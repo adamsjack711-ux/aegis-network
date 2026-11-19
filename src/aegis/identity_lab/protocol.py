@@ -141,6 +141,7 @@ class Fence(Record):
 class InstalledFence(Record):
     assignment: Assignment
     boot: RecordID
+    held: bool = False
 
 
 class State(Record):
