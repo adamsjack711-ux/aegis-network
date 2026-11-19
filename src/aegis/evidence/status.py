@@ -19,7 +19,7 @@ from .records import (
 )
 from .service import Bundle, _admit
 from .status_protocol import (
-    MAX_HISTORY, STATUS_TTL, Challenge, Endorsement, Head, ReviewBinding, Scope, SignedEndorsement,
+    MAX_HISTORY, STATUS_TTL, Challenge, Endorsement, EvidencePolicy, Head, ReviewBinding, Scope, SignedEndorsement,
     StatusPolicy, archive_head, authenticate, canonical_json, check_observation, endorsement_bytes,
     material_scope,
 )
@@ -216,7 +216,7 @@ class RelyingStatus(_State):
                 db.execute("UPDATE status_state SET blocked = 1 WHERE id = 1")
                 return StatusAssessment("inconclusive", "conflicting-history", head)
             try:
-                history = _History(self._policy, records, now)
+                history = EvidenceHistory(self._policy, records, now)
             except ValueError:
                 return StatusAssessment("inconclusive", "invalid-history", head)
             if len(old) != len(pins):
@@ -254,8 +254,8 @@ class RelyingStatus(_State):
         return None, first.head, min(first.expires_at, second.expires_at)
 
 
-class _History:
-    def __init__(self, policy: StatusPolicy, records: list[tuple[str, bytes]], now: int):
+class EvidenceHistory:
+    def __init__(self, policy: EvidencePolicy, records: list[tuple[str, bytes]], now: int):
         self.manifests: dict[str, tuple[SignedManifest, Grant]] = {}
         self.votes: list[tuple[str, SignedAttestation, Grant]] = []
         self.withdrawals = set()

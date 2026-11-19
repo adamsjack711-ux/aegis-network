@@ -1,5 +1,9 @@
 # Aegis Network status
 
+## Phase 4E-C isolated trust services
+
+`feat/phase4e-trust` in `.worktrees/phase4e-trust` starts at approved Phase 4E baseline `ae59a97`. The local-service prototype exercises direct scoped withdrawal intake, independent checkpoint and status signing, authenticated archive replay, and protected floors across isolated processes. The default suite passed 278 tests on 2026-11-19, including all nine Phase 4E-C tests. Three opt-in Docker cases were skipped. The shared Phase 3C/T6 writer remains outside this change. Independent real-world custody, anchor recovery, withdrawal dispatch priority and target fencing remain integration and release gates. [Trust model, contract and terminal handoff](docs/phase4e-trust.md) · [Raw local measurements](benchmarks/phase4e-trust.json)
+
 ## Phase 4D isolated integration candidate
 
 The native Trust profile is integrated in `.worktrees/phase4d` on `integration/phase4d`. It layers native witnessed Mesh coverage, independent Evidence status and durable ownership fencing onto explicit approvals for the disposable three-replica fixture. At tested pin `f26f69d`, the complete suite passed **272 tests** with all local live modes enabled. All three Phase 4C High findings have tested fixture dispositions. Distributed enforcement remains blocked on independently administered endpoints, authenticated broker identity and session fencing, rollback-resistant trust anchors and barriers across separate writers. [Architecture](docs/phase4d-architecture.md) · [Security dispositions](docs/phase4d-security-review.md) · [Release readiness](docs/phase4d-release-readiness.md)
