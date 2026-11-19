@@ -14,13 +14,14 @@ from typing import TYPE_CHECKING
 from nats.js.api import AckPolicy, ConsumerConfig, DeliverPolicy
 from nats.js.errors import BadRequestError, NotFoundError
 
-from .agent_runtime import durable_name, process_message
+from .agent_runtime import critical_delivery, durable_name, process_message
 from .api import STREAM
 from .artifact import Evidence as EvidenceReference
 from .artifact import SignedFinding, canonical_bytes, parse_event, sign
 from .evidence._worker import materials
 from .evidence.records import SignedAttestation, SignedManifest, decode, digest
 from .identity import IdentityLease, IdentityLost, renew_lease
+from .mesh import priority_enabled
 from .mitigation.lab import Lab
 from .mitigation.policy import Denied
 from .ownership import Action, IdentitySession
@@ -88,6 +89,8 @@ class MeshIntake:
         self.journal_deadline = None
         self.lease = None
         self.subscription = None
+        self.critical_task = None
+        self.priority = priority_enabled()
 
     @asynccontextmanager
     async def connect(self):
@@ -101,8 +104,15 @@ class MeshIntake:
                 config=ConsumerConfig(max_deliver=-1, ack_wait=10,
                                       ack_policy=AckPolicy.EXPLICIT, deliver_policy=DeliverPolicy.NEW),
             )
+            if self.priority:
+                self.critical_task = asyncio.create_task(critical_delivery(
+                    self.agent, self.agent.audit, self.js, self.lease, self.client, name,
+                ))
             yield self
         finally:
+            if self.critical_task is not None:
+                self.critical_task.cancel()
+                await asyncio.gather(self.critical_task, return_exceptions=True)
             renewal.cancel()
             await asyncio.gather(renewal, return_exceptions=True)
             try:
@@ -136,12 +146,27 @@ class MeshIntake:
                 except TimeoutError:
                     continue
                 message = messages[0]
-                await process_message(message, self.agent, self.js, self.lease, observe=observe)
+                await process_message(message, self.agent, self.js, self.lease, observe=observe,
+                                      ordered_revocations=not self.priority, fence_ack=self.priority)
                 if observation is not None:
                     envelope = parse_event(message.data)
                     if not isinstance(envelope, SignedFinding):
                         raise Denied("the received event is not a finding")
                     return envelope, *observation
+
+    def withdrawal_clear(self, envelope):
+        if not self.priority:
+            return True
+        if self.critical_task is None or self.critical_task.done():
+            return False
+        finding = envelope.finding
+        try:
+            self.lease.require_live()
+            return not self.agent.audit.observe_withdrawal(
+                finding.publisher_id, str(finding.artifact_id), digest(canonical_bytes(finding)),
+            )
+        except (IdentityLost, OSError, sqlite3.Error):
+            return False
 
     async def fresh(self, envelope):
         deadline = time.monotonic_ns() + int(STATUS_SECONDS * 1e9)
@@ -293,6 +318,7 @@ class EvidenceGate:
         # acquire a lock here because guarded writers take the opposite order.
         current_status, plan_status = self._current_status, self._plan_status
         return (time.monotonic_ns() < min(self._fresh_until, self.valid_until_ns)
+                and (not getattr(self.receiver, "priority", False) or self.receiver.withdrawal_clear(self.envelope))
                 and (self.journal is None or (self._plan_checkpoint == self._current_checkpoint
                      and self.journal.current(self.envelope, self._plan_checkpoint)))
                 and (self.independent_evidence is None
@@ -327,6 +353,8 @@ class VerifiedLab:
     def __init__(self, gate: EvidenceGate, path: Path, *, identity: IdentitySession | None = None):
         self.gate = gate
         self.identity = identity
+        if getattr(gate.receiver, "priority", False) and gate.independent_evidence is None:
+            raise Denied("priority fixture requires witnessed Mesh and independent Evidence status")
         if gate.independent_evidence is not None and identity is None:
             raise Denied("combined Trust fixture requires identity ownership")
         if identity is not None and identity.assignment.deployment != gate.binding_context["agent_id"]:

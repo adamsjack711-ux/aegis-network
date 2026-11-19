@@ -11,12 +11,15 @@ import httpx
 import pytest
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
+from aegis.agent_runtime import process_message
+from aegis.artifact import sign_revocation
 from aegis.core import InventoryItem, LocalAgent, LocalPolicy
 from aegis.evidence import Evidence
 from aegis.evidence.records import Withdrawal, digest, sign_record
 from aegis.evidence.status import RelyingStatus, StatusProof, StatusWitness
 from aegis.evidence.status_protocol import StatusPolicy, WitnessGrant, observe
 from aegis.evidence.synthetic import create_lab
+from aegis.journal.protocol import JournalBlocked
 from aegis.mitigation.policy import Denied, LocalOperator
 from aegis.mitigation.store import TargetStore
 from aegis.ownership import IdentitySession, lease_proof
@@ -29,7 +32,8 @@ from test_journal import Network
 
 
 @pytest.mark.parametrize("fault", ["legacy", "none", "journal-withdrawal", "evidence-withdrawal",
-                                  "stale-ownership", "offline-status", "missing-audit"])
+                                  "stale-ownership", "offline-status", "missing-audit",
+                                  "critical-ack-unavailable", "offline-witness-pending"])
 def test_native_trust_rechecks_each_peer_write(tmp_path, fault):
     run_fixture(tmp_path, fault)
 
@@ -102,7 +106,11 @@ def run_fixture(tmp_path, fault):
                                          transport=httpx.MockTransport(coordinator)) as remote:
                 legacy = fault == "legacy"
                 intake = MeshIntake(agent, None, remote, journal=None if legacy else journal)
-                intake.lease = SimpleNamespace(ensure=lambda: asyncio.sleep(0))
+                intake.lease = SimpleNamespace(ensure=lambda: asyncio.sleep(0), require_live=lambda: None)
+                if fault in {"critical-ack-unavailable", "offline-witness-pending", "offline-status"}:
+                    intake.priority = True
+                    intake.critical_task = asyncio.get_running_loop().create_future()
+                    stack.callback(intake.critical_task.cancel)
                 gate = EvidenceGate(finding, bundle, appraisal, intake, collector, relying,
                                     independent_evidence=None if legacy else appraiser)
                 if legacy:
@@ -162,6 +170,46 @@ def run_fixture(tmp_path, fault):
                         ), researcher.revoker)
                         assert witnesses[1].admit(record) == digest(record)
                         reason = "divergent-status"
+                    elif fault == "critical-ack-unavailable":
+                        assert gate.status_current()
+                        withdrawal = network.withdrawal(finding)
+                        issued_at = datetime.now(timezone.utc) - timedelta(seconds=1)
+                        withdrawal = sign_revocation(withdrawal.revocation.model_copy(update={
+                            "issued_at": issued_at, "expires_at": issued_at + timedelta(seconds=8),
+                        }), network.reviewer, "default")
+                        ack_attempted = False
+                        intake_ns = time.monotonic_ns()
+                        cpu_intake_ns = time.process_time_ns()
+                        timing = {}
+
+                        async def no_ack():
+                            nonlocal ack_attempted
+                            # Separate SQLite observer and real HTTP probes run while
+                            # the witnessed Mesh still considers this finding current.
+                            assert journal.current(finding, intake.journal_binding)
+                            assert not intake.withdrawal_clear(finding)
+                            fences = tuple((target, fence + int(target == canary))
+                                           for target, fence in zip(plan.targets, plan.expected_fences, strict=True))
+                            observation = await asyncio.to_thread(defense.lab.observer.observe, "quarantined", fences)
+                            timing.update(readback_ns=observation.finished_ns - intake_ns,
+                                          cpu_ns=time.process_time_ns() - cpu_intake_ns,
+                                          observed_requests=observation.requests)
+                            ack_attempted = True
+                            raise ConnectionError("lost broker response after local denial")
+
+                        await process_message(SimpleNamespace(data=withdrawal.model_dump_json().encode(),
+                                                              ack_sync=no_ack),
+                                              agent, lease=intake.lease, critical=True)
+                        assert ack_attempted
+                        reason = "exact durable Rapid decision"
+                    elif fault == "offline-witness-pending":
+                        network.archive.append(network.receive(network.withdrawal(finding)))
+
+                        async def unavailable():
+                            raise ConnectionError("witness quorum unavailable with pending withdrawal")
+
+                        journal.heads = SimpleNamespace(latest=unavailable)
+                        reason = "witnessed journal unavailable"
                     elif fault == "offline-status":
                         online = False
                         reason = "withheld-status"
@@ -171,7 +219,8 @@ def run_fixture(tmp_path, fault):
                                     peer_principal=principal, broker="broker-b")
                         reason = "assignment generation"
 
-                    with pytest.raises(Denied, match=reason):
+                    denied = JournalBlocked if fault == "offline-witness-pending" else Denied
+                    with pytest.raises(denied, match=reason):
                         await defense.transition(controller.restrict, plan, approval, peer,
                                                  action="restrict", target=peer)
                     if fault == "offline-status":
@@ -188,6 +237,6 @@ def run_fixture(tmp_path, fault):
                     assert rows[-1]["event"] == "safe_hold"
                     defense.lab.observer.observe("quarantined", tuple((target, fence + 1)
                                                                      for target, fence in before_recovery))
-                    return None
+                    return timing if fault == "critical-ack-unavailable" else None
 
     return asyncio.run(exercise())

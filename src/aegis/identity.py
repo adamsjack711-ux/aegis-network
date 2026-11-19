@@ -33,11 +33,12 @@ def canonical_agent_id(value: str) -> str:
 
 
 class IdentityLease:
-    def __init__(self, kv, agent_id: str, token: bytes, revision: int):
+    def __init__(self, kv, agent_id: str, token: bytes, revision: int, checked_at: float):
         self.kv = kv
         self.agent_id = canonical_agent_id(agent_id)
         self.token = token
         self.revision = revision
+        self.deadline = checked_at + LEASE_TTL_SECONDS
         self.lost = False
         self.lock = asyncio.Lock()
 
@@ -58,6 +59,7 @@ class IdentityLease:
         token = secrets.token_bytes(32)
         deadline = time.monotonic() + wait_seconds
         while True:
+            checked_at = time.monotonic()
             try:
                 revision = await kv.create(agent_id, token)
                 break
@@ -65,32 +67,46 @@ class IdentityLease:
                 if time.monotonic() >= deadline:
                     raise IdentityInUse("agent identity already has an active broker lease") from exc
                 await asyncio.sleep(1)
-        return cls(kv, agent_id, token, revision)
+        lease = cls(kv, agent_id, token, revision, checked_at)
+        lease.require_live()
+        return lease
+
+    def require_live(self) -> None:
+        if self.lost or time.monotonic() >= self.deadline:
+            self.lost = True
+            raise IdentityLost("agent identity lease expired or was lost")
 
     async def ensure(self) -> None:
         async with self.lock:
-            if self.lost:
-                raise IdentityLost("agent identity lease was lost")
+            self.require_live()
+            checked_at = time.monotonic()
             try:
-                self.revision = await self.kv.update(
-                    self.agent_id, self.token, last=self.revision)
+                revision = await self.kv.update(self.agent_id, self.token, last=self.revision)
             except (KeyNotFoundError, KeyDeletedError):
-                try:
-                    self.revision = await self.kv.create(self.agent_id, self.token)
-                except KeyWrongLastSequenceError as exc:
-                    self.lost = True
-                    raise IdentityLost("agent identity was claimed by another process") from exc
+                self.lost = True
+                raise IdentityLost("agent identity lease disappeared")
             except KeyWrongLastSequenceError as exc:
                 try:
                     entry = await self.kv.get(self.agent_id)
                 except (KeyNotFoundError, KeyDeletedError):
                     self.lost = True
                     raise IdentityLost("agent identity lease disappeared") from exc
-                if entry.value != self.token:
+                if entry.value != self.token or entry.revision <= self.revision:
                     self.lost = True
-                    raise IdentityLost("agent identity was claimed by another process") from exc
-                # The update may have committed while its response was lost.
+                    raise IdentityLost("agent identity lease changed or rolled back") from exc
+                # A timed-out update may have committed. Recheck using its
+                # revision before granting any new time to this session.
+                self.require_live()
                 self.revision = entry.revision
+                checked_at = time.monotonic()
+                revision = await self.kv.update(self.agent_id, self.token, last=self.revision)
+            self.require_live()
+            if revision <= self.revision:
+                self.lost = True
+                raise IdentityLost("agent identity lease revision did not advance")
+            self.revision = revision
+            self.deadline = checked_at + LEASE_TTL_SECONDS
+            self.require_live()
 
     async def release(self) -> None:
         async with self.lock:

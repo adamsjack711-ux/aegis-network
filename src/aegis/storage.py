@@ -44,7 +44,8 @@ class SqliteAudit:
         if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,62}", agent_id):
             raise ValueError("invalid agent ID")
         self.agent_id = agent_id
-        self.db = sqlite3.connect(str(path))
+        self.path = str(path)
+        self.db = sqlite3.connect(self.path)
         self.db.execute("CREATE TABLE IF NOT EXISTS audit_identity (agent_id TEXT PRIMARY KEY)")
         existing_ids = [row[0] for row in self.db.execute("SELECT agent_id FROM audit_identity")]
         if len(existing_ids) > 1 or any(value != agent_id for value in existing_ids):
@@ -77,7 +78,8 @@ class SqliteAudit:
             event_id TEXT PRIMARY KEY, target_artifact_id TEXT NOT NULL,
             target_digest TEXT NOT NULL, target_publisher_id TEXT, digest TEXT NOT NULL,
             publisher_id TEXT NOT NULL, sequence INTEGER NOT NULL,
-            authenticated INTEGER NOT NULL, outcome TEXT NOT NULL, reason TEXT NOT NULL,
+            authenticated INTEGER NOT NULL, ordered INTEGER NOT NULL DEFAULT 1,
+            outcome TEXT NOT NULL, reason TEXT NOT NULL,
             reason_code TEXT NOT NULL,
             decided_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
         )""")
@@ -102,6 +104,20 @@ class SqliteAudit:
             position INTEGER NOT NULL CHECK (position >= 0)
         )""")
         self.db.execute("INSERT OR IGNORE INTO recovery_cursor(singleton,position) VALUES(1,0)")
+        self.db.execute("""CREATE TABLE IF NOT EXISTS critical_recovery_cursor (
+            singleton INTEGER PRIMARY KEY CHECK (singleton = 1),
+            position INTEGER NOT NULL CHECK (position >= 0)
+        )""")
+        self.db.execute("INSERT OR IGNORE INTO critical_recovery_cursor(singleton,position) VALUES(1,0)")
+        columns = {row[1] for row in self.db.execute("PRAGMA table_info(revocation_decisions)")}
+        if "ordered" not in columns:
+            self.db.execute("ALTER TABLE revocation_decisions ADD COLUMN ordered INTEGER NOT NULL DEFAULT 1")
+        self.db.execute("CREATE INDEX IF NOT EXISTS decision_sequence ON decisions(publisher_id,sequence) "
+                        "WHERE authenticated=1")
+        self.db.execute("CREATE INDEX IF NOT EXISTS revocation_sequence ON "
+                        "revocation_decisions(publisher_id,sequence) WHERE authenticated=1")
+        self.db.execute("CREATE INDEX IF NOT EXISTS ordered_revocation_sequence ON "
+                        "revocation_decisions(publisher_id,sequence) WHERE authenticated=1 AND ordered=1")
         for table in ("decisions", "rejected_events", "revocation_decisions"):
             columns = {row[1] for row in self.db.execute(f"PRAGMA table_info({table})")}
             if "reason_code" not in columns:
@@ -140,7 +156,7 @@ class SqliteAudit:
         row = self.db.execute(
             "SELECT MAX(value) FROM ("
             "SELECT COALESCE(MAX(sequence),0) AS value FROM decisions WHERE publisher_id=? AND authenticated=1 "
-            "UNION ALL SELECT COALESCE(MAX(sequence),0) FROM revocation_decisions WHERE publisher_id=? AND authenticated=1)",
+            "UNION ALL SELECT COALESCE(MAX(sequence),0) FROM revocation_decisions WHERE publisher_id=? AND authenticated=1 AND ordered=1)",
             (publisher_id, publisher_id),
         ).fetchone()
         return row[0]
@@ -154,14 +170,19 @@ class SqliteAudit:
         ).fetchone()
         return row[0] if row else None
 
-    def journal_position(self) -> int:
-        return self.db.execute("SELECT position FROM recovery_cursor WHERE singleton=1").fetchone()[0]
+    def journal_position(self, *, critical: bool = False) -> int:
+        table = "critical_recovery_cursor" if critical else "recovery_cursor"
+        return self.db.execute(f"SELECT position FROM {table} WHERE singleton=1").fetchone()[0]
 
-    def advance_journal(self, position: int) -> None:
-        if position <= self.journal_position():
-            raise ValueError("journal position must increase")
+    def advance_journal(self, position: int, *, critical: bool = False) -> None:
+        table = "critical_recovery_cursor" if critical else "recovery_cursor"
         with self.db:
-            self.db.execute("UPDATE recovery_cursor SET position=? WHERE singleton=1", (position,))
+            changed = self.db.execute(
+                f"UPDATE {table} SET position=? WHERE singleton=1 AND position<?",
+                (position, position),
+            ).rowcount
+            if not changed:
+                raise ValueError("journal position must increase")
 
     def record(self, publisher_id: str, sequence: int, decision: Decision, authenticated: bool) -> None:
         if not authenticated:
@@ -211,16 +232,34 @@ class SqliteAudit:
         return [dict(zip(["artifact_id", "digest", "publisher_id", "reason", "reason_code", "decided_at"], row)) for row in rows]
 
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool:
-        if self.db.execute(
+        return self._is_revoked(self.db, publisher_id, artifact_id, digest)
+
+    def observe_withdrawal(self, publisher_id: str, artifact_id: str, digest: str) -> bool:
+        """Read the exact durable denial from a separate, read-only connection."""
+        uri = Path(self.path).resolve().as_uri() + "?mode=ro"
+        db = sqlite3.connect(uri, uri=True, timeout=0.05)
+        try:
+            return self._is_revoked(db, publisher_id, artifact_id, digest)
+        finally:
+            db.close()
+
+    @staticmethod
+    def _is_revoked(db, publisher_id: str, artifact_id: str, digest: str) -> bool:
+        if db.execute(
             "SELECT 1 FROM revoked_targets WHERE target_publisher_id=? AND artifact_id=? AND digest=?",
             (publisher_id, artifact_id, digest),
         ).fetchone() is not None:
             return True
-        return self.db.execute(
+        return db.execute(
             "SELECT 1 FROM revoked_artifacts WHERE artifact_id=? AND digest=? "
             "AND (target_publisher_id=? OR target_publisher_id IS NULL)",
             (artifact_id, digest, publisher_id),
         ).fetchone() is not None
+
+    def order_revocation(self, revocation_id: str) -> None:
+        with self.db:
+            self.db.execute("UPDATE revocation_decisions SET ordered=1 WHERE event_id=? AND ordered=0",
+                            (revocation_id,))
 
     def get_revocation(self, revocation_id: str) -> Decision | None:
         row = self.db.execute(
@@ -235,7 +274,7 @@ class SqliteAudit:
 
     def record_revocation(self, publisher_id: str, sequence: int, decision: Decision,
                           target_id: str, target_digest: str, target_publisher_id: str | None,
-                          authenticated: bool) -> None:
+                          authenticated: bool, *, ordered: bool = True) -> None:
         if not authenticated:
             self.db.execute(
                 "INSERT INTO rejected_events(artifact_id,digest,publisher_id,reason,reason_code) VALUES(?,?,?,?,?)",
@@ -245,10 +284,10 @@ class SqliteAudit:
             return
         with self.db:
             self.db.execute(
-                "INSERT INTO revocation_decisions(event_id,target_artifact_id,target_digest,target_publisher_id,digest,publisher_id,sequence,authenticated,outcome,reason,reason_code) "
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO revocation_decisions(event_id,target_artifact_id,target_digest,target_publisher_id,digest,publisher_id,sequence,authenticated,ordered,outcome,reason,reason_code) "
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
                 (decision.event_id, target_id, target_digest, target_publisher_id, decision.digest, publisher_id,
-                 sequence, 1, decision.outcome, decision.reason, decision.reason_code),
+                 sequence, 1, int(ordered), decision.outcome, decision.reason, decision.reason_code),
             )
             if decision.outcome == "revoked_dry_run":
                 self.db.execute(

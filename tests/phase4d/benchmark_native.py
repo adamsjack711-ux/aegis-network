@@ -14,7 +14,13 @@ from test_trust_composition import run_fixture
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pairs", type=int, default=12)
+    parser.add_argument("--withdrawals", type=int,
+                        help="measure independent HTTP quarantine with broker ACK withheld")
     args = parser.parse_args()
+    if args.withdrawals is not None:
+        if not 2 <= args.withdrawals <= 100:
+            parser.error("use 2–100 withdrawal samples")
+        return withdrawals(args.withdrawals)
     if args.pairs < 2:
         parser.error("at least two pairs are required")
     pairs = []
@@ -45,6 +51,26 @@ def main():
         "pairs_ns": pairs,
     }
     print(json.dumps(report, indent=2))
+
+
+def withdrawals(count):
+    samples = []
+    for _ in range(count):
+        with TemporaryDirectory(prefix="aegis-phase4e-native-") as directory:
+            samples.append(run_fixture(Path(directory), "critical-ack-unavailable"))
+
+    def percentiles(field):
+        values = [sample[field] / 1e6 for sample in samples]
+        quantiles = statistics.quantiles(values, n=100, method="inclusive")
+        return {f"p{p}": round(quantiles[p - 1], 3) for p in (50, 95, 99)}
+
+    print(json.dumps({
+        "schema_version": "1.0", "platform": platform.platform(), "python": platform.python_version(),
+        "clock": "direct agent wire intake to independent HTTP quarantine confirmation on one host",
+        "broker_ack_confirmed": 0, "sample_count": count,
+        "percentiles_ms": {field: percentiles(field) for field in ("readback_ns", "cpu_ns")},
+        "trials_ns": samples,
+    }, indent=2))
 
 
 if __name__ == "__main__":
