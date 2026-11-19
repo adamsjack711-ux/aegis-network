@@ -43,8 +43,7 @@ async def observe_until(read, ready, timeout=15):
             await asyncio.sleep(0.025)
 
 
-@pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1", reason="requires isolated local Docker")
-def test_W01_W02_queued_withdrawal_after_broker_restart(tmp_path, record_property):
+def withdrawal_delivery(tmp_path, record_property, *, priority):
     async def run(docker_env):
         lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), tmp_path, docker_env)
         async with httpx.AsyncClient(trust_env=False, timeout=5) as client:
@@ -75,7 +74,16 @@ def test_W01_W02_queued_withdrawal_after_broker_restart(tmp_path, record_propert
                 await observe_until(lambda: agent_readback(audit, finding_id),
                                     lambda rows: rows[0] == ("allow_dry_run", 1))
                 await observe_until(queue, lambda rows: rows == [(1, finding_id, True)])
-                stream_before = (await lab.js.stream_info(STREAM)).state.last_seq
+                ordinary_state = await lab.js.stream_info(STREAM)
+                stream_before = ordinary_state.state.last_seq
+                if priority:
+                    from aegis.mesh import CRITICAL_STREAM
+
+                    critical_before = (await lab.js.stream_info(CRITICAL_STREAM)).state.last_seq
+                    capped = (await lab.js.stream_info(STREAM)).config
+                    capped.max_bytes = ordinary_state.state.bytes
+                    assert capped.max_bytes > 0 and capped.discard == "new"
+                    await lab.js.update_stream(capped)
                 await asyncio.to_thread(lab.compose, "stop", "-t", "0", "nats")
                 ordinary = [await submit(lab.make_finding(lab.publishers[0], seq)) for seq in range(2, 6)]
                 withdrawal_id = await submit(revocation(lab.revoker, finding, 1))
@@ -98,17 +106,67 @@ def test_W01_W02_queued_withdrawal_after_broker_restart(tmp_path, record_propert
                     await started
                 record_property("durable_denial", json.dumps({"row": denial, "recovery_upper_ms": recovery_ms}))
                 assert denial == ("revoked_dry_run", 1, withdrawal_id)
+                if priority:
+                    held = await lab.js.stream_info(STREAM)
+                    pending = await observe_until(
+                        queue, lambda rows: any(row[1:] == (withdrawal_id, True) for row in rows),
+                    )
+                    critical = await lab.js.get_msg(CRITICAL_STREAM, seq=critical_before + 1)
+                    critical_event = event_id(parse_event(critical.data))
+                    record_property("priority_before_release", json.dumps({
+                        "ordinary_before": stream_before,
+                        "ordinary_held": held.state.last_seq,
+                        "ordinary_max_bytes": held.config.max_bytes,
+                        "ordinary_pending_ids": [eid for _, eid, sent in pending if not sent],
+                        "critical_event_id": critical_event,
+                        "observed_ms_from_restart": (time.monotonic_ns() - restart_ns) / 1_000_000,
+                    }))
+                    assert held.state.last_seq == stream_before and held.config.max_bytes == capped.max_bytes
+                    assert {eid for _, eid, sent in pending if not sent} == set(ordinary)
+                    assert critical_event == withdrawal_id
+                    assert recovery_ms <= 5_000
+                    release_ns = time.monotonic_ns()
+                    await lab.js.update_stream(ordinary_state.config)
+
                 await observe_until(queue, lambda rows: len(rows) == 6 and all(row[2] for row in rows))
                 publication = []
-                for seq in range(stream_before + 1, stream_before + 6):
+                count = len(ordinary) if priority else len(ordinary) + 1
+                for seq in range(stream_before + 1, stream_before + count + 1):
                     message = await lab.js.get_msg(STREAM, seq=seq)
                     publication.append((seq, event_id(parse_event(message.data))))
                 record_property("broker_publication", json.dumps(publication))
-                assert {eid for _, eid in publication} == {*ordinary, withdrawal_id}
-                assert recovery_ms <= 5_000
-                assert publication[0][1] == withdrawal_id, "ordinary lab finding overtook a queued withdrawal"
+                if priority:
+                    assert {eid for _, eid in publication} == set(ordinary)
+
+                    def ordinary_readback():
+                        with closing(sqlite3.connect(f"{audit.resolve().as_uri()}?mode=ro", uri=True)) as db:
+                            return db.execute("SELECT artifact_id, outcome FROM decisions").fetchall()
+
+                    decisions = await observe_until(
+                        ordinary_readback, lambda rows: set(ordinary) <= {eid for eid, _ in rows},
+                    )
+                    record_property("ordinary_after_release", json.dumps({
+                        "decisions": decisions, "release_ms_from_restart": (release_ns - restart_ns) / 1_000_000,
+                        "drain_ms_from_release": (time.monotonic_ns() - release_ns) / 1_000_000,
+                    }))
+                else:
+                    assert {eid for _, eid in publication} == {*ordinary, withdrawal_id}
+                    assert recovery_ms <= 5_000
+                    assert publication[0][1] == withdrawal_id, "ordinary lab finding overtook a queued withdrawal"
             finally:
                 await lab.stop()
 
     with local_docker() as docker_env:
         asyncio.run(run(docker_env))
+
+
+@pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1" or os.getenv("AEGIS_PHASE4E_PRIORITY") == "1",
+                    reason="requires the legacy loopback single-stream profile")
+def test_W01_W02_queued_withdrawal_after_broker_restart(tmp_path, record_property):
+    withdrawal_delivery(tmp_path, record_property, priority=False)
+
+
+@pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1" or os.getenv("AEGIS_PHASE4E_PRIORITY") != "1",
+                    reason="requires the Phase 4E loopback priority profile")
+def test_W01_W02_critical_lane_progress_while_ordinary_stream_is_full(tmp_path, record_property):
+    withdrawal_delivery(tmp_path, record_property, priority=True)

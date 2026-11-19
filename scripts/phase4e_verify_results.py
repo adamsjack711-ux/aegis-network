@@ -51,6 +51,22 @@ def inspect_dispatch(properties):
             "recovery_upper_ms": round(denial["recovery_upper_ms"], 3)}
 
 
+def inspect_priority(properties):
+    before = properties["priority_before_release"]
+    after = properties["ordinary_after_release"]
+    denial = properties["durable_denial"]
+    withdrawal = before["critical_event_id"]
+    ordinary = set(before["ordinary_pending_ids"])
+    assert denial["row"] == ["revoked_dry_run", 1, withdrawal]
+    assert before["ordinary_before"] == before["ordinary_held"] and before["ordinary_max_bytes"] > 0
+    assert 0 < denial["recovery_upper_ms"] <= before["observed_ms_from_restart"] <= after["release_ms_from_restart"]
+    assert {row[1] for row in properties["queued_before_restart"] if not row[2]} == ordinary | {withdrawal}
+    assert {row[1] for row in properties["broker_publication"]} == ordinary
+    assert ordinary <= {row[0] for row in after["decisions"]}
+    return {"ordinary_held": len(ordinary), "recovery_upper_ms": round(denial["recovery_upper_ms"], 3),
+            "ordinary_drain_ms": round(after["drain_ms_from_release"], 3)}
+
+
 def inspect_file(path):
     suite = ElementTree.parse(path).getroot().find("testsuite")
     summary = {key: int(suite.attrib[key]) for key in ("tests", "failures", "errors", "skipped")}
@@ -69,10 +85,15 @@ def inspect_file(path):
                                         request["body"])
                 assert request["body"]["assignment"]["holder_key"] == request["public_key"]
                 summary["signed_ownership_requests"] += 1
-            elif name in {"queued_before_restart", "broker_publication", "durable_denial"}:
+            elif name in {"queued_before_restart", "broker_publication", "durable_denial",
+                          "priority_before_release", "ordinary_after_release"}:
                 dispatch[name] = value
         if {"queued_before_restart", "broker_publication", "durable_denial"} <= dispatch.keys():
-            summary["dispatch"] = inspect_dispatch({key: json.loads(value) for key, value in dispatch.items()})
+            data = {key: json.loads(value) for key, value in dispatch.items()}
+            if {"priority_before_release", "ordinary_after_release"} <= data.keys():
+                summary["priority"] = inspect_priority(data)
+            elif "priority_before_release" not in data:
+                summary["dispatch"] = inspect_dispatch(data)
     assert summary["tests"] == len(suite.findall("testcase"))
     return summary
 

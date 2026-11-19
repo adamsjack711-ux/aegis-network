@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="19.029" timestamp="2026-11-19T16:28:49.120244-07:00" hostname="MacBookPro.lan"><testcase classname="tests.phase4e.test_withdrawal_delivery" name="test_W01_W02_queued_withdrawal_after_broker_restart" file="tests/phase4e/test_withdrawal_delivery.py" line="43" time="18.704"><properties><property name="queued_before_restart" value="[(1, '252bfecd-8b80-4214-89be-c8e2f913b051', True), (2, 'c0461890-cbad-4f50-a1eb-7bcc1adc1a02', False), (3, '3fade7ad-3aca-4144-9f3d-3ebbe154bb16', False), (4, '963b9dcf-1c6d-4aab-a179-4bf10cbea45a', False), (5, '18503c08-c402-4d74-8085-2d73e1aaefc5', False), (6, 'aea3ea3c-1265-4f0a-8f35-a830d7058d61', False)]" /><property name="docker_images" value="{'nats': 'sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927', 'postgres': 'sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857'}" /></properties><failure message="TimeoutError">tests/phase4e/test_withdrawal_delivery.py:41: in observe_until
+    await asyncio.sleep(0.025)
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/tasks.py:725: in sleep
+    return await future
+           ^^^^^^^^^^^^
+E   asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+tests/phase4e/test_withdrawal_delivery.py:112: in test_W01_W02_queued_withdrawal_after_broker_restart
+    asyncio.run(run(docker_env))
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py:205: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py:128: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py:724: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests/phase4e/test_withdrawal_delivery.py:93: in run
+    _, denial = await observe_until(read_agent, lambda rows: rows[1] is not None)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_withdrawal_delivery.py:36: in observe_until
+    async with asyncio.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/timeouts.py:115: in __aexit__
+    raise TimeoutError from exc_val
+E   TimeoutError</failure></testcase></testsuite></testsuites>
