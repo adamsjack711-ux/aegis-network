@@ -20,13 +20,49 @@ The lab uses OpenSSL through Python TLS 1.3 with mutual certificate verification
 ## Transfer and recovery
 
 1. An eligible broker forwards an authenticated, signed claim naming the deployment, broker, prior generation and expiry. A live owner or competing pending assignment blocks the claim. Operator retirement or lease expiry makes the next claim eligible. Lease duration is capped by the claimant's credential expiry.
-2. The home advances the anchor and commits a `preparing` assignment before contacting any writer. If the anchor committed and the home failed, comparisons fail closed. Retrying the same candidate while pending reuses the same assignment and repeats the entire barrier.
-3. The home sends `Fence(assignment, target)` over an authenticated connection to each pinned target. The writer verifies the exact pending assignment inside its SQLite mutation lock. It then commits the floor and the quarantine marker under that lock. The receipt follows durable commit. A target can repeat a receipt for its current boot and exact assignment. A missing receipt holds the transfer.
+2. The home advances the anchor and commits a `preparing` assignment before contacting any writer. If the anchor committed and the home failed, comparisons fail closed. Retrying the same candidate against its original expected generation reuses the pending assignment and repeats the entire barrier.
+3. The home sends `Fence(assignment, target)` over an authenticated connection to each pinned target. The writer verifies the exact pending assignment inside its SQLite mutation lock. It then commits the floor and the quarantine marker under that lock. The receipt follows durable commit. A target can repeat a receipt for its current boot and exact assignment. A missing receipt holds the transfer. A restart after receipt can leave the target quarantined even if the home finishes activation. Recover it through a fresh generation and barrier.
 4. The home rechecks the pending state, claim and credential deadlines and seals `active` only after all receipts. It releases its lock before barrier network calls so a writer can consult the home while holding the local write lock. An in-flight old write that already obtained current authorization can finish before that writer's fence. The successor cannot activate until that write has released the lock and the new fence has committed.
 5. Every target write checks the broker TLS role, signed instance command, exact operator approval, target version and nonce. It checks the durable fence and current home assignment inside the marker transaction, then commits the effect and receipt together. A retired generation gives zero effects even with a valid old key, command and approval. If a target observes loss of current authority, it durably latches quarantine. Restoring the dependency under the same assignment cannot reopen authority.
 6. To recover a home snapshot, stop the home before restoring the file and retain the continuity anchor in its separate recovery domain. The home denies authorization while its stamp differs. The operator reads the current stamp from the anchor and submits it to `/recover` to allocate a higher vacant generation. The next claim repeats the full barrier. An anchor older than the readable home floor holds recovery. Each target restart generates a new boot identifier and requires a fence from an exact pending assignment. A target restored within the same generation therefore cannot reopen write authority for that generation. Restore of target effect history or consumed intents requires external audit custody if that history must survive the backup.
 
 [Protocol records](../src/aegis/identity_lab/protocol.py) · [Transaction and service boundaries](../src/aegis/identity_lab/services.py) · [mTLS adapter](../src/aegis/identity_lab/transport.py)
+
+## Adversarial coverage
+
+| Scenario | Observed boundary |
+| --- | --- |
+| Simultaneous ownership at two brokers | One claim activates. Both target stores show its generation. |
+| Former owner attempts a signed write after transfer | The prior broker sends a valid signed command and approval to the writer. Independent readback and durable receipts show zero subsequent old-generation writes. |
+| Same URI from a separate host namespace | A CA-signed leaf with the same URI and an unpinned TLS key is denied. An eligible TLS key paired with the wrong instance proof is denied separately. |
+| Credential expiry and rotation during recovery | The expired leaf fails both the client validity check and the broker's raw mTLS handshake. The separately enrolled replacement key reacquires the same instance identity through the other broker. |
+| Broker partition and reconciliation | The current broker loses its network attachment. A competing claim is denied until retirement. After the new target fences and network reattachment, the former broker's session and write authority remain retired. |
+| Old ownership or anchor snapshot | A restored home state behind the anchor holds ownership and writes. An older anchor cannot move back the newer home floor. Recovery through the intact anchor uses a higher generation. |
+| Target restart during partial transfer | The first target keeps its committed floor. While the second is unavailable the candidate stays preparing. Both writers return durable fences before activation succeeds. |
+| Old approval after reassignment | A current agent command coupled to a prior-generation approval is denied. Exact new approval succeeds. |
+| Target restored within one generation | The restored store lacks a previously consumed nonce. Its new boot blocks the old command and requires a fresh home fence. |
+| Anchor outage and same-generation return | One target observes loss via readback and the other via an attempted write. Both persist quarantine and reject the old approval after the same home generation becomes reachable. New approval in the successor generation succeeds. |
+
+## Verification and measurements
+
+The implementation pin `11ecb948de82ef094f4fc48261786ff7600d64de` passed **285 tests** with all local live modes enabled, including 13 Phase 4E cases. The same 13 cases passed in separate Docker network namespaces. The full suite emitted the inherited Starlette/httpx deprecation warning. The benchmark ran on 2026-11-19 on arm64 macOS with one Linux Docker VM. Both transport arms used the same target, TLS implementation and image. [Test evidence](../benchmarks/phase4e-identity-tests.json) · [Raw benchmark samples, environment and outcomes](../benchmarks/phase4e-identity.json)
+
+| Measured span | Samples | p50 | p95 |
+| --- | ---: | ---: | ---: |
+| Operator retirement and successor activation, elapsed Docker harness time | 12 | 935.70 ms | 987.62 ms |
+| Same transfer, summed anchor-stamp, retirement and claim RPC spans | 12 | 89.19 ms | 104.83 ms |
+| Successor claim RPC, including both durable fence receipts | 12 | 63.97 ms | 79.36 ms |
+| First writer's durable receipt, from start of barrier | 12 | 13.63 ms | 17.31 ms |
+| Second writer's durable receipt, from start of barrier | 12 | 26.64 ms | 31.37 ms |
+| Fresh authenticated session after activation | 12 | 12.99 ms | 13.64 ms |
+| mTLS probe across the internal bridge | 60 | 2.20 ms | 2.56 ms |
+| Same mTLS probe over target-namespace loopback | 60 | 1.90 ms | 2.21 ms |
+
+The bridge added 0.30 ms at p50 and 0.35 ms at p95 on this VM. The fixture measures communication across network namespaces. Physical cross-host latency remains unmeasured. Transfer wall time includes Docker exec and controller scheduling. Each RPC and writer span uses its own monotonic clock. The transport arms each discard five recorded warmup probes and use the nearest-rank p95.
+
+All 24 healthy session and write controls succeeded. The client rejected 12/12 expired credential attempts, and the separate test also exercised the broker's raw handshake. The broker denied 12/12 attempts with a trusted-CA leaf bearing the same URI and an unenrolled TLS key. All 12/12 sessions offered to a previous broker were denied. The raw sample records all 65 timed authorization and fault decisions and their expected outcomes.
+
+In one network disconnect, the home activated generation 27 on both targets 1.547 s after the former broker lost its network attachment. Reattaching the old broker took 37.5 ms. Independent readback confirmed one approved successor write 3.315 s after disconnect and zero stale writes. The recovery interval includes the deliberate old-session and old-write probes and controller operations.
 
 ## Proposed shared-contract changes
 
@@ -46,7 +82,7 @@ From the root of the requested worktree, use the repository Python environment w
 
 ```sh
 cd .worktrees/phase4e-identity
-git log -2 --oneline
+git log -3 --oneline
 
 AEGIS_PHASE4E_LIVE=1 PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 \
   python -m pytest -q -p no:cacheprovider tests/identity_lab

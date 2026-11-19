@@ -1,0 +1,155 @@
+{
+  "source_commit": "11ecb948de82ef094f4fc48261786ff7600d64de",
+  "full_local_suite": {
+    "totals": {
+      "tests": 285,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "seconds": 105.124,
+    "identity_cases": [
+      {
+        "name": "test_simultaneous_authenticated_broker_claims",
+        "seconds": 1.862,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_former_owner_signed_command_denied_at_actual_writer",
+        "seconds": 1.781,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_distinct_leaf_with_same_uri_and_separate_proof_key",
+        "seconds": 1.648,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_expired_leaf_during_recovery_and_rotated_key",
+        "seconds": 1.682,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_broker_loss_and_reconciliation",
+        "seconds": 2.012,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_stale_home_snapshot_and_independent_anchor",
+        "seconds": 2.34,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_target_restarts_during_partial_transfer",
+        "seconds": 2.456,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_old_approval_cannot_authorize_new_generation",
+        "seconds": 1.718,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_broker_and_signing_roles_are_separate",
+        "seconds": 1.719,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_lease_expiry_allows_new_broker_without_operator[2000000000]",
+        "seconds": 3.774,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_restored_anchor_cannot_reset_newer_home_floor",
+        "seconds": 2.217,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_restarted_writer_holds_after_same_generation_restore",
+        "seconds": 1.981,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_lost_anchor_latches_quarantine_until_a_new_generation",
+        "seconds": 2.191,
+        "outcome": "passed"
+      }
+    ]
+  },
+  "isolated_docker_suite": {
+    "totals": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "seconds": 120.247,
+    "identity_cases": [
+      {
+        "name": "test_simultaneous_authenticated_broker_claims",
+        "seconds": 5.649,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_former_owner_signed_command_denied_at_actual_writer",
+        "seconds": 9.871,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_distinct_leaf_with_same_uri_and_separate_proof_key",
+        "seconds": 5.708,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_expired_leaf_during_recovery_and_rotated_key",
+        "seconds": 8.427,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_broker_loss_and_reconciliation",
+        "seconds": 9.914,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_stale_home_snapshot_and_independent_anchor",
+        "seconds": 11.287,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_target_restarts_during_partial_transfer",
+        "seconds": 11.425,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_old_approval_cannot_authorize_new_generation",
+        "seconds": 7.689,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_broker_and_signing_roles_are_separate",
+        "seconds": 8.138,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_lease_expiry_allows_new_broker_without_operator[2000000000]",
+        "seconds": 9.12,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_restored_anchor_cannot_reset_newer_home_floor",
+        "seconds": 9.787,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_restarted_writer_holds_after_same_generation_restore",
+        "seconds": 9.62,
+        "outcome": "passed"
+      },
+      {
+        "name": "test_lost_anchor_latches_quarantine_until_a_new_generation",
+        "seconds": 13.559,
+        "outcome": "passed"
+      }
+    ]
+  }
+}

@@ -1,0 +1,865 @@
+{
+  "environment": {
+    "when_utc": "2026-11-19T23:45:32.312338+00:00",
+    "source_commit": "11ecb948de82ef094f4fc48261786ff7600d64de",
+    "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "docker": "29.5.2 6.8.0-117-generic aarch64",
+    "image": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "worker": "3.12.16 OpenSSL 3.5.7 9 Jun 2026",
+    "network": "single Docker VM, internal bridge, no published ports, one namespace per role"
+  },
+  "ping": {
+    "bridge": {
+      "warmup_ns": [
+        6774210,
+        2765809,
+        2841726,
+        2565142,
+        2195722
+      ],
+      "samples_ns": [
+        2113555,
+        2558808,
+        2404349,
+        2045346,
+        2160722,
+        2379224,
+        2205889,
+        2026346,
+        2217680,
+        2280723,
+        2267640,
+        2039596,
+        2333473,
+        2342265,
+        2153764,
+        2262764,
+        2428432,
+        2483849,
+        2129347,
+        2087888,
+        2324390,
+        2298473,
+        2183347,
+        2557975,
+        2693684,
+        2110555,
+        2086763,
+        2340556,
+        2145430,
+        1984846,
+        2005887,
+        1988054,
+        2181222,
+        2114638,
+        2476140,
+        2559142,
+        2096763,
+        2221931,
+        2271056,
+        2503307,
+        1971555,
+        2064554,
+        2600808,
+        2310556,
+        1964345,
+        2292307,
+        2432224,
+        2133180,
+        1973305,
+        2138930,
+        1914554,
+        2184556,
+        1981721,
+        2354765,
+        2397973,
+        1996138,
+        2065096,
+        2446016,
+        2496266,
+        2157805
+      ]
+    },
+    "loopback": {
+      "warmup_ns": [
+        5268575,
+        2380765,
+        2002721,
+        1714220,
+        1807886
+      ],
+      "samples_ns": [
+        1801053,
+        1818803,
+        1854553,
+        1687719,
+        1733428,
+        1670803,
+        1995762,
+        2101555,
+        1791386,
+        2045888,
+        2058971,
+        2027346,
+        2024638,
+        2438598,
+        2373806,
+        1979471,
+        1962720,
+        2107305,
+        2210180,
+        1942596,
+        1893762,
+        1968387,
+        2018679,
+        1859470,
+        1833428,
+        1736677,
+        1749844,
+        1995263,
+        1865262,
+        1906720,
+        2228597,
+        2197222,
+        1719719,
+        1908012,
+        2133763,
+        2068222,
+        1858845,
+        1778720,
+        1979304,
+        1947304,
+        1849012,
+        1821887,
+        1956637,
+        2129763,
+        1858387,
+        1873096,
+        1759969,
+        1700886,
+        1695094,
+        1709552,
+        1690260,
+        1662885,
+        1708761,
+        1757219,
+        1950971,
+        1973971,
+        2007555,
+        2076971,
+        1750219,
+        1737469
+      ]
+    }
+  },
+  "transfers": [
+    {
+      "generation": 3,
+      "wall_ns": 930971542,
+      "stamp_ns": 6315915,
+      "retire_ns": 19011245,
+      "claim_ns": 66952632,
+      "reconnect_ns": 12915415
+    },
+    {
+      "generation": 5,
+      "wall_ns": 937168083,
+      "stamp_ns": 6511874,
+      "retire_ns": 17228776,
+      "claim_ns": 60265466,
+      "reconnect_ns": 13231043
+    },
+    {
+      "generation": 7,
+      "wall_ns": 946001875,
+      "stamp_ns": 6877918,
+      "retire_ns": 18545034,
+      "claim_ns": 63711447,
+      "reconnect_ns": 12573788
+    },
+    {
+      "generation": 9,
+      "wall_ns": 934240792,
+      "stamp_ns": 6497416,
+      "retire_ns": 19520332,
+      "claim_ns": 64618287,
+      "reconnect_ns": 13575336
+    },
+    {
+      "generation": 11,
+      "wall_ns": 987618292,
+      "stamp_ns": 6883419,
+      "retire_ns": 18581827,
+      "claim_ns": 79361257,
+      "reconnect_ns": 12956833
+    },
+    {
+      "generation": 13,
+      "wall_ns": 938136542,
+      "stamp_ns": 6304540,
+      "retire_ns": 18572868,
+      "claim_ns": 64186869,
+      "reconnect_ns": 13033667
+    },
+    {
+      "generation": 15,
+      "wall_ns": 924339375,
+      "stamp_ns": 8230386,
+      "retire_ns": 16815441,
+      "claim_ns": 55232813,
+      "reconnect_ns": 11667283
+    },
+    {
+      "generation": 17,
+      "wall_ns": 923450750,
+      "stamp_ns": 6156331,
+      "retire_ns": 17430153,
+      "claim_ns": 65655130,
+      "reconnect_ns": 12434288
+    },
+    {
+      "generation": 19,
+      "wall_ns": 937221000,
+      "stamp_ns": 6059039,
+      "retire_ns": 17215444,
+      "claim_ns": 61046435,
+      "reconnect_ns": 13018584
+    },
+    {
+      "generation": 21,
+      "wall_ns": 928960833,
+      "stamp_ns": 7055587,
+      "retire_ns": 19059498,
+      "claim_ns": 59214340,
+      "reconnect_ns": 12321121
+    },
+    {
+      "generation": 23,
+      "wall_ns": 923301375,
+      "stamp_ns": 6075289,
+      "retire_ns": 19721878,
+      "claim_ns": 63754329,
+      "reconnect_ns": 13456337
+    },
+    {
+      "generation": 25,
+      "wall_ns": 950102208,
+      "stamp_ns": 6563376,
+      "retire_ns": 18281452,
+      "claim_ns": 65122505,
+      "reconnect_ns": 13639589
+    }
+  ],
+  "target_fence_receipts": [
+    {
+      "event": "fence-receipt",
+      "generation": 1,
+      "target": "target-a",
+      "rpc_ns": 13748170,
+      "barrier_ns": 13749212
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 1,
+      "target": "target-b",
+      "rpc_ns": 14176298,
+      "barrier_ns": 27957177
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 3,
+      "target": "target-a",
+      "rpc_ns": 13802754,
+      "barrier_ns": 13803963
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 3,
+      "target": "target-b",
+      "rpc_ns": 13127875,
+      "barrier_ns": 26968838
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 5,
+      "target": "target-a",
+      "rpc_ns": 12772248,
+      "barrier_ns": 12773206
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 5,
+      "target": "target-b",
+      "rpc_ns": 11644116,
+      "barrier_ns": 24441947
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 7,
+      "target": "target-a",
+      "rpc_ns": 13872713,
+      "barrier_ns": 13873630
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 7,
+      "target": "target-b",
+      "rpc_ns": 13558211,
+      "barrier_ns": 27457925
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 9,
+      "target": "target-a",
+      "rpc_ns": 13799004,
+      "barrier_ns": 13800004
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 9,
+      "target": "target-b",
+      "rpc_ns": 14732427,
+      "barrier_ns": 28556223
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 11,
+      "target": "target-a",
+      "rpc_ns": 17311277,
+      "barrier_ns": 17312735
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 11,
+      "target": "target-b",
+      "rpc_ns": 14031715,
+      "barrier_ns": 31370492
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 13,
+      "target": "target-a",
+      "rpc_ns": 12240329,
+      "barrier_ns": 12240745
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 13,
+      "target": "target-b",
+      "rpc_ns": 13746630,
+      "barrier_ns": 26016333
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 15,
+      "target": "target-a",
+      "rpc_ns": 12444080,
+      "barrier_ns": 12444872
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 15,
+      "target": "target-b",
+      "rpc_ns": 10542401,
+      "barrier_ns": 23012814
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 17,
+      "target": "target-a",
+      "rpc_ns": 13596504,
+      "barrier_ns": 13597837
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 17,
+      "target": "target-b",
+      "rpc_ns": 14216883,
+      "barrier_ns": 27842387
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 19,
+      "target": "target-a",
+      "rpc_ns": 12832040,
+      "barrier_ns": 12832541
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 19,
+      "target": "target-b",
+      "rpc_ns": 12137745,
+      "barrier_ns": 24993995
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 21,
+      "target": "target-a",
+      "rpc_ns": 12072953,
+      "barrier_ns": 12073453
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 21,
+      "target": "target-b",
+      "rpc_ns": 12212079,
+      "barrier_ns": 24317241
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 23,
+      "target": "target-a",
+      "rpc_ns": 13781798,
+      "barrier_ns": 13783006
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 23,
+      "target": "target-b",
+      "rpc_ns": 12503039,
+      "barrier_ns": 26311628
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 25,
+      "target": "target-a",
+      "rpc_ns": 13664130,
+      "barrier_ns": 13665214
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 25,
+      "target": "target-b",
+      "rpc_ns": 13716756,
+      "barrier_ns": 27410178
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 27,
+      "target": "target-a",
+      "rpc_ns": 14174259,
+      "barrier_ns": 14175175
+    },
+    {
+      "event": "fence-receipt",
+      "generation": 27,
+      "target": "target-b",
+      "rpc_ns": 14652095,
+      "barrier_ns": 28851020
+    }
+  ],
+  "attempts": [
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 12915415
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13092208
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 5666
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 6037038
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 50610696
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13231043
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 12836498
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4250
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5828453
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 20468255
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 12573788
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13256793
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4666
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5700870
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 20793007
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13575336
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13172500
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 7375
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 6046414
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 21831889
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 12956833
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 14078965
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4083
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5801246
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 22942314
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13033667
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 12226037
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 6250
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5408951
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 21183052
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 11667283
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 12296745
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4625
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5035449
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 19931961
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 12434288
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 14293216
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4208
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5042866
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 19320416
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13018584
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13436003
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4417
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5938205
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 27907888
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 12321121
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 14860679
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 5792
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5613870
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 20938052
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13456337
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 12497081
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 4333
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 10014814
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 22991482
+    },
+    {
+      "case": "current-session",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 13639589
+    },
+    {
+      "case": "old-broker-session",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13386420
+    },
+    {
+      "case": "expired-certificate",
+      "outcome": "AuthenticationFailed",
+      "expected": "AuthenticationFailed",
+      "elapsed_ns": 6250
+    },
+    {
+      "case": "unlisted-key-same-uri",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 5346868
+    },
+    {
+      "case": "approved-write",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 22459145
+    },
+    {
+      "case": "partitioned-broker",
+      "outcome": "Unavailable",
+      "expected": "Unavailable",
+      "elapsed_ns": 2471391
+    },
+    {
+      "case": "overlapping-claim",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 13870132
+    },
+    {
+      "case": "former-owner-at-writer",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 7490674
+    },
+    {
+      "case": "former-owner-after-reconnect",
+      "outcome": "Denied",
+      "expected": "Denied",
+      "elapsed_ns": 12990460
+    },
+    {
+      "case": "successor-after-partition",
+      "outcome": "ok",
+      "expected": "ok",
+      "elapsed_ns": 21005678
+    }
+  ],
+  "outcome_counts": {
+    "ok": 25,
+    "Denied": 27,
+    "AuthenticationFailed": 12,
+    "Unavailable": 1
+  },
+  "partition": {
+    "former_generation": 25,
+    "successor_generation": 27,
+    "disconnect_ns": 57584750,
+    "observed_unavailable_ns": 2471391,
+    "active_after_disconnect_ns": 1546648583,
+    "reattach_ns": 37521208,
+    "first_confirmed_successor_write_ns": 3314806625,
+    "stale_writes": 0,
+    "successor_writes": 1,
+    "target_floors": {
+      "target-a": 27,
+      "target-b": 27
+    },
+    "fault": "Docker network disconnect/connect, former broker process stayed running"
+  }
+}
