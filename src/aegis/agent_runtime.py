@@ -134,7 +134,7 @@ async def run() -> None:
 
 
 async def critical_delivery(agent, audit, js, lease, client, durable, *,
-                            before_critical=None, on_ack=None, on_commit=None):
+                            on_ack=None, on_commit=None):
     """Independent wire and replay loops share only the identity and local audit."""
 
     async def wire():
@@ -156,8 +156,6 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
                         continue
                     message = messages[0]
                     received_ns = time.perf_counter_ns()
-                    if before_critical is not None:
-                        await before_critical(message)
                     observe = partial(on_ack, message) if on_ack is not None else None
                     committed = partial(on_commit, message) if on_commit is not None else None
                     await process_message(message, agent, js, lease, observe=observe, critical=True,
@@ -192,16 +190,14 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
 
 
 async def consume(agent, audit, js, lease, renew_task, client, durable, *, priority=False,
-                  on_reconcile=None, before_message=None, on_ack=None,
-                  before_critical=None, on_critical_commit=None):
+                  on_reconcile=None, before_message=None, on_ack=None, on_critical_commit=None):
     ordinary = partial(consume_ordinary, agent, audit, js, lease, renew_task, client, durable,
                        on_reconcile=on_reconcile, before_message=before_message, on_ack=on_ack, priority=priority)
     if not priority:
         return await ordinary()
     async with asyncio.TaskGroup() as tasks:
         tasks.create_task(critical_delivery(agent, audit, js, lease, client, durable,
-                                            before_critical=before_critical, on_ack=on_ack,
-                                            on_commit=on_critical_commit))
+                                            on_ack=on_ack, on_commit=on_critical_commit))
         tasks.create_task(ordinary())
 
 

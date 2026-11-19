@@ -1,0 +1,869 @@
+{
+  "baseline": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "findings": 1000,
+  "observer_poll_ms": 25.0,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "priority_minus_control": {
+    "coordinator_cpu_ms": {
+      "max": 2289.529,
+      "n": 5,
+      "p50": 1726.962,
+      "p95": 2179.386,
+      "p99": 2267.5
+    },
+    "coordinator_peak_rss_bytes": {
+      "max": 557056,
+      "n": 5,
+      "p50": -49152.0,
+      "p95": 484966.4,
+      "p99": 542638.08
+    },
+    "worker_cpu_ms": {
+      "max": 687.618,
+      "n": 5,
+      "p50": 429.222,
+      "p95": 647.508,
+      "p99": 679.596
+    },
+    "worker_peak_rss_bytes": {
+      "max": 573440,
+      "n": 5,
+      "p50": 163840.0,
+      "p95": 524288.0,
+      "p99": 563609.6
+    }
+  },
+  "python": "3.15.2",
+  "sample_summary": {
+    "control": {
+      "backlog_drain_ms": {
+        "max": 13631.409,
+        "n": 5,
+        "p50": 11771.078,
+        "p95": 13267.063,
+        "p99": 13558.54
+      },
+      "coordinator_cpu_ms": {
+        "max": 12821.108,
+        "n": 5,
+        "p50": 12341.448,
+        "p95": 12750.299,
+        "p99": 12806.946
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 84803584,
+        "n": 5,
+        "p50": 84606976.0,
+        "p95": 84793753.6,
+        "p99": 84801617.92
+      },
+      "crash_to_ack_ms": null,
+      "crash_to_local_denial_ms": null,
+      "crash_to_ready_ms": null,
+      "intake_to_ack_ms": {
+        "max": 14239.855,
+        "n": 5,
+        "p50": 12367.549,
+        "p95": 13873.684,
+        "p99": 14166.621
+      },
+      "intake_to_local_denial_ms": {
+        "max": 4986.492,
+        "n": 5,
+        "p50": 4097.605,
+        "p95": 4956.09,
+        "p99": 4980.412
+      },
+      "intake_to_report_ms": {
+        "max": 4986.557,
+        "n": 5,
+        "p50": 4097.666,
+        "p95": 4956.154,
+        "p99": 4980.476
+      },
+      "worker_cpu_ms": {
+        "max": 3457.753,
+        "n": 5,
+        "p50": 3303.884,
+        "p95": 3441.694,
+        "p99": 3454.541
+      },
+      "worker_peak_rss_bytes": {
+        "max": 66289664,
+        "n": 5,
+        "p50": 65945600.0,
+        "p95": 66279833.6,
+        "p99": 66287697.92
+      }
+    },
+    "crash": {
+      "backlog_drain_ms": null,
+      "coordinator_cpu_ms": {
+        "max": 3758.149,
+        "n": 1,
+        "p50": 3758.149,
+        "p95": 3758.149,
+        "p99": 3758.149
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 81903616,
+        "n": 1,
+        "p50": 81903616.0,
+        "p95": 81903616.0,
+        "p99": 81903616.0
+      },
+      "crash_to_ack_ms": {
+        "max": 30371.135,
+        "n": 2,
+        "p50": 30361.966,
+        "p95": 30370.218,
+        "p99": 30370.952
+      },
+      "crash_to_local_denial_ms": {
+        "max": 30390.236,
+        "n": 2,
+        "p50": 15195.118,
+        "p95": 28870.724,
+        "p99": 30086.334
+      },
+      "crash_to_ready_ms": {
+        "max": 30381.108,
+        "n": 2,
+        "p50": 30372.728,
+        "p95": 30380.27,
+        "p99": 30380.94
+      },
+      "intake_to_ack_ms": {
+        "max": 30475.606,
+        "n": 2,
+        "p50": 30419.493,
+        "p95": 30469.995,
+        "p99": 30474.484
+      },
+      "intake_to_local_denial_ms": {
+        "max": 30382.479,
+        "n": 2,
+        "p50": 15218.909,
+        "p95": 28866.122,
+        "p99": 30079.208
+      },
+      "intake_to_report_ms": {
+        "max": 30382.552,
+        "n": 2,
+        "p50": 15218.969,
+        "p95": 28866.194,
+        "p99": 30079.28
+      },
+      "worker_cpu_ms": {
+        "max": 546.494,
+        "n": 1,
+        "p50": 546.494,
+        "p95": 546.494,
+        "p99": 546.494
+      },
+      "worker_peak_rss_bytes": {
+        "max": 64307200,
+        "n": 1,
+        "p50": 64307200.0,
+        "p95": 64307200.0,
+        "p99": 64307200.0
+      }
+    },
+    "priority": {
+      "backlog_drain_ms": {
+        "max": 13682.746,
+        "n": 5,
+        "p50": 13185.188,
+        "p95": 13629.128,
+        "p99": 13672.022
+      },
+      "coordinator_cpu_ms": {
+        "max": 14756.594,
+        "n": 5,
+        "p50": 13977.012,
+        "p95": 14603.774,
+        "p99": 14726.03
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 85016576,
+        "n": 5,
+        "p50": 84754432.0,
+        "p95": 84970700.8,
+        "p99": 85007400.96
+      },
+      "crash_to_ack_ms": null,
+      "crash_to_local_denial_ms": null,
+      "crash_to_ready_ms": null,
+      "intake_to_ack_ms": {
+        "max": 2729.264,
+        "n": 5,
+        "p50": 2247.377,
+        "p95": 2669.003,
+        "p99": 2717.212
+      },
+      "intake_to_local_denial_ms": {
+        "max": 2738.367,
+        "n": 5,
+        "p50": 2229.362,
+        "p95": 2675.167,
+        "p99": 2725.727
+      },
+      "intake_to_report_ms": {
+        "max": 2738.419,
+        "n": 5,
+        "p50": 2229.416,
+        "p95": 2675.228,
+        "p99": 2725.781
+      },
+      "worker_cpu_ms": {
+        "max": 3991.502,
+        "n": 5,
+        "p50": 3680.336,
+        "p95": 3942.164,
+        "p99": 3981.634
+      },
+      "worker_peak_rss_bytes": {
+        "max": 66453504,
+        "n": 5,
+        "p50": 66289664.0,
+        "p95": 66443673.6,
+        "p99": 66451537.92
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "signaling": "disposable local POSIX processes",
+  "slow_consumer_delay_ms": 3,
+  "trials": [
+    {
+      "agent_id": "40ea6aba-5e9b-4f08-8aad-1ac9b1202e33",
+      "arm": "control",
+      "backlog_drain_ms": 13631.409,
+      "clock_ns": {
+        "acked": 551368651921833,
+        "denied": 551359398558458,
+        "drained": 551368620303041,
+        "intake": 551354412066416,
+        "received": 551368649825208,
+        "reported": 551359398623375,
+        "restart_requested": 551354988893791
+      },
+      "coordinator_cpu_ms": 12821.108,
+      "coordinator_peak_rss_bytes": 84590592,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "c7b870e8-1793-4dc6-9bdc-fb7effe0e26b",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 14239.855,
+      "intake_to_http_accept_ms": 15.63,
+      "intake_to_local_denial_ms": 4986.492,
+      "intake_to_report_ms": 4986.557,
+      "intake_to_worker_receipt_ms": 14237.759,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 1,
+      "withdrawal_ack": {
+        "acked": 551368651921833,
+        "broker_timestamp": "2026-11-19T23:33:21.991354+00:00",
+        "committed": 551368651151125,
+        "decision": {
+          "agent_id": "40ea6aba-5e9b-4f08-8aad-1ac9b1202e33",
+          "artifact_id": "9f6dab8a-6706-40ad-a4cd-cb6049d740eb",
+          "correlation_id": "9f6dab8a-6706-40ad-a4cd-cb6049d740eb",
+          "digest": "1976a3bf758a3bbc3ab9319daea9eb5a4092a9de7db66ca86371e724852e72da",
+          "dry_run": true,
+          "event_id": "c7b870e8-1793-4dc6-9bdc-fb7effe0e26b",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 551368650668416,
+        "ns": 551368651941250,
+        "received": 551368649825208,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3457.7529999999997,
+      "worker_peak_rss_bytes": 66240512
+    },
+    {
+      "agent_id": "7f5f5c2d-d6e1-4e15-a6ec-ed69e87aabcb",
+      "arm": "priority",
+      "backlog_drain_ms": 13185.188,
+      "clock_ns": {
+        "acked": 551381006561458,
+        "denied": 551381000969166,
+        "drained": 551392342494375,
+        "intake": 551378578604541,
+        "received": 551380995648333,
+        "reported": 551381001068416,
+        "restart_requested": 551379157306333
+      },
+      "coordinator_cpu_ms": 13992.495,
+      "coordinator_peak_rss_bytes": 84787200,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "d404931d-d20c-4e51-b435-d06a0e4eef4d",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 2427.957,
+      "intake_to_http_accept_ms": 17.263,
+      "intake_to_local_denial_ms": 2422.365,
+      "intake_to_report_ms": 2422.464,
+      "intake_to_worker_receipt_ms": 2417.044,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 1,
+      "withdrawal_ack": {
+        "acked": 551381006561458,
+        "broker_timestamp": "2026-11-19T23:33:34.339616+00:00",
+        "committed": 551380999463375,
+        "decision": {
+          "agent_id": "7f5f5c2d-d6e1-4e15-a6ec-ed69e87aabcb",
+          "artifact_id": "337a0f19-a169-4289-a66e-bb0d32228018",
+          "correlation_id": "337a0f19-a169-4289-a66e-bb0d32228018",
+          "digest": "7d668cc8986240be77fc5794eef9387645e34ae498443c742515317f37bdfa2d",
+          "dry_run": true,
+          "event_id": "d404931d-d20c-4e51-b435-d06a0e4eef4d",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551380999063625,
+        "ns": 551381006615791,
+        "received": 551380995648333,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3680.336,
+      "worker_peak_rss_bytes": 66289664
+    },
+    {
+      "agent_id": "92b0e829-e9c7-416c-9351-de2e9c2db52c",
+      "arm": "priority",
+      "backlog_drain_ms": 13682.746,
+      "clock_ns": {
+        "acked": 551416468701833,
+        "denied": 551416477804208,
+        "drained": 551428000975458,
+        "intake": 551413739437583,
+        "received": 551416459770333,
+        "reported": 551416477856458,
+        "restart_requested": 551414318229375
+      },
+      "coordinator_cpu_ms": 13977.012,
+      "coordinator_peak_rss_bytes": 84688896,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "d8c1dbc6-9028-4c0d-91c0-834ba4d7c10f",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 2729.264,
+      "intake_to_http_accept_ms": 16.074,
+      "intake_to_local_denial_ms": 2738.367,
+      "intake_to_report_ms": 2738.419,
+      "intake_to_worker_receipt_ms": 2720.333,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 2,
+      "withdrawal_ack": {
+        "acked": 551416468701833,
+        "broker_timestamp": "2026-11-19T23:34:09.804473+00:00",
+        "committed": 551416463151041,
+        "decision": {
+          "agent_id": "92b0e829-e9c7-416c-9351-de2e9c2db52c",
+          "artifact_id": "816f0956-b019-452b-8b2f-293973c6f29e",
+          "correlation_id": "816f0956-b019-452b-8b2f-293973c6f29e",
+          "digest": "b21a5d44f3fa3a1e404c2407fd1eff2068a0b2715d6fea955f8c81e221926596",
+          "dry_run": true,
+          "event_id": "d8c1dbc6-9028-4c0d-91c0-834ba4d7c10f",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551416462766250,
+        "ns": 551416468754583,
+        "received": 551416459770333,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3744.811,
+      "worker_peak_rss_bytes": 66027520
+    },
+    {
+      "agent_id": "4d2b677a-cb23-47be-8d98-02dc56dbaacb",
+      "arm": "control",
+      "backlog_drain_ms": 10554.169,
+      "clock_ns": {
+        "acked": 551448366235000,
+        "denied": 551440881750083,
+        "drained": 551448346212291,
+        "intake": 551437214153333,
+        "received": 551448364390458,
+        "reported": 551440881810708,
+        "restart_requested": 551437792042875
+      },
+      "coordinator_cpu_ms": 12250.05,
+      "coordinator_peak_rss_bytes": 84754432,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "c1373daa-20f0-475b-8856-7f7a786b3325",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 11152.082,
+      "intake_to_http_accept_ms": 15.635,
+      "intake_to_local_denial_ms": 3667.597,
+      "intake_to_report_ms": 3667.657,
+      "intake_to_worker_receipt_ms": 11150.237,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 2,
+      "withdrawal_ack": {
+        "acked": 551448366235000,
+        "broker_timestamp": "2026-11-19T23:34:41.705710+00:00",
+        "committed": 551448365596833,
+        "decision": {
+          "agent_id": "4d2b677a-cb23-47be-8d98-02dc56dbaacb",
+          "artifact_id": "a0e20f7e-4c21-4c3b-a73c-5fcf5f22a510",
+          "correlation_id": "a0e20f7e-4c21-4c3b-a73c-5fcf5f22a510",
+          "digest": "ec22b3cb932c4aabe9bf5698c75a53abde4e60d4d24ae801e048f76a7b798909",
+          "dry_run": true,
+          "event_id": "c1373daa-20f0-475b-8856-7f7a786b3325",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 551448365161875,
+        "ns": 551448366251625,
+        "received": 551448364390458,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3257.745,
+      "worker_peak_rss_bytes": 65945600
+    },
+    {
+      "agent_id": "9439d255-5327-43f4-9a4b-8812a182dd43",
+      "arm": "control",
+      "backlog_drain_ms": 11809.678,
+      "clock_ns": {
+        "acked": 551469859517083,
+        "denied": 551461548120833,
+        "drained": 551469836712083,
+        "intake": 551457450516250,
+        "received": 551469857608500,
+        "reported": 551461548182041,
+        "restart_requested": 551458027034541
+      },
+      "coordinator_cpu_ms": 12341.448,
+      "coordinator_peak_rss_bytes": 84803584,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "b107802a-0373-42d1-abbc-15dfe394b873",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 12409.001,
+      "intake_to_http_accept_ms": 15.411,
+      "intake_to_local_denial_ms": 4097.605,
+      "intake_to_report_ms": 4097.666,
+      "intake_to_worker_receipt_ms": 12407.092,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 3,
+      "withdrawal_ack": {
+        "acked": 551469859517083,
+        "broker_timestamp": "2026-11-19T23:35:03.198756+00:00",
+        "committed": 551469858826708,
+        "decision": {
+          "agent_id": "9439d255-5327-43f4-9a4b-8812a182dd43",
+          "artifact_id": "4d896f28-d08e-404c-965c-10d085f88888",
+          "correlation_id": "4d896f28-d08e-404c-965c-10d085f88888",
+          "digest": "6cb9abe7e923d9f33f923711f4bdee337ee0ac6aea8d84062645e1bbd3945d09",
+          "dry_run": true,
+          "event_id": "b107802a-0373-42d1-abbc-15dfe394b873",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 551469858434166,
+        "ns": 551469859532166,
+        "received": 551469857608500,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3377.4570000000003,
+      "worker_peak_rss_bytes": 66289664
+    },
+    {
+      "agent_id": "a2073a5e-f79e-4e81-98e5-9e169fa97b8a",
+      "arm": "priority",
+      "backlog_drain_ms": 12293.005,
+      "clock_ns": {
+        "acked": 551488282349958,
+        "denied": 551488287878625,
+        "drained": 551498939390208,
+        "intake": 551486067756250,
+        "received": 551488268943916,
+        "reported": 551488287950708,
+        "restart_requested": 551486646384791
+      },
+      "coordinator_cpu_ms": 13947.03,
+      "coordinator_peak_rss_bytes": 84754432,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "1b58a05c-e41c-4fdd-b9ab-f94873bb68c5",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 2214.594,
+      "intake_to_http_accept_ms": 17.541,
+      "intake_to_local_denial_ms": 2220.122,
+      "intake_to_report_ms": 2220.194,
+      "intake_to_worker_receipt_ms": 2201.188,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 3,
+      "withdrawal_ack": {
+        "acked": 551488282349958,
+        "broker_timestamp": "2026-11-19T23:35:21.613722+00:00",
+        "committed": 551488272488166,
+        "decision": {
+          "agent_id": "a2073a5e-f79e-4e81-98e5-9e169fa97b8a",
+          "artifact_id": "965307a7-0573-43a8-bc63-2da7e06b29cd",
+          "correlation_id": "965307a7-0573-43a8-bc63-2da7e06b29cd",
+          "digest": "93ebc4ca35a7874f82b10740d21604ca8d4ef96e36b16d81bb1c2e72712a9919",
+          "dry_run": true,
+          "event_id": "1b58a05c-e41c-4fdd-b9ab-f94873bb68c5",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551488272055083,
+        "ns": 551488282402791,
+        "received": 551488268943916,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3526.6539999999995,
+      "worker_peak_rss_bytes": 66453504
+    },
+    {
+      "agent_id": "ba88fbb7-2c07-4a5f-942f-8586ea230116",
+      "arm": "priority",
+      "backlog_drain_ms": 13414.654,
+      "clock_ns": {
+        "acked": 551511204509291,
+        "denied": 551511197169541,
+        "drained": 551523902685125,
+        "intake": 551509907336958,
+        "received": 551511194059125,
+        "reported": 551511197236375,
+        "restart_requested": 551510488031083
+      },
+      "coordinator_cpu_ms": 14756.594,
+      "coordinator_peak_rss_bytes": 84541440,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "573d5635-8753-4ac8-a0db-678266a5b17e",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 1297.172,
+      "intake_to_http_accept_ms": 16.799,
+      "intake_to_local_denial_ms": 1289.833,
+      "intake_to_report_ms": 1289.899,
+      "intake_to_worker_receipt_ms": 1286.722,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 4,
+      "withdrawal_ack": {
+        "acked": 551511204509291,
+        "broker_timestamp": "2026-11-19T23:35:44.538772+00:00",
+        "committed": 551511198304166,
+        "decision": {
+          "agent_id": "ba88fbb7-2c07-4a5f-942f-8586ea230116",
+          "artifact_id": "b0185df0-17af-45ba-b4c4-1adfaa52f887",
+          "correlation_id": "b0185df0-17af-45ba-b4c4-1adfaa52f887",
+          "digest": "e5c2c0ffd55ad7d9adb810baf14edce45d48c3f201944c1fe190ab1ef5e9e3e2",
+          "dry_run": true,
+          "event_id": "573d5635-8753-4ac8-a0db-678266a5b17e",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551511197907125,
+        "ns": 551511204552750,
+        "received": 551511194059125,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3991.502,
+      "worker_peak_rss_bytes": 66273280
+    },
+    {
+      "agent_id": "44ce89fe-d6ff-4a29-acaf-4e830885bc33",
+      "arm": "control",
+      "backlog_drain_ms": 11771.078,
+      "clock_ns": {
+        "acked": 551547072587000,
+        "denied": 551539539521625,
+        "drained": 551547053860500,
+        "intake": 551534705037875,
+        "received": 551547070702083,
+        "reported": 551539539580458,
+        "restart_requested": 551535282782375
+      },
+      "coordinator_cpu_ms": 12467.065,
+      "coordinator_peak_rss_bytes": 84606976,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "2f534c5f-92f1-495d-8e3e-1adc4e4f6b9e",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 12367.549,
+      "intake_to_http_accept_ms": 16.443,
+      "intake_to_local_denial_ms": 4834.484,
+      "intake_to_report_ms": 4834.543,
+      "intake_to_worker_receipt_ms": 12365.664,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 4,
+      "withdrawal_ack": {
+        "acked": 551547072587000,
+        "broker_timestamp": "2026-11-19T23:36:20.412431+00:00",
+        "committed": 551547071969375,
+        "decision": {
+          "agent_id": "44ce89fe-d6ff-4a29-acaf-4e830885bc33",
+          "artifact_id": "505a424f-99c3-492d-aaa0-e726b71fadf1",
+          "correlation_id": "505a424f-99c3-492d-aaa0-e726b71fadf1",
+          "digest": "83ee1b2eb145a139edc655efaeb087b926e2fee4830375e79a6bd699ca243699",
+          "dry_run": true,
+          "event_id": "2f534c5f-92f1-495d-8e3e-1adc4e4f6b9e",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 551547071539083,
+        "ns": 551547072603958,
+        "received": 551547070702083,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3303.884,
+      "worker_peak_rss_bytes": 65945600
+    },
+    {
+      "agent_id": "71434166-b499-43cf-af7a-a721606d2558",
+      "arm": "control",
+      "backlog_drain_ms": 10559.513,
+      "clock_ns": {
+        "acked": 551567550982416,
+        "denied": 551560028937208,
+        "drained": 551567531292458,
+        "intake": 551556394162375,
+        "received": 551567548992583,
+        "reported": 551560028988041,
+        "restart_requested": 551556971779958
+      },
+      "coordinator_cpu_ms": 12210.891,
+      "coordinator_peak_rss_bytes": 84459520,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "b1d5fdb4-2105-4ab2-9f12-35337a23f596",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 11156.82,
+      "intake_to_http_accept_ms": 15.546,
+      "intake_to_local_denial_ms": 3634.775,
+      "intake_to_report_ms": 3634.826,
+      "intake_to_worker_receipt_ms": 11154.83,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 5,
+      "withdrawal_ack": {
+        "acked": 551567550982416,
+        "broker_timestamp": "2026-11-19T23:36:40.890448+00:00",
+        "committed": 551567550226208,
+        "decision": {
+          "agent_id": "71434166-b499-43cf-af7a-a721606d2558",
+          "artifact_id": "4c55fbee-08c0-447a-9fbe-02aac8443677",
+          "correlation_id": "4c55fbee-08c0-447a-9fbe-02aac8443677",
+          "digest": "fbf32eba21fee7177a00840fd12eb6a449539ee5dbf7af422c1fee42fb361283",
+          "dry_run": true,
+          "event_id": "b1d5fdb4-2105-4ab2-9f12-35337a23f596",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 551567549814708,
+        "ns": 551567550998291,
+        "received": 551567548992583,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3242.653,
+      "worker_peak_rss_bytes": 65830912
+    },
+    {
+      "agent_id": "e0250cd1-918a-46e3-84a4-63370f4231eb",
+      "arm": "priority",
+      "backlog_drain_ms": 12705.217,
+      "clock_ns": {
+        "acked": 551579789351500,
+        "denied": 551579771336958,
+        "drained": 551590826776708,
+        "intake": 551577541974958,
+        "received": 551579778087125,
+        "reported": 551579771391083,
+        "restart_requested": 551578121559750
+      },
+      "coordinator_cpu_ms": 13949.707,
+      "coordinator_peak_rss_bytes": 85016576,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "95a38b40-6c51-41d3-8672-2f2a9063e637",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 2247.377,
+      "intake_to_http_accept_ms": 17.833,
+      "intake_to_local_denial_ms": 2229.362,
+      "intake_to_report_ms": 2229.416,
+      "intake_to_worker_receipt_ms": 2236.112,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 5,
+      "withdrawal_ack": {
+        "acked": 551579789351500,
+        "broker_timestamp": "2026-11-19T23:36:53.121161+00:00",
+        "committed": 551579782321625,
+        "decision": {
+          "agent_id": "e0250cd1-918a-46e3-84a4-63370f4231eb",
+          "artifact_id": "fee42c7d-a0cd-4152-9f06-ae222711fbab",
+          "correlation_id": "fee42c7d-a0cd-4152-9f06-ae222711fbab",
+          "digest": "32df00cac6797a1368baf9d76e89350522910327209e53074a64df189fdc10be",
+          "dry_run": true,
+          "event_id": "95a38b40-6c51-41d3-8672-2f2a9063e637",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551579781908000,
+        "ns": 551579789395625,
+        "received": 551579778087125,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3671.875,
+      "worker_peak_rss_bytes": 66404352
+    },
+    {
+      "arm": "crash",
+      "coordinator_cpu_ms": 3758.149,
+      "coordinator_peak_rss_bytes": 81903616,
+      "docker": "29.5.2 6 8307912704",
+      "faults": [
+        {
+          "ack_delivery": 1,
+          "agent_id": "8c6214ac-0605-4b7b-ac6f-47002035d69d",
+          "clock_ns": {
+            "acked": 551625765691416,
+            "crash": 551595394556458,
+            "denied": 551625784792041,
+            "intake": 551595402312791,
+            "ready": 551625775664166,
+            "reported": 551625784864916
+          },
+          "crash_to_ack_ms": 30371.135,
+          "crash_to_local_denial_ms": 30390.236,
+          "crash_to_ready_ms": 30381.108,
+          "event_id": "1a44fd40-f991-44f1-9225-e8f96dbc8556",
+          "fault": "before-audit",
+          "intake_to_ack_ms": 30363.379,
+          "intake_to_local_denial_ms": 30382.479,
+          "intake_to_report_ms": 30382.552
+        },
+        {
+          "ack_delivery": 2,
+          "agent_id": "2a4d6c52-d586-4c45-9813-206d11fca334",
+          "clock_ns": {
+            "acked": 551625877918958,
+            "crash": 551595525121000,
+            "denied": 551595457652666,
+            "intake": 551595402312791,
+            "ready": 551625889467583,
+            "reported": 551595457698583
+          },
+          "crash_to_ack_ms": 30352.798,
+          "crash_to_local_denial_ms": 0,
+          "crash_to_ready_ms": 30364.347,
+          "event_id": "1a44fd40-f991-44f1-9225-e8f96dbc8556",
+          "fault": "after-audit-before-ack",
+          "intake_to_ack_ms": 30475.606,
+          "intake_to_local_denial_ms": 55.34,
+          "intake_to_report_ms": 55.386
+        }
+      ],
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "trial": 1,
+      "worker_cpu_ms": 546.4939999999999,
+      "worker_peak_rss_bytes": 64307200
+    }
+  ]
+}
