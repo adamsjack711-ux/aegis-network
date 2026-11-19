@@ -1,5 +1,7 @@
 # Architecture
 
+This document records the original dry-run architecture. Phase 3C added a separately authorized disposable fixture path. Phase 4 uses the Phase 3C baseline and the shared contract freeze. [Phase 3C integration](docs/phase3c-integration.md) · [Phase 4 plan](docs/phase4-integration-plan.md)
+
 ## Objective and boundaries
 
 Aegis Mesh accepts and distributes signed findings with verifiable provenance and evidence digests. Aegis Rapid runs at each authorized lab deployment, independently verifies the publisher, compares exact inventory identities, and records a local policy decision. The current implementation only computes dry-run decisions. It neither fetches evidence URLs nor executes mitigation commands.

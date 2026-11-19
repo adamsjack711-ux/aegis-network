@@ -1,5 +1,7 @@
 # Threat model
 
+This document records the original dry-run boundaries. The Phase 4 risk register tracks the additional threats for the Phase 3C fixture path and proposed distributed experiments. [Phase 4 risk register](docs/phase4-risk-register.md)
+
 ## Assets, attackers, and trust boundaries
 
 Assets: local policy authority, inventory, audit history, private publisher keys, artifact integrity, evidence provenance, and lab availability. Untrusted inputs enter through the HTTP submission body and the NATS event. Evidence URIs are opaque references and are never fetched by this slice. The coordinator, NATS, and publishers can be compromised independently; local policy and pinned public keys are a distinct trust boundary.
