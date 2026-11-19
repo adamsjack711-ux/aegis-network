@@ -2,6 +2,6 @@
 
 from .records import Grant, Trust
 from .runner import WorkerProfile
-from .service import Assessment, Bundle, Evidence, Verifier
+from .service import Assessment, Bundle, CompatibleEvidence, Evidence, Verifier
 
-__all__ = ["Assessment", "Bundle", "Evidence", "Grant", "Trust", "Verifier", "WorkerProfile"]
+__all__ = ["Assessment", "Bundle", "CompatibleEvidence", "Evidence", "Grant", "Trust", "Verifier", "WorkerProfile"]

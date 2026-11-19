@@ -58,7 +58,7 @@ class Materials(Record):
 class Manifest(IssuedRecord):
     kind: Literal["aegis.evidence.bundle.v1"]
     claim_sha256: Digest
-    family: Literal["feature-gate", "route-toggle", "service-access"]
+    family: Literal["feature-gate", "route-toggle", "service-access", "portability-marker"]
     materials: Materials
     environment_sha256: Digest
     check_sha256: Digest
