@@ -50,3 +50,46 @@ PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 AEGIS_PHASE4A_LIVE=1 \
   AEGIS_PHASE4D_LIVE=1 AEGIS_PHASE4D_T3_LIVE=1 \
   python -m pytest -q -p no:cacheprovider
 ```
+
+## Sequential intake record
+
+| Step | Approved source input | Integrated checkpoint and focused result |
+| --- | --- | --- |
+| A | `6e8bedccb184f3b4268670c93bc22310234c4f5e` and evidence/crash regression `4c6f674c1915ee255222f02c38c2e2c010421b1f` | `1adea06fc5b1a86b802008bfe55b7753f4abf755`. 35 focused withdrawal, exact fixture, hardened Mesh and slice tests passed. |
+| B | `cb7986d1abb7491e73f5ce53bb01778ba7159d94` and durable interruption fix `11ecb948de82ef094f4fc48261786ff7600d64de` | `16e71ed1ccaf96209054fa3e5ddd03dd6e24b273`. 39 cross-regressions passed, including 13 authenticated loopback identity cases and inherited two-broker identity. Imported as a separate lab namespace. Evidence-only source tip `330294e1326ab30fb1ade096b089d5c175d957cd` retained after review. |
+| C | `f1692340b03521d44877b6ba4a2799db66a4576d` | `4918dadacc8dedd96d1c4b506e5f746040a01941`. 47 cross-regressions passed across Trust, unmodified native writer authority, Evidence and withdrawals. Shadow and isolated capability only. |
+| D | `61909cc085389a1987a7b835517270160a896ab2`, `39e72afc9e4e915ff56e44b3e8c77cc4e509409a`, `e22ab356aea4f4a6ba01bf59fee44da33c685c01` | `508322e441c772a4d5b93396d6856fc9bf36f0ba`. Independent defensive harness and retained baseline failures. The native tests need the default fixture mode. The two-stream live oracle uses the priority environment separately. |
+
+C's only overlapping intake was the status log. Preserve all source handoffs. No C status endpoint is wired to the existing writer. No B broker adapter can grant native consumer or target authority. The D challenge against the shared writer covers the existing exact T4/T5 fixture gates plus A's early denial integration. Independent D checks of B and C exercise their separate lab boundaries. A single combined authenticated native writer with B and C active remains untested. [Reviewed interfaces](phase4e-contract-review.md) · [Independent assessment](phase4e-adversarial.md)
+
+## Candidate test profiles
+
+Use the default Mesh profile for the general and guarded-fixture suite. Run the explicit two-stream test separately so stubs built for the legacy profile retain their intended controls. The separate legacy-stream withdrawal test intentionally fails the original priority requirement on the baseline. Its four corrected runs remain archived and are outside the current pass denominator.
+
+```sh
+export PYTHONPATH=src:tests/phase4d:scripts:. PYTHONDONTWRITEBYTECODE=1
+export AEGIS_PHASE4A_LIVE=1 AEGIS_PHASE4D_LIVE=1 AEGIS_PHASE4D_T3_LIVE=1
+export AEGIS_PHASE4E_LIVE=1 AEGIS_PHASE4E_TOPOLOGY=loopback
+
+AEGIS_PHASE4E_PRIORITY=0 python -m pytest -q -ra -p no:cacheprovider \
+  --ignore=tests/phase4e/test_withdrawal_delivery.py
+AEGIS_PHASE4E_PRIORITY=1 python -m pytest -q -ra -p no:cacheprovider \
+  tests/phase4e/test_withdrawal_delivery.py::test_W01_W02_critical_lane_progress_while_ordinary_stream_is_full
+```
+
+The B container backend is separate from this full loopback-oriented run. The scoped bench and adversarial reports state the tested topology and pin for each observation. No combined authoritative native deployment was provisioned. [Identity topology](phase4e-identity.md) · [Independent run conditions](phase4e-adversarial.md)
+
+## Targeted follow-up order
+
+1. Retain the original C single-witness reproduction. The strict shadow profile must require direct authenticated denial-lane freshness, preserve receipt bytes and native authority, and deny positive appraisal when a designated witness cannot be accounted for. Test one accepted denial and an untrusted denial attempt separately. No shared writer promotion is in scope.
+2. Review A's adapter contract for transport separation and permanent versus unavailable denial states. Any generation-scoped transport revision remains behind an explicit lab contract. Broker and replay metadata cannot serve as verified inclusion or Evidence status.
+3. Review B's exact protected-marker binding at the transaction. Keep the native T4/T5 writer and existing safety latch. Before live use, require proven fences and known denials at every enrolled writer and at the authoritative consumer/cursor boundary.
+4. Give D the exact local candidate and every failed or superseded pin. Verify the three inherited Docker faults explicitly and retain matched healthy and fault controls. Repeat the crash, rollback and partial outage matrix while keeping the no-production and no-multi-host scope. Independent administration, enrolled physical hosts and stronger rollback anchors remain deployment prerequisites.
+
+## Verified local validation and release posture
+
+The full local suite at source and harness pin `508322e441c772a4d5b93396d6856fc9bf36f0ba` passed **314 tests in 169.17 s** with no failures or skips and one inherited Starlette/httpx warning. The separate opt-in independent priority oracle passed in 6.19 s. The defensively failing legacy-stream priority reproduction remains separate from the accepted candidate tests.
+
+The three inherited Docker checks were rerun explicitly on `213e3dd1400708cea686b175b9a16ff279b1f421`: actual agent-process distribution and broker fault recovery, witnessed archive reconciliation after replacing a broker, and independent JetStream leases against one owner home. **3 passed, zero failed or skipped** in 48.99 s. The three flags exercise local Docker with cached images. They close the outstanding local execution checks from the C integration review. They do not establish independent physical hosts, actual custody or deployed rollback anchors. [Exact Docker fault results](../benchmarks/phase4e/docker-fault-results.json)
+
+D independently passed 15 native writer and supporting cases on `4918dadacc8dedd96d1c4b506e5f746040a01941`, retaining independent route and audit readback. D also reproduced C's fresh positive after one authorized witness admission on that combined source and on the original C branch. The sealed quorum path, native mandatory-two T5 path and the isolated B latch passed their narrower checks. A mid-failure observed durable denial is not an authorization, and an unavailable observation is not a confirmed safe state. [C compatibility result](phase4e-trust-integration-review.md) · [Independent validation](phase4e-adversarial.md)

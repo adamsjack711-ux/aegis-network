@@ -6,6 +6,8 @@ The common clean baseline is Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f`
 
 Four specialist workstreams share the approved baseline in separate worktrees. Independent baseline probes reproduced withdrawal starvation and a 29.644-second restart-to-ACK interval after SIGKILL. Three new Phase 4B diagnostic trials each matched 1,000/1,000 outcomes, with the original four availability/provenance misses retained. The original cause remains unknown.
 
+The initial combined local candidate integrates the opt-in A priority lane, the isolated B identity and fencing lab, C shadow appraisal, and D's independent tests. The native T4/T5 path stays authoritative. The full local suite passed **314** tests, and the separate priority-stream fault passed. D reproduced C's original single-witness withdrawal gap. The five-second all-agent reporting gate remains **OPEN** after pre-intake SIGKILL delayed durable denial beyond 30 seconds. Generation-scoped native ACKs, exact Trust binding and release validation are distinct remaining work.
+
 Authorized testing stays on disposable localhost or container fixtures with throwaway test signing material. Physical multi-host acceptance, independent administration and distributed enforcement remain blocked. [Architecture](docs/phase4e-architecture.md) · [Contract review](docs/phase4e-contract-review.md) · [Integration plan](docs/phase4e-integration-plan.md) · [Risk register](docs/phase4e-risk-register.md) · [Benchmarks and topology](docs/phase4e-benchmarks.md)
 
 ## Phase 4E-A withdrawal priority

@@ -1,0 +1,27 @@
+{
+  "tested_commit": "213e3dd1400708cea686b175b9a16ff279b1f421",
+  "scope": "disposable localhost Docker; cached images; no external peers",
+  "live_flags": [
+    "AEGIS_PHASE4A_LIVE",
+    "AEGIS_PHASE4D_LIVE",
+    "AEGIS_PHASE4D_T3_LIVE"
+  ],
+  "suite_seconds": 48.998,
+  "tests": [
+    {
+      "name": "tests.test_phase4a_distributed.test_live_distinct_processes_and_fault_recovery",
+      "seconds": 45.876,
+      "outcome": "passed"
+    },
+    {
+      "name": "tests.phase4d.test_journal.test_live_broker_loss_and_replacement_reconcile_with_independent_archive",
+      "seconds": 1.832,
+      "outcome": "passed"
+    },
+    {
+      "name": "tests.phase4d.test_ownership.test_live_independent_jetstream_leases_cannot_override_home",
+      "seconds": 0.91,
+      "outcome": "passed"
+    }
+  ]
+}
