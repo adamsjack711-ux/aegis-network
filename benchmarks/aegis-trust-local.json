@@ -1,0 +1,99 @@
+{
+  "environment": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "cryptography": "46.0.7",
+  "repeats": 20,
+  "warmup": 3,
+  "runs": [
+    {
+      "events": 3,
+      "milliseconds": {
+        "coverage": {
+          "median": 11.9,
+          "p95": 12.478,
+          "max": 12.631
+        },
+        "status": {
+          "median": 4.199,
+          "p95": 4.414,
+          "max": 4.612
+        },
+        "reconciliation": {
+          "median": 6.459,
+          "p95": 6.846,
+          "max": 6.961
+        },
+        "commit": {
+          "median": 1.903,
+          "p95": 2.023,
+          "max": 2.301
+        },
+        "total": {
+          "median": 24.276,
+          "p95": 25.019,
+          "max": 25.36
+        }
+      }
+    },
+    {
+      "events": 32,
+      "milliseconds": {
+        "coverage": {
+          "median": 88.929,
+          "p95": 89.824,
+          "max": 90.287
+        },
+        "status": {
+          "median": 29.349,
+          "p95": 29.795,
+          "max": 30.373
+        },
+        "reconciliation": {
+          "median": 32.685,
+          "p95": 33.111,
+          "max": 33.193
+        },
+        "commit": {
+          "median": 2.294,
+          "p95": 2.691,
+          "max": 2.722
+        },
+        "total": {
+          "median": 153.293,
+          "p95": 154.959,
+          "max": 155.109
+        }
+      }
+    },
+    {
+      "events": 128,
+      "milliseconds": {
+        "coverage": {
+          "median": 342.541,
+          "p95": 344.094,
+          "max": 344.993
+        },
+        "status": {
+          "median": 113.309,
+          "p95": 114.636,
+          "max": 116.81
+        },
+        "reconciliation": {
+          "median": 118.49,
+          "p95": 119.579,
+          "max": 119.871
+        },
+        "commit": {
+          "median": 3.335,
+          "p95": 3.766,
+          "max": 3.868
+        },
+        "total": {
+          "median": 577.484,
+          "p95": 581.551,
+          "max": 582.519
+        }
+      }
+    }
+  ]
+}
