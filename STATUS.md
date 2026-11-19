@@ -6,6 +6,12 @@ All three Phase 4 development worktrees were verified clean at Phase 3C `7744ebd
 
 An independent baseline check reproduced a critical protection release blocker. The current journal can omit a valid withdrawal and still pass the freshness prerequisite. No mitigation writes were attempted in the check. Phase 4 release readiness remains pending. [Integration plan](docs/phase4-integration-plan.md) · [Contract freeze](docs/phase4-contract-review.md) · [Risk register](docs/phase4-risk-register.md)
 
+## Phase 4D Journal Integrity
+
+The reference witnessed Mesh profile addresses 4C-01 in `.worktrees/phase4d-journal-integrity` on `feat/phase4d-journal-integrity`. The tested implementation is `2de4d1b`, on the Phase 4A baseline with Phase 4C's review and defensive tests. The combined suite passed 154 tests with both live fault modes enabled on 2026-11-19. The witnessed gate blocked peer writes after a separately admitted withdrawal and recovered that withdrawal after replacing NATS and damaging the original archive. Phase 4A's broker restart and journal repair also passed.
+
+Deployment acceptance requires independently administered witnesses, rollback-resistant pins, and a witnessed-only cutover for protected writers. See the [trust model, integrity evidence, and integration requirements](docs/phase4d-journal-integrity.md) and [raw benchmark results](benchmarks/phase4d-journal.json).
+
 ## Phase 4A distributed reliability
 
 Phase 4A on `feat/phase4a-distributed` verified distribution to **300 independent agent processes on one physical host**. Both completed 300-agent runs confirmed **8,100/8,100** expected decisions and found zero duplicate logical decisions or missed withdrawals. Decision p95 was **465–500 ms** for steady traffic and **4.23–5.57 s** for a 20-finding burst.

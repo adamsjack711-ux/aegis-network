@@ -99,8 +99,9 @@ class Network:
         return datetime.fromtimestamp(self.time.utc, timezone.utc)
 
     def finding(self, sequence=1):
+        issued = min(self.now(), datetime.now(timezone.utc)) - timedelta(seconds=2)
         return Finding(schema_version="1.0", artifact_id=uuid4(), publisher_id="author", sequence=sequence,
-                       issued_at=self.now() - timedelta(seconds=1), expires_at=self.now() + timedelta(hours=1),
+                       issued_at=issued, expires_at=self.now() + timedelta(hours=1),
                        vulnerability_id="PHASE4D-DISPOSABLE-FIXTURE",
                        software=Software(purl=PACKAGE, affected_versions=[VERSION]),
                        evidence=[Reference(uri="urn:fixture", sha256="0" * 64, method="lab-reproduction")],
@@ -301,7 +302,17 @@ def test_corrupt_pages_hold_and_resume_from_independent_mirror_after_broker_loss
     assert restarted.replay.denials == {finding_target(finding)}
     with closing(sqlite3.connect(cache)) as db:
         assert db.execute("SELECT count(*) FROM leaves").fetchone() == (2,)
-    assert not n.trust.grants["review", "default"].expires_at > n.now()
+    assert n.trust.grants["review", "default"].expires_at <= n.now()
+
+    cache.write_bytes(b"unreadable SQLite file")
+    corrupted = n.client(resume=True, archives=(ArchiveSource(mirror),))
+    with pytest.raises(JournalBlocked, match="file is not a database"):
+        run(corrupted.refresh())
+    rebuilt = n.client(resume=True, archives=(ArchiveSource(mirror),),
+                       cache=n.directory / "agent-restored.db")
+    restored, _ = run(rebuilt.refresh())
+    assert not rebuilt.current(finding, restored)
+    assert rebuilt.replay.denials == {finding_target(finding)}
 
     monitor = Monitor(n.policy, n.directory / "receipt-monitor.db")
     timely = n.policy.cutoff(second.head.epoch) + 1
@@ -376,6 +387,14 @@ def test_witness_rejects_restore_and_corruption_and_preserves_pending_admissions
         db.execute("UPDATE ops SET wire = ? WHERE position = 0", (b"fake-op",))
     with pytest.raises(JournalBlocked, match="protected pin"):
         n.open_witness("w0")
+
+    shutil.copyfile(exact_backup, path)
+    restored = n.open_witness("w0")
+    n.archive.append(leaf)
+    signed = n.archive.propose(n.coordinator, epoch)
+    signature = restored.cosign(signed, n.archive)
+    n.policy.check_vote(signed, signature)
+    assert restored.published() == (signed, signature)
 
 
 def test_wrong_scope_signature_and_quorum_are_rejected(network):
@@ -452,9 +471,20 @@ def test_witnessed_write_gate_blocks_peers_after_canary_without_legacy_journal(n
                 gate = EvidenceGate(finding, bundle, appraisal, intake, collector, relying)
                 defense = VerifiedLab(gate, n.directory / "fixture.db")
                 with defense.lab:
-                    plan = await defense.prepare(5_000)
-                    approval = defense.lab.operator.approve(plan, plan.digest)
+                    old_plan = await defense.prepare(5_000)
+                    old_approval = defense.lab.operator.approve(old_plan, old_plan.digest)
                     assert gate.binding_context["mesh_checkpoint_sha256"] == digest(first.head)
+
+                    # A newer sealed empty epoch commits to the same tree but
+                    # invalidates a review bound to the previous cutoff.
+                    empty_epoch = n.publish(n.seal())
+                    assert empty_epoch.head.root == first.head.root
+                    with pytest.raises(JournalBlocked, match="no current, complete"):
+                        await defense.transition(defense.lab.controller.start, old_plan, old_approval)
+                    assert defense.lab.store.status() == "ready"
+                    plan = await defense.prepare(5_000)
+                    assert plan.evidence_binding != old_plan.evidence_binding
+                    approval = defense.lab.operator.approve(plan, plan.digest)
                     await defense.transition(defense.lab.controller.start, plan, approval)
                     await defense.transition(defense.lab.controller.restrict, plan, approval, plan.targets[0])
                     await defense.transition(defense.lab.controller.verify, plan, canary=True)
@@ -502,7 +532,7 @@ def test_live_broker_loss_and_replacement_reconcile_with_independent_archive(net
             try:
                 nc = await nats.connect(f"nats://{host}", allow_reconnect=False, connect_timeout=1)
                 return name, nc
-            except OSError:
+            except (OSError, nats.errors.NoServersError):
                 await asyncio.sleep(.05)
         raise AssertionError("disposable NATS did not start")
 
