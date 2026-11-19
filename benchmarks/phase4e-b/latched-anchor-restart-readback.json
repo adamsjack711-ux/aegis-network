@@ -1,0 +1,87 @@
+{
+  "pin": "11ecb948de82ef094f4fc48261786ff7600d64de",
+  "scope": "one host, inert fixture markers, mTLS, read-only SQLite verification",
+  "before": {
+    "target-a": {
+      "generation": 1,
+      "version": 2,
+      "marker": "observing",
+      "effective": "observing",
+      "writes": 1,
+      "durable_held": false
+    },
+    "target-b": {
+      "generation": 1,
+      "version": 2,
+      "marker": "observing",
+      "effective": "observing",
+      "writes": 1,
+      "durable_held": false
+    }
+  },
+  "outage_target_a_read_trigger": {
+    "generation": 1,
+    "version": 3,
+    "marker": "quarantined",
+    "effective": "quarantined",
+    "writes": 1,
+    "durable_held": true
+  },
+  "anchor_restarted_and_target_a_restarted": {
+    "target-a": {
+      "generation": 1,
+      "version": 3,
+      "marker": "quarantined",
+      "effective": "quarantined",
+      "writes": 1,
+      "durable_held": true
+    },
+    "target-b": {
+      "generation": 1,
+      "version": 3,
+      "marker": "quarantined",
+      "effective": "quarantined",
+      "writes": 1,
+      "durable_held": true
+    }
+  },
+  "retired_generation": 2,
+  "new_generation_before_approval": {
+    "target-a": {
+      "generation": 3,
+      "version": 4,
+      "marker": "quarantined",
+      "effective": "quarantined",
+      "writes": 1,
+      "durable_held": false
+    },
+    "target-b": {
+      "generation": 3,
+      "version": 4,
+      "marker": "quarantined",
+      "effective": "quarantined",
+      "writes": 1,
+      "durable_held": false
+    }
+  },
+  "new_generation_after_exact_approval": {
+    "target-a": {
+      "generation": 3,
+      "version": 5,
+      "marker": "observing",
+      "effective": "observing",
+      "writes": 2,
+      "durable_held": false
+    },
+    "target-b": {
+      "generation": 3,
+      "version": 5,
+      "marker": "observing",
+      "effective": "observing",
+      "writes": 2,
+      "durable_held": false
+    }
+  },
+  "held_generation_write_denied": true,
+  "old_approval_for_new_generation_denied": true
+}
