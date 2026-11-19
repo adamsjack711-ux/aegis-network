@@ -24,14 +24,24 @@ DEAD_LETTER_SUBJECT = "aegis.deadletter.v1"
 FINDING_RETENTION_SECONDS = 24 * 60 * 60
 DEAD_LETTER_RETENTION_SECONDS = 7 * FINDING_RETENTION_SECONDS
 STREAM_MAX_BYTES = 64 * 1024 * 1024
+OUTBOX_BATCH_SIZE = 100
+OUTBOX_POLL_SECONDS = 0.2
 logger = logging.getLogger(__name__)
 
 
 class OutboxBus:
-    """The repository transaction creates the outbox row; background task publishes it."""
+    """Nudge the dispatcher after the repository has committed the outbox row."""
+
+    def __init__(self, loop: asyncio.AbstractEventLoop, wakeup: asyncio.Event):
+        self.loop = loop
+        self.wakeup = wakeup
 
     def publish(self, envelope: SignedEvent) -> None:
-        pass
+        try:
+            self.loop.call_soon_threadsafe(self.wakeup.set)
+        except RuntimeError:
+            # The next process will recover the already committed row by polling.
+            pass
 
 
 async def dispatch_once(repo: PostgresRepository, js) -> int:
@@ -48,13 +58,22 @@ async def dispatch_once(repo: PostgresRepository, js) -> int:
     return sent
 
 
-async def dispatch(repo: PostgresRepository, js) -> None:
+async def dispatch(repo: PostgresRepository, js, wakeup: asyncio.Event) -> None:
     while True:
+        # Clear before reading: commits during the poll or publish must wake us.
+        wakeup.clear()
         try:
-            await dispatch_once(repo, js)
+            sent = await dispatch_once(repo, js)
         except Exception:
             logger.exception("outbox dispatch failed")
-        await asyncio.sleep(0.2)
+            await asyncio.sleep(OUTBOX_POLL_SECONDS)
+            continue
+        if sent >= OUTBOX_BATCH_SIZE:
+            continue
+        try:
+            await asyncio.wait_for(wakeup.wait(), timeout=OUTBOX_POLL_SECONDS)
+        except TimeoutError:
+            pass
 
 
 async def ensure_streams(js) -> None:
@@ -91,8 +110,9 @@ async def lifespan(app: FastAPI):
     js = nc.jetstream()
     await ensure_streams(js)
     app.state.repo = repo
-    app.state.coordinator = Coordinator(publishers, repo, OutboxBus())
-    task = asyncio.create_task(dispatch(repo, js))
+    wakeup = asyncio.Event()
+    app.state.coordinator = Coordinator(publishers, repo, OutboxBus(asyncio.get_running_loop(), wakeup))
+    task = asyncio.create_task(dispatch(repo, js, wakeup))
     try:
         yield
     finally:
