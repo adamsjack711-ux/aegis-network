@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-19",
+  "candidate": "7744ebd7f80e6f2aabb253d5cc3ec9972c86cffd",
+  "branch": "test/phase4c-adversarial",
+  "environment": {
+    "python": "3.15.2",
+    "pytest": "9.2.0",
+    "mesh_replay": "in-process HTTP transport with an available lease double",
+    "mitigation": "local loopback HTTP proxies and Unix socket upstreams"
+  },
+  "runs": [
+    {
+      "scope": "baseline",
+      "passed": 110,
+      "failures": 5,
+      "errors": 14,
+      "note": "The sandbox denied fixture socket binding."
+    },
+    {
+      "scope": "baseline with local sockets permitted",
+      "passed": 129,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "scope": "first Phase 4C run",
+      "passed": 7,
+      "failures": 1,
+      "errors": 0,
+      "note": "The withdrawal fixture omitted the required signing key ID. Fixture setup was corrected."
+    },
+    {
+      "scope": "full suite with local sockets permitted",
+      "passed": 137,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "phase4c_cases_from_junit": [
+    {
+      "case": "test_publisher_denial_cannot_lease_fixture[wrong-signer-INVALID_SIGNATURE]",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_publisher_denial_cannot_lease_fixture[wrong-role-PUBLISHER_ROLE_DENIED]",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_publisher_denial_cannot_lease_fixture[expired-PUBLISHER_KEY_INVALID_TIME]",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_publisher_denial_cannot_lease_fixture[revoked-PUBLISHER_KEY_REVOKED]",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_valid_evidence_from_another_cohort_cannot_prepare",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_plan_review_and_initial_status_are_both_required",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_signed_journal_withdrawal_after_canary_stops_expansion",
+      "outcome": "passed"
+    },
+    {
+      "case": "test_lease_expiry_fails_closed_before_recovery_and_stays_closed_after_reconnect",
+      "outcome": "passed"
+    }
+  ],
+  "warnings": [
+    "Starlette TestClient deprecates its current httpx integration."
+  ]
+}
