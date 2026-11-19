@@ -20,7 +20,7 @@ from .api import DEAD_LETTER_SUBJECT, STREAM
 from .artifact import SignedRevocation, parse_event
 from .config import load_local
 from .core import LocalAgent
-from .identity import IdentityLease, IdentityLost, canonical_agent_id, renew_lease
+from .identity import LEASE_TTL_SECONDS, IdentityLease, IdentityLost, canonical_agent_id, renew_lease
 from .recovery import RecoveryBlocked, reconcile
 from .storage import SqliteAudit
 
@@ -46,16 +46,38 @@ async def dead_letter(js, message, agent_id: str, reason: str) -> None:
                      headers={"Nats-Msg-Id": f"dead-{agent_id}-{stream_seq or uuid4()}"})
 
 
+async def evaluate_in_worker(agent, envelope):
+    worker = asyncio.create_task(asyncio.to_thread(agent.evaluate_event, envelope))
+    try:
+        return await asyncio.shield(worker)
+    except asyncio.CancelledError:
+        # SQLite work already submitted to a thread cannot be cancelled. Finish
+        # it before the caller releases the lease or tears down the audit.
+        while not worker.done():
+            try:
+                await asyncio.shield(worker)
+            except asyncio.CancelledError:
+                continue
+            except Exception:
+                break
+        if not worker.cancelled():
+            worker.exception()
+        raise
+
+
 async def process_message(message, agent: LocalAgent, js=None, lease=None,
-                          max_attempts: int = 5, *, observe=None) -> None:
-    received_ns = time.perf_counter_ns() if observe is not None else 0
+                          max_attempts: int = 5, *, observe=None, worker=False) -> None:
+    received_ns = time.perf_counter_ns() if observe is not None or worker else 0
     if lease is not None:
         await lease.ensure()
     lease_checked_ns = time.perf_counter_ns() if observe is not None else 0
     envelope = None
     try:
         envelope = parse_event(message.data)
-        decision = agent.evaluate_event(envelope)
+        if worker:
+            decision = await evaluate_in_worker(agent, envelope)
+        else:
+            decision = agent.evaluate_event(envelope)
     except (ValidationError, ValueError, TypeError, AttributeError, json.JSONDecodeError) as exc:
         logger.warning("rejected malformed or conflicting event")
         try:
@@ -80,6 +102,11 @@ async def process_message(message, agent: LocalAgent, js=None, lease=None,
                 logger.exception("dead-letter publish failed; delivery will retry")
         return
     committed_ns = time.perf_counter_ns() if observe is not None else 0
+    if worker and lease is not None:
+        if lease.lost:
+            raise IdentityLost("agent identity lease was lost during evaluation")
+        if time.perf_counter_ns() - received_ns >= LEASE_TTL_SECONDS * 1e9 / 3:
+            await lease.ensure()
     if observe is None:
         print(json.dumps(decision.__dict__, sort_keys=True), flush=True)
     try:
@@ -95,7 +122,7 @@ async def run() -> None:
     agent_id = os.environ["AEGIS_AGENT_ID"]
     durable = durable_name(agent_id)
     policy, inventory = load_local(os.environ["AEGIS_LOCAL_CONFIG"])
-    audit = SqliteAudit(os.environ["AEGIS_AUDIT_DB"], agent_id=agent_id)
+    audit = SqliteAudit(os.environ["AEGIS_AUDIT_DB"], agent_id=agent_id, worker=True)
     agent = LocalAgent(policy, inventory, audit)
     nc = await nats.connect(os.environ["AEGIS_NATS_URL"])
     js = nc.jetstream()
@@ -113,9 +140,12 @@ async def run() -> None:
         await consume(agent, audit, js, lease, renew_task, client, durable)
     finally:
         renew_task.cancel()
-        await client.aclose()
-        await lease.release()
-        await nc.close()
+        try:
+            await client.aclose()
+            await lease.release()
+        finally:
+            audit.db.close()
+            await nc.close()
 
 
 async def consume(agent, audit, js, lease, renew_task, client, durable):
@@ -156,7 +186,7 @@ async def consume(agent, audit, js, lease, renew_task, client, durable):
             continue
         for message in messages:
             try:
-                await process_message(message, agent, js, lease)
+                await process_message(message, agent, js, lease, worker=True)
             except IdentityLost:
                 raise
             except Exception:

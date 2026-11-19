@@ -286,7 +286,7 @@ class Lab:
         try:
             for _ in range(count):
                 agent_id = str(uuid4())
-                audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id)
+                audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id, worker=True)
                 agents.append(LocalAgent(policy, inventory, audit))
                 leases.append(await IdentityLease.claim(js, agent_id))
                 subscription = await js.pull_subscribe(
@@ -347,7 +347,8 @@ class Lab:
                 except TimeoutError:
                     continue
                 for message in messages:
-                    await process_message(message, agents[index], js, leases[index], observe=observe)
+                    await process_message(message, agents[index], js, leases[index],
+                                          observe=observe, worker=True)
 
         cpu_start = time.process_time_ns()
         wall_start = time.perf_counter_ns()

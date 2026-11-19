@@ -40,11 +40,12 @@ class MemoryBus:
 
 
 class SqliteAudit:
-    def __init__(self, path: str | Path, agent_id: str = "test-agent"):
+    def __init__(self, path: str | Path, agent_id: str = "test-agent", *, worker: bool = False):
         if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,62}", agent_id):
             raise ValueError("invalid agent ID")
         self.agent_id = agent_id
-        self.db = sqlite3.connect(str(path))
+        # The runtime still serializes replay, delivery, and connection cleanup.
+        self.db = sqlite3.connect(str(path), check_same_thread=not worker)
         self.db.execute("CREATE TABLE IF NOT EXISTS audit_identity (agent_id TEXT PRIMARY KEY)")
         existing_ids = [row[0] for row in self.db.execute("SELECT agent_id FROM audit_identity")]
         if len(existing_ids) > 1 or any(value != agent_id for value in existing_ids):
