@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import signal
+import time
 from uuid import uuid4
 
 import httpx
@@ -46,9 +47,11 @@ async def dead_letter(js, message, agent_id: str, reason: str) -> None:
 
 
 async def process_message(message, agent: LocalAgent, js=None, lease=None,
-                          max_attempts: int = 5) -> None:
+                          max_attempts: int = 5, *, observe=None) -> None:
+    received_ns = time.perf_counter_ns() if observe is not None else 0
     if lease is not None:
         await lease.ensure()
+    lease_checked_ns = time.perf_counter_ns() if observe is not None else 0
     envelope = None
     try:
         envelope = parse_event(message.data)
@@ -76,11 +79,16 @@ async def process_message(message, agent: LocalAgent, js=None, lease=None,
             except Exception:
                 logger.exception("dead-letter publish failed; delivery will retry")
         return
-    print(json.dumps(decision.__dict__, sort_keys=True), flush=True)
+    committed_ns = time.perf_counter_ns() if observe is not None else 0
+    if observe is None:
+        print(json.dumps(decision.__dict__, sort_keys=True), flush=True)
     try:
         await message.ack_sync()
     except Exception:
         logger.exception("ack failed after commit; delivery will retry")
+    else:
+        if observe is not None:
+            observe(decision, received_ns, lease_checked_ns, committed_ns, time.perf_counter_ns())
 
 
 async def run() -> None:

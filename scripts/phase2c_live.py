@@ -28,8 +28,9 @@ from aegis.api import (
     DEAD_LETTER_STREAM, DEAD_LETTER_SUBJECT, FINDING_RETENTION_SECONDS,
     STREAM, STREAM_MAX_BYTES, SUBJECT,
 )
+from aegis.agent_runtime import durable_name, process_message
 from aegis.artifact import (
-    Evidence, Finding, Revocation, Software, canonical_bytes, parse_event, sign,
+    Evidence, Finding, Revocation, Software, canonical_bytes, sign,
     sign_revocation,
 )
 from aegis.config import load_local
@@ -280,72 +281,103 @@ class Lab:
     async def benchmark(self, js, count: int, samples: int, path: Path) -> dict:
         policy, inventory = load_local(self.args.local_config)
         agents = []
+        leases = []
         subscribers = []
-        for index in range(count):
-            agent_id = str(uuid4())
-            audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id)
-            agents.append((LocalAgent(policy, inventory, audit), audit))
-            subscription = await js.pull_subscribe(
-                "aegis.>", durable=f"aegis-{agent_id}", stream=STREAM,
-                config=ConsumerConfig(max_deliver=5, ack_wait=30,
-                                      ack_policy=AckPolicy.EXPLICIT,
-                                      deliver_policy=DeliverPolicy.NEW),
-            )
-            subscribers.append(subscription)
+        try:
+            for _ in range(count):
+                agent_id = str(uuid4())
+                audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id)
+                agents.append(LocalAgent(policy, inventory, audit))
+                leases.append(await IdentityLease.claim(js, agent_id))
+                subscription = await js.pull_subscribe(
+                    "aegis.>", durable=durable_name(agent_id), stream=STREAM,
+                    config=ConsumerConfig(max_deliver=-1, ack_wait=10,
+                                          ack_policy=AckPolicy.EXPLICIT,
+                                          deliver_policy=DeliverPolicy.NEW),
+                )
+                subscribers.append(subscription)
+            return await self.measure_fanout(js, agents, leases, subscribers, samples)
+        finally:
+            for lease in leases:
+                await lease.release()
+            for agent in agents:
+                agent.audit.db.close()
+            for agent in agents[:len(subscribers)]:
+                await js.delete_consumer(STREAM, durable_name(agent.audit.agent_id))
+
+    async def measure_fanout(self, js, agents, leases, subscribers, samples: int) -> dict:
+        count = len(agents)
         signed = [finding(self.key, self.next_sequence()) for _ in range(samples)]
         expected_ids = {str(item.finding.artifact_id) for item in signed}
-        starts: dict[str, float] = {}
-        latencies: list[float] = []
-        observed = [set() for _ in range(count)]
+        starts = {}
+        observed = [set() for _ in agents]
         errors = []
-        cpu_start = time.process_time()
-        wall_start = time.monotonic()
+        durations = {name: [] for name in
+                     ("http", "receipt", "lease", "evaluation", "audit", "broker_ack", "ack_total")}
+        last_ack_ns = 0
+        redeliveries = 0
+
+        def record(decision, received, lease_checked, committed, acked, index):
+            nonlocal last_ack_ns, redeliveries
+            eid = decision.event_id
+            if eid not in expected_ids:
+                return
+            if eid in observed[index]:
+                redeliveries += 1
+                return
+            if decision.outcome != "allow_dry_run":
+                errors.append((index, eid, decision.reason_code))
+            observed[index].add(eid)
+            last_ack_ns = max(acked, last_ack_ns)
+            for name, ns in (("receipt", received - starts[eid]),
+                             ("lease", lease_checked - received),
+                             ("evaluation", committed - lease_checked),
+                             ("audit", committed - starts[eid]),
+                             ("broker_ack", acked - committed),
+                             ("ack_total", acked - starts[eid])):
+                durations[name].append(ns / 1e6)
 
         async def consume(index: int):
+            def observe(*observation):
+                record(*observation, index)
+
             while len(observed[index]) < samples:
-                if time.monotonic() - wall_start > 120:
-                    return
                 try:
-                    messages = await subscribers[index].fetch(20, timeout=1)
+                    messages = await subscribers[index].fetch(10, timeout=1)
                 except TimeoutError:
                     continue
                 for message in messages:
-                    envelope = parse_event(message.data)
-                    event_id = str(envelope.finding.artifact_id)
-                    if event_id in expected_ids:
-                        decision = agents[index][0].evaluate_event(envelope)
-                        if decision.outcome != "allow_dry_run":
-                            errors.append((index, event_id, decision.reason_code))
-                        if event_id not in observed[index]:
-                            observed[index].add(event_id)
-                            latencies.append((time.monotonic() - starts[event_id]) * 1000)
-                    await message.ack_sync()
+                    await process_message(message, agents[index], js, leases[index], observe=observe)
 
-        tasks = [asyncio.create_task(consume(index)) for index in range(count)]
-        async with httpx.AsyncClient(base_url=self.args.http, timeout=15) as client:
-            for envelope in signed:
-                event_id = str(envelope.finding.artifact_id)
-                starts[event_id] = time.monotonic()
-                response = await client.post("/v1/findings", json=envelope.model_dump(mode="json"))
-                response.raise_for_status()
-                assert response.json()["accepted"] is True
-        await asyncio.gather(*tasks)
-        elapsed = time.monotonic() - wall_start
-        rows = [audit.db.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
-                for _, audit in agents]
+        cpu_start = time.process_time_ns()
+        wall_start = time.perf_counter_ns()
+        async with asyncio.timeout(120), asyncio.TaskGroup() as group:
+            for index in range(count):
+                group.create_task(consume(index))
+            async with httpx.AsyncClient(base_url=self.args.http, timeout=15) as client:
+                for envelope in signed:
+                    eid = str(envelope.finding.artifact_id)
+                    starts[eid] = time.perf_counter_ns()
+                    response = await client.post("/v1/findings", json=envelope.model_dump(mode="json"))
+                    durations["http"].append((time.perf_counter_ns() - starts[eid]) / 1e6)
+                    response.raise_for_status()
+                    assert response.json()["accepted"] is True
+        elapsed = (last_ack_ns - wall_start) / 1e9
+        observed_count = sum(len(ids) for ids in observed)
+        rows = sum(agent.audit.db.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
+                   for agent in agents)
         result = {
             "agents": count, "findings": samples, "expected_deliveries": count * samples,
-            "committed_decisions": sum(rows), "coverage": sum(len(ids) for ids in observed) / (count * samples),
-            "duplicate_logical_rows": sum(rows) - sum(len(ids) for ids in observed),
-            "invalid_allow_decisions": len(errors), "elapsed_s": round(elapsed, 3),
-            "cpu_s": round(time.process_time() - cpu_start, 3),
+            "committed_decisions": rows, "coverage": observed_count / (count * samples),
+            "duplicate_logical_rows": rows - observed_count, "observed_redeliveries": redeliveries,
+            "unexpected_denials": len(errors), "elapsed_s": round(elapsed, 3),
+            "decisions_per_s": round(rows / elapsed, 2),
+            "cpu_s": round((time.process_time_ns() - cpu_start) / 1e9, 3),
             "peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
-            "p50_ms": round(percentile(latencies, 0.50), 3) if latencies else None,
-            "p95_ms": round(percentile(latencies, 0.95), 3) if latencies else None,
-            "p99_ms": round(percentile(latencies, 0.99), 3) if latencies else None,
+            "stages_ms": {name: {f"p{int(q * 100)}": round(percentile(values, q), 3)
+                                  for q in (.50, .95, .99)}
+                          for name, values in durations.items()},
         }
-        for _, audit in agents:
-            audit.db.close()
         if result["coverage"] != 1 or result["duplicate_logical_rows"] or errors:
             raise AssertionError(result)
         return result
@@ -356,20 +388,24 @@ async def run(args):
     nc = await nats.connect(args.nats)
     js = nc.jetstream()
     try:
-        if not args.skip_integration:
+        if not args.benchmark_only and not args.skip_integration:
             integration = await lab.integration(js)
             print(json.dumps({"integration": integration}, sort_keys=True), flush=True)
-        hardening = await lab.hardening(js)
-        print(json.dumps({"hardening": hardening}, sort_keys=True), flush=True)
+        if not args.benchmark_only:
+            hardening = await lab.hardening(js)
+            print(json.dumps({"hardening": hardening}, sort_keys=True), flush=True)
+        if args.integration_only:
+            return
         with tempfile.TemporaryDirectory(prefix="aegis-phase2c-bench-") as directory:
             config = json.loads(Path(args.local_config).read_text())
             config["publishers_file"] = str(Path("lab-config/publishers.json").resolve())
             host_config = Path(directory) / "agent-host.json"
             host_config.write_text(json.dumps(config))
             args.local_config = str(host_config)
-            for count in (3, 10, 100):
-                result = await lab.benchmark(js, count, args.samples, Path(directory))
-                print(json.dumps({"benchmark": result}, sort_keys=True), flush=True)
+            for repeat in range(1, args.repeats + 1):
+                for count in (3, 10, 100):
+                    result = await lab.benchmark(js, count, args.samples, Path(directory))
+                    print(json.dumps({"repeat": repeat, "benchmark": result}, sort_keys=True), flush=True)
     finally:
         await nc.close()
 
@@ -386,4 +422,8 @@ if __name__ == "__main__":
     parser.add_argument("--local-config", default="lab-config/agent.json")
     parser.add_argument("--samples", type=int, default=20)
     parser.add_argument("--skip-integration", action="store_true")
+    parser.add_argument("--repeats", type=int, default=1)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--benchmark-only", action="store_true")
+    mode.add_argument("--integration-only", action="store_true")
     asyncio.run(run(parser.parse_args()))
