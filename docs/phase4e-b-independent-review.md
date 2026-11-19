@@ -60,3 +60,9 @@ Reproduce from an archived copy of the exact commit with the repository Python e
 AEGIS_PHASE4E_LIVE=1 PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 \
   python -m pytest -q -ra -p no:cacheprovider tests/identity_lab
 ```
+
+### Quarantine latch follow-up
+
+The canonical follow-up `11ecb948de82ef094f4fc48261786ff7600d64de` persisted a hold in each writer's installed fence and quarantined the marker in the writer transaction. An observing read or a valid command whose current ownership check fails can set the hold. The ordinary successful path still requires exact current ownership, the target version and the distinct operator signature. An exact duplicate fence for a held assignment is rejected. A fresh preparing assignment with a higher generation installs a new fence and retains quarantine pending exact local approval. [Updated case results](../benchmarks/phase4e-b/canonical-identity-latch-tests.json)
+
+The exact archived follow-up passed **13/13** enabled loopback tests in 27.75 seconds. A separate probe stopped the anchor, triggered a hold at one writer through observation and at the other through an otherwise valid command, then restarted the unchanged anchor and rebooted the first writer. Read-only SQLite verification showed both holds persisted at generation 1 with one original mutation receipt each. A same-generation write was rejected. Explicit retirement advanced to generation 2. A claim installed both generation 3 fences, leaving the marker quarantined. The old approval paired with the new command was rejected. Each writer recorded one new mutation after a fresh exact approval. This resolves the earlier recovery observation in the inert fixture. The physical multi-host, clock, broker ACK/cursor, combined status and operational restore gates remain open. [Independent latch and recovery readback](../benchmarks/phase4e-b/latched-anchor-restart-readback.json)

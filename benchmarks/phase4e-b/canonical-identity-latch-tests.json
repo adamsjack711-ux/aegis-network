@@ -1,0 +1,68 @@
+{
+  "source_commit": "11ecb948de82ef094f4fc48261786ff7600d64de",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "topology": "one physical host, six loopback mTLS service processes and separate disposable SQLite files",
+  "scope": "exact pinned identity lab. Durations measure pytest case runtime.",
+  "totals": {
+    "tests": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suite_seconds": 27.757,
+  "cases": [
+    {
+      "id": "tests.identity_lab.test_fencing.test_simultaneous_authenticated_broker_claims",
+      "seconds": 1.832
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_former_owner_signed_command_denied_at_actual_writer",
+      "seconds": 1.8
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_distinct_leaf_with_same_uri_and_separate_proof_key",
+      "seconds": 1.674
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_expired_leaf_during_recovery_and_rotated_key",
+      "seconds": 1.755
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_broker_loss_and_reconciliation",
+      "seconds": 1.983
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_stale_home_snapshot_and_independent_anchor",
+      "seconds": 2.311
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_target_restarts_during_partial_transfer",
+      "seconds": 2.219
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_old_approval_cannot_authorize_new_generation",
+      "seconds": 1.962
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_broker_and_signing_roles_are_separate",
+      "seconds": 1.777
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_lease_expiry_allows_new_broker_without_operator[2000000000]",
+      "seconds": 3.808
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_restored_anchor_cannot_reset_newer_home_floor",
+      "seconds": 2.267
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_restarted_writer_holds_after_same_generation_restore",
+      "seconds": 2.117
+    },
+    {
+      "id": "tests.identity_lab.test_fencing.test_lost_anchor_latches_quarantine_until_a_new_generation",
+      "seconds": 2.205
+    }
+  ]
+}
