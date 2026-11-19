@@ -9,6 +9,7 @@ from pathlib import Path
 import sqlite3
 from threading import RLock
 import time
+from typing import TYPE_CHECKING
 
 from nats.js.api import AckPolicy, ConsumerConfig, DeliverPolicy
 from nats.js.errors import BadRequestError, NotFoundError
@@ -24,6 +25,9 @@ from .mitigation.lab import Lab
 from .mitigation.policy import Denied
 from .ownership import Action, IdentitySession
 from .recovery import reconcile
+
+if TYPE_CHECKING:
+    from .trust_lab.native_evidence import NativeEvidenceStatus
 
 COHORT = "lab-blue"
 PACKAGE = "pkg:generic/aegis-demo"
@@ -167,11 +171,19 @@ class MeshIntake:
 class EvidenceGate:
     """Join immutable evidence and per-deployment Rapid appraisal at the writer."""
 
-    def __init__(self, envelope, bundle, assessment, receiver, collector, evidence):
+    def __init__(self, envelope, bundle, assessment, receiver, collector, evidence, *,
+                 independent_evidence: "NativeEvidenceStatus | None" = None):
         self.envelope = envelope
         self.bundle = bundle
         self.receiver = receiver
         self.journal = getattr(receiver, "journal", None)
+        if independent_evidence is not None and self.journal is None:
+            raise Denied("independent Evidence status requires witnessed Mesh history")
+        self.independent_evidence = independent_evidence
+        self._current_status = None
+        self._plan_status = None
+        self._plan_interrupted = False
+        self._refresh_lock = asyncio.Lock()
         self._current_checkpoint = None
         self._plan_checkpoint = None
         self._journal_deadline = None
@@ -202,11 +214,17 @@ class EvidenceGate:
             expiry = min(expiry, publisher.revoked_at.timestamp())
         self.valid_until_ns = time.monotonic_ns() + int((expiry - time.time()) * 1e9)
 
+    def _context(self, checkpoint, status):
+        context = self._binding_context.copy()
+        if checkpoint is not None:
+            context["mesh_checkpoint_sha256"] = checkpoint
+        if status is not None:
+            context["evidence_status_sha256"] = status.binding
+        return context
+
     @property
     def binding_context(self):
-        if self._plan_checkpoint is None:
-            return self._binding_context.copy()
-        return {**self._binding_context, "mesh_checkpoint_sha256": self._plan_checkpoint}
+        return self._context(self._plan_checkpoint, self._plan_status)
 
     @property
     def binding(self):
@@ -214,37 +232,73 @@ class EvidenceGate:
 
     def prepare(self, controller, lease_ms):
         with self._lock:
-            if self.journal is not None:
-                if (self._current_checkpoint is None or self._journal_deadline is None
-                        or not self.journal.current(self.envelope, self._current_checkpoint)):
-                    raise Denied("witnessed status unavailable for plan review")
-                context = {**self._binding_context, "mesh_checkpoint_sha256": self._current_checkpoint}
-                binding = digest(json.dumps(context, sort_keys=True).encode())
-                plan = controller.prepare(lease_ms, binding=binding,
-                                          valid_until_ns=min(self.valid_until_ns, self._journal_deadline))
-                self._plan_checkpoint = self._current_checkpoint
-                return plan
-            return controller.prepare(lease_ms, binding=self.binding, valid_until_ns=self.valid_until_ns)
+            if self.journal is None:
+                return controller.prepare(lease_ms, binding=self.binding, valid_until_ns=self.valid_until_ns)
+            if (self._current_checkpoint is None or self._journal_deadline is None
+                    or not self.journal.current(self.envelope, self._current_checkpoint)):
+                raise Denied("witnessed status unavailable for plan review")
+            deadline = min(self.valid_until_ns, self._journal_deadline)
+            status = self._current_status
+            if self.independent_evidence is not None:
+                if status is None or not status.current():
+                    raise Denied("independent Evidence status unavailable for plan review")
+                deadline = min(deadline, status.expires_ns)
+            context = self._context(self._current_checkpoint, status)
+            plan = controller.prepare(lease_ms, binding=digest(json.dumps(context, sort_keys=True).encode()),
+                                      valid_until_ns=deadline)
+            self._plan_checkpoint = self._current_checkpoint
+            self._plan_status = status
+            self._plan_interrupted = False
+            return plan
 
     async def refresh(self):
+        async with self._refresh_lock:
+            await self._refresh()
+
+    async def _refresh(self):
+        status = None
         try:
+            if self.independent_evidence is not None:
+                prior = self.receiver.agent.audit.get(self._binding_context["finding_id"])
+                if (prior is None or prior.digest != self._binding_context["finding_sha256"]
+                        or prior.outcome != "allow_dry_run"):
+                    raise Denied("combined Trust profile requires the exact durable Rapid decision")
             deadline = await self.receiver.fresh(self.envelope)
+            if self.independent_evidence is not None:
+                remaining = (deadline - time.monotonic_ns()) / 1e9
+                async with asyncio.timeout(remaining):
+                    status = await asyncio.to_thread(self.independent_evidence.require, self.envelope.finding,
+                                                     self.bundle, self._binding_context["agent_id"])
+                deadline = min(deadline, status.expires_ns)
         except (Exception, asyncio.CancelledError):
             with self._lock:
                 self._fresh_until = 0
+                self._current_status = None
+                if self._plan_status is not None:
+                    self._plan_interrupted = True
             raise
         with self._lock:
             if self.journal is not None:
                 self._current_checkpoint = self.receiver.journal_binding
                 self._journal_deadline = self.receiver.journal_deadline
+            if (status is not None and self._plan_status is not None
+                    and (status.binding != self._plan_status.binding
+                         or self._current_checkpoint != self._plan_checkpoint)):
+                self._plan_interrupted = True
+            self._current_status = status
             self._fresh_until = deadline
 
     def status_current(self):
         # Called by the proxy while it holds a target transaction. Do not
         # acquire a lock here because guarded writers take the opposite order.
+        current_status, plan_status = self._current_status, self._plan_status
         return (time.monotonic_ns() < min(self._fresh_until, self.valid_until_ns)
                 and (self.journal is None or (self._plan_checkpoint == self._current_checkpoint
-                     and self.journal.current(self.envelope, self._plan_checkpoint))))
+                     and self.journal.current(self.envelope, self._plan_checkpoint)))
+                and (self.independent_evidence is None
+                     or (not self._plan_interrupted and current_status is not None and plan_status is not None
+                         and current_status.binding == plan_status.binding
+                         and current_status.current() and plan_status.current())))
 
     @contextmanager
     def authorize(self, plan):
@@ -273,6 +327,8 @@ class VerifiedLab:
     def __init__(self, gate: EvidenceGate, path: Path, *, identity: IdentitySession | None = None):
         self.gate = gate
         self.identity = identity
+        if gate.independent_evidence is not None and identity is None:
+            raise Denied("combined Trust fixture requires identity ownership")
         if identity is not None and identity.assignment.deployment != gate.binding_context["agent_id"]:
             raise Denied("enrolled deployment does not match the Rapid audit owner")
         self.lab = Lab(path, authorize=gate.authorize, status_current=gate.status_current,
