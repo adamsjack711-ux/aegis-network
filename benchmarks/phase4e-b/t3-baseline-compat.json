@@ -1,0 +1,97 @@
+{
+  "source_commit": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "topology": "one physical host, two Docker loopback NATS brokers, existing shared SQLite ownership/target home",
+  "scope": "inherited T3 and Phase 3C ownership compatibility; durations are pytest case runtime",
+  "deselected": 4,
+  "totals": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suite_seconds": 2.297,
+  "cases": [
+    {
+      "id": "tests.phase4d.test_ownership.test_simultaneous_cross_broker_claims_have_one_durable_winner",
+      "seconds": 0.348
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[workload]",
+      "seconds": 0.006
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[broker]",
+      "seconds": 0.006
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[unenrolled-broker]",
+      "seconds": 0.006
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[key]",
+      "seconds": 0.008
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[deployment]",
+      "seconds": 0.006
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[fixture]",
+      "seconds": 0.005
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_unentitled_claims_leave_home_unassigned[expired]",
+      "seconds": 0.006
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_renewal_requires_current_broker_new_proof_and_the_lease_domain",
+      "seconds": 0.012
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_expired_owner_cannot_renew_or_survive_reassignment",
+      "seconds": 0.013
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_clock_regression_holds_until_operator_fences",
+      "seconds": 0.01
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_rotation_and_retirement_invalidate_old_keys_across_reopen",
+      "seconds": 0.016
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_target_rejects_bad_intents_and_approval_without_consuming_anything",
+      "seconds": 0.02
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_fenced_broker_and_previous_review_cannot_lease_after_failover",
+      "seconds": 0.014
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_expiry_before_commit_rolls_back_effect_and_command_receipt",
+      "seconds": 0.01
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_transfer_barrier_serializes_with_the_actual_target_mutation",
+      "seconds": 0.013
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_required_profile_denies_unenrolled_replacement_database",
+      "seconds": 0.009
+    },
+    {
+      "id": "tests.phase4d.test_ownership.test_live_independent_jetstream_leases_cannot_override_home",
+      "seconds": 0.763
+    },
+    {
+      "id": "tests.test_phase3c_pipeline.test_phase4d_ownership_with_real_evidence_and_target_readback[healthy]",
+      "seconds": 0.338
+    },
+    {
+      "id": "tests.test_phase3c_pipeline.test_phase4d_ownership_with_real_evidence_and_target_readback[failover-after-canary]",
+      "seconds": 0.36
+    }
+  ]
+}
