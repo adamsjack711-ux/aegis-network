@@ -292,8 +292,11 @@ class Target:
             current = installed.assignment if installed else None
             if current is not None and offered != current and offered.generation <= current.generation:
                 raise Denied("fence generation has been retired")
-            if current == offered and installed.boot == self.boot:
-                return fence
+            if current == offered:
+                if installed.held:
+                    raise Denied("held writer requires a new generation")
+                if installed.boot == self.boot:
+                    return fence
             result = remote(self.client, self.endpoints["home"], "/pending", fence)
             if Fence.model_validate(result) != fence or not offered.live():
                 raise Denied("home is not preparing this writer's fence")
@@ -302,6 +305,36 @@ class Target:
             if current != offered:
                 db.execute("UPDATE marker SET value='quarantined', version=version+1 WHERE id=1")
         return fence  # only after SQLite commits the floor and restrictive state
+
+    def hold(self, db: sqlite3.Connection, installed: InstalledFence) -> None:
+        save(db, installed.model_copy(update={"held": True}))
+        db.execute("UPDATE marker SET value='quarantined', version=version+1 WHERE value<>'quarantined'")
+
+    def require_current(self, assignment: Assignment) -> None:
+        check = Fence(assignment=assignment, target=self.name)
+        result = remote(self.client, self.endpoints["home"], "/current", check)
+        try:
+            expected = Fence.model_validate(result)
+        except ValueError as exc:
+            raise Unavailable("invalid home authorization response") from exc
+        if expected != check or not assignment.live():
+            raise Denied("home authorization differs or has expired")
+
+    def apply(self, db: sqlite3.Connection, request: Write, deadline: int) -> dict:
+        proof = request.command
+        mutation = proof.body.mutation
+        assignment = mutation.assignment
+        if db.execute("SELECT 1 FROM receipts WHERE nonce=?", (proof.body.nonce,)).fetchone():
+            raise Denied("command was already committed")
+        change = db.execute("UPDATE marker SET value=?, version=version+1 WHERE id=1 AND version=?",
+                            (mutation.marker, mutation.expected_version))
+        if change.rowcount != 1:
+            raise Denied("target version has changed")
+        db.execute("INSERT INTO receipts VALUES (?, ?, ?)", (proof.body.nonce, assignment.generation,
+                   mutation.marker))
+        if not assignment.live() or time_ns() >= min(deadline, proof.body.expires_ns):
+            raise Denied("authorization expired before the target commit")
+        return {"version": mutation.expected_version + 1, "generation": assignment.generation}
 
     def write(self, peer: Peer, request: Write) -> dict:
         proof = request.command
@@ -323,22 +356,20 @@ class Target:
                 raise Denied("assignment is outside the target's durable fence")
             if installed.boot != self.boot:
                 raise Denied("writer restart requires a fresh home fence")
+            if installed.held:
+                raise Denied("held writer requires a new generation")
             live_proof(proof.body.expires_ns)
-            check = Fence(assignment=assignment, target=self.name)
-            result = remote(self.client, self.endpoints["home"], "/current", check)
-            if Fence.model_validate(result) != check:
-                raise Denied("home authorization differs from the pending write")
-            if db.execute("SELECT 1 FROM receipts WHERE nonce=?", (proof.body.nonce,)).fetchone():
-                raise Denied("command was already committed")
-            change = db.execute("UPDATE marker SET value=?, version=version+1 WHERE id=1 AND version=?",
-                                (mutation.marker, mutation.expected_version))
-            if change.rowcount != 1:
-                raise Denied("target version has changed")
-            db.execute("INSERT INTO receipts VALUES (?, ?, ?)", (proof.body.nonce, assignment.generation,
-                       mutation.marker))
-            if not assignment.live() or time_ns() >= min(deadline, proof.body.expires_ns):
-                raise Denied("authorization expired before the target commit")
-            return {"version": mutation.expected_version + 1, "generation": assignment.generation}
+            if time_ns() >= deadline:
+                raise Denied("write credential or approval expired")
+            try:
+                self.require_current(assignment)
+            except (Denied, Unavailable) as exc:
+                self.hold(db, installed)
+                denial = exc
+            else:
+                return self.apply(db, request, deadline)
+        # A denied write commits the local safety latch, never the requested mutation.
+        raise denial
 
     def dispatch(self, peer: Peer, route: str, raw: bytes) -> Record | dict:
         if route == "/fence":
@@ -355,15 +386,17 @@ class Target:
                 assignment = installed.assignment if installed else None
                 version, marker = db.execute("SELECT version,value FROM marker").fetchone()
                 writes = db.execute("SELECT COUNT(*) FROM receipts").fetchone()[0]
-                effective = "quarantined"
-                if marker == "observing" and installed and installed.boot == self.boot and assignment.live():
-                    check = Fence(assignment=assignment, target=self.name)
+                if marker == "observing":
                     try:
-                        current = remote(self.client, self.endpoints["home"], "/current", check)
-                        if Fence.model_validate(current) == check and assignment.live():
-                            effective = marker
-                    except (Denied, Unavailable, ValueError):
-                        pass
+                        if installed is None or installed.held or installed.boot != self.boot:
+                            raise Denied("writer must be fenced before observing")
+                        self.require_current(assignment)
+                    except (Denied, Unavailable):
+                        if installed is None:
+                            raise Unavailable("observing marker lacks a durable fence")
+                        self.hold(db, installed)
+                        version, marker = db.execute("SELECT version,value FROM marker").fetchone()
                 return {"generation": assignment.generation if assignment else 0,
-                        "version": version, "marker": marker, "effective": effective, "writes": writes}
+                        "version": version, "marker": marker, "effective": marker, "writes": writes}
+
         raise Denied("operation outside target scope")
