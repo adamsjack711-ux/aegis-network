@@ -14,13 +14,9 @@ from psycopg import errors as pg_errors
 from .artifact import SignedEvent, SignedFinding, SignedRevocation, event_id
 from .config import load_publishers
 from .core import Coordinator
+from .mesh import DEAD_LETTER_STREAM, DEAD_LETTER_SUBJECT, REVOCATION_SUBJECT, STREAM, SUBJECT
 from .postgres import PostgresRepository, SequenceConflict
 
-SUBJECT = "aegis.findings.v1"
-REVOCATION_SUBJECT = "aegis.revocations.v1"
-STREAM = "AEGIS_FINDINGS"
-DEAD_LETTER_STREAM = "AEGIS_DEAD_LETTERS"
-DEAD_LETTER_SUBJECT = "aegis.deadletter.v1"
 FINDING_RETENTION_SECONDS = 24 * 60 * 60
 DEAD_LETTER_RETENTION_SECONDS = 7 * FINDING_RETENTION_SECONDS
 STREAM_MAX_BYTES = 64 * 1024 * 1024
