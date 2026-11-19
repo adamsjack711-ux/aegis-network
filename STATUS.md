@@ -1,5 +1,13 @@
 # Aegis Network status
 
+## Phase 4E integration
+
+The common clean baseline is Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f`. The integration checkout is `.worktrees/phase4e` on `integration/phase4e`. The clean baseline reproduced **272 passing tests** with all three local live modes enabled. Both detached T6 commits reconstructed at their retained hashes. The later guarded fixture contains both source and test changes, and its distributed verdict remains failed.
+
+Four specialist workstreams share the approved baseline in separate worktrees. Independent baseline probes reproduced withdrawal starvation and a 29.644-second restart-to-ACK interval after SIGKILL. Three new Phase 4B diagnostic trials each matched 1,000/1,000 outcomes, with the original four availability/provenance misses retained. The original cause remains unknown.
+
+Authorized testing stays on disposable localhost or container fixtures with throwaway test signing material. Physical multi-host acceptance, independent administration and distributed enforcement remain blocked. [Architecture](docs/phase4e-architecture.md) · [Contract review](docs/phase4e-contract-review.md) · [Integration plan](docs/phase4e-integration-plan.md) · [Risk register](docs/phase4e-risk-register.md) · [Benchmarks and topology](docs/phase4e-benchmarks.md)
+
 ## Phase 4D isolated integration candidate
 
 The native Trust profile is integrated in `.worktrees/phase4d` on `integration/phase4d`. It layers native witnessed Mesh coverage, independent Evidence status and durable ownership fencing onto explicit approvals for the disposable three-replica fixture. At tested pin `f26f69d`, the complete suite passed **272 tests** with all local live modes enabled. All three Phase 4C High findings have tested fixture dispositions. Distributed enforcement remains blocked on independently administered endpoints, authenticated broker identity and session fencing, rollback-resistant trust anchors and barriers across separate writers. [Architecture](docs/phase4d-architecture.md) · [Security dispositions](docs/phase4d-security-review.md) · [Release readiness](docs/phase4d-release-readiness.md)

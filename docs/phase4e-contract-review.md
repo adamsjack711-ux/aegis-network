@@ -22,3 +22,11 @@ Phase 3C remains the historical wire reference. The runtime compatibility baseli
 - **4E-ADR-05 accepted** The historical 4B strict availability sample remains part of the evidence. Any current instrumentation or reproducible oracle result is separate; preserve fail-closed outcomes and evidence schema.
 
 A workstream seeking a shared change supplies exact before/after fields or ordering semantics, version and rollback policy, an old/new reader and writer matrix, positive and negative tests, migration behavior for prior denials, and exact commit. Relevant owners and D review before the integration lead approves adoption.
+
+## Lab proposals and review boundaries
+
+| Proposal | Current boundary |
+| --- | --- |
+| A · Critical delivery | A separate opt-in stream and filtered replay cursor are observable transport and persistence changes. The candidate must preserve scoped signed event verification and the regular cursor, and must allow only ordered full replay to advance the historical publisher watermark. Check shared database profile enforcement, old binary cutover, dead-letter identity per stream, restart during pending publication, and protection when the separate lane is unavailable. A fast denial read cannot supply a fresh positive history. |
+| B · Authenticated lab ownership | Candidate identity services use an isolated namespace for synthetic claims, exact approval, command and coarse writer receipts. Lab transport and credential boundaries can be verified separately from native JetStream consumer ACK/lease fencing. A local TLS controller on one machine does not establish independent identity administration or physical fault tolerance. |
+| C · Unified history/status epoch | A separately namespaced native-record experiment can corroborate Mesh and Evidence at one cut. It must stay separate from the frozen T5 writer appraisal unless equivalent denial behavior is demonstrated. With a 3-of-4 roster, a sole witness can hear a withdrawal that three other witnesses have not received. Until quorum admission, that intake may have narrower denial coverage than the baseline T5 2-of-2 policy. Capacity exhaustion must leave unknown status held. |
