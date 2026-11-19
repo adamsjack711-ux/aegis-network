@@ -1,0 +1,409 @@
+{
+  "baseline": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "findings": 1000,
+  "observer_poll_ms": 25.0,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "priority_minus_control": {
+    "coordinator_cpu_ms": {
+      "max": 1317.551,
+      "n": 1,
+      "p50": 1317.551,
+      "p95": 1317.551,
+      "p99": 1317.551
+    },
+    "coordinator_peak_rss_bytes": {
+      "max": 262144,
+      "n": 1,
+      "p50": 262144.0,
+      "p95": 262144.0,
+      "p99": 262144.0
+    },
+    "worker_cpu_ms": {
+      "max": 241.666,
+      "n": 1,
+      "p50": 241.666,
+      "p95": 241.666,
+      "p99": 241.666
+    },
+    "worker_peak_rss_bytes": {
+      "max": 442368,
+      "n": 1,
+      "p50": 442368.0,
+      "p95": 442368.0,
+      "p99": 442368.0
+    }
+  },
+  "python": "3.15.2",
+  "sample_summary": {
+    "control": {
+      "backlog_drain_ms": {
+        "max": 13115.576,
+        "n": 1,
+        "p50": 13115.576,
+        "p95": 13115.576,
+        "p99": 13115.576
+      },
+      "coordinator_cpu_ms": {
+        "max": 12999.474,
+        "n": 1,
+        "p50": 12999.474,
+        "p95": 12999.474,
+        "p99": 12999.474
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 84328448,
+        "n": 1,
+        "p50": 84328448.0,
+        "p95": 84328448.0,
+        "p99": 84328448.0
+      },
+      "crash_to_ack_ms": null,
+      "crash_to_local_denial_ms": null,
+      "crash_to_ready_ms": null,
+      "intake_to_ack_ms": {
+        "max": 13713.808,
+        "n": 1,
+        "p50": 13713.808,
+        "p95": 13713.808,
+        "p99": 13713.808
+      },
+      "intake_to_local_denial_ms": {
+        "max": 5248.467,
+        "n": 1,
+        "p50": 5248.467,
+        "p95": 5248.467,
+        "p99": 5248.467
+      },
+      "intake_to_report_ms": {
+        "max": 5248.54,
+        "n": 1,
+        "p50": 5248.54,
+        "p95": 5248.54,
+        "p99": 5248.54
+      },
+      "worker_cpu_ms": {
+        "max": 3665.897,
+        "n": 1,
+        "p50": 3665.897,
+        "p95": 3665.897,
+        "p99": 3665.897
+      },
+      "worker_peak_rss_bytes": {
+        "max": 66043904,
+        "n": 1,
+        "p50": 66043904.0,
+        "p95": 66043904.0,
+        "p99": 66043904.0
+      }
+    },
+    "crash": {
+      "backlog_drain_ms": null,
+      "coordinator_cpu_ms": {
+        "max": 3344.046,
+        "n": 1,
+        "p50": 3344.046,
+        "p95": 3344.046,
+        "p99": 3344.046
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 82051072,
+        "n": 1,
+        "p50": 82051072.0,
+        "p95": 82051072.0,
+        "p99": 82051072.0
+      },
+      "crash_to_ack_ms": {
+        "max": 30355.447,
+        "n": 2,
+        "p50": 30350.243,
+        "p95": 30354.927,
+        "p99": 30355.343
+      },
+      "crash_to_local_denial_ms": {
+        "max": 30373.525,
+        "n": 2,
+        "p50": 15186.763,
+        "p95": 28854.849,
+        "p99": 30069.79
+      },
+      "crash_to_ready_ms": {
+        "max": 30366.408,
+        "n": 2,
+        "p50": 30361.968,
+        "p95": 30365.964,
+        "p99": 30366.319
+      },
+      "intake_to_ack_ms": {
+        "max": 30467.209,
+        "n": 2,
+        "p50": 30407.601,
+        "p95": 30461.248,
+        "p99": 30466.017
+      },
+      "intake_to_local_denial_ms": {
+        "max": 30366.071,
+        "n": 2,
+        "p50": 15210.514,
+        "p95": 28850.515,
+        "p99": 30062.96
+      },
+      "intake_to_report_ms": {
+        "max": 30366.145,
+        "n": 2,
+        "p50": 15210.57,
+        "p95": 28850.587,
+        "p99": 30063.034
+      },
+      "worker_cpu_ms": {
+        "max": 530.227,
+        "n": 1,
+        "p50": 530.227,
+        "p95": 530.227,
+        "p99": 530.227
+      },
+      "worker_peak_rss_bytes": {
+        "max": 64552960,
+        "n": 1,
+        "p50": 64552960.0,
+        "p95": 64552960.0,
+        "p99": 64552960.0
+      }
+    },
+    "priority": {
+      "backlog_drain_ms": {
+        "max": 13385.35,
+        "n": 1,
+        "p50": 13385.35,
+        "p95": 13385.35,
+        "p99": 13385.35
+      },
+      "coordinator_cpu_ms": {
+        "max": 14317.025,
+        "n": 1,
+        "p50": 14317.025,
+        "p95": 14317.025,
+        "p99": 14317.025
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 84590592,
+        "n": 1,
+        "p50": 84590592.0,
+        "p95": 84590592.0,
+        "p99": 84590592.0
+      },
+      "crash_to_ack_ms": null,
+      "crash_to_local_denial_ms": null,
+      "crash_to_ready_ms": null,
+      "intake_to_ack_ms": {
+        "max": 2399.842,
+        "n": 1,
+        "p50": 2399.842,
+        "p95": 2399.842,
+        "p99": 2399.842
+      },
+      "intake_to_local_denial_ms": {
+        "max": 2395.778,
+        "n": 1,
+        "p50": 2395.778,
+        "p95": 2395.778,
+        "p99": 2395.778
+      },
+      "intake_to_report_ms": {
+        "max": 2395.831,
+        "n": 1,
+        "p50": 2395.831,
+        "p95": 2395.831,
+        "p99": 2395.831
+      },
+      "worker_cpu_ms": {
+        "max": 3907.563,
+        "n": 1,
+        "p50": 3907.563,
+        "p95": 3907.563,
+        "p99": 3907.563
+      },
+      "worker_peak_rss_bytes": {
+        "max": 66486272,
+        "n": 1,
+        "p50": 66486272.0,
+        "p95": 66486272.0,
+        "p99": 66486272.0
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "signaling": "disposable local POSIX processes",
+  "slow_consumer_delay_ms": 3,
+  "trials": [
+    {
+      "agent_id": "7e6789f3-bb74-428d-98fe-a6121155c0a3",
+      "arm": "control",
+      "backlog_drain_ms": 13115.576,
+      "clock_ns": {
+        "acked": 552261450158041,
+        "denied": 552252984817333,
+        "drained": 552261428776833,
+        "intake": 552247736350041,
+        "received": 552261447790250,
+        "reported": 552252984890416,
+        "restart_requested": 552248313200958
+      },
+      "coordinator_cpu_ms": 12999.474000000002,
+      "coordinator_peak_rss_bytes": 84328448,
+      "critical_messages_at_end": null,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "885cc564-1637-4f44-9603-fa72598d27aa",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 13713.808,
+      "intake_to_http_accept_ms": 15.398,
+      "intake_to_local_denial_ms": 5248.467,
+      "intake_to_report_ms": 5248.54,
+      "intake_to_worker_receipt_ms": 13711.44,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 1000,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 1,
+      "withdrawal_ack": {
+        "acked": 552261450158041,
+        "broker_timestamp": "2026-11-19T23:48:14.792497+00:00",
+        "committed": 552261449259750,
+        "decision": {
+          "agent_id": "7e6789f3-bb74-428d-98fe-a6121155c0a3",
+          "artifact_id": "471424ab-8bc8-4a04-b502-2e560f3f31a6",
+          "correlation_id": "471424ab-8bc8-4a04-b502-2e560f3f31a6",
+          "digest": "00282862e2f0aca246f6550a3800f5d9666a7977909bf51222080400dcc0d43a",
+          "dry_run": true,
+          "event_id": "885cc564-1637-4f44-9603-fa72598d27aa",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "leased": 552261448822416,
+        "ns": 552261450177125,
+        "received": 552261447790250,
+        "sequence": 1002
+      },
+      "worker_cpu_ms": 3665.8970000000004,
+      "worker_peak_rss_bytes": 66043904
+    },
+    {
+      "agent_id": "d72b5687-e47f-43e5-922b-4ff646db5f5e",
+      "arm": "priority",
+      "backlog_drain_ms": 13385.35,
+      "clock_ns": {
+        "acked": 552273517117666,
+        "denied": 552273513054250,
+        "drained": 552285080937666,
+        "intake": 552271117275875,
+        "received": 552273505479500,
+        "reported": 552273513107333,
+        "restart_requested": 552271695587708
+      },
+      "coordinator_cpu_ms": 14317.025,
+      "coordinator_peak_rss_bytes": 84590592,
+      "critical_messages_at_end": 1,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "c33c325b-c7f0-4136-abef-d7fc9492c26f",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 2399.842,
+      "intake_to_http_accept_ms": 17.761,
+      "intake_to_local_denial_ms": 2395.778,
+      "intake_to_report_ms": 2395.831,
+      "intake_to_worker_receipt_ms": 2388.204,
+      "ordinary_ack_pending_at_end": 0,
+      "ordinary_acked_before_withdrawal": 0,
+      "ordinary_pending_at_end": 0,
+      "outbox_unsent_at_cut": 1001,
+      "trial": 1,
+      "withdrawal_ack": {
+        "acked": 552273517117666,
+        "broker_timestamp": "2026-11-19T23:48:26.853770+00:00",
+        "committed": 552273509110541,
+        "decision": {
+          "agent_id": "d72b5687-e47f-43e5-922b-4ff646db5f5e",
+          "artifact_id": "114d6a77-3df2-4b19-9275-10f0f11d2d28",
+          "correlation_id": "114d6a77-3df2-4b19-9275-10f0f11d2d28",
+          "digest": "c55ebbd861c8a5fed05e600babb0e46d2842f1ca03ccd54f017c6a7266691aae",
+          "dry_run": true,
+          "event_id": "c33c325b-c7f0-4136-abef-d7fc9492c26f",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 552273508757291,
+        "ns": 552273517169375,
+        "received": 552273505479500,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 3907.563,
+      "worker_peak_rss_bytes": 66486272
+    },
+    {
+      "arm": "crash",
+      "coordinator_cpu_ms": 3344.0460000000003,
+      "coordinator_peak_rss_bytes": 82051072,
+      "docker": "29.5.2 6 8307912704",
+      "faults": [
+        {
+          "ack_delivery": 1,
+          "agent_id": "02441944-b83a-4f94-8bc9-8e5cd43ab170",
+          "clock_ns": {
+            "acked": 552320655303458,
+            "crash": 552290299856875,
+            "denied": 552320673382166,
+            "intake": 552290307311166,
+            "ready": 552320666264916,
+            "reported": 552320673456583
+          },
+          "crash_to_ack_ms": 30355.447,
+          "crash_to_local_denial_ms": 30373.525,
+          "crash_to_ready_ms": 30366.408,
+          "event_id": "e87b0b1e-b0f6-4206-93a9-f4aa4db51ec9",
+          "fault": "before-audit",
+          "intake_to_ack_ms": 30347.992,
+          "intake_to_local_denial_ms": 30366.071,
+          "intake_to_report_ms": 30366.145
+        },
+        {
+          "ack_delivery": 2,
+          "agent_id": "475b6aad-b0f7-444f-a606-fd3df44d0aa0",
+          "clock_ns": {
+            "acked": 552320774520416,
+            "crash": 552290429481083,
+            "denied": 552290362267083,
+            "intake": 552290307311166,
+            "ready": 552320787009166,
+            "reported": 552290362306666
+          },
+          "crash_to_ack_ms": 30345.039,
+          "crash_to_local_denial_ms": 0,
+          "crash_to_ready_ms": 30357.528,
+          "event_id": "e87b0b1e-b0f6-4206-93a9-f4aa4db51ec9",
+          "fault": "after-audit-before-ack",
+          "intake_to_ack_ms": 30467.209,
+          "intake_to_local_denial_ms": 54.956,
+          "intake_to_report_ms": 54.995
+        }
+      ],
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "trial": 1,
+      "worker_cpu_ms": 530.227,
+      "worker_peak_rss_bytes": 64552960
+    }
+  ]
+}
