@@ -32,7 +32,15 @@ def main() -> None:
     public = key.public_key().public_bytes(
         serialization.Encoding.Raw, serialization.PublicFormat.Raw
     )
-    (directory / "publishers.json").write_text(json.dumps({"lab-publisher": base64.b64encode(public).decode()}))
+    (directory / "publishers.json").write_text(json.dumps({"grants": [{
+        "publisher_id": "lab-publisher",
+        "key_id": "default",
+        "public_key": base64.b64encode(public).decode(),
+        "roles": ["finding", "revocation"],
+        "not_before": "2020-01-01T00:00:00+00:00",
+        "expires_at": "2035-01-01T00:00:00+00:00",
+        "revoked_at": None,
+    }]}, indent=2))
     (directory / "agent.json").write_text(json.dumps({
         "publishers_file": "/config/publishers.json",
         "lab_authorized": True,

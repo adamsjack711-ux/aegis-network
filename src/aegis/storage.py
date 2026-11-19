@@ -29,7 +29,7 @@ class MemoryRepository:
 
 class MemoryBus:
     def __init__(self):
-        self.events: list[SignedFinding] = []
+        self.events: list[SignedEvent] = []
 
     def publish(self, envelope: SignedEvent) -> None:
         self.events.append(envelope)
@@ -39,6 +39,12 @@ class SqliteAudit:
     def __init__(self, path: str | Path, agent_id: str = "test-agent"):
         self.agent_id = agent_id
         self.db = sqlite3.connect(str(path))
+        self.db.execute("CREATE TABLE IF NOT EXISTS audit_identity (agent_id TEXT PRIMARY KEY)")
+        existing_id = self.db.execute("SELECT agent_id FROM audit_identity").fetchone()
+        if existing_id is not None and existing_id[0] != agent_id:
+            raise ValueError("audit database belongs to another agent")
+        if existing_id is None:
+            self.db.execute("INSERT INTO audit_identity(agent_id) VALUES(?)", (agent_id,))
         self.db.execute("""CREATE TABLE IF NOT EXISTS decisions (
             artifact_id TEXT PRIMARY KEY, digest TEXT NOT NULL, publisher_id TEXT NOT NULL,
             sequence INTEGER NOT NULL, authenticated INTEGER NOT NULL,
@@ -66,10 +72,16 @@ class SqliteAudit:
 
     def get(self, artifact_id: str) -> Decision | None:
         row = self.db.execute(
-            "SELECT artifact_id,digest,outcome,reason,dry_run FROM decisions WHERE artifact_id=?",
+            "SELECT artifact_id,digest,publisher_id,outcome,reason,dry_run FROM decisions WHERE artifact_id=?",
             (artifact_id,),
         ).fetchone()
-        return Decision(*row, event_id=artifact_id, correlation_id=artifact_id, agent_id=self.agent_id) if row else None
+        if row is None:
+            return None
+        aid, digest, publisher_id, outcome, reason, dry_run = row
+        if self.is_revoked(publisher_id, aid, digest):
+            outcome, reason = "deny", "finding revoked"
+        return Decision(aid, digest, outcome, reason, bool(dry_run), event_id=aid,
+                        correlation_id=aid, agent_id=self.agent_id)
 
     def high_water(self, publisher_id: str) -> int:
         row = self.db.execute(
@@ -113,8 +125,8 @@ class SqliteAudit:
 
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool:
         return self.db.execute(
-            "SELECT 1 FROM revoked_artifacts WHERE publisher_id=? AND artifact_id=? AND digest=?",
-            (publisher_id, artifact_id, digest),
+            "SELECT 1 FROM revoked_artifacts WHERE artifact_id=? AND digest=?",
+            (artifact_id, digest),
         ).fetchone() is not None
 
     def get_revocation(self, revocation_id: str) -> Decision | None:

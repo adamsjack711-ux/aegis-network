@@ -9,6 +9,14 @@
 - [x] Tests cover tampering, expiry, unknown fields, duplicate delivery, stale sequence, invalid-signature watermark poisoning, no inventory match, and local denial.
 - [x] Container integration with live PostgreSQL and JetStream on 2026-11-19: initial POST accepted, replay returned `accepted: false`, and local SQLite contained one `allow_dry_run` decision.
 
+## Phase 2A mesh reliability, local branch
+
+- [x] Two independently named JetStream durables and separate SQLite volumes received the same synthetic finding.
+- [x] PostgreSQL kept a finding pending while NATS was stopped; after broker and paused agent restart, both agents had two distinct audited decisions and the outbox was fully sent.
+- [x] A signed revocation reached both agents and populated both durable revocation ledgers. Repeated finding and revocation submissions were idempotent.
+- [x] Unit tests cover broker publish failure, database failure after broker acknowledgement, audit failure before consumer acknowledgement, role denial, invalid signature, revocation before and after finding, and agent restart deduplication.
+- [ ] Review the shared event, trust-file, and agent-ID changes in [Phase 2A integration review](phase2a-integration.md) before merging.
+
 ## Research questions and measurable gates
 
 **A — latency:** In Phase 4/5, start timer at receipt of a independently verified finding. End at successful, locally authorized mitigation health check. Record p50/p95/p99, target eligibility, and failures over repeated trials. The proposed gate is p95 ≤30 seconds for eligible lab deployments, with zero unauthorized actions and verified rollback. The current dry-run path cannot answer this question.
@@ -19,4 +27,4 @@
 
 ## Safety gates before any execution
 
-Independent container reproduction; evidence subject binding; explicit artifact revocation and key rotation; least-privilege executor; preflight snapshot; health-check oracle; automatic rollback; fault injection; and operator approval for any production or external distribution. None is complete in this slice.
+Independent container reproduction; evidence subject binding; key rotation; least-privilege executor; preflight snapshot; health-check oracle; automatic rollback; broader fault injection; and operator approval for any production or external distribution remain incomplete. Signed artifact revocation is implemented for dry-run trust decisions only.
