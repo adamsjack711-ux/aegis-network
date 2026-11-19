@@ -1,0 +1,52 @@
+{
+  "source_commit": "e3a526d4109f0879a8da649c9c9b680bfc82c59a",
+  "source_report_sha256": "f5ec48e52f15d93a95ccc9c94c0bc9c0b61733af988236b3a46656c5e72d9064",
+  "deployments": 1000,
+  "scenario": "heterogeneous",
+  "seed": 20261120,
+  "arm": "compatible-shared",
+  "result": {
+    "distinct_exact_scopes": 259,
+    "worker_attempts": 510,
+    "cohorts": 1,
+    "cpu_seconds": 31.124972,
+    "wall_seconds": 75.159441,
+    "parent_peak_rss_bytes": 53657600,
+    "worker_peak_rss_bytes": 17399808,
+    "aggregate_peak_rss_upper_bound_bytes": 71057408,
+    "outcomes": {
+      "reproduced": 307,
+      "not-reproduced": 537,
+      "inconclusive": 156
+    },
+    "expected_outcomes": {
+      "reproduced": 308,
+      "not-reproduced": 539,
+      "inconclusive": 153
+    },
+    "correct_assessments": 996,
+    "decision_accuracy": 0.996,
+    "accuracy_among_conclusive": 1.0,
+    "reproduction_rate": 0.307,
+    "inconclusive_rate": 0.156,
+    "conclusive_cache_hits": 632,
+    "inconclusive_cache_hits": 113,
+    "cache_hit_rate": 0.745,
+    "incorrect_cache_reuse": 0,
+    "incorrect_reuse_per_hit": 0.0,
+    "compatibility_transfers": 29,
+    "time_to_assessment": {
+      "p50_ms": 4.953,
+      "p95_ms": 253.2194,
+      "p99_ms": 570.0038
+    },
+    "time_to_verified_finding": {
+      "p50_ms": 4.8259,
+      "p95_ms": 231.5571,
+      "p99_ms": 383.7601
+    },
+    "time_to_first_verified_finding_ms": 283.8724,
+    "cpu_ms_per_correctly_assessed_deployment": 31.25,
+    "cpu_ms_per_correct_conclusive_deployment": 36.8779
+  }
+}

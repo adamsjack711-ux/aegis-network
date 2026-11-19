@@ -1,0 +1,60 @@
+{
+  "checkout_commit": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "seed": 20261120,
+  "deployments": 1000,
+  "scenario": "heterogeneous",
+  "arm": "compatible-shared",
+  "worker_attempt_p50_p95_p99_ms": {
+    "p50_ms": 35.5059,
+    "p95_ms": 40.5882,
+    "p99_ms": 68.4495
+  },
+  "worker_attempt_max_ms": 108.772,
+  "worker_failures": [],
+  "result": {
+    "distinct_exact_scopes": 259,
+    "worker_attempts": 502,
+    "cohorts": 1,
+    "cpu_seconds": 21.490045,
+    "wall_seconds": 23.328183,
+    "parent_peak_rss_bytes": 58425344,
+    "worker_peak_rss_bytes": 17416192,
+    "aggregate_peak_rss_upper_bound_bytes": 75841536,
+    "outcomes": {
+      "reproduced": 308,
+      "not-reproduced": 539,
+      "inconclusive": 153
+    },
+    "expected_outcomes": {
+      "reproduced": 308,
+      "not-reproduced": 539,
+      "inconclusive": 153
+    },
+    "correct_assessments": 1000,
+    "decision_accuracy": 1.0,
+    "accuracy_among_conclusive": 1.0,
+    "reproduction_rate": 0.308,
+    "inconclusive_rate": 0.153,
+    "conclusive_cache_hits": 635,
+    "inconclusive_cache_hits": 114,
+    "cache_hit_rate": 0.749,
+    "incorrect_cache_reuse": 0,
+    "incorrect_reuse_per_hit": 0.0,
+    "compatibility_transfers": 29,
+    "time_to_assessment": {
+      "p50_ms": 3.7097,
+      "p95_ms": 82.5767,
+      "p99_ms": 90.2926
+    },
+    "time_to_verified_finding": {
+      "p50_ms": 3.6488,
+      "p95_ms": 82.5767,
+      "p99_ms": 89.2153
+    },
+    "time_to_first_verified_finding_ms": 82.7686,
+    "cpu_ms_per_correctly_assessed_deployment": 21.49,
+    "cpu_ms_per_correct_conclusive_deployment": 25.372
+  }
+}
