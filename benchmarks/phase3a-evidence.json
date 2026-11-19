@@ -1,0 +1,2380 @@
+{
+  "environment": {
+    "environment_sha256": "1fcdea326257c7df3b4d5dbd696ca3d9b702bb781ccf8655e1766630a5c6af9a",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.15.2",
+    "source_sha256": {
+      "scripts/benchmark_phase3a_evidence.py": "5412d5e0547143e7f5aabdbc7a427dc5fa7e863e6b0f79c74ecb2739338c6e63",
+      "src/aegis/evidence/__init__.py": "6bbacf54aa8176f11e19ab7357230a8bb8a7bbe84bbd5b27b63452175939317b",
+      "src/aegis/evidence/_worker.py": "d59895231de4a29b1ab0607188f264ba54823352107521caf0eba49301d6d275",
+      "src/aegis/evidence/records.py": "fa2fbbb36127572e31a1a106e1992e9d1f0d9192df09ce738ec260ea0a3a2a4c",
+      "src/aegis/evidence/runner.py": "5d705302919725cc4b67a0b26df252043a010dc1656a36edd310dfd236318b8e",
+      "src/aegis/evidence/service.py": "6a1a3811e0dbffc05275b3a64fdd3d068c3595da6e25d7e39a94490020f5e299",
+      "src/aegis/evidence/synthetic.py": "82b9ad21cd6c9867d376b54a8465d6bb874ba5d829bffcf86bd24003c946ae62"
+    },
+    "worker_sha256": "d59895231de4a29b1ab0607188f264ba54823352107521caf0eba49301d6d275"
+  },
+  "protocol": "phase3a-shared-versus-repeated-v1",
+  "scenarios": [
+    {
+      "deployments": 10,
+      "paired_cpu_ratio_median": 2.9202,
+      "paired_cpu_ratio_range": [
+        2.8429,
+        2.9621
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 2.9621,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.600929,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.600371,
+                "wall_seconds": 0.648483,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.649017,
+            "worker_attempts": 20
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.202874,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.202512,
+                "wall_seconds": 0.216666,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.217011,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.9202,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.603158,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.602881,
+                "wall_seconds": 0.654567,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.654835,
+            "worker_attempts": 20
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.206544,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.206209,
+                "wall_seconds": 0.222576,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.222894,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.8429,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.62343,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.623128,
+                "wall_seconds": 0.677134,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.677428,
+            "worker_attempts": 20
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.219296,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.218971,
+                "wall_seconds": 0.237349,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.237662,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.8971,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.63207,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.631747,
+                "wall_seconds": 0.704822,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.705136,
+            "worker_attempts": 20
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.218177,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.217836,
+                "wall_seconds": 0.23703,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.237354,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.9392,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.62286,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.622577,
+                "wall_seconds": 0.682558,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.682829,
+            "worker_attempts": 20
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.211912,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.211594,
+                "wall_seconds": 0.226577,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.226882,
+            "worker_attempts": 6
+          }
+        }
+      ],
+      "scenario": "cold"
+    },
+    {
+      "deployments": 10,
+      "paired_cpu_ratio_median": 4.9214,
+      "paired_cpu_ratio_range": [
+        4.8391,
+        4.9665
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 4.8423,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 1.242083,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.623575,
+                "wall_seconds": 0.678656,
+                "worker_attempts": 20
+              },
+              "warm": {
+                "cpu_seconds": 0.618153,
+                "wall_seconds": 0.67976,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 1.358749,
+            "worker_attempts": 40
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.256507,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.217506,
+                "wall_seconds": 0.232141,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.038587,
+                "wall_seconds": 0.038677,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.271204,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 4.8391,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 1.208888,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.602526,
+                "wall_seconds": 0.656464,
+                "worker_attempts": 20
+              },
+              "warm": {
+                "cpu_seconds": 0.606044,
+                "wall_seconds": 0.654128,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 1.310879,
+            "worker_attempts": 40
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.249818,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.21213,
+                "wall_seconds": 0.228062,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.037321,
+                "wall_seconds": 0.037351,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.265755,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 4.9611,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 1.209159,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.605084,
+                "wall_seconds": 0.654073,
+                "worker_attempts": 20
+              },
+              "warm": {
+                "cpu_seconds": 0.603758,
+                "wall_seconds": 0.652177,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 1.30654,
+            "worker_attempts": 40
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.24373,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.2058,
+                "wall_seconds": 0.220344,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.03759,
+                "wall_seconds": 0.037689,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.258351,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 4.9214,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 1.226978,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.609461,
+                "wall_seconds": 0.660446,
+                "worker_attempts": 20
+              },
+              "warm": {
+                "cpu_seconds": 0.617173,
+                "wall_seconds": 0.669554,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 1.330363,
+            "worker_attempts": 40
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.249313,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.210993,
+                "wall_seconds": 0.225067,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.037954,
+                "wall_seconds": 0.038052,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.263458,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 4.9665,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 1.235228,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.61657,
+                "wall_seconds": 0.666355,
+                "worker_attempts": 20
+              },
+              "warm": {
+                "cpu_seconds": 0.618337,
+                "wall_seconds": 0.676885,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 1.343535,
+            "worker_attempts": 40
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.248711,
+            "outcomes": {
+              "inconclusive": 6,
+              "not-reproduced": 6,
+              "reproduced": 8
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.21165,
+                "wall_seconds": 0.229819,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.036723,
+                "wall_seconds": 0.036735,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.266869,
+            "worker_attempts": 6
+          }
+        }
+      ],
+      "scenario": "warm"
+    },
+    {
+      "deployments": 10,
+      "paired_cpu_ratio_median": 1.0152,
+      "paired_cpu_ratio_range": [
+        1.0054,
+        1.0187
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 1.0127,
+          "distinct_keys": 10,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.610182,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.609873,
+                "wall_seconds": 0.664836,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.665129,
+            "worker_attempts": 20
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.602534,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.602178,
+                "wall_seconds": 0.656559,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.656901,
+            "worker_attempts": 20
+          }
+        },
+        {
+          "cpu_ratio": 1.0187,
+          "distinct_keys": 10,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.615153,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.614861,
+                "wall_seconds": 0.666292,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.666569,
+            "worker_attempts": 20
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.603865,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.603567,
+                "wall_seconds": 0.653197,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.653489,
+            "worker_attempts": 20
+          }
+        },
+        {
+          "cpu_ratio": 1.0176,
+          "distinct_keys": 10,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.61025,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.609863,
+                "wall_seconds": 0.663709,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.664087,
+            "worker_attempts": 20
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.599685,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.599379,
+                "wall_seconds": 0.648667,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.648961,
+            "worker_attempts": 20
+          }
+        },
+        {
+          "cpu_ratio": 1.0152,
+          "distinct_keys": 10,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.603511,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.603232,
+                "wall_seconds": 0.652123,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.652394,
+            "worker_attempts": 20
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.594499,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.594196,
+                "wall_seconds": 0.648124,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.648415,
+            "worker_attempts": 20
+          }
+        },
+        {
+          "cpu_ratio": 1.0054,
+          "distinct_keys": 10,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.604171,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.603887,
+                "wall_seconds": 0.653432,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.653704,
+            "worker_attempts": 20
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.600906,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.600618,
+                "wall_seconds": 0.650656,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.650937,
+            "worker_attempts": 20
+          }
+        }
+      ],
+      "scenario": "distinct"
+    },
+    {
+      "deployments": 10,
+      "paired_cpu_ratio_median": 1.6051,
+      "paired_cpu_ratio_range": [
+        1.5917,
+        1.6247
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 1.6052,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.612091,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.611795,
+                "wall_seconds": 0.664976,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.665261,
+            "worker_attempts": 20
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.381323,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.380971,
+                "wall_seconds": 0.414586,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.414922,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 1.5917,
+          "distinct_keys": 6,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.609685,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.60936,
+                "wall_seconds": 0.663508,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.663822,
+            "worker_attempts": 20
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.38304,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.382664,
+                "wall_seconds": 0.412583,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.41294,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 1.592,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.608221,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.607939,
+                "wall_seconds": 0.656587,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.65686,
+            "worker_attempts": 20
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.382044,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.381741,
+                "wall_seconds": 0.410865,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.411158,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 1.6247,
+          "distinct_keys": 6,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.619313,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.61904,
+                "wall_seconds": 0.669175,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.669438,
+            "worker_attempts": 20
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.381186,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.380911,
+                "wall_seconds": 0.414582,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.41485,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 1.6051,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.612431,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.612142,
+                "wall_seconds": 0.666201,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.666478,
+            "worker_attempts": 20
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.38155,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.381257,
+                "wall_seconds": 0.412734,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.413017,
+            "worker_attempts": 12
+          }
+        }
+      ],
+      "scenario": "cohorts"
+    },
+    {
+      "deployments": 10,
+      "paired_cpu_ratio_median": 2.9591,
+      "paired_cpu_ratio_range": [
+        2.4633,
+        3.059
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 2.874,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.607377,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.60707,
+                "wall_seconds": 0.656202,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.656491,
+            "worker_attempts": 20
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.211336,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.211026,
+                "wall_seconds": 0.224746,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.225037,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 3.059,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.639822,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.639549,
+                "wall_seconds": 0.725154,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.725418,
+            "worker_attempts": 20
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.209158,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.208857,
+                "wall_seconds": 0.223161,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.223449,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.9698,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.613263,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.612971,
+                "wall_seconds": 0.667102,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.667387,
+            "worker_attempts": 20
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.206497,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.206146,
+                "wall_seconds": 0.221648,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.221987,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.9591,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.613879,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.61355,
+                "wall_seconds": 0.666473,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.666792,
+            "worker_attempts": 20
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.207454,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.207168,
+                "wall_seconds": 0.223019,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.223293,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 2.4633,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 0.613623,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.613341,
+                "wall_seconds": 0.667801,
+                "worker_attempts": 20
+              }
+            },
+            "wall_seconds": 0.668074,
+            "worker_attempts": 20
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.249107,
+            "outcomes": {
+              "inconclusive": 3,
+              "not-reproduced": 3,
+              "reproduced": 4
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.248796,
+                "wall_seconds": 0.310394,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.31069,
+            "worker_attempts": 6
+          }
+        }
+      ],
+      "scenario": "one-per-ten"
+    },
+    {
+      "deployments": 100,
+      "paired_cpu_ratio_median": 11.275,
+      "paired_cpu_ratio_range": [
+        10.9618,
+        11.4151
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 10.9618,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.350998,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.350684,
+                "wall_seconds": 6.968276,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.968577,
+            "worker_attempts": 200
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.579374,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.579056,
+                "wall_seconds": 0.598851,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.599151,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 11.4151,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.42801,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.427638,
+                "wall_seconds": 7.014334,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.014695,
+            "worker_attempts": 200
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.563113,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.562608,
+                "wall_seconds": 0.582264,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.582743,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 10.9967,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.47731,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.476948,
+                "wall_seconds": 7.041855,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.042202,
+            "worker_attempts": 200
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.589021,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.588714,
+                "wall_seconds": 0.609917,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.610204,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 11.275,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.497886,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.497421,
+                "wall_seconds": 7.086048,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.086557,
+            "worker_attempts": 200
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.576307,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.575906,
+                "wall_seconds": 0.59516,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.59554,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 11.3456,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.416184,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.415668,
+                "wall_seconds": 7.023169,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.023786,
+            "worker_attempts": 200
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.565521,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.56521,
+                "wall_seconds": 0.580974,
+                "worker_attempts": 6
+              }
+            },
+            "wall_seconds": 0.581268,
+            "worker_attempts": 6
+          }
+        }
+      ],
+      "scenario": "cold"
+    },
+    {
+      "deployments": 100,
+      "paired_cpu_ratio_median": 12.825,
+      "paired_cpu_ratio_range": [
+        12.1909,
+        13.1702
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 12.825,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 12.370665,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.359391,
+                "wall_seconds": 6.963527,
+                "worker_attempts": 200
+              },
+              "warm": {
+                "cpu_seconds": 6.010939,
+                "wall_seconds": 6.521261,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 13.485102,
+            "worker_attempts": 400
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.964574,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.584125,
+                "wall_seconds": 0.61211,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.380054,
+                "wall_seconds": 0.380631,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.993111,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 12.2432,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 11.647597,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.829534,
+                "wall_seconds": 6.308017,
+                "worker_attempts": 200
+              },
+              "warm": {
+                "cpu_seconds": 5.817769,
+                "wall_seconds": 6.291045,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 12.599339,
+            "worker_attempts": 400
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.951352,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.57905,
+                "wall_seconds": 0.607874,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.371922,
+                "wall_seconds": 0.372091,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.980299,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 12.1909,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 11.732084,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.866058,
+                "wall_seconds": 6.33175,
+                "worker_attempts": 200
+              },
+              "warm": {
+                "cpu_seconds": 5.865633,
+                "wall_seconds": 6.352829,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 12.68494,
+            "worker_attempts": 400
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.962366,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.574024,
+                "wall_seconds": 0.596861,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.387961,
+                "wall_seconds": 0.389318,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.986536,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 13.1702,
+          "distinct_keys": 3,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 12.688789,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.407826,
+                "wall_seconds": 7.016183,
+                "worker_attempts": 200
+              },
+              "warm": {
+                "cpu_seconds": 6.280589,
+                "wall_seconds": 6.865546,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 13.88208,
+            "worker_attempts": 400
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.963449,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.572437,
+                "wall_seconds": 0.589476,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.390612,
+                "wall_seconds": 0.39209,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.981936,
+            "worker_attempts": 6
+          }
+        },
+        {
+          "cpu_ratio": 13.1645,
+          "distinct_keys": 3,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 12.696186,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.406222,
+                "wall_seconds": 6.968957,
+                "worker_attempts": 200
+              },
+              "warm": {
+                "cpu_seconds": 6.289539,
+                "wall_seconds": 6.825676,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 13.795035,
+            "worker_attempts": 400
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.964423,
+            "outcomes": {
+              "inconclusive": 66,
+              "not-reproduced": 66,
+              "reproduced": 68
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.578701,
+                "wall_seconds": 0.602653,
+                "worker_attempts": 6
+              },
+              "warm": {
+                "cpu_seconds": 0.385343,
+                "wall_seconds": 0.386652,
+                "worker_attempts": 0
+              }
+            },
+            "wall_seconds": 0.98966,
+            "worker_attempts": 6
+          }
+        }
+      ],
+      "scenario": "warm"
+    },
+    {
+      "deployments": 100,
+      "paired_cpu_ratio_median": 1.0192,
+      "paired_cpu_ratio_range": [
+        0.9401,
+        1.0534
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 1.0192,
+          "distinct_keys": 100,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.170838,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.170502,
+                "wall_seconds": 6.687619,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.687942,
+            "worker_attempts": 200
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 6.054696,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.054373,
+                "wall_seconds": 6.618107,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.618425,
+            "worker_attempts": 200
+          }
+        },
+        {
+          "cpu_ratio": 0.9759,
+          "distinct_keys": 100,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 5.920787,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.920495,
+                "wall_seconds": 6.41139,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.411667,
+            "worker_attempts": 200
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 6.066782,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.066295,
+                "wall_seconds": 6.603197,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.603668,
+            "worker_attempts": 200
+          }
+        },
+        {
+          "cpu_ratio": 0.9401,
+          "distinct_keys": 100,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 5.970711,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.970343,
+                "wall_seconds": 6.489333,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.489689,
+            "worker_attempts": 200
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 6.351249,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.350924,
+                "wall_seconds": 6.911931,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.912246,
+            "worker_attempts": 200
+          }
+        },
+        {
+          "cpu_ratio": 1.0534,
+          "distinct_keys": 100,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.518785,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.518489,
+                "wall_seconds": 7.179968,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.180254,
+            "worker_attempts": 200
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 6.188101,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.187685,
+                "wall_seconds": 6.817158,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.81756,
+            "worker_attempts": 200
+          }
+        },
+        {
+          "cpu_ratio": 1.0351,
+          "distinct_keys": 100,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.373828,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.373422,
+                "wall_seconds": 6.963452,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.963846,
+            "worker_attempts": 200
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 6.157725,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.157366,
+                "wall_seconds": 6.807738,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.808088,
+            "worker_attempts": 200
+          }
+        }
+      ],
+      "scenario": "distinct"
+    },
+    {
+      "deployments": 100,
+      "paired_cpu_ratio_median": 8.4647,
+      "paired_cpu_ratio_range": [
+        8.4249,
+        8.5119
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 8.4249,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.309468,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.309051,
+                "wall_seconds": 6.896419,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.896823,
+            "worker_attempts": 200
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 0.748906,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.748574,
+                "wall_seconds": 0.781821,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.782133,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 8.4336,
+          "distinct_keys": 6,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.377093,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.376738,
+                "wall_seconds": 6.943921,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.944271,
+            "worker_attempts": 200
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 0.75615,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.755718,
+                "wall_seconds": 0.790435,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.790843,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 8.4681,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.381825,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.381512,
+                "wall_seconds": 6.951182,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.95148,
+            "worker_attempts": 200
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 0.753634,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.753325,
+                "wall_seconds": 0.794732,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.795026,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 8.4647,
+          "distinct_keys": 6,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.355941,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.355663,
+                "wall_seconds": 6.956793,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.957064,
+            "worker_attempts": 200
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 0.750878,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.750526,
+                "wall_seconds": 0.783248,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.783583,
+            "worker_attempts": 12
+          }
+        },
+        {
+          "cpu_ratio": 8.5119,
+          "distinct_keys": 6,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 5.925844,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.925436,
+                "wall_seconds": 6.454444,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.454834,
+            "worker_attempts": 200
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 0.696181,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 0.695863,
+                "wall_seconds": 0.723969,
+                "worker_attempts": 12
+              }
+            },
+            "wall_seconds": 0.724269,
+            "worker_attempts": 12
+          }
+        }
+      ],
+      "scenario": "cohorts"
+    },
+    {
+      "deployments": 100,
+      "paired_cpu_ratio_median": 5.7289,
+      "paired_cpu_ratio_range": [
+        5.6622,
+        5.8307
+      ],
+      "pairs": [
+        {
+          "cpu_ratio": 5.6622,
+          "distinct_keys": 12,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 5.780666,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.780362,
+                "wall_seconds": 6.263323,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.26362,
+            "worker_attempts": 200
+          },
+          "seed": 20261119,
+          "shared": {
+            "cpu_seconds": 1.020927,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 1.020607,
+                "wall_seconds": 1.079028,
+                "worker_attempts": 24
+              }
+            },
+            "wall_seconds": 1.079324,
+            "worker_attempts": 24
+          }
+        },
+        {
+          "cpu_ratio": 5.8307,
+          "distinct_keys": 12,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 5.940134,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 5.939852,
+                "wall_seconds": 6.476205,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.476479,
+            "worker_attempts": 200
+          },
+          "seed": 20261120,
+          "shared": {
+            "cpu_seconds": 1.018766,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 1.018433,
+                "wall_seconds": 1.080348,
+                "worker_attempts": 24
+              }
+            },
+            "wall_seconds": 1.080667,
+            "worker_attempts": 24
+          }
+        },
+        {
+          "cpu_ratio": 5.6895,
+          "distinct_keys": 12,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.367261,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.366957,
+                "wall_seconds": 6.912834,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.913124,
+            "worker_attempts": 200
+          },
+          "seed": 20261121,
+          "shared": {
+            "cpu_seconds": 1.119129,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 1.118785,
+                "wall_seconds": 1.200845,
+                "worker_attempts": 24
+              }
+            },
+            "wall_seconds": 1.201174,
+            "worker_attempts": 24
+          }
+        },
+        {
+          "cpu_ratio": 5.7289,
+          "distinct_keys": 12,
+          "order": [
+            "shared",
+            "repeated"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.32421,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.323798,
+                "wall_seconds": 6.889133,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 6.889534,
+            "worker_attempts": 200
+          },
+          "seed": 20261122,
+          "shared": {
+            "cpu_seconds": 1.103917,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 1.103427,
+                "wall_seconds": 1.178565,
+                "worker_attempts": 24
+              }
+            },
+            "wall_seconds": 1.179034,
+            "worker_attempts": 24
+          }
+        },
+        {
+          "cpu_ratio": 5.7766,
+          "distinct_keys": 12,
+          "order": [
+            "repeated",
+            "shared"
+          ],
+          "repeated": {
+            "cpu_seconds": 6.550355,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 6.549919,
+                "wall_seconds": 7.183834,
+                "worker_attempts": 200
+              }
+            },
+            "wall_seconds": 7.184261,
+            "worker_attempts": 200
+          },
+          "seed": 20261123,
+          "shared": {
+            "cpu_seconds": 1.13394,
+            "outcomes": {
+              "inconclusive": 33,
+              "not-reproduced": 33,
+              "reproduced": 34
+            },
+            "stages": {
+              "cold": {
+                "cpu_seconds": 1.133638,
+                "wall_seconds": 1.213218,
+                "worker_attempts": 24
+              }
+            },
+            "wall_seconds": 1.213506,
+            "worker_attempts": 24
+          }
+        }
+      ],
+      "scenario": "one-per-ten"
+    }
+  ]
+}
