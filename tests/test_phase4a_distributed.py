@@ -113,6 +113,23 @@ def test_trace_reader_only_advances_after_complete_record(tmp_path, harness):
     assert harness.observed({"ns": 3, "controller_observed_ns": 9}) == 9
 
 
+def test_compose_port_collision_retries_before_starting_the_fleet(tmp_path, harness, monkeypatch):
+    lab = harness.Lab(SimpleNamespace(), tmp_path, {})
+    calls = []
+
+    def compose(*args):
+        calls.append(args[0])
+        if len(calls) == 1:
+            raise subprocess.CalledProcessError(1, args, stderr="failed to bind: address already in use")
+        return ""
+
+    monkeypatch.setattr(lab, "compose", compose)
+    asyncio.run(lab.start_containers())
+    assert calls == ["up", "down", "up"]
+    assert lab.port_retries == 1
+    assert lab.env["AEGIS_PHASE4A_NATS_PORT"] != lab.env["AEGIS_PHASE4A_MONITOR_PORT"]
+
+
 def test_peer_proxy_uses_only_loopback_and_private_unix_socket(tmp_path, harness):
     peer = importlib.import_module("phase4a_peer")
     for invalid in ("example=0", "-oProxyCommand=1", "host name=5", "host=2;", "lab@8.8.8.8=5"):
