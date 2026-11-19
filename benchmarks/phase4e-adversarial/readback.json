@@ -69,5 +69,18 @@
     "signed_status_samples": 0,
     "skipped": 0,
     "tests": 1
+  },
+  "withdrawal-scratch-cleanup.xml": {
+    "dispatch": {
+      "pending_count": 5,
+      "recovery_upper_ms": 1890.798,
+      "withdrawal_rank": 5
+    },
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
   }
 }

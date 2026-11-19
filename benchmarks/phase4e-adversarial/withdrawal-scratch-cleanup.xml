@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="6.165" timestamp="2026-11-19T16:39:39.549580-07:00" hostname="MacBookPro.lan"><testcase classname="tests.phase4e.test_withdrawal_delivery" name="test_W01_W02_queued_withdrawal_after_broker_restart" file="tests/phase4e/test_withdrawal_delivery.py" line="164" time="5.817"><properties><property name="queued_before_restart" value="[[1, &quot;114a8018-b636-4466-88f2-e3b8390eb3e9&quot;, true], [2, &quot;b9be3791-6ee2-4c1e-b6f1-f366b35a7a38&quot;, false], [3, &quot;7eff13a4-f62d-4b99-bd8b-f0dc8f6a2349&quot;, false], [4, &quot;981405a9-cd79-4935-b263-3db245f4358c&quot;, false], [5, &quot;ea13515b-d92a-4626-bb00-7bb94a5c380f&quot;, false], [6, &quot;0f2108f6-6472-4853-9d97-51827a48a255&quot;, false]]" /><property name="docker_images" value="{&quot;nats&quot;: &quot;sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927&quot;, &quot;postgres&quot;: &quot;sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857&quot;}" /><property name="durable_denial" value="{&quot;row&quot;: [&quot;revoked_dry_run&quot;, 1, &quot;0f2108f6-6472-4853-9d97-51827a48a255&quot;], &quot;recovery_upper_ms&quot;: 1890.798167}" /><property name="broker_publication" value="[[2, &quot;b9be3791-6ee2-4c1e-b6f1-f366b35a7a38&quot;], [3, &quot;7eff13a4-f62d-4b99-bd8b-f0dc8f6a2349&quot;], [4, &quot;981405a9-cd79-4935-b263-3db245f4358c&quot;], [5, &quot;ea13515b-d92a-4626-bb00-7bb94a5c380f&quot;], [6, &quot;0f2108f6-6472-4853-9d97-51827a48a255&quot;]]" /></properties><failure message="AssertionError: ordinary lab finding overtook a queued withdrawal&#10;assert 'b9be3791-6ee...-f366b35a7a38' == '0f2108f6-647...-51827a48a255'&#10;  &#10;  - 0f2108f6-6472-4853-9d97-51827a48a255&#10;  + b9be3791-6ee2-4c1e-b6f1-f366b35a7a38">tests/phase4e/test_withdrawal_delivery.py:168: in test_W01_W02_queued_withdrawal_after_broker_restart
+    withdrawal_delivery(tmp_path, record_property, priority=False)
+tests/phase4e/test_withdrawal_delivery.py:162: in withdrawal_delivery
+    asyncio.run(run(docker_env, Path(scratch)))
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py:205: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py:128: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py:724: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests/phase4e/test_withdrawal_delivery.py:157: in run
+    assert publication[0][1] == withdrawal_id, "ordinary lab finding overtook a queued withdrawal"
+E   AssertionError: ordinary lab finding overtook a queued withdrawal
+E   assert 'b9be3791-6ee...-f366b35a7a38' == '0f2108f6-647...-51827a48a255'
+E     
+E     - 0f2108f6-6472-4853-9d97-51827a48a255
+E     + b9be3791-6ee2-4c1e-b6f1-f366b35a7a38</failure></testcase></testsuite></testsuites>
