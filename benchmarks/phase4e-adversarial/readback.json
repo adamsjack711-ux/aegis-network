@@ -63,6 +63,14 @@
     "skipped": 0,
     "tests": 1
   },
+  "combined-identity-restore.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
   "combined-identity.xml": {
     "errors": 0,
     "failures": 0,
@@ -75,6 +83,14 @@
   "combined-inherited-docker-diagnostic.xml": {
     "errors": 0,
     "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 3
+  },
+  "combined-inherited-docker.xml": {
+    "errors": 0,
+    "failures": 0,
     "signed_ownership_requests": 0,
     "signed_status_samples": 0,
     "skipped": 0,
@@ -210,6 +226,14 @@
     "signed_ownership_requests": 0,
     "signed_status_samples": 0,
     "single_witness_appraisal": "reproduced",
+    "skipped": 0,
+    "tests": 1
+  },
+  "transport-proof-contract.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
     "skipped": 0,
     "tests": 1
   },

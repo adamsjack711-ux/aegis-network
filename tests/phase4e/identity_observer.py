@@ -126,3 +126,56 @@ def test_I01_I02_I03_barrier_with_one_authenticated_writer_unavailable(lab, reco
     ]
     assert recovered["targets"][offline]["receipts"] == [(successor_generation, "observing")]
     assert all(item["effective"] == "observing" for item in observed.values())
+
+
+def test_I05_restored_home_holds_against_current_anchor(lab, record_property):
+    def claim(agent, broker, generation):
+        proof = make_claim(lab.policy, agent, broker, generation, lab.instances[agent])
+        return Assignment.model_validate(lab.call(agent, broker, "/claim", proof))
+
+    def available_generation():
+        expected = Stamp.model_validate(lab.call("operator", "anchor", "/stamp"))
+        return lab.call("operator", "home", "/recover", expected)["generation"]
+
+    prior = claim("agent-a", "broker-a", 0)
+    snapshot = lab.root / "home-snapshot.sqlite"
+    with (closing(sqlite3.connect(lab.database("home"))) as original,
+          closing(sqlite3.connect(snapshot)) as backup):
+        original.backup(backup)
+    current = claim("agent-b", "broker-b", available_generation())
+    target = lab.targets[0]
+
+    def request(assignment):
+        version = read_target(lab, target)["version"]
+        mutation = Mutation(assignment=assignment, target=target, marker="observing", expected_version=version)
+        return Write(command=command(mutation, lab.instances[assignment.agent]),
+                     approval=approve(mutation, lab.approval), credential_until_ns=assignment.expires_ns)
+
+    lab.call(current.agent, current.broker, "/write", request(current))
+    assert read_target(lab, target)["effective"] == "observing"
+    staged = request(current)
+    lab.stop("home")
+    with (closing(sqlite3.connect(snapshot)) as backup,
+          closing(sqlite3.connect(lab.database("home"))) as restored):
+        backup.backup(restored)
+    lab.start("home")
+    with pytest.raises((Denied, Unavailable)):
+        lab.call(current.agent, current.broker, "/write", staged)
+    observed = read_target(lab, target)
+    stale = readback(lab)
+    record_property("stale_home_restore", json.dumps({"durable": stale, "target": observed}, sort_keys=True))
+    assert stale["home"]["generation"] == prior.generation
+    assert stale["anchor"]["generation"] == current.generation > prior.generation
+    assert observed["effective"] == observed["marker"] == "quarantined"
+    assert stale["targets"][target]["receipts"] == [(current.generation, "observing")]
+
+    new = claim("agent-a", "broker-a", available_generation())
+    assert new.generation > current.generation
+    assert read_target(lab, target)["effective"] == "quarantined"
+    lab.call(new.agent, new.broker, "/write", request(new))
+    final = readback(lab)
+    observed = read_target(lab, target)
+    record_property("restored_home_reconciled", json.dumps({"durable": final, "target": observed}, sort_keys=True))
+    assert final["anchor"]["generation"] == final["home"]["generation"] == new.generation
+    assert observed["effective"] == "observing"
+    assert final["targets"][target]["receipts"] == [(current.generation, "observing"), (new.generation, "observing")]

@@ -17,10 +17,12 @@ The integration lead approved Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f
 | Pre-intake and post-audit crash, A `4c6f674c1915ee255222f02c38c2e2c010421b1f` and combined `4918dadacc8dedd96d1c4b506e5f746040a01941` | The pre-intake agent first had a durable denial visible at 30.434 and 30.479 s from HTTP submission. The post-audit agent already had a denial at 50.269 and 47.655 ms, and its broker ACK was first observed at 30.434 and 30.477 s. Each recovered agent retained one durable decision and advanced its broker ACK floor. Both runs were dry-run transport. |
 | Combined agent-only broker partition | Withdrawal reached JetStream while the disconnected worker had no durable local denial or ACK advancement. After rejoin the independent observer read the denial at 1.964 s and the broker ACK at 1.968 s. Target state during the transport-only run is unobserved. |
 | One-witness admission at original C and combined source | The enrolled witness returned a valid, durably recorded receipt for a synthetic Evidence withdrawal. Scoped appraisal remained `reproduced` on both exact pins. After quorum receipt, a separate delayed-archive trial held before inclusion and again after restart. The one-witness trial appraises only and attempts zero target writes. |
+| B restore at combined source | Restoring only the older home snapshot while retaining a newer external anchor rejected the staged current-owner write. The observing marker latched to quarantine on the observer read. The old action receipt stayed intact. A higher reconciled generation with new exact approval was required for another effect. The test observes the latch at read time. |
+| A transport-to-proof contract `c1e5702202ad317396856ee4af89590e14a57a16` | The focused receipt contract test passed. It separated transport delivery from independent receipt and inclusion, and showed the existing reader holding the prior cut needs a separate discovery path for early receipt. That pin proposes a deny-only adapter, and its delta adds a contract test and documentation. No runtime adapter is exercised by that result. |
 
 The native writer constructs the T6 `EvidenceGate`, checks its journal and `NativeEvidenceStatus`, and signs local commands for the shared SQLite `OwnershipHome`. At the reviewed combined pin, Phase 4E-C `Gate` appraises an independently witnessed common cut in its own service lane, and Phase 4E-B owns a separate synthetic marker and receipt store. A common exact-plan binding across that cut, B owner and writer barrier, broker generation and ACK lane, and actual guarded mitigation transaction remains unimplemented. The tests preserve the distinct claims of each path.
 
-The initial inherited Docker rerun at the combined pin passed the T4 witnessed broker replacement and T3 two-JetStream lease cases. The Phase 4A benchmark aborted before setup in a Git-less export because it records the source commit. The durable and transport probes reported above ran from pinned exports without this dependency. A separate local Git clone supports the Phase 4A regression and retains the first diagnostic.
+All three inherited Docker regressions passed on the exact combined source in a detached local Git clone in 49.96 seconds. The Phase 4A workload independently confirmed 169/169 expected broker ACKs. The initial archive-based attempt passed the T4 witnessed broker replacement and T3 two-JetStream lease cases. Its Phase 4A benchmark stopped before lab setup because it records the Git source commit. That diagnostic stays in the retained results. [Final JUnit](../benchmarks/phase4e-adversarial/combined-inherited-docker.xml) · [Raw Phase 4A workload](../benchmarks/phase4e-adversarial/combined-inherited-phase4a.json.gz)
 
 ## Findings register
 
@@ -54,7 +56,7 @@ The table records the scope of independently observed behavior at the named pins
 | I02 | Partial | Two mutually authenticated B broker adapters yielded one active generation. Real JetStream generation-bound ACK and cursor fencing are outside that adapter. |
 | I03 | Partial | The native writer denied the old generation after a transfer. The B writer barrier held during one writer outage, and stale signed intent added zero receipts. Real JetStream generation-bound ACK remains open. |
 | I04 | Partial | A modeled signed-assignment expiry stopped peer writes. HTTP and audit showed restrictive recovery and fences advanced on restart. Transport credential expiry remains open. |
-| I05 | Blocked | No independently anchored ownership restore or multi-writer barrier run. |
+| I05 | Partial | At the B local marker boundary, an older home restore with a current separate anchor denied the staged write, preserved the sole prior receipt and durably quarantined the marker on observation. New exact approval followed a higher generation and a fresh barrier. Broker cursor/ACK and joint writer restore remain open. |
 | E01 | Partial | A legitimate verifier outside the enrolled trust set added zero corroborating records. The known signed head was unchanged. A trusted-identity forgery campaign is outside this run. |
 | E02 | Blocked | Contradictory independently produced observations at the integrated candidate's writer remain untested. |
 | E03 | Partial | A duly signed verifier-key withdrawal advanced both witness archives and the reader's durable floor. Exact appraisal remained denied after reopening the reader. End-to-end write binding under this specific withdrawal remains open. |
@@ -135,5 +137,23 @@ export PYTHONPATH="$candidate/src:$candidate/tests/phase4d:$candidate/scripts:$c
 ```
 
 Expect the strict single-witness assertion to fail at the named pin, with the quorum and native T6 guard cases passing. For the older shared-writer control, export `16e71ed1ccaf96209054fa3e5ddd03dd6e24b273` and run only `test_defensive_validation.py` with priority off. For the earlier A pins, run the priority cap test on `6e8bedccb184f3b4268670c93bc22310234c4f5e` and the crash test on `4c6f674c1915ee255222f02c38c2e2c010421b1f`. For B, export `cb7986d1abb7491e73f5ce53bb01778ba7159d94` and copy and run only the identity observer. For C, export `f1692340b03521d44877b6ba4a2799db66a4576d` and run only the Trust observer. Artifacts retain the exact cases and the earlier diagnostic failures.
+
+Run the restored-home observer on the combined pin with the durable B quarantine latch. Run only the barrier observer on the earlier B pin. To reproduce the receipt contract check, export `c1e5702202ad317396856ee4af89590e14a57a16` and select `tests/phase4d/test_journal.py::test_native_receipt_binds_reencoded_transport_envelope_before_inclusion` with the source on `PYTHONPATH`.
+
+The inherited Docker suite requires a real Git checkout because the Phase 4A workload records the exact source identity.
+
+```sh
+git clone --local --shared --no-checkout "$repo" "$scratch/live-source"
+git -C "$scratch/live-source" checkout --detach "$AEGIS_4E_CANDIDATE"
+(
+  cd "$scratch/live-source"
+  export PYTHONPATH="$PWD/src" AEGIS_PHASE4A_LIVE=1 AEGIS_PHASE4D_LIVE=1 AEGIS_PHASE4D_T3_LIVE=1
+  AEGIS_PHASE4E_PRIORITY=0 "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+    tests/test_phase4a_distributed.py::test_live_distinct_processes_and_fault_recovery \
+    tests/phase4d/test_journal.py::test_live_broker_loss_and_replacement_reconcile_with_independent_archive \
+    tests/phase4d/test_ownership.py::test_live_independent_jetstream_leases_cannot_override_home \
+    --basetemp="$scratch/inherited-state" --junitxml="$scratch/inherited-docker.xml" --tb=short
+)
+```
 
 Keep enforcement limited to disposable labs and shadow work. Distributed acceptance requires an actual A/B/C writer binding, independent proof, broker generation and ACK fencing, authenticated independent failure domains, and a fulfilled all-agent withdrawal reporting bound.
