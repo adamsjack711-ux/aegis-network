@@ -26,6 +26,12 @@ The cohort experiment used separate trust keys and ledgers. Multi-host status co
 
 See [the Phase 4B handoff](docs/phase4b-evidence-portability.md) for the scope matrix, reproduction commands, raw measurements, and limitations.
 
+## Phase 4D T5 independent Evidence status
+
+The 2026-11-19 T5 handoff is on `feat/phase4d-t5-evidence` in `.worktrees/phase4d-t5-evidence`, based on the Phase 4C review at `52a4dc4`. The prototype uses two independent verifier organizations and two separately enrolled status operators. The relying party verifies complete status, retains continuity and denial history, and supplies a stable Evidence binding for explicit local policy review. The isolated lab benchmark measured p95 appraisal of 3.21 ms at three records and 70.84 ms at 256 records. [Protocol and T6 instructions](docs/phase4d-t5-evidence-status.md) · [Raw measurements](benchmarks/phase4d-t5-evidence.json)
+
+The full Phase 4C-based suite passed 157 tests and skipped the Phase 4B-only case, with the inherited Starlette/httpx deprecation warning. The combined Phase 4B and T5 focused suites passed all 54 tests. The 4C-04 fix is demonstrated at the T5 API boundary. T6 owns wiring the gate into the disposable writer and validating independently administered services, authenticated intake and recovery before promoting a release candidate.
+
 ## Phase 4C independent validation
 
 The 2026-11-19 review is on `test/phase4c-adversarial` in `.worktrees/phase4c-adversarial`, based on `7744ebd`. All 137 tests passed, including eight new defensive checks of the integrated path. Independent HTTP and SQLite readback verified that a signed withdrawal after the canary prevented peer writes and that fixture lease expiry closed all nine routes before durable recovery. Mesh replay was in-process, and fixture HTTP was live on loopback.
