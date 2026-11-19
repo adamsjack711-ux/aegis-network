@@ -1,5 +1,11 @@
 # Aegis Network status
 
+## Phase 4 architecture handoff
+
+All three Phase 4 development worktrees were verified clean at Phase 3C `7744ebd` during intake. The full baseline suite passed 129 tests. The isolated control rerun confirmed all 60 eligible lab rollouts and reproduced the reuse-heavy 100-deployment CPU result at 11.1647×. Phase 4 candidates are pending. The contract freeze and 4A → 4B → 4C sequence are recorded in the planning worktree.
+
+An independent baseline check reproduced a critical protection release blocker. The current journal can omit a valid withdrawal and still pass the freshness prerequisite. No mitigation writes were attempted in the check. Phase 4 release readiness remains pending. [Integration plan](docs/phase4-integration-plan.md) · [Contract freeze](docs/phase4-contract-review.md) · [Risk register](docs/phase4-risk-register.md)
+
 ## Phase 3C local-lab integration
 
 Verified implementation **`1cb5cd60467ad6885f8aa1350197f576c06ae0ed`** on `integration/phase3c` in `.worktrees/phase3c`. The branch uses Phase 2 RC `ffe5c32` and the pinned Phase 3A, 3B and 3D commits. Master and the source feature branches were preserved. The Phase 2 runtime remains dry-run. Phase 3C applies only an exactly approved route restriction in a disposable synthetic fixture.
