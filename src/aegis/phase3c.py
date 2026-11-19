@@ -1,7 +1,7 @@
 """Evidence-bound, manually approved defense for disposable local HTTP fixtures."""
 
 import asyncio
-from contextlib import asynccontextmanager, contextmanager, suppress
+from contextlib import asynccontextmanager, contextmanager, nullcontext, suppress
 from dataclasses import replace
 import json
 import logging
@@ -73,10 +73,15 @@ def publishable_finding(finding, key, researcher, collector):
 class MeshIntake:
     """Phase 2 durable delivery plus current local appraisal of journal state."""
 
-    def __init__(self, agent, js, client):
+    def __init__(self, agent, js, client, *, journal=None):
         self.agent = agent
         self.js = js
         self.client = client
+        if journal is not None and journal.policy.cohort != COHORT:
+            raise Denied("witnessed Mesh history is outside the enrolled cohort")
+        self.journal = journal
+        self.journal_binding = None
+        self.journal_deadline = None
         self.lease = None
         self.subscription = None
 
@@ -135,18 +140,28 @@ class MeshIntake:
                     return envelope, *observation
 
     async def fresh(self, envelope):
-        started = time.monotonic_ns()
+        deadline = time.monotonic_ns() + int(STATUS_SECONDS * 1e9)
         async with asyncio.timeout(STATUS_SECONDS):
             await self.lease.ensure()
-            await reconcile(self.agent, self.agent.audit, self.client, self.lease)
+            if self.journal is None:
+                await reconcile(self.agent, self.agent.audit, self.client, self.lease)
+            else:
+                binding, fresh_until = await self.journal.refresh()
+                if not self.journal.current(envelope, binding):
+                    raise Denied("finding is absent from current witnessed history or withdrawn")
+                self.journal_binding = binding
+                self.journal_deadline = int(fresh_until * 1e9)
+                deadline = min(deadline, int(fresh_until * 1e9))
+                await self.lease.ensure()
         prior = self.agent.audit.get(str(envelope.finding.artifact_id))
         exact_digest = digest(canonical_bytes(envelope.finding))
-        if prior is None or prior.digest != exact_digest:
+        if ((prior is None and self.journal is None)
+                or (prior is not None and prior.digest != exact_digest)):
             raise Denied("the exact delivered finding has no local audit")
         decision = self.agent.evaluate(envelope)
         if decision.outcome != "allow_dry_run" or decision.digest != exact_digest:
             raise Denied(f"Rapid denied the finding: {decision.reason_code}")
-        return started + int(STATUS_SECONDS * 1e9)
+        return deadline
 
 
 class EvidenceGate:
@@ -156,6 +171,10 @@ class EvidenceGate:
         self.envelope = envelope
         self.bundle = bundle
         self.receiver = receiver
+        self.journal = getattr(receiver, "journal", None)
+        self._current_checkpoint = None
+        self._plan_checkpoint = None
+        self._journal_deadline = None
         self.collector = collector
         self.evidence = evidence
         self._lock = RLock()
@@ -169,14 +188,13 @@ class EvidenceGate:
         if local.outcome != "reproduced":
             raise Denied(f"local evidence appraisal failed: {local.reason}")
         self.attestations = attestations_digest(local)
-        self.binding_context = {
+        self._binding_context = {
             "agent_id": receiver.agent.audit.agent_id,
             "finding_id": str(envelope.finding.artifact_id),
             "finding_sha256": digest(canonical_bytes(envelope.finding)),
             "bundle_sha256": bundle.sha256,
             "attestation_sha256": self.attestations,
         }
-        self.binding = digest(json.dumps(self.binding_context, sort_keys=True).encode())
         publisher = receiver.agent.trust.grants[(envelope.finding.publisher_id, envelope.key_id)]
         expiry = min(envelope.finding.expires_at.timestamp(), publisher.expires_at.timestamp(),
                      *(decode(SignedAttestation, wire).body.expires_at for wire in local.attestations))
@@ -184,37 +202,69 @@ class EvidenceGate:
             expiry = min(expiry, publisher.revoked_at.timestamp())
         self.valid_until_ns = time.monotonic_ns() + int((expiry - time.time()) * 1e9)
 
+    @property
+    def binding_context(self):
+        if self._plan_checkpoint is None:
+            return self._binding_context.copy()
+        return {**self._binding_context, "mesh_checkpoint_sha256": self._plan_checkpoint}
+
+    @property
+    def binding(self):
+        return digest(json.dumps(self.binding_context, sort_keys=True).encode())
+
     def prepare(self, controller, lease_ms):
-        return controller.prepare(lease_ms, binding=self.binding, valid_until_ns=self.valid_until_ns)
+        with self._lock:
+            if self.journal is not None:
+                if (self._current_checkpoint is None or self._journal_deadline is None
+                        or not self.journal.current(self.envelope, self._current_checkpoint)):
+                    raise Denied("witnessed status unavailable for plan review")
+                context = {**self._binding_context, "mesh_checkpoint_sha256": self._current_checkpoint}
+                binding = digest(json.dumps(context, sort_keys=True).encode())
+                plan = controller.prepare(lease_ms, binding=binding,
+                                          valid_until_ns=min(self.valid_until_ns, self._journal_deadline))
+                self._plan_checkpoint = self._current_checkpoint
+                return plan
+            return controller.prepare(lease_ms, binding=self.binding, valid_until_ns=self.valid_until_ns)
 
     async def refresh(self):
         try:
             deadline = await self.receiver.fresh(self.envelope)
-        except Exception:
+        except (Exception, asyncio.CancelledError):
             with self._lock:
                 self._fresh_until = 0
             raise
         with self._lock:
+            if self.journal is not None:
+                self._current_checkpoint = self.receiver.journal_binding
+                self._journal_deadline = self.receiver.journal_deadline
             self._fresh_until = deadline
 
     def status_current(self):
         # Called by the proxy while it holds a target transaction. Do not
         # acquire a lock here because guarded writers take the opposite order.
-        return time.monotonic_ns() < min(self._fresh_until, self.valid_until_ns)
+        return (time.monotonic_ns() < min(self._fresh_until, self.valid_until_ns)
+                and (self.journal is None or (self._plan_checkpoint == self._current_checkpoint
+                     and self.journal.current(self.envelope, self._plan_checkpoint))))
 
     @contextmanager
     def authorize(self, plan):
-        with self._lock, self.collector.current_assessment(self.bundle, cohort=COHORT) as current:
-            with self.evidence.current_assessment(self.bundle, cohort=COHORT) as local:
+        with self._lock:
+            guard = (self.journal.authorize(self.envelope, self._plan_checkpoint)
+                     if self.journal is not None else nullcontext())
+            with (guard, self.collector.current_assessment(self.bundle, cohort=COHORT) as current,
+                  self.evidence.current_assessment(self.bundle, cohort=COHORT) as local):
                 if (current.outcome != "reproduced" or local.outcome != "reproduced"
                         or attestations_digest(current) != self.attestations
                         or attestations_digest(local) != self.attestations):
                     self._fresh_until = 0
                     raise Denied(f"evidence or Mesh status is not current ({current.reason}, {local.reason})")
-                if (plan.evidence_binding != self.binding or plan.expires_ns > self.valid_until_ns
+                deadline = self.valid_until_ns
+                if self._journal_deadline is not None:
+                    deadline = min(deadline, self._journal_deadline)
+                if (plan.evidence_binding != self.binding or plan.expires_ns > deadline
                         or not self.status_current()):
                     raise Denied("exact plan binding or Mesh status is not current")
-                yield self.binding_context.copy()
+                yield self.binding_context
 
 
 class VerifiedLab:
