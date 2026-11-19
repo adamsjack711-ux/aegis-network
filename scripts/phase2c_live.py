@@ -23,6 +23,7 @@ import nats
 import psycopg
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from nats.js.api import AckPolicy, ConsumerConfig, DeliverPolicy
+from nats.js.errors import BadRequestError
 
 from aegis.api import (
     DEAD_LETTER_STREAM, DEAD_LETTER_SUBJECT, FINDING_RETENTION_SECONDS,
@@ -201,10 +202,17 @@ class Lab:
         dead_stream = await js.stream_info(DEAD_LETTER_STREAM)
         assert stream.config.max_age == FINDING_RETENTION_SECONDS
         assert stream.config.max_bytes == STREAM_MAX_BYTES
+        assert stream.config.max_msg_size == 256 * 1024
         assert dead_stream.config.max_age == 7 * FINDING_RETENTION_SECONDS
         assert dead_stream.config.max_bytes == STREAM_MAX_BYTES
         assert str(stream.config.discard).lower().endswith("new")
         assert str(dead_stream.config.discard).lower().endswith("new")
+        try:
+            await js.publish(SUBJECT, b"x" * (stream.config.max_msg_size + 1))
+        except BadRequestError:
+            pass
+        else:
+            raise AssertionError("broker accepted an oversized message")
 
         # The broker lease rejects a second live process using the same UUID.
         active_id = self.audit("agent")["identity"]
@@ -281,13 +289,34 @@ class Lab:
                 "purged_finding_and_revocation_recovered": True,
                 "dead_letter_records": len(records),
                 "stream_max_age_s": stream.config.max_age,
-                "stream_max_bytes": stream.config.max_bytes}
+                "stream_max_bytes": stream.config.max_bytes,
+                "oversized_broker_payload_rejected": True}
 
-    async def extended_faults(self) -> dict:
+    async def extended_faults(self, js) -> dict:
         services = ("agent", "agent_b")
 
         def count(service, ids):
             return sum(row[0] in ids for row in self.audit(service)["decisions"])
+
+        slow_ids = set()
+        slow_agent_id = self.audit("agent_b")["identity"]
+        self.compose("stop", "agent_b")
+        try:
+            for _ in range(10):
+                envelope = finding(self.key, self.next_sequence())
+                assert (await self.post("/v1/findings", envelope))["accepted"]
+                slow_ids.add(str(envelope.finding.artifact_id))
+            await self.wait(lambda: all(self.outbox(eid) is True for eid in slow_ids),
+                            "slow consumer broker backlog")
+            consumer = await js.consumer_info(STREAM, durable_name(slow_agent_id))
+            pending = consumer.num_pending
+            assert pending >= len(slow_ids)
+        finally:
+            begin = time.monotonic()
+            self.compose("start", "agent_b")
+        await self.wait(lambda: all(count(s, slow_ids) == 10 for s in services),
+                        "slow consumer catch-up")
+        slow_seconds = round(time.monotonic() - begin, 3)
 
         pending_ids = set()
         self.compose("stop", "nats")
@@ -336,6 +365,8 @@ class Lab:
         assert count("agent_b", pending_ids) == 40
         assert count("agent_b", partition_ids) == 1
         return {
+            "slow_consumer": {"pending": pending, "committed_decisions": 20,
+                              "recovery_s": slow_seconds},
             "coordinator_sigkill_broker_backlog": {
                 "pending_before": pending_before, "pending_after": 0,
                 "committed_decisions": 80, "recovery_s": backlog_seconds,
@@ -462,7 +493,7 @@ async def run(args):
             hardening = await lab.hardening(js)
             print(json.dumps({"hardening": hardening}, sort_keys=True), flush=True)
             if args.extended_faults:
-                print(json.dumps({"extended_faults": await lab.extended_faults()}, sort_keys=True),
+                print(json.dumps({"extended_faults": await lab.extended_faults(js)}, sort_keys=True),
                       flush=True)
         if args.integration_only:
             return
