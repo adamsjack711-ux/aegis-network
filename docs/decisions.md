@@ -39,3 +39,11 @@ Accepted for Phase 4. Establish and test the distributed transport before layeri
 ## ADR-010 — Compare only equivalent workloads and safety gates
 
 Accepted for Phase 4. Keep the Phase 3C workload as the reference. Pair each candidate with a fresh control and retain the original Phase 3 results as historical evidence. Freeze eligibility, observer criteria, repeated trials, and negative outcomes before measuring. A successful decision, write, confirmed protection, and safe hold are different outcomes with different denominators. Report attainable scope and uncertainty with each result. [Benchmark protocol](phase4-integration-plan.md#benchmark-protocol)
+
+## ADR-011 — Keep Phase 4D distributed writes disabled
+
+Accepted for the Phase 4D candidate. Mesh delivery and coordinator recovery carry original signed inputs. The legacy lab remains isolated. The combined fixture explicitly requires a witnessed native cut, independent Evidence status and exact audited Rapid appraisal before local approval against the enrolled ownership generation. The original prototype's shadow seam correlates exact native digests and drops pending authority. A distributed writer needs independently controlled services, authenticated identities and validated target fences before promotion. [Architecture](phase4d-architecture.md) · [Release readiness](phase4d-release-readiness.md)
+
+## ADR-012 — Establish one bounded local write authority
+
+Implemented for the Phase 4D disposable fixture. Bind every exact local approval to the appraised native subject, complete fresh security cut, independent Evidence status, durable holder generation, targets and fences. At the target commit, use the earliest relevant expiry and compare the local generation. Hold during incomplete, conflicting or stale observations. A detected interruption invalidates the current plan for the remaining rollout. Recovery preserves the restrictive state and requires independent readback. The transport and storage deployment assumptions remain open. [Architecture](phase4d-architecture.md) · [Review](phase4d-security-review.md)

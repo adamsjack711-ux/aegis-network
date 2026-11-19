@@ -1,0 +1,373 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "clock": "one host monotonic wall intervals plus process CPU, from plan request to probe confirmation",
+  "confirmed_per_arm": 12,
+  "process_peak_rss_bytes": 100663296,
+  "percentiles_ms": {
+    "legacy": {
+      "ready_to_confirmation_ns": {
+        "p50": 133.178,
+        "p95": 137.772,
+        "p99": 139.342
+      },
+      "prepare_ns": {
+        "p50": 2.201,
+        "p95": 3.548,
+        "p99": 4.352
+      },
+      "cpu_ns": {
+        "p50": 67.848,
+        "p95": 71.196,
+        "p99": 71.238
+      },
+      "preflight": {
+        "p50": 45.733,
+        "p95": 47.708,
+        "p99": 47.775
+      },
+      "canary": {
+        "p50": 35.999,
+        "p95": 37.31,
+        "p99": 37.648
+      },
+      "expansion": {
+        "p50": 7.184,
+        "p95": 7.687,
+        "p99": 7.715
+      },
+      "effectiveness": {
+        "p50": 41.692,
+        "p95": 44.767,
+        "p99": 45.699
+      }
+    },
+    "trust": {
+      "ready_to_confirmation_ns": {
+        "p50": 180.829,
+        "p95": 185.949,
+        "p99": 186.704
+      },
+      "prepare_ns": {
+        "p50": 12.63,
+        "p95": 14.112,
+        "p99": 14.226
+      },
+      "cpu_ns": {
+        "p50": 118.316,
+        "p95": 122.174,
+        "p99": 122.613
+      },
+      "preflight": {
+        "p50": 50.792,
+        "p95": 53.606,
+        "p99": 54.346
+      },
+      "canary": {
+        "p50": 48.242,
+        "p95": 50.398,
+        "p99": 50.912
+      },
+      "expansion": {
+        "p50": 18.882,
+        "p95": 20.889,
+        "p99": 21.815
+      },
+      "effectiveness": {
+        "p50": 49.9,
+        "p95": 53.876,
+        "p99": 54.329
+      }
+    }
+  },
+  "pairs_ns": [
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 139734125,
+        "prepare_ns": 2659875,
+        "cpu_ns": 71153000,
+        "preflight": 45968125,
+        "canary": 37732750,
+        "expansion": 7362083,
+        "effectiveness": 45932458
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 181198542,
+        "prepare_ns": 13995000,
+        "cpu_ns": 118441000,
+        "preflight": 50433958,
+        "canary": 48711417,
+        "expansion": 18959792,
+        "effectiveness": 49020500
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 185152833,
+        "prepare_ns": 12253250,
+        "cpu_ns": 119027000,
+        "preflight": 52044625,
+        "canary": 49871000,
+        "expansion": 19773125,
+        "effectiveness": 51131959
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 128968500,
+        "prepare_ns": 1928083,
+        "cpu_ns": 64488000,
+        "preflight": 45018542,
+        "canary": 34470583,
+        "expansion": 6487333,
+        "effectiveness": 40995709
+      }
+    },
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 131044834,
+        "prepare_ns": 2203834,
+        "cpu_ns": 68330000,
+        "preflight": 44862959,
+        "canary": 35379750,
+        "expansion": 6620875,
+        "effectiveness": 41906833
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 180459542,
+        "prepare_ns": 12469417,
+        "cpu_ns": 116584000,
+        "preflight": 52453583,
+        "canary": 47128709,
+        "expansion": 19941041,
+        "effectiveness": 48394459
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 181781916,
+        "prepare_ns": 12789708,
+        "cpu_ns": 118192000,
+        "preflight": 52378917,
+        "canary": 47299708,
+        "expansion": 18591125,
+        "effectiveness": 50647000
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 133079459,
+        "prepare_ns": 2084334,
+        "cpu_ns": 67542000,
+        "preflight": 47639167,
+        "canary": 35801042,
+        "expansion": 7334583,
+        "effectiveness": 40155625
+      }
+    },
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 135094958,
+        "prepare_ns": 2109292,
+        "cpu_ns": 66523000,
+        "preflight": 47791875,
+        "canary": 36422542,
+        "expansion": 6777375,
+        "effectiveness": 41928791
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 185176500,
+        "prepare_ns": 14254458,
+        "cpu_ns": 122723000,
+        "preflight": 50250625,
+        "canary": 51041208,
+        "expansion": 19705750,
+        "effectiveness": 49840875
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 178329041,
+        "prepare_ns": 12330083,
+        "cpu_ns": 114047000,
+        "preflight": 47291000,
+        "canary": 47009958,
+        "expansion": 18212125,
+        "effectiveness": 53412709
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 133343833,
+        "prepare_ns": 2726583,
+        "cpu_ns": 69284000,
+        "preflight": 47107000,
+        "canary": 34605208,
+        "expansion": 7148375,
+        "effectiveness": 41678125
+      }
+    },
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 129613208,
+        "prepare_ns": 2516500,
+        "cpu_ns": 67092000,
+        "preflight": 42878208,
+        "canary": 36196584,
+        "expansion": 7218333,
+        "effectiveness": 40732292
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 179802458,
+        "prepare_ns": 12378833,
+        "cpu_ns": 118476000,
+        "preflight": 50238250,
+        "canary": 48940625,
+        "expansion": 18205500,
+        "effectiveness": 49959666
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 186892334,
+        "prepare_ns": 13317875,
+        "cpu_ns": 121724000,
+        "preflight": 54530458,
+        "canary": 47455959,
+        "expansion": 22046666,
+        "effectiveness": 49463042
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 132305750,
+        "prepare_ns": 4553000,
+        "cpu_ns": 68154000,
+        "preflight": 42863375,
+        "canary": 36682416,
+        "expansion": 6955667,
+        "effectiveness": 41176125
+      }
+    },
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 133276250,
+        "prepare_ns": 1967250,
+        "cpu_ns": 71248000,
+        "preflight": 45497833,
+        "canary": 34405042,
+        "expansion": 7529125,
+        "effectiveness": 43813791
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 178377542,
+        "prepare_ns": 12066667,
+        "cpu_ns": 113837000,
+        "preflight": 52850292,
+        "canary": 45416625,
+        "expansion": 17944166,
+        "effectiveness": 50028542
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 175818500,
+        "prepare_ns": 12344000,
+        "cpu_ns": 116397000,
+        "preflight": 49329750,
+        "canary": 47772250,
+        "expansion": 18114459,
+        "effectiveness": 48183125
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 136167083,
+        "prepare_ns": 2198500,
+        "cpu_ns": 67255000,
+        "preflight": 46617042,
+        "canary": 36522166,
+        "expansion": 7150625,
+        "effectiveness": 43599792
+      }
+    },
+    {
+      "order": [
+        "legacy",
+        "trust"
+      ],
+      "legacy": {
+        "ready_to_confirmation_ns": 134707000,
+        "prepare_ns": 2084791,
+        "cpu_ns": 66783000,
+        "preflight": 46271709,
+        "canary": 36964125,
+        "expansion": 7722416,
+        "effectiveness": 41576500
+      },
+      "trust": {
+        "ready_to_confirmation_ns": 184822375,
+        "prepare_ns": 12897584,
+        "cpu_ns": 120168000,
+        "preflight": 49623792,
+        "canary": 48796208,
+        "expansion": 18985750,
+        "effectiveness": 54442625
+      }
+    },
+    {
+      "order": [
+        "trust",
+        "legacy"
+      ],
+      "trust": {
+        "ready_to_confirmation_ns": 179974375,
+        "prepare_ns": 12862083,
+        "cpu_ns": 116587000,
+        "preflight": 51150750,
+        "canary": 49378375,
+        "expansion": 18804583,
+        "effectiveness": 47701292
+      },
+      "legacy": {
+        "ready_to_confirmation_ns": 131706584,
+        "prepare_ns": 2301667,
+        "cpu_ns": 71084000,
+        "preflight": 44238917,
+        "canary": 35734042,
+        "expansion": 7657416,
+        "effectiveness": 41706167
+      }
+    }
+  ]
+}

@@ -1,10 +1,16 @@
 # Aegis Network status
 
+## Phase 4D isolated integration candidate
+
+The native Trust profile is integrated in `.worktrees/phase4d` on `integration/phase4d`. It layers native witnessed Mesh coverage, independent Evidence status and durable ownership fencing onto explicit approvals for the disposable three-replica fixture. At tested pin `f26f69d`, the complete suite passed **272 tests** with all local live modes enabled. All three Phase 4C High findings have tested fixture dispositions. Distributed enforcement remains blocked on independently administered endpoints, authenticated broker identity and session fencing, rollback-resistant trust anchors and barriers across separate writers. [Architecture](docs/phase4d-architecture.md) · [Security dispositions](docs/phase4d-security-review.md) · [Release readiness](docs/phase4d-release-readiness.md)
+
+The 10-process legacy transport comparison delivered **810/810** logical decisions per arm. The candidate's fault run recovered **310/310** logical decisions, with one withdrawal crossing the five-second reporting budget after SIGKILL. In 12 paired preprovisioned fixture trials per arm, p95 plan-request-to-confirmation was **185.949 ms** with Trust and **137.772 ms** for legacy. The exact three-key 100-deployment workload saved **10.9334×** verification CPU. The all-distinct workload saved **1.0033×**. [Methods and raw results](docs/phase4d-benchmarks.md) · [Commit intake and conflicts](docs/phase4d-trust-integration.md)
+
 ## Phase 4 architecture handoff
 
-All three Phase 4 development worktrees were verified clean at Phase 3C `7744ebd` during intake. The full baseline suite passed 129 tests. The isolated control rerun confirmed all 60 eligible lab rollouts and reproduced the reuse-heavy 100-deployment CPU result at 11.1647×. Phase 4 candidates are pending. The contract freeze and 4A → 4B → 4C sequence are recorded in the planning worktree.
+All three Phase 4 development worktrees were verified clean at Phase 3C `7744ebd` during intake. The full baseline suite passed 129 tests. The isolated control rerun confirmed all 60 eligible lab rollouts and reproduced the reuse-heavy 100-deployment CPU result at 11.1647×. The contract freeze and 4A → 4B → 4C sequence were recorded in the planning worktree.
 
-An independent baseline check reproduced a critical protection release blocker. The current journal can omit a valid withdrawal and still pass the freshness prerequisite. No mitigation writes were attempted in the check. Phase 4 release readiness remains pending. [Integration plan](docs/phase4-integration-plan.md) · [Contract freeze](docs/phase4-contract-review.md) · [Risk register](docs/phase4-risk-register.md)
+An independent baseline check reproduced a critical protection release blocker. The coordinator-only journal could omit a valid withdrawal and still pass the freshness prerequisite. The check used no mitigation writes. [Integration plan](docs/phase4-integration-plan.md) · [Contract freeze](docs/phase4-contract-review.md) · [Risk register](docs/phase4-risk-register.md)
 
 ## Phase 4D Journal Integrity
 
