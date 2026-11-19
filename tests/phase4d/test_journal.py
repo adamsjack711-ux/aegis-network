@@ -20,7 +20,7 @@ from fastapi import FastAPI, HTTPException, Request
 
 from aegis.api import ensure_streams
 from aegis.artifact import Evidence as Reference
-from aegis.artifact import Finding, Revocation, Software, sign, sign_revocation
+from aegis.artifact import Finding, Revocation, Software, parse_event, sign, sign_revocation
 from aegis.core import InventoryItem, LocalAgent, LocalPolicy
 from aegis.evidence import Evidence
 from aegis.evidence.synthetic import create_lab
@@ -215,6 +215,54 @@ def test_receipted_withdrawal_cannot_be_omitted_even_with_a_byzantine_vote(netwo
         run(agent.refresh())
     monitor = Monitor(n.policy, n.directory / "monitor.db")
     assert monitor.merge_status(withdrawal.receipt, n.time.utc, None, None) == "merge_proof_unavailable"
+
+
+def test_native_receipt_binds_reencoded_transport_envelope_before_inclusion(network):
+    n = network
+    finding = sign(n.finding(), n.author)
+    n.archive.append(n.receive(finding))
+    prior_cut = n.publish(n.seal())
+    reader = n.client()
+    binding, _ = run(reader.refresh())
+    assert reader.current(finding, binding)
+
+    withdrawal = n.withdrawal(finding)
+    leaf = n.receive(withdrawal, (0, 1, 2))
+    # The queue may serialize the native model differently from the witnesses.
+    repacked = parse_event(withdrawal.model_dump_json(indent=2).encode())
+    offered = Leaf(receipt=leaf.receipt, envelope=repacked)
+    n.policy.check_leaf(offered, leaf.receipt.admission.epoch)
+    assert finding_target(finding) == (
+        repacked.revocation.target_publisher_id, str(repacked.revocation.target_artifact_id),
+        repacked.revocation.target_sha256,
+    )
+
+    # Even an independently valid, in-scope withdrawal with the same event UUID
+    # cannot borrow the receipt when the target changes.
+    different = sign(n.finding(sequence=2), n.author)
+    alternate = sign_revocation(withdrawal.revocation.model_copy(update={
+        "target_artifact_id": different.finding.artifact_id,
+        "target_sha256": finding_target(different)[2],
+    }), n.reviewer, "default")
+    n.policy.validate_event(alternate, n.now())
+    with pytest.raises(JournalBlocked, match="does not bind"):
+        n.policy.check_leaf(Leaf(receipt=leaf.receipt, envelope=alternate), leaf.receipt.admission.epoch)
+    with pytest.raises(JournalBlocked, match="distinct canonical quorum"):
+        partial_receipt = leaf.receipt.model_copy(update={"votes": leaf.receipt.votes[:2]})
+        n.policy.check_leaf(Leaf(receipt=partial_receipt, envelope=repacked), leaf.receipt.admission.epoch)
+
+    monitor = Monitor(n.policy, n.directory / "transport-receipt.db")
+    assert monitor.merge_status(leaf.receipt, n.time.utc, prior_cut, None) == "pending"
+    assert reader.current(finding, binding)  # The native reader has only seen the preceding cut.
+
+    index = n.archive.append(offered)
+    assert n.archive.append(leaf) == index
+    included = n.publish(n.seal())
+    entry, = n.archive.page(included.head, index, 1)
+    assert monitor.merge_status(leaf.receipt, n.time.utc, included, entry) == "included"
+    binding, _ = run(reader.refresh())
+    assert not reader.current(finding, binding)
+    assert reader.replay.denials == {finding_target(finding)}
 
 
 def test_witnesses_verify_coverage_conflicts_and_monitor_retains_signed_evidence(network):
