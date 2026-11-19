@@ -1,6 +1,6 @@
 # Aegis Network
 
-Lab-only proof of concept for independently verified, signed defensive findings and local dry-run decisions. The current slice has no enforcement path and makes no claims about response latency or compute savings.
+Lab-only proof of concept for independently verified, signed defensive findings and local dry-run decisions. The separate Phase 3C fixture can apply an exactly approved route restriction to disposable synthetic replicas.
 
 ## Current path
 
@@ -13,3 +13,5 @@ Read [architecture.md](architecture.md), [threat-model.md](threat-model.md), [do
 Requires Python 3.12+. Install with `python -m pip install -e '.[test]'`, then run `pytest -q`. To run the containers, generate a lab key and configs with `python scripts/setup_lab.py`, set `AEGIS_DB_PASSWORD` in `.env`, and run `docker compose up --build`. The coordinator is bound to `127.0.0.1:8000`; Postgres and NATS have no host ports. The setup script creates a fresh sample signed finding in `lab-config/finding.json` and reuses the lab key on subsequent runs. Submit it with `curl -H 'content-type: application/json' --data-binary @lab-config/finding.json http://127.0.0.1:8000/v1/findings`. Inspect both agents' JSON decisions in `docker compose logs agent agent_b`.
 
 The sample inventory represents a simulated lab package. The sample private key and configuration are ignored by Git. Use only the generated lab key for this demo. No application or host policy is changed.
+
+The [Phase 4A benchmark and handoff](docs/phase4a-distributed.md) covers independent agent processes, measured delivery and recovery, and optional private lab peers.
