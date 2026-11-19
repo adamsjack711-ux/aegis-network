@@ -1,11 +1,19 @@
-# Project status — 2026-11-19, Phase 2C hardening review
+# Aegis Network status
 
-Phase 2C hardening starts from `integration/phase2c` at `4973df1` and remains in the dedicated `.worktrees/phase2c` worktree. The original Mesh and Rapid branches and the canonical `master` checkout were not changed or merged. The slice is still entirely dry-run: no AI, mitigation executor, production target, or Daybreak integration exists.
+## Phase 3C local-lab integration
 
-The integration now requires canonical UUIDv4 agent IDs and a broker KV lease before consuming; binds signed revocations to a scoped target publisher; accepts unique late revocations while rejecting stale findings and sequence collisions; journals events with commit-ordered positions in PostgreSQL; reconciles missing events after NATS stream loss; and uses explicit file-backed retention plus a separate dead-letter stream. Local signature, grant, policy, exact inventory, audit-before-ack, and default-deny checks remain in force. Existing unbound v1.0 revocations are denied on new ingestion; already committed historical denials stay effective.
+Verified implementation **`1cb5cd60467ad6885f8aa1350197f576c06ae0ed`** on `integration/phase3c` in `.worktrees/phase3c`. The branch uses Phase 2 RC `ffe5c32` and the pinned Phase 3A, 3B and 3D commits. Master and the source feature branches were preserved. The Phase 2 runtime remains dry-run. Phase 3C applies only an exactly approved route restriction in a disposable synthetic fixture.
 
-Verification: **38 local tests passed**, with one third-party deprecation warning. A fresh loopback-only Compose project passed signed finding and revocation distribution, duplicate suppression, invalid signature rejection, broker outage/outbox recovery, agent restart including a separate SIGKILL/restart check, UUID lease collision, scope denial, stale-sequence denial, full findings-stream purge followed by finding **and revocation** recovery from the PostgreSQL journal, and two dead-letter deliveries. The final journal contained 68 ordered rows; after SIGKILL/restart, the agent retained recovery cursor 68, 65 finding decisions, and 3 revocation decisions. All outcomes remained dry-run.
+The integrated runner verifies digest-pinned Evidence with signed attestations, transports the signed finding over the existing Mesh outbox and JetStream, independently appraises the finding and evidence at each eligible Rapid deployment, then requires local exact-plan approval. A fenced canary gates expansion. Independent HTTP probes confirm the marker is suppressed and the benign routes are healthy. A durable audit binds the finding and attestations to the action and observation. Withdrawal, status or health loss, and expiry force a restrictive recovery.
 
-At 3, 10, and 100 simulated UUID agents, 20 signed findings per run produced 60/60, 200/200, and 2,000/2,000 committed decisions, all 100% coverage with zero duplicate logical rows or unexpected allows. End-to-end p50/p95/p99 were 157.838/186.367/190.581 ms, 179.456/337.528/343.681 ms, and 477.600/538.790/562.450 ms respectively. These are single-host delivery and audit measurements, not mitigation timings.
+**Verified 2026-11-19.** All 129 tests passed, including the Phase 3D suite and the stable invalid-signature reason and watermark test. Live scoped Mesh withdrawal and broker loss reached verified quarantine in 117.530 and 1,304.709 ms. The original Phase 2 live regression passed, including actual network partition, purge/replay, and crash recovery. Lab containers were stopped.
 
-Read [docs/phase2c-hardening.md](docs/phase2c-hardening.md) for exact environment, commands, contract changes, migration notes, and results. The [risk register](docs/phase2c-risk-register.md) names remaining identity, replay-completeness, key-history, journal-backup, capacity, dead-letter operations, and evidence-verification risks. Phase 2C stops at review; do not merge into `master` automatically.
+| Logical agents | Confirmed eligible deployments | Verified finding to protection p95 |
+| ---: | ---: | ---: |
+| 3 | 20/20 | 512.200 ms |
+| 10 | 20/20 | 532.374 ms |
+| 100 | 20/20 | 602.859 ms |
+
+The benchmark used scripted local approval and two three-replica fixture deployments per episode. It observed zero marker escapes across 360 post-confirmation marker probes. The 100-deployment cold, three-key workload saved 11.15× verification CPU. The all-distinct workload saved 1.01×. The latency and compute thresholds were observed under the stated lab workloads. Human approval p95, multi-host availability, independent status completeness, authenticated broker identity, and distributed operator trust remain open.
+
+See [the Phase 3C handoff](docs/phase3c-integration.md) for the compatibility register, acceptance checklist, reproduction commands, exact timings, raw results, and unresolved risks.

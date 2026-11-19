@@ -1,0 +1,14 @@
+{
+  "signed_mesh_revocation": {
+    "safe_hold_ms": 117.529625,
+    "probes": 18,
+    "status": "safe_hold",
+    "marker_escapes": 0
+  },
+  "broker_loss": {
+    "safe_hold_ms": 1304.70925,
+    "probes": 18,
+    "status": "safe_hold",
+    "marker_escapes": 0
+  }
+}
