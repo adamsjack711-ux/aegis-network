@@ -4,7 +4,9 @@ import asyncio
 from contextlib import closing
 import json
 import os
+from pathlib import Path
 import sqlite3
+from tempfile import TemporaryDirectory
 import time
 from types import SimpleNamespace
 from uuid import uuid4
@@ -44,14 +46,14 @@ async def observe_until(read, ready, timeout=15):
 
 
 def withdrawal_delivery(tmp_path, record_property, *, priority):
-    async def run(docker_env):
-        lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), tmp_path, docker_env)
+    async def run(docker_env, path):
+        lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), path, docker_env)
         async with httpx.AsyncClient(trust_env=False, timeout=5) as client:
             try:
                 await lab.start_services(client)
                 agent_id = str(uuid4())
                 _, worker = lab.fleet.start(agent_id, 2)
-                audit = tmp_path / agent_id / "audit.db"
+                audit = path / agent_id / "audit.db"
                 await observe_until(worker.read, lambda rows: any(row["kind"] == "ready" for row in rows))
 
                 async def submit(event):
@@ -156,8 +158,8 @@ def withdrawal_delivery(tmp_path, record_property, *, priority):
             finally:
                 await lab.stop()
 
-    with local_docker() as docker_env:
-        asyncio.run(run(docker_env))
+    with TemporaryDirectory(prefix="broker-", dir=tmp_path) as scratch, local_docker() as docker_env:
+        asyncio.run(run(docker_env, Path(scratch)))
 
 
 @pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1" or os.getenv("AEGIS_PHASE4E_PRIORITY") == "1",
