@@ -177,6 +177,7 @@ class Lab:
         self.failures = []
         self.notes = []
         self.compose_log = []
+        self.port_retries = 0
         self.setup_started = False
         self.monitoring = None
         self.connection = None
@@ -230,17 +231,32 @@ class Lab:
             self.configs.append(path)
         self.configs += [self.configs[-1]] * 7
 
+    async def start_containers(self):
+        self.setup_started = True
+        for attempt in range(4):
+            with socket.socket() as broker, socket.socket() as monitor:
+                # Hold both until their addresses are distinct. Keep the
+                # bindings stable when Docker restarts the broker in this run.
+                broker.bind(("127.0.0.1", 0))
+                monitor.bind(("127.0.0.1", 0))
+                self.env["AEGIS_PHASE4A_NATS_PORT"] = str(broker.getsockname()[1])
+                self.env["AEGIS_PHASE4A_MONITOR_PORT"] = str(monitor.getsockname()[1])
+            try:
+                self.compose_log.append(await asyncio.to_thread(
+                    self.compose, "up", "-d", "--wait", "--wait-timeout", "45", "--pull", "never"))
+                return
+            except subprocess.CalledProcessError as exc:
+                if attempt == 3 or "address already in use" not in (exc.stderr or ""):
+                    raise
+                # The Docker daemon can have a separate host namespace.
+                # Retry its port race before creating any workload state.
+                self.port_retries += 1
+                self.compose_log.append(await asyncio.to_thread(
+                    self.compose, "down", "--volumes", "--timeout", "5"))
+
     async def start_services(self, client):
         self.prepare_keys()
-        with socket.socket() as broker, socket.socket() as monitor:
-            broker.bind(("127.0.0.1", 0))
-            monitor.bind(("127.0.0.1", 0))
-            # Preserve the broker endpoints when Docker recreates port mappings.
-            self.env["AEGIS_PHASE4A_NATS_PORT"] = str(broker.getsockname()[1])
-            self.env["AEGIS_PHASE4A_MONITOR_PORT"] = str(monitor.getsockname()[1])
-        self.setup_started = True
-        self.compose_log.append(await asyncio.to_thread(
-            self.compose, "up", "-d", "--wait", "--wait-timeout", "45", "--pull", "never"))
+        await self.start_containers()
         self.broker_port = self.port("nats", 4222)
         self.monitor_port = self.port("nats", 8222)
         self.database_port = self.port("postgres", 5432)
@@ -940,7 +956,7 @@ async def run(args, path, docker_env):
                         "dependencies": {key: version(key) for key in (
                             "nats-py", "psycopg", "cryptography", "httpx", "uvicorn", "fastapi")},
                         "git": source},
-        "parameters": parameters,
+        "parameters": parameters, "lab_port_retries": lab.port_retries,
         "metrics": summary, "scenarios": lab.phases,
         "events": lab.events, "broker_postgres_samples": sorted(lab.snapshots, key=lambda row: row["ns"]),
         "container_samples": lab.container_samples, "outbox": lab.journal,
