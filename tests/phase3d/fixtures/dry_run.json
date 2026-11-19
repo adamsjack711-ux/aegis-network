@@ -1,0 +1,25 @@
+{
+  "finding": {
+    "schema_version": "1.0",
+    "artifact_id": "00000000-0000-4000-8000-000000000301",
+    "publisher_id": "synthetic-finder",
+    "sequence": 1,
+    "issued_at": "2025-01-01T00:00:00Z",
+    "expires_at": "2090-01-01T00:00:00Z",
+    "vulnerability_id": "PHASE3D-INERT",
+    "software": {"purl": "pkg:generic/phase3d-toy", "affected_versions": ["1.0.0"]},
+    "evidence": [{"uri": "urn:phase3d:inert-observation", "sha256": "407d449f7e0cab9e0aeedb20e032626e0084724ed86ad2aa5d2dbcecb990a4c1", "method": "lab-reproduction"}],
+    "applicability": "authorized-lab",
+    "mitigation_template": "observe-only"
+  },
+  "withdrawal": {
+    "schema_version": "1.1",
+    "revocation_id": "00000000-0000-4000-8000-000000000302",
+    "publisher_id": "synthetic-revoker",
+    "sequence": 1,
+    "issued_at": "2025-01-02T00:00:00Z",
+    "expires_at": "2025-01-03T00:00:00Z",
+    "target_publisher_id": "synthetic-finder",
+    "reason": "invalid-evidence"
+  }
+}

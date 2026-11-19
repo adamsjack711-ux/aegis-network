@@ -1,0 +1,36 @@
+{
+  "evidence": "phase3d inert observation v1",
+  "evidence_sha256": "407d449f7e0cab9e0aeedb20e032626e0084724ed86ad2aa5d2dbcecb990a4c1",
+  "scope": "two-replica-toy-gate",
+  "submitter": "research",
+  "verifiers": {
+    "v1": {"org": "lab-one", "seed": 1},
+    "v1-alt": {"org": "lab-one", "seed": 2},
+    "v2": {"org": "lab-two", "seed": 3},
+    "v3": {"org": "lab-three", "seed": 4},
+    "research-key": {"org": "research", "seed": 5}
+  },
+  "status": {
+    "trust_generation": 8,
+    "withdrawal_generation": 12,
+    "complete": true,
+    "valid_until": 110,
+    "withdrawn": false
+  },
+  "inventory": {
+    "artifact": "toy-build-a",
+    "configuration": "toy-config-a",
+    "generation": 7,
+    "routes": {
+      "canary": ["main", "alternate"],
+      "peer": ["main", "alternate"]
+    }
+  },
+  "fence": 4,
+  "lease": [90, 100],
+  "capabilities": {
+    "cap-canary": {"agent": "agent-a", "replica": "canary", "fence": 4},
+    "cap-peer": {"agent": "agent-b", "replica": "peer", "fence": 4},
+    "cap-old": {"agent": "agent-a", "replica": "canary", "fence": 3}
+  }
+}
