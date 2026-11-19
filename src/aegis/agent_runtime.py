@@ -3,6 +3,7 @@
 import asyncio
 import base64
 from datetime import datetime, timezone
+from functools import partial
 import json
 import logging
 import os
@@ -16,11 +17,11 @@ from nats.js.api import AckPolicy, ConsumerConfig
 from nats.js.errors import NotFoundError
 from pydantic import ValidationError
 
-from .api import DEAD_LETTER_SUBJECT, STREAM
 from .artifact import SignedRevocation, parse_event
 from .config import load_local
 from .core import LocalAgent
 from .identity import IdentityLease, IdentityLost, canonical_agent_id, renew_lease
+from .mesh import DEAD_LETTER_SUBJECT, STREAM
 from .recovery import RecoveryBlocked, reconcile
 from .storage import SqliteAudit
 
@@ -118,7 +119,8 @@ async def run() -> None:
         await nc.close()
 
 
-async def consume(agent, audit, js, lease, renew_task, client, durable):
+async def consume(agent, audit, js, lease, renew_task, client, durable, *,
+                  on_reconcile=None, before_message=None, on_ack=None):
     while True:
         try:
             await js.stream_info(STREAM)
@@ -136,8 +138,9 @@ async def consume(agent, audit, js, lease, renew_task, client, durable):
         if lease.lost or renew_task.done():
             raise IdentityLost("agent identity lease was lost")
         if asyncio.get_running_loop().time() >= next_reconcile:
+            started_ns = time.perf_counter_ns() if on_reconcile is not None else 0
             try:
-                await reconcile(agent, audit, client, lease)
+                recovered = await reconcile(agent, audit, client, lease)
             except RecoveryBlocked:
                 logger.critical("signed replay journal failed validation; agent stopped")
                 raise
@@ -145,6 +148,8 @@ async def consume(agent, audit, js, lease, renew_task, client, durable):
                 logger.exception("journal reconciliation failed; pausing event delivery")
                 await asyncio.sleep(1)
                 continue
+            if on_reconcile is not None:
+                on_reconcile(recovered, started_ns, time.perf_counter_ns())
             next_reconcile = asyncio.get_running_loop().time() + 5
         try:
             messages = await subscription.fetch(10, timeout=1)
@@ -156,7 +161,10 @@ async def consume(agent, audit, js, lease, renew_task, client, durable):
             continue
         for message in messages:
             try:
-                await process_message(message, agent, js, lease)
+                if before_message is not None:
+                    await before_message(message)
+                observe = partial(on_ack, message) if on_ack is not None else None
+                await process_message(message, agent, js, lease, observe=observe)
             except IdentityLost:
                 raise
             except Exception:
