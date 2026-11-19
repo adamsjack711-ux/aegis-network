@@ -107,9 +107,9 @@ class PostgresRepository:
             head = db.execute("SELECT COALESCE(MAX(position),0) FROM mesh_journal").fetchone()[0]
             rows = db.execute(
                 "SELECT j.position,e.envelope FROM mesh_journal j "
-                "JOIN mesh_events e USING(event_id) WHERE j.position>%s "
+                "JOIN mesh_events e USING(event_id) WHERE j.position>%s AND j.position<=%s "
                 "ORDER BY j.position LIMIT %s",
-                (position, limit),
+                (position, head, limit),
             ).fetchall()
         return [{"position": item, "envelope": envelope} for item, envelope in rows], head
 

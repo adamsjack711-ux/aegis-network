@@ -90,6 +90,11 @@ class Lab:
     def compose(self, *command: str) -> None:
         subprocess.run([*self.compose_base, *command], check=True, stdout=subprocess.DEVNULL)
 
+    def compose_id(self, service: str) -> str:
+        result = subprocess.check_output([*self.compose_base, "ps", "-q", service], text=True).strip()
+        assert result and "\n" not in result
+        return result
+
     def outbox(self, event_id: str) -> bool | None:
         with psycopg.connect(self.args.postgres) as db:
             row = db.execute("SELECT sent_at IS NOT NULL FROM mesh_outbox WHERE event_id=%s",
@@ -278,6 +283,68 @@ class Lab:
                 "stream_max_age_s": stream.config.max_age,
                 "stream_max_bytes": stream.config.max_bytes}
 
+    async def extended_faults(self) -> dict:
+        services = ("agent", "agent_b")
+
+        def count(service, ids):
+            return sum(row[0] in ids for row in self.audit(service)["decisions"])
+
+        pending_ids = set()
+        self.compose("stop", "nats")
+        try:
+            for _ in range(40):
+                envelope = finding(self.key, self.next_sequence())
+                assert (await self.post("/v1/findings", envelope))["accepted"]
+                pending_ids.add(str(envelope.finding.artifact_id))
+            pending_before = sum(self.outbox(eid) is False for eid in pending_ids)
+            assert pending_before == 40
+            self.compose("kill", "-s", "SIGKILL", "coordinator")
+        finally:
+            begin = time.monotonic()
+            self.compose("start", "nats", "coordinator")
+        await self.wait(lambda: all(self.outbox(eid) is True for eid in pending_ids),
+                        "coordinator crash and broker outage backlog")
+        await self.wait(lambda: all(count(s, pending_ids) == 40 for s in services),
+                        "both agent backlog audits")
+        backlog_seconds = round(time.monotonic() - begin, 3)
+
+        agent_container = self.compose_id("agent_b")
+        network = f"{self.args.project}_default"
+        subprocess.run(["docker", "network", "disconnect", network, agent_container], check=True)
+        try:
+            during_partition = finding(self.key, self.next_sequence())
+            partition_ids = {str(during_partition.finding.artifact_id)}
+            assert (await self.post("/v1/findings", during_partition))["accepted"]
+            await self.wait(lambda: count("agent", partition_ids) == 1, "connected agent")
+            assert count("agent_b", partition_ids) == 0
+        finally:
+            begin = time.monotonic()
+            subprocess.run(["docker", "network", "connect", network, agent_container], check=True)
+        await self.wait(lambda: count("agent_b", partition_ids) == 1, "partition catch-up")
+        partition_seconds = round(time.monotonic() - begin, 3)
+
+        self.compose("kill", "-s", "SIGKILL", "agent_b")
+        try:
+            after_crash = finding(self.key, self.next_sequence())
+            crash_ids = {str(after_crash.finding.artifact_id)}
+            assert (await self.post("/v1/findings", after_crash))["accepted"]
+        finally:
+            begin = time.monotonic()
+            self.compose("start", "agent_b")
+        await self.wait(lambda: all(count(s, crash_ids) == 1 for s in services),
+                        "agent lease re-acquisition and audit", timeout=65)
+        assert count("agent_b", pending_ids) == 40
+        assert count("agent_b", partition_ids) == 1
+        return {
+            "coordinator_sigkill_broker_backlog": {
+                "pending_before": pending_before, "pending_after": 0,
+                "committed_decisions": 80, "recovery_s": backlog_seconds,
+            },
+            "agent_network_partition": {"committed_decisions": 2, "recovery_s": partition_seconds},
+            "agent_sigkill": {"committed_decisions": 2,
+                              "recovery_s": round(time.monotonic() - begin, 3)},
+        }
+
     async def benchmark(self, js, count: int, samples: int, path: Path) -> dict:
         policy, inventory = load_local(self.args.local_config)
         agents = []
@@ -286,7 +353,7 @@ class Lab:
         try:
             for _ in range(count):
                 agent_id = str(uuid4())
-                audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id, worker=True)
+                audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id)
                 agents.append(LocalAgent(policy, inventory, audit))
                 leases.append(await IdentityLease.claim(js, agent_id))
                 subscription = await js.pull_subscribe(
@@ -347,8 +414,7 @@ class Lab:
                 except TimeoutError:
                     continue
                 for message in messages:
-                    await process_message(message, agents[index], js, leases[index],
-                                          observe=observe, worker=True)
+                    await process_message(message, agents[index], js, leases[index], observe=observe)
 
         cpu_start = time.process_time_ns()
         wall_start = time.perf_counter_ns()
@@ -395,6 +461,9 @@ async def run(args):
         if not args.benchmark_only:
             hardening = await lab.hardening(js)
             print(json.dumps({"hardening": hardening}, sort_keys=True), flush=True)
+            if args.extended_faults:
+                print(json.dumps({"extended_faults": await lab.extended_faults()}, sort_keys=True),
+                      flush=True)
         if args.integration_only:
             return
         with tempfile.TemporaryDirectory(prefix="aegis-phase2c-bench-") as directory:
@@ -424,6 +493,7 @@ if __name__ == "__main__":
     parser.add_argument("--samples", type=int, default=20)
     parser.add_argument("--skip-integration", action="store_true")
     parser.add_argument("--repeats", type=int, default=1)
+    parser.add_argument("--extended-faults", action="store_true")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--benchmark-only", action="store_true")
     mode.add_argument("--integration-only", action="store_true")
