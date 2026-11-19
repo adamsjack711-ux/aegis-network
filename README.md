@@ -6,7 +6,7 @@ Lab-only proof of concept for independently verified, signed defensive findings 
 
 `POST /v1/findings` → Ed25519 validation → PostgreSQL plus transactional outbox → NATS JetStream → independent agent signature recheck → exact local inventory match → separate SQLite audits and dry-run decisions. `POST /v1/revocations` carries signed withdrawals to the same agents.
 
-Read [architecture.md](architecture.md), [threat-model.md](threat-model.md), [docs/phase0.md](docs/phase0.md), [docs/contracts.md](docs/contracts.md), [docs/phase2a-integration.md](docs/phase2a-integration.md), [docs/acceptance.md](docs/acceptance.md), and [docs/roadmap.md](docs/roadmap.md).
+Read [architecture.md](architecture.md), [threat-model.md](threat-model.md), [docs/phase0.md](docs/phase0.md), [docs/contracts.md](docs/contracts.md), [docs/phase2c-integration.md](docs/phase2c-integration.md), [docs/acceptance.md](docs/acceptance.md), and [docs/roadmap.md](docs/roadmap.md).
 
 ## Local setup
 

@@ -64,6 +64,10 @@ async def run() -> None:
             messages = await subscription.fetch(10, timeout=1)
         except TimeoutError:
             continue
+        except Exception:
+            logger.exception("broker fetch failed; waiting for reconnect")
+            await asyncio.sleep(0.5)
+            continue
         for message in messages:
             await process_message(message, agent)
 

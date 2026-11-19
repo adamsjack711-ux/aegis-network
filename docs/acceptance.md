@@ -15,7 +15,7 @@
 - [x] PostgreSQL kept a finding pending while NATS was stopped; after broker and paused agent restart, both agents had two distinct audited decisions and the outbox was fully sent.
 - [x] A signed revocation reached both agents and populated both durable revocation ledgers. Repeated finding and revocation submissions were idempotent.
 - [x] Unit tests cover broker publish failure, database failure after broker acknowledgement, audit failure before consumer acknowledgement, role denial, invalid signature, revocation before and after finding, and agent restart deduplication.
-- [ ] Review the shared event, trust-file, and agent-ID changes in [Phase 2A integration review](phase2a-integration.md) before merging.
+- [x] Reconcile the Mesh and Rapid event, trust, revocation, agent-ID, audit, and acknowledgement contracts in [Phase 2C integration review](phase2c-integration.md). Review handoff is complete; no merge into `master` has occurred.
 
 ## Research questions and measurable gates
 

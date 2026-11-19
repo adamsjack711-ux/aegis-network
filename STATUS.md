@@ -1,22 +1,11 @@
-# Project status — 2026-11-19, Phase 2C integration worktree
+# Project status — 2026-11-19, Phase 2C review handoff
 
-Phase 2C is in the isolated `.worktrees/phase2c` worktree on `integration/phase2c`, based on the verified common ancestor `14440ee`. The canonical checkout is on `master` and has unrelated uncommitted work. Neither feature branch nor `master` has been modified or merged.
+Phase 2C lives in `.worktrees/phase2c` on `integration/phase2c`, starting from the verified shared ancestor `14440ee`. The Mesh and Rapid commits were integrated as `9e3a6b8` and `c3cd6cc`, then reconciled in this worktree. The original feature branches and the dirty canonical `master` checkout were not changed. Nothing has been merged into `master`.
 
-Phase 0 reuse assessment and Phase 1 architecture, threat model, decisions, contracts, acceptance criteria, and roadmap are documented. The signed-finding to audited dry-run slice and Phase 2A mesh reliability changes are implemented. Two agents have independent durable consumers and audit volumes. Findings and signed revocations use stable event IDs, a transactional PostgreSQL outbox, JetStream acknowledgements, and local deduplication. No enforcement, vulnerable lab apps, verification workers, rollback, benchmarks, or LLM investigator have been implemented.
+The integrated dry-run slice has signed finding and revocation ingestion, a transactional PostgreSQL outbox, JetStream distribution, independent durables and SQLite audits for each agent, exact local inventory and allowlist matching, stable reason codes, denial overrides, and revocation-aware effective decisions. No mitigation executor, production target, Daybreak connection, independent verifier, or rollback path exists.
 
-Baseline verification on 2026-11-19:
+Phase 2C verification on 2026-11-19: **28 local tests passed**. An isolated Docker Compose project built and ran PostgreSQL, NATS, the coordinator, and two distinct agents. Live checks passed for signed finding distribution, duplicate submission and delivery, invalid signature rejection, broker outage and outbox recovery, agent restart, signed revocation before and after its target, and audit persistence. Each containerized agent retained 3 finding decisions, 2 revocation decisions, and 2 permanent target ledger entries after restart. All outcomes remained dry-run.
 
-- Python 3.15 local environment: `pytest -q` passed 8 tests. One third-party Starlette/httpx deprecation warning.
-- Python bytecode compilation passed; Compose config parsed.
-- Docker Compose with PostgreSQL 16 and NATS 2.10 built and ran. Synthetic signed finding `87bae51f-d743-49e9-ac86-575d8d4c74cd` returned HTTP 202 with `accepted: true`; duplicate returned `accepted: false`. PostgreSQL contained one finding and one sent outbox row. The local agent printed `allow_dry_run` and its SQLite audit contained one decision.
-- Temporary Compose containers were stopped with `docker compose down`; named lab volumes remain for inspection or reuse.
+The end-to-end single-host benchmark submitted 20 synthetic findings per scale and committed all expected decisions: 60/60 at 3 agents, 200/200 at 10, and 2,000/2,000 at 100. Delivery coverage was 100% at each scale, with zero duplicate logical rows and zero unexpected allows. p50/p95/p99 were 248.987/284.850/286.926 ms (3), 182.427/334.506/341.446 ms (10), and 726.944/814.114/837.044 ms (100). These are one-run dry-run fanout measurements, not mitigation timings.
 
-These results show the path works for one synthetic lab finding. They do not demonstrate 30-second mitigation, 10x compute savings, safe enforcement, or resilience to a compromised coordinator in a deployed system.
-
-Phase 2A verification on 2026-11-19: 16 local tests passed, including broker and audit failure injection, replay, independent agent recovery, invalid signatures, role checks, and revocation ordering. An isolated local Compose project showed two agents receiving a synthetic finding, an outbox row remaining pending during a broker outage, both agents catching up after broker and agent restart, and both receiving a signed revocation. Duplicate HTTP submissions returned `accepted: false`. See [integration review](docs/phase2a-integration.md) for exact commands, shared interface changes, and remaining limits.
-
-## Phase 2B Rapid policy branch
-
-`feat/rapid-policy` adds exact local inventory matching with a precomputed identity set, stable audited reason codes, SQLite agent identity binding and schema migration, duplicate/restart tests, revocation-aware effective decisions, and a local decision latency benchmark. See [docs/phase2b-rapid-policy.md](docs/phase2b-rapid-policy.md) for test and benchmark results. Shared contract proposals are isolated in [docs/proposed-shared-contracts-rapid.md](docs/proposed-shared-contracts-rapid.md). Mesh and NATS code were not changed; no mitigation executes.
-
-Phase 2C contract mismatches were recorded before integration changes in [docs/phase2c-integration.md](docs/phase2c-integration.md). Integration verification and benchmarks are in progress.
+The exact environment, commands, contract comparison recorded before code changes, live results, limitations, and remaining security risks are in [docs/phase2c-integration.md](docs/phase2c-integration.md). Phase 2C is ready for review only. Do not merge into `master` without review. Offline retention, dead-letter handling, cross-deployment agent-ID uniqueness, key rotation, independent verification, and audit export remain open.
