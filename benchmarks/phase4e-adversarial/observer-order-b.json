@@ -1,0 +1,294 @@
+{
+  "monotonic_clock": "single host",
+  "trials": [
+    {
+      "source_commit": "11ecb948de82ef094f4fc48261786ff7600d64de",
+      "trace": [
+        {
+          "event": "healthy_disk",
+          "at_ns": 552660145996666,
+          "started_ns": 552660145440666,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "anchor_stopped",
+          "at_ns": 552660149867791,
+          "started_ns": 552660146003041,
+          "result": null
+        },
+        {
+          "event": "before_any_serving_request",
+          "at_ns": 552660655026500,
+          "started_ns": 552660654298916,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "first_post_fault_read_a",
+          "at_ns": 552660662655625,
+          "started_ns": 552660655029791,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        {
+          "event": "after_first_read_a",
+          "at_ns": 552660663172416,
+          "started_ns": 552660662660541,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": true,
+              "version": 3,
+              "marker": "quarantined",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "unchanged_anchor_restarted",
+          "at_ns": 552660899484166,
+          "started_ns": 552660663175583,
+          "result": null
+        },
+        {
+          "event": "same_generation_latched_target_a",
+          "at_ns": 552660904127500,
+          "started_ns": 552660899515666,
+          "outcome": "Denied",
+          "reason": "held writer requires a new generation"
+        },
+        {
+          "event": "observer_attempts_fence",
+          "at_ns": 552660907053458,
+          "started_ns": 552660904147583,
+          "outcome": "Denied",
+          "reason": "TLS identity or expiry is outside the operation's scope"
+        },
+        {
+          "event": "first_read_b_after_unchanged_anchor_return",
+          "at_ns": 552660920824708,
+          "started_ns": 552660907068083,
+          "result": {
+            "generation": 1,
+            "version": 2,
+            "marker": "observing",
+            "effective": "observing",
+            "writes": 1
+          }
+        },
+        {
+          "event": "second_anchor_loss",
+          "at_ns": 552660922661041,
+          "started_ns": 552660921201916,
+          "result": null
+        },
+        {
+          "event": "target_b_writer_lock_acquired",
+          "at_ns": 552660922841625
+        },
+        {
+          "event": "competing_requests_blocked_disk",
+          "at_ns": 552661027906875,
+          "started_ns": 552661027396500,
+          "result": {
+            "generation": 1,
+            "held": false,
+            "version": 2,
+            "marker": "observing",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          }
+        },
+        {
+          "event": "target_b_writer_lock_released",
+          "at_ns": 552661027922458
+        },
+        {
+          "event": "racing_request_results",
+          "at_ns": 552661075336000,
+          "results": [
+            {
+              "name": "hold_read",
+              "started_ns": 552660923098041,
+              "at_ns": 552661046502083,
+              "value": {
+                "generation": 1,
+                "version": 3,
+                "marker": "quarantined",
+                "effective": "quarantined",
+                "writes": 1
+              }
+            },
+            {
+              "name": "protected_write",
+              "started_ns": 552660923123166,
+              "at_ns": 552661075190166,
+              "error": "held writer requires a new generation",
+              "outcome": "Denied"
+            }
+          ]
+        },
+        {
+          "event": "target_b_durable_after_race",
+          "at_ns": 552661075738333,
+          "started_ns": 552661075338291,
+          "result": {
+            "generation": 1,
+            "held": true,
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          }
+        },
+        {
+          "event": "anchor_restarted_after_race",
+          "at_ns": 552661316390333,
+          "started_ns": 552661075742458,
+          "result": null
+        },
+        {
+          "event": "operator_retired",
+          "at_ns": 552661334365208,
+          "started_ns": 552661316416333,
+          "result": {
+            "commitment": "9760083218b942abb303b08d5399b75aa7d78bc9be1e5e40298bdd9c0a2c678c",
+            "generation": 2,
+            "revision": 3
+          }
+        },
+        {
+          "event": "successor_activated",
+          "at_ns": 552661381284583,
+          "generation": 3
+        },
+        {
+          "event": "stale_owner_target-a",
+          "at_ns": 552661388360916,
+          "started_ns": 552661384743125,
+          "outcome": "Denied",
+          "reason": "assignment is outside the target's durable fence"
+        },
+        {
+          "event": "old_approval_target-a",
+          "at_ns": 552661393839458,
+          "started_ns": 552661388382625,
+          "outcome": "Denied",
+          "reason": "command or approval does not bind the exact target and assignment"
+        },
+        {
+          "event": "fresh_approval_target-a",
+          "at_ns": 552661405323875,
+          "started_ns": 552661394339916,
+          "result": {
+            "version": 5,
+            "generation": 3
+          }
+        },
+        {
+          "event": "stale_owner_target-b",
+          "at_ns": 552661411813000,
+          "started_ns": 552661408753666,
+          "outcome": "Denied",
+          "reason": "assignment is outside the target's durable fence"
+        },
+        {
+          "event": "old_approval_target-b",
+          "at_ns": 552661416751583,
+          "started_ns": 552661411824708,
+          "outcome": "Denied",
+          "reason": "command or approval does not bind the exact target and assignment"
+        },
+        {
+          "event": "fresh_approval_target-b",
+          "at_ns": 552661428607791,
+          "started_ns": 552661417082708,
+          "result": {
+            "version": 5,
+            "generation": 3
+          }
+        }
+      ],
+      "pre_observation_gate": "FAIL"
+    }
+  ]
+}
