@@ -23,6 +23,9 @@ class MemoryRepository:
         sequence = (payload.publisher_id, payload.sequence)
         if sequence in self.sequences:
             raise ValueError("publisher sequence conflict")
+        if envelope.kind == "finding" and any(publisher == payload.publisher_id and number > payload.sequence
+               for publisher, number in self.sequences):
+            raise ValueError("publisher sequence is not increasing")
         self.items[artifact_id] = envelope
         self.sequences.add(sequence)
         return True
@@ -43,8 +46,8 @@ class SqliteAudit:
         self.agent_id = agent_id
         self.db = sqlite3.connect(str(path))
         self.db.execute("CREATE TABLE IF NOT EXISTS audit_identity (agent_id TEXT PRIMARY KEY)")
-        existing_id = self.db.execute("SELECT agent_id FROM audit_identity").fetchone()
-        if existing_id is not None and existing_id[0] != agent_id:
+        existing_ids = [row[0] for row in self.db.execute("SELECT agent_id FROM audit_identity")]
+        if len(existing_ids) > 1 or any(value != agent_id for value in existing_ids):
             self.db.close()
             raise ValueError("audit database belongs to a different agent")
         self.db.execute("""CREATE TABLE IF NOT EXISTS agent_identity (
@@ -55,7 +58,7 @@ class SqliteAudit:
         if bound_agent_id != agent_id:
             self.db.close()
             raise ValueError("audit database belongs to a different agent")
-        if existing_id is None:
+        if not existing_ids:
             self.db.execute("INSERT INTO audit_identity(agent_id) VALUES(?)", (agent_id,))
         self.db.execute("""CREATE TABLE IF NOT EXISTS decisions (
             artifact_id TEXT PRIMARY KEY, digest TEXT NOT NULL, publisher_id TEXT NOT NULL,
@@ -72,28 +75,43 @@ class SqliteAudit:
         )""")
         self.db.execute("""CREATE TABLE IF NOT EXISTS revocation_decisions (
             event_id TEXT PRIMARY KEY, target_artifact_id TEXT NOT NULL,
-            target_digest TEXT NOT NULL, digest TEXT NOT NULL,
+            target_digest TEXT NOT NULL, target_publisher_id TEXT, digest TEXT NOT NULL,
             publisher_id TEXT NOT NULL, sequence INTEGER NOT NULL,
             authenticated INTEGER NOT NULL, outcome TEXT NOT NULL, reason TEXT NOT NULL,
             reason_code TEXT NOT NULL,
             decided_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
         )""")
         self.db.execute("""CREATE TABLE IF NOT EXISTS revoked_artifacts (
-            publisher_id TEXT NOT NULL, artifact_id TEXT NOT NULL,
+            publisher_id TEXT NOT NULL, target_publisher_id TEXT, artifact_id TEXT NOT NULL,
             digest TEXT NOT NULL, revocation_id TEXT NOT NULL,
             PRIMARY KEY (publisher_id, artifact_id, digest)
+        )""")
+        self.db.execute("""CREATE TABLE IF NOT EXISTS revoked_targets (
+            target_publisher_id TEXT NOT NULL, artifact_id TEXT NOT NULL,
+            digest TEXT NOT NULL, revocation_id TEXT NOT NULL,
+            revoker_publisher_id TEXT NOT NULL,
+            PRIMARY KEY (target_publisher_id, artifact_id, digest)
         )""")
         self.db.execute("""CREATE TABLE IF NOT EXISTS decision_overrides (
             artifact_id TEXT PRIMARY KEY REFERENCES decisions(artifact_id),
             digest TEXT NOT NULL, reason TEXT NOT NULL, reason_code TEXT NOT NULL,
             decided_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
         )""")
+        self.db.execute("""CREATE TABLE IF NOT EXISTS recovery_cursor (
+            singleton INTEGER PRIMARY KEY CHECK (singleton = 1),
+            position INTEGER NOT NULL CHECK (position >= 0)
+        )""")
+        self.db.execute("INSERT OR IGNORE INTO recovery_cursor(singleton,position) VALUES(1,0)")
         for table in ("decisions", "rejected_events", "revocation_decisions"):
             columns = {row[1] for row in self.db.execute(f"PRAGMA table_info({table})")}
             if "reason_code" not in columns:
                 self.db.execute(
                     f"ALTER TABLE {table} ADD COLUMN reason_code TEXT NOT NULL DEFAULT 'LEGACY_REASON'"
                 )
+        for table in ("revocation_decisions", "revoked_artifacts"):
+            columns = {row[1] for row in self.db.execute(f"PRAGMA table_info({table})")}
+            if "target_publisher_id" not in columns:
+                self.db.execute(f"ALTER TABLE {table} ADD COLUMN target_publisher_id TEXT")
         self.db.commit()
 
     def get(self, artifact_id: str) -> Decision | None:
@@ -126,6 +144,24 @@ class SqliteAudit:
             (publisher_id, publisher_id),
         ).fetchone()
         return row[0]
+
+    def sequence_owner(self, publisher_id: str, sequence: int) -> str | None:
+        row = self.db.execute(
+            "SELECT artifact_id FROM decisions WHERE publisher_id=? AND sequence=? AND authenticated=1 "
+            "UNION ALL SELECT event_id FROM revocation_decisions "
+            "WHERE publisher_id=? AND sequence=? AND authenticated=1 LIMIT 1",
+            (publisher_id, sequence, publisher_id, sequence),
+        ).fetchone()
+        return row[0] if row else None
+
+    def journal_position(self) -> int:
+        return self.db.execute("SELECT position FROM recovery_cursor WHERE singleton=1").fetchone()[0]
+
+    def advance_journal(self, position: int) -> None:
+        if position <= self.journal_position():
+            raise ValueError("journal position must increase")
+        with self.db:
+            self.db.execute("UPDATE recovery_cursor SET position=? WHERE singleton=1", (position,))
 
     def record(self, publisher_id: str, sequence: int, decision: Decision, authenticated: bool) -> None:
         if not authenticated:
@@ -175,9 +211,15 @@ class SqliteAudit:
         return [dict(zip(["artifact_id", "digest", "publisher_id", "reason", "reason_code", "decided_at"], row)) for row in rows]
 
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool:
+        if self.db.execute(
+            "SELECT 1 FROM revoked_targets WHERE target_publisher_id=? AND artifact_id=? AND digest=?",
+            (publisher_id, artifact_id, digest),
+        ).fetchone() is not None:
+            return True
         return self.db.execute(
-            "SELECT 1 FROM revoked_artifacts WHERE artifact_id=? AND digest=?",
-            (artifact_id, digest),
+            "SELECT 1 FROM revoked_artifacts WHERE artifact_id=? AND digest=? "
+            "AND (target_publisher_id=? OR target_publisher_id IS NULL)",
+            (artifact_id, digest, publisher_id),
         ).fetchone() is not None
 
     def get_revocation(self, revocation_id: str) -> Decision | None:
@@ -192,7 +234,8 @@ class SqliteAudit:
                         event_id=rid, correlation_id=target_id, agent_id=self.agent_id)
 
     def record_revocation(self, publisher_id: str, sequence: int, decision: Decision,
-                          target_id: str, target_digest: str, authenticated: bool) -> None:
+                          target_id: str, target_digest: str, target_publisher_id: str | None,
+                          authenticated: bool) -> None:
         if not authenticated:
             self.db.execute(
                 "INSERT INTO rejected_events(artifact_id,digest,publisher_id,reason,reason_code) VALUES(?,?,?,?,?)",
@@ -202,13 +245,13 @@ class SqliteAudit:
             return
         with self.db:
             self.db.execute(
-                "INSERT INTO revocation_decisions(event_id,target_artifact_id,target_digest,digest,publisher_id,sequence,authenticated,outcome,reason,reason_code) "
-                "VALUES(?,?,?,?,?,?,?,?,?,?)",
-                (decision.event_id, target_id, target_digest, decision.digest, publisher_id,
+                "INSERT INTO revocation_decisions(event_id,target_artifact_id,target_digest,target_publisher_id,digest,publisher_id,sequence,authenticated,outcome,reason,reason_code) "
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                (decision.event_id, target_id, target_digest, target_publisher_id, decision.digest, publisher_id,
                  sequence, 1, decision.outcome, decision.reason, decision.reason_code),
             )
             if decision.outcome == "revoked_dry_run":
                 self.db.execute(
-                    "INSERT OR IGNORE INTO revoked_artifacts(publisher_id,artifact_id,digest,revocation_id) VALUES(?,?,?,?)",
-                    (publisher_id, target_id, target_digest, decision.event_id),
+                    "INSERT OR IGNORE INTO revoked_targets(target_publisher_id,artifact_id,digest,revocation_id,revoker_publisher_id) VALUES(?,?,?,?,?)",
+                    (target_publisher_id, target_id, target_digest, decision.event_id, publisher_id),
                 )

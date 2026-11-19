@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import re
 from typing import Literal
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
@@ -16,6 +17,7 @@ class PublisherGrant:
     not_before: datetime
     expires_at: datetime
     revoked_at: datetime | None = None
+    revocation_publishers: frozenset[str] | None = None
 
     def __post_init__(self):
         if self.not_before.tzinfo is None or self.expires_at.tzinfo is None:
@@ -26,6 +28,14 @@ class PublisherGrant:
             raise ValueError("revocation timestamp requires timezone")
         if not self.roles or not self.roles <= {"finding", "revocation"}:
             raise ValueError("invalid grant roles")
+        if self.revocation_publishers is None:
+            object.__setattr__(self, "revocation_publishers",
+                           frozenset({self.publisher_id}) if "revocation" in self.roles else frozenset())
+        if any(not re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,63}", publisher)
+               for publisher in self.revocation_publishers):
+            raise ValueError("invalid revocation publisher scope")
+        if "revocation" not in self.roles and self.revocation_publishers:
+            raise ValueError("revocation scope requires revocation role")
 
 
 class TrustStore:
@@ -55,3 +65,10 @@ class TrustStore:
         if grant.revoked_at is not None and now >= grant.revoked_at:
             raise ValueError("publisher key revoked")
         return grant.public_key
+
+    def authorize_revocation(self, publisher_id: str, key_id: str,
+                             target_publisher_id: str, now: datetime | None = None) -> Ed25519PublicKey:
+        key = self.authorize(publisher_id, key_id, "revocation", now)
+        if target_publisher_id not in self.grants[(publisher_id, key_id)].revocation_publishers:
+            raise ValueError("revocation target publisher outside grant scope")
+        return key

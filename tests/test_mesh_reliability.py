@@ -28,6 +28,7 @@ def grant(publisher, key, roles, *, revoked_at=None, expires_at=None):
         publisher, "key-1", key.public_key(), frozenset(roles),
         datetime(2020, 1, 1, tzinfo=timezone.utc),
         expires_at or datetime(2035, 1, 1, tzinfo=timezone.utc), revoked_at,
+        frozenset({"finder"}) if publisher == "revoker" and "revocation" in roles else None,
     )
 
 
@@ -46,11 +47,12 @@ def finding(key, publisher="finder", sequence=1):
 def revocation(key, target, publisher="revoker", sequence=1):
     now = datetime.now(timezone.utc)
     return sign_revocation(Revocation(
-        schema_version="1.0", revocation_id=uuid4(), publisher_id=publisher,
+        schema_version="1.1", revocation_id=uuid4(), publisher_id=publisher,
         sequence=sequence, issued_at=now - timedelta(minutes=1),
         expires_at=now + timedelta(hours=1),
         target_artifact_id=target.finding.artifact_id,
         target_sha256=hashlib.sha256(canonical_bytes(target.finding)).hexdigest(),
+        target_publisher_id=target.finding.publisher_id,
         reason="invalid-evidence",
     ), key, "key-1")
 
@@ -134,6 +136,7 @@ def test_config_grants_and_revocation_endpoint(tmp_path):
     path.write_text(json.dumps({"grants": [{
         "publisher_id": "revoker", "key_id": "key-1",
         "public_key": base64.b64encode(public).decode(), "roles": ["revocation"],
+        "revocation_publishers": ["finder"],
         "not_before": "2020-01-01T00:00:00+00:00",
         "expires_at": "2035-01-01T00:00:00+00:00", "revoked_at": None,
     }]}))
@@ -221,7 +224,8 @@ def test_agent_acks_after_commit_and_terms_bad_payload(tmp_path):
     malformed = Message(b"[]")
     asyncio.run(process_message(malformed, local))
     assert malformed.terminated and not malformed.acked
-    assert durable_name("agent_1") == "aegis-agent_1"
+    agent_id = "36e1c9d7-b513-4c24-86c5-8923909170ec"
+    assert durable_name(agent_id) == f"aegis-{agent_id}"
     with pytest.raises(ValueError):
         durable_name("Agent.1")
 

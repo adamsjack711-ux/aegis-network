@@ -24,13 +24,17 @@ import psycopg
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from nats.js.api import AckPolicy, ConsumerConfig, DeliverPolicy
 
-from aegis.api import STREAM, SUBJECT
+from aegis.api import (
+    DEAD_LETTER_STREAM, DEAD_LETTER_SUBJECT, FINDING_RETENTION_SECONDS,
+    STREAM, STREAM_MAX_BYTES, SUBJECT,
+)
 from aegis.artifact import (
     Evidence, Finding, Revocation, Software, canonical_bytes, parse_event, sign,
     sign_revocation,
 )
 from aegis.config import load_local
 from aegis.core import LocalAgent
+from aegis.identity import IdentityInUse, IdentityLease
 from aegis.storage import SqliteAudit
 
 
@@ -56,22 +60,24 @@ def finding(key: Ed25519PrivateKey, sequence: int):
     ), key)
 
 
-def revocation(key: Ed25519PrivateKey, target, sequence: int):
+def revocation(key: Ed25519PrivateKey, target, sequence: int, target_publisher=None):
     now = datetime.now(timezone.utc)
     return sign_revocation(Revocation(
-        schema_version="1.0", revocation_id=uuid4(), publisher_id="lab-publisher",
+        schema_version="1.1", revocation_id=uuid4(), publisher_id="lab-revoker",
         sequence=sequence, issued_at=now - timedelta(seconds=2),
         expires_at=now + timedelta(hours=1),
         target_artifact_id=target.finding.artifact_id,
         target_sha256=hashlib.sha256(canonical_bytes(target.finding)).hexdigest(),
+        target_publisher_id=target_publisher or target.finding.publisher_id,
         reason="withdrawn",
-    ), key, "default")
+    ), key, "revoker")
 
 
 class Lab:
     def __init__(self, args):
         self.args = args
         self.key = Ed25519PrivateKey.from_private_bytes(Path(args.key).read_bytes())
+        self.revoker_key = Ed25519PrivateKey.from_private_bytes(Path(args.revoker_key).read_bytes())
         self.sequence = time.time_ns() // 1000
         self.compose_base = ["docker", "compose", "-p", args.project, "-f", "compose.yaml",
                              "-f", args.override]
@@ -96,7 +102,7 @@ class Lab:
             "print(json.dumps({'identity':db.execute('select agent_id from audit_identity').fetchone()[0],"
             "'decisions':db.execute('select artifact_id,outcome,reason_code from decisions order by rowid').fetchall(),"
             "'revocations':db.execute('select event_id,reason_code from revocation_decisions order by rowid').fetchall(),"
-            "'ledger':db.execute('select artifact_id,digest from revoked_artifacts order by rowid').fetchall()}))"
+            "'ledger':db.execute('select artifact_id,digest from revoked_targets order by rowid').fetchall()}))"
         )
         result = subprocess.run([*self.compose_base, "exec", "-T", service, "python", "-c", code],
                                 capture_output=True, text=True, check=True)
@@ -150,7 +156,7 @@ class Lab:
         await self.wait(lambda: all(any(row[0] == outage_id for row in self.audit(s)["decisions"])
                                     for s in ("agent", "agent_b")), "agent catch-up")
 
-        revoke = revocation(self.key, outage, self.next_sequence())
+        revoke = revocation(self.revoker_key, outage, self.next_sequence())
         revoke_id = str(revoke.revocation.revocation_id)
         assert (await self.post("/v1/revocations", revoke))["accepted"] is True
         await self.wait(lambda: all(any(row[0] == revoke_id and row[1] == "REVOCATION_ACCEPTED"
@@ -161,7 +167,7 @@ class Lab:
 
         # Prove a target digest remains denied when its revocation arrived first.
         future = finding(self.key, self.next_sequence())
-        future_revoke = revocation(self.key, future, self.next_sequence())
+        future_revoke = revocation(self.revoker_key, future, self.next_sequence())
         future_id = str(future.finding.artifact_id)
         assert (await self.post("/v1/revocations", future_revoke))["accepted"] is True
         await self.wait(lambda: all(any(row[0] == future_id for row in self.audit(s)["ledger"])
@@ -184,13 +190,99 @@ class Lab:
                 "outage_pending_before_restart": True, "outage_sent_after_restart": True,
                 "audit_persisted_after_restart": True}
 
+    async def hardening(self, js) -> dict:
+        stream = await js.stream_info(STREAM)
+        dead_stream = await js.stream_info(DEAD_LETTER_STREAM)
+        assert stream.config.max_age == FINDING_RETENTION_SECONDS
+        assert stream.config.max_bytes == STREAM_MAX_BYTES
+        assert dead_stream.config.max_age == 7 * FINDING_RETENTION_SECONDS
+        assert dead_stream.config.max_bytes == STREAM_MAX_BYTES
+        assert str(stream.config.discard).lower().endswith("new")
+        assert str(dead_stream.config.discard).lower().endswith("new")
+
+        # The broker lease rejects a second live process using the same UUID.
+        active_id = self.audit("agent")["identity"]
+        consumer = await js.consumer_info(STREAM, f"aegis-{active_id}")
+        assert consumer.config.max_deliver == -1
+        try:
+            await IdentityLease.claim(js, active_id)
+        except IdentityInUse:
+            duplicate_blocked = True
+        else:
+            raise AssertionError("duplicate agent identity acquired a lease")
+
+        target = finding(self.key, self.next_sequence())
+        outside_scope = revocation(self.revoker_key, target, self.next_sequence(),
+                                   target_publisher="other-publisher")
+        async with httpx.AsyncClient(base_url=self.args.http) as client:
+            denied = await client.post("/v1/revocations", json=outside_scope.model_dump(mode="json"))
+        assert denied.status_code == 400
+
+        # A lower publisher sequence is refused by the coordinator transaction.
+        current = finding(self.key, self.next_sequence())
+        assert (await self.post("/v1/findings", current))["accepted"]
+        lower = finding(self.key, current.finding.sequence - 1)
+        async with httpx.AsyncClient(base_url=self.args.http) as client:
+            stale = await client.post("/v1/findings", json=lower.model_dump(mode="json"))
+        assert stale.status_code == 409
+
+        # Lose the entire broker stream while agent_b is offline. PostgreSQL
+        # journal replay must restore its missed dry-run decision on restart.
+        self.compose("stop", "agent_b")
+        missed = finding(self.key, self.next_sequence())
+        missed_id = str(missed.finding.artifact_id)
+        assert (await self.post("/v1/findings", missed))["accepted"]
+        missed_revoke = revocation(self.revoker_key, missed, self.next_sequence())
+        missed_revoke_id = str(missed_revoke.revocation.revocation_id)
+        assert (await self.post("/v1/revocations", missed_revoke))["accepted"]
+        await self.wait(lambda: self.outbox(missed_id) is True, "missed outbox publish")
+        await self.wait(lambda: self.outbox(missed_revoke_id) is True, "missed revocation publish")
+        await self.wait(lambda: any(row[0] == missed_id for row in self.audit("agent")["decisions"]),
+                        "first agent before stream purge")
+        await self.wait(lambda: any(row[0] == missed_id for row in self.audit("agent")["ledger"]),
+                        "first agent revocation before stream purge")
+        await js.purge_stream(STREAM)
+        assert (await js.stream_info(STREAM)).state.messages == 0
+        self.compose("start", "agent_b")
+        await self.wait(lambda: any(row[0] == missed_id and row[2] == "EXACT_MATCH_ALLOWED"
+                                    for row in self.audit("agent_b")["decisions"]),
+                        "journal recovery beyond stream retention", timeout=60)
+        await self.wait(lambda: any(row[0] == missed_id for row in self.audit("agent_b")["ledger"]),
+                        "revocation recovery beyond stream retention", timeout=60)
+
+        # Every durable sends malformed broker input to the bounded DLQ before term.
+        await js.publish(SUBJECT, b"[]", headers={"Nats-Msg-Id": str(uuid4())})
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline:
+            if (await js.stream_info(DEAD_LETTER_STREAM)).state.messages >= 2:
+                break
+            await asyncio.sleep(0.25)
+        else:
+            raise AssertionError("both agents did not dead-letter malformed input")
+        dlq = await js.pull_subscribe(DEAD_LETTER_SUBJECT, durable=f"review-{uuid4().hex[:8]}",
+                                      stream=DEAD_LETTER_STREAM)
+        messages = await dlq.fetch(2, timeout=5)
+        records = [json.loads(message.data) for message in messages]
+        assert len(records) == 2
+        assert {record["agent_id"] for record in records} == {
+            self.audit("agent")["identity"], self.audit("agent_b")["identity"]}
+        assert all(base64.b64decode(record["body_base64"]) == b"[]" for record in records)
+        for message in messages:
+            await message.ack_sync()
+        return {"duplicate_identity_blocked": duplicate_blocked,
+                "out_of_scope_http_status": denied.status_code,
+                "stale_sequence_http_status": stale.status_code,
+                "purged_finding_and_revocation_recovered": True,
+                "dead_letter_records": len(records),
+                "stream_max_age_s": stream.config.max_age,
+                "stream_max_bytes": stream.config.max_bytes}
+
     async def benchmark(self, js, count: int, samples: int, path: Path) -> dict:
         policy, inventory = load_local(self.args.local_config)
         agents = []
         subscribers = []
-        token = uuid4().hex[:8]
         for index in range(count):
-            agent_id = f"phase2c-{count}-{token}-{index}"
+            agent_id = str(uuid4())
             audit = SqliteAudit(path / f"{agent_id}.db", agent_id=agent_id)
             agents.append((LocalAgent(policy, inventory, audit), audit))
             subscription = await js.pull_subscribe(
@@ -264,8 +356,11 @@ async def run(args):
     nc = await nats.connect(args.nats)
     js = nc.jetstream()
     try:
-        integration = await lab.integration(js)
-        print(json.dumps({"integration": integration}, sort_keys=True), flush=True)
+        if not args.skip_integration:
+            integration = await lab.integration(js)
+            print(json.dumps({"integration": integration}, sort_keys=True), flush=True)
+        hardening = await lab.hardening(js)
+        print(json.dumps({"hardening": hardening}, sort_keys=True), flush=True)
         with tempfile.TemporaryDirectory(prefix="aegis-phase2c-bench-") as directory:
             config = json.loads(Path(args.local_config).read_text())
             config["publishers_file"] = str(Path("lab-config/publishers.json").resolve())
@@ -287,6 +382,8 @@ if __name__ == "__main__":
     parser.add_argument("--nats", default="nats://127.0.0.1:14222")
     parser.add_argument("--postgres", default="postgresql://aegis:local-phase2c@127.0.0.1:15432/aegis")
     parser.add_argument("--key", default="lab-config/publisher.key")
+    parser.add_argument("--revoker-key", default="lab-config/revoker.key")
     parser.add_argument("--local-config", default="lab-config/agent.json")
     parser.add_argument("--samples", type=int, default=20)
+    parser.add_argument("--skip-integration", action="store_true")
     asyncio.run(run(parser.parse_args()))

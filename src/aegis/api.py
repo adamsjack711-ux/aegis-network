@@ -6,7 +6,8 @@ import os
 from contextlib import asynccontextmanager
 
 import nats
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
+from nats.js.api import DiscardPolicy, RetentionPolicy, StorageType, StreamConfig
 from nats.js.errors import NotFoundError
 from psycopg import errors as pg_errors
 
@@ -18,6 +19,11 @@ from .postgres import PostgresRepository, SequenceConflict
 SUBJECT = "aegis.findings.v1"
 REVOCATION_SUBJECT = "aegis.revocations.v1"
 STREAM = "AEGIS_FINDINGS"
+DEAD_LETTER_STREAM = "AEGIS_DEAD_LETTERS"
+DEAD_LETTER_SUBJECT = "aegis.deadletter.v1"
+FINDING_RETENTION_SECONDS = 24 * 60 * 60
+DEAD_LETTER_RETENTION_SECONDS = 7 * FINDING_RETENTION_SECONDS
+STREAM_MAX_BYTES = 64 * 1024 * 1024
 logger = logging.getLogger(__name__)
 
 
@@ -51,20 +57,40 @@ async def dispatch(repo: PostgresRepository, js) -> None:
         await asyncio.sleep(0.2)
 
 
+async def ensure_streams(js) -> None:
+    for name, subjects, max_age in (
+        (STREAM, [SUBJECT, REVOCATION_SUBJECT], FINDING_RETENTION_SECONDS),
+        (DEAD_LETTER_STREAM, [DEAD_LETTER_SUBJECT], DEAD_LETTER_RETENTION_SECONDS),
+    ):
+        try:
+            info = await js.stream_info(name)
+            config = info.config
+            config.subjects = sorted(set(config.subjects or []) | set(subjects))
+            exists = True
+        except NotFoundError:
+            config = StreamConfig(name=name, subjects=subjects)
+            exists = False
+        config.retention = RetentionPolicy.LIMITS
+        config.storage = StorageType.FILE
+        config.max_age = max_age
+        config.max_bytes = STREAM_MAX_BYTES
+        config.discard = DiscardPolicy.NEW
+        if name == STREAM:
+            config.max_msg_size = 256 * 1024
+        if exists:
+            await js.update_stream(config)
+        else:
+            await js.add_stream(config)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     repo = PostgresRepository(os.environ["AEGIS_DATABASE_URL"])
     publishers = load_publishers(os.environ["AEGIS_PUBLISHERS_FILE"])
     nc = await nats.connect(os.environ["AEGIS_NATS_URL"])
     js = nc.jetstream()
-    try:
-        info = await js.stream_info(STREAM)
-        subjects = set(info.config.subjects or [])
-        if REVOCATION_SUBJECT not in subjects:
-            info.config.subjects = sorted(subjects | {SUBJECT, REVOCATION_SUBJECT})
-            await js.update_stream(info.config)
-    except NotFoundError:
-        await js.add_stream(name=STREAM, subjects=[SUBJECT, REVOCATION_SUBJECT])
+    await ensure_streams(js)
+    app.state.repo = repo
     app.state.coordinator = Coordinator(publishers, repo, OutboxBus())
     task = asyncio.create_task(dispatch(repo, js))
     try:
@@ -84,6 +110,12 @@ app = FastAPI(title="Aegis Mesh lab coordinator", lifespan=lifespan)
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/v1/events")
+def replay_events(after: int = Query(default=0, ge=0), limit: int = Query(default=100, ge=1, le=100)):
+    events, head = app.state.repo.events_after(after, limit)
+    return {"events": events, "head": head}
 
 
 @app.post("/v1/findings", status_code=202)

@@ -32,11 +32,33 @@ def main() -> None:
     public = key.public_key().public_bytes(
         serialization.Encoding.Raw, serialization.PublicFormat.Raw
     )
+    revoker_path = directory / "revoker.key"
+    if revoker_path.exists():
+        revoker = Ed25519PrivateKey.from_private_bytes(revoker_path.read_bytes())
+    else:
+        revoker = Ed25519PrivateKey.generate()
+        revoker_path.write_bytes(revoker.private_bytes(
+            serialization.Encoding.Raw, serialization.PrivateFormat.Raw,
+            serialization.NoEncryption(),
+        ))
+        os.chmod(revoker_path, 0o600)
+    revoker_public = revoker.public_key().public_bytes(
+        serialization.Encoding.Raw, serialization.PublicFormat.Raw
+    )
     (directory / "publishers.json").write_text(json.dumps({"grants": [{
         "publisher_id": "lab-publisher",
         "key_id": "default",
         "public_key": base64.b64encode(public).decode(),
-        "roles": ["finding", "revocation"],
+        "roles": ["finding"],
+        "not_before": "2020-01-01T00:00:00+00:00",
+        "expires_at": "2035-01-01T00:00:00+00:00",
+        "revoked_at": None,
+    }, {
+        "publisher_id": "lab-revoker",
+        "key_id": "revoker",
+        "public_key": base64.b64encode(revoker_public).decode(),
+        "roles": ["revocation"],
+        "revocation_publishers": ["lab-publisher"],
         "not_before": "2020-01-01T00:00:00+00:00",
         "expires_at": "2035-01-01T00:00:00+00:00",
         "revoked_at": None,

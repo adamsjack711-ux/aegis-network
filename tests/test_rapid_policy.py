@@ -44,10 +44,11 @@ def agent(path, key, *, inventory=None, authorized=True, templates=None, agent_i
 
 def revocation(key, envelope, sequence=2, *, digest=None):
     return sign_revocation(Revocation(
-        schema_version="1.0", revocation_id=uuid4(), publisher_id="publisher-a",
+        schema_version="1.1", revocation_id=uuid4(), publisher_id="publisher-a",
         sequence=sequence, issued_at=NOW - timedelta(minutes=1),
         expires_at=NOW + timedelta(hours=1), target_artifact_id=envelope.finding.artifact_id,
         target_sha256=digest or hashlib.sha256(canonical_bytes(envelope.finding)).hexdigest(),
+        target_publisher_id=envelope.finding.publisher_id,
         reason="withdrawn",
     ), key, "revoker")
 

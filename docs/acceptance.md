@@ -16,6 +16,7 @@
 - [x] A signed revocation reached both agents and populated both durable revocation ledgers. Repeated finding and revocation submissions were idempotent.
 - [x] Unit tests cover broker publish failure, database failure after broker acknowledgement, audit failure before consumer acknowledgement, role denial, invalid signature, revocation before and after finding, and agent restart deduplication.
 - [x] Reconcile the Mesh and Rapid event, trust, revocation, agent-ID, audit, and acknowledgement contracts in [Phase 2C integration review](phase2c-integration.md). Review handoff is complete; no merge into `master` has occurred.
+- [x] Exercise Phase 2C identity leases, scoped revocations, stale sequence denial, full-stream-loss journal recovery, and dead-letter persistence in the [hardening review](phase2c-hardening.md). These dry-run checks do not authorize execution.
 
 ## Research questions and measurable gates
 

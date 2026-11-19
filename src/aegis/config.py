@@ -20,7 +20,8 @@ def load_publishers(path: str) -> TrustStore:
         })
     grants = []
     for entry in raw["grants"]:
-        if set(entry) != {"publisher_id", "key_id", "public_key", "roles", "not_before", "expires_at", "revoked_at"}:
+        required = {"publisher_id", "key_id", "public_key", "roles", "not_before", "expires_at", "revoked_at"}
+        if not required <= set(entry) or set(entry) - required - {"revocation_publishers"}:
             raise ValueError("invalid publisher grant fields")
         grants.append(PublisherGrant(
             publisher_id=entry["publisher_id"],
@@ -30,6 +31,8 @@ def load_publishers(path: str) -> TrustStore:
             not_before=datetime.fromisoformat(entry["not_before"]),
             expires_at=datetime.fromisoformat(entry["expires_at"]),
             revoked_at=datetime.fromisoformat(entry["revoked_at"]) if entry["revoked_at"] else None,
+            revocation_publishers=frozenset(entry["revocation_publishers"])
+            if "revocation_publishers" in entry else None,
         ))
     return TrustStore(grants)
 

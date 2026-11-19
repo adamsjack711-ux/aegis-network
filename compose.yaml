@@ -35,13 +35,14 @@ services:
     build: .
     command: ["python", "-m", "aegis.agent_runtime"]
     environment:
-      AEGIS_AGENT_ID: lab-agent-a
+      AEGIS_AGENT_ID: 36e1c9d7-b513-4c24-86c5-8923909170ec
       AEGIS_NATS_URL: nats://nats:4222
+      AEGIS_COORDINATOR_URL: http://coordinator:8000
       AEGIS_LOCAL_CONFIG: /config/agent.json
       AEGIS_AUDIT_DB: /audit/agent.db
     volumes:
       - ./lab-config:/config:ro
-      - agent_audit:/audit
+      - agent_audit_v2:/audit
     depends_on:
       - nats
       - coordinator
@@ -49,18 +50,19 @@ services:
     build: .
     command: ["python", "-m", "aegis.agent_runtime"]
     environment:
-      AEGIS_AGENT_ID: lab-agent-b
+      AEGIS_AGENT_ID: 4479b1c0-73e0-4917-9e4a-78f819125165
       AEGIS_NATS_URL: nats://nats:4222
+      AEGIS_COORDINATOR_URL: http://coordinator:8000
       AEGIS_LOCAL_CONFIG: /config/agent.json
       AEGIS_AUDIT_DB: /audit/agent.db
     volumes:
       - ./lab-config:/config:ro
-      - agent_b_audit:/audit
+      - agent_b_audit_v2:/audit
     depends_on:
       - nats
       - coordinator
 volumes:
   postgres_data:
   nats_data:
-  agent_audit:
-  agent_b_audit:
+  agent_audit_v2:
+  agent_b_audit_v2:

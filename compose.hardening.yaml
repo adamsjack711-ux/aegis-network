@@ -1,0 +1,11 @@
+# Loopback-only ports for the disposable Phase 2C hardening lab.
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:15432:5432"
+  nats:
+    ports:
+      - "127.0.0.1:14222:4222"
+  coordinator:
+    ports: !override
+      - "127.0.0.1:18080:8000"

@@ -48,11 +48,12 @@ class Decision:
 class Audit(Protocol):
     def get(self, artifact_id: str) -> Decision | None: ...
     def high_water(self, publisher_id: str) -> int: ...
+    def sequence_owner(self, publisher_id: str, sequence: int) -> str | None: ...
     def record(self, publisher_id: str, sequence: int, decision: Decision, authenticated: bool) -> None: ...
     def record_override(self, decision: Decision) -> Decision: ...
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool: ...
     def get_revocation(self, revocation_id: str) -> Decision | None: ...
-    def record_revocation(self, publisher_id: str, sequence: int, decision: Decision, target_id: str, target_digest: str, authenticated: bool) -> None: ...
+    def record_revocation(self, publisher_id: str, sequence: int, decision: Decision, target_id: str, target_digest: str, target_publisher_id: str | None, authenticated: bool) -> None: ...
 
 
 REJECTION_CODES = {
@@ -63,6 +64,8 @@ REJECTION_CODES = {
     "finding is not currently valid": "FINDING_INVALID_TIME",
     "revocation is not currently valid": "REVOCATION_INVALID_TIME",
     "invalid signature": "INVALID_SIGNATURE",
+    "revocation target publisher outside grant scope": "REVOCATION_SCOPE_DENIED",
+    "revocation target publisher is required": "REVOCATION_SCOPE_UNBOUND",
 }
 
 
@@ -85,7 +88,11 @@ class Coordinator:
         return created
 
     def revoke(self, envelope: SignedRevocation, now: datetime | None = None) -> bool:
-        key = self.publishers.authorize(envelope.revocation.publisher_id, envelope.key_id, "revocation", now)
+        target_publisher_id = envelope.revocation.target_publisher_id
+        if target_publisher_id is None:
+            raise ValueError("revocation target publisher is required")
+        key = self.publishers.authorize_revocation(
+            envelope.revocation.publisher_id, envelope.key_id, target_publisher_id, now)
         verify(envelope, key, now)
         created = self.repository.add(envelope)
         if created:
@@ -135,6 +142,8 @@ class LocalAgent:
         else:
             if previous is not None and previous.digest != digest:
                 reason, reason_code = "artifact ID conflict", "ARTIFACT_ID_CONFLICT"
+            elif (owner := self.audit.sequence_owner(finding.publisher_id, finding.sequence)) is not None and owner != artifact_id:
+                reason, reason_code = "publisher sequence conflict", "PUBLISHER_SEQUENCE_CONFLICT"
             elif self.audit.is_revoked(finding.publisher_id, artifact_id, digest):
                 # A revocation changes the effective result of an old finding.
                 # Its own durable audit row supplies the history of that change.
@@ -175,6 +184,7 @@ class LocalAgent:
         return decision
 
     def evaluate_revocation(self, envelope: SignedRevocation, now: datetime | None = None) -> Decision:
+        now = now or datetime.now(timezone.utc)
         revocation = envelope.revocation
         rid = str(revocation.revocation_id)
         target_id = str(revocation.target_artifact_id)
@@ -183,7 +193,11 @@ class LocalAgent:
         authenticated = False
         try:
             key = self.trust.authorize(revocation.publisher_id, envelope.key_id, "revocation", now)
-            verify(envelope, key, now)
+            if revocation.issued_at > now:
+                raise ValueError("revocation is not currently valid")
+            # A withdrawal is permanent. Retained signed revocations can be
+            # recovered after their submission window while the key is still trusted.
+            verify(envelope, key, revocation.issued_at)
         except ValueError as exc:
             outcome, reason, reason_code = "deny", str(exc), _rejection_code(exc)
         else:
@@ -191,13 +205,24 @@ class LocalAgent:
                 outcome, reason, reason_code = "deny", "revocation ID conflict", "REVOCATION_ID_CONFLICT"
             elif previous is not None:
                 return previous
+            elif revocation.target_publisher_id is None:
+                outcome, reason, reason_code = "deny", "revocation target publisher is required", "REVOCATION_SCOPE_UNBOUND"
             else:
-                authenticated = True
-                if revocation.sequence <= self.audit.high_water(revocation.publisher_id):
-                    outcome, reason, reason_code = "deny", "stale sequence", "STALE_SEQUENCE"
+                try:
+                    self.trust.authorize_revocation(
+                        revocation.publisher_id, envelope.key_id, revocation.target_publisher_id, now)
+                except ValueError as exc:
+                    outcome, reason, reason_code = "deny", str(exc), _rejection_code(exc)
                 else:
-                    outcome, reason, reason_code = "revoked_dry_run", revocation.reason, "REVOCATION_ACCEPTED"
+                    owner = self.audit.sequence_owner(revocation.publisher_id, revocation.sequence)
+                    if owner is not None and owner != rid:
+                        outcome, reason, reason_code = "deny", "publisher sequence conflict", "PUBLISHER_SEQUENCE_CONFLICT"
+                    else:
+                        # A valid late revocation must still withdraw its exact target.
+                        authenticated = True
+                        outcome, reason, reason_code = "revoked_dry_run", revocation.reason, "REVOCATION_ACCEPTED"
         decision = Decision(target_id, digest, outcome, reason, reason_code=reason_code,
                             event_id=rid, correlation_id=target_id, agent_id=getattr(self.audit, "agent_id", None))
-        self.audit.record_revocation(revocation.publisher_id, revocation.sequence, decision, target_id, revocation.target_sha256, authenticated)
+        self.audit.record_revocation(revocation.publisher_id, revocation.sequence, decision, target_id,
+                                     revocation.target_sha256, revocation.target_publisher_id, authenticated)
         return decision

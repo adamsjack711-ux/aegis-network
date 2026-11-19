@@ -61,7 +61,7 @@ class SignedFinding(StrictModel):
 
 
 class Revocation(StrictModel):
-    schema_version: Literal["1.0"]
+    schema_version: Literal["1.0", "1.1"]
     revocation_id: UUID
     publisher_id: str = Field(pattern=r"^[a-z0-9][a-z0-9._-]{0,63}$")
     sequence: int = Field(strict=True, gt=0)
@@ -69,6 +69,7 @@ class Revocation(StrictModel):
     expires_at: datetime
     target_artifact_id: UUID
     target_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    target_publisher_id: str | None = Field(default=None, pattern=r"^[a-z0-9][a-z0-9._-]{0,63}$")
     reason: Literal["withdrawn", "invalid-evidence", "superseded"]
 
     @model_validator(mode="after")
@@ -77,6 +78,10 @@ class Revocation(StrictModel):
             raise ValueError("timestamps must include a timezone")
         if self.expires_at <= self.issued_at:
             raise ValueError("expiry must follow issue time")
+        if self.schema_version == "1.1" and self.target_publisher_id is None:
+            raise ValueError("revocation target publisher is required")
+        if self.schema_version == "1.0" and self.target_publisher_id is not None:
+            raise ValueError("v1.0 revocation cannot bind a target publisher")
         return self
 
 
@@ -91,8 +96,12 @@ SignedEvent = SignedFinding | SignedRevocation
 
 
 def canonical_bytes(finding: Finding | Revocation) -> bytes:
+    payload = finding.model_dump(mode="json")
+    # Keep legacy v1.0 signatures verifiable; the new field is signed in v1.1.
+    if isinstance(finding, Revocation) and finding.schema_version == "1.0":
+        payload.pop("target_publisher_id")
     return json.dumps(
-        finding.model_dump(mode="json"), sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
     ).encode("utf-8")
 
 
