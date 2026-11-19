@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sqlite3
+import sys
 from tempfile import TemporaryDirectory
 import time
 from types import SimpleNamespace
@@ -16,7 +17,7 @@ import psycopg
 import pytest
 
 from aegis.artifact import event_id, parse_event
-from phase4a_bench import Lab, STREAM, local_docker, revocation
+from phase4a_bench import Lab, Log, ROOT, STREAM, local_docker, revocation
 
 
 def agent_readback(path, finding, withdrawal=None):
@@ -45,6 +46,14 @@ async def observe_until(read, ready, timeout=15):
             await asyncio.sleep(0.025)
 
 
+async def submit_http(lab, client, event):
+    route = "/v1/findings" if event.kind == "finding" else "/v1/revocations"
+    url = f"http://127.0.0.1:{lab.coordinator_ports[0]}{route}"
+    response = await client.post(url, content=event.model_dump_json(), headers={"Content-Type": "application/json"})
+    assert response.status_code in (200, 201, 202)
+    return event_id(event)
+
+
 def withdrawal_delivery(tmp_path, record_property, *, priority):
     async def run(docker_env, path):
         lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), path, docker_env)
@@ -56,14 +65,6 @@ def withdrawal_delivery(tmp_path, record_property, *, priority):
                 audit = path / agent_id / "audit.db"
                 await observe_until(worker.read, lambda rows: any(row["kind"] == "ready" for row in rows))
 
-                async def submit(event):
-                    route = "/v1/findings" if event.kind == "finding" else "/v1/revocations"
-                    url = f"http://127.0.0.1:{lab.coordinator_ports[0]}{route}"
-                    response = await client.post(url, content=event.model_dump_json(),
-                                                 headers={"Content-Type": "application/json"})
-                    assert response.status_code in (200, 201, 202)
-                    return event_id(event)
-
                 def queue():
                     with psycopg.connect(lab.dsn) as db:
                         db.execute("SET TRANSACTION READ ONLY")
@@ -72,7 +73,7 @@ def withdrawal_delivery(tmp_path, record_property, *, priority):
                                           "ORDER BY j.position").fetchall()
 
                 finding = lab.make_finding(lab.publishers[0], 1)
-                finding_id = await submit(finding)
+                finding_id = await submit_http(lab, client, finding)
                 await observe_until(lambda: agent_readback(audit, finding_id),
                                     lambda rows: rows[0] == ("allow_dry_run", 1))
                 await observe_until(queue, lambda rows: rows == [(1, finding_id, True)])
@@ -87,8 +88,9 @@ def withdrawal_delivery(tmp_path, record_property, *, priority):
                     assert capped.max_bytes > 0 and capped.discard == "new"
                     await lab.js.update_stream(capped)
                 await asyncio.to_thread(lab.compose, "stop", "-t", "0", "nats")
-                ordinary = [await submit(lab.make_finding(lab.publishers[0], seq)) for seq in range(2, 6)]
-                withdrawal_id = await submit(revocation(lab.revoker, finding, 1))
+                ordinary = [await submit_http(lab, client, lab.make_finding(lab.publishers[0], seq))
+                            for seq in range(2, 6)]
+                withdrawal_id = await submit_http(lab, client, revocation(lab.revoker, finding, 1))
                 backlog = await asyncio.to_thread(queue)
                 record_property("queued_before_restart", json.dumps(backlog))
                 assert backlog == [(1, finding_id, True)] + [
@@ -172,3 +174,160 @@ def test_W01_W02_queued_withdrawal_after_broker_restart(tmp_path, record_propert
                     reason="requires the Phase 4E loopback priority profile")
 def test_W01_W02_critical_lane_progress_while_ordinary_stream_is_full(tmp_path, record_property):
     withdrawal_delivery(tmp_path, record_property, priority=True)
+
+
+@pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1" or os.getenv("AEGIS_PHASE4E_PRIORITY") != "1",
+                    reason="requires the Phase 4E loopback priority profile")
+def test_C05_agent_death_on_both_sides_of_durable_commit(tmp_path, record_property):
+    from aegis.agent_runtime import durable_name
+    from aegis.mesh import CRITICAL_STREAM
+
+    async def run(path, docker_env):
+        lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), path, docker_env)
+        async with httpx.AsyncClient(trust_env=False, timeout=5) as client:
+            try:
+                await lab.start_services(client)
+                early, late = str(uuid4()), str(uuid4())
+                early_proc, early_log = lab.fleet.start(early, 2)
+                late_folder = path / late
+                late_folder.mkdir()
+                late_log = Log(late_folder / "trace.jsonl")
+                late_proc = lab.spawn(sys.executable, ROOT / "scripts/phase4a_worker.py", "--id", late,
+                                      "--broker-port", lab.broker_port, "--coordinator-port", lab.coordinator_ports[0],
+                                      "--config", lab.configs[2], "--audit", late_folder / "audit.db",
+                                      "--stop-before-withdrawal-ack", log=late_log)
+                lab.fleet.processes[late] = late_proc
+                lab.fleet.paused.add(late)
+                for worker in (early_log, late_log):
+                    await observe_until(worker.read, lambda rows: any(row["kind"] == "ready" for row in rows))
+
+                def db_path(agent):
+                    return path / agent / "audit.db"
+
+                finding = lab.make_finding(lab.publishers[0], 1)
+                finding_id = await submit_http(lab, client, finding)
+                for agent in (early, late):
+                    await observe_until(lambda: agent_readback(db_path(agent), finding_id),
+                                        lambda rows: rows[0] == ("allow_dry_run", 1))
+
+                async def ack_floor(agent):
+                    info = await lab.js.consumer_info(CRITICAL_STREAM, f"{durable_name(agent)}-withdrawals")
+                    return info.ack_floor.stream_seq
+
+                assert await ack_floor(early) == await ack_floor(late) == 0
+                early_proc.kill()
+                await asyncio.to_thread(early_proc.wait, 5)
+                start_ns = time.monotonic_ns()
+                withdrawal_id = await submit_http(lab, client, revocation(lab.revoker, finding, 1))
+                accepted_ms = (time.monotonic_ns() - start_ns) / 1_000_000
+                assert agent_readback(db_path(early), finding_id, withdrawal_id)[1] is None
+                await observe_until(late_log.read, lambda rows: any(row["kind"] == "withdrawal_commit" for row in rows))
+                _, late_denial = agent_readback(db_path(late), finding_id, withdrawal_id)
+                assert late_denial == ("revoked_dry_run", 1, withdrawal_id)
+                late_denial_ms = (time.monotonic_ns() - start_ns) / 1_000_000
+                assert await ack_floor(late) == 0
+                message = await lab.js.get_msg(CRITICAL_STREAM, seq=1)
+                assert event_id(parse_event(message.data)) == withdrawal_id
+                record_property("crash_before_recovery", json.dumps({
+                    "withdrawal_id": withdrawal_id, "accepted_ms": accepted_ms,
+                    "pre_intake_agent": {"decision": None, "broker_ack_floor": await ack_floor(early)},
+                    "after_audit_agent": {"decision": late_denial, "broker_ack_floor": await ack_floor(late),
+                                          "observer_denial_ms": late_denial_ms},
+                    "actuator_observation": "unobserved; dry-run transport",
+                }))
+
+                late_proc.kill()
+                await asyncio.to_thread(late_proc.wait, 5)
+                lab.fleet.paused.remove(late)
+                lab.fleet.start(early, 2)
+                lab.fleet.start(late, 2)
+
+                async def recover(agent, initial_observation=None):
+                    _, result = await observe_until(lambda: agent_readback(db_path(agent), finding_id, withdrawal_id),
+                                                    lambda rows: rows[1] is not None, timeout=45)
+                    observed_ms = (time.monotonic_ns() - start_ns) / 1_000_000
+                    assert result == ("revoked_dry_run", 1, withdrawal_id)
+                    async with asyncio.timeout(45):
+                        while await ack_floor(agent) < 1:
+                            await asyncio.sleep(0.025)
+                    ack_ms = (time.monotonic_ns() - start_ns) / 1_000_000
+                    with closing(sqlite3.connect(f"{db_path(agent).as_uri()}?mode=ro", uri=True)) as db:
+                        row, = db.execute("SELECT count(*), min(decided_at) FROM revocation_decisions "
+                                          "WHERE event_id=?", (withdrawal_id,)).fetchall()
+                    assert row[0] == 1
+                    return {"first_durable_observation_upper_ms": initial_observation or observed_ms,
+                            "independent_ack_observation_upper_ms": ack_ms, "durable_decision_rows": row[0],
+                            "audit_wall_timestamp": row[1], "broker_ack_floor": await ack_floor(agent)}
+
+                pre, post = await asyncio.gather(recover(early), recover(late, late_denial_ms))
+                record_property("crash_recovery", json.dumps({"pre_intake": pre, "after_audit_before_ack": post}))
+            finally:
+                await lab.stop()
+
+    with TemporaryDirectory(prefix="crash-", dir=tmp_path) as scratch, local_docker() as docker_env:
+        asyncio.run(run(Path(scratch), docker_env))
+
+
+@pytest.mark.skipif(os.getenv("AEGIS_PHASE4E_LIVE") != "1" or os.getenv("AEGIS_PHASE4E_PRIORITY") != "1",
+                    reason="requires the Phase 4E loopback priority profile")
+def test_C05_agent_partition_holds_until_reconciliation(tmp_path, record_property):
+    from aegis.agent_runtime import durable_name
+    from aegis.mesh import CRITICAL_STREAM
+    from benchmark_phase4e_withdrawal import BrokerLink
+
+    async def run(path, docker_env):
+        lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5), path, docker_env)
+        async with httpx.AsyncClient(trust_env=False, timeout=5) as client:
+            try:
+                await lab.start_services(client)
+                link = BrokerLink(lab.broker_port)
+                async with await asyncio.start_server(link.connect, "127.0.0.1", 0) as proxy:
+                    agent = str(uuid4())
+                    port = lab.broker_port
+                    try:
+                        lab.broker_port = proxy.sockets[0].getsockname()[1]
+                        _, worker = lab.fleet.start(agent, 2)
+                    finally:
+                        lab.broker_port = port
+                    await observe_until(worker.read, lambda rows: any(row["kind"] == "ready" for row in rows))
+                    db = path / agent / "audit.db"
+                    finding = lab.make_finding(lab.publishers[0], 1)
+                    finding_id = await submit_http(lab, client, finding)
+                    await observe_until(lambda: agent_readback(db, finding_id),
+                                        lambda rows: rows[0] == ("allow_dry_run", 1))
+                    name = f"{durable_name(agent)}-withdrawals"
+                    link.partition()
+                    await observe_until(worker.read, lambda rows: any(row["kind"] == "disconnected" for row in rows))
+                    withdrawal_id = await submit_http(lab, client, revocation(lab.revoker, finding, 1))
+                    async with asyncio.timeout(10):
+                        while (await lab.js.stream_info(CRITICAL_STREAM)).state.last_seq == 0:
+                            await asyncio.sleep(0.025)
+                    message = await lab.js.get_msg(CRITICAL_STREAM, seq=1)
+                    assert event_id(parse_event(message.data)) == withdrawal_id
+                    _, held = agent_readback(db, finding_id, withdrawal_id)
+                    floor = (await lab.js.consumer_info(CRITICAL_STREAM, name)).ack_floor.stream_seq
+                    record_property("partition_held", json.dumps({
+                        "published_withdrawal": withdrawal_id, "decision": held, "broker_ack_floor": floor,
+                        "actuator_observation": "unobserved; dry-run transport",
+                    }))
+                    assert held is None and floor == 0
+
+                    rejoined_ns = time.monotonic_ns()
+                    link.open = True
+                    _, denial = await observe_until(lambda: agent_readback(db, finding_id, withdrawal_id),
+                                                    lambda rows: rows[1] is not None, timeout=30)
+                    denial_ms = (time.monotonic_ns() - rejoined_ns) / 1_000_000
+                    async with asyncio.timeout(30):
+                        while (await lab.js.consumer_info(CRITICAL_STREAM, name)).ack_floor.stream_seq < 1:
+                            await asyncio.sleep(0.025)
+                    record_property("partition_reconnected", json.dumps({
+                        "decision": denial, "observer_denial_upper_ms": denial_ms,
+                        "independent_ack_upper_ms": (time.monotonic_ns() - rejoined_ns) / 1_000_000,
+                    }))
+                    assert denial == ("revoked_dry_run", 1, withdrawal_id)
+                    link.partition()
+            finally:
+                await lab.stop()
+
+    with TemporaryDirectory(prefix="partition-", dir=tmp_path) as scratch, local_docker() as docker_env:
+        asyncio.run(run(Path(scratch), docker_env))
