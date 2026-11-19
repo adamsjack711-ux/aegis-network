@@ -1,0 +1,299 @@
+{
+  "environment": {
+    "when_utc": "2026-11-19T23:56:30.075936+00:00",
+    "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.15.2",
+    "monotonic_clock": "single host"
+  },
+  "trials": [
+    {
+      "source_commit": "11ecb948de82ef094f4fc48261786ff7600d64de",
+      "trace": [
+        {
+          "event": "healthy_disk",
+          "at_ns": 552758668540458,
+          "started_ns": 552758667941125,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "anchor_stopped",
+          "at_ns": 552758672009333,
+          "started_ns": 552758668547583,
+          "result": null
+        },
+        {
+          "event": "before_any_serving_request",
+          "at_ns": 552759173471791,
+          "started_ns": 552759172811625,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "first_post_fault_read_a",
+          "at_ns": 552759180099500,
+          "started_ns": 552759173474916,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        {
+          "event": "after_first_read_a",
+          "at_ns": 552759180540000,
+          "started_ns": 552759180101750,
+          "result": {
+            "target-a": {
+              "generation": 1,
+              "held": true,
+              "version": 3,
+              "marker": "quarantined",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            },
+            "target-b": {
+              "generation": 1,
+              "held": false,
+              "version": 2,
+              "marker": "observing",
+              "receipts": [
+                [
+                  1,
+                  "observing"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "event": "unchanged_anchor_restarted",
+          "at_ns": 552759441841958,
+          "started_ns": 552759180542833,
+          "result": null
+        },
+        {
+          "event": "same_generation_latched_target_a",
+          "at_ns": 552759446197625,
+          "started_ns": 552759441872625,
+          "outcome": "Denied",
+          "reason": "held writer requires a new generation"
+        },
+        {
+          "event": "observer_attempts_fence",
+          "at_ns": 552759448744375,
+          "started_ns": 552759446214250,
+          "outcome": "Denied",
+          "reason": "TLS identity or expiry is outside the operation's scope"
+        },
+        {
+          "event": "first_read_b_after_unchanged_anchor_return",
+          "at_ns": 552759461764041,
+          "started_ns": 552759448756416,
+          "result": {
+            "generation": 1,
+            "version": 2,
+            "marker": "observing",
+            "effective": "observing",
+            "writes": 1
+          }
+        },
+        {
+          "event": "second_anchor_loss",
+          "at_ns": 552759465833916,
+          "started_ns": 552759462181125,
+          "result": null
+        },
+        {
+          "event": "target_b_writer_lock_acquired",
+          "at_ns": 552759466101208
+        },
+        {
+          "event": "competing_requests_blocked_disk",
+          "at_ns": 552759572319375,
+          "started_ns": 552759571956750,
+          "result": {
+            "generation": 1,
+            "held": false,
+            "version": 2,
+            "marker": "observing",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          }
+        },
+        {
+          "event": "target_b_writer_lock_released",
+          "at_ns": 552759572332875
+        },
+        {
+          "event": "racing_request_results",
+          "at_ns": 552759585316333,
+          "results": [
+            {
+              "name": "hold_read",
+              "started_ns": 552759466916250,
+              "at_ns": 552759585219541,
+              "value": {
+                "generation": 1,
+                "version": 3,
+                "marker": "quarantined",
+                "effective": "quarantined",
+                "writes": 1
+              }
+            },
+            {
+              "name": "protected_write",
+              "started_ns": 552759466942833,
+              "at_ns": 552759585002791,
+              "error": "RPC endpoint unavailable",
+              "outcome": "Unavailable"
+            }
+          ]
+        },
+        {
+          "event": "target_b_durable_after_race",
+          "at_ns": 552759585607250,
+          "started_ns": 552759585318666,
+          "result": {
+            "generation": 1,
+            "held": true,
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          }
+        },
+        {
+          "event": "anchor_restarted_after_race",
+          "at_ns": 552759877118416,
+          "started_ns": 552759585610291,
+          "result": null
+        },
+        {
+          "event": "operator_retired",
+          "at_ns": 552759894778541,
+          "started_ns": 552759877135791,
+          "result": {
+            "commitment": "4fa783c82a23374406e47c00434835d64efa6e2935da5b612a0423e58cc13f45",
+            "generation": 2,
+            "revision": 3
+          }
+        },
+        {
+          "event": "successor_activated",
+          "at_ns": 552759942279166,
+          "generation": 3
+        },
+        {
+          "event": "stale_owner_target-a",
+          "at_ns": 552759949670541,
+          "started_ns": 552759945957875,
+          "outcome": "Denied",
+          "reason": "assignment is outside the target's durable fence"
+        },
+        {
+          "event": "old_approval_target-a",
+          "at_ns": 552759955148750,
+          "started_ns": 552759949689291,
+          "outcome": "Denied",
+          "reason": "command or approval does not bind the exact target and assignment"
+        },
+        {
+          "event": "fresh_approval_target-a",
+          "at_ns": 552759966848791,
+          "started_ns": 552759955617291,
+          "result": {
+            "version": 5,
+            "generation": 3
+          }
+        },
+        {
+          "event": "stale_owner_target-b",
+          "at_ns": 552759973967000,
+          "started_ns": 552759970544416,
+          "outcome": "Denied",
+          "reason": "assignment is outside the target's durable fence"
+        },
+        {
+          "event": "old_approval_target-b",
+          "at_ns": 552759979450333,
+          "started_ns": 552759973980833,
+          "outcome": "Denied",
+          "reason": "command or approval does not bind the exact target and assignment"
+        },
+        {
+          "event": "fresh_approval_target-b",
+          "at_ns": 552759992607333,
+          "started_ns": 552759979794666,
+          "result": {
+            "version": 5,
+            "generation": 3
+          }
+        }
+      ],
+      "pre_observation_gate": "FAIL"
+    }
+  ]
+}

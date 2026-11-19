@@ -50,6 +50,10 @@ The table records the independent control-run evidence. Every full Phase 4E gate
 | C04 | Partial | Simulated status loss stopped peer writes. A new fixture instance reopened the store with status still unavailable and all nine routes quarantined at fences 2/1/1. Independent networked witness, process failure, and continuous observation remain open. |
 | C05 | Partial | Modeled agent journal recovery required current history and retained the historical withdrawal. No combined delayed broker delivery and live agent recovery timing. |
 
+## Pre-observation enforcement follow-up
+
+**FAIL for native ownership loss and the 4E-B marker target.** At the tested integrated pin, the native HTTP serving path denied access before the hold was durable. A monitored ownership loss reached its first health probe before committing quarantine. At the exact B pin the observer's first `/read` itself persisted the hold, while the untouched target resumed observing after its anchor returned. The native Evidence-loss control passed the narrower ordering test. [Exact pins, repeat trials and raw timing](phase4e-observer-order.md)
+
 ## Evidence and oracle
 
 - An external observer uses standard-library HTTP against inventoried IPv4 loopback emulators, checking response status, complete fixture body, target identity, and fence independently of the control-plane observer. Expected modes are fixed in the test. Cross-checks reopen SQLite in read-only mode and query the audit sequence, target modes, generation, and retained status floor.
