@@ -25,7 +25,9 @@ from aegis.evidence.status import RelyingStatus, StatusProof, StatusWitness
 from aegis.evidence.status_protocol import StatusPolicy, WitnessGrant, observe
 from aegis.evidence.synthetic import create_lab
 from aegis.journal.protocol import JournalBlocked
+from aegis.journal.witness import WitnessHeads
 from aegis.mitigation.lab import Lab
+from aegis.mitigation.observer import ObservationError
 from aegis.mitigation.policy import Denied, LocalOperator
 from aegis.mitigation.store import TargetStore
 from aegis.ownership import IdentitySession, lease_proof
@@ -168,6 +170,16 @@ class StatusFixture:
             expected_environment_sha256=manifest["environment_sha256"], fetch=self.fetch,
         )
 
+    def withdraw(self, issuer, kind, pin):
+        now = int(time.time())
+        record = sign_record(Withdrawal(
+            kind="aegis.evidence.withdrawal.v1", issuer="review", key_id="lab-v1", cohort=COHORT,
+            record_id=uuid4().hex, issued_at=now, expires_at=now + 10, target_kind=kind,
+            target_issuer=issuer, target_sha256=pin, reason="withdrawn",
+        ), self.researcher.revoker)
+        self.admit(record)
+        return record
+
 
 def test_E03_signed_verifier_withdrawal_survives_reader_restart(tmp_path, record_property):
     researcher = create_lab()
@@ -176,14 +188,7 @@ def test_E03_signed_verifier_withdrawal_survives_reader_restart(tmp_path, record
     retain(record_property, "healthy_signed_status", status.last)
     verifier = researcher.verifiers[0]
     grant = researcher.trust.grants[verifier.issuer, verifier.key_id]
-    now = int(time.time())
-    withdrawal = sign_record(Withdrawal(
-        kind="aegis.evidence.withdrawal.v1", issuer="review", key_id="lab-v1", cohort=COHORT,
-        record_id=uuid4().hex, issued_at=now, expires_at=now + 10, target_kind="verifier-key",
-        target_issuer=verifier.issuer, target_sha256=sha256(grant.public_key.public_bytes_raw()).hexdigest(),
-        reason="withdrawn",
-    ), researcher.revoker)
-    status.admit(withdrawal)
+    withdrawal = status.withdraw(verifier.issuer, "verifier-key", sha256(grant.public_key.public_bytes_raw()).hexdigest())
     result = status.appraise()
     assert (result.binding, result.reason) == (None, "revoked")
     retain(record_property, "withdrawn_signed_status", status.last)
@@ -297,7 +302,10 @@ def test_I01_I03_signed_home_transfer(tmp_path, record_property):
     ]
 
 
-@pytest.mark.parametrize("case", ["M01_stale", "M02_missing", "healthy", "C04_status_loss", "I04_expiry"])
+@pytest.mark.parametrize("case", [
+    "M01_stale", "M02_missing", "healthy", "C04_status_loss", "I04_expiry",
+    "T6_journal_quorum", "T6_unresolved_cut", "T6_revoked_evidence", "T6_exact_intent", "T6_stale_owner",
+])
 def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
     async def run():
         with ExitStack() as stack:
@@ -309,7 +317,7 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
             finding, bundle, verification = publishable_finding(network.finding(), network.author,
                                                                 researcher, collector)
             network.archive.append(network.receive(finding))
-            network.publish(network.seal())
+            first = network.publish(network.seal())
             audit = SqliteAudit(tmp_path / "rapid.sqlite", str(uuid4()))
             stack.enter_context(closing(audit.db))
             agent = LocalAgent(LocalPolicy(network.trust, frozenset({MESH_TEMPLATE}), True),
@@ -324,19 +332,23 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
             store = TargetStore(tmp_path / "target.sqlite", LocalOperator())
             store.create()
             home = store.ownership
-            home.enroll(audit.agent_id, PRINCIPAL, key.public_key(), ("broker-a",))
+            home.enroll(audit.agent_id, PRINCIPAL, key.public_key(), ("broker-a", "broker-b"))
             assignment = home.accept(lease_proof("claim", home.candidate("broker-a"), key),
                                      peer_principal=PRINCIPAL, broker="broker-a")
+            identity = IdentitySession(assignment, key)
 
             def coordinator(_):
                 pytest.fail("witnessed fixture queried the coordinator")
 
             async with httpx.AsyncClient(transport=httpx.MockTransport(coordinator)) as remote:
-                intake = MeshIntake(agent, None, remote, journal=network.client())
+                journal = network.client()
+                if case == "T6_journal_quorum":
+                    journal.heads = WitnessHeads(network.policy, network.witnesses[:3])
+                intake = MeshIntake(agent, None, remote, journal=journal)
                 intake.lease = SimpleNamespace(ensure=lambda: asyncio.sleep(0))
                 gate = EvidenceGate(finding, bundle, verification, intake, collector, evidence,
                                     independent_evidence=NativeEvidenceStatus(status.reader, status.fetch))
-                writer = VerifiedLab(gate, store.path, identity=IdentitySession(assignment, key))
+                writer = VerifiedLab(gate, store.path, identity=identity)
                 with writer.lab as lab:
                     controller = lab.controller
                     plan = await writer.prepare(3_000)
@@ -366,12 +378,32 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
                         return
 
                     approval = lab.operator.approve(plan, plan.digest)
+                    if case == "T6_exact_intent":
+                        with pytest.raises(Denied):
+                            controller.start(plan, approval, command=identity.command("restrict", plan.digest, "canary"))
+                        changed = replace(plan, expected_fences=(1, 0, 0))
+                        changed_approval = lab.operator.approve(changed, changed.digest)
+                        with pytest.raises(ObservationError):
+                            controller.start(changed, changed_approval, command=identity.command("begin", changed.digest))
+                        assert snapshot(store.path)["audit"] == []
                     await writer.transition(controller.start, plan, approval, action="begin")
                     await writer.transition(controller.restrict, plan, approval, TARGETS[0],
                                             action="restrict", target=TARGETS[0])
                     await writer.transition(controller.verify, plan, canary=True, action="verify-canary")
                     canary_modes = open_modes | {TARGETS[0]: ("restricted", 1)}
                     assert_routes(probe(lab.endpoints), lab_id, canary_modes)
+                    if case == "T6_exact_intent":
+                        state = snapshot(store.path)
+                        with pytest.raises(Denied):
+                            controller.restrict(plan, approval, TARGETS[1],
+                                                command=identity.command("restrict", plan.digest, TARGETS[2]))
+                        actual, routes = snapshot(store.path), probe(lab.endpoints)
+                        retain(record_property, "exact_intent_denial", {"db": actual, "http": routes})
+                        assert actual == state
+                        assert_routes(routes, lab_id, canary_modes)
+                        return
+
+                    error = Denied
                     if case == "I04_expiry":
                         with readonly(store.path) as db:
                             mono_expiry, wall_expiry = db.execute(
@@ -381,11 +413,40 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
                         monkeypatch.setattr(ownership, "time_ns", lambda: wall_expiry)
                         retain(record_property, "expiry_boundary",
                                {"mono_ns": mono_expiry, "wall_ns": wall_expiry, "generation": assignment.generation})
-                    else:
+                    elif case == "C04_status_loss":
                         status.unavailable = True
-                    with pytest.raises(Denied):
+                    elif case == "T6_journal_quorum":
+                        journal.heads = WitnessHeads(network.policy, network.witnesses[:2])
+                        error = JournalBlocked
+                    elif case == "T6_unresolved_cut":
+                        network.archive.append(network.receive(network.withdrawal(finding)))
+                        latest = network.publish(network.seal())
+                        journal.archives = ()
+                        error = JournalBlocked
+                    elif case == "T6_revoked_evidence":
+                        status.withdraw("research", "bundle", bundle.sha256)
+                    else:
+                        home.fence(assignment.generation)
+                        home.accept(lease_proof("claim", home.candidate("broker-b"), key),
+                                    peer_principal=PRINCIPAL, broker="broker-b")
+                    with pytest.raises(error):
                         await writer.transition(controller.restrict, plan, approval, TARGETS[1],
                                                 action="restrict", target=TARGETS[1])
+                    if case == "T6_unresolved_cut":
+                        with readonly(tmp_path / "agent-protected.db") as db:
+                            pin, = db.execute("SELECT value FROM pins WHERE name = 'agent'").fetchone()
+                        state = json.loads(pin)
+                        assert state["pending"] == latest.head.model_dump(mode="json")
+
+                        class OlderView:
+                            async def latest(self):
+                                return first
+
+                        journal.heads = OlderView()
+                        with pytest.raises(JournalBlocked):
+                            await writer.transition(controller.restrict, plan, approval, TARGETS[1],
+                                                    action="restrict", target=TARGETS[1])
+                        retain(record_property, "retained_pending_cut", state)
                     state, routes = snapshot(store.path), probe(lab.endpoints)
                     retain(record_property, "authority_loss", {"db": state, "http": routes})
                     assert state["targets"] == [("canary", 1, "restricted"),

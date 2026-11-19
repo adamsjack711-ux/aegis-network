@@ -1,4 +1,142 @@
 {
+  "agent-crash-4918dad-diagnostic.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "agent-crash-4918dad.xml": {
+    "agent_crash_recovery": {
+      "after_audit_before_ack": {
+        "audit_wall_timestamp": "2026-11-19T23:51:43.107Z",
+        "broker_ack_floor": 1,
+        "durable_decision_rows": 1,
+        "first_durable_observation_upper_ms": 47.654583,
+        "independent_ack_observation_upper_ms": 30477.481375
+      },
+      "pre_intake": {
+        "audit_wall_timestamp": "2026-11-19T23:52:13.534Z",
+        "broker_ack_floor": 1,
+        "durable_decision_rows": 1,
+        "first_durable_observation_upper_ms": 30479.332583,
+        "independent_ack_observation_upper_ms": 30479.991458
+      }
+    },
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "agent-crash-4c6f674-diagnostic.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "agent-crash-4c6f674.xml": {
+    "agent_crash_recovery": {
+      "after_audit_before_ack": {
+        "audit_wall_timestamp": "2026-11-19T23:51:08.478Z",
+        "broker_ack_floor": 1,
+        "durable_decision_rows": 1,
+        "first_durable_observation_upper_ms": 50.2685,
+        "independent_ack_observation_upper_ms": 30433.536125
+      },
+      "pre_intake": {
+        "audit_wall_timestamp": "2026-11-19T23:51:38.855Z",
+        "broker_ack_floor": 1,
+        "durable_decision_rows": 1,
+        "first_durable_observation_upper_ms": 30434.234916,
+        "independent_ack_observation_upper_ms": 30435.114833
+      }
+    },
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "combined-identity.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "combined-inherited-docker-diagnostic.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 3
+  },
+  "combined-partition.xml": {
+    "errors": 0,
+    "failures": 0,
+    "partition_recovery": {
+      "decision": [
+        "revoked_dry_run",
+        1,
+        "a094430e-27d5-4150-8e2c-47b9cdeb8b16"
+      ],
+      "independent_ack_upper_ms": 1967.545833,
+      "observer_denial_upper_ms": 1963.816958
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "combined-trust.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "signed_unified_status_samples": 6,
+    "skipped": 0,
+    "tests": 1
+  },
+  "combined-withdrawal.xml": {
+    "errors": 0,
+    "failures": 0,
+    "priority": {
+      "ordinary_drain_ms": 281.191,
+      "ordinary_held": 4,
+      "recovery_upper_ms": 1657.93
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "identity-B-1.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "identity-B-2.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
   "local-baseline-repeat.xml": {
     "errors": 0,
     "failures": 0,
@@ -23,6 +161,76 @@
     "skipped": 0,
     "tests": 7
   },
+  "receipt-4918dad.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "signed_unified_status_samples": 6,
+    "skipped": 0,
+    "tests": 1
+  },
+  "receipt-f169234.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "signed_unified_status_samples": 6,
+    "skipped": 0,
+    "tests": 1
+  },
+  "shared-writer-16e71ed.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 3,
+    "signed_status_samples": 12,
+    "skipped": 0,
+    "tests": 15
+  },
+  "shared-writer-4918dad.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 3,
+    "signed_status_samples": 12,
+    "skipped": 0,
+    "tests": 15
+  },
+  "single-witness-4918dad.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "single_witness_appraisal": "reproduced",
+    "skipped": 0,
+    "tests": 1
+  },
+  "single-witness-f169234.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "single_witness_appraisal": "reproduced",
+    "skipped": 0,
+    "tests": 1
+  },
+  "trust-C-1.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "signed_unified_status_samples": 6,
+    "skipped": 0,
+    "tests": 1
+  },
+  "trust-C-2.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "signed_unified_status_samples": 6,
+    "skipped": 0,
+    "tests": 1
+  },
   "withdrawal-1.xml": {
     "dispatch": {
       "pending_count": 5,
@@ -44,6 +252,32 @@
     },
     "errors": 0,
     "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "withdrawal-A-1.xml": {
+    "errors": 0,
+    "failures": 0,
+    "priority": {
+      "ordinary_drain_ms": 269.914,
+      "ordinary_held": 4,
+      "recovery_upper_ms": 1769.525
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "withdrawal-A-2.xml": {
+    "errors": 0,
+    "failures": 0,
+    "priority": {
+      "ordinary_drain_ms": 218.369,
+      "ordinary_held": 4,
+      "recovery_upper_ms": 1742.638
+    },
     "signed_ownership_requests": 0,
     "signed_status_samples": 0,
     "skipped": 0,

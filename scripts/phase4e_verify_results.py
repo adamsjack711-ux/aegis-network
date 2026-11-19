@@ -67,6 +67,38 @@ def inspect_priority(properties):
             "ordinary_drain_ms": round(after["drain_ms_from_release"], 3)}
 
 
+def inspect_held_barrier(report):
+    generation = report["durable"]["home"]["generation"]
+    assert report["durable"]["home"]["phase"] == "preparing"
+    assert report["durable"]["anchor"]["generation"] == report["reachable"]["generation"] == generation
+    assert report["reachable"]["effective"] == "quarantined"
+    assert sorted(target["fence"] for target in report["durable"]["targets"].values()) == [1, generation]
+    return generation
+
+
+def inspect_unified_status(report):
+    for status in report["statuses"]:
+        wire = status["wire"]
+        verify_public_signature(status["key"], wire["signature"], b"aegis-phase4e-v1/status", wire["body"])
+        assert wire["body"]["challenge"] == sha256(canonical(status["challenge"])).hexdigest()
+    assert report["statuses"][0]["wire"]["body"]["outcome"] == "reproduced"
+    assert report["statuses"][-1]["wire"]["body"]["reason"] == "revoked"
+    assert [row[0] for row in report["restrictions"]] == ["canary"]
+    assert report["floor"]["pending"] is None
+    return len(report["statuses"])
+
+
+def inspect_crash(properties):
+    before, after = properties["crash_before_recovery"], properties["crash_recovery"]
+    assert before["pre_intake_agent"] == {"decision": None, "broker_ack_floor": 0}
+    assert before["after_audit_agent"]["broker_ack_floor"] == 0
+    assert before["after_audit_agent"]["decision"] == ["revoked_dry_run", 1, before["withdrawal_id"]]
+    for row in after.values():
+        assert row["durable_decision_rows"] == row["broker_ack_floor"] == 1
+        assert row["first_durable_observation_upper_ms"] <= row["independent_ack_observation_upper_ms"]
+    return after
+
+
 def inspect_file(path):
     suite = ElementTree.parse(path).getroot().find("testsuite")
     summary = {key: int(suite.attrib[key]) for key in ("tests", "failures", "errors", "skipped")}
@@ -86,7 +118,19 @@ def inspect_file(path):
                 assert request["body"]["assignment"]["holder_key"] == request["public_key"]
                 summary["signed_ownership_requests"] += 1
             elif name in {"queued_before_restart", "broker_publication", "durable_denial",
-                          "priority_before_release", "ordinary_after_release"}:
+                          "priority_before_release", "ordinary_after_release", "crash_before_recovery",
+                          "crash_recovery"}:
+                dispatch[name] = value
+            elif name == "held_barrier":
+                summary["held_writer_barrier_generation"] = inspect_held_barrier(json.loads(value))
+            elif name == "verified_trust":
+                summary["signed_unified_status_samples"] = inspect_unified_status(json.loads(value))
+            elif name == "single_witness_admission":
+                observation = json.loads(value)
+                assert len(observation["direct_durable_receipt"]["votes"]) == 1
+                assert observation["target_write_attempted"] is False
+                summary["single_witness_appraisal"] = observation["outcome"]
+            elif name in {"partition_held", "partition_reconnected"}:
                 dispatch[name] = value
         if {"queued_before_restart", "broker_publication", "durable_denial"} <= dispatch.keys():
             data = {key: json.loads(value) for key, value in dispatch.items()}
@@ -94,6 +138,15 @@ def inspect_file(path):
                 summary["priority"] = inspect_priority(data)
             elif "priority_before_release" not in data:
                 summary["dispatch"] = inspect_dispatch(data)
+        if {"crash_before_recovery", "crash_recovery"} <= dispatch.keys():
+            summary["agent_crash_recovery"] = inspect_crash({key: json.loads(value) for key, value in dispatch.items()})
+        if {"partition_held", "partition_reconnected"} <= dispatch.keys():
+            held = json.loads(dispatch["partition_held"])
+            recovered = json.loads(dispatch["partition_reconnected"])
+            assert held["decision"] is None and held["broker_ack_floor"] == 0
+            assert recovered["decision"] == ["revoked_dry_run", 1, held["published_withdrawal"]]
+            assert recovered["observer_denial_upper_ms"] <= recovered["independent_ack_upper_ms"]
+            summary["partition_recovery"] = recovered
     assert summary["tests"] == len(suite.findall("testcase"))
     return summary
 
