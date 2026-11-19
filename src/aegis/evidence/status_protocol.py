@@ -2,7 +2,7 @@
 
 import json
 from dataclasses import dataclass
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Protocol
 from uuid import uuid4
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
@@ -144,7 +144,18 @@ def endorsement_bytes(body: Endorsement) -> bytes:
     return STATUS_DOMAIN + b"endorsement\x00" + canonical(body)
 
 
-def authenticate(policy: StatusPolicy, wire: bytes, now: int, *, admission: bool) -> tuple[SignedRecord, Grant]:
+class EvidencePolicy(Protocol):
+    @property
+    def cohort(self) -> str: ...
+
+    @property
+    def trust(self) -> Trust: ...
+
+    @property
+    def profiles(self) -> frozenset[runner.WorkerProfile]: ...
+
+
+def authenticate(policy: EvidencePolicy, wire: bytes, now: int, *, admission: bool) -> tuple[SignedRecord, Grant]:
     schemas = ((SignedManifest, "submitter"), (SignedAttestation, "verifier"), (SignedWithdrawal, "revoker"))
     for schema, role in schemas:
         try:
