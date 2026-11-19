@@ -1,0 +1,15 @@
+[
+  {"id": "original", "changes": {}, "outcome": "reproduced", "compatible": false},
+  {"id": "packaging-only", "changes": {}, "outcome": "reproduced", "compatible": true},
+  {"id": "version-v2", "changes": {"version": "v2"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "version-v3", "changes": {"version": "v3"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "build", "changes": {"build": "alternate"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "configuration", "changes": {"feature": "disabled"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "runtime", "changes": {"runtime": "runtime-b"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "runtime-offline", "changes": {"runtime": "runtime-offline"}, "outcome": "inconclusive", "compatible": false},
+  {"id": "security-policy", "changes": {"policy": "policy-v2"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "dependency-lock", "changes": {"dependency": "lock-v2"}, "outcome": "not-reproduced", "compatible": false},
+  {"id": "build-recipe", "changes": {"recipe": "recipe-v2"}, "outcome": "reproduced", "compatible": false},
+  {"id": "test-harness", "changes": {"harness": "harness-v2"}, "outcome": "reproduced", "compatible": false},
+  {"id": "test-harness-unavailable", "changes": {"harness": "harness-unavailable"}, "outcome": "inconclusive", "compatible": false}
+]

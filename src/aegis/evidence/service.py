@@ -15,7 +15,7 @@ from uuid import uuid4
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-from . import runner
+from . import _portability_worker, runner
 from ._worker import registered
 from .records import (
     MATERIAL_ROLES, Attestation, Grant, Manifest, Outcome, SignedAttestation, SignedManifest,
@@ -102,6 +102,15 @@ class Assessment:
 
 
 @dataclass(frozen=True)
+class CompatibleEvidence:
+    """A local compatibility decision anchored to signed source evidence and target scope."""
+
+    source: Assessment
+    target_sha256: str
+    rule: Literal["synthetic-package-label-v1"] = "synthetic-package-label-v1"
+
+
+@dataclass(frozen=True)
 class _Admitted:
     sha256: str
     scope: str
@@ -129,7 +138,11 @@ def _admit(bundle: Bundle, cohort: str, trust: Trust, profiles: frozenset[runner
         if type(content) is not bytes or len(content) != pin.size or digest(content) != pin.sha256:
             raise ValueError(f"evidence material pin mismatch: {role}")
         objects[role] = content
-    if not registered(manifest.family, objects):
+    if manifest.family == _portability_worker.FAMILY:
+        if (runner.WorkerProfile.from_manifest(manifest) not in runner.PORTABILITY_PROFILES.values()
+                or not _portability_worker.registered(objects)):
+            raise ValueError("portability fixture or profile is not registered")
+    elif not registered(manifest.family, objects):
         raise ValueError("fixture is not registered")
     # Envelope reissuance requires new signatures but cannot erase a material disagreement.
     inputs = manifest.model_dump(
@@ -313,6 +326,52 @@ class Evidence:
         with self._lock, self._db:
             self._register(admitted, bundle.manifest)
             return self._assessment(admitted, self._now())
+
+    def assess_compatible(self, source: Bundle, target: Bundle, *, cohort: str) -> CompatibleEvidence | None:
+        """Check a single synthetic packaging relation. None means compatibility is unknown."""
+        try:
+            source_admitted = _admit(source, cohort, self._trust, self._profiles)
+            target_admitted = _admit(target, cohort, self._trust, self._profiles)
+        except ValueError:
+            return None
+        source_manifest, target_manifest = source_admitted.manifest, target_admitted.manifest
+        if source_manifest.family != _portability_worker.FAMILY:
+            return None
+        # Only the packaging field may differ, and the target pins the exact source envelope.
+        excluded = {"materials", "record_id", "issued_at", "expires_at"}
+        if source_manifest.model_dump(exclude=excluded) != target_manifest.model_dump(exclude=excluded):
+            return None
+        package, _, label = source_admitted.objects["subject"].rpartition(b":")
+        if label != b"original":
+            return None
+        expected_subject = package + b":repackaged:" + source_admitted.sha256.encode("ascii")
+        if any(
+            target_admitted.objects[role] != (
+                expected_subject if role == "subject" else source_admitted.objects[role]
+            )
+            for role in MATERIAL_ROLES
+        ):
+            return None
+
+        with self._lock, self._db:
+            self._register(source_admitted, source.manifest)
+            self._register(target_admitted, target.manifest)
+            now = self._now()
+            if self._bundle_problem(target_admitted, now):
+                return None
+            # Any direct history takes precedence, even after a vote expires or is withdrawn.
+            history = self._db.execute(
+                """SELECT 1 FROM evidence_manifests AS m
+                   JOIN evidence_attestations AS a ON a.cohort = m.cohort AND a.bundle = m.digest
+                   WHERE m.cohort = ? AND m.scope = ? LIMIT 1""",
+                (cohort, target_admitted.scope),
+            ).fetchone()
+            if history:
+                return None
+            result = self._assessment(source_admitted, now)
+            if result.outcome == "reproduced":
+                return CompatibleEvidence(result, target_admitted.sha256)
+            return None
 
     @contextmanager
     def current_assessment(self, bundle: Bundle, *, cohort: str):
