@@ -105,7 +105,7 @@ def test_invalid_signature_does_not_poison_sequence(tmp_path):
     key, _, _, agent, audit = setup(tmp_path)
     forged = sample(key, sequence=100)
     forged = forged.model_copy(update={"signature": base64.b64encode(b"x" * 64).decode()})
-    assert agent.evaluate(forged, NOW).reason == "invalid signature"
+    assert agent.evaluate(forged, NOW).reason_code == "INVALID_SIGNATURE"
     assert audit.high_water("lab-publisher") == 0
     assert agent.evaluate(sample(key, sequence=1), NOW).outcome == "allow_dry_run"
     assert len(audit.rejected_events()) == 1

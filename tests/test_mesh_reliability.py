@@ -78,7 +78,7 @@ def test_independent_audits_redelivery_and_recovery(tmp_path):
     restarted, restarted_audit = agent(tmp_path, trust, "first")
     assert restarted.evaluate(event).outcome == "allow_dry_run"
     assert len(restarted_audit.all_decisions()) == 1
-    with pytest.raises(ValueError, match="another agent"):
+    with pytest.raises(ValueError, match="different agent"):
         SqliteAudit(tmp_path / "first.db", agent_id="stolen")
 
 

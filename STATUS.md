@@ -1,6 +1,6 @@
-# Project status — 2026-11-19, Phase 2A worktree
+# Project status — 2026-11-19, Phase 2C integration worktree
 
-Phase 2A is in the isolated `/Users/jackadams-lovell/aegis-mesh` worktree on `feat/mesh-reliability`, based on commit `14440ee`. The canonical checkout is `/Users/jackadams-lovell/aegis-network` on `master`. Phase 2A changes are local and have not been merged.
+Phase 2C is in the isolated `.worktrees/phase2c` worktree on `integration/phase2c`, based on the verified common ancestor `14440ee`. The canonical checkout is on `master` and has unrelated uncommitted work. Neither feature branch nor `master` has been modified or merged.
 
 Phase 0 reuse assessment and Phase 1 architecture, threat model, decisions, contracts, acceptance criteria, and roadmap are documented. The signed-finding to audited dry-run slice and Phase 2A mesh reliability changes are implemented. Two agents have independent durable consumers and audit volumes. Findings and signed revocations use stable event IDs, a transactional PostgreSQL outbox, JetStream acknowledgements, and local deduplication. No enforcement, vulnerable lab apps, verification workers, rollback, benchmarks, or LLM investigator have been implemented.
 
@@ -15,4 +15,8 @@ These results show the path works for one synthetic lab finding. They do not dem
 
 Phase 2A verification on 2026-11-19: 16 local tests passed, including broker and audit failure injection, replay, independent agent recovery, invalid signatures, role checks, and revocation ordering. An isolated local Compose project showed two agents receiving a synthetic finding, an outbox row remaining pending during a broker outage, both agents catching up after broker and agent restart, and both receiving a signed revocation. Duplicate HTTP submissions returned `accepted: false`. See [integration review](docs/phase2a-integration.md) for exact commands, shared interface changes, and remaining limits.
 
-Next: review the changed mesh contracts with the Rapid owner, then specify independent verifier attestations before adding any executor. Preserve the local policy boundary and never enable production actions from this proof of concept.
+## Phase 2B Rapid policy branch
+
+`feat/rapid-policy` adds exact local inventory matching with a precomputed identity set, stable audited reason codes, SQLite agent identity binding and schema migration, duplicate/restart tests, revocation-aware effective decisions, and a local decision latency benchmark. See [docs/phase2b-rapid-policy.md](docs/phase2b-rapid-policy.md) for test and benchmark results. Shared contract proposals are isolated in [docs/proposed-shared-contracts-rapid.md](docs/proposed-shared-contracts-rapid.md). Mesh and NATS code were not changed; no mitigation executes.
+
+Phase 2C contract mismatches were recorded before integration changes in [docs/phase2c-integration.md](docs/phase2c-integration.md). Integration verification and benchmarks are in progress.
