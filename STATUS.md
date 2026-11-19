@@ -26,6 +26,12 @@ The cohort experiment used separate trust keys and ledgers. Multi-host status co
 
 See [the Phase 4B handoff](docs/phase4b-evidence-portability.md) for the scope matrix, reproduction commands, raw measurements, and limitations.
 
+## Phase 4C independent validation
+
+The 2026-11-19 review is on `test/phase4c-adversarial` in `.worktrees/phase4c-adversarial`, based on `7744ebd`. All 137 tests passed, including eight new defensive checks of the integrated path. Independent HTTP and SQLite readback verified that a signed withdrawal after the canary prevented peer writes and that fixture lease expiry closed all nine routes before durable recovery. Mesh replay was in-process, and fixture HTTP was live on loopback.
+
+Retain isolated-lab use. Integration review should prioritize independently witnessed journal completeness, authenticated cross-broker identity with durable fencing, and independently administered Evidence status. [Phase 4C report](docs/phase4c-adversarial.md) · [Threat-model proposals](threat-model.md#proposed-phase-4c-trust-boundaries)
+
 ## Phase 3C local-lab integration
 
 Verified implementation **`1cb5cd60467ad6885f8aa1350197f576c06ae0ed`** on `integration/phase3c` in `.worktrees/phase3c`. The branch uses Phase 2 RC `ffe5c32` and the pinned Phase 3A, 3B and 3D commits. Master and the source feature branches were preserved. The Phase 2 runtime remains dry-run. Phase 3C applies only an exactly approved route restriction in a disposable synthetic fixture.
