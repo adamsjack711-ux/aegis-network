@@ -53,7 +53,8 @@ class Audit(Protocol):
     def record_override(self, decision: Decision) -> Decision: ...
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool: ...
     def get_revocation(self, revocation_id: str) -> Decision | None: ...
-    def record_revocation(self, publisher_id: str, sequence: int, decision: Decision, target_id: str, target_digest: str, target_publisher_id: str | None, authenticated: bool) -> None: ...
+    def record_revocation(self, publisher_id: str, sequence: int, decision: Decision, target_id: str, target_digest: str, target_publisher_id: str | None, authenticated: bool, *, ordered: bool = True) -> None: ...
+    def order_revocation(self, revocation_id: str) -> None: ...
 
 
 REJECTION_CODES = {
@@ -183,7 +184,8 @@ class LocalAgent:
         self.audit.record(finding.publisher_id, finding.sequence, decision, authenticated)
         return decision
 
-    def evaluate_revocation(self, envelope: SignedRevocation, now: datetime | None = None) -> Decision:
+    def evaluate_revocation(self, envelope: SignedRevocation, now: datetime | None = None,
+                            *, ordered: bool = True) -> Decision:
         now = now or datetime.now(timezone.utc)
         revocation = envelope.revocation
         rid = str(revocation.revocation_id)
@@ -204,6 +206,8 @@ class LocalAgent:
             if previous is not None and previous.digest != digest:
                 outcome, reason, reason_code = "deny", "revocation ID conflict", "REVOCATION_ID_CONFLICT"
             elif previous is not None:
+                if ordered:
+                    self.audit.order_revocation(rid)
                 return previous
             elif revocation.target_publisher_id is None:
                 outcome, reason, reason_code = "deny", "revocation target publisher is required", "REVOCATION_SCOPE_UNBOUND"
@@ -224,5 +228,6 @@ class LocalAgent:
         decision = Decision(target_id, digest, outcome, reason, reason_code=reason_code,
                             event_id=rid, correlation_id=target_id, agent_id=getattr(self.audit, "agent_id", None))
         self.audit.record_revocation(revocation.publisher_id, revocation.sequence, decision, target_id,
-                                     revocation.target_sha256, revocation.target_publisher_id, authenticated)
+                                     revocation.target_sha256, revocation.target_publisher_id, authenticated,
+                                     ordered=ordered)
         return decision

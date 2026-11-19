@@ -20,6 +20,7 @@ from aegis.agent_runtime import consume, durable_name
 from aegis.config import load_local
 from aegis.core import LocalAgent
 from aegis.identity import IdentityInUse, IdentityLease, renew_lease
+from aegis.mesh import CRITICAL_SUBJECT, priority_enabled
 from aegis.storage import SqliteAudit
 
 
@@ -115,9 +116,15 @@ async def run(args):
                 report("attempt", sequence=message.metadata.sequence.stream,
                        delivery=message.metadata.num_delivered)
 
+            def critical_committed(message, decision, received, committed):
+                report("withdrawal_commit", decision=asdict(decision), received=received,
+                       committed=committed)
+                if args.stop_before_withdrawal_ack:
+                    os.kill(os.getpid(), signal.SIGSTOP)
+
             def acked(message, decision, received, leased, committed, ack):
                 metadata = message.metadata
-                report("ack", decision=asdict(decision), received=received, leased=leased,
+                report("ack", lane="withdrawal" if message.subject == CRITICAL_SUBJECT else "ordinary", decision=asdict(decision), received=received, leased=leased,
                        committed=committed, acked=ack, sequence=metadata.sequence.stream,
                        delivery=metadata.num_delivered,
                        broker_timestamp=metadata.timestamp.isoformat())
@@ -126,7 +133,8 @@ async def run(args):
                                          trust_env=False, timeout=10) as client:
                 await consume(agent, audit, js, lease, renew, client, durable_name(args.id),
                               before_message=before_message if args.delay else None,
-                              on_reconcile=reconciled, on_ack=acked)
+                              on_reconcile=reconciled, on_ack=acked, priority=priority_enabled(),
+                              on_critical_commit=critical_committed)
         finally:
             renew.cancel()
             await asyncio.gather(renew, return_exceptions=True)
@@ -158,5 +166,7 @@ if __name__ == "__main__":
     parser.add_argument("--audit", type=Path, required=True)
     parser.add_argument("--claim-timeout", type=float, default=45)
     parser.add_argument("--delay", type=float, default=0)
+    parser.add_argument("--stop-before-withdrawal-ack", action="store_true",
+                        help="disposable fault harness: SIGSTOP after withdrawal audit and before broker ACK")
     logging.basicConfig(level=logging.WARNING)
     sys.exit(asyncio.run(main(parser.parse_args())))
