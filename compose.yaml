@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: aegis
+      POSTGRES_PASSWORD: ${AEGIS_DB_PASSWORD:?set AEGIS_DB_PASSWORD}
+      POSTGRES_DB: aegis
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aegis"]
+      interval: 2s
+      retries: 20
+  nats:
+    image: nats:2.10-alpine
+    command: ["-js", "-sd", "/data"]
+    volumes:
+      - nats_data:/data
+  coordinator:
+    build: .
+    environment:
+      AEGIS_DATABASE_URL: postgresql://aegis:${AEGIS_DB_PASSWORD}@postgres:5432/aegis
+      AEGIS_NATS_URL: nats://nats:4222
+      AEGIS_PUBLISHERS_FILE: /config/publishers.json
+    volumes:
+      - ./lab-config:/config:ro
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nats:
+        condition: service_started
+  agent:
+    build: .
+    command: ["python", "-m", "aegis.agent_runtime"]
+    environment:
+      AEGIS_NATS_URL: nats://nats:4222
+      AEGIS_LOCAL_CONFIG: /config/agent.json
+      AEGIS_AUDIT_DB: /audit/agent.db
+    volumes:
+      - ./lab-config:/config:ro
+      - agent_audit:/audit
+    depends_on:
+      - nats
+      - coordinator
+volumes:
+  postgres_data:
+  nats_data:
+  agent_audit:

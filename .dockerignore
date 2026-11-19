@@ -1,0 +1,9 @@
+.venv
+.env
+lab-config
+.git
+.pytest_cache
+__pycache__
+*.pyc
+tests
+docs
