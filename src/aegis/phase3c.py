@@ -2,6 +2,7 @@
 
 import asyncio
 from contextlib import asynccontextmanager, contextmanager, suppress
+from dataclasses import replace
 import json
 import logging
 from pathlib import Path
@@ -21,6 +22,7 @@ from .evidence.records import SignedAttestation, SignedManifest, decode, digest
 from .identity import IdentityLease, IdentityLost, renew_lease
 from .mitigation.lab import Lab
 from .mitigation.policy import Denied
+from .ownership import Action, IdentitySession
 from .recovery import reconcile
 
 COHORT = "lab-blue"
@@ -182,6 +184,9 @@ class EvidenceGate:
             expiry = min(expiry, publisher.revoked_at.timestamp())
         self.valid_until_ns = time.monotonic_ns() + int((expiry - time.time()) * 1e9)
 
+    def prepare(self, controller, lease_ms):
+        return controller.prepare(lease_ms, binding=self.binding, valid_until_ns=self.valid_until_ns)
+
     async def refresh(self):
         try:
             deadline = await self.receiver.fresh(self.envelope)
@@ -215,18 +220,31 @@ class EvidenceGate:
 class VerifiedLab:
     """Drive explicit local stages. A control-plane event never invokes this class."""
 
-    def __init__(self, gate: EvidenceGate, path: Path):
+    def __init__(self, gate: EvidenceGate, path: Path, *, identity: IdentitySession | None = None):
         self.gate = gate
-        self.lab = Lab(path, authorize=gate.authorize, status_current=gate.status_current)
+        self.identity = identity
+        if identity is not None and identity.assignment.deployment != gate.binding_context["agent_id"]:
+            raise Denied("enrolled deployment does not match the Rapid audit owner")
+        self.lab = Lab(path, authorize=gate.authorize, status_current=gate.status_current,
+                       require_identity=identity is not None)
 
     async def prepare(self, lease_ms):
         await self.gate.refresh()
-        return self.lab.controller.prepare(lease_ms, binding=self.gate.binding,
-                                           valid_until_ns=self.gate.valid_until_ns)
+        plan = self.gate.prepare(self.lab.controller, lease_ms)
+        if self.identity is None:
+            return plan
+        assignment = self.identity.assignment
+        deadline = self.lab.store.ownership.check(assignment)
+        return replace(plan, ownership_binding=assignment.binding, expires_ns=min(plan.expires_ns, deadline))
 
-    async def transition(self, operation, *args, **kwargs):
+    async def transition(self, operation, plan, *args, action: Action | None = None,
+                         target: str | None = None, **kwargs):
         await self.gate.refresh()
-        worker = asyncio.create_task(asyncio.to_thread(operation, *args, **kwargs))
+        if self.identity is not None:
+            if action is None:
+                raise Denied("identity-fenced transition requires an explicit action")
+            kwargs["command"] = self.identity.command(action, plan.digest, target)
+        worker = asyncio.create_task(asyncio.to_thread(operation, plan, *args, **kwargs))
         try:
             return await asyncio.shield(worker)
         except asyncio.CancelledError:
@@ -246,15 +264,17 @@ class VerifiedLab:
         approval = self.lab.operator.approve(plan, reviewed_digest)
         started = time.monotonic_ns()
         try:
-            await self.transition(self.lab.controller.start, plan, approval)
+            await self.transition(self.lab.controller.start, plan, approval, action="begin")
             preflight = time.monotonic_ns()
-            await self.transition(self.lab.controller.restrict, plan, approval, plan.targets[0])
-            await self.transition(self.lab.controller.verify, plan, canary=True)
+            await self.transition(self.lab.controller.restrict, plan, approval, plan.targets[0],
+                                  action="restrict", target=plan.targets[0])
+            await self.transition(self.lab.controller.verify, plan, canary=True, action="verify-canary")
             canary = time.monotonic_ns()
             for target in plan.targets[1:]:
-                await self.transition(self.lab.controller.restrict, plan, approval, target)
+                await self.transition(self.lab.controller.restrict, plan, approval, target,
+                                      action="restrict", target=target)
             expanded = time.monotonic_ns()
-            await self.transition(self.lab.controller.verify, plan)
+            await self.transition(self.lab.controller.verify, plan, action="verify-health")
             confirmed = time.monotonic_ns()
         except BaseException:
             # A failed preflight or unapproved plan cannot mutate a ready fixture.
@@ -273,6 +293,6 @@ class VerifiedLab:
         try:
             while True:
                 await asyncio.sleep(.05)
-                await self.transition(self.lab.controller.verify, plan)
+                await self.transition(self.lab.controller.verify, plan, action="verify-health")
         except Exception:
             return await asyncio.to_thread(self.lab.controller.rollback, "lease, evidence, or health lost")

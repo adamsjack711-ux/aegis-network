@@ -10,6 +10,7 @@ from tempfile import TemporaryDirectory
 from threading import Event, Thread
 import time
 
+from ..ownership import CommandProof
 from .http_lab import RunningServer, start_fixture, start_proxy
 from .observer import HttpObserver, ObservationError
 from .policy import APPROVAL_WINDOW_NS, Approval, Denied, LocalOperator, MARKER_PATH, Plan, TARGETS, TEMPLATE
@@ -37,24 +38,26 @@ class Controller:
         plan.validate(lab_id, now)
         return plan
 
-    def start(self, plan: Plan, approval: Approval) -> None:
+    def start(self, plan: Plan, approval: Approval, *, command: CommandProof | None = None) -> None:
         lab_id, _ = self.store.inventory()
         now = time.monotonic_ns()
         plan.validate(lab_id, now)
         self.operator.check(plan, approval, now)
         baseline = self.observer.observe("open", tuple(zip(plan.targets, plan.expected_fences, strict=True)))
-        self.store.begin(plan, approval, baseline)
+        self.store.begin(plan, approval, baseline, command=command)
 
-    def restrict(self, plan: Plan, approval: Approval, target: str) -> None:
+    def restrict(self, plan: Plan, approval: Approval, target: str, *,
+                 command: CommandProof | None = None) -> None:
         grant = self.operator.grant(plan, approval, target)
-        self.store.restrict(plan, approval, target, grant)
+        self.store.restrict(plan, approval, target, grant, command=command)
 
-    def verify(self, plan: Plan, *, canary: bool = False) -> None:
+    def verify(self, plan: Plan, *, canary: bool = False,
+               command: CommandProof | None = None) -> None:
         scope = tuple(zip(plan.targets, plan.expected_fences, strict=True))
         if canary:
             scope = scope[:1]
         evidence = self.observer.observe("restricted", tuple((target, fence + 1) for target, fence in scope))
-        self.store.record_protection(plan, evidence, canary=canary)
+        self.store.record_protection(plan, evidence, canary=canary, command=command)
 
     def execute(self, plan: Plan, approval: Approval) -> None:
         self.start(plan, approval)
@@ -100,10 +103,11 @@ class Controller:
 class Lab:
     """One disposable, statically enrolled inventory; no enforcement API."""
 
-    def __init__(self, state_path: Path, *, authorize=None, status_current=None) -> None:
+    def __init__(self, state_path: Path, *, authorize=None, status_current=None,
+                 require_identity: bool = False) -> None:
         self.operator = LocalOperator()
         self.store = TargetStore(state_path.resolve(), self.operator, authorize=authorize,
-                                 status_current=status_current)
+                                 status_current=status_current, require_identity=require_identity)
         self.upstreams: dict[str, RunningServer] = {}
         self.proxies: dict[str, RunningServer] = {}
         self.endpoints: dict[str, tuple[str, int]] = {}

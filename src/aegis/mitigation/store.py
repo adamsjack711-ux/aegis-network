@@ -1,6 +1,6 @@
 """SQLite target adapter. Target mutations, fencing and audit share one commit."""
 
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass
 import json
 from pathlib import Path
@@ -9,6 +9,7 @@ import sqlite3
 from threading import Event
 import time
 
+from ..ownership import Action, CommandProof, OwnershipHome
 from .observer import Observation
 from .policy import (
     Approval, Denied, EVIDENCE_MAX_AGE_NS, LocalOperator, MIN_LEASE_MS,
@@ -21,33 +22,49 @@ class RouteState:
     mode: str
     fence: int
     deadline_ns: int | None = None
+    ownership_utc_window: tuple[int, int] | None = None
 
 
 class TargetStore:
     def __init__(self, path: Path, operator: LocalOperator, *, authorize=None,
-                 status_current=None) -> None:
+                 status_current=None, require_identity: bool = False) -> None:
         if (authorize is None) != (status_current is None):
             raise ValueError("guarded writes require a local freshness check")
+        if require_identity and authorize is None:
+            raise ValueError("identity-fenced writes require local evidence authorization")
         self.path = path
         self._operator = operator
         self._outage = Event()
         self._authorize = authorize
         self._status_current = status_current
+        self._require_identity = require_identity
+        self.ownership = OwnershipHome(self)
 
     @contextmanager
-    def _authorized_write(self, plan: Plan):
-        if self._authorize is None:
-            if plan.evidence_binding is not None:
-                raise Denied("evidence-bound plan requires local authorization")
-            with self._transaction(write=True) as db:
-                yield db, None
-        else:
-            with self._authorize(plan) as evidence, self._transaction(write=True) as db:
-                if not self._status_current():
-                    raise Denied("local status expired before the target transaction")
-                yield db, evidence
-                if not self._status_current():
-                    raise Denied("local status expired before the target commit")
+    def _authorized_write(self, plan: Plan, action: Action, command: CommandProof | None,
+                          target: str | None = None):
+        if self._authorize is None and plan.evidence_binding is not None:
+            raise Denied("evidence-bound plan requires local authorization")
+        authorization = self._authorize(plan) if self._authorize is not None else nullcontext()
+        with authorization as evidence, self._transaction(write=True) as db:
+            row = self.ownership.read(db)
+            assignment = None
+            if self._require_identity:
+                if plan.evidence_binding is None:
+                    raise Denied("identity-fenced write requires an evidence-bound plan")
+                assignment = self.ownership.authorize_target(db, row, plan, action, target, command)
+            elif row is not None or plan.ownership_binding is not None or command is not None:
+                raise Denied("enrolled target requires the identity-fenced writer")
+            if self._status_current is not None and not self._status_current():
+                raise Denied("local status expired before the target transaction")
+            yield db, evidence
+            if self._status_current is not None and not self._status_current():
+                raise Denied("local status expired before the target commit")
+            if assignment is not None:
+                self.ownership.recheck_target(db, assignment, command)
+                rollout = self._rollout(db)
+                if time.monotonic_ns() >= min(plan.expires_ns, self._effective_deadline(rollout)):
+                    raise Denied("approved rollout expired before the target commit")
 
     def create(self) -> None:
         if self.path.exists():
@@ -144,8 +161,9 @@ class TargetStore:
             return min(rollout["deadline_ns"], rollout["evidence_ns"] + EVIDENCE_MAX_AGE_NS)
         return rollout["deadline_ns"]
 
-    def begin(self, plan: Plan, approval: Approval, baseline: Observation) -> None:
-        with self._authorized_write(plan) as (db, evidence_context):
+    def begin(self, plan: Plan, approval: Approval, baseline: Observation, *,
+              command: CommandProof | None = None) -> None:
+        with self._authorized_write(plan, "begin", command) as (db, evidence_context):
             now = time.monotonic_ns()
             lab_id = self._lab_id(db)
             plan.validate(lab_id, now)
@@ -170,8 +188,9 @@ class TargetStore:
             self._audit(db, now, "leased", plan.digest, deadline_ns=deadline, targets=plan.targets,
                         evidence_binding=plan.evidence_binding, evidence_context=evidence_context)
 
-    def restrict(self, plan: Plan, approval: Approval, target: str, grant: str) -> None:
-        with self._authorized_write(plan) as (db, _):
+    def restrict(self, plan: Plan, approval: Approval, target: str, grant: str, *,
+                 command: CommandProof | None = None) -> None:
+        with self._authorized_write(plan, "restrict", command, target) as (db, _):
             now = time.monotonic_ns()
             rollout = self._active(db, now, plan)
             self._operator.check_grant(plan, approval, target, grant, now)
@@ -191,8 +210,10 @@ class TargetStore:
             db.execute("UPDATE rollout SET changed_ns = ?", (now,))
             self._audit(db, now, "restricted", plan.digest, target=target, fence=fence + 1)
 
-    def record_protection(self, plan: Plan, evidence: Observation, *, canary: bool = False) -> None:
-        with self._authorized_write(plan) as (db, _):
+    def record_protection(self, plan: Plan, evidence: Observation, *, canary: bool = False,
+                          command: CommandProof | None = None) -> None:
+        action = "verify-canary" if canary else "verify-health"
+        with self._authorized_write(plan, action, command) as (db, _):
             now = time.monotonic_ns()
             rollout = self._active(db, now, plan)
             phase = rollout["phase"]
@@ -239,29 +260,50 @@ class TargetStore:
             phase = rollout["phase"]
             if phase in {"applying", "expanding", "confirmed"}:
                 if (time.monotonic_ns() >= self._effective_deadline(rollout)
+                        or self._route_ownership(db, rollout) is None
                         or (self._status_current is not None and not self._status_current())):
                     return "recovery_required"
             return phase
 
+    def _route_ownership(self, db, rollout) -> tuple[int | None, tuple[int, int] | None] | None:
+        row = self.ownership.read(db)
+        if row is None:
+            return None if self._require_identity else (None, None)
+        if not self._require_identity:
+            return None
+        if rollout is None:
+            return None, None
+        if row["rollout_generation"] != row["generation"]:
+            return None
+        return self.ownership.deadlines(row)
+
     @contextmanager
     def route(self, target: str, *, marker: bool):
         # Serialize marker admission and response with target writes. Benign traffic
-        # cannot disclose the marker and uses a read transaction.
-        with self._transaction(write=marker) as db:
+        # in the identity profile also serializes with ownership changes.
+        with self._transaction(write=marker or self._require_identity) as db:
             row = db.execute("SELECT fence, mode FROM target WHERE id = ?", (target,)).fetchone()
             if row is None:
                 raise Denied("proxy target absent from its enrolled inventory")
             rollout = self._rollout(db)
             deadline = self._effective_deadline(rollout) if rollout is not None else None
-            if self._outage.is_set() or (deadline is not None and (
+            ownership = self._route_ownership(db, rollout)
+            if self._outage.is_set() or ownership is None or (deadline is not None and (
                 time.monotonic_ns() >= deadline
                 or (self._status_current is not None and not self._status_current())
             )):
                 yield RouteState("quarantined", row["fence"])
             else:
-                yield RouteState(row["mode"], row["fence"], deadline)
+                ownership_ns, ownership_utc_window = ownership
+                if deadline is not None and ownership_ns is not None:
+                    deadline = min(deadline, ownership_ns)
+                yield RouteState(row["mode"], row["fence"], deadline, ownership_utc_window)
 
     def response_permitted(self, state: RouteState) -> bool:
+        if state.ownership_utc_window is not None:
+            start, end = state.ownership_utc_window
+            if not start <= time.time_ns() < end:
+                return False
         return not self._outage.is_set() and (
             state.deadline_ns is None or (
                 time.monotonic_ns() < state.deadline_ns

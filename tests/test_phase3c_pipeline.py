@@ -159,3 +159,72 @@ def test_inexact_approval_and_stale_status_never_write(enrolled, tmp_path):
                     defense.lab.controller.start(plan, approved)
                 assert defense.lab.store.history() == []
     asyncio.run(run())
+
+
+@pytest.mark.parametrize("failover", [False, True], ids=["healthy", "failover-after-canary"])
+def test_phase4d_ownership_with_real_evidence_and_target_readback(enrolled, tmp_path, failover):
+    from aegis.mitigation.policy import LocalOperator
+    from aegis.mitigation.store import TargetStore
+    from aegis.ownership import IdentitySession, lease_proof
+
+    async def run():
+        async with httpx.AsyncClient(base_url="http://127.0.0.1",
+                                     transport=httpx.MockTransport(lambda req: httpx.Response(
+                                         200, json={"head": 0, "events": []},
+                                     ))) as client:
+            receiver = MeshIntake(enrolled.agent, None, client)
+            receiver.lease = SimpleNamespace(ensure=lambda: asyncio.sleep(0))
+            path = tmp_path / "fixture.db"
+            provision = TargetStore(path, LocalOperator())
+            provision.create()
+            principal = "spiffe://aegis.test/workload/phase4d"
+            key = Ed25519PrivateKey.generate()
+            provision.ownership.enroll(enrolled.agent.audit.agent_id, principal, key.public_key(),
+                                       ("broker-a", "broker-b"))
+
+            def claim(broker):
+                # Fixture-level trust adapter inputs. The test runs no TLS listener.
+                home = provision.ownership
+                return IdentitySession(home.accept(lease_proof("claim", home.candidate(broker), key),
+                                                   peer_principal=principal, broker=broker), key)
+
+            prior = claim("broker-a")
+            defense = VerifiedLab(gate(enrolled, receiver), path, identity=prior)
+            with defense.lab:
+                plan = await defense.prepare(3000)
+                assert plan.ownership_binding == prior.assignment.binding
+                if not failover:
+                    await defense.execute(plan, plan.digest)
+                    assert defense.lab.store.status() == "confirmed"
+                    defense.lab.observer.observe("restricted", tuple((t, 1) for t in plan.targets))
+                    return
+
+                approval = defense.lab.operator.approve(plan, plan.digest)
+                controller = defense.lab.controller
+                canary, peer, _ = plan.targets
+                await defense.transition(controller.start, plan, approval, action="begin")
+                await defense.transition(controller.restrict, plan, approval, canary,
+                                         action="restrict", target=canary)
+                await defense.transition(controller.verify, plan, canary=True, action="verify-canary")
+                provision.ownership.fence(prior.assignment.generation)
+                replacement = claim("broker-b")
+                assert replacement.assignment.generation == prior.assignment.generation + 2
+
+                # Observe all routes on all replicas directly before a controller recovery write.
+                fences = tuple(zip(plan.targets, (1, 0, 0), strict=True))
+                defense.lab.observer.observe("quarantined", fences)
+                with pytest.raises(Denied, match="stale"):
+                    await defense.transition(controller.restrict, plan, approval, peer,
+                                             action="restrict", target=peer)
+                with pytest.raises(Denied, match="exact approved plan"):
+                    controller.restrict(plan, approval, peer,
+                                        command=replacement.command("restrict", plan.digest, peer))
+                assert [row["event"] for row in defense.lab.store.history()] == [
+                    "leased", "restricted", "canary_verified",
+                ]
+                assert tuple(state.fence for state in defense.lab.store.inventory()[1].values()) == (1, 0, 0)
+                assert controller.rollback("ownership lost") == "safe_hold"
+                defense.lab.observer.observe("quarantined",
+                                             tuple(zip(plan.targets, (2, 1, 1), strict=True)))
+
+    asyncio.run(run())

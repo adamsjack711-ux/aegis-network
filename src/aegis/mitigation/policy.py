@@ -36,10 +36,14 @@ class Plan:
     lease_ms: int
     expires_ns: int
     evidence_binding: str | None = None
+    ownership_binding: str | None = None
 
     @property
     def digest(self) -> str:
-        encoded = json.dumps(asdict(self), sort_keys=True, separators=(",", ":"))
+        fields = asdict(self)
+        if self.ownership_binding is None:
+            del fields["ownership_binding"]
+        encoded = json.dumps(fields, sort_keys=True, separators=(",", ":"))
         return hashlib.sha256(encoded.encode()).hexdigest()
 
     def validate(self, lab_id: str, now: int) -> None:
@@ -55,6 +59,8 @@ class Plan:
             or not now < self.expires_ns <= now + APPROVAL_WINDOW_NS
             or (self.evidence_binding is not None
                 and re.fullmatch(r"[0-9a-f]{64}", self.evidence_binding) is None)
+            or (self.ownership_binding is not None
+                and re.fullmatch(r"[0-9a-f]{64}", self.ownership_binding) is None)
         ):
             raise Denied("plan outside the enrolled template or validity window")
 
