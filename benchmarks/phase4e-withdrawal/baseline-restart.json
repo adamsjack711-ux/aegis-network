@@ -1,0 +1,427 @@
+{
+  "source": {
+    "head": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+    "instrumentation_sha256": {
+      "compose.phase4a.yaml": "264439f222a46bc154ec192a08e474e67785d20588541c888cda7ecffd25c9d6",
+      "scripts/phase4a_bench.py": "4a3d9887134caac0b89826969f553b285022ca12af905fe84a228cf263e21f2a",
+      "scripts/phase4a_coordinator.py": "bea1120b87d5d552204f72f6d60f3e7f60764772d494e9ffc383a8fb75a33e1b",
+      "scripts/phase4a_peer.py": "2b0359d1b1bd5c8f0ea267eb8c392a5e828bfcc2fc8fc19982b7e96492efc02d",
+      "scripts/phase4a_worker.py": "49e4f64170a7d36088c6088899c7aef3e5d0fec0117786b0f1f65f0a4f2749ea",
+      "src/aegis/agent_runtime.py": "c3a1d5b955feed3e98837492cf91c2d46e277ac9c5fcc8d0f4a955c6d63a5438",
+      "src/aegis/api.py": "b037129b6b16c9d2262b3848228b57e2ef14a8b9b159f01249499b8c62d6749d",
+      "src/aegis/mesh.py": "b342935d25edd7f8e263fd555c05f600f93bfd5f1d9fd36b5f2ba2791901c6a8"
+    }
+  },
+  "oracle_sha256": "5e9be722264b46b54b606f38d9d77ef0355b600a292baadd471e260771a27a18",
+  "postgres_source_sha256": "127fa9cc4d1980546dc7d5764dd99d60f9998b3aef2350667949fcef32d9409e",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "docker_image_ids": {
+    "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+    "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+  },
+  "scope": "one host, one broker, one database, one dry-run agent",
+  "profile": "legacy",
+  "agent_sigkill": false,
+  "ordinary_enqueued": 24,
+  "ordinary_findings_ahead_of_independent_withdrawal": 24,
+  "ordinary_capacity_isolation": null,
+  "all_logical_broker_acks": 28,
+  "effective_denials_from_read_only_sqlite": [
+    "3f0a9cfb-683a-4573-a2c5-3c533df1c8ab",
+    "b398f62e-331c-4512-bbf8-ae9d27c796a4"
+  ],
+  "legacy_replay_cursor_at_readback": 0,
+  "queued_journal_order": [
+    {
+      "position": 1,
+      "event_id": "3f0a9cfb-683a-4573-a2c5-3c533df1c8ab",
+      "sent_at": "2026-11-19T23:28:19.507024+00:00"
+    },
+    {
+      "position": 2,
+      "event_id": "b398f62e-331c-4512-bbf8-ae9d27c796a4",
+      "sent_at": "2026-11-19T23:28:19.526844+00:00"
+    },
+    {
+      "position": 3,
+      "event_id": "a666e837-3a99-49cb-a9d4-b0fd80e526eb",
+      "sent_at": null
+    },
+    {
+      "position": 4,
+      "event_id": "299d3d48-9100-48b6-a93a-06e642736e64",
+      "sent_at": null
+    },
+    {
+      "position": 5,
+      "event_id": "496820dd-395d-4093-84a9-a901ceaa8c3a",
+      "sent_at": null
+    },
+    {
+      "position": 6,
+      "event_id": "5f8356b6-d8e4-454a-8aa2-26f47249260e",
+      "sent_at": null
+    },
+    {
+      "position": 7,
+      "event_id": "af910f8a-c81c-4e33-b70c-b3aac8d7015c",
+      "sent_at": null
+    },
+    {
+      "position": 8,
+      "event_id": "a61cca3f-dbe0-4403-a285-3b7730f6ee2e",
+      "sent_at": null
+    },
+    {
+      "position": 9,
+      "event_id": "3977037d-be68-4f07-a181-708225b4fa6c",
+      "sent_at": null
+    },
+    {
+      "position": 10,
+      "event_id": "447f0de6-8a4b-4534-8048-3978302d6d59",
+      "sent_at": null
+    },
+    {
+      "position": 11,
+      "event_id": "1ef38230-7499-4ef5-942b-d46617149af4",
+      "sent_at": null
+    },
+    {
+      "position": 12,
+      "event_id": "a8056fd5-c0de-45ab-9453-2c7210e948d8",
+      "sent_at": null
+    },
+    {
+      "position": 13,
+      "event_id": "dfb7b45e-3d26-42e6-a3fd-354db78010ac",
+      "sent_at": null
+    },
+    {
+      "position": 14,
+      "event_id": "c5c09e33-7eb3-43bf-91f8-99ce406de086",
+      "sent_at": null
+    },
+    {
+      "position": 15,
+      "event_id": "c3055cf4-6cf7-408c-96a9-ad6324faa8b8",
+      "sent_at": null
+    },
+    {
+      "position": 16,
+      "event_id": "a2ec32fd-5d29-488d-b8bb-bc0b58599d28",
+      "sent_at": null
+    },
+    {
+      "position": 17,
+      "event_id": "e5b976bd-3020-4e4f-b0f0-471864c3e984",
+      "sent_at": null
+    },
+    {
+      "position": 18,
+      "event_id": "37cf99b9-320a-42a8-a749-9151d5e5fe2a",
+      "sent_at": null
+    },
+    {
+      "position": 19,
+      "event_id": "9fe0eac7-ce06-45cb-ab8d-405ea541878c",
+      "sent_at": null
+    },
+    {
+      "position": 20,
+      "event_id": "f1202922-0844-4fe4-912a-e56e41d43e08",
+      "sent_at": null
+    },
+    {
+      "position": 21,
+      "event_id": "074ad449-0e28-4bd5-9646-fd1818bcbfc0",
+      "sent_at": null
+    },
+    {
+      "position": 22,
+      "event_id": "baaebc9b-fb85-4775-9760-e0ee5aa728d5",
+      "sent_at": null
+    },
+    {
+      "position": 23,
+      "event_id": "08258428-9d83-4342-abb0-15c86018128b",
+      "sent_at": null
+    },
+    {
+      "position": 24,
+      "event_id": "4fc6ce0e-5ff7-4ba5-a7cd-f16b1044115a",
+      "sent_at": null
+    },
+    {
+      "position": 25,
+      "event_id": "678fdca1-c16d-46c0-9d8f-9f73230d5570",
+      "sent_at": null
+    },
+    {
+      "position": 26,
+      "event_id": "1fae1f24-1031-49d4-8533-cf789dc917e3",
+      "sent_at": null
+    },
+    {
+      "position": 27,
+      "event_id": "58d7d035-6fac-44e4-8a5c-f6c5506da1e1",
+      "sent_at": null
+    },
+    {
+      "position": 28,
+      "event_id": "8cd17668-1a1f-4f7e-a8ac-cd04ac265eb7",
+      "sent_at": null
+    },
+    {
+      "position": 29,
+      "event_id": "47091a7a-ae35-4de7-bd1b-393a818332a7",
+      "sent_at": null
+    },
+    {
+      "position": 30,
+      "event_id": "11bc7ce5-7066-4b5d-beb0-384b753437e0",
+      "sent_at": null
+    }
+  ],
+  "broker_order_after_restart": [
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 3,
+      "event_id": "a666e837-3a99-49cb-a9d4-b0fd80e526eb",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 4,
+      "event_id": "299d3d48-9100-48b6-a93a-06e642736e64",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 4
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 5,
+      "event_id": "496820dd-395d-4093-84a9-a901ceaa8c3a",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 5
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 6,
+      "event_id": "5f8356b6-d8e4-454a-8aa2-26f47249260e",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 6
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 7,
+      "event_id": "af910f8a-c81c-4e33-b70c-b3aac8d7015c",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 7
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 8,
+      "event_id": "a61cca3f-dbe0-4403-a285-3b7730f6ee2e",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 8
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 9,
+      "event_id": "3977037d-be68-4f07-a181-708225b4fa6c",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 9
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 10,
+      "event_id": "447f0de6-8a4b-4534-8048-3978302d6d59",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 10
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 11,
+      "event_id": "1ef38230-7499-4ef5-942b-d46617149af4",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 11
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 12,
+      "event_id": "a8056fd5-c0de-45ab-9453-2c7210e948d8",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 12
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 13,
+      "event_id": "dfb7b45e-3d26-42e6-a3fd-354db78010ac",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 13
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 14,
+      "event_id": "c5c09e33-7eb3-43bf-91f8-99ce406de086",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 14
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 15,
+      "event_id": "c3055cf4-6cf7-408c-96a9-ad6324faa8b8",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 15
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 16,
+      "event_id": "a2ec32fd-5d29-488d-b8bb-bc0b58599d28",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 16
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 17,
+      "event_id": "e5b976bd-3020-4e4f-b0f0-471864c3e984",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 17
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 18,
+      "event_id": "37cf99b9-320a-42a8-a749-9151d5e5fe2a",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 18
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 19,
+      "event_id": "9fe0eac7-ce06-45cb-ab8d-405ea541878c",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 19
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 20,
+      "event_id": "f1202922-0844-4fe4-912a-e56e41d43e08",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 20
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 21,
+      "event_id": "074ad449-0e28-4bd5-9646-fd1818bcbfc0",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 21
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 22,
+      "event_id": "baaebc9b-fb85-4775-9760-e0ee5aa728d5",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 22
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 23,
+      "event_id": "08258428-9d83-4342-abb0-15c86018128b",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 23
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 24,
+      "event_id": "4fc6ce0e-5ff7-4ba5-a7cd-f16b1044115a",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 24
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 25,
+      "event_id": "678fdca1-c16d-46c0-9d8f-9f73230d5570",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 25
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 26,
+      "event_id": "1fae1f24-1031-49d4-8533-cf789dc917e3",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 26
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 27,
+      "event_id": "58d7d035-6fac-44e4-8a5c-f6c5506da1e1",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 28,
+      "event_id": "47091a7a-ae35-4de7-bd1b-393a818332a7",
+      "kind": "revocation",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 2
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 29,
+      "event_id": "11bc7ce5-7066-4b5d-beb0-384b753437e0",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 30,
+      "event_id": "8cd17668-1a1f-4f7e-a8ac-cd04ac265eb7",
+      "kind": "revocation",
+      "publisher": "lab-revoker",
+      "publisher_sequence": 1
+    }
+  ],
+  "independent_withdrawal_id": "8cd17668-1a1f-4f7e-a8ac-cd04ac265eb7",
+  "mixed_withdrawal_id": "47091a7a-ae35-4de7-bd1b-393a818332a7",
+  "independent_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1717.288,
+    "submit_to_confirmed_ack_ms": 1718.201,
+    "restart_request_to_durable_audit_ms": 1660.004,
+    "restart_request_to_confirmed_ack_ms": 1660.916
+  },
+  "mixed_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1682.673,
+    "submit_to_confirmed_ack_ms": 1683.352,
+    "restart_request_to_durable_audit_ms": 1640.715,
+    "restart_request_to_confirmed_ack_ms": 1641.394
+  }
+}
