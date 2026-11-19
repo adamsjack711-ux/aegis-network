@@ -3,6 +3,10 @@
 import asyncio
 from contextlib import closing
 from functools import partial
+import select
+import signal
+import subprocess
+import sys
 from types import SimpleNamespace
 from uuid import uuid4
 
@@ -254,3 +258,56 @@ def test_withdrawal_ack_requires_live_lease_and_recovery_is_idempotent(tmp_path,
             assert recovered.db.execute("SELECT count(*) FROM revocation_decisions").fetchone()[0] == 1
 
     asyncio.run(exercise())
+
+
+
+@pytest.mark.skipif(not hasattr(signal, "SIGKILL"), reason="requires POSIX SIGKILL")
+def test_sigkill_inside_revocation_transaction_keeps_both_audit_rows_atomic(tmp_path):
+    rapid, audit, first, _, withdrawal, _ = same_publisher(tmp_path)
+    rev = withdrawal.revocation
+    path = audit.path
+    with closing(audit.db):
+        assert rapid.evaluate(first).outcome == "allow_dry_run"
+
+    # Use a TEMP trigger in the disposable child to stop after both writes
+    # have reached SQLite, while the enclosing context still owns the commit.
+    child_code = """
+import signal
+import sys
+from aegis.core import Decision
+from aegis.storage import SqliteAudit
+
+path, eid, aid, digest = sys.argv[1:]
+audit = SqliteAudit(path, "phase4e")
+
+def at_barrier():
+    print("before-commit", flush=True)
+    signal.pause()
+
+audit.db.create_function("at_barrier", 0, at_barrier)
+audit.db.execute(
+    "CREATE TEMP TRIGGER before_commit AFTER INSERT ON revoked_targets "
+    "BEGIN SELECT at_barrier(); END"
+)
+decision = Decision(aid, digest, "revoked_dry_run", "withdrawn",
+                    reason_code="REVOCATION_ACCEPTED", event_id=eid)
+audit.record_revocation("finder", 3, decision, aid, digest, "finder", True, ordered=False)
+"""
+    with subprocess.Popen(
+        [sys.executable, "-c", child_code, path, event_id(withdrawal), event_id(first), rev.target_sha256],
+        stdout=subprocess.PIPE,
+    ) as child:
+        try:
+            assert select.select([child.stdout], [], [], 5)[0]
+            assert child.stdout.readline() == b"before-commit\n"
+        finally:
+            child.kill()
+            assert child.wait(timeout=5) == -signal.SIGKILL
+
+    restarted, recovered = agent(tmp_path, rapid.trust, "phase4e")
+    with closing(recovered.db):
+        assert recovered.get_revocation(event_id(withdrawal)) is None
+        assert recovered.get(event_id(first)).outcome == "allow_dry_run"
+        assert restarted.evaluate_revocation(withdrawal, ordered=False).outcome == "revoked_dry_run"
+        assert recovered.observe_withdrawal("finder", event_id(first), rev.target_sha256)
+        assert recovered.db.execute("SELECT count(*) FROM revocation_decisions").fetchone()[0] == 1

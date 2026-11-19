@@ -1,0 +1,128 @@
+{
+  "baseline": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "findings": 1000,
+  "observer_poll_ms": 25.0,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "priority_minus_control": {
+    "coordinator_cpu_ms": null,
+    "coordinator_peak_rss_bytes": null,
+    "worker_cpu_ms": null,
+    "worker_peak_rss_bytes": null
+  },
+  "python": "3.15.2",
+  "sample_summary": {
+    "partition": {
+      "backlog_drain_ms": null,
+      "coordinator_cpu_ms": {
+        "max": 1098.684,
+        "n": 1,
+        "p50": 1098.684,
+        "p95": 1098.684,
+        "p99": 1098.684
+      },
+      "coordinator_peak_rss_bytes": {
+        "max": 82247680,
+        "n": 1,
+        "p50": 82247680.0,
+        "p95": 82247680.0,
+        "p99": 82247680.0
+      },
+      "crash_to_ack_ms": null,
+      "crash_to_local_denial_ms": null,
+      "crash_to_ready_ms": null,
+      "intake_to_ack_ms": {
+        "max": 1910.311,
+        "n": 1,
+        "p50": 1910.311,
+        "p95": 1910.311,
+        "p99": 1910.311
+      },
+      "intake_to_local_denial_ms": {
+        "max": 1923.202,
+        "n": 1,
+        "p50": 1923.202,
+        "p95": 1923.202,
+        "p99": 1923.202
+      },
+      "intake_to_report_ms": {
+        "max": 1923.257,
+        "n": 1,
+        "p50": 1923.257,
+        "p95": 1923.257,
+        "p99": 1923.257
+      },
+      "worker_cpu_ms": {
+        "max": 294.183,
+        "n": 1,
+        "p50": 294.183,
+        "p95": 294.183,
+        "p99": 294.183
+      },
+      "worker_peak_rss_bytes": {
+        "max": 64569344,
+        "n": 1,
+        "p50": 64569344.0,
+        "p95": 64569344.0,
+        "p99": 64569344.0
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "signaling": "disposable local POSIX processes",
+  "slow_consumer_delay_ms": 3,
+  "trials": [
+    {
+      "agent_id": "53933788-9e0a-404a-8f35-b9a55ecc0332",
+      "arm": "partition",
+      "clock_ns": {
+        "acked": 551832205441958,
+        "denied": 551832218332916,
+        "intake": 551830295130875,
+        "received": 551832202193416,
+        "rejoined": 551830368399000,
+        "reported": 551832218388083
+      },
+      "coordinator_cpu_ms": 1098.684,
+      "coordinator_peak_rss_bytes": 82247680,
+      "docker": "29.5.2 6 8307912704",
+      "event_id": "b1b66067-baf5-4709-942e-31b4c93f712b",
+      "images": {
+        "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+        "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+      },
+      "intake_to_ack_ms": 1910.311,
+      "intake_to_local_denial_ms": 1923.202,
+      "intake_to_report_ms": 1923.257,
+      "mixed_profile_rejected": true,
+      "ordinary_admission_rejection_atomic": true,
+      "ordinary_still_unsent_at_withdrawal_ack": true,
+      "same_profile_started_during_journal_read_lock": true,
+      "trial": 1,
+      "withdrawal_ack": {
+        "acked": 551832205441958,
+        "broker_timestamp": "2026-11-19T23:41:03.671668+00:00",
+        "committed": 551832203594791,
+        "decision": {
+          "agent_id": "53933788-9e0a-404a-8f35-b9a55ecc0332",
+          "artifact_id": "6dc56f18-f7df-49d9-8a1d-6ed090e0e8f3",
+          "correlation_id": "6dc56f18-f7df-49d9-8a1d-6ed090e0e8f3",
+          "digest": "393a20cfcc976cd1e335920cd6c5e641389e85b8802686e57d56b39d28f35125",
+          "dry_run": true,
+          "event_id": "b1b66067-baf5-4709-942e-31b4c93f712b",
+          "outcome": "revoked_dry_run",
+          "reason": "withdrawn",
+          "reason_code": "REVOCATION_ACCEPTED"
+        },
+        "delivery": 1,
+        "kind": "ack",
+        "lane": "withdrawal",
+        "leased": 551832203240833,
+        "ns": 551832205478291,
+        "received": 551832202193416,
+        "sequence": 1
+      },
+      "worker_cpu_ms": 294.183,
+      "worker_peak_rss_bytes": 64569344
+    }
+  ]
+}

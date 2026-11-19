@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "clock": "direct agent wire intake to independent HTTP quarantine confirmation on one host",
+  "broker_ack_confirmed": 0,
+  "sample_count": 12,
+  "percentiles_ms": {
+    "readback_ns": {
+      "p50": 50.983,
+      "p95": 56.492,
+      "p99": 58.401
+    },
+    "cpu_ns": {
+      "p50": 30.909,
+      "p95": 32.047,
+      "p99": 32.158
+    }
+  },
+  "trials_ns": [
+    {
+      "readback_ns": 50499667,
+      "cpu_ns": 30332000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 58878083,
+      "cpu_ns": 31934000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 47031125,
+      "cpu_ns": 30756000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 50620167,
+      "cpu_ns": 32186000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 49736375,
+      "cpu_ns": 31062000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 49034292,
+      "cpu_ns": 31643000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 53375625,
+      "cpu_ns": 29878000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 49584833,
+      "cpu_ns": 28953000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 51636125,
+      "cpu_ns": 29502000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 51806375,
+      "cpu_ns": 29163000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 54540208,
+      "cpu_ns": 31887000,
+      "observed_requests": 18
+    },
+    {
+      "readback_ns": 51346792,
+      "cpu_ns": 31169000,
+      "observed_requests": 18
+    }
+  ]
+}

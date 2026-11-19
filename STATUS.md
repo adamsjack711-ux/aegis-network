@@ -1,5 +1,9 @@
 # Aegis Network status
 
+## Phase 4E-A withdrawal priority
+
+The opt-in lab profile on `feat/phase4e-withdrawal` starts from approved Phase 4D `ae59a97`. Five paired broker-restart trials put one withdrawal behind 1,000 ordinary findings. The priority worker acknowledged the withdrawal first in each trial. Intake-to-report p95 was 2.675 seconds. SIGKILL after an audit commit left a denial reportable in 55 ms, with an ACK at 30.476 seconds. SIGKILL before intake left the all-agent five-second gate open. The existing lease and independently verified actuator authority still apply. [Implementation and risks](docs/phase4e-withdrawal.md) · [Raw measurements](benchmarks/phase4e/)
+
 ## Phase 4D isolated integration candidate
 
 The native Trust profile is integrated in `.worktrees/phase4d` on `integration/phase4d`. It layers native witnessed Mesh coverage, independent Evidence status and durable ownership fencing onto explicit approvals for the disposable three-replica fixture. At tested pin `f26f69d`, the complete suite passed **272 tests** with all local live modes enabled. All three Phase 4C High findings have tested fixture dispositions. Distributed enforcement remains blocked on independently administered endpoints, authenticated broker identity and session fencing, rollback-resistant trust anchors and barriers across separate writers. [Architecture](docs/phase4d-architecture.md) · [Security dispositions](docs/phase4d-security-review.md) · [Release readiness](docs/phase4d-release-readiness.md)
