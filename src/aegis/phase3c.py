@@ -3,13 +3,14 @@
 import asyncio
 from contextlib import asynccontextmanager, contextmanager, suppress
 import json
+import logging
 from pathlib import Path
 import sqlite3
 from threading import RLock
 import time
 
 from nats.js.api import AckPolicy, ConsumerConfig, DeliverPolicy
-from nats.js.errors import NotFoundError
+from nats.js.errors import BadRequestError, NotFoundError
 
 from .agent_runtime import durable_name, process_message
 from .api import STREAM
@@ -17,7 +18,7 @@ from .artifact import Evidence as EvidenceReference
 from .artifact import SignedFinding, canonical_bytes, parse_event, sign
 from .evidence._worker import materials
 from .evidence.records import SignedAttestation, SignedManifest, decode, digest
-from .identity import IdentityLease, renew_lease
+from .identity import IdentityLease, IdentityLost, renew_lease
 from .mitigation.lab import Lab
 from .mitigation.policy import Denied
 from .recovery import reconcile
@@ -28,6 +29,8 @@ VERSION = "1.0.0"
 MESH_TEMPLATE = "restrict-fixture-route.v1"
 REFERENCE = "urn:aegis:evidence:"
 STATUS_SECONDS = 1.0
+JS_WRONG_LAST_SEQUENCE = 10071
+logger = logging.getLogger(__name__)
 
 
 def claim_bytes(finding) -> bytes:
@@ -92,12 +95,20 @@ class MeshIntake:
             renewal.cancel()
             await asyncio.gather(renewal, return_exceptions=True)
             try:
-                await self.lease.release()
-            finally:
-                # These are disposable subscriptions. The audit is retained.
                 if self.subscription is not None:
-                    with suppress(NotFoundError):
+                    # Don't remove a durable now controlled by another owner.
+                    with suppress(NotFoundError, IdentityLost):
+                        await self.lease.ensure()
                         await self.js.delete_consumer(STREAM, name)
+            finally:
+                try:
+                    await self.lease.release()
+                except BadRequestError as exc:
+                    if exc.err_code != JS_WRONG_LAST_SEQUENCE:
+                        raise
+                    # A timed-out KV write can land on reconnect. Leave the
+                    # unmatched revision to expire instead of deleting it.
+                    logger.warning("lease revision changed during cleanup; awaiting expiration")
 
     async def receive(self, event_id: str):
         observation = None
