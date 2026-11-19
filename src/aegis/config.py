@@ -2,19 +2,36 @@
 
 import base64
 import json
+from datetime import datetime
 from pathlib import Path
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
 from .core import InventoryItem, LocalPolicy
+from .trust import PublisherGrant, TrustStore
 
 
-def load_publishers(path: str) -> dict[str, Ed25519PublicKey]:
+def load_publishers(path: str) -> TrustStore:
     raw = json.loads(Path(path).read_text())
-    return {
-        publisher_id: Ed25519PublicKey.from_public_bytes(base64.b64decode(value, validate=True))
-        for publisher_id, value in raw.items()
-    }
+    if "grants" not in raw:
+        return TrustStore.from_legacy({
+            publisher_id: Ed25519PublicKey.from_public_bytes(base64.b64decode(value, validate=True))
+            for publisher_id, value in raw.items()
+        })
+    grants = []
+    for entry in raw["grants"]:
+        if set(entry) != {"publisher_id", "key_id", "public_key", "roles", "not_before", "expires_at", "revoked_at"}:
+            raise ValueError("invalid publisher grant fields")
+        grants.append(PublisherGrant(
+            publisher_id=entry["publisher_id"],
+            key_id=entry["key_id"],
+            public_key=Ed25519PublicKey.from_public_bytes(base64.b64decode(entry["public_key"], validate=True)),
+            roles=frozenset(entry["roles"]),
+            not_before=datetime.fromisoformat(entry["not_before"]),
+            expires_at=datetime.fromisoformat(entry["expires_at"]),
+            revoked_at=datetime.fromisoformat(entry["revoked_at"]) if entry["revoked_at"] else None,
+        ))
+    return TrustStore(grants)
 
 
 def load_local(path: str) -> tuple[LocalPolicy, list[InventoryItem]]:

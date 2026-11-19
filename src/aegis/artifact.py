@@ -122,6 +122,8 @@ def correlation_id(envelope: SignedEvent) -> str:
 
 def parse_event(data: bytes) -> SignedEvent:
     raw = json.loads(data)
+    if not isinstance(raw, dict):
+        raise ValueError("event body must be an object")
     if raw.get("kind", "finding") == "revocation":
         return SignedRevocation.model_validate(raw)
     return SignedFinding.model_validate(raw)

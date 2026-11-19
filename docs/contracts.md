@@ -14,8 +14,10 @@ Stream `AEGIS_FINDINGS`, subject `aegis.findings.v1`, body identical to submitte
 
 SQLite `decisions` records one authenticated decision per artifact: SHA-256 payload digest, publisher, sequence, `allow_dry_run` or `deny`, reason, and timestamp. `rejected_events` stores unauthenticated attempts without changing replay state. `allow_dry_run` means only that a trusted, unexpired finding matched exact local inventory and local allowlist in an authorized lab. It never triggers an action.
 
-## Proposed revocation contract (unimplemented)
+## Phase 2A signed revocation contract (integration review)
 
-A future `SignedRevocation` envelope should bind `schema_version`, `revocation_id`, `publisher_id`, monotonic `sequence`, `issued_at`, `target_artifact_id`, `target_sha256`, `reason`, and Ed25519 signature. The local trust store should pin a separate revocation role and accept revocation even when the target finding has expired. A revocation must permanently deny use of the target digest and never itself request execution. Key rotation, ordering across publishers, and offline catch-up still need an ADR and failure tests. This contract is **not accepted by v1 code**.
+`POST /v1/revocations` accepts `SignedRevocation` with `kind: "revocation"`, `key_id`, `revocation` and Ed25519 `signature`. The signed payload binds `schema_version`, `revocation_id`, `publisher_id`, monotonic `sequence`, `issued_at`, `expires_at`, `target_artifact_id`, `target_sha256`, and `reason`. Success is HTTP 202 with `revocation_id` and `accepted`. The revocation subject is `aegis.revocations.v1`; its `Nats-Msg-Id` is `revocation_id`. An agent with a locally pinned revocation-role key records the target ID and digest permanently, including when the revocation precedes the finding. An expired target finding can still be revoked while the revocation itself is valid. A revocation never requests execution. See [Phase 2A integration review](phase2a-integration.md) before merging shared contracts.
+
+Key rotation, ordering across publishers, and unbounded offline catch-up still need design and failure tests.
 
 Verification attestations, template parameters, independent test evidence, execution request, preflight result, health signal, rollback token, and signed audit export remain undefined. They must be specified and tested before enabling mitigation.
