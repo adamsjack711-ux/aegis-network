@@ -34,6 +34,9 @@ AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f c
 AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f compose.yaml -f compose.hardening.yaml up -d --build
 PYTHONPATH=src AEGIS_DB_PASSWORD=local-hardening /Users/jackadams-lovell/aegis-network/.venv/bin/python scripts/phase2c_live.py --project aegis_phase2c_hardening --override compose.hardening.yaml --postgres postgresql://aegis:local-hardening@127.0.0.1:15432/aegis --samples 20
 PYTHONPATH=src /Users/jackadams-lovell/aegis-network/.venv/bin/python scripts/review_dead_letters.py --nats nats://127.0.0.1:14222 --limit 10
+AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f compose.yaml -f compose.hardening.yaml up -d --build
+docker kill --signal=KILL aegis_phase2c_hardening-agent_b-1
+AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f compose.yaml -f compose.hardening.yaml start agent_b
 AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f compose.yaml -f compose.hardening.yaml down
 ```
 
@@ -42,6 +45,8 @@ AEGIS_DB_PASSWORD=local-hardening docker compose -p aegis_phase2c_hardening -f c
 The final local suite passed **38 tests** (one third-party Starlette/httpx deprecation warning). Tests cover UUID rejection, active lease collision and takeover, ambiguous SQLite identity, scoped and legacy revocation denial, late revocation, stale finding and sequence collision, expired-but-signed revocation replay, replay cursor gaps, dead-letter publish ordering, and an unaudited revocation that keeps retrying after dead-letter copy. Python compilation and Compose configuration parsing passed.
 
 The clean Compose project built and started PostgreSQL, NATS, the coordinator, and two UUID-identified agents. Both agents persisted the same three signed findings and two signed revocations at the integration checkpoint, with two target-ledger entries each. A forced duplicate JetStream delivery did not add a logical row. An invalid signature returned HTTP 400. A broker stop left an outbox row pending; restart sent it and both agents caught up. Agent restart preserved the audits. A second active claimant of an agent UUID was blocked by the broker lease. A signed out-of-scope revocation returned HTTP 400; a stale finding sequence returned HTTP 409. After `agent_b` stopped, the entire findings stream was purged. The missed finding **and its signed revocation** were then restored from the PostgreSQL journal into `agent_b`'s audit. Two malformed deliveries, one per agent, entered the dead-letter stream and were read by the metadata-only review tool. PostgreSQL held **68 journal rows**, positions 1 through 68, after the benchmark. The findings stream reported 86,400-second max age and 67,108,864-byte max size; both streams reported discard-new, and the consumer reported unlimited broker redelivery.
+
+An additional unclean-restart check used the retained lab volumes after the main run. `agent_b` was killed with SIGKILL and immediately started again. Its startup replay requested journal events after position 68, and read-only SQLite inspection showed recovery cursor **68**, **65** finding decisions, and **3** revocation decisions. This checks that an abrupt restart can reclaim its expired lease and retain local audit state; it does not prove recovery after losing the SQLite volume.
 
 The benchmark reused the Phase 2C method: 20 unique synthetic findings per scale, HTTP submission start to local SQLite commit, distinct UUID durables and audit files in one host Python process. It is one run per scale; all outcomes were dry-run. Results from the final clean run:
 
