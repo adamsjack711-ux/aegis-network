@@ -4,6 +4,7 @@ from dataclasses import asdict, dataclass
 import hashlib
 import hmac
 import json
+import re
 import secrets
 import time
 
@@ -34,6 +35,7 @@ class Plan:
     expected_fences: tuple[int, ...]
     lease_ms: int
     expires_ns: int
+    evidence_binding: str | None = None
 
     @property
     def digest(self) -> str:
@@ -51,6 +53,8 @@ class Plan:
             or type(self.lease_ms) is not int
             or not MIN_LEASE_MS <= self.lease_ms <= MAX_LEASE_MS
             or not now < self.expires_ns <= now + APPROVAL_WINDOW_NS
+            or (self.evidence_binding is not None
+                and re.fullmatch(r"[0-9a-f]{64}", self.evidence_binding) is None)
         ):
             raise Denied("plan outside the enrolled template or validity window")
 

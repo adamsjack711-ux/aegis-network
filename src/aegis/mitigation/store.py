@@ -24,10 +24,30 @@ class RouteState:
 
 
 class TargetStore:
-    def __init__(self, path: Path, operator: LocalOperator) -> None:
+    def __init__(self, path: Path, operator: LocalOperator, *, authorize=None,
+                 status_current=None) -> None:
+        if (authorize is None) != (status_current is None):
+            raise ValueError("guarded writes require a local freshness check")
         self.path = path
         self._operator = operator
         self._outage = Event()
+        self._authorize = authorize
+        self._status_current = status_current
+
+    @contextmanager
+    def _authorized_write(self, plan: Plan):
+        if self._authorize is None:
+            if plan.evidence_binding is not None:
+                raise Denied("evidence-bound plan requires local authorization")
+            with self._transaction(write=True) as db:
+                yield db, None
+        else:
+            with self._authorize(plan) as evidence, self._transaction(write=True) as db:
+                if not self._status_current():
+                    raise Denied("local status expired before the target transaction")
+                yield db, evidence
+                if not self._status_current():
+                    raise Denied("local status expired before the target commit")
 
     def create(self) -> None:
         if self.path.exists():
@@ -125,7 +145,7 @@ class TargetStore:
         return rollout["deadline_ns"]
 
     def begin(self, plan: Plan, approval: Approval, baseline: Observation) -> None:
-        with self._transaction(write=True) as db:
+        with self._authorized_write(plan) as (db, evidence_context):
             now = time.monotonic_ns()
             lab_id = self._lab_id(db)
             plan.validate(lab_id, now)
@@ -147,10 +167,11 @@ class TargetStore:
                 "INSERT INTO rollout VALUES (1, ?, 'applying', ?, ?, NULL)",
                 (plan.digest, deadline, now),
             )
-            self._audit(db, now, "leased", plan.digest, deadline_ns=deadline, targets=plan.targets)
+            self._audit(db, now, "leased", plan.digest, deadline_ns=deadline, targets=plan.targets,
+                        evidence_binding=plan.evidence_binding, evidence_context=evidence_context)
 
     def restrict(self, plan: Plan, approval: Approval, target: str, grant: str) -> None:
-        with self._transaction(write=True) as db:
+        with self._authorized_write(plan) as (db, _):
             now = time.monotonic_ns()
             rollout = self._active(db, now, plan)
             self._operator.check_grant(plan, approval, target, grant, now)
@@ -171,7 +192,7 @@ class TargetStore:
             self._audit(db, now, "restricted", plan.digest, target=target, fence=fence + 1)
 
     def record_protection(self, plan: Plan, evidence: Observation, *, canary: bool = False) -> None:
-        with self._transaction(write=True) as db:
+        with self._authorized_write(plan) as (db, _):
             now = time.monotonic_ns()
             rollout = self._active(db, now, plan)
             phase = rollout["phase"]
@@ -217,7 +238,8 @@ class TargetStore:
                 return "ready"
             phase = rollout["phase"]
             if phase in {"applying", "expanding", "confirmed"}:
-                if time.monotonic_ns() >= self._effective_deadline(rollout):
+                if (time.monotonic_ns() >= self._effective_deadline(rollout)
+                        or (self._status_current is not None and not self._status_current())):
                     return "recovery_required"
             return phase
 
@@ -231,14 +253,20 @@ class TargetStore:
                 raise Denied("proxy target absent from its enrolled inventory")
             rollout = self._rollout(db)
             deadline = self._effective_deadline(rollout) if rollout is not None else None
-            if self._outage.is_set() or (deadline is not None and time.monotonic_ns() >= deadline):
+            if self._outage.is_set() or (deadline is not None and (
+                time.monotonic_ns() >= deadline
+                or (self._status_current is not None and not self._status_current())
+            )):
                 yield RouteState("quarantined", row["fence"])
             else:
                 yield RouteState(row["mode"], row["fence"], deadline)
 
     def response_permitted(self, state: RouteState) -> bool:
         return not self._outage.is_set() and (
-            state.deadline_ns is None or time.monotonic_ns() < state.deadline_ns
+            state.deadline_ns is None or (
+                time.monotonic_ns() < state.deadline_ns
+                and (self._status_current is None or self._status_current())
+            )
         )
 
     def quarantine(self, reason: str, *, restart: bool = False) -> tuple[tuple[str, int], ...]:

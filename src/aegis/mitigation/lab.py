@@ -1,6 +1,7 @@
 """Local rollout orchestration and private fixture lifecycle."""
 
 from contextlib import ExitStack
+from dataclasses import replace
 import fcntl
 from pathlib import Path
 import secrets
@@ -21,13 +22,18 @@ class Controller:
         self.operator = operator
         self.observer = observer
 
-    def prepare(self, lease_ms: int) -> Plan:
+    def prepare(self, lease_ms: int, *, binding: str | None = None,
+                valid_until_ns: int | None = None) -> Plan:
         lab_id, targets = self.store.inventory()
         if tuple(targets) != TARGETS or self.store.status() != "ready":
             raise Denied("enrolled lab inventory is unavailable or already used")
         now = time.monotonic_ns()
         plan = Plan(lab_id, secrets.token_hex(16), TEMPLATE, MARKER_PATH, TARGETS,
                     tuple(targets[target].fence for target in TARGETS), lease_ms, now + APPROVAL_WINDOW_NS)
+        if (binding is None) != (valid_until_ns is None):
+            raise Denied("evidence binding and its deadline must be supplied together")
+        if valid_until_ns is not None:
+            plan = replace(plan, evidence_binding=binding, expires_ns=min(plan.expires_ns, valid_until_ns))
         plan.validate(lab_id, now)
         return plan
 
@@ -94,9 +100,10 @@ class Controller:
 class Lab:
     """One disposable, statically enrolled inventory; no enforcement API."""
 
-    def __init__(self, state_path: Path) -> None:
+    def __init__(self, state_path: Path, *, authorize=None, status_current=None) -> None:
         self.operator = LocalOperator()
-        self.store = TargetStore(state_path.resolve(), self.operator)
+        self.store = TargetStore(state_path.resolve(), self.operator, authorize=authorize,
+                                 status_current=status_current)
         self.upstreams: dict[str, RunningServer] = {}
         self.proxies: dict[str, RunningServer] = {}
         self.endpoints: dict[str, tuple[str, int]] = {}

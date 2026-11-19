@@ -7,6 +7,7 @@ import threading
 import time
 from collections.abc import Callable, Mapping
 from concurrent.futures import Future
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
@@ -312,6 +313,12 @@ class Evidence:
         with self._lock, self._db:
             self._register(admitted, bundle.manifest)
             return self._assessment(admitted, self._now())
+
+    @contextmanager
+    def current_assessment(self, bundle: Bundle, *, cohort: str):
+        """Prevent a local status update from interleaving with a guarded commit."""
+        with self._lock:
+            yield self.assess(bundle, cohort=cohort)
 
     def _store_attestation(self, bundle: _Admitted, wire: bytes, now: int) -> Assessment:
         attestation = decode(SignedAttestation, wire)
