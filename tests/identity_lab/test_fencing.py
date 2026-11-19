@@ -290,3 +290,27 @@ def test_restarted_writer_holds_after_same_generation_restore(lab, tmp_path):
     successor = claim(lab, "agent-b", "broker-b")
     lab.call("agent-b", "broker-b", "/write", plan(lab, successor))
     assert raw_receipts(lab) == [(successor.generation, "observing")]
+
+
+def test_lost_anchor_latches_quarantine_until_a_new_generation(lab):
+    assigned = claim(lab)
+    for target in lab.targets:
+        lab.call("agent-a", "broker-a", "/write", plan(lab, assigned, target))
+    old_a = plan(lab, assigned, "target-a")
+    old_b = plan(lab, assigned, "target-b")
+    lab.stop("anchor")
+    assert read(lab, "target-a")["marker"] == "quarantined"
+    with pytest.raises(Unavailable):
+        lab.call("agent-a", "broker-a", "/write", old_b)
+    lab.start("anchor")
+    assert lab.call("operator", "home", "/status")["generation"] == assigned.generation
+    for target, request in zip(lab.targets, (old_a, old_b), strict=True):
+        assert read(lab, target)["marker"] == "quarantined"
+        with pytest.raises(Denied, match="held writer requires a new generation"):
+            lab.call("agent-a", "broker-a", "/write", request)
+        assert raw_receipts(lab, target) == [(assigned.generation, "observing")]
+    recover(lab)
+    successor = claim(lab, "agent-b", "broker-b")
+    for target in lab.targets:
+        lab.call("agent-b", "broker-b", "/write", plan(lab, successor, target))
+        assert raw_receipts(lab, target)[-1] == (successor.generation, "observing")
