@@ -1,0 +1,25 @@
+{
+  "pin": "cb7986d1abb7491e73f5ce53bb01778ba7159d94",
+  "scope": "inert fixture marker, one host, no actual actuation",
+  "before": {
+    "generation": 1,
+    "version": 2,
+    "marker": "observing",
+    "effective": "observing",
+    "writes": 1
+  },
+  "anchor_down": {
+    "generation": 1,
+    "version": 2,
+    "marker": "observing",
+    "effective": "quarantined",
+    "writes": 1
+  },
+  "anchor_restarted": {
+    "generation": 1,
+    "version": 2,
+    "marker": "observing",
+    "effective": "observing",
+    "writes": 1
+  }
+}

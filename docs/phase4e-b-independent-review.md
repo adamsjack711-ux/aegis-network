@@ -41,3 +41,22 @@ Run each fault with a healthy control and new isolated storage. Freeze the code 
 | B6 · Combined guarded path | Run the composition with independently governed Mesh admission and Evidence services. Make status unavailable or withdrawn during transfer and after canary. Audit no unauthorized target mutation, verify all enrolled observations and require fresh exact local approval before a successor transition. |
 
 The distributed acceptance runs need at least two explicitly authorized independent hosts, separate writable stores, identity and broker permissions actually enforced at each endpoint, a recoverable home and barriers on every writer. The baseline run had one physical host and shared administration. A split process, shared Colima VM or mock TLS adapter can establish intermediate contract behavior. They leave the physical multi-host, credential custody and operational failure gates open. Report counts for attempted/accepted generations, attempted/committed protected writes, observed unsafe paths and late or missing operations. Track authorization recovery, footprint and timing separately from ordinary transport fan-out.
+
+## Review of the pinned canonical lab
+
+The canonical identity branch has exact pin `cb7986d1abb7491e73f5ce53bb01778ba7159d94`, directly on the approved baseline. The amendment from `35fae604f1c4fca46644c3c2d561a1f9e2f20dfb` adds the missing `ClaimProof` import. The independent test run used an archive of the amended pin. **All 12 enabled cases passed** on loopback in 25.99 seconds, with no failures or skips. The earlier observed failures belong to the superseded source. [Retained case results](../benchmarks/phase4e-b/canonical-identity-tests.json)
+
+- TLS 1.3 validates the CA chain and exact service URI. The broker verifies the workload URI and enrolled TLS public key, derives the broker from the endpoint role and checks the separately signed claim. An approved TLS peer alone cannot mutate any record.
+- The home commits the preparing assignment before asking each enrolled target for a fence. Each target checks the pending assignment and commits its generation floor under the same SQLite transaction as the synthetic marker. The home checks the receipt for the exact assignment and target. It activates the assignment after both target commits. The mutation path separately checks the writer's floor, current home state, exact operator approval, version, nonce and deadline. The pinned cases exercise two competing brokers, partial transfer, former owner denial and older snapshots with an independent home anchor.
+- The prototype preserves signed Mesh bytes and the existing Phase 4D fixture. It has separate HTTPS broker adapters with their own `/session` endpoint. Real JetStream consumer permissions, generation-bound ACK and cursor transitions, native Rapid, Mesh and Evidence status, clock-skew bounds and independent administrative custody remain outside those results.
+
+### Recovery observation
+
+One additional independent loopback run assigned the synthetic marker and then stopped and restarted the anchor without changing its state. The observer reported `observing → quarantined → observing`. The generation, version and sole mutation receipt stayed fixed through the interruption. This is a derived readback in the inert lab only. It reveals an integration boundary: the marker view recomputes eligibility from the current home, so locally observed quarantine is transient. Any proposed native serving adapter needs a durable interruption latch that keeps its restrictive state across restart, requires fresh exact local review, and has independent readback before reopening. Keep the marker service isolated. [Exact pinned readback](../benchmarks/phase4e-b/anchor-restart-readback.json)
+
+Reproduce from an archived copy of the exact commit with the repository Python environment. Use only disposable loopback services and fixture credentials.
+
+```sh
+AEGIS_PHASE4E_LIVE=1 PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 \
+  python -m pytest -q -ra -p no:cacheprovider tests/identity_lab
+```
