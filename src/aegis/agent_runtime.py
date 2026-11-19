@@ -21,7 +21,9 @@ logger = logging.getLogger(__name__)
 
 async def run() -> None:
     policy, inventory = load_local(os.environ["AEGIS_LOCAL_CONFIG"])
-    audit = SqliteAudit(os.environ["AEGIS_AUDIT_DB"])
+    audit = SqliteAudit(
+        os.environ["AEGIS_AUDIT_DB"], agent_id=os.environ.get("AEGIS_AGENT_ID", "lab-agent")
+    )
     agent = LocalAgent(policy, inventory, audit)
     nc = await nats.connect(os.environ["AEGIS_NATS_URL"])
     js = nc.jetstream()

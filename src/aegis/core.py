@@ -7,7 +7,7 @@ from typing import Protocol
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 
-from .artifact import SignedEvent, SignedFinding, SignedRevocation, canonical_bytes, event_id, event_payload, verify
+from .artifact import Finding, SignedEvent, SignedFinding, SignedRevocation, canonical_bytes, verify
 from .trust import TrustStore
 
 
@@ -38,6 +38,7 @@ class Decision:
     digest: str
     outcome: str
     reason: str
+    reason_code: str
     dry_run: bool = True
     event_id: str | None = None
     correlation_id: str | None = None
@@ -48,9 +49,25 @@ class Audit(Protocol):
     def get(self, artifact_id: str) -> Decision | None: ...
     def high_water(self, publisher_id: str) -> int: ...
     def record(self, publisher_id: str, sequence: int, decision: Decision, authenticated: bool) -> None: ...
+    def record_override(self, decision: Decision) -> Decision: ...
     def is_revoked(self, publisher_id: str, artifact_id: str, digest: str) -> bool: ...
     def get_revocation(self, revocation_id: str) -> Decision | None: ...
     def record_revocation(self, publisher_id: str, sequence: int, decision: Decision, target_id: str, target_digest: str, authenticated: bool) -> None: ...
+
+
+REJECTION_CODES = {
+    "unknown publisher key": "UNKNOWN_PUBLISHER_KEY",
+    "publisher key lacks role": "PUBLISHER_ROLE_DENIED",
+    "publisher key outside validity interval": "PUBLISHER_KEY_INVALID_TIME",
+    "publisher key revoked": "PUBLISHER_KEY_REVOKED",
+    "finding is not currently valid": "FINDING_INVALID_TIME",
+    "revocation is not currently valid": "REVOCATION_INVALID_TIME",
+    "invalid signature": "INVALID_SIGNATURE",
+}
+
+
+def _rejection_code(exc: ValueError) -> str:
+    return REJECTION_CODES.get(str(exc), "INVALID_EVENT")
 
 
 class Coordinator:
@@ -79,9 +96,21 @@ class Coordinator:
 class LocalAgent:
     def __init__(self, policy: LocalPolicy, inventory: list[InventoryItem], audit: Audit):
         self.policy = policy
-        self.inventory = inventory
+        # The local inventory is exact identity data. No URL, range, or prefix
+        # interpretation is performed on evidence supplied by a publisher.
+        self.inventory = frozenset((item.purl, item.version) for item in inventory)
         self.audit = audit
         self.trust = policy.trusted_publishers if isinstance(policy.trusted_publishers, TrustStore) else TrustStore.from_legacy(policy.trusted_publishers)
+
+    def _local_denial(self, finding: Finding) -> tuple[str, str] | None:
+        if not self.policy.lab_authorized:
+            return "lab not authorized", "LAB_NOT_AUTHORIZED"
+        if finding.mitigation_template not in self.policy.allowed_templates:
+            return "template not allowed", "TEMPLATE_NOT_ALLOWED"
+        if not any((finding.software.purl, version) in self.inventory
+                   for version in finding.software.affected_versions):
+            return "no exact inventory match", "INVENTORY_NO_EXACT_MATCH"
+        return None
 
     def evaluate_event(self, envelope: SignedEvent, now: datetime | None = None) -> Decision:
         if isinstance(envelope, SignedRevocation):
@@ -93,10 +122,8 @@ class LocalAgent:
         artifact_id = str(finding.artifact_id)
         digest = hashlib.sha256(canonical_bytes(finding)).hexdigest()
         previous = self.audit.get(artifact_id)
-        if previous is not None and previous.digest != digest:
-            raise ValueError("artifact ID reused with different content")
-
         reason = ""
+        reason_code = "INVALID_EVENT"
         outcome = "deny"
         authenticated = False
         try:
@@ -104,28 +131,46 @@ class LocalAgent:
             verify(envelope, key, now)
         except ValueError as exc:
             reason = str(exc)
+            reason_code = _rejection_code(exc)
         else:
-            authenticated = True
-            if previous is not None:
-                return previous
-            if finding.sequence <= self.audit.high_water(finding.publisher_id):
-                reason = "stale sequence"
+            if previous is not None and previous.digest != digest:
+                reason, reason_code = "artifact ID conflict", "ARTIFACT_ID_CONFLICT"
             elif self.audit.is_revoked(finding.publisher_id, artifact_id, digest):
-                reason = "finding revoked"
-            elif not self.policy.lab_authorized:
-                reason = "lab not authorized"
-            elif finding.mitigation_template not in self.policy.allowed_templates:
-                reason = "template not allowed"
-            elif not any(
-                item.purl == finding.software.purl
-                and item.version in finding.software.affected_versions
-                for item in self.inventory
-            ):
-                reason = "no exact inventory match"
+                # A revocation changes the effective result of an old finding.
+                # Its own durable audit row supplies the history of that change.
+                if previous is not None:
+                    return Decision(artifact_id, digest, "deny", "finding revoked",
+                                    reason_code="FINDING_REVOKED", event_id=artifact_id,
+                                    correlation_id=artifact_id, agent_id=getattr(self.audit, "agent_id", None))
+                authenticated = True
+                reason, reason_code = "finding revoked", "FINDING_REVOKED"
+            elif previous is not None:
+                if previous.outcome == "allow_dry_run":
+                    denial = self._local_denial(finding)
+                    if denial is not None:
+                        reason, reason_code = denial
+                        return self.audit.record_override(Decision(
+                            artifact_id, digest, "deny", reason, reason_code,
+                            event_id=artifact_id, correlation_id=artifact_id,
+                            agent_id=getattr(self.audit, "agent_id", None),
+                        ))
+                return previous
             else:
-                outcome, reason = "allow_dry_run", "exact match and local policy allow"
+                authenticated = True
+                if finding.sequence <= self.audit.high_water(finding.publisher_id):
+                    reason, reason_code = "stale sequence", "STALE_SEQUENCE"
+                else:
+                    denial = self._local_denial(finding)
+                    if denial is None:
+                        outcome, reason, reason_code = (
+                            "allow_dry_run", "exact match and local policy allow", "EXACT_MATCH_ALLOWED"
+                        )
+                    else:
+                        reason, reason_code = denial
 
-        decision = Decision(artifact_id, digest, outcome, reason, event_id=artifact_id, correlation_id=artifact_id, agent_id=getattr(self.audit, "agent_id", None))
+        decision = Decision(artifact_id, digest, outcome, reason, reason_code=reason_code,
+                            event_id=artifact_id, correlation_id=artifact_id,
+                            agent_id=getattr(self.audit, "agent_id", None))
         self.audit.record(finding.publisher_id, finding.sequence, decision, authenticated)
         return decision
 
@@ -135,22 +180,24 @@ class LocalAgent:
         target_id = str(revocation.target_artifact_id)
         digest = hashlib.sha256(canonical_bytes(revocation)).hexdigest()
         previous = self.audit.get_revocation(rid)
-        if previous is not None and previous.digest != digest:
-            raise ValueError("revocation ID reused with different content")
         authenticated = False
         try:
             key = self.trust.authorize(revocation.publisher_id, envelope.key_id, "revocation", now)
             verify(envelope, key, now)
         except ValueError as exc:
-            outcome, reason = "deny", str(exc)
+            outcome, reason, reason_code = "deny", str(exc), _rejection_code(exc)
         else:
-            authenticated = True
-            if previous is not None:
+            if previous is not None and previous.digest != digest:
+                outcome, reason, reason_code = "deny", "revocation ID conflict", "REVOCATION_ID_CONFLICT"
+            elif previous is not None:
                 return previous
-            if revocation.sequence <= self.audit.high_water(revocation.publisher_id):
-                outcome, reason = "deny", "stale sequence"
             else:
-                outcome, reason = "revoked_dry_run", revocation.reason
-        decision = Decision(target_id, digest, outcome, reason, event_id=rid, correlation_id=target_id, agent_id=getattr(self.audit, "agent_id", None))
+                authenticated = True
+                if revocation.sequence <= self.audit.high_water(revocation.publisher_id):
+                    outcome, reason, reason_code = "deny", "stale sequence", "STALE_SEQUENCE"
+                else:
+                    outcome, reason, reason_code = "revoked_dry_run", revocation.reason, "REVOCATION_ACCEPTED"
+        decision = Decision(target_id, digest, outcome, reason, reason_code=reason_code,
+                            event_id=rid, correlation_id=target_id, agent_id=getattr(self.audit, "agent_id", None))
         self.audit.record_revocation(revocation.publisher_id, revocation.sequence, decision, target_id, revocation.target_sha256, authenticated)
         return decision

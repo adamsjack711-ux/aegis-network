@@ -14,3 +14,7 @@ Verification on 2026-11-19:
 These results show the path works for one synthetic lab finding. They do not demonstrate 30-second mitigation, 10x compute savings, safe enforcement, or resilience to a compromised coordinator in a deployed system.
 
 Next: specify signed revocation and independent verifier attestations before adding any executor. Preserve the local policy boundary and never enable production actions from this proof of concept.
+
+## Phase 2B Rapid policy branch
+
+`feat/rapid-policy` adds exact local inventory matching with a precomputed identity set, stable audited reason codes, SQLite agent identity binding and schema migration, duplicate/restart tests, revocation-aware effective decisions, and a local decision latency benchmark. See [docs/phase2b-rapid-policy.md](docs/phase2b-rapid-policy.md) for test and benchmark results. Shared contract proposals are isolated in [docs/proposed-shared-contracts-rapid.md](docs/proposed-shared-contracts-rapid.md). Mesh and NATS code were not changed; no mitigation executes.
