@@ -1,0 +1,85 @@
+{
+  "authority": [
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/artifact.py",
+      "sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/local_observer.py",
+      "sha256": "35435851de6852e99875f824c2ece8e0f33ffc85f32f871c65768f7638f85523"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/trust.py",
+      "sha256": "4f1d90573d5f4d3f0b8dd0b245dbddf0c3ccded56318b2239e518803c4d01343"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/config.py",
+      "sha256": "90502a186843dd0a2efb951c1b1d9ad3f9a49f77344c94c8726acd8aba0f3a03"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/intelligence_adapter.py",
+      "sha256": "95f592222046ec8f87de52acf152842d9f1f7a59deb223b66311a2ab8ef29138"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/trust_lab/native_evidence.py",
+      "sha256": "a9b38d1d8bbe25cf3d6dec28df978c6b280aa6742492865fcadc9c23091141f0"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "src/aegis/mitigation/store.py",
+      "sha256": "46e846bcd6cd86f2e4a90b424efbd740baa08c99a7c6202deafa5e51ebc3b3dc"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "docs/phase4f-recovery-acceptance.md",
+      "sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2"
+    },
+    {
+      "matches_frozen_and_baseline": true,
+      "path": "docs/phase5c-diagnostic-threat-acceptance.md",
+      "sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d"
+    }
+  ],
+  "base": "8292e531194216a578c32c912d066f98cdbce9ea",
+  "candidate": "0045e88db170221a22269a79982d8530f2fd250a",
+  "eval": {
+    "actual_model": {
+      "reason": "no model authorization",
+      "status": "skipped"
+    },
+    "baseline_correct": 12,
+    "citation_valid": 12,
+    "corpus_sha256": "cba6b33415f287b33dcf13d4aca9f99a21ae56c4375b4cd588c64b673cc5fb65",
+    "false_affected": 0,
+    "investigator_correct": 12,
+    "manifest_sha256": "9770b5377aebd23fb2377e67e05ffdc94af13133210bc700ed61118062a2325c",
+    "planned": 12,
+    "unsupported_semantic_claims": null
+  },
+  "junit": {
+    "case_count": 490,
+    "errors": 0,
+    "failures": 0,
+    "passed": 452,
+    "sha256": "3ad4e390ddf89bfc23c993cebb043f1b97bfdf175508d8b14138bc3359e77231",
+    "skip_reasons": {
+      "credentialed disposable mTLS tests require AEGIS_PHASE4E_LIVE=1": 30,
+      "requires the Phase 4E loopback priority profile": 3,
+      "requires the legacy loopback single-stream profile": 1,
+      "set AEGIS_PHASE4A_LIVE=1 to authorize disposable Docker and fault tests": 1,
+      "set AEGIS_PHASE4D_LIVE=1 for a disposable loopback NATS replacement": 1,
+      "set AEGIS_PHASE4D_T3_LIVE=1 for two disposable loopback NATS brokers": 1,
+      "trust stat/read race awaits shared grant parser compatibility review": 1
+    },
+    "skipped": 38,
+    "subtest_delta": 5,
+    "suite_count": 495,
+    "xfail": 1
+  }
+}
