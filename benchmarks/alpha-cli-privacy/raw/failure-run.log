@@ -1,0 +1,3 @@
+{"case": "truncated", "exit_code": 2, "inventory_complete": false, "package_count": 0, "reason": "malformed installed package architecture", "stdout_bytes": 412}
+{"case": "duplicate", "exit_code": 2, "inventory_complete": false, "package_count": 0, "reason": "duplicate installed package identity", "stdout_bytes": 408}
+{"case": "oversized-line", "exit_code": 2, "inventory_complete": false, "package_count": 0, "reason": "dpkg status exceeds input limit", "stdout_bytes": 403}

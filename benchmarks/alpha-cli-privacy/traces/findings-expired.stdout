@@ -1,0 +1,42 @@
+{
+  "asset_id": null,
+  "claim_count": 1,
+  "cli_version": "0.1.0",
+  "current_exact_package_match_count": 0,
+  "findings": [
+    {
+      "architecture": "amd64",
+      "artifact_id": "00000000-0000-4000-8000-000000000501",
+      "asset_id": null,
+      "claim_digest": "2ad41dca22012fc7e2eaef390a01323aac01bb39b48aca091e07fab9ad6b50b2",
+      "collected_at": "2026-11-20T07:20:18.610572Z",
+      "comparator": "exact-string",
+      "confidence": "package-identity-only",
+      "finding_id": "fcb77232e16dffd8338a7759",
+      "independent_status": "unknown",
+      "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+      "installed_version": "1:8.0-1",
+      "intelligence_expires_at": "2026-11-19T00:00:00Z",
+      "inventory_complete": true,
+      "local_claim_status": "expired",
+      "match_reason": "EXACT_PACKAGE_VERSION",
+      "overall_assessment": "unknown",
+      "package_name": "curl",
+      "publisher_authenticity": "verified",
+      "purl": "pkg:deb/debian/curl",
+      "software_match": "matched",
+      "source": "aegis-mesh:validator-fixture:00000000-0000-4000-8000-000000000501",
+      "summary": "Signed Mesh lab finding; no host exploitability conclusion",
+      "uncertainty": "No current independent Evidence/T4/T5 status; binary/source package and reachability mapping unavailable",
+      "verification": "signed-mesh-v1-lab-scope",
+      "vulnerability_id": "AEGIS-CLI-501"
+    }
+  ],
+  "identity_scope": "none",
+  "intelligence_scope": "supplied-signed-events-only",
+  "inventory_complete": true,
+  "inventory_reason": "complete",
+  "observation_count": 1,
+  "schema_version": "observation-results-v2",
+  "snapshot_id": "b92072b61ef86865252fd894f5cfd76c4e6015f9f04b952de0c371e5bec52e58"
+}

@@ -1,0 +1,579 @@
+{
+  "runs": [
+    {
+      "case": "status-default",
+      "argv": [
+        "status",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/status-default.trace.9"
+      ],
+      "trace_lines": 1239,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"status\", \"--json\"], 0xffffff970b50 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": "unknown",
+      "overall_assessment": "unknown",
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "inventory-default",
+      "argv": [
+        "inventory",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/inventory-default.trace.9"
+      ],
+      "trace_lines": 1239,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"inventory\", \"--json\"], 0xffffc1ea9010 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "doctor-default",
+      "argv": [
+        "doctor",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/doctor-default.trace.9"
+      ],
+      "trace_lines": 1241,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"doctor\", \"--json\"], 0xffffe7300f00 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-no-feed",
+      "argv": [
+        "findings",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-no-feed.trace.9"
+      ],
+      "trace_lines": 1239,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--json\"], 0xffffc12c9c20 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "explain-no-feed",
+      "argv": [
+        "explain",
+        "absent",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/explain-no-feed.trace.9"
+      ],
+      "trace_lines": 1239,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"explain\", \"absent\", \"--json\"], 0xffffc675b148 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-signed",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/fixtures/phase-next-cli/signed-current.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/findings-signed.trace.9"
+      ],
+      "trace_lines": 1359,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/fixtures/phase-next-cli/sig\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xfffff0269ee0 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": 1,
+      "findings": [
+        {
+          "architecture": "amd64",
+          "artifact_id": "00000000-0000-4000-8000-000000000501",
+          "asset_id": null,
+          "claim_digest": "7b5e1b0bd94c32a72e9c5a904e1886348a8e5da8001b35948c1098998130fe83",
+          "collected_at": "2026-11-20T07:20:14.677666Z",
+          "comparator": "exact-string",
+          "confidence": "package-identity-only",
+          "finding_id": "fcb77232e16dffd8338a7759",
+          "independent_status": "unknown",
+          "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+          "installed_version": "1:8.0-1",
+          "intelligence_expires_at": "2030-01-01T00:00:00Z",
+          "inventory_complete": true,
+          "local_claim_status": "current-in-supplied-file",
+          "match_reason": "EXACT_PACKAGE_VERSION",
+          "overall_assessment": "unknown",
+          "package_name": "curl",
+          "publisher_authenticity": "verified",
+          "purl": "pkg:deb/debian/curl",
+          "software_match": "matched",
+          "source": "aegis-mesh:validator-fixture:00000000-0000-4000-8000-000000000501",
+          "summary": "Signed Mesh lab finding; no host exploitability conclusion",
+          "uncertainty": "No current independent Evidence/T4/T5 status; binary/source package and reachability mapping unavailable",
+          "verification": "signed-mesh-v1-lab-scope",
+          "vulnerability_id": "AEGIS-CLI-501"
+        }
+      ],
+      "asset_id": null
+    },
+    {
+      "case": "status-signed",
+      "argv": [
+        "status",
+        "--feed",
+        "/src/fixtures/phase-next-cli/signed-current.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/status-signed.trace.9"
+      ],
+      "trace_lines": 1359,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"status\", \"--feed\", \"/src/fixtures/phase-next-cli/sig\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xffffd95ab3d0 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": "unknown",
+      "overall_assessment": "unknown",
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-tampered",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/benchmarks/alpha-cli-privacy/inputs/tampered-signed-current.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-tampered.trace.9"
+      ],
+      "trace_lines": 1359,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/benchmarks/alpha-cli-privac\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xffffe3a02a30 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-missing-trust",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/fixtures/phase-next-cli/signed-current.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-missing-trust.trace.9"
+      ],
+      "trace_lines": 1241,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/fixtures/phase-next-cli/sig\"..., \"--json\"], 0xffffd1ce2500 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-malformed",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/fixtures/phase-next-cli/malformed-feed.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-malformed.trace.9"
+      ],
+      "trace_lines": 1241,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/fixtures/phase-next-cli/mal\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xfffff8c7ca40 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "findings-expired",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/fixtures/phase-next-cli/signed-expired.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-expired.trace.9"
+      ],
+      "trace_lines": 1359,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/fixtures/phase-next-cli/sig\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xffffef4ec540 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": 1,
+      "findings": [
+        {
+          "architecture": "amd64",
+          "artifact_id": "00000000-0000-4000-8000-000000000501",
+          "asset_id": null,
+          "claim_digest": "2ad41dca22012fc7e2eaef390a01323aac01bb39b48aca091e07fab9ad6b50b2",
+          "collected_at": "2026-11-20T07:20:18.610572Z",
+          "comparator": "exact-string",
+          "confidence": "package-identity-only",
+          "finding_id": "fcb77232e16dffd8338a7759",
+          "independent_status": "unknown",
+          "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+          "installed_version": "1:8.0-1",
+          "intelligence_expires_at": "2026-11-19T00:00:00Z",
+          "inventory_complete": true,
+          "local_claim_status": "expired",
+          "match_reason": "EXACT_PACKAGE_VERSION",
+          "overall_assessment": "unknown",
+          "package_name": "curl",
+          "publisher_authenticity": "verified",
+          "purl": "pkg:deb/debian/curl",
+          "software_match": "matched",
+          "source": "aegis-mesh:validator-fixture:00000000-0000-4000-8000-000000000501",
+          "summary": "Signed Mesh lab finding; no host exploitability conclusion",
+          "uncertainty": "No current independent Evidence/T4/T5 status; binary/source package and reachability mapping unavailable",
+          "verification": "signed-mesh-v1-lab-scope",
+          "vulnerability_id": "AEGIS-CLI-501"
+        }
+      ],
+      "asset_id": null
+    },
+    {
+      "case": "findings-withdrawn",
+      "argv": [
+        "findings",
+        "--feed",
+        "/src/fixtures/phase-next-cli/signed-withdrawn.json",
+        "--trust",
+        "/src/fixtures/phase-next-cli/trust.json",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/findings-withdrawn.trace.9"
+      ],
+      "trace_lines": 1359,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"findings\", \"--feed\", \"/src/fixtures/phase-next-cli/sig\"..., \"--trust\", \"/src/fixtures/phase-next-cli/tru\"..., \"--json\"], 0xffffe0686980 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": 1,
+      "findings": [
+        {
+          "architecture": "amd64",
+          "artifact_id": "00000000-0000-4000-8000-000000000501",
+          "asset_id": null,
+          "claim_digest": "7b5e1b0bd94c32a72e9c5a904e1886348a8e5da8001b35948c1098998130fe83",
+          "collected_at": "2026-11-20T07:20:19.414199Z",
+          "comparator": "exact-string",
+          "confidence": "package-identity-only",
+          "finding_id": "fcb77232e16dffd8338a7759",
+          "independent_status": "unknown",
+          "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+          "installed_version": "1:8.0-1",
+          "intelligence_expires_at": "2030-01-01T00:00:00Z",
+          "inventory_complete": true,
+          "local_claim_status": "withdrawn-in-supplied-file",
+          "match_reason": "EXACT_PACKAGE_VERSION",
+          "overall_assessment": "unknown",
+          "package_name": "curl",
+          "publisher_authenticity": "verified",
+          "purl": "pkg:deb/debian/curl",
+          "software_match": "matched",
+          "source": "aegis-mesh:validator-fixture:00000000-0000-4000-8000-000000000501",
+          "summary": "Signed Mesh lab finding; no host exploitability conclusion",
+          "uncertainty": "No current independent Evidence/T4/T5 status; binary/source package and reachability mapping unavailable",
+          "verification": "signed-mesh-v1-lab-scope",
+          "vulnerability_id": "AEGIS-CLI-501"
+        }
+      ],
+      "asset_id": null
+    },
+    {
+      "case": "state-first",
+      "argv": [
+        "--state-dir",
+        "/state/chosen",
+        "inventory",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/state-first.trace.9"
+      ],
+      "trace_lines": 1245,
+      "network_attempts": [],
+      "write_attempts": [
+        "mkdirat(4, \"chosen\", 0700)              = 0",
+        "openat(3, \"identity.json\", O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC, 0600) = 4"
+      ],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"--state-dir\", \"/state/chosen\", \"inventory\", \"--json\"], 0xffffcb76a100 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": "f8830ea9-069f-4f8c-b164-7a4f91d11629"
+    },
+    {
+      "case": "state-repeat",
+      "argv": [
+        "--state-dir",
+        "/state/chosen",
+        "inventory",
+        "--json"
+      ],
+      "exit_code": 0,
+      "trace_files": [
+        "traces/state-repeat.trace.9"
+      ],
+      "trace_lines": 1245,
+      "network_attempts": [],
+      "write_attempts": [
+        "mkdirat(4, \"chosen\", 0700)              = -1 EEXIST (File exists)",
+        "openat(3, \"identity.json\", O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC, 0600) = -1 EEXIST (File exists)"
+      ],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"--state-dir\", \"/state/chosen\", \"inventory\", \"--json\"], 0xfffffbb2c8b0 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": null,
+      "independent_status": null,
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": "f8830ea9-069f-4f8c-b164-7a4f91d11629"
+    },
+    {
+      "case": "state-ancestor-link",
+      "argv": [
+        "--state-dir",
+        "/state/ancestor-link/chosen",
+        "inventory",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/state-ancestor-link.trace.9"
+      ],
+      "trace_lines": 1238,
+      "network_attempts": [],
+      "write_attempts": [],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"--state-dir\", \"/state/ancestor-link/chosen\", \"inventory\", \"--json\"], 0xffffd39e7a30 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    },
+    {
+      "case": "state-final-link",
+      "argv": [
+        "--state-dir",
+        "/state/final-link",
+        "inventory",
+        "--json"
+      ],
+      "exit_code": 2,
+      "trace_files": [
+        "traces/state-final-link.trace.9"
+      ],
+      "trace_lines": 1239,
+      "network_attempts": [],
+      "write_attempts": [
+        "mkdirat(4, \"final-link\", 0700)          = -1 EEXIST (File exists)"
+      ],
+      "exec_attempts": [
+        "execve(\"/usr/local/bin/python\", [\"python\", \"-m\", \"aegis.cli\", \"--state-dir\", \"/state/final-link\", \"inventory\", \"--json\"], 0xffffd536be50 /* 9 vars */) = 0"
+      ],
+      "privilege_attempts": [],
+      "stderr": "",
+      "input_tree_unchanged": true,
+      "parsed_status": "unknown",
+      "independent_status": "unknown",
+      "overall_assessment": null,
+      "observation_count": null,
+      "findings": null,
+      "asset_id": null
+    }
+  ],
+  "state_tree": [
+    {
+      "path": "ancestor-link",
+      "mode": "0o755",
+      "size": 106,
+      "sha256": null
+    },
+    {
+      "path": "chosen",
+      "mode": "0o700",
+      "size": 96,
+      "sha256": null
+    },
+    {
+      "path": "chosen/identity.json",
+      "mode": "0o600",
+      "size": 53,
+      "sha256": "49279737734628a06b1fccd0812e3de30bdaf08b276f66697f0ffdb79237c996"
+    },
+    {
+      "path": "final-link",
+      "mode": "0o755",
+      "size": 106,
+      "sha256": null
+    },
+    {
+      "path": "real",
+      "mode": "0o755",
+      "size": 64,
+      "sha256": null
+    }
+  ]
+}

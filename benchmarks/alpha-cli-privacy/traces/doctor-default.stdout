@@ -1,0 +1,13 @@
+{
+  "advisories": "not configured (pass --feed to findings)",
+  "asset_id": null,
+  "distribution": "debian",
+  "enforcement": "unavailable",
+  "identity_note": "not persisted (pass --state-dir to opt in)",
+  "identity_scope": "none",
+  "independent_status": "unknown",
+  "inventory": "1 installed binary packages",
+  "network": "disabled; no sockets or listeners",
+  "ready": "yes",
+  "schema_version": "doctor-v2"
+}
