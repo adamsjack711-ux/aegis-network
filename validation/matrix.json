@@ -1,0 +1,223 @@
+{
+  "candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "approval": "c4cd31a4c7c243c52928b076d1573fd270747ece",
+  "decision": "NO-GO",
+  "cells": [
+    {
+      "cell": "debian-13-py312",
+      "image": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+      "wheel_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_functional_pass": 21,
+      "console_logical_with_privacy": {
+        "passed": 0,
+        "failed": 21,
+        "unrun": 0
+      },
+      "cache_attempts": 210,
+      "resource": {
+        "passed": 17,
+        "failed": [],
+        "unrun": 0
+      },
+      "hard_256": [
+        {
+          "id": "hard-256-1",
+          "exit_code": 0,
+          "wall_seconds": 1.984025,
+          "cpu_seconds": 1.349974,
+          "peak_rss_mib": 105.508,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-2",
+          "exit_code": 0,
+          "wall_seconds": 2.01784,
+          "cpu_seconds": 1.373352,
+          "peak_rss_mib": 148.973,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-3",
+          "exit_code": 0,
+          "wall_seconds": 2.005223,
+          "cpu_seconds": 1.358952,
+          "peak_rss_mib": 148.973,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "cell": "debian-13-py313",
+      "image": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+      "wheel_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_functional_pass": 21,
+      "console_logical_with_privacy": {
+        "passed": 0,
+        "failed": 21,
+        "unrun": 0
+      },
+      "cache_attempts": 3612,
+      "resource": {
+        "passed": 17,
+        "failed": [],
+        "unrun": 0
+      },
+      "hard_256": [
+        {
+          "id": "hard-256-1",
+          "exit_code": 0,
+          "wall_seconds": 2.145822,
+          "cpu_seconds": 1.536261,
+          "peak_rss_mib": 107.52,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-2",
+          "exit_code": 0,
+          "wall_seconds": 2.229252,
+          "cpu_seconds": 1.54696,
+          "peak_rss_mib": 151.887,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-3",
+          "exit_code": 0,
+          "wall_seconds": 2.172931,
+          "cpu_seconds": 1.534547,
+          "peak_rss_mib": 152.031,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "image": "sha256:c955040430a4cd8bee1b84aa6a038d6cf0fca28644b7e71f3f17280a84f358ec",
+      "wheel_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_functional_pass": 21,
+      "console_logical_with_privacy": {
+        "passed": 0,
+        "failed": 21,
+        "unrun": 0
+      },
+      "cache_attempts": 4494,
+      "resource": {
+        "passed": 17,
+        "failed": [],
+        "unrun": 0
+      },
+      "hard_256": [
+        {
+          "id": "hard-256-1",
+          "exit_code": 0,
+          "wall_seconds": 2.146825,
+          "cpu_seconds": 1.523842,
+          "peak_rss_mib": 110.145,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-2",
+          "exit_code": 0,
+          "wall_seconds": 2.156231,
+          "cpu_seconds": 1.531603,
+          "peak_rss_mib": 153.207,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-3",
+          "exit_code": 0,
+          "wall_seconds": 2.160644,
+          "cpu_seconds": 1.530623,
+          "peak_rss_mib": 153.219,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "image": "sha256:f28569db398ff4d8d9edbe4887411861566a6c5f573d40a9ae559785e0e2dc86",
+      "wheel_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_functional_pass": 21,
+      "console_logical_with_privacy": {
+        "passed": 0,
+        "failed": 21,
+        "unrun": 0
+      },
+      "cache_attempts": 3612,
+      "resource": {
+        "passed": 17,
+        "failed": [],
+        "unrun": 0
+      },
+      "hard_256": [
+        {
+          "id": "hard-256-1",
+          "exit_code": 0,
+          "wall_seconds": 1.995999,
+          "cpu_seconds": 1.455985,
+          "peak_rss_mib": 108.57,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-2",
+          "exit_code": 0,
+          "wall_seconds": 2.106212,
+          "cpu_seconds": 1.47193,
+          "peak_rss_mib": 153.801,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        },
+        {
+          "id": "hard-256-3",
+          "exit_code": 0,
+          "wall_seconds": 2.104656,
+          "cpu_seconds": 1.470267,
+          "peak_rss_mib": 154.023,
+          "stdout_bytes": 43889275,
+          "all_rows_exact": true,
+          "cgroup_oom_kill_delta": 0,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "all_rows_exact": false,
+  "cgroup_oom_kill_delta": 0,
+  "conservative_failure": true,
+  "cpu_seconds": 0.10076,
+  "exit_code": 2,
+  "id": "malformed-truncated",
+  "identity_error": "not a successful inventory",
+  "implicit_state_absent": true,
+  "input_sha256": "44c24f79230c90adb3ff71165e3b079dd4b6f2c21ad801441f4655cea02f1944",
+  "input_unchanged": true,
+  "mode": "failure",
+  "pass": true,
+  "peak_rss_mib": 35.676,
+  "rows": "truncated",
+  "stderr_bytes": 0,
+  "stderr_excerpt": "",
+  "stdout_bytes": 412,
+  "stdout_sha256": "cfc8efcecabac9a9f8c472a142c0facf57428bdd74e058f5b08aa7022fb86821",
+  "timed_out": false,
+  "wall_seconds": 0.104924,
+  "writable_trees_unchanged": true
+}

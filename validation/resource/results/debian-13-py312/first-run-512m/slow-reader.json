@@ -1,0 +1,22 @@
+{
+  "all_rows_exact": true,
+  "cgroup_oom_kill_delta": 0,
+  "cpu_seconds": 1.320187,
+  "exit_code": 0,
+  "id": "slow-reader",
+  "identity_error": null,
+  "implicit_state_absent": true,
+  "input_sha256": "3bc8226479aeb287021fd6ae2cd58c30067b83e3c6692bbe84c4d8acc7f39482",
+  "input_unchanged": true,
+  "mode": "slow",
+  "pass": true,
+  "peak_rss_mib": 151.961,
+  "rows": 100000,
+  "stderr_bytes": 0,
+  "stderr_excerpt": "",
+  "stdout_bytes": 43889275,
+  "stdout_sha256": "00f7f667d085752cda9bbcfca7e6e939b424639eada4dd732f4fa7659d698ecd",
+  "timed_out": false,
+  "wall_seconds": 1.845318,
+  "writable_trees_unchanged": true
+}

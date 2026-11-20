@@ -1,0 +1,23 @@
+{
+  "all_rows_exact": false,
+  "cgroup_oom_kill_delta": 0,
+  "conservative_failure": true,
+  "cpu_seconds": 0.097305,
+  "exit_code": 2,
+  "id": "malformed-oversized",
+  "identity_error": "not a successful inventory",
+  "implicit_state_absent": true,
+  "input_sha256": "c2e74cfc04892a70f3a96b7bf3efd112b03790e71e5cd2f64a723c02e5178dca",
+  "input_unchanged": true,
+  "mode": "failure",
+  "pass": true,
+  "peak_rss_mib": 35.684,
+  "rows": "oversized",
+  "stderr_bytes": 0,
+  "stderr_excerpt": "",
+  "stdout_bytes": 403,
+  "stdout_sha256": "8ef9a5bbc7cfdeed8a66f3f0f0a8bc192e70adcd31f0e74a3b8084cceb10fcb8",
+  "timed_out": false,
+  "wall_seconds": 0.103285,
+  "writable_trees_unchanged": true
+}

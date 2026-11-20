@@ -1,0 +1,22 @@
+{
+  "all_rows_exact": true,
+  "cgroup_oom_kill_delta": 0,
+  "cpu_seconds": 1.340602,
+  "exit_code": 0,
+  "id": "inventory-100000-2",
+  "identity_error": null,
+  "implicit_state_absent": true,
+  "input_sha256": "3bc8226479aeb287021fd6ae2cd58c30067b83e3c6692bbe84c4d8acc7f39482",
+  "input_unchanged": true,
+  "mode": "normal",
+  "pass": true,
+  "peak_rss_mib": 151.801,
+  "rows": 100000,
+  "stderr_bytes": 0,
+  "stderr_excerpt": "",
+  "stdout_bytes": 43889275,
+  "stdout_sha256": "e9dc4e63c070014e4e489c6e436cd94ff4bb9511d77679288115e59e608e317b",
+  "timed_out": false,
+  "wall_seconds": 1.982517,
+  "writable_trees_unchanged": true
+}

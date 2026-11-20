@@ -1,0 +1,43 @@
+{
+  "attempted": 1,
+  "bytecode_suppressed_for_resource_measurement": true,
+  "cgroup_readback": {
+    "cpu.max": "100000 100000",
+    "memory.max": "536870912",
+    "memory.swap.max": "0",
+    "pids.max": "64"
+  },
+  "children": [
+    {
+      "all_rows_exact": false,
+      "cgroup_oom_kill_delta": 0,
+      "closed_consumer_bytes_read": 4096,
+      "closed_consumer_sha256": "44dcaf118356cd6b440c006be8df6952b8d10fdcd7d303584c6c2631cd7b9036",
+      "cpu_seconds": 0.771557,
+      "exit_code": 2,
+      "feed_sha256": null,
+      "feed_unchanged": true,
+      "id": "closed-stdout",
+      "identity_error": "not a successful inventory",
+      "implicit_state_absent": true,
+      "input_sha256": "3bc8226479aeb287021fd6ae2cd58c30067b83e3c6692bbe84c4d8acc7f39482",
+      "input_unchanged": true,
+      "mode": "closed",
+      "pass": true,
+      "peak_rss_mib": 107.398,
+      "rows": 100000,
+      "stderr_bytes": 0,
+      "stderr_excerpt": "",
+      "stdout_bytes": 4096,
+      "stdout_sha256": "44dcaf118356cd6b440c006be8df6952b8d10fdcd7d303584c6c2631cd7b9036",
+      "timed_out": false,
+      "wall_seconds": 0.780907,
+      "writable_trees_unchanged": true
+    }
+  ],
+  "distro": "debian",
+  "failed": 0,
+  "memory_limit_mib": 512,
+  "passed": 1,
+  "planned": 1
+}

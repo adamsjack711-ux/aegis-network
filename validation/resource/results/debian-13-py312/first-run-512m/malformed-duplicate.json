@@ -1,0 +1,23 @@
+{
+  "all_rows_exact": false,
+  "cgroup_oom_kill_delta": 0,
+  "conservative_failure": true,
+  "cpu_seconds": 0.099103,
+  "exit_code": 2,
+  "id": "malformed-duplicate",
+  "identity_error": "not a successful inventory",
+  "implicit_state_absent": true,
+  "input_sha256": "23209ef51e7c5722ba052eb5f0b4b9e028c062c7513dca8e13b3c4f89196c80a",
+  "input_unchanged": true,
+  "mode": "failure",
+  "pass": false,
+  "peak_rss_mib": 151.961,
+  "rows": "duplicate",
+  "stderr_bytes": 0,
+  "stderr_excerpt": "",
+  "stdout_bytes": 408,
+  "stdout_sha256": "7a4952d2dd73a8f4ac2aa199672bc45f69b5f2878e0ca5cf2bc188ad87db06db",
+  "timed_out": false,
+  "wall_seconds": 0.106502,
+  "writable_trees_unchanged": true
+}
