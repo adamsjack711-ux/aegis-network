@@ -12,3 +12,5 @@ Reviewed integration reference `29455087922a728a41936d8c5c79ff9942e1e3df` passed
 | Diagnostic Runner preview and production | **NO-GO.** 5C remains a design-only proposal, and production deployment/distributed autonomous enforcement have no authorization. |
 
 The Alpha Readiness cycle can accept narrowly reviewed source, package and test changes into its isolated branch only after exact clean specialist pins, independent negative tests and full regression after each intake. Skipped infrastructure or a source-only Linux surrogate cannot change a release decision.
+
+At the first proposal checkpoint, independent packaging review `c659718` accepted the fail-closed plan but kept all build/install cells skipped. Independent grant review `4e47ee0` reproduced the old check/read bypass and required a revised contract before source implementation. The owner OpenAI mock proposal `15f74cc` reports 37 focused passes and zero real-model calls but is awaiting an independent exact-pin review. No source changes have entered this Alpha Readiness candidate, and every opening release decision remains unchanged.
