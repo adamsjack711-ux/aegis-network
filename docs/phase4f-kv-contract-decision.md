@@ -4,6 +4,8 @@ Decision: **REVISE; no authority-changing implementation authorization.** Review
 
 Five fresh one-agent crash trials had **10/10 eligible agent-withdrawal pairs miss 5,000 ms**; the two separately reported healthy pairs passed. The latest crash trial reached read-only SQLite denial at 30,619.245 and 30,634.960 ms. Thirty rejected FILE KV claims precede the replacement claim near 30.5 seconds. Broker ACK and replay cursor are distinct from denial and native witnessed status. This establishes a local dry-run bottleneck, not a safe early ownership transfer or target-side protection result. The independently run unique-lane diagnostic also missed at 30,598.738 and 30,610.679 ms; its 72-pair full oracle remains unrun.
 
+Separate independent acceptance at `b81dac88c895aa074e534d7ea0feb6341b4347e6` read the exact SQLite state through a distinct connection: both denials were still absent 30,559.741 ms after broker restart and first present at 30,585.717 ms. Signed withdrawals had already been durably admitted before restart. This is an additional direct durable-state failure, not a broker ACK inference. That driver used four queued ordinary findings, so its 1,000-row backlog arm remains untested. The decision below is unchanged.
+
 ## Required revision before an implementation decision
 
 1. Name the failure-independent, monotonic owner-generation authority, its authenticated claimant, its persistence across broker failover, and its rollback-resistant restore anchor. Show how every incumbent protected writer is excluded before a successor obtains positive authority. A controller death observation, broker TTL or KV revision alone is insufficient under partition or pause.
