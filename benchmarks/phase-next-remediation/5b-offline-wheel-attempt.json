@@ -1,0 +1,9 @@
+{
+  "source_pin": "a9b0d0e1d45b64ce833343dbfa3dd9f034a20770",
+  "command": "uv build --offline --wheel --out-dir benchmarks/phase-next-remediation/5b-wheel ../phase5b-observer-purity",
+  "network": "offline; no external fetch authorized",
+  "exit_code": 2,
+  "wheel_created": false,
+  "error": "Failed to resolve build-system.requires: hatchling was not found in the local uv cache",
+  "classification": "packaging acceptance skipped due to missing cached build prerequisite; no install or uninstall result"
+}

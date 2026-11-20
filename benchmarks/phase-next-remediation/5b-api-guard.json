@@ -1,0 +1,12 @@
+{
+  "at_utc": "2026-11-20T02:31:34.555192+00:00",
+  "calls": [],
+  "exit_code": 2,
+  "files": [
+    "explicit-state/identity.json"
+  ],
+  "scope": "Python-level API guard, local host; not a syscall trace",
+  "source_pin": "a9b0d0e1d45b64ce833343dbfa3dd9f034a20770",
+  "status": "pass",
+  "stdout": "{\n  \"asset_id\": \"c0264557-c355-4972-a3a9-b7ac1cdf3423\",\n  \"captured_at\": \"2026-11-20T02:31:34.552627Z\",\n  \"cli_version\": \"0.1.0\",\n  \"distribution\": \"unknown\",\n  \"identity_scope\": \"explicit-local\",\n  \"inventory_complete\": false,\n  \"inventory_reason\": \"cannot read Linux os-release\",\n  \"package_count\": 0,\n  \"packages\": [],\n  \"schema_version\": \"inventory-v2\",\n  \"snapshot_id\": \"1c26c3539e14a6957f2e319ba00b161774e3258a9b9770a07d4c0a5a82488303\"\n}\n"
+}

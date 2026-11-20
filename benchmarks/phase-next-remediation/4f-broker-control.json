@@ -1,0 +1,345 @@
+{
+  "source": {
+    "head": "2fa7321618fc5e7435b339ffa9368de258198d21",
+    "instrumentation_sha256": {
+      "compose.phase4a.yaml": "264439f222a46bc154ec192a08e474e67785d20588541c888cda7ecffd25c9d6",
+      "scripts/phase4a_bench.py": "4a3d9887134caac0b89826969f553b285022ca12af905fe84a228cf263e21f2a",
+      "scripts/phase4a_coordinator.py": "bea1120b87d5d552204f72f6d60f3e7f60764772d494e9ffc383a8fb75a33e1b",
+      "scripts/phase4a_peer.py": "2b0359d1b1bd5c8f0ea267eb8c392a5e828bfcc2fc8fc19982b7e96492efc02d",
+      "scripts/phase4a_worker.py": "b4b4b879af4fb888a76b5b43c1b4e1c32897f36e9b9bfe7c2ed33fa5fafb7eca",
+      "src/aegis/agent_runtime.py": "c46fac20034762c1403007aba0e81c8c37182402a125f04e53f0a47585cd5ce7",
+      "src/aegis/api.py": "e14907705da33bf715a7bf38325631f2f6705f480d2faabd4ed353f29348ac41",
+      "src/aegis/mesh.py": "6a013f3c961a7cb928dddf6a65bce93cebab7a0e71d7a3899e59dcd6d4880b1d"
+    }
+  },
+  "oracle_sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050",
+  "postgres_source_sha256": "397e438a4284c3551ac7602b95f34d0e8539ac9ce6b93fe127f5fed6d5423c39",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "docker_image_ids": {
+    "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+    "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+  },
+  "scope": "one host, one broker, one database, one dry-run agent",
+  "profile": "priority",
+  "agent_sigkill": false,
+  "recovery_stages": {
+    "clock": "one-host monotonic perf_counter_ns; process-local stage spans and controller milestones",
+    "enrolled_agent_ids": [
+      "1b9083ca-f240-455c-9e02-5aef59bcdb64"
+    ],
+    "targeted_agent_withdrawal_pairs": 2,
+    "broker_stop_duration_ms": 243.699,
+    "broker_start_duration_ms": 177.609,
+    "sigkill_to_reap_ms": null,
+    "agent_spawn_requested_from_restart_ms": null,
+    "trace": [
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -340.491,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -326.012,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -74.891,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -60.745,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 190.405,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 1708.433,
+        "revision": null,
+        "detail": 1,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 1713.598,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 1716.087,
+        "revision": null,
+        "detail": null,
+        "event_id": "06278ea3-23a2-42a5-867e-17105e5bd820"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1718.179,
+        "revision": null,
+        "detail": null,
+        "event_id": "06278ea3-23a2-42a5-867e-17105e5bd820"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 1734.911,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 1736.326,
+        "revision": null,
+        "detail": null,
+        "event_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1737.747,
+        "revision": null,
+        "detail": null,
+        "event_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1956.923,
+        "revision": null,
+        "detail": null,
+        "event_id": "91106b15-72d4-49df-9099-4b25fa2dbac0"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 1963.782,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1971.236,
+        "revision": null,
+        "detail": null,
+        "event_id": "1b2ed242-a2b4-4332-a1cc-00f99c70a077"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1973.359,
+        "revision": null,
+        "detail": null,
+        "event_id": "c22fea51-0f58-4b2e-a88d-0a905be580ac"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 1975.042,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1975.779,
+        "revision": null,
+        "detail": null,
+        "event_id": "0dde2011-47ea-4a9e-9565-cfdf82fa8d42"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1989.33,
+        "revision": null,
+        "detail": null,
+        "event_id": "64295fbe-caeb-431a-a4da-8d92d4c212dc"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1991.067,
+        "revision": null,
+        "detail": null,
+        "event_id": "8dc9c95c-ee6c-4efb-bae3-9b207ae0d019"
+      }
+    ]
+  },
+  "ordinary_enqueued": 4,
+  "ordinary_findings_ahead_of_independent_withdrawal": null,
+  "ordinary_capacity_isolation": {
+    "normal_stream_head_while_critical_acked": 2,
+    "ordinary_outbox_rows_still_pending": 6,
+    "critical_ack_count": 2,
+    "durable_effective_denial_count": 2
+  },
+  "all_logical_broker_acks": 8,
+  "effective_denials_from_read_only_sqlite": [
+    "867f429b-e495-4e60-8159-f84bfae1ef00",
+    "960d02e7-2543-4cd1-bf6d-a6654960c1b3"
+  ],
+  "legacy_replay_cursor_at_readback": 10,
+  "queued_journal_order": [
+    {
+      "position": 1,
+      "event_id": "960d02e7-2543-4cd1-bf6d-a6654960c1b3",
+      "sent_at": "2026-11-20T02:24:21.482772+00:00"
+    },
+    {
+      "position": 2,
+      "event_id": "867f429b-e495-4e60-8159-f84bfae1ef00",
+      "sent_at": "2026-11-20T02:24:21.503255+00:00"
+    },
+    {
+      "position": 3,
+      "event_id": "91106b15-72d4-49df-9099-4b25fa2dbac0",
+      "sent_at": null
+    },
+    {
+      "position": 4,
+      "event_id": "1b2ed242-a2b4-4332-a1cc-00f99c70a077",
+      "sent_at": null
+    },
+    {
+      "position": 5,
+      "event_id": "c22fea51-0f58-4b2e-a88d-0a905be580ac",
+      "sent_at": null
+    },
+    {
+      "position": 6,
+      "event_id": "0dde2011-47ea-4a9e-9565-cfdf82fa8d42",
+      "sent_at": null
+    },
+    {
+      "position": 7,
+      "event_id": "64295fbe-caeb-431a-a4da-8d92d4c212dc",
+      "sent_at": null
+    },
+    {
+      "position": 8,
+      "event_id": "06278ea3-23a2-42a5-867e-17105e5bd820",
+      "sent_at": null
+    },
+    {
+      "position": 9,
+      "event_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39",
+      "sent_at": null
+    },
+    {
+      "position": 10,
+      "event_id": "8dc9c95c-ee6c-4efb-bae3-9b207ae0d019",
+      "sent_at": null
+    }
+  ],
+  "broker_order_after_restart": [
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 3,
+      "event_id": "91106b15-72d4-49df-9099-4b25fa2dbac0",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 4,
+      "event_id": "1b2ed242-a2b4-4332-a1cc-00f99c70a077",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 4
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 5,
+      "event_id": "c22fea51-0f58-4b2e-a88d-0a905be580ac",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 5
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 6,
+      "event_id": "0dde2011-47ea-4a9e-9565-cfdf82fa8d42",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 6
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 7,
+      "event_id": "64295fbe-caeb-431a-a4da-8d92d4c212dc",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 8,
+      "event_id": "8dc9c95c-ee6c-4efb-bae3-9b207ae0d019",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 1,
+      "event_id": "06278ea3-23a2-42a5-867e-17105e5bd820",
+      "kind": "revocation",
+      "publisher": "lab-revoker",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 2,
+      "event_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39",
+      "kind": "revocation",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 2
+    }
+  ],
+  "independent_withdrawal_id": "06278ea3-23a2-42a5-867e-17105e5bd820",
+  "mixed_withdrawal_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39",
+  "independent_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1767.656,
+    "submit_to_confirmed_ack_ms": 1779.766,
+    "restart_request_to_durable_audit_ms": 1706.051,
+    "restart_request_to_confirmed_ack_ms": 1718.16
+  },
+  "mixed_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1753.683,
+    "submit_to_confirmed_ack_ms": 1780.621,
+    "restart_request_to_durable_audit_ms": 1710.792,
+    "restart_request_to_confirmed_ack_ms": 1737.73
+  }
+}
