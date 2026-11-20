@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="27" failures="0" skipped="0" tests="27" time="1.210" timestamp="2026-11-19T22:04:25.574496-07:00" hostname="Jacks-MacBook-Pro-2.local"><testcase classname="" name="tests.identity_lab" time="0.000"><error message="collection failure">/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1389: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1353: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1249: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:857: in _load_unlocked
+    ???
+../../.venv/lib/python3.15/site-packages/_pytest/assertion/rewrite.py:185: in exec_module
+    exec(co, module.__dict__)
+tests/identity_lab/conftest.py:19: in &lt;module&gt;
+    from aegis.evidence.records import canonical
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.phase3d.test_dry_run" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase3d/test_dry_run.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase3d/test_dry_run.py:16: in &lt;module&gt;
+    from aegis.agent_runtime import process_message
+E   ImportError: cannot import name 'process_message' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.phase4c.test_defensive_boundaries" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4c/test_defensive_boundaries.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4c/test_defensive_boundaries.py:20: in &lt;module&gt;
+    from aegis.evidence import Evidence
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.phase4d.test_journal" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4d/test_journal.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4d/test_journal.py:21: in &lt;module&gt;
+    from aegis.api import ensure_streams
+E   ImportError: cannot import name 'ensure_streams' from 'aegis.api' (/Users/jackadams-lovell/aegis-network/src/aegis/api.py)</error></testcase><testcase classname="" name="tests.phase4d.test_native_enforcement" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4d/test_native_enforcement.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4d/test_native_enforcement.py:13: in &lt;module&gt;
+    from aegis.mitigation.lab import Lab
+E   ModuleNotFoundError: No module named 'aegis.mitigation'</error></testcase><testcase classname="" name="tests.phase4d.test_ownership" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4d/test_ownership.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4d/test_ownership.py:19: in &lt;module&gt;
+    from aegis import ownership
+E   ImportError: cannot import name 'ownership' from 'aegis' (/Users/jackadams-lovell/aegis-network/src/aegis/__init__.py)</error></testcase><testcase classname="" name="tests.phase4d.test_trust_composition" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4d/test_trust_composition.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4d/test_trust_composition.py:14: in &lt;module&gt;
+    from aegis.agent_runtime import process_message
+E   ImportError: cannot import name 'process_message' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.phase4d_t5.test_independent_status" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4d_t5/test_independent_status.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4d_t5/test_independent_status.py:11: in &lt;module&gt;
+    from aegis.evidence import runner, synthetic
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.phase4e.test_defensive_validation" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4e/test_defensive_validation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_defensive_validation.py:18: in &lt;module&gt;
+    from aegis import ownership
+E   ImportError: cannot import name 'ownership' from 'aegis' (/Users/jackadams-lovell/aegis-network/src/aegis/__init__.py)</error></testcase><testcase classname="" name="tests.phase4e.test_status_expiry" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4e/test_status_expiry.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_status_expiry.py:9: in &lt;module&gt;
+    from aegis.journal.protocol import JournalBlocked
+E   ModuleNotFoundError: No module named 'aegis.journal'</error></testcase><testcase classname="" name="tests.phase4e.test_trust_services" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4e/test_trust_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_trust_services.py:13: in &lt;module&gt;
+    from aegis.evidence.runner import ENVIRONMENT_SHA256
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.phase4e.test_withdrawal_delivery" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4e/test_withdrawal_delivery.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_withdrawal_delivery.py:20: in &lt;module&gt;
+    from phase4a_bench import Lab, Log, ROOT, STREAM, local_docker, revocation
+E   ModuleNotFoundError: No module named 'phase4a_bench'</error></testcase><testcase classname="" name="tests.phase4e.test_withdrawal_status" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/phase4e/test_withdrawal_status.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/phase4e/test_withdrawal_status.py:8: in &lt;module&gt;
+    from aegis.evidence.runner import ENVIRONMENT_SHA256
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.test_mesh_reliability" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_mesh_reliability.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_mesh_reliability.py:15: in &lt;module&gt;
+    from aegis.agent_runtime import durable_name, process_message
+E   ImportError: cannot import name 'durable_name' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.test_phase2c_hardening" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase2c_hardening.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase2c_hardening.py:16: in &lt;module&gt;
+    from aegis.agent_runtime import dead_letter, durable_name, process_message
+E   ImportError: cannot import name 'dead_letter' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.test_phase3a_evidence" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase3a_evidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase3a_evidence.py:9: in &lt;module&gt;
+    from aegis.evidence import Bundle, Evidence, Grant, Trust, Verifier
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.test_phase3b_containment" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase3b_containment.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase3b_containment.py:12: in &lt;module&gt;
+    from aegis.mitigation.lab import Lab
+E   ModuleNotFoundError: No module named 'aegis.mitigation'</error></testcase><testcase classname="" name="tests.test_phase3c_pipeline" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase3c_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase3c_pipeline.py:16: in &lt;module&gt;
+    from aegis.evidence import Evidence
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.test_phase4a_distributed" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase4a_distributed.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase4a_distributed.py:20: in &lt;module&gt;
+    from aegis.agent_runtime import consume, durable_name
+E   ImportError: cannot import name 'consume' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.test_phase4b_evidence" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase4b_evidence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase4b_evidence.py:13: in &lt;module&gt;
+    from aegis.evidence import Evidence, Trust, runner
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.test_phase4e_withdrawal" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase4e_withdrawal.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase4e_withdrawal.py:18: in &lt;module&gt;
+    from aegis import identity
+E   ImportError: cannot import name 'identity' from 'aegis' (/Users/jackadams-lovell/aegis-network/src/aegis/__init__.py)</error></testcase><testcase classname="" name="tests.test_phase5a_claim_integrity" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase5a_claim_integrity.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase5a_claim_integrity.py:8: in &lt;module&gt;
+    from aegis.intelligence import Asset, assess, normalize, snapshot
+E   ModuleNotFoundError: No module named 'aegis.intelligence'</error></testcase><testcase classname="" name="tests.test_phase5a_intelligence" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase5a_intelligence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase5a_intelligence.py:8: in &lt;module&gt;
+    from aegis.intelligence import Asset, FeedClient, assess, normalize, snapshot
+E   ModuleNotFoundError: No module named 'aegis.intelligence'</error></testcase><testcase classname="" name="tests.test_phase5b_cli" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_phase5b_cli.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase5b_cli.py:17: in &lt;module&gt;
+    from aegis.cli import main
+E   ModuleNotFoundError: No module named 'aegis.cli'. Did you mean: 'aegis.api'?</error></testcase><testcase classname="" name="tests.test_release_candidate" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/test_release_candidate.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_release_candidate.py:13: in &lt;module&gt;
+    from test_phase2c_hardening import NOW, finding, grant, local
+tests/test_phase2c_hardening.py:16: in &lt;module&gt;
+    from aegis.agent_runtime import dead_letter, durable_name, process_message
+E   ImportError: cannot import name 'dead_letter' from 'aegis.agent_runtime' (/Users/jackadams-lovell/aegis-network/src/aegis/agent_runtime.py)</error></testcase><testcase classname="" name="tests.trust_lab.test_phase4d_shadow" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/trust_lab/test_phase4d_shadow.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/trust_lab/test_phase4d_shadow.py:15: in &lt;module&gt;
+    from aegis.evidence import Evidence
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase><testcase classname="" name="tests.trust_lab.test_trust_lab" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-integration/tests/trust_lab/test_trust_lab.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/trust_lab/test_trust_lab.py:7: in &lt;module&gt;
+    from aegis.evidence.records import digest
+E   ModuleNotFoundError: No module named 'aegis.evidence'</error></testcase></testsuite></testsuites>
