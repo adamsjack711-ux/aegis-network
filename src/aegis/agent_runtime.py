@@ -134,7 +134,7 @@ async def run() -> None:
 
 
 async def critical_delivery(agent, audit, js, lease, client, durable, *,
-                            on_ack=None, on_commit=None):
+                            on_ack=None, on_commit=None, on_stage=None):
     """Independent wire and replay loops share only the identity and local audit."""
 
     async def wire():
@@ -148,6 +148,8 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
                     config=ConsumerConfig(max_deliver=-1, ack_wait=2, max_ack_pending=16,
                                           ack_policy=AckPolicy.EXPLICIT),
                 )
+                if on_stage is not None:
+                    on_stage("critical_subscribed", time.perf_counter_ns(), None)
                 while True:
                     lease.require_live()
                     try:
@@ -156,6 +158,8 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
                         continue
                     message = messages[0]
                     received_ns = time.perf_counter_ns()
+                    if on_stage is not None:
+                        on_stage("critical_received", received_ns, message.metadata.sequence.stream)
                     observe = partial(on_ack, message) if on_ack is not None else None
                     committed = partial(on_commit, message) if on_commit is not None else None
                     await process_message(message, agent, js, lease, observe=observe, critical=True,
@@ -176,7 +180,11 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
         while True:
             lease.require_live()
             try:
+                if on_stage is not None:
+                    on_stage("critical_replay_start", time.perf_counter_ns(), None)
                 count = await reconcile(agent, audit, client, lease, page_size=16, critical=True)
+                if on_stage is not None:
+                    on_stage("critical_replay_end", time.perf_counter_ns(), count)
             except IdentityLost:
                 raise
             except Exception:
@@ -190,14 +198,16 @@ async def critical_delivery(agent, audit, js, lease, client, durable, *,
 
 
 async def consume(agent, audit, js, lease, renew_task, client, durable, *, priority=False,
-                  on_reconcile=None, before_message=None, on_ack=None, on_critical_commit=None):
+                  on_reconcile=None, before_message=None, on_ack=None, on_critical_commit=None,
+                  on_critical_stage=None):
     ordinary = partial(consume_ordinary, agent, audit, js, lease, renew_task, client, durable,
                        on_reconcile=on_reconcile, before_message=before_message, on_ack=on_ack, priority=priority)
     if not priority:
         return await ordinary()
     async with asyncio.TaskGroup() as tasks:
         tasks.create_task(critical_delivery(agent, audit, js, lease, client, durable,
-                                            on_ack=on_ack, on_commit=on_critical_commit))
+                                            on_ack=on_ack, on_commit=on_critical_commit,
+                                            on_stage=on_critical_stage))
         tasks.create_task(ordinary())
 
 
