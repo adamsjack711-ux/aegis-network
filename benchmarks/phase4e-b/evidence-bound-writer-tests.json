@@ -1,0 +1,53 @@
+{
+  "identity_source": "79f068a09f7b76f546f6f6780043ff1ae1ec01b9",
+  "native_source": "ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "sqlite": "3.54.1",
+  "scope": "disposable single-host inert marker, loopback mTLS ownership, native locally pinned T4/T5 appraisal",
+  "result": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suite_seconds": 17.832,
+  "cases": [
+    {
+      "id": "test_exact_evidence_in_b_transaction[none-None]",
+      "seconds": 2.07
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-cut-cut differs]",
+      "seconds": 1.952
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-approval-approval signature]",
+      "seconds": 1.963
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-plan-exact mutation and native plan]",
+      "seconds": 1.764
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-target-exact mutation and native plan]",
+      "seconds": 2.023
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[stale-generation-durable fence]",
+      "seconds": 2.005
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[new-witness-cut-native appraisal is unavailable]",
+      "seconds": 1.947
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[expiry-after-owner-exclusive deadline]",
+      "seconds": 1.863
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[native-expiry-after-owner-exclusive deadline]",
+      "seconds": 1.899
+    }
+  ]
+}
