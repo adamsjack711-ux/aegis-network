@@ -1,0 +1,9 @@
+{
+  "package_url": "https://deb.debian.org/debian/pool/main/s/strace/strace_6.13+ds-1_arm64.deb",
+  "package_sha256": "d793af70a104eb0bd5be466c3043b512f549e7cb27971320a7c9b8f4c6165e55",
+  "signature": "gpgv: Signature made Sat Sep 12 00:56:18 2026 PDT\ngpgv:                using RSA key 4CB50190207B4758A3F73A796ED0E7B82643E131\ngpgv: Good signature from \"Debian Archive Automatic Signing Key (12/bookworm) <ftpmaster@debian.org>\"\ngpgv: Signature made Sat Sep 12 00:56:19 2026 PDT\ngpgv:                using RSA key B8E5F13176D2A7A75220028078DBA3BC47EF2265\ngpgv: Good signature from \"Debian Archive Automatic Signing Key (13/trixie) <ftpmaster@debian.org>\"\ngpgv: Signature made Sat Sep 12 00:57:47 2026 PDT\ngpgv:                using EDDSA key 41587F7DB8C774BCCF131416762F67A0B2C39DE4\ngpgv: Good signature from \"Debian Stable Release Key (13/trixie) <debian-release@lists.debian.org>\"\n",
+  "release_sha256": "0584fba32e13e0ab8285fb16c27adea1ec03a73669c18702821094fd6ca86675",
+  "keyring_sha256": "506b815cbb32d9b6066b4a2aa524071e071761e7e7f68c3ac74f3061ba852017",
+  "index_sha256": "be16b37b2f740f066ea93d35d56f04f94d63693e5a3eb421b052bf86fae75bcd",
+  "tracer_sha256": "e4f0c42a07574df2fc6b353f5bc24423099d8c896cee72c605671d878fedeb5a"
+}
