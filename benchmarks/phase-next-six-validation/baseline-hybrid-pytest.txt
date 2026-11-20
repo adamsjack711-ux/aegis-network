@@ -1,0 +1,56 @@
+ssssssssssssssssssssssssssssss.......................................... [ 17%]
+.......................s.............................s.................. [ 35%]
+..........................................ssss.......................... [ 52%]
+..............................................s......................... [ 70%]
+....................................................F................... [ 87%]
+..................................................                       [100%]
+=================================== FAILURES ===================================
+___________ test_default_and_failure_paths_make_no_persistent_writes ___________
+
+tmp_path = PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-426/test_default_and_failure_paths0')
+
+    def test_default_and_failure_paths_make_no_persistent_writes(tmp_path):
+        def tree_signature(root):
+            return sorted((path.relative_to(root).as_posix(), path.stat().st_mtime_ns,
+                           hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None)
+                          for path in root.rglob("*"))
+    
+        source = Path(__file__).resolve().parents[1] / "src"
+        cases = {
+            "status_no_feed": ["status", "--json"],
+            "inventory": ["inventory", "--json"],
+            "findings_no_feed": ["findings", "--json"],
+            "findings_missing_file": ["findings", "--feed", str(tmp_path / "missing.json"), "--json"],
+            "doctor": ["doctor", "--json"],
+            "explain_no_feed": ["explain", "absent", "--json"],
+        }
+        for name, arguments in cases.items():
+            scratch = tmp_path / name
+            scratch.mkdir()
+            (scratch / "sentinel").write_text("unchanged\n")
+            state = scratch / "state"
+            environment = os.environ | {"XDG_STATE_HOME": str(state), "PYTHONPATH": str(source),
+                                        "PYTHONDONTWRITEBYTECODE": "1"}
+            before = tree_signature(scratch)
+            result = subprocess.run([sys.executable, "-m", "aegis.cli", *arguments],
+                                    env=environment, capture_output=True, text=True, check=False)
+>           assert result.returncode in {0, 2}, (name, result.stderr)
+E           AssertionError: ('status_no_feed', 'Traceback (most recent call last):
+E               File "<frozen runpy>", line 201, in _run_module_as_main
+E               F...e>
+E                 from cryptography.exceptions import InvalidSignature
+E             ModuleNotFoundError: No module named \'cryptography\'
+E             ')
+E           assert 1 in {0, 2}
+E            +  where 1 = CompletedProcess(args=['/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-six-astra/.venv/bin/python', '-m',...e>\n    from cryptography.exceptions import InvalidSignature\nModuleNotFoundError: No module named \'cryptography\'\n').returncode
+
+tests/test_phase5b_cli.py:234: AssertionError
+=============================== warnings summary ===============================
+../../../../../private/tmp/aegis-phase5b-smoke-venv/lib/python3.15/site-packages/fastapi/testclient.py:1
+  /private/tmp/aegis-phase5b-smoke-venv/lib/python3.15/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_phase5b_cli.py::test_default_and_failure_paths_make_no_persistent_writes
+1 failed, 372 passed, 37 skipped, 1 warning in 128.21s (0:02:08)

@@ -12,4 +12,6 @@
 | Five-second withdrawal recovery | **NO-GO** | About 30.6-second retained crash delay; 72+18 frozen matrix unrun on a remedy; native latest-floor and fencing contracts unresolved. |
 | Distributed autonomous enforcement or production | **NO-GO** | Native Trust/fencing, independent multi-host custody, rollback protection and all-agent recovery not demonstrated. |
 
+At the first six-lane review checkpoint, VAL-1 froze and verified **44/44** original evidence files (`0960e6f`) and independently reviewed proposal pins (`0cf8724`, `20d4e18`, `3e54865`). These are design decisions only. 4F-1's anchored-floor proposal `accc7e7` is **REVISE before authority runtime work** and leaves the original 30,559.741 ms denial miss and 0/72+0/18 successor trials unchanged. The current local environment lacks a reviewed Hatchling archive and offline `cryptography` resolution; no installed Linux alpha or full platform matrix claim follows from source tests. No new specialist implementation is integrated at this checkpoint.
+
 No master merge, external provider call, unreviewed dependency download, public scan or production target change is authorized by this assessment. Each later release decision must cite a clean exact integrated commit, independent negative tests, complete denominators and raw performance/resource evidence.
