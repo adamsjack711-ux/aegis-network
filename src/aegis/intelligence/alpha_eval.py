@@ -263,7 +263,7 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
                "source_claims_emitted": [claim.model_dump(mode="json") for claim in emitted_claims],
                "baseline_wall_ms": round(baseline_ms, 4), "baseline_cpu_ms": round(baseline_cpu_ms, 4),
                "expected_impact": case.get("expected_impact"),
-               "supported_impact": "availability degradation" if any(
+               "fixture_impact_observation": "availability degradation" if any(
                    claim.claim_kind == "effect" for claim in emitted_claims) else None}
         if scripted:
             payload = json.dumps({"asset": case["asset"], "sources": case["sources"]},
@@ -309,7 +309,7 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
                            unsupported_positive_points_emitted=0)
         rows.append(row)
     completed_scripted = [r for r in rows if r.get("scripted_status") == "completed"]
-    return {"schema_version": "phase5a-alpha-eval-v2", "mode": "offline-scripted-stress" if scripted else "deterministic",
+    return {"schema_version": "phase5a-alpha-eval-v3", "mode": "offline-scripted-stress" if scripted else "deterministic",
             "seal": seal, "planned_cases": len(rows), "new_cases": 24, "prior_cases": 12,
             "rows": rows, "baseline": _score(rows, "baseline"),
             "source_claims": {"attempted": sum(len(r["source_claims_attempted"]) for r in rows),

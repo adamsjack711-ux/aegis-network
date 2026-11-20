@@ -72,7 +72,12 @@ def exact_source_bytes(root: Path, source: dict) -> tuple[bytes, str]:
 def _span(text: str, *, kind: str, predicate: str, asset_version: str) -> tuple[int, int, str]:
     """Select an exact phrase, never an inferred or generated summary."""
     if kind == "effect":
-        match = re.search(re.escape(_EFFECT), text, re.I)
+        affirmative = _AFFIRMATIVE_EFFECT.search(text)
+        if affirmative is None:
+            raise ValueError("no affirmative effect phrase")
+        start_char, end_char = affirmative.end() - len(_EFFECT), affirmative.end()
+        return (len(text[:start_char].encode()), len(text[:end_char].encode()),
+                text[start_char:end_char])
     elif predicate == "explicit-numeric-range":
         match = re.search(r"(?:>=|<=|<|>)\s*[0-9]+(?:\.[0-9]+)*(?:\s+and\s+(?:>=|<=|<|>)\s*[0-9]+(?:\.[0-9]+)*)?", text)
     elif predicate == "explicit-inclusive-range":
@@ -95,14 +100,19 @@ def affirmative_effect(text: str, asset: dict | None = None) -> bool:
     match = _AFFIRMATIVE_EFFECT.search(text)
     if match is None:
         return False
-    sentence_start = max(text.rfind(". ", 0, match.start()) + 2, 0)
+    prior_sentence = text.rfind(". ", 0, match.start())
+    sentence_start = prior_sentence + 2 if prior_sentence >= 0 else 0
     sentence_end = text.find(". ", match.end())
     sentence = text[sentence_start:sentence_end if sentence_end >= 0 else len(text)]
-    if re.search(r"\b(?:different|another|unrelated)\s+(?:product|package)\b", sentence, re.I):
+    if re.search(r"\b(?:different|another|unrelated)\b", sentence, re.I):
         return False
     if asset is not None:
         identities = list(_SOURCE_IDENTITY.finditer(text))
         local = _SOURCE_IDENTITY.search(sentence)
+        if local is None:
+            subject = sentence[:match.start() - sentence_start].strip()
+            if not re.fullmatch(r"(?:a|an) crafted (?:document|request|input|packet)", subject, re.I):
+                return False
         if len(identities) > 1 and local is None:
             return False
         if local is not None:
@@ -153,8 +163,15 @@ def verify_atomic_claim(claim: AtomicSourceClaim, raw: bytes, source: dict, asse
             "withdrawn" in text.lower()):
         raise ValueError("source status is not current fixture")
     decision, checked_predicate = _source_decision(text, asset)
+    expected_acquisition = "sealed-local-fixture" if "raw_path" in source else "pinned-inline-fixture"
+    expected_start, expected_end, expected_quote = _span(
+        text, kind=claim.claim_kind, predicate=predicate, asset_version=asset["version"])
     if (claim.source_id != source["id"] or claim.source_sha256 != hashlib.sha256(raw).hexdigest() or
+            ("sha256" in source and source["sha256"] != claim.source_sha256) or
+            claim.source_role != source["role"] or claim.acquisition != expected_acquisition or
             claim.source_locator != f"utf8-byte:{claim.byte_start}:{claim.byte_end}" or
+            (claim.byte_start, claim.byte_end, claim.quote) !=
+            (expected_start, expected_end, expected_quote) or
             claim.byte_end > len(raw) or raw[claim.byte_start:claim.byte_end].decode("utf-8") != claim.quote or
             claim.product_ecosystem != asset["ecosystem"] or claim.product_name != asset["name"] or
             claim.source_product_ecosystem != source_ecosystem or
