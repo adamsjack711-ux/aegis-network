@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+from contextlib import closing
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -140,20 +141,38 @@ class OfflineHandoff:
 
     def history(self, source_kind: str, advisory_id: str) -> list[dict]:
         """Single statement snapshot; currency is derived, never cached on a result."""
-        rows = self.db.execute("""
-            SELECT s.sequence,s.status,s.record,r.vulnerability_id,r.asset_digest,r.investigation
-            FROM research_results r JOIN research_revision_state s ON s.sequence=r.sequence
-            WHERE s.source_kind=? AND s.advisory_id=? ORDER BY s.sequence,r.vulnerability_id,r.asset_digest
-        """, (source_kind, advisory_id)).fetchall()
-        history = []
-        for seq, status, record, vid, asset_digest, investigation in rows:
-            scout = ScoutInput.model_validate_json(record)
-            history.append(dict(adapter=VERSION, scout_schema=scout.schema_version,
-                                investigator_schema="advisory-input-v1", sequence=seq, status=status,
-                                source_kind=scout.source_kind, advisory_id=scout.advisory_id,
-                                source_uri=scout.source_uri, revision=scout.content_sha256,
-                                acquisition=scout.acquisition, provenance=scout.provenance,
-                                redistribution=scout.redistribution, priority=scout.priority.tier,
-                                vulnerability_id=vid, asset_digest=asset_digest,
-                                research=json.loads(investigation)))
-        return history
+        return _history(self.db, source_kind, advisory_id)
+
+
+def read_history(path: Path, source_kind: str, advisory_id: str) -> list[dict]:
+    """Read one snapshot of an initialized handoff database via a read-only connection."""
+    with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
+        try:
+            return _history(db, source_kind, advisory_id)
+        except sqlite3.OperationalError as exc:
+            if str(exc).startswith("no such table:"):
+                raise sqlite3.OperationalError(
+                    f"Incomplete research history schema ({exc}). "
+                    "Initialize this database with ThreatScout and OfflineHandoff before reporting."
+                ) from exc
+            raise
+
+
+def _history(db: sqlite3.Connection, source_kind: str, advisory_id: str) -> list[dict]:
+    rows = db.execute("""
+        SELECT s.sequence,s.status,s.record,r.vulnerability_id,r.asset_digest,r.investigation
+        FROM research_results r JOIN research_revision_state s ON s.sequence=r.sequence
+        WHERE s.source_kind=? AND s.advisory_id=? ORDER BY s.sequence,r.vulnerability_id,r.asset_digest
+    """, (source_kind, advisory_id)).fetchall()
+    history = []
+    for seq, status, record, vid, asset_digest, investigation in rows:
+        scout = ScoutInput.model_validate_json(record)
+        history.append(dict(adapter=VERSION, scout_schema=scout.schema_version,
+                            investigator_schema="advisory-input-v1", sequence=seq, status=status,
+                            source_kind=scout.source_kind, advisory_id=scout.advisory_id,
+                            source_uri=scout.source_uri, revision=scout.content_sha256,
+                            acquisition=scout.acquisition, provenance=scout.provenance,
+                            redistribution=scout.redistribution, priority=scout.priority.tier,
+                            vulnerability_id=vid, asset_digest=asset_digest,
+                            research=json.loads(investigation)))
+    return history

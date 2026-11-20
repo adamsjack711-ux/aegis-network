@@ -1,6 +1,8 @@
 """Forced schedules over three real connections. Run with pytest -s to retain observations."""
 import hashlib
 import json
+import os
+import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
@@ -8,7 +10,7 @@ from unittest.mock import patch
 import pytest
 
 from aegis.intelligence.feeds import snapshot
-from aegis.intelligence.handoff import OfflineHandoff
+from aegis.intelligence.handoff import OfflineHandoff, read_history
 from aegis.intelligence.investigator import ScriptedProvider
 from aegis.intelligence.models import Asset
 from aegis.intelligence.scout import ThreatScout
@@ -170,3 +172,77 @@ def test_archive_preserves_uncertainty_and_conflict_blocks_even_if_pointer_stays
     finally:
         worker.close()
         scout.close()
+
+
+def test_read_history_on_readonly_fixture(tmp_path, monkeypatch):
+    folder = tmp_path / 'report'
+    folder.mkdir()
+    path = folder / 'research #1?.sqlite'
+    scout = ThreatScout(path)
+    worker = OfflineHandoff(path)
+    try:
+        event, = scout.ingest(source())
+        assert worker.consume(event.sequence, VID, ASSET, PROVIDER, now=NOW).outcome == 'committed'
+        # Seed a stored result in the candidate format that preceded structured references.
+        current, = worker.history('osv', AID)
+        legacy = json.loads(json.dumps(current['research']))
+        legacy['candidate']['schema_version'] = 'research-candidate-v1'
+        del legacy['candidate']['applicability_references']
+        with worker.db:
+            worker.db.execute('INSERT INTO research_results VALUES (?, ?, ?, ?)',
+                              (event.sequence, VID, '0' * 64, json.dumps(legacy)))
+        expected = worker.history('osv', AID)
+        assert [row['research'] for row in expected] == [legacy, current['research']]
+    finally:
+        worker.close()
+        scout.close()
+
+    statements = []
+    connect = sqlite3.connect
+
+    def trace_connect(database, **kwargs):
+        assert database == path.resolve().as_uri() + '?mode=ro' and kwargs == {'uri': True}
+        db = connect(database, **kwargs)
+        db.set_trace_callback(statements.append)
+        return db
+
+    monkeypatch.setattr(sqlite3, 'connect', trace_connect)
+    path.chmod(0o444)
+    folder.chmod(0o555)
+    try:
+        if os.geteuid() != 0:
+            assert not os.access(path, os.W_OK) and not os.access(folder, os.W_OK)
+        assert read_history(path, 'osv', AID) == expected
+        query, = statements
+        assert query.lstrip().startswith('SELECT ')
+        assert list(folder.iterdir()) == [path]
+    finally:
+        folder.chmod(0o755)
+        path.chmod(0o644)
+
+
+def test_read_history_after_withdrawal(tmp_path):
+    path = tmp_path / 'local.sqlite'
+    scout = ThreatScout(path)
+    worker = OfflineHandoff(path)
+    try:
+        event, = scout.ingest(source())
+        assert worker.consume(event.sequence, VID, ASSET, PROVIDER, now=NOW).outcome == 'committed'
+        row, = read_history(path, 'osv', AID)
+        assert row['status'] == 'current'
+        scout.ingest(source(modified='2026-11-20T00:00:00Z', withdrawn='2026-11-20T00:00:00Z'))
+        assert read_history(path, 'osv', AID) == worker.history('osv', AID) == [row | {'status': 'withdrawn'}]
+    finally:
+        worker.close()
+        scout.close()
+
+
+def test_read_history_requires_initialized_database(tmp_path):
+    path = tmp_path / 'empty.sqlite'
+    with pytest.raises(sqlite3.OperationalError):
+        read_history(path, 'osv', AID)
+    assert not path.exists()
+    path.touch()
+    with pytest.raises(sqlite3.OperationalError, match='Initialize this database'):
+        read_history(path, 'osv', AID)
+    assert path.read_bytes() == b''
