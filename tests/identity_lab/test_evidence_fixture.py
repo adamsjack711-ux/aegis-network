@@ -4,7 +4,7 @@ import asyncio
 from contextlib import ExitStack, closing
 from datetime import datetime, timedelta, timezone
 import sqlite3
-from time import monotonic_ns, time
+from time import monotonic_ns, time, time_ns
 from types import SimpleNamespace
 
 import httpx
@@ -115,6 +115,8 @@ def inspect(target_path):
     ("expiry-after-owner", "exclusive deadline"),
     ("native-expiry-after-owner", "exclusive deadline"),
     ("expiry-during-status-read", "exclusive deadline"),
+    ("freshness-during-status-read", "exclusive deadline"),
+    ("credential-during-status-read", "identity validity window"),
 ])
 def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, monkeypatch):
     native, network = native_appraisal
@@ -148,10 +150,13 @@ def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, m
         body = body.model_copy(update={"expires_ns": native.plan.expires_ns - 1_000_000_000})
     elif fault == "native-expiry-after-owner":
         body = body.model_copy(update={"expires_ns": native.plan.expires_ns + 1_000_000_000})
+    elif fault == "credential-during-status-read":
+        request = request.model_copy(update={"credential_until_ns": request.command.body.expires_ns - 1_000_000_000})
     approval = sign_evidence_approval(body, key)
     before = inspect(path)
 
-    if fault in {"expiry-after-owner", "native-expiry-after-owner", "expiry-during-status-read"}:
+    delayed_status = fault.endswith("-during-status-read")
+    if delayed_status or fault in {"expiry-after-owner", "native-expiry-after-owner"}:
         base_apply = Target.apply
         base_current = Target.require_current
         base_status = native.gate.status_current
@@ -159,6 +164,9 @@ def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, m
         checked_owner = []
         checked_status = []
         cutoff = min(body.expires_ns, native.plan.expires_ns)
+        if fault == "freshness-during-status-read":
+            assert native.gate._fresh_until < cutoff
+            cutoff = native.gate._fresh_until
         assert monotonic_ns() < cutoff
 
         def stage(writer, db, attempt):
@@ -182,16 +190,22 @@ def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, m
         with monkeypatch.context() as patches:
             patches.setattr(Target, "apply", stage)
             patches.setattr(Target, "require_current", final_owner)
-            if fault == "expiry-during-status-read":
+            if delayed_status:
                 patches.setattr(native.gate, "status_current", final_status)
                 expire_at = checked_status
             else:
                 expire_at = checked_owner
-            patches.setattr(evidence_fixture, "monotonic_ns", lambda: cutoff if expire_at else monotonic_ns())
+            if fault == "credential-during-status-read":
+                wall_cutoff = request.credential_until_ns
+                assert time_ns() < wall_cutoff < min(peer.expires_ns, request.command.body.expires_ns)
+                patches.setattr(evidence_fixture, "time_ns",
+                                lambda: wall_cutoff if checked_status else time_ns(), raising=False)
+            else:
+                patches.setattr(evidence_fixture, "monotonic_ns", lambda: cutoff if expire_at else monotonic_ns())
             with pytest.raises(Denied, match=reason):
                 target.write_verified(peer, request, approval, native)
         assert staged == checked_owner == [True]
-        if fault == "expiry-during-status-read":
+        if delayed_status:
             assert checked_status == [True]
         assert inspect(path) == before
         # The requested write's nonce was rolled back with the marker update.

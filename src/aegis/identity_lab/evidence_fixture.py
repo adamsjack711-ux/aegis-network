@@ -4,7 +4,7 @@ from contextlib import contextmanager, ExitStack
 from contextvars import ContextVar
 from dataclasses import dataclass
 import sqlite3
-from time import monotonic_ns
+from time import monotonic_ns, time_ns
 from typing import Literal
 
 from cryptography.exceptions import InvalidSignature
@@ -67,6 +67,11 @@ class NativeAppraisal:
         except (NativeDenied, JournalBlocked, ValueError) as exc:
             raise Denied("local native appraisal is unavailable or no longer current") from exc
 
+    def _deadline_under_guard(self, approval_expires_ns: int) -> int:
+        # The native authorization context holds the gate lock through commit.
+        return min(self.gate._fresh_until, self.gate.valid_until_ns,
+                   self.plan.expires_ns, approval_expires_ns)
+
 
 @dataclass
 class _PendingWrite:
@@ -74,16 +79,20 @@ class _PendingWrite:
     approval: EvidenceApproval
     appraisal: NativeAppraisal
     guards: ExitStack
+    assignment_issued_ns: int
+    identity_deadline_ns: int
+    native_deadline_ns: int = 0
     commit_checked: bool = False
     commit_denial: Exception | None = None
 
     def check_current(self) -> None:
-        deadline = min(self.approval.expires_ns, self.appraisal.plan.expires_ns)
-        if monotonic_ns() >= deadline:
+        if monotonic_ns() >= self.native_deadline_ns:
             raise Denied("bound Evidence authorization reached its exclusive deadline")
         status_current = self.appraisal.gate.status_current()
-        if monotonic_ns() >= deadline:
+        if monotonic_ns() >= self.native_deadline_ns:
             raise Denied("bound Evidence authorization reached its exclusive deadline")
+        if not self.assignment_issued_ns <= time_ns() < self.identity_deadline_ns:
+            raise Denied("bound identity validity window has closed")
         if not status_current:
             raise Denied("bound Evidence or witnessed cut is no longer current")
 
@@ -110,7 +119,8 @@ class EvidenceBoundTarget(Target):
     def write_verified(self, peer: Peer, request: Write, approval: SignedEvidenceApproval,
                        appraisal: NativeAppraisal) -> dict:
         body = approval.body
-        if (body.mutation != request.command.body.mutation
+        command = request.command.body
+        if (body.mutation != command.mutation
                 or body.native_plan_sha256 != appraisal.plan.digest):
             raise Denied("local Evidence approval must bind the exact mutation and native plan")
         try:
@@ -118,8 +128,11 @@ class EvidenceBoundTarget(Target):
             key.verify(bytes.fromhex(approval.signature), _APPROVAL_DOMAIN + canonical(body))
         except (InvalidSignature, ValueError) as exc:
             raise Denied("Evidence approval signature does not match the local operator") from exc
+        assignment = command.mutation.assignment
+        identity_deadline = min(request.approval.body.expires_ns, request.credential_until_ns,
+                                peer.expires_ns, assignment.expires_ns, command.expires_ns)
         with ExitStack() as guards:
-            pending = _PendingWrite(self, body, appraisal, guards)
+            pending = _PendingWrite(self, body, appraisal, guards, assignment.issued_ns, identity_deadline)
             token = _pending.set(pending)
             try:
                 result = super().write(peer, request)
@@ -142,6 +155,7 @@ class EvidenceBoundTarget(Target):
         cut = pending.guards.enter_context(pending.appraisal.verified_cut())
         if cut != pending.approval.cut or cut.agent_id != request.command.body.mutation.assignment.deployment:
             raise Denied("local Evidence cut differs from the exact approval or deployment")
+        pending.native_deadline_ns = pending.appraisal._deadline_under_guard(pending.approval.expires_ns)
         pending.check_current()
         # B's explicit commit follows its final ownership RPC and takes the
         # loss mutex. Keep the native guard open and veto that same commit.
