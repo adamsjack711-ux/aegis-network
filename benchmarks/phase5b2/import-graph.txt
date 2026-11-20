@@ -1,0 +1,7 @@
+aegis.artifact
+aegis.cli
+aegis.config
+aegis.core
+aegis.intelligence_adapter
+aegis.local_observer
+aegis.trust
