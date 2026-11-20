@@ -170,20 +170,32 @@ def collect_inventory(asset_id: str | None, *, os_release: Path = Path("/etc/os-
 
 
 def state_directory(path: Path) -> Path:
-    # Do not create implicit parent directories or follow an operator-supplied
-    # symlink out of the explicitly selected state location.
-    if any(part.is_symlink() for part in (path, *path.parents)):
-        raise ObservationError("state directory path must not contain a symlink")
+    # Canonicalize an existing parent, but reject user-controlled aliasing.
+    # macOS exposes /var and /tmp as fixed root-owned links to /private;
+    # these exact OS aliases are permitted before resolving the parent.
+    system_aliases = {Path("/var"): Path("/private/var"),
+                      Path("/tmp"): Path("/private/tmp")}
+    for part in path.parents:
+        if part.is_symlink() and (part not in system_aliases or
+                                  part.lstat().st_uid != 0 or
+                                  part.resolve() != system_aliases[part]):
+            raise ObservationError("state directory path must not contain a user-controlled symlink")
     try:
-        path.mkdir(mode=0o700, parents=False, exist_ok=True)
+        canonical = path.parent.resolve(strict=True) / path.name
     except OSError as exc:
         raise ObservationError("state directory parent must exist and be writable") from exc
-    if not stat.S_ISDIR(path.stat().st_mode):
+    if canonical.is_symlink():
+        raise ObservationError("state directory must not be a symlink")
+    try:
+        canonical.mkdir(mode=0o700, parents=False, exist_ok=True)
+    except OSError as exc:
+        raise ObservationError("state directory parent must exist and be writable") from exc
+    if not stat.S_ISDIR(canonical.stat().st_mode):
         raise ObservationError("state directory must be a directory")
-    mode = stat.S_IMODE(path.stat().st_mode)
+    mode = stat.S_IMODE(canonical.stat().st_mode)
     if mode & 0o077:
         raise ObservationError("state directory must be private (mode 0700)")
-    return path
+    return canonical
 
 
 def asset_identity(path: Path) -> str:
