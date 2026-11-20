@@ -43,8 +43,8 @@ def test_conflicts_instructions_and_impact_support_are_kept_separate():
     assert rows["I01-override-outcome"]["baseline"] == "unaffected"
     assert rows["I02-command-in-advisory"]["baseline"] == "affected"
     assert rows["I03-json-role-spoof"]["baseline"] == "unknown"
-    assert rows["B01-inclusive-lower"]["supported_impact"] == "availability degradation"
-    assert rows["U03-fabricated-impact"]["supported_impact"] is None
+    assert rows["B01-inclusive-lower"]["fixture_impact_observation"] == "availability degradation"
+    assert rows["U03-fabricated-impact"]["fixture_impact_observation"] is None
     assert rows["U03-fabricated-impact"]["raw_point"]["support"] == "unchecked"
     assert rows["W01-withdrawn-notice"]["baseline"] == "unknown"
     assert rows["W02-stale-snapshot"]["baseline"] == "unknown"
