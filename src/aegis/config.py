@@ -13,6 +13,15 @@ from .trust import PublisherGrant, TrustStore
 
 def load_publishers(path: str) -> TrustStore:
     raw = json.loads(Path(path).read_text())
+    return _parse_publishers(raw)
+
+
+def load_publishers_bytes(data: bytes) -> TrustStore:
+    """Parse a bounded descriptor snapshot without reopening its pathname."""
+    return _parse_publishers(json.loads(data.decode("utf-8")))
+
+
+def _parse_publishers(raw: object) -> TrustStore:
     if "grants" not in raw:
         return TrustStore.from_legacy({
             publisher_id: Ed25519PublicKey.from_public_bytes(base64.b64decode(value, validate=True))

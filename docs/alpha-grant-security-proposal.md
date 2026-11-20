@@ -1,5 +1,7 @@
 # Alpha Grant Security: single-read local grant contract proposal
 
+**Implementation update:** Main approved an isolated attempt after this proposal's revision, but did not accept its proposed `0600`/`0644`-only and ACL-unknown-deny filesystem profile. Pre-edit mode measurements and the narrowed implementation are recorded in `docs/alpha-grant-mode-baseline.md` and `docs/alpha-grant-implementation.md`. The stricter F01–F03 expectations below remain **unapproved proposal items**, not implemented release gates.
+
 **Status: revised proposal only.** Source baseline `29455087922a728a41936d8c5c79ff9942e1e3df` on the unique `feat/alpha-grant-astra` branch; independent pre-implementation freeze `ff69241e87ae36916a25489191aa27674a046ecb`. The earlier clean proposal `90ad3a7f5ba04669ff2f44c1034a1e5a7e16a101` received VAL **REVISE** at `4e47ee0f8ced889b36937e33009e020810b59343`. SignedFinding 1.0, exact `InventoryItem(purl, version)`, native T4/T5 authority and all protected-writer semantics stay unchanged. Shared `src/aegis/config.py` and `src/aegis/intelligence_adapter.py` are **not edited** until Main and VAL review this revision. The abandoned `feat/alpha-grant-security` worktree has another process's unknown uncommitted source edits; they are not this proposal or an accepted implementation.
 
 ## Reproduced failure and scope
