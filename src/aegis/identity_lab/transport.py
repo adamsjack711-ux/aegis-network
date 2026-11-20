@@ -103,10 +103,11 @@ class Client:
         self.valid_until_ns = int(leaf.not_valid_after_utc.timestamp()) * 1_000_000_000
         self.timeout = timeout
 
-    def call(self, endpoint: Endpoint, route: str, body: Record | bytes | None = None) -> dict:
+    def call(self, endpoint: Endpoint, route: str, body: Record | bytes | None = None,
+             *, timeout: float | None = None) -> dict:
         if not self.valid_from_ns <= time_ns() < self.valid_until_ns:
             raise AuthenticationFailed("local TLS credential is outside its validity period")
-        connection = _Connection(endpoint, self.context, self.timeout)
+        connection = _Connection(endpoint, self.context, self.timeout if timeout is None else timeout)
         try:
             payload = canonical(body) if isinstance(body, Record) else body or b"{}"
             connection.request("POST", route, payload,

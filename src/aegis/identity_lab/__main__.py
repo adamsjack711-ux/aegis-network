@@ -1,6 +1,7 @@
 """Run an explicitly provisioned role on a private laboratory address."""
 
 import argparse
+from contextlib import ExitStack
 import json
 from pathlib import Path
 
@@ -38,7 +39,10 @@ def main() -> None:
     else:
         parser.error("unenrolled role")
     address = (args.bind, endpoints[args.name].port)
-    with Server(address, credentials, service.dispatch) as server:
+    with ExitStack() as stack:
+        server = stack.enter_context(Server(address, credentials, service.dispatch))
+        if isinstance(service, Target):
+            stack.enter_context(service.watchdog())
         server.serve_forever()
 
 
