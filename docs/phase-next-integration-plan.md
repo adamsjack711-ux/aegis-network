@@ -66,3 +66,13 @@ Integration sequence remains native 4F only after a committed implementation and
 - **5B observation** Agent 3's earlier draft admitted unsigned observation rows and omitted unknown/stale cases. Its active owner is revising these paths. A reviewed exact commit must prove signed Finding 1.0 compatibility, local trust, explicit unknown output, non-root Linux install and zero protected or network side effects. Six local tests on the uncommitted draft do not close those gates.
 
 No uncommitted implementation code is eligible for sequential intake. The integration lead will review complete branch commits with Agent 4's exact-pin evidence, then create a separate integration candidate. The Phase 4E full-suite failure and five-second all-agent gate remain open throughout this queue.
+
+## Updated cross-stream review decisions
+
+The schema authority publication `faba7f99c546db46e7761e2d6794140c91bc3eda` remains in force. The current implementation drafts have not proposed an approved change to signed Finding 1.0, exact local inventory matching or native T4/T5. No adapter is permitted to promote a research result into a signed finding or a local protected-writer approval.
+
+For 4F, review the target-owned idle Trust/Evidence watcher and original full-suite failures before accepting native writer changes. Test a withdrawal or trust loss before any request, competing owner generations, lost ACKs and delayed cursors on an exact committed pin. A new persisted ACK/cursor generation field requires a versioned, migration-aware contract proposal and independent denial-preservation test.
+
+For 5A, keep the prepared pipeline local-fixture-only. The executable rejects selected live modes, but retained outbound code and direct APIs still require a source review and negative transport tests before a commit is accepted. Reconcile the current `SourceSnapshot`/`Claim`/`Asset`/`Assessment` implementation with the proposed `AdvisoryInput.v1`/`ResearchCandidate.v1`/`ResearchCheck.v1`/`ResearchReview.v1` semantics. The broad-suite exit 2 needs a trace and classification. The 12-case scripted tie does not establish model benefit.
+
+For 5B, the signed-only Mesh adapter and incomplete-inventory unknown handling are promising uncommitted changes. Verify the signature, publisher grant, expiry, revocation and unsupported identity paths with old/new reader fixtures. Decide whether `status` without a local signed feed should return an unknown exit status. The owner must document local UUID storage, exact owned file list, non-root installation and zero network/protected-writer effects. Agent 4 must challenge the exact committed CLI pin before intake.
