@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/work/resource.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/work/resource.py", line 81, in main
+    rows = [trial(i, args.reader_delay_ms / 1000, args.closed)
+            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/resource.py", line 42, in trial
+    pid, status, usage = os.wait4(child.pid, 0)
+                         ~~~~~~~~^^^^^^^^^^^^^^
+AttributeError: module 'resource' has no attribute 'struct_rusage' (consider renaming '/work/resource.py' since it has the same name as the standard library module named 'resource' and prevents importing that standard library module)
