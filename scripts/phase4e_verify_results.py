@@ -123,6 +123,22 @@ def inspect_file(path):
                 dispatch[name] = value
             elif name == "held_barrier":
                 summary["held_writer_barrier_generation"] = inspect_held_barrier(json.loads(value))
+            elif name == "idle_hold_before_probe":
+                report = json.loads(value)
+                elapsed_ms = {
+                    target: round((at - report["started_ns"]) / 1e6, 3)
+                    for target, at in report["first_durable_ns"].items()
+                }
+                for target, row in report["state"].items():
+                    assert row["receipts"] == report["healthy"][target]["receipts"]
+                    if target in elapsed_ms:
+                        assert row["marker"] == "quarantined" and row["fence"]["held"]
+                        assert row["version"] == report["healthy"][target]["version"] + 1
+                summary.setdefault("idle_hold", {})[report["fault"]] = {
+                    "sample_ms": round((report["sample_ns"] - report["started_ns"]) / 1e6, 3),
+                    "durable_ms": elapsed_ms,
+                    "markers": {target: row["marker"] for target, row in report["state"].items()},
+                }
             elif name == "verified_trust":
                 summary["signed_unified_status_samples"] = inspect_unified_status(json.loads(value))
             elif name == "single_witness_admission":

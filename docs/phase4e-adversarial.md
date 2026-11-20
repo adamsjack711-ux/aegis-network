@@ -18,6 +18,7 @@ The integration lead approved Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f
 | Combined agent-only broker partition | Withdrawal reached JetStream while the disconnected worker had no durable local denial or ACK advancement. After rejoin the independent observer read the denial at 1.964 s and the broker ACK at 1.968 s. Target state during the transport-only run is unobserved. |
 | One-witness admission at original C and combined source | The enrolled witness returned a valid, durably recorded receipt for a synthetic Evidence withdrawal. Scoped appraisal remained `reproduced` on both exact pins. After quorum receipt, a separate delayed-archive trial held before inclusion and again after restart. The one-witness trial appraises only and attempts zero target writes. |
 | B restore at combined source | Restoring only the older home snapshot while retaining a newer external anchor rejected the staged current-owner write. A follow-up snapshot immediately after that rejected write showed quarantine already durable. The independent HTTPS observation left the snapshot unchanged. The old action receipt stayed intact. A higher reconciled generation with new exact approval was required for another effect. |
+| B proactive ownership-loss fix `79f068a09f7b76f546f6f6780043ff1ae1ec01b9` and amended branch tip `79cd10a72aac169047f63fe137988ce881304f25` | Five independent disposable marker tests passed in each of two runs at the requested source and one run at the amended tip. Both targets committed hold and quarantine while idle after anchor loss, lease expiry, and a cold stale-anchor restore. Independent HTTPS reads left durable state unchanged. Same-generation recovery kept both writers held. With a higher generation, an unexpired approval for the former assignment was rejected and fresh exact approvals produced one new receipt each. The old control `11ecb948de82ef094f4fc48261786ff7600d64de` still had both markers observing at 1,013.517 ms before any probe. |
 | Inherited Evidence contradiction and certified-view continuity on combined source | Both focused regressions passed. The inherited shared writer invalidated an exact plan after contradictory Evidence. The native T5 relying floor rejected older and conflicting certified status. These checks exercised the predecessor gates. |
 | C shadow remediation `f7053de6f059535e631cbca9544cd2ee57b2ed48` | The original assertion still failed with `checkpoint-v1`. The opt-in `withdrawal-v2` passed it and returned revoked after the same one-witness admission, before archive inclusion. A stopped admitting witness held status and restart preserved denial. A separate trial held when a fourth withdrawal view was unavailable despite three checkpoint signatures, excluded an unauthorized transport submission, preserved positive appraisal for an unrelated scope, denied a stale captured view, and rejected an older relying ledger against its intact anchor. |
 | C shadow import `86d2454bb9132642ce0b05fda0c7cd681c8f065f` | Both opt-in shadow probes and all 15 native T6 controls passed from one pinned integration export. Shadow appraisal uses its own writer boundary. |
@@ -44,7 +45,7 @@ Severity describes the observed defect or the consequence of an open deployment 
 | 4E-D04 · Crash drill import error | Test tooling | The initial controlled crash test imported its durable-name helper from the wrong module at both pins. Both diagnostic reports are retained. The correction keeps the crash and ACK assertions intact. |
 | 4E-D05 · Single-witness withdrawal can leave positive Evidence | High | Reproduced at original C, the reviewed combined pin, and the `checkpoint-v1` profile on the remediation pin. One authenticated witness had durably accepted the withdrawal and returned its signed receipt while fresh positive appraisal remained available. The opt-in C `withdrawal-v2` profile passed the strict appraisal guard and lost-view and restore checks. Shared-writer closure remains open. No target write or marker reopening was attempted by the single-witness probe. |
 | 4E-D06 · Five-second all-agent withdrawal reporting gate | Medium | Open. The exact crashed pre-intake agents yielded no independent durable denial observation within five seconds. Both post-audit agents retained an early denial, with ACK observations around 30.4 s. Transport-only runs supply no independent actuator or quarantine evidence. |
-| 4E-D07 · Idle pre-observation quarantine | High | Related integration validation at `c32532c4aa709a4a11d9c53cf87deefb392efca8` reports reproducible durable-hold ordering failures on the idle ownership-loss path and the separate B marker service. Our B stale-restore path exercises an explicit rejected write before the observer, so its durable latch result covers that path. The separate integration artifacts retain both idle runs under `docs/phase4e-observer-order.md` and the `observer-order-*.json` files. |
+| 4E-D07 · Idle pre-observation quarantine | High | The original findings and four raw reports remain at `e64bd4d639d9dfd25646650c6a988c7ab0e57718` on `test/phase4e-observer-validation`, also incorporated at `c32532c4aa709a4a11d9c53cf87deefb392efca8`. The same independent idle assertion failed at the old B pin and passed at the two newer B pins for the disposable marker writers. The native idle ownership-loss failure remains open. |
 | 4E-D08 · Shadow freshness is checked before final anchor I/O | High | Source-confirmed at C `f7053de`. The publisher checks expiry before the final checkpoint and withdrawal anchor reads and can sign afterward without sampling time again. The relying refresh and authorization use the same ordering. C's separate local reviewer reported expiry crossed in both relying paths without a target effect. The passing matched shadow tests in this branch cover receipt behavior and do not close the delayed-read condition. |
 
 ## Scenario coverage
@@ -72,7 +73,7 @@ The table records the scope of independently observed behavior at the named pins
 | M03 | Pass in fixture | Unavailable status and modeled owner expiry each left exactly one canary restriction and zero peer restriction writes. HTTP and durable fences were inspected independently. |
 | M04 | Partial | Restart of restrictive state advanced fences and produced verified safe hold. An independently anchored old snapshot challenge remains open. |
 | M05 | Pass in fixture | The audit retained `recovery_required` while one HTTP endpoint was unreachable. Both reachable replicas were quarantined. Restart restored full observation at fence two. |
-| M06 | Partial, separate idle gate failed | Probes bracketed the exercised recovery and observed no protected marker reopening. Integration validation reports that idle ownership loss can precede durable quarantine. Continuous sampling and deployed fault windows remain open. |
+| M06 | Partial, B idle marker gate passed | The proactive B fix durably latched both disposable markers before independent serving probes and prevented reopening on same-generation recovery. Earlier B and native ordering failures remain in the evidence. Native idle quarantine, continuous sampling, and deployed fault windows remain open. |
 | C01 | Blocked | A broker restart and an Evidence withdrawal were exercised separately. Their simultaneous effect at an integrated guard remains open. |
 | C02 | Blocked | Home transfer and Evidence status were checked separately. The joint stale-checkpoint path remains untested. |
 | C03 | Blocked | The witnessed fixture rejected use of coordinator replay during local controls. An untrustworthy coordinator under a real network partition remains untested. |
@@ -148,6 +149,32 @@ export PYTHONPATH="$candidate/src:$candidate/tests/phase4d:$candidate/scripts:$c
 Expect the strict single-witness assertion to fail at the named pin, with the quorum and native T6 guard cases passing. For the older shared-writer control, export `16e71ed1ccaf96209054fa3e5ddd03dd6e24b273` and run only `test_defensive_validation.py` with priority off. For the earlier A pins, run the priority cap test on `6e8bedccb184f3b4268670c93bc22310234c4f5e` and the crash test on `4c6f674c1915ee255222f02c38c2e2c010421b1f`. For B, export `cb7986d1abb7491e73f5ce53bb01778ba7159d94` and copy and run only the identity observer. For C, export `f1692340b03521d44877b6ba4a2799db66a4576d` and run only the Trust observer. Artifacts retain the exact cases and the earlier diagnostic failures.
 
 Run the restored-home observer on the combined pin with the durable B quarantine latch. Run only the barrier observer on the earlier B pin. To reproduce the receipt contract check, export `c1e5702202ad317396856ee4af89590e14a57a16` and select `tests/phase4d/test_journal.py::test_native_receipt_binds_reencoded_transport_envelope_before_inclusion` with the source on `PYTHONPATH`.
+
+### Reproduce the B idle ordering comparison
+
+```sh
+for pin in 11ecb948de82ef094f4fc48261786ff7600d64de \
+           79f068a09f7b76f546f6f6780043ff1ae1ec01b9 \
+           79cd10a72aac169047f63fe137988ce881304f25; do
+  identity="$scratch/identity-$pin"
+  mkdir "$identity"
+  git archive "$pin" | tar -x -C "$identity"
+  cp "$harness/tests/phase4e/identity_observer.py" "$identity/tests/identity_lab/test_independent_observer.py"
+  (
+    cd "$identity"
+    export PYTHONPATH="$PWD/src" AEGIS_PHASE4E_LIVE=1 AEGIS_PHASE4E_TOPOLOGY=loopback
+    test_file=tests/identity_lab/test_independent_observer.py
+    case "$pin" in
+      11ecb948*) selector="${test_file}::test_M06_idle_hold_precedes_observation[anchor-outage]" ;;
+      *) selector="$test_file" ;;
+    esac
+    "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+      "$selector" --junitxml="$scratch/identity-$pin.xml" --tb=short
+  )
+done
+```
+
+The old control exits 1 with neither writer held during its one-second observation window. On the new pins the slower of the two writer observations was 39.776–62.684 ms from anchor stop request, 26.728–48.980 ms from the first post-expiry sample, and 254.451–315.874 ms from the cold stale-restore request, which includes restarting the anchor. These are sampled timings on one host. The stale-restore arm demonstrates safe behavior across the outage and stale state together. The original observations can be read with `git show e64bd4d639d9dfd25646650c6a988c7ab0e57718:docs/phase4e-observer-order.md`. [Old B control](../benchmarks/phase4e-adversarial/idle-hold-original-11ecb94.xml) · [Requested B fix](../benchmarks/phase4e-adversarial/idle-hold-79f068a-1.xml) · [Repeat](../benchmarks/phase4e-adversarial/idle-hold-79f068a-2.xml) · [Amended B tip](../benchmarks/phase4e-adversarial/idle-hold-79cd10a.xml)
 
 Repeat the inherited Evidence conflict controls on the combined source with priority off.
 

@@ -7,6 +7,7 @@ import json
 import sqlite3
 import ssl
 from threading import Barrier
+from time import monotonic_ns, sleep, time_ns
 
 import pytest
 from cryptography import x509
@@ -181,3 +182,126 @@ def test_I05_restored_home_holds_against_current_anchor(lab, record_property):
     assert final["anchor"]["generation"] == final["home"]["generation"] == new.generation
     assert observed["effective"] == "observing"
     assert final["targets"][target]["receipts"] == [(current.generation, "observing"), (new.generation, "observing")]
+
+
+def read_writer(lab, target):
+    path = lab.database(target)
+    with closing(sqlite3.connect(f"{path.as_uri()}?mode=ro", uri=True)) as db:
+        db.execute("PRAGMA query_only=ON")
+        db.execute("BEGIN")
+        fence, = db.execute("SELECT body FROM record").fetchone()
+        version, marker = db.execute("SELECT version, value FROM marker").fetchone()
+        receipts = db.execute("SELECT generation, marker FROM receipts ORDER BY rowid").fetchall()
+    return {"fence": json.loads(fence), "version": version, "marker": marker, "receipts": receipts}
+
+
+def backup_db(source, destination):
+    with (closing(sqlite3.connect(f"{source.as_uri()}?mode=ro", uri=True)) as original,
+          closing(sqlite3.connect(destination)) as copy):
+        original.backup(copy)
+
+
+@pytest.mark.parametrize(("lab", "fault"), [
+    (30_000_000_000, "anchor-outage"),
+    (2_000_000_000, "lease-expiry"),
+    (30_000_000_000, "stale-anchor"),
+], indirect=["lab"], ids=["anchor-outage", "lease-expiry", "stale-anchor"])
+def test_M06_idle_hold_precedes_observation(lab, fault, record_property):
+    def claim(agent, broker, generation):
+        proof = make_claim(lab.policy, agent, broker, generation, lab.instances[agent])
+        return Assignment.model_validate(lab.call(agent, broker, "/claim", proof))
+
+    def plan(assignment, target):
+        version, = read_db(lab.database(target), "SELECT version FROM marker")
+        mutation = Mutation(assignment=assignment, target=target, marker="observing", expected_version=version[0])
+        return Write(command=command(mutation, lab.instances[assignment.agent]),
+                     approval=approve(mutation, lab.approval), credential_until_ns=assignment.expires_ns)
+
+    anchor_path = lab.database("anchor")
+    older = lab.root / "older-anchor.sqlite"
+    current = lab.root / "current-anchor.sqlite"
+    if fault == "stale-anchor":
+        backup_db(anchor_path, older)
+    initial = claim("agent-a", "broker-a", 0)
+    for target in lab.targets:
+        lab.call(initial.agent, initial.broker, "/write", plan(initial, target))
+        assert read_target(lab, target)["effective"] == "observing"
+    former = {target: plan(initial, target) for target in lab.targets}
+    if fault == "stale-anchor":
+        backup_db(anchor_path, current)
+    healthy = {target: read_writer(lab, target) for target in lab.targets}
+    assert all(row["marker"] == "observing" and not row["fence"]["held"] for row in healthy.values())
+
+    start_ns = monotonic_ns()
+    if fault == "lease-expiry":
+        remaining = max(0, initial.expires_ns - time_ns())
+        sleep(remaining / 1e9)
+        start_ns = monotonic_ns()
+    else:
+        lab.stop("anchor")
+        if fault == "stale-anchor":
+            backup_db(older, anchor_path)
+            lab.start("anchor")
+    fault_ready_ns = monotonic_ns()
+
+    # At idle only SQLite readers poll these stores. Serving and effect
+    # requests resume after the first durable hold snapshot, or the timeout.
+    limit = fault_ready_ns + 1_000_000_000
+    first_seen = {}
+    while True:
+        state = {target: read_writer(lab, target) for target in lab.targets}
+        now = monotonic_ns()
+        for target, row in state.items():
+            if row["fence"]["held"] and row["marker"] == "quarantined":
+                first_seen.setdefault(target, now)
+        if len(first_seen) == len(lab.targets) or now >= limit:
+            break
+        sleep(0.01)
+    record_property("idle_hold_before_probe", json.dumps({
+        "fault": fault, "started_ns": start_ns, "fault_ready_ns": fault_ready_ns,
+        "first_durable_ns": first_seen, "sample_ns": now, "healthy": healthy, "state": state,
+    }, sort_keys=True))
+    assert len(first_seen) == len(lab.targets), "idle writer hold missing before any serving or effect request"
+    for target, row in state.items():
+        assert row["receipts"] == [(initial.generation, "observing")]
+        assert row["version"] == healthy[target]["version"] + 1
+        assert row["fence"]["assignment"]["generation"] == initial.generation
+        if fault == "lease-expiry":
+            assert row["fence"]["loss"]["reason"] == "expired"
+
+    if fault == "stale-anchor":
+        with pytest.raises(Unavailable):
+            lab.call("operator", "home", "/status")
+        lab.stop("anchor")
+        backup_db(current, anchor_path)
+    if fault != "lease-expiry":
+        lab.start("anchor")
+    assert lab.call("operator", "home", "/status")["generation"] == initial.generation
+    observed = {target: read_target(lab, target) for target in lab.targets}
+    assert all(response["effective"] == "quarantined" for response in observed.values())
+    assert {target: read_writer(lab, target) for target in lab.targets} == state
+    for target in lab.targets:
+        with pytest.raises(Denied):
+            lab.call(initial.agent, initial.broker, "/write", plan(initial, target))
+    assert {target: read_writer(lab, target) for target in lab.targets} == state
+    record_property("same_generation_recovery", json.dumps({"observed": observed, "durable": state}, sort_keys=True))
+
+    stamp = Stamp.model_validate(lab.call("operator", "anchor", "/stamp"))
+    retired_generation = lab.call("operator", "home", "/recover", stamp)["generation"]
+    successor = claim("agent-b", "broker-b", retired_generation)
+    assert successor.generation > initial.generation
+    for target in lab.targets:
+        expected = read_writer(lab, target)
+        request = plan(successor, target)
+        if fault != "lease-expiry":
+            assert time_ns() < former[target].approval.body.expires_ns
+            stale = request.model_copy(update={"approval": former[target].approval})
+            with pytest.raises(Denied, match="exact target and assignment"):
+                lab.call(successor.agent, successor.broker, "/write", stale)
+            assert read_writer(lab, target) == expected
+        lab.call(successor.agent, successor.broker, "/write", request)
+        assert read_writer(lab, target)["receipts"] == [
+            (initial.generation, "observing"), (successor.generation, "observing"),
+        ]
+        assert read_target(lab, target)["effective"] == "observing"
+    record_property("successor_generation", successor.generation)
