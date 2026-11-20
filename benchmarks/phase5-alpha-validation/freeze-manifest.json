@@ -1,0 +1,175 @@
+{
+  "authority_source_and_gate_hashes": [
+    {
+      "bytes": 6365,
+      "git_blob": "d3d266577bac0708211feb571f516bf51ae087b3",
+      "path": "src/aegis/artifact.py",
+      "sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6"
+    },
+    {
+      "bytes": 15444,
+      "git_blob": "d2a1eeca0b69585e8253e0d406c6a35b9e59b9f1",
+      "path": "src/aegis/local_observer.py",
+      "sha256": "35435851de6852e99875f824c2ece8e0f33ffc85f32f871c65768f7638f85523"
+    },
+    {
+      "bytes": 3444,
+      "git_blob": "843a8d72b9b3a945100fa7459de68b8f146a61f7",
+      "path": "src/aegis/trust.py",
+      "sha256": "4f1d90573d5f4d3f0b8dd0b245dbddf0c3ccded56318b2239e518803c4d01343"
+    },
+    {
+      "bytes": 2377,
+      "git_blob": "2ced662f5b48302233118fe69937c38684018d8b",
+      "path": "src/aegis/config.py",
+      "sha256": "90502a186843dd0a2efb951c1b1d9ad3f9a49f77344c94c8726acd8aba0f3a03"
+    },
+    {
+      "bytes": 9081,
+      "git_blob": "466246775070f629dd0dd3a08a6bd4bc3b770519",
+      "path": "src/aegis/intelligence_adapter.py",
+      "sha256": "95f592222046ec8f87de52acf152842d9f1f7a59deb223b66311a2ab8ef29138"
+    },
+    {
+      "bytes": 1879,
+      "git_blob": "20b78ebd3058a11f9a10564acb08d17b96fb7528",
+      "path": "src/aegis/trust_lab/native_evidence.py",
+      "sha256": "a9b38d1d8bbe25cf3d6dec28df978c6b280aa6742492865fcadc9c23091141f0"
+    },
+    {
+      "bytes": 22429,
+      "git_blob": "179fdd350e6423fb9d3a124f21b2c7bfa4183197",
+      "path": "src/aegis/mitigation/store.py",
+      "sha256": "46e846bcd6cd86f2e4a90b424efbd740baa08c99a7c6202deafa5e51ebc3b3dc"
+    },
+    {
+      "bytes": 4943,
+      "git_blob": "7e170e148149bb7369f67ec61dca7c921713cb49",
+      "path": "docs/phase4f-recovery-acceptance.md",
+      "sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2"
+    },
+    {
+      "bytes": 9230,
+      "git_blob": "eddc5e8666a363db97ab6f98eb01f7d9818c40a7",
+      "path": "docs/phase5c-diagnostic-threat-acceptance.md",
+      "sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d"
+    }
+  ],
+  "baseline_commit": "8292e531194216a578c32c912d066f98cdbce9ea",
+  "denominators": {
+    "diagnostic_performance_each_arm": 30,
+    "diagnostic_safety_trials": 72,
+    "linux_cells": 4,
+    "linux_logical_cases": 84,
+    "linux_resource_privacy_children": 68,
+    "model_comparison_each_arm": 72,
+    "native_fault_pairs": 72,
+    "native_healthy_pairs": 18,
+    "research_independent_prior": 12,
+    "research_synthetic": 24
+  },
+  "external_independent_freeze": {
+    "commit": "68f9fd8fc84e8d92673c43ad20e3230a714ddac2",
+    "document_git_blob": "165df4abe02e0bfdb8ada171dd9d56f9ef051410",
+    "document_path": "docs/phase5-next-acceptance-freeze.md",
+    "document_sha256": "934e813788c41abe08d86cc5a2d2ff2c2f2004dec17821880d2a9a73c81a3c46",
+    "json_git_blob": "93ecf3bdd8f930ff3188805dae1a968923e178c3",
+    "json_path": "benchmarks/phase5-next-validation/freeze.json",
+    "json_sha256": "312fbfe4269c39649dbb690a0bd090b01ad1dcf8b6a47857b55a3714cab27b6f",
+    "verified_input_count": 15,
+    "verified_research_case_count": 24
+  },
+  "prior_failure_input_hashes": [
+    {
+      "bytes": 27786,
+      "git_blob": "e9c408fc4583add66e0f181cfc5ebdc07059ee3f",
+      "path": "fixtures/phase-next-alpha-ai/holdout-v1.json",
+      "sha256": "7f88e132b92d528fb01573f37e00c8af4698919bf3747c583f3ec74fb7dbc82d"
+    },
+    {
+      "bytes": 6929,
+      "git_blob": "14e04568a2105f3ff3a2ba78c80ca37abfe1eec3",
+      "path": "fixtures/phase-next-alpha-ai/seal-manifest.json",
+      "sha256": "20a3a37da8f941f17e6db514d1437d8d6575140e2e3bde61fc2cad9c6d4a234b"
+    },
+    {
+      "bytes": 7279,
+      "git_blob": "3354c7e2d591bbe774193d14630cf6ca6c81291e",
+      "path": "benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133"
+    },
+    {
+      "bytes": 1418,
+      "git_blob": "e6b596d8dbef40138c7c1ab6c48c9d3679b76f84",
+      "path": "benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916"
+    },
+    {
+      "bytes": 402,
+      "git_blob": "b05cb5a4fc546efd645e3d4f6a0fc151ac5fc9ef",
+      "path": "benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "sha256": "9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b"
+    },
+    {
+      "bytes": 1639,
+      "git_blob": "4e82fd9ef6a8b8dabe257ca245d5266cf1715942",
+      "path": "benchmarks/phase5b2/grant-race-open.txt",
+      "sha256": "4008abba7a41b879e68e13ef332935a4d0b853bcc7bdd79fa105e719d5cae19d"
+    },
+    {
+      "bytes": 1639,
+      "git_blob": "78e781e87d062a962a9c29519eb364e8494393ba",
+      "path": "benchmarks/alpha-grant/baseline-grant-race.txt",
+      "sha256": "5d174b3e45e473a68c880caf337edfc9a30dc338bfb766f3173210067927613e"
+    },
+    {
+      "bytes": 28751,
+      "git_blob": "1baa9031a40c13fd933a0e1485defcf5bde0fd1a",
+      "path": "benchmarks/phase-next-six-validation/original-evidence-manifest.json",
+      "sha256": "87abdaf1f526f86eaae9fee87b811b2330ccaea135abf473634bd1db4edd645a"
+    },
+    {
+      "bytes": 16037,
+      "git_blob": "f84900ec95c707e9e3ad996663d6a7c0b63fda39",
+      "path": "benchmarks/phase-next-r-validation/original-evidence-manifest.json",
+      "sha256": "444e17d2fa0fa0a44168a85e506561945041d0f814a10bf20ba4c956544a5ce5"
+    },
+    {
+      "bytes": 10941,
+      "git_blob": "dee1fdc4f7b5253f62a7ccc58721a43993d70887",
+      "path": "docs/phase5c-diagnostic-contract-proposal.md",
+      "sha256": "d3fe3ebb3fddf3fd057e842f5f4fbb3e54b3d717a9caa7d55c2f63f0f77ef070"
+    },
+    {
+      "bytes": 9230,
+      "git_blob": "eddc5e8666a363db97ab6f98eb01f7d9818c40a7",
+      "path": "docs/phase5c-diagnostic-threat-acceptance.md",
+      "sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d"
+    },
+    {
+      "bytes": 11515,
+      "git_blob": "115f8182c0cee792c8af491e944988cbcb41ffb3",
+      "path": "docs/alpha-readiness-validation-freeze.md",
+      "sha256": "dc2ba877305a274961fa0c4f21311dc19ccb7e99d9810cd6f66760fe0f1b36be"
+    },
+    {
+      "bytes": 15448,
+      "git_blob": "5a6b5968d359de65c63da0c64b34586bfd5b5234",
+      "path": "docs/phase-next-r-acceptance-frozen.md",
+      "sha256": "6067511be767a5b7bbc9e82a91dab7e92b7f4df5de57bf638170d98dbb19ed5e"
+    },
+    {
+      "bytes": 6585,
+      "git_blob": "fffb82f1dc239245b3a55eaa2592bd9c43973dcb",
+      "path": "docs/phase4e-observer-order.md",
+      "sha256": "4167fb8d2f253c407a0d5b61c84d0e29babf6d6695f9f21a547b98015c43868b"
+    },
+    {
+      "bytes": 4943,
+      "git_blob": "7e170e148149bb7369f67ec61dca7c921713cb49",
+      "path": "docs/phase4f-recovery-acceptance.md",
+      "sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2"
+    }
+  ],
+  "schema": "aegis-phase5-alpha-validator-freeze-v1"
+}
