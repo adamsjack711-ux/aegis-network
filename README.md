@@ -2,6 +2,10 @@
 
 Lab-only proof of concept for independently verified, signed defensive findings and local dry-run decisions. The separate Phase 3C fixture can apply an exactly approved route restriction to disposable synthetic replicas.
 
+## Observation-only Linux CLI (Phase 5B)
+
+The installable `aegis` command reads local Debian/Ubuntu package metadata and compares exact versions with a local, signed Mesh finding bundle. Run `aegis doctor`, `aegis inventory`, or `aegis findings --feed mesh-events.json --trust publishers.json`. It does not connect to the network or change host policy. See [Phase 5B CLI guide](docs/phase5b-linux-cli.md) for installation, file format, limitations and tests.
+
 ## Current path
 
 `POST /v1/findings` → Ed25519 validation → PostgreSQL plus transactional outbox → NATS JetStream → independent agent signature recheck → exact local inventory match → separate SQLite audits and dry-run decisions. `POST /v1/revocations` carries signed withdrawals to the same agents.

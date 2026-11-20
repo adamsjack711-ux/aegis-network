@@ -1,0 +1,23 @@
+{
+  "runs": [
+    {
+      "advisories": 100,
+      "cpu_ms": 102.72,
+      "input_disk_mib": 0.09,
+      "matches": 100,
+      "packages": 1000,
+      "python_peak_mib": 0.68,
+      "wall_ms": 520.42
+    },
+    {
+      "advisories": 1000,
+      "cpu_ms": 902.53,
+      "input_disk_mib": 0.89,
+      "matches": 1000,
+      "packages": 10000,
+      "python_peak_mib": 6.12,
+      "wall_ms": 2375.01
+    }
+  ],
+  "scope": "single process, synthetic dpkg status and in-memory normalized signed-claim records, no network"
+}
