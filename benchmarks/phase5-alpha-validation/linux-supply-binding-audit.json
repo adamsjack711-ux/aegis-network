@@ -1,0 +1,22 @@
+{
+  "binding": {
+    "manifest_sha256": "39653937e83dd3d53a4becf9009c9a87234dddd7cf07bfb263451ae5cfed3784",
+    "provenance_sha256": "076619b22cb864a405eb073828bc57f317772340c3e5f18f70d4c4cc2b19b49c",
+    "review_commit": "ad830ada4bb13e45b9f192bc54c165281e8d9b50",
+    "source_commit": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99"
+  },
+  "candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "final_provenance_sha256": "076619b22cb864a405eb073828bc57f317772340c3e5f18f70d4c4cc2b19b49c",
+  "manifest_sha256": "39653937e83dd3d53a4becf9009c9a87234dddd7cf07bfb263451ae5cfed3784",
+  "negative_release_entrypoint": {
+    "build_called": false,
+    "reason": "release inputs differ from pinned independent review",
+    "status": "incomplete",
+    "unrelated_commit": "8292e531194216a578c32c912d066f98cdbce9ea"
+  },
+  "normalized_draft_sha256": "e1b4e383f76342651061800c25cb8981456dcdc37763ca2f8f6f78ae53caa530",
+  "owner_pin": "4b270926d3d8125946d854fbfea4d0076a913fd6",
+  "positive_preflight": "passed",
+  "review_commit": "ad830ada4bb13e45b9f192bc54c165281e8d9b50",
+  "wheel_count": 32
+}
