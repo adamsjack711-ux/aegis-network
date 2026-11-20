@@ -17,7 +17,7 @@ The non-AI arm uses the same advisory snapshot and deterministic parser/checker,
 | DeterministicCheck v1 | Parser version, input digest, field validity, package identity match, version-range evaluation or `unsupported`, contradictory claims, missing provenance, deduplication key and reason codes. Inconclusive is preserved as a first-class result. |
 | ReviewDecision v1 | Reviewer identity, exact candidate digest, accepted/rejected/needs-evidence outcome, reason and time. It only controls research workflow. It does not alter native T4/T5 or Rapid policy. |
 
-The existing signed Finding 1.0/1.1 and Evidence records retain their canonical bytes and trust rules. A model can quote adversarial advisory text, so instruction-looking text remains data and is excluded from tool authority. Bounded calls use allowlisted local fixture inputs, time/token/cost limits and deterministic output validation. Providers are pluggable behind a call interface. The default run requires no provider and no network.
+The existing signed Finding 1.0 and Revocation 1.0/1.1 and Evidence records retain their canonical bytes and trust rules. A model can quote adversarial advisory text, so instruction-looking text remains data and is excluded from tool authority. Bounded calls use allowlisted local fixture inputs, time/token/cost limits and deterministic output validation. Providers are pluggable behind a call interface. The default run requires no provider and no network.
 
 ## Acceptance criteria
 

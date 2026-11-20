@@ -22,4 +22,8 @@ GO for Phase 4F stabilization research, Phase 5A read-only intelligence and Phas
 
 ## Preparation assignments and interface hold
 
-Agent 1 design `ae83b16` proposes native writer and consumer stabilization. Agent 2 design `086a1df` proposes model-independent research contracts. Agent 3 design `5535876` proposes a Debian-first offline CLI. Agent 4 independently challenges all three from `test/phase4f-phase5a-validation`; its preparation result is pending. No implementation branch has been integrated. Untracked network-capable intelligence files appeared in Agent 2's worktree from an unidentified concurrent actor. They are preserved and excluded from approval until ownership and the offline boundary are reviewed. [Assignments and conflict](phase-next-integration-plan.md)
+Agent 1 design `ae83b16` proposes native writer and consumer stabilization. Agent 2 design `086a1df` proposes model-independent research contracts. Agent 3 design `5535876` proposes a Debian-first offline CLI. Agent 4 committed the independent challenge plan at `e41770868f8c614a73764a8d9a73917b76ef2d91` on `test/phase4f-phase5a-validation`. No implementation branch has been integrated. Untracked network-capable intelligence files appeared in Agent 2's worktree from an unidentified concurrent actor. They are preserved and excluded from approval until ownership and the offline boundary are reviewed. [Assignments and conflict](phase-next-integration-plan.md)
+
+The current signed finding and local inventory authority, provisional Phase 5 research and Linux inventory records, and change owners are pinned in [Phase 5 schema authority](phase5-schema-authority.md).
+
+Agent 3's schema correction is `443a2c4779948b5be24342c9c3bdad9eea6b5d54`. Concurrent uncommitted CLI and packaging files also appeared in the Phase 5B worktree. Both the 5A and 5B implementation drafts remain unreviewed and outside this preparation's integration decision.
