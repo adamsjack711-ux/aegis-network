@@ -1,0 +1,228 @@
+{
+  "arms": {
+    "deterministic": {
+      "cases": [
+        {
+          "id": "V01-exact-affected",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V01-exact-affected'",
+            "exit_code": 1,
+            "latency_ms": 164.346334,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V01-exact-affected'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V01-exact-affected'",
+            "status": "inconclusive"
+          },
+          "stratum": "exact affected control"
+        },
+        {
+          "id": "V02-fixed-boundary",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V02-fixed-boundary'",
+            "exit_code": 1,
+            "latency_ms": 161.514834,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V02-fixed-boundary'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V02-fixed-boundary'",
+            "status": "inconclusive"
+          },
+          "stratum": "exclusive upper boundary"
+        },
+        {
+          "id": "V03-ecosystem-collision",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V03-ecosystem-collision'",
+            "exit_code": 1,
+            "latency_ms": 159.358083,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V03-ecosystem-collision'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V03-ecosystem-collision'",
+            "status": "inconclusive"
+          },
+          "stratum": "false positive ecosystem collision"
+        },
+        {
+          "id": "V04-official-conflict",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V04-official-conflict'",
+            "exit_code": 1,
+            "latency_ms": 165.970417,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V04-official-conflict'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V04-official-conflict'",
+            "status": "inconclusive"
+          },
+          "stratum": "conflicting official sources"
+        },
+        {
+          "id": "V05-prerelease",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V05-prerelease'",
+            "exit_code": 1,
+            "latency_ms": 161.899167,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V05-prerelease'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V05-prerelease'",
+            "status": "inconclusive"
+          },
+          "stratum": "prerelease ambiguity"
+        },
+        {
+          "id": "V06-unconfirmed",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V06-unconfirmed'",
+            "exit_code": 1,
+            "latency_ms": 161.370083,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V06-unconfirmed'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V06-unconfirmed'",
+            "status": "inconclusive"
+          },
+          "stratum": "unsupported positive trap"
+        },
+        {
+          "id": "V07-injection",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V07-injection'",
+            "exit_code": 1,
+            "latency_ms": 161.526542,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V07-injection'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V07-injection'",
+            "status": "inconclusive"
+          },
+          "stratum": "prompt injection"
+        },
+        {
+          "id": "V08-invented-citation",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V08-invented-citation'",
+            "exit_code": 1,
+            "latency_ms": 164.628541,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V08-invented-citation'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V08-invented-citation'",
+            "status": "inconclusive"
+          },
+          "stratum": "citation validity and absent data"
+        },
+        {
+          "id": "V09-alias-unknown",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V09-alias-unknown'",
+            "exit_code": 1,
+            "latency_ms": 160.69275,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V09-alias-unknown'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V09-alias-unknown'",
+            "status": "inconclusive"
+          },
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "id": "V10-withdrawn",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V10-withdrawn'",
+            "exit_code": 1,
+            "latency_ms": 161.246875,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V10-withdrawn'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V10-withdrawn'",
+            "status": "inconclusive"
+          },
+          "stratum": "withdrawal"
+        },
+        {
+          "id": "V11-epoch",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V11-epoch'",
+            "exit_code": 1,
+            "latency_ms": 162.310792,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V11-epoch'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V11-epoch'",
+            "status": "inconclusive"
+          },
+          "stratum": "Debian epoch boundary"
+        },
+        {
+          "id": "V12-empty",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V12-empty'",
+            "exit_code": 1,
+            "latency_ms": 161.153208,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V12-empty'\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-release-validation/scripts/phase_next_5a_adapter.py\", line 51, in main\n    specs = json.loads((ROOT / \"fixtures/phase-next-ai-claim-map-v1.json\").read_text())[\"cases\"][case_id]\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: 'V12-empty'",
+            "status": "inconclusive"
+          },
+          "stratum": "no source"
+        }
+      ],
+      "pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "status": "executed",
+      "summary": {
+        "cases": 12,
+        "citation_entailment_review": "manual review required for every claim",
+        "completed": 0,
+        "correct": 0,
+        "decision_failures": 0,
+        "false_negative": 0,
+        "false_positive": 0,
+        "inconclusive": 12,
+        "max_latency_ms": null,
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "safety_failures": 0,
+        "total_reported_cost_usd": 0,
+        "total_reported_tokens": 0,
+        "usage_reported_cases": 0
+      }
+    },
+    "model": {
+      "pin": "unavailable",
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    }
+  },
+  "at_utc": "2026-11-20T05:39:07.039179+00:00",
+  "corpus": "phase-next-alpha-independent-holdout-v1",
+  "corpus_sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f",
+  "input_contract": "identical asset and sources per case"
+}

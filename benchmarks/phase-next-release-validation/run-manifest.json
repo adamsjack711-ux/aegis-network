@@ -1,0 +1,220 @@
+{
+  "commands": {
+    "ai-alpha-integrated": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../phase-next-alpha-integration/src ../../.venv/bin/python ../phase-next-alpha-integration/scripts/phase5a_alpha_evaluate.py --root ../phase-next-alpha-integration --output benchmarks/phase-next-release-validation/runs/ai-alpha-integrated.json --repeats 3",
+    "ai-h12-integrated": "PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase_next_ai_eval.py --baseline-command \"../../.venv/bin/python scripts/phase_next_5a_adapter.py --candidate-root ../phase-next-alpha-integration --source-pin d15a3a756b8066c5cb2d98665662220e52f4a7d6\" --baseline-pin d15a3a756b8066c5cb2d98665662220e52f4a7d6 --output benchmarks/phase-next-release-validation/runs/ai-h12-integrated.json",
+    "ai-v12-integrated": "same evaluator with --corpus benchmarks/phase-next-release-validation/oracles/phase-next-alpha-ai-holdout-v1.json, output ai-v12-integrated.json",
+    "cli-five-linux-integrated": "docker run --rm --pull never --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 65534:65534 --tmpfs /tmp:rw,noexec,nosuid,size=32m -e PYTHONPATH=/candidate/src -e PYTHONDONTWRITEBYTECODE=1 -v ../phase-next-alpha-integration/src:/candidate/src:ro -v scripts/phase_next_probe_cli.py:/probe.py:ro sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab python3 /probe.py",
+    "cli-resource-retained-rescore": "Python one-off SHA-256 checked rescore of retained 100000-row Debian and Ubuntu hybrid raw JSON; no fresh benchmark",
+    "cli-status-integrated": "PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase_next_5b_status_challenge.py --candidate-root ../phase-next-alpha-integration --source-pin d15a3a756b8066c5cb2d98665662220e52f4a7d6 --fixture-root fixtures/phase-next-cli --output benchmarks/phase-next-release-validation/runs/cli-status-integrated.json",
+    "focused-integrated": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../phase-next-alpha-integration/src ../../.venv/bin/pytest -q -p no:cacheprovider ../phase-next-alpha-integration/tests/test_phase5a_alpha_eval.py ../phase-next-alpha-integration/tests/test_phase5a_intelligence.py ../phase-next-alpha-integration/tests/test_phase5a_claim_integrity.py ../phase-next-alpha-integration/tests/test_phase5b_cli.py --junitxml=benchmarks/phase-next-release-validation/runs/focused-integrated.xml",
+    "native-defensive-integrated": "first collection attempt, PYTHONPATH lacking tests/phase4d; retained exit 2",
+    "native-defensive-integrated-corrected": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../phase-next-alpha-integration/src:../phase-next-alpha-integration/scripts:../phase-next-alpha-integration/tests/phase4d ../../.venv/bin/pytest -q -p no:cacheprovider ../phase-next-alpha-integration/tests/phase4e/test_defensive_validation.py --junitxml=benchmarks/phase-next-release-validation/runs/native-defensive-integrated-corrected.xml",
+    "native-healthy-integrated": "same command with --kill-agent omitted, fresh state, output native-healthy-integrated.json",
+    "native-preintake-integrated": "PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase4e_withdrawal_recovery_check.py ../phase-next-alpha-integration --authorize-local-lab --kill-agent --priority --ordinary-count 4 --output benchmarks/phase-next-release-validation/runs/native-preintake-integrated.json",
+    "native-repeat2-integrated": "same crash/restart command, fresh state, output native-repeat2-integrated.json",
+    "native-repeat3-integrated": "same crash/restart command, fresh state, output native-repeat3-integrated.json",
+    "native-stage-score": "python3 scripts/phase_next_4f_stage_audit.py --output benchmarks/phase-next-release-validation/runs/native-stage-score.json [four native trial JSON paths]"
+  },
+  "created_utc": "2026-11-20T05:45:30.721051+00:00",
+  "files": [
+    {
+      "bytes": 166216,
+      "path": "benchmarks/phase-next-release-validation/runs/ai-alpha-integrated.json",
+      "sha256": "73bf995d8e6be35a0251540dc4102f4a57495a2d21ee6cec4f018ecc6df6123f"
+    },
+    {
+      "bytes": 14962,
+      "path": "benchmarks/phase-next-release-validation/runs/ai-h12-integrated.json",
+      "sha256": "c482b65cceb827ec89ba4c2bba569fd90155ca1afac0f83051646b9f5d2423c2"
+    },
+    {
+      "bytes": 27328,
+      "path": "benchmarks/phase-next-release-validation/runs/ai-v12-integrated.json",
+      "sha256": "1c4a3fb6554876b848b7d5f6b8f28b12aadd05f12cd7ace249027d622e7d7124"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/cli-five-linux-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/cli-five-linux-integrated.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 818,
+      "path": "benchmarks/phase-next-release-validation/runs/cli-five-linux-integrated.stdout",
+      "sha256": "21fb318d10479a8ab51851be56b252e1b4330de7d8856e6d01cb7064eccaad2e"
+    },
+    {
+      "bytes": 2386,
+      "path": "benchmarks/phase-next-release-validation/runs/cli-resource-retained-rescore.json",
+      "sha256": "9e1b249831fd574b8dfc5992f1be6563cd065ec8fb81ce7480466ce7fb31d631"
+    },
+    {
+      "bytes": 11217,
+      "path": "benchmarks/phase-next-release-validation/runs/cli-status-integrated.json",
+      "sha256": "5325be31cdfc815d978ea78bb9e3eb95b8cf5cef5d2bee32478647f37d6b2167"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/focused-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/focused-integrated.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 99,
+      "path": "benchmarks/phase-next-release-validation/runs/focused-integrated.stdout",
+      "sha256": "4069000e221ef499037333a1bc46551bb8abda1ea80e2a0d3852b75ac682dfce"
+    },
+    {
+      "bytes": 4466,
+      "path": "benchmarks/phase-next-release-validation/runs/focused-integrated.xml",
+      "sha256": "9f3ce8ac8da0301c1ce45c5af4dce49b2c2aeff2c5e9fa33719bf227b591f54f"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated-corrected.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated-corrected.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2184,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated-corrected.stdout",
+      "sha256": "01a211d2527f20d7c823b74f1ae7fff4d2b3238d88a780f28dfb15b325a70186"
+    },
+    {
+      "bytes": 113925,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated-corrected.xml",
+      "sha256": "4a57393bdb7293a873efae80c6e2dcaaad60e26e399b358d87d354610577f5c7"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated.exit",
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1118,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated.stdout",
+      "sha256": "e27b684a23b897d6738746558b3c574c19e6470c47867fe984326d59b7688911"
+    },
+    {
+      "bytes": 1099,
+      "path": "benchmarks/phase-next-release-validation/runs/native-defensive-integrated.xml",
+      "sha256": "6925e2c2718a8f7027149fa99b247c7e2805362960c44a63dae45030fb8094e3"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-healthy-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 10404,
+      "path": "benchmarks/phase-next-release-validation/runs/native-healthy-integrated.json",
+      "sha256": "a74a5c4154f77d3a766e0fd907b38673b722b40cfbc908c3760d3216bdcb4726"
+    },
+    {
+      "bytes": 72,
+      "path": "benchmarks/phase-next-release-validation/runs/native-healthy-integrated.stderr",
+      "sha256": "45c0eda643af05334795c78de74935e4b71b875e09df4f9352b3efce7c67fff2"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-healthy-integrated.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-preintake-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 23310,
+      "path": "benchmarks/phase-next-release-validation/runs/native-preintake-integrated.json",
+      "sha256": "8ff9b5ed9fc9bbb1e3d1e6b116edb380a4564e51c869129597770c902a090326"
+    },
+    {
+      "bytes": 72,
+      "path": "benchmarks/phase-next-release-validation/runs/native-preintake-integrated.stderr",
+      "sha256": "45c0eda643af05334795c78de74935e4b71b875e09df4f9352b3efce7c67fff2"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-preintake-integrated.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat2-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 23312,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat2-integrated.json",
+      "sha256": "61ea68ea59f4264e4d39998083d4d4992b9d2b2fcff0a2e5137493a5a5a9c4a2"
+    },
+    {
+      "bytes": 72,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat2-integrated.stderr",
+      "sha256": "45c0eda643af05334795c78de74935e4b71b875e09df4f9352b3efce7c67fff2"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat2-integrated.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat3-integrated.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 23310,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat3-integrated.json",
+      "sha256": "f58693036129a620a1e2356b258437549860f014fe27612010a65a5e671f0b0b"
+    },
+    {
+      "bytes": 72,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat3-integrated.stderr",
+      "sha256": "45c0eda643af05334795c78de74935e4b71b875e09df4f9352b3efce7c67fff2"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-release-validation/runs/native-repeat3-integrated.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3308,
+      "path": "benchmarks/phase-next-release-validation/runs/native-stage-score.json",
+      "sha256": "d1ef704649f5f33b0d883452e9481b0cec82fd35ac7e2f9c53a7e2c9d8b027f1"
+    }
+  ],
+  "harness_sha256": {
+    "phase5a_alpha_evaluate.py": "255bcdecea44bfc5130c359278b7f3699b7e931bc7116a8c8a57a2f4072cb459",
+    "scripts/phase4e_withdrawal_recovery_check.py": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050",
+    "scripts/phase_next_4f_stage_audit.py": "c75d8101912b5940e26e679b0e0a8a41224b93f31ead837de5f2a760c4cdc789",
+    "scripts/phase_next_5a_adapter.py": "172cd273c04e8d1513d3d1e78ca4a67aa903177f31d60005c20b3ce4f092e7e4",
+    "scripts/phase_next_5b_status_challenge.py": "68b00c0afbaeb3151b09de75280f90c576855b4c01709fe956991cd236cee8cd",
+    "scripts/phase_next_ai_eval.py": "60102a4e27c33e22e77ee8cf3161c485cb1598529ff5c862d1417864f0ea0c29",
+    "scripts/phase_next_probe_cli.py": "40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1"
+  },
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "integrated_source_clean": true,
+  "integrated_source_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+  "schema": "VAL-R-run-v1",
+  "validation_freeze_commit": "5d2608ab9a8e2175ac4b92beeb9b03fa3aa84632"
+}

@@ -1,0 +1,2 @@
+nats: encountered error
+nats.errors.UnexpectedEOF: nats: unexpected EOF

@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "agent_sigkill": true,
+      "broker_start_return_ms": 186.794,
+      "busy_attempts": 30,
+      "claim_success_from_restart_ms": 30490.698,
+      "durable_denial_and_priority_control": "pass",
+      "file": "benchmarks/phase-next-release-validation/runs/native-preintake-integrated.json",
+      "first_critical_receipt_from_restart_ms": 30535.358,
+      "five_second_submit_to_durable_denial": "fail",
+      "independent_submit_to_denial_ms": 30602.585,
+      "mixed_submit_to_denial_ms": 30592.565,
+      "sha256": "8ff9b5ed9fc9bbb1e3d1e6b116edb380a4564e51c869129597770c902a090326",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    },
+    {
+      "agent_sigkill": true,
+      "broker_start_return_ms": 215.059,
+      "busy_attempts": 30,
+      "claim_success_from_restart_ms": 30573.273,
+      "durable_denial_and_priority_control": "pass",
+      "file": "benchmarks/phase-next-release-validation/runs/native-repeat2-integrated.json",
+      "first_critical_receipt_from_restart_ms": 30620.816,
+      "five_second_submit_to_durable_denial": "fail",
+      "independent_submit_to_denial_ms": 30687.841,
+      "mixed_submit_to_denial_ms": 30674.569,
+      "sha256": "61ea68ea59f4264e4d39998083d4d4992b9d2b2fcff0a2e5137493a5a5a9c4a2",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    },
+    {
+      "agent_sigkill": true,
+      "broker_start_return_ms": 203.409,
+      "busy_attempts": 30,
+      "claim_success_from_restart_ms": 30548.876,
+      "durable_denial_and_priority_control": "pass",
+      "file": "benchmarks/phase-next-release-validation/runs/native-repeat3-integrated.json",
+      "first_critical_receipt_from_restart_ms": 30595.537,
+      "five_second_submit_to_durable_denial": "fail",
+      "independent_submit_to_denial_ms": 30665.094,
+      "mixed_submit_to_denial_ms": 30651.597,
+      "sha256": "f58693036129a620a1e2356b258437549860f014fe27612010a65a5e671f0b0b",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    },
+    {
+      "agent_sigkill": false,
+      "broker_start_return_ms": 211.922,
+      "busy_attempts": 0,
+      "claim_success_from_restart_ms": null,
+      "durable_denial_and_priority_control": "pass",
+      "file": "benchmarks/phase-next-release-validation/runs/native-healthy-integrated.json",
+      "first_critical_receipt_from_restart_ms": 1712.993,
+      "five_second_submit_to_durable_denial": "pass",
+      "independent_submit_to_denial_ms": 1771.305,
+      "mixed_submit_to_denial_ms": 1756.548,
+      "sha256": "a74a5c4154f77d3a766e0fd907b38673b722b40cfbc908c3760d3216bdcb4726",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    }
+  ],
+  "denominator": {
+    "sigkill_trials": 3,
+    "targeted_pairs": 8,
+    "trials": 4
+  },
+  "diagnostic_pass": 4,
+  "five_second_fail": 3,
+  "limitations": "One host, one broker, one dry-run agent per trial; no native T4/T5 or target hold timestamp. Controller and child perf_counter_ns comparable only within one host."
+}

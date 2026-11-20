@@ -1,0 +1,80 @@
+{
+  "candidate_implementation_pin": "876988ba30abed9c2954668d02b2c4c13f84e50f",
+  "cases": [
+    {
+      "distro": "debian",
+      "max_cpu_ms": 1069.121,
+      "max_rss_mib": 297.805,
+      "max_wall_ms": 1074.661,
+      "python": "3.12.16",
+      "rss_fail_count": 3,
+      "rss_gate_mib": 256,
+      "sha256": "0c4f031d0d7d17a16658a1ad3cf55aadad3340adc06a6473db1c1bc2bcf9a716",
+      "source_file": "benchmarks/phase-next-release-validation/original/benchmarks/phase-next-alpha-astra/5b-final-debian-rusage-512m.json",
+      "trial_count": 3,
+      "trials": [
+        {
+          "cpu_ms": 1048.142,
+          "exit": 0,
+          "peak_rss_mib": 297.805,
+          "repetition": 1,
+          "wall_ms": 1049.209
+        },
+        {
+          "cpu_ms": 1045.403,
+          "exit": 0,
+          "peak_rss_mib": 297.801,
+          "repetition": 2,
+          "wall_ms": 1050.423
+        },
+        {
+          "cpu_ms": 1069.121,
+          "exit": 0,
+          "peak_rss_mib": 297.805,
+          "repetition": 3,
+          "wall_ms": 1074.661
+        }
+      ]
+    },
+    {
+      "distro": "ubuntu",
+      "max_cpu_ms": 1106.548,
+      "max_rss_mib": 295.883,
+      "max_wall_ms": 1110.993,
+      "python": "3.12.3",
+      "rss_fail_count": 3,
+      "rss_gate_mib": 256,
+      "sha256": "f10d67f9168513a39e63186d903076ddaf872bc64188f6450e6f05da47baee73",
+      "source_file": "benchmarks/phase-next-release-validation/original/benchmarks/phase-next-alpha-astra/5b-final-ubuntu-hybrid-rusage-512m.json",
+      "trial_count": 3,
+      "trials": [
+        {
+          "cpu_ms": 1048.711,
+          "exit": 0,
+          "peak_rss_mib": 295.883,
+          "repetition": 1,
+          "wall_ms": 1059.001
+        },
+        {
+          "cpu_ms": 1084.578,
+          "exit": 0,
+          "peak_rss_mib": 295.883,
+          "repetition": 2,
+          "wall_ms": 1091.338
+        },
+        {
+          "cpu_ms": 1106.548,
+          "exit": 0,
+          "peak_rss_mib": 295.883,
+          "repetition": 3,
+          "wall_ms": 1110.993
+        }
+      ]
+    }
+  ],
+  "evidence_pin": "9c54a14f5e600f6378c7b1ae683607dc802cc60a",
+  "gate": "fail",
+  "kind": "independent_rescore_of_retained_VAL_D_raw_measurements",
+  "not_a_fresh_benchmark": true,
+  "reason": "all six 100000-row 512 MiB trials exceeded frozen 256 MiB peak RSS; three separately retained 256 MiB cgroup trials were OOM-killed"
+}
