@@ -1,0 +1,24 @@
+{
+  "entry_point": "aegis = aegis.cli:main",
+  "extra_package_files": [],
+  "member_count": 72,
+  "missing_or_different_source_files": [],
+  "requires_dist": [
+    "cryptography<47,>=44",
+    "fastapi<1,>=0.115",
+    "httpx<1,>=0.27",
+    "nats-py<3,>=2.9",
+    "psycopg[binary]<4,>=3.2",
+    "pydantic<3,>=2.10",
+    "uvicorn<1,>=0.30",
+    "httpx<1,>=0.27; extra == 'test'",
+    "pytest<10,>=8; extra == 'test'"
+  ],
+  "requires_python": ">=3.12",
+  "sdist_sha256": "8a074b379fe8c4bac82f8dc70c7a183a409198e596be3c77ea151209c7f9d306",
+  "source_file_count": 68,
+  "wheel_bytes": 168699,
+  "wheel_package_file_count": 68,
+  "wheel_sha256": "4c3b6a9edcc78efc2dada9f3a88e8dbe4e3fb472abafe438336936425033502d",
+  "wheel_zip_error": null
+}

@@ -1,0 +1,17 @@
+IMAGE=[aegis_phase4_baseline-coordinator:latest] ID=sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e
+VERSION_ID="13"
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+Python 3.12.16
+pip 25.0.1 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
+IMAGE=[python:3.13-slim] ID=sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+VERSION_ID="13"
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+Python 3.13.18
+pip 26.2.2 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)
+IMAGE=[mcr.microsoft.com/playwright/python:v1.50.0-noble] ID=sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60
+VERSION_ID="24.04"
+ID=ubuntu
+Python 3.12.3
+pip 25.0 from /usr/local/lib/python3.12/dist-packages/pip (python 3.12)
