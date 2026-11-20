@@ -1,0 +1,130 @@
+{
+  "baseline": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9",
+  "note": "Branch heads are discovery metadata. Validation uses clean detached/exact commit pins, never floating heads.",
+  "observed_branch_heads": [
+    {
+      "branch": "feat/phase4f-kv-recovery",
+      "commit": "aec828ddd075db344277ddbc8cf87122d37fb4d1"
+    },
+    {
+      "branch": "feat/phase4f-native-enforcement",
+      "commit": "51e5601cdb5f1330828063518d62c342ba8721da"
+    },
+    {
+      "branch": "feat/phase4f-recovery-astra",
+      "commit": "5aa2d3c4aee3445199fcd010bed8e7475018160a"
+    },
+    {
+      "branch": "feat/phase4f-recovery-protocol",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase4f-recovery-r-astra",
+      "commit": "cf957b18f4cd4a61361122426c6c5ed3a99e5059"
+    },
+    {
+      "branch": "feat/phase4f-safe-recovery",
+      "commit": "a51e8a68b1ed99b9b220d71a509229da8327687a"
+    },
+    {
+      "branch": "feat/phase4f-stabilization",
+      "commit": "ae83b16ad9159d96e80553b335eef3bfa218fd47"
+    },
+    {
+      "branch": "feat/phase4f-withdrawal-recovery",
+      "commit": "2fa7321618fc5e7435b339ffa9368de258198d21"
+    },
+    {
+      "branch": "feat/phase4f1-recovery-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5a-claim-integrity",
+      "commit": "71a6f864456457769cfb3f844f0cd47aac3a9d95"
+    },
+    {
+      "branch": "feat/phase5a-eval-astra",
+      "commit": "99e866453a504aa070ee4e0b177da42b621ab67b"
+    },
+    {
+      "branch": "feat/phase5a-intelligence",
+      "commit": "e3da3876df413f080095dc7568a664f75ffba5b6"
+    },
+    {
+      "branch": "feat/phase5a-model-evaluation",
+      "commit": "5b4787432ed3c5ccbb215d85a87d55ae0c9e5ea1"
+    },
+    {
+      "branch": "feat/phase5a-openai-evaluation",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5a-research-r-astra",
+      "commit": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762"
+    },
+    {
+      "branch": "feat/phase5a-research-validation",
+      "commit": "f4332e27948b8e4cd4afa198397db413ea20b81b"
+    },
+    {
+      "branch": "feat/phase5a1-openai-eval-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5b-alpha-astra",
+      "commit": "7bd8639bbead590c4ced662efcd61d846e48e9a2"
+    },
+    {
+      "branch": "feat/phase5b-alpha-packaging",
+      "commit": "0df40c933ba7d49d0fb58c075be2abc6dab0cd08"
+    },
+    {
+      "branch": "feat/phase5b-alpha-stabilization",
+      "commit": "1b30cf864b8559e02509c22ed8c5362a141da448"
+    },
+    {
+      "branch": "feat/phase5b-linux-cli",
+      "commit": "cc2e918603beff4cd296b4f39a723b6c30beed06"
+    },
+    {
+      "branch": "feat/phase5b-linux-compatibility",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5b-observer-purity",
+      "commit": "a9b0d0e1d45b64ce833343dbfa3dd9f034a20770"
+    },
+    {
+      "branch": "feat/phase5b-performance-safety",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5b-release-r-astra",
+      "commit": "4ad4d8daa28e6d511324514b67ad915b25b43afe"
+    },
+    {
+      "branch": "feat/phase5b1-packaging-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "feat/phase5b2-cli-safety-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "integration/phase-next-alpha-astra",
+      "commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6"
+    },
+    {
+      "branch": "integration/phase-next-r-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    {
+      "branch": "integration/phase-next-remediation",
+      "commit": "3bfd2abea430bc8036105ce85adfdc78706d367d"
+    },
+    {
+      "branch": "integration/phase-next-six-astra",
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    }
+  ]
+}
