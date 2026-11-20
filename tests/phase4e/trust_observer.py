@@ -3,6 +3,7 @@
 from contextlib import closing
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
 import sqlite3
 from tempfile import TemporaryDirectory
@@ -146,7 +147,9 @@ def test_E03_E05_independent_mirror_persists_revocation_after_witness_outage(rec
 
 def test_W03_single_direct_admission_does_not_leave_positive_appraisal(record_property):
     """Strict release guard. Appraisal only, with no fixture write attempted."""
-    with TemporaryDirectory(prefix="aegis-4ec-one-", dir="/tmp") as scratch, Lab(Path(scratch)) as lab:
+    profile = os.getenv("AEGIS_4ED_STATUS_PROFILE", "checkpoint-v1")
+    settings = {} if profile == "checkpoint-v1" else {"profile": profile}
+    with TemporaryDirectory(prefix="aegis-4ec-one-", dir="/tmp") as scratch, Lab(Path(scratch), **settings) as lab:
         finding, bundle = lab.seed()
         cut = verify_cut(lab, lab.seal_latest())
         assert lab.status(finding, bundle).body.outcome == "reproduced"
@@ -167,6 +170,87 @@ def test_W03_single_direct_admission_does_not_leave_positive_appraisal(record_pr
             outcome = "unavailable"
         record_property("single_witness_admission", json.dumps({
             "outcome": outcome, "prior_head": cut, "direct_durable_receipt": receipt,
-            "target_write_attempted": False,
+            "target_write_attempted": False, "profile": profile,
         }, sort_keys=True))
         assert outcome != "reproduced", "one independently admitted withdrawal left a positive appraisal"
+        if profile == "withdrawal-v2":
+            assert outcome == "inconclusive"
+            assert lab.status(finding, bundle).body.reason == "revoked"
+            lab.stop("w0")
+            with pytest.raises(JournalBlocked):
+                lab.status(finding, bundle)
+            lab.start("w0")
+            assert lab.status(finding, bundle).body.reason == "revoked"
+
+
+@pytest.mark.skipif(os.getenv("AEGIS_4ED_STATUS_PROFILE") != "withdrawal-v2",
+                    reason="requires the explicit withdrawal-v2 shadow profile")
+def test_W03_v2_scope_freshness_and_restore(record_property):
+    with TemporaryDirectory(prefix="aegis-4ec-v2-", dir="/tmp") as scratch:
+        with Lab(Path(scratch), profile="withdrawal-v2") as lab:
+            finding, bundle = lab.seed()
+            epoch = int(time.time() // lab.epoch_width)
+            cut = lab.seal(lab.propose(epoch), ("w1", "w2", "w3"))
+            verify_cut(lab, cut)
+            assert len(cut.votes) == 3
+            assert lab.status(finding, bundle).body.outcome == "reproduced"
+            lab.stop("w0")
+            with pytest.raises(JournalBlocked):
+                lab.status(finding, bundle)
+            lab.start("w0")
+            assert lab.status(finding, bundle).body.outcome == "reproduced"
+
+            unauthorized = lab.evidence_withdrawal(bundle)
+            with pytest.raises(OSError, match="403"):
+                lab.admissions["research", "lab-v1"]["w0"].call("/admit", Leaf, unauthorized)
+            unaccepted = sha256(canonical(unauthorized.model_dump(mode="json"))).hexdigest()
+            witness_log = read_db(lab.path / "w0.db", "SELECT wire FROM ops")
+            assert all(unaccepted.encode() not in wire for wire, in witness_log)
+            _, other = lab.fixture(sequence=2)
+            unrelated = lab.evidence_withdrawal(other)
+            direct = lab.admissions["review", "lab-v1"]["w0"]
+            unrelated_leaf = direct.call("/admit", Leaf, unrelated)
+            assert lab.status(finding, bundle).body.outcome == "reproduced"
+
+            lane = lab.reader.withdrawals
+            fetch = lane.sources["w0"]
+            captured = []
+
+            def observe_view(challenge):
+                view = fetch(challenge)
+                captured.append(view)
+                return view
+
+            lane.sources["w0"] = observe_view
+            assert lab.status(finding, bundle).body.outcome == "reproduced"
+            assert len(captured) == 1
+            lane.sources["w0"] = lambda _: captured[0]
+            with pytest.raises(JournalBlocked):
+                lab.status(finding, bundle)
+            lane.sources["w0"] = fetch
+
+            ledger = Path(lab.reader_settings["withdrawals"]["db"])
+            backup_path = lab.path / "old-withdrawals.sqlite"
+            with (closing(sqlite3.connect(ledger)) as db,
+                  closing(sqlite3.connect(backup_path)) as backup):
+                db.backup(backup)
+            matched = direct.call("/admit", Leaf, lab.evidence_withdrawal(bundle))
+            result = lab.status(finding, bundle)
+            assert (result.body.outcome, result.body.reason) == ("inconclusive", "revoked")
+            records = read_db(ledger, "SELECT wire FROM ops ORDER BY position")
+            pins = [json.loads(wire)["receipt"]["admission"]["event"] for wire, in records]
+            assert pins == [unrelated_leaf.receipt.admission.event, matched.receipt.admission.event]
+            durable_pins = read_db(lab.path / "anchor.db", "SELECT name, hex(value) FROM pins ORDER BY name")
+            lane.ledger.close()
+            with (closing(sqlite3.connect(backup_path)) as backup,
+                  closing(sqlite3.connect(ledger)) as restored):
+                backup.backup(restored)
+            with pytest.raises(JournalBlocked, match="protected pin"):
+                lab.new_reader()
+            assert read_db(lab.path / "anchor.db", "SELECT name, hex(value) FROM pins ORDER BY name") == durable_pins
+            record_property("shadow_v2_scope_restore", json.dumps({
+                "unauthorized_digest": unaccepted, "retained_digests": pins,
+                "checkpoint_signers": [vote.operator for vote in cut.votes],
+                "lost_fourth_view": "held", "replayed_view": "held", "stale_relying_restore": "held",
+                "matched": result.body.model_dump(mode="json"),
+            }, sort_keys=True))

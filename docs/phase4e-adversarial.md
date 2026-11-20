@@ -19,6 +19,7 @@ The integration lead approved Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f
 | One-witness admission at original C and combined source | The enrolled witness returned a valid, durably recorded receipt for a synthetic Evidence withdrawal. Scoped appraisal remained `reproduced` on both exact pins. After quorum receipt, a separate delayed-archive trial held before inclusion and again after restart. The one-witness trial appraises only and attempts zero target writes. |
 | B restore at combined source | Restoring only the older home snapshot while retaining a newer external anchor rejected the staged current-owner write. A follow-up snapshot immediately after that rejected write showed quarantine already durable. The independent HTTPS observation left the snapshot unchanged. The old action receipt stayed intact. A higher reconciled generation with new exact approval was required for another effect. |
 | Inherited Evidence contradiction and certified-view continuity on combined source | Both focused regressions passed. The inherited shared writer invalidated an exact plan after contradictory Evidence. The native T5 relying floor rejected older and conflicting certified status. These checks exercised the predecessor gates. |
+| C shadow remediation `f7053de6f059535e631cbca9544cd2ee57b2ed48` | The original assertion still failed with `checkpoint-v1`. The opt-in `withdrawal-v2` passed it and returned revoked after the same one-witness admission, before archive inclusion. A stopped admitting witness held status and restart preserved denial. A separate trial held when a fourth withdrawal view was unavailable despite three checkpoint signatures, excluded an unauthorized transport submission, preserved positive appraisal for an unrelated scope, denied a stale captured view, and rejected an older relying ledger against its intact anchor. |
 | A transport-to-proof contract `c1e5702202ad317396856ee4af89590e14a57a16` | The focused receipt contract test passed. It separated transport delivery from independent receipt and inclusion, and showed the existing reader holding the prior cut needs a separate discovery path for early receipt. That pin proposes a deny-only adapter, and its delta adds a contract test and documentation. No runtime adapter is exercised by that result. |
 
 The native writer constructs the T6 `EvidenceGate`, checks its journal and `NativeEvidenceStatus`, and signs local commands for the shared SQLite `OwnershipHome`. At the reviewed combined pin, Phase 4E-C `Gate` appraises an independently witnessed common cut in its own service lane, and Phase 4E-B owns a separate synthetic marker and receipt store. A common exact-plan binding across that cut, B owner and writer barrier, broker generation and ACK lane, and actual guarded mitigation transaction remains unimplemented. The tests preserve the distinct claims of each path.
@@ -40,7 +41,7 @@ Severity describes the observed defect or the consequence of an open deployment 
 | 4E-D02 · Initial broker drill observer error | Test tooling | The initial SQL observer waited for an override row. Rapid represents the denial in the exact scoped tombstone row joined to the original finding. The initial run timed out even though readback later confirmed the tombstone. The corrected observer joins publisher, artifact and digest and matches the authenticated revocation decision. Failure reproducibility uses the four corrected trials. The first run remains in the raw results. |
 | 4E-D03 · Shared authority composition missing at the reviewed source | High | Source-confirmed. The separate B and C services have local rehearsal evidence, while the actual shared mitigation writer is guarded by the inherited T6 composition. A joint release claim needs one writer with exact current A/B/C bindings and end-to-end fencing and observation. |
 | 4E-D04 · Crash drill import error | Test tooling | The initial controlled crash test imported its durable-name helper from the wrong module at both pins. Both diagnostic reports are retained. The correction keeps the crash and ACK assertions intact. |
-| 4E-D05 · Single-witness withdrawal can leave positive Evidence | High | Reproduced at original C and the reviewed combined pin. One authenticated witness had durably accepted the withdrawal and returned its signed receipt, while the remaining witnesses still supported fresh positive appraisal. This is inside C's stated pre-quorum availability trade-off and fails the stricter release guard tested here. No target write or marker reopening was attempted. |
+| 4E-D05 · Single-witness withdrawal can leave positive Evidence | High | Reproduced at original C, the reviewed combined pin, and the `checkpoint-v1` profile on the remediation pin. One authenticated witness had durably accepted the withdrawal and returned its signed receipt while fresh positive appraisal remained available. The opt-in C `withdrawal-v2` profile passed the strict appraisal guard and lost-view and restore checks. Shared-writer closure remains open. No target write or marker reopening was attempted by the single-witness probe. |
 | 4E-D06 · Five-second all-agent withdrawal reporting gate | Medium | Open. The exact crashed pre-intake agents yielded no independent durable denial observation within five seconds. Both post-audit agents retained an early denial, with ACK observations around 30.4 s. Transport-only runs supply no independent actuator or quarantine evidence. |
 | 4E-D07 · Idle pre-observation quarantine | High | Related integration validation at `c32532c4aa709a4a11d9c53cf87deefb392efca8` reports reproducible durable-hold ordering failures on the idle ownership-loss path and the separate B marker service. Our B stale-restore path exercises an explicit rejected write before the observer, so its durable latch result covers that path. The separate integration artifacts retain both idle runs under `docs/phase4e-observer-order.md` and the `observer-order-*.json` files. |
 
@@ -52,7 +53,7 @@ The table records the scope of independently observed behavior at the named pins
 | --- | --- | --- |
 | W01 | Baseline fail, partial opt-in pass | All four baseline trials put the withdrawal last. All three priority trials delivered the withdrawal and observed durable denial ahead of four held ordinary publications. Continuous mixed-load and all-agent criteria remain open. |
 | W02 | Baseline fail, partial opt-in pass | Restart retained the exact withdrawal. The priority fixture used a full ordinary lane and still completed independent durable denial in under five seconds. |
-| W03 | Partial, single-witness release guard failed | Native T6 denied peer writes under an unresolved newer cut. C held after quorum receipt before normal archive inclusion. Single-witness admission preserved a positive appraisal on two pins. Joint writer coverage remains open. |
+| W03 | Partial, C shadow v2 pass | Native T6 denied peer writes under an unresolved newer cut. C v1 held after quorum receipt and preserved positive appraisal after single-witness admission. Opt-in v2 denied before inclusion with the same one receipt. Joint writer coverage remains open. |
 | W04 | Partial | A controlled offline journal clock crossed the recorded cutoff and the revoker's grant expiry. The reopened client held while offline, retained the old cursor, then read and persisted the actual historic withdrawal. Physical agent reconnect and live rotation remain open. |
 | I01 | Partial | A second same-deployment enrollment and a concurrent second home claim were denied. One home, two modeled broker contexts. |
 | I02 | Partial | Two mutually authenticated B broker adapters yielded one active generation. Real JetStream generation-bound ACK and cursor fencing are outside that adapter. |
@@ -171,3 +172,25 @@ git -C "$scratch/live-source" checkout --detach "$AEGIS_4E_CANDIDATE"
 ```
 
 Keep enforcement limited to disposable labs and shadow work. Distributed acceptance requires an actual A/B/C writer binding, independent proof, broker generation and ACK fencing, authenticated independent failure domains, and a fulfilled all-agent withdrawal reporting bound.
+
+### Reproduce the C shadow comparison
+
+```sh
+shadow="$scratch/shadow-v2"
+mkdir "$shadow"
+git archive f7053de6f059535e631cbca9544cd2ee57b2ed48 | tar -x -C "$shadow"
+(
+  cd "$shadow"
+  export PYTHONPATH="$PWD/src:$PWD"
+  for profile in checkpoint-v1 withdrawal-v2; do
+    AEGIS_4ED_STATUS_PROFILE="$profile" "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+      "$harness/tests/phase4e/trust_observer.py::test_W03_single_direct_admission_does_not_leave_positive_appraisal" \
+      --junitxml="$scratch/$profile.xml" --tb=short
+  done
+  AEGIS_4ED_STATUS_PROFILE=withdrawal-v2 "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+    "$harness/tests/phase4e/trust_observer.py::test_W03_v2_scope_freshness_and_restore" \
+    --junitxml="$scratch/withdrawal-v2-faults.xml" --tb=short
+)
+```
+
+The matched v1 assertion exits 1. Both opt-in cases pass. The separate authority probes run against disposable private Unix sockets and leave native T4/T5 on the actual shared writer.
