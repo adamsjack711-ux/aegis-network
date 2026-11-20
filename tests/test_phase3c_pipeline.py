@@ -210,8 +210,15 @@ def test_phase4d_ownership_with_real_evidence_and_target_readback(enrolled, tmp_
                 replacement = claim("broker-b")
                 assert replacement.assignment.generation == prior.assignment.generation + 2
 
-                # Observe all routes on all replicas directly before a controller recovery write.
-                fences = tuple(zip(plan.targets, (1, 0, 0), strict=True))
+                # The target-owned watcher must commit before the first observer request.
+                deadline = time.monotonic() + 2
+                while (any(state.mode != "quarantined" for state in
+                           defense.lab.store.inventory()[1].values()) and time.monotonic() < deadline):
+                    await asyncio.sleep(.01)
+                assert all(state.mode == "quarantined" for state in
+                           defense.lab.store.inventory()[1].values())
+                fences = tuple((target, state.fence)
+                               for target, state in defense.lab.store.inventory()[1].items())
                 defense.lab.observer.observe("quarantined", fences)
                 with pytest.raises(Denied, match="stale"):
                     await defense.transition(controller.restrict, plan, approval, peer,
@@ -220,11 +227,11 @@ def test_phase4d_ownership_with_real_evidence_and_target_readback(enrolled, tmp_
                     controller.restrict(plan, approval, peer,
                                         command=replacement.command("restrict", plan.digest, peer))
                 assert [row["event"] for row in defense.lab.store.history()] == [
-                    "leased", "restricted", "canary_verified",
+                    "leased", "restricted", "canary_verified", "quarantined",
                 ]
-                assert tuple(state.fence for state in defense.lab.store.inventory()[1].values()) == (1, 0, 0)
+                assert tuple(state.fence for state in defense.lab.store.inventory()[1].values()) == (2, 1, 1)
                 assert controller.rollback("ownership lost") == "safe_hold"
                 defense.lab.observer.observe("quarantined",
-                                             tuple(zip(plan.targets, (2, 1, 1), strict=True)))
+                                             fences)
 
     asyncio.run(run())

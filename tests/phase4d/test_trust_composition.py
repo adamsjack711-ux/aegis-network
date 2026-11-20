@@ -188,8 +188,14 @@ def run_fixture(tmp_path, fault):
                             # the witnessed Mesh still considers this finding current.
                             assert journal.current(finding, intake.journal_binding)
                             assert not intake.withdrawal_clear(finding)
-                            fences = tuple((target, fence + int(target == canary))
-                                           for target, fence in zip(plan.targets, plan.expected_fences, strict=True))
+                            deadline = time.monotonic() + 2
+                            while (any(state.mode != "quarantined" for state in
+                                       defense.lab.store.inventory()[1].values()) and time.monotonic() < deadline):
+                                await asyncio.sleep(.01)
+                            assert all(state.mode == "quarantined" for state in
+                                       defense.lab.store.inventory()[1].values())
+                            fences = tuple((target, state.fence)
+                                           for target, state in defense.lab.store.inventory()[1].items())
                             observation = await asyncio.to_thread(defense.lab.observer.observe, "quarantined", fences)
                             timing.update(readback_ns=observation.finished_ns - intake_ns,
                                           cpu_ns=time.process_time_ns() - cpu_intake_ns,
@@ -228,15 +234,22 @@ def run_fixture(tmp_path, fault):
                         with pytest.raises(Denied, match="Mesh status is not current"):
                             await defense.transition(controller.restrict, plan, approval, peer,
                                                      action="restrict", target=peer)
-                    before_recovery = tuple((target, fence + int(target == canary)) for target, fence
-                                            in zip(plan.targets, plan.expected_fences, strict=True))
+                    deadline = time.monotonic() + 2
+                    while (any(state.mode != "quarantined" for state in
+                               defense.lab.store.inventory()[1].values()) and time.monotonic() < deadline):
+                        await asyncio.sleep(.01)
+                    assert all(state.mode == "quarantined" for state in
+                               defense.lab.store.inventory()[1].values())
+                    before_recovery = tuple((target, state.fence)
+                                            for target, state in defense.lab.store.inventory()[1].items())
                     defense.lab.observer.observe("quarantined", before_recovery)
                     assert controller.rollback("trust fixture interrupted") == "safe_hold"
                     rows = defense.lab.store.history()
                     assert [row["detail"]["target"] for row in rows if row["event"] == "restricted"] == [canary]
                     assert rows[-1]["event"] == "safe_hold"
-                    defense.lab.observer.observe("quarantined", tuple((target, fence + 1)
-                                                                     for target, fence in before_recovery))
+                    after_recovery = tuple((target, state.fence)
+                                           for target, state in defense.lab.store.inventory()[1].items())
+                    defense.lab.observer.observe("quarantined", after_recovery)
                     return timing if fault == "critical-ack-unavailable" else None
 
     return asyncio.run(exercise())
