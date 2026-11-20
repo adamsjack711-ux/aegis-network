@@ -40,11 +40,15 @@ def verify() -> dict:
         distro = "debian" if label.startswith("debian") else "ubuntu"
         for child in summary["children"]:
             assert child["pass"] and child["cgroup_oom_kill_delta"] == 0
+            assert child["input_unchanged"] and child["writable_trees_unchanged"]
+            assert child["implicit_state_absent"] and not child["timed_out"]
             if child["mode"] == "closed":
                 correction = json.loads((HERE / "results" / label / "512m-closed-correction" /
                                          "summary.json").read_text())
                 replacement = correction["children"]
                 assert len(replacement) == 1 and replacement[0]["pass"]
+                assert child["exit_code"] == replacement[0]["exit_code"] == 2
+                assert child["stderr_bytes"] <= 4096 and replacement[0]["stderr_bytes"] <= 4096
                 assert replacement[0]["closed_consumer_bytes_read"] == 4096
                 assert raw_sha(HERE / "results" / label / "512m-closed-correction" /
                                "closed-stdout.stdout.gz") == replacement[0]["closed_consumer_sha256"]
@@ -57,6 +61,9 @@ def verify() -> dict:
                 body = json.load(stream)
             rows = child["rows"]
             if isinstance(rows, int):
+                assert child["exit_code"] == 0 and child["cpu_seconds"] <= 5
+                assert child["peak_rss_mib"] <= 256 and child["stdout_bytes"] <= 64 * 1024 * 1024
+                assert child["wall_seconds"] <= (10 if child["mode"] == "slow" else 5)
                 assert body["schema_version"] == "inventory-v2"
                 assert body["package_count"] == rows and body["inventory_complete"] is True
                 packages = body["packages"]
@@ -67,6 +74,9 @@ def verify() -> dict:
                             item["purl"], item["source"]) == (
                             name, f"1:{index}.0-1", "amd64", f"pkg:deb/{distro}/{name}", "dpkg-status")
             else:
+                assert child["exit_code"] == 2 and child["wall_seconds"] <= 2
+                assert child["peak_rss_mib"] <= 128 and child["stdout_bytes"] <= 4096
+                assert child["stderr_bytes"] <= 4096 and child["feed_unchanged"]
                 if rows == "duplicate-inventory":
                     assert body["schema_version"] == "inventory-v2"
                     assert body["inventory_complete"] is False and body["package_count"] == 0
