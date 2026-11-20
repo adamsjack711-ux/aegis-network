@@ -1,0 +1,86 @@
+[
+  {
+    "cell": "debian-13-py312",
+    "image": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "verdict": "BLOCKED",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--pull=never",
+      "--rm",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--workdir=/tmp",
+      "--entrypoint=sh",
+      "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+      "-c",
+      "cat /etc/os-release && id && python3 -V; command -v strace || true"
+    ],
+    "exit": 0,
+    "stdout": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\nuid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\nPython 3.12.16\n",
+    "stderr": ""
+  },
+  {
+    "cell": "debian-13-py313",
+    "image": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "verdict": "BLOCKED",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--pull=never",
+      "--rm",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--workdir=/tmp",
+      "--entrypoint=sh",
+      "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+      "-c",
+      "cat /etc/os-release && id && python3 -V; command -v strace || true"
+    ],
+    "exit": 0,
+    "stdout": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\nuid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\nPython 3.13.18\n",
+    "stderr": ""
+  },
+  {
+    "cell": "ubuntu-2404-py312",
+    "image": "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60",
+    "verdict": "BLOCKED",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--pull=never",
+      "--rm",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--workdir=/tmp",
+      "--entrypoint=sh",
+      "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60",
+      "-c",
+      "cat /etc/os-release && id && python3 -V; command -v strace || true"
+    ],
+    "exit": 0,
+    "stdout": "PRETTY_NAME=\"Ubuntu 24.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.1 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\nuid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\nPython 3.12.3\n",
+    "stderr": ""
+  },
+  {
+    "cell": "ubuntu-2404-py313",
+    "image": null,
+    "verdict": "BLOCKED",
+    "reason": "No reviewed image ID supplied for this cell."
+  }
+]
