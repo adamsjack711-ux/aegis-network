@@ -2,6 +2,8 @@
 
 **Status: proposal only.** Baseline `d15a3a756b8066c5cb2d98665662220e52f4a7d6`. This revises the external `bb1db07` ownership proposal after diagnostic `aec828d`, independent review `6a3d309`, independent read-only denial poll `b81dac8`, and the `d15a3a7` contract decision **REVISE**. It does not adopt a shared encoding, alter a lease or authorize implementation. Native T4/T5 remains authoritative, the inherited five-second all-agent submit-to-durable-denial gate remains failed, and distributed enforcement stays disabled.
 
+**VAL-R correction:** `6c7589e87bcb000f4df0cbe3959d56edea3ea3b3` rejects this document's target-owned `AgentDenialReceipt.v1` as an agent-owned `revocation_decisions` denial. The target sentinel remains a separate protection proposal. See [the agent-owned audit revision](phase4f-r-agent-owned-denial-revision.md) for the conditional reporting mechanism and impossibility limits. No proxy receipt counts toward the 72+18 all-agent gate.
+
 ## Proven problem and separate authorities
 
 The external one-host dry-run fault arm recorded **10/10 eligible pairs over 5,000 ms**, with 30 busy FILE KV claims and a replacement claim near 30.5 seconds. VAL-D independently read both exact SQLite denials absent 30,559.741 ms after broker restart and present at 30,585.717 ms. An alive broker-restart control was below two seconds. These data locate the delay in the retained broker lease, but they do not justify early lease deletion or prove target protection. A broker KV revision, the native target `ownership.generation`, a T4 checkpoint, a T5 status, an agent audit row and a JetStream ACK/cursor have different authorities and failure domains. No equality or inferred authority between them is allowed.
