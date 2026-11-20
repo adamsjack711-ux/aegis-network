@@ -8,7 +8,7 @@
 | Installable Debian/Ubuntu Linux alpha | **NO-GO** | Offline dependency matrix, Python 3.13, syscall tracing and full installed resource/side-effect gates incomplete. |
 | Private offline research/evaluation | GO for isolated lab research | Source-claim repair independently accepted only as fixture-parser-consistent; no real source/model authority. |
 | Real-model OpenAI intelligence | **NO-GO** | No authorized endpoint, data-export scope, billed-cost oracle or real-model accuracy/latency result. |
-| Diagnostic Runner architecture | Proposed; no implementation decision | 5C-1 must submit a versioned, bounded, observation-only design for Main and VAL-1 review. |
+| Diagnostic Runner architecture | GO for design exploration; implementation **REVISE** | 5C-1 `5b36fe0` is docs only; VAL-1 `20d4e18` requires out-of-band operator capability, sealed inputs, concrete OS containment, literal unknown status and output-path capability. No safety trial or runnable preview. |
 | Five-second withdrawal recovery | **NO-GO** | About 30.6-second retained crash delay; 72+18 frozen matrix unrun on a remedy; native latest-floor and fencing contracts unresolved. |
 | Distributed autonomous enforcement or production | **NO-GO** | Native Trust/fencing, independent multi-host custody, rollback protection and all-agent recovery not demonstrated. |
 

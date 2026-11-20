@@ -1,0 +1,25 @@
+{
+  "arms": {
+    "deterministic": {
+      "abstentions": 7,
+      "case_count": 12,
+      "claim_support_pending_independent_review": 0,
+      "correct": 11,
+      "emitted_claims": 0,
+      "false_positive_decisions": 0,
+      "latency_ms_p95": 28.795542,
+      "pin": "b1ba1c98a88bd66536c48f3503f5151871f4693b",
+      "real_model_performance_evidence": false,
+      "reported_cost_usd": null,
+      "status": "evaluated"
+    },
+    "model": {
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    }
+  },
+  "corpus_sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f",
+  "eligible_cases": 12,
+  "evaluation_sha256": "19037d9e56744abbae2d7514f8d8b8c32eebf6b51cb4c33706753afe531cd489",
+  "research_release_status": "NO-GO"
+}
