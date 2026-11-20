@@ -22,7 +22,11 @@ SPEC.loader.exec_module(builder)
 
 def test_metadata_adds_console_and_direct_parser_dependency_without_default_split():
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())
-    assert project["project"]["scripts"] == {"aegis": "aegis.cli:main"}
+    assert "scripts" not in project["project"]
+    wheel = project["tool"]["hatch"]["build"]["targets"]["wheel"]
+    assert wheel["shared-scripts"] == {"src/aegis/launcher/aegis": "aegis"}
+    launcher = ROOT / "src/aegis/launcher/aegis"
+    assert launcher.read_text().splitlines()[-1] == 'exec "${0%/*}/python" -B -P -m aegis.cli "$@"'
     assert project["project"]["requires-python"] == ">=3.12"
     assert project["project"]["dependencies"] == [
         "cryptography>=44,<47", "pydantic>=2.10,<3", "fastapi>=0.115,<1",
