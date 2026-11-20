@@ -209,6 +209,156 @@
     "skipped": 0,
     "tests": 1
   },
+  "idle-hold-79cd10a.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "idle_hold": {
+      "anchor-outage": {
+        "durable_ms": {
+          "target-a": 54.027,
+          "target-b": 29.791
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 54.027
+      },
+      "lease-expiry": {
+        "durable_ms": {
+          "target-a": 0.503,
+          "target-b": 48.98
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 48.98
+      },
+      "stale-anchor": {
+        "durable_ms": {
+          "target-a": 254.451,
+          "target-b": 254.451
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 254.451
+      }
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 5
+  },
+  "idle-hold-79f068a-1.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "idle_hold": {
+      "anchor-outage": {
+        "durable_ms": {
+          "target-a": 39.776,
+          "target-b": 15.64
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 39.776
+      },
+      "lease-expiry": {
+        "durable_ms": {
+          "target-a": 23.721,
+          "target-b": 35.735
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 35.735
+      },
+      "stale-anchor": {
+        "durable_ms": {
+          "target-a": 311.911,
+          "target-b": 311.911
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 311.911
+      }
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 5
+  },
+  "idle-hold-79f068a-2.xml": {
+    "errors": 0,
+    "failures": 0,
+    "held_writer_barrier_generation": 3,
+    "idle_hold": {
+      "anchor-outage": {
+        "durable_ms": {
+          "target-a": 39.504,
+          "target-b": 62.684
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 62.684
+      },
+      "lease-expiry": {
+        "durable_ms": {
+          "target-a": 0.585,
+          "target-b": 26.728
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 26.728
+      },
+      "stale-anchor": {
+        "durable_ms": {
+          "target-a": 315.874,
+          "target-b": 315.874
+        },
+        "markers": {
+          "target-a": "quarantined",
+          "target-b": "quarantined"
+        },
+        "sample_ms": 315.874
+      }
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 5
+  },
+  "idle-hold-original-11ecb94.xml": {
+    "errors": 0,
+    "failures": 1,
+    "idle_hold": {
+      "anchor-outage": {
+        "durable_ms": {},
+        "markers": {
+          "target-a": "observing",
+          "target-b": "observing"
+        },
+        "sample_ms": 1013.517
+      }
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
   "inherited-evidence-conflict.xml": {
     "errors": 0,
     "failures": 0,
