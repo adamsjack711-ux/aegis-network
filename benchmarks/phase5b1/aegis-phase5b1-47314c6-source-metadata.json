@@ -1,0 +1,34 @@
+{
+  "archive_skip_reason": "No independently reviewed actual Hatchling archive",
+  "build_system": {
+    "build-backend": "hatchling.build",
+    "requires": [
+      "hatchling"
+    ]
+  },
+  "dependencies": [
+    "cryptography>=44,<47",
+    "pydantic>=2.10,<3",
+    "fastapi>=0.115,<1",
+    "httpx>=0.27,<1",
+    "nats-py>=2.9,<3",
+    "psycopg[binary]>=3.2,<4",
+    "uvicorn>=0.30,<1"
+  ],
+  "optional_dependencies": {
+    "test": [
+      "httpx>=0.27,<1",
+      "pytest>=8,<10"
+    ]
+  },
+  "project_name": "aegis-network",
+  "pyproject_sha256": "a78ac9949438f6b8fa517adedd7d89183eda96a73d2e7509726425b5eb291f7b",
+  "requires_python": ">=3.12",
+  "scripts": {
+    "aegis": "aegis.cli:main"
+  },
+  "sdist_archive": null,
+  "source_commit": "47314c6f9bc478f334c494e1e7d31ac3a10e9e2f",
+  "version": "0.1.0",
+  "wheel_archive": null
+}

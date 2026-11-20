@@ -1,0 +1,60 @@
+{
+  "build_helper_sha256": "fe9da153981bae719a1848e24e4fefb353949b49dfe0135f8b2f966ff2ee9a67",
+  "classification": "owner-reported prerequisite assessment; not independent VAL-1 acceptance",
+  "files": {
+    "aegis-phase5b1-47314c6-build-attempt.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "aegis-phase5b1-47314c6-build-attempt.json": {
+      "bytes": 97,
+      "sha256": "b03962386239fb7fc30659cf94a767366ed7bdd1d8e44a83c99fdd4c949293dd"
+    },
+    "aegis-phase5b1-47314c6-build-attempt.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "aegis-phase5b1-47314c6-focused.log": {
+      "bytes": 99,
+      "sha256": "653c89c5e65407a259fc10ad7b3882da2c47e6088e525c60539aaec721a3ced8"
+    },
+    "aegis-phase5b1-47314c6-source-metadata.json": {
+      "bytes": 832,
+      "sha256": "2d4b45ea9617064f2c3832a72f5f4897fcc3e786cc164b3c3a581638e271233a"
+    },
+    "aegis-phase5b1-4ff3c77-build-attempt.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "aegis-phase5b1-4ff3c77-build-attempt.json": {
+      "bytes": 97,
+      "sha256": "b03962386239fb7fc30659cf94a767366ed7bdd1d8e44a83c99fdd4c949293dd"
+    },
+    "aegis-phase5b1-4ff3c77-build-attempt.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "aegis-phase5b1-4ff3c77-cached-images.txt": {
+      "bytes": 173,
+      "sha256": "8df4b8e66d2f80916db65badc0deb73f1a5d0f2e3fa32911beb5962f8f6cc97d"
+    },
+    "aegis-phase5b1-4ff3c77-focused.log": {
+      "bytes": 99,
+      "sha256": "3565699c68148e24eba7a51151b0b5f91d4cd14f8d76358c920e428ea9260935"
+    },
+    "aegis-phase5b1-4ff3c77-hatchling-archive-search.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "aegis-phase5b1-4ff3c77-source-metadata.json": {
+      "bytes": 849,
+      "sha256": "bbc9d54b39b993e2d6b19bd3a52ea0cd7a0717f74047998b9589c3152d7a0a38"
+    },
+    "owner-prerequisite-status.json": {
+      "bytes": 2915,
+      "sha256": "477dbced19c8ebbe7c90292357cdec845e87fcb887cf8032423dd35b32509ceb"
+    }
+  },
+  "source_commit": "47314c6f9bc478f334c494e1e7d31ac3a10e9e2f",
+  "test_sha256": "1cb4699f506021033c625665b69b326ecb4aa94503d306b38338beb9382c9a2a"
+}
