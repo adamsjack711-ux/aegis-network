@@ -198,10 +198,16 @@ def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin,
                 (build.get("wheel_info") or {}).get("entry_points", ""))
     cases = debian.get("cases", {})
     needed = {"status_no_feed", "findings_no_feed", "findings_missing_feed",
-              "inventory", "malformed_feed"}
+              "inventory", "malformed_feed", "signed_current"}
     pure = set(cases) == needed and all(
         not row.get("created") and not row.get("removed") and not row.get("modified")
         for row in cases.values())
+    try:
+        signed = json.loads(cases["signed_current"]["stdout"])["findings"][0]
+        signed_uncertain = (signed.get("independent_status") == "unknown" and
+                            signed.get("overall_assessment") == "unknown")
+    except (KeyError, IndexError, TypeError, ValueError):
+        signed_uncertain = False
     explicit = debian.get("explicit_state") or {}
     installed = (debian.get("uid") == 1000 and debian.get("wheel_sha256") == wheel_sha[0]
                  and debian.get("install", {}).get("exit_code") == 0
@@ -240,6 +246,7 @@ def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin,
             "wheel_sha256": wheel_sha, "reproducible_offline_build": "pass" if build_ok else "fail",
             "debian_nonroot_install_uninstall": "pass" if installed else "fail",
             "debian_default_zero_writes": "pass" if pure else "fail",
+            "debian_signed_independent_uncertainty": "pass" if signed_uncertain else "fail",
             "debian_default_denominator": len(needed),
             "debian_explicit_state": "pass" if explicit_ok else "fail",
             "debian_resource_sha256": digest(debian_resource_path) if debian_resource_path else None,

@@ -59,6 +59,8 @@ def main():
         "findings_missing_feed": ["findings", "--feed", "/tmp/missing.json", "--json"],
         "inventory": ["inventory", "--json"],
         "malformed_feed": ["findings", "--feed", "/fixture/malformed-feed.json", "--json"],
+        "signed_current": ["findings", "--feed", "/fixture/signed-current.json",
+                           "--trust", "/fixture/trust.json", "--json"],
     }
     if install["exit_code"] == 0 and entry.exists():
         for name, argv in commands.items():
