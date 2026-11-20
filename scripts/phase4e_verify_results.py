@@ -170,6 +170,26 @@ def inspect_file(path):
                 summary.setdefault("shadow_timing", {}).setdefault(observation["actor"], {})[
                     observation["fault"]
                 ] = observation["decision"]
+            elif name == "b_predicate_deadline":
+                observation = json.loads(value)
+                assert observation["before_status_ns"] < observation["exclusive_cutoff_ns"]
+                assert observation["after_status_ns"] == observation["exclusive_cutoff_ns"]
+                summary["b_status_predicate_denied_at_cutoff"] = observation["denied"]
+            elif name == "b_marker_containment":
+                observation = json.loads(value)
+                assert observation["native_audit_rows"] == observation["native_rollout_rows"] == 0
+                before, final = observation["before"], observation["final"]
+                if observation["after_denial"] is not None:
+                    assert observation["after_denial"] == before
+                if observation["fault"] in {"wrong-cut", "former-assignment"}:
+                    assert final == before
+                else:
+                    assert final["marker"] == [[before["marker"][0][0] + 1, "observing"]]
+                    assert len(final["receipts"]) == len(before["receipts"]) + 1
+                summary.setdefault("b_marker_containment", {})[observation["fault"]] = {
+                    "decision": observation["decision"], "trace": observation["trace"],
+                    "receipts_after_trial": len(final["receipts"]),
+                }
             elif name in {"partition_held", "partition_reconnected"}:
                 dispatch[name] = value
         if {"queued_before_restart", "broker_publication", "durable_denial"} <= dispatch.keys():
