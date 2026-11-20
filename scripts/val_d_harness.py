@@ -65,11 +65,24 @@ def withdrawal(paths, expected_pin):
                                 raw.get("mixed_withdrawal_id")}.issubset(admitted_ids)
         admission_lower_bound = {name: item.get("restart_request_to_durable_audit_ms")
                                  for name, item in timings.items()}
+        readback = raw.get("durable_denial_readback", {})
+        ids = {"independent": raw.get("independent_withdrawal_id"),
+               "mixed": raw.get("mixed_withdrawal_id")}
+        timed_readback = all(ids[name] in readback and
+                             readback[ids[name]].get("last_absent_from_restart_ms") is not None and
+                             readback[ids[name]].get("first_present_from_restart_ms") is not None and
+                             readback[ids[name]]["first_present_from_restart_ms"] >
+                             readback[ids[name]]["last_absent_from_restart_ms"]
+                             for name in ids)
+        independently_absent_after_restart_ms = (
+            {name: readback[ids[name]]["last_absent_from_restart_ms"] for name in ids}
+            if timed_readback else None)
         missing = (source != expected_pin or expected_pairs != 2 * len(actor_ids)
                    or len(denials) != expected_pairs or observed_pairs != expected_pairs
                    or not pre_restart_admitted or any(value is None for value in admission_lower_bound.values()))
         ceiling_breach = any(value is not None and value > LIMIT_MS
-                             for value in admission_lower_bound.values())
+                             for value in (independently_absent_after_restart_ms or
+                                           admission_lower_bound).values())
         status = "inconclusive" if missing else "fail" if ceiling_breach else "pass"
         rows.append({"file": str(path), "sha256": digest(path), "source_pin": source,
                      "enrolled_agents": len(actor_ids), "targeted_pairs": expected_pairs,
@@ -79,6 +92,10 @@ def withdrawal(paths, expected_pin):
                      "pre_restart_durable_admission_witness": pre_restart_admitted,
                      "admission_to_denial_lower_bound_ms": admission_lower_bound,
                      "admission_to_denial_exact_ms": "not recorded by this legacy driver",
+                     "timed_independent_readback": timed_readback,
+                     "independently_absent_after_restart_ms": independently_absent_after_restart_ms,
+                     "oracle_basis": "read-only last-absent sample" if timed_readback else
+                     "worker commit time plus final read-only state",
                      "physical_target_hold": "not observed; dry-run agent audit only",
                      "status": status})
     return {"source_pin": expected_pin, "five_second_limit_ms": LIMIT_MS,
