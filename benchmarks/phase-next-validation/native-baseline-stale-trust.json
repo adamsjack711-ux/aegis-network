@@ -1,0 +1,119 @@
+{
+  "environment": {
+    "when_utc": "2026-11-20T01:06:02.008386+00:00",
+    "topology": "one-host loopback fixture",
+    "candidate_env": []
+  },
+  "trials": [
+    {
+      "source_commit": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+      "scenario": "stale_trust_cut",
+      "trace": [
+        {
+          "event": "before_negative_write",
+          "at_ns": 556536761996416,
+          "started_ns": 556536759154208,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-a",
+                0,
+                "open"
+              ],
+              [
+                "replica-b",
+                0,
+                "open"
+              ]
+            ],
+            "rollout": [
+              "expanding",
+              556536667791333,
+              556541127684875
+            ],
+            "audit": [
+              [
+                1,
+                556536627684875,
+                "leased"
+              ],
+              [
+                2,
+                556536667791333,
+                "restricted"
+              ],
+              [
+                3,
+                556536755594083,
+                "canary_verified"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "negative_write_result",
+          "at_ns": 556536829781041,
+          "outcome": "denied",
+          "reason": "witnessed journal unavailable: no archive supplied a valid consistency proof"
+        },
+        {
+          "event": "after_negative_write",
+          "at_ns": 556536831978041,
+          "started_ns": 556536829801583,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-a",
+                0,
+                "open"
+              ],
+              [
+                "replica-b",
+                0,
+                "open"
+              ]
+            ],
+            "rollout": [
+              "expanding",
+              556536667791333,
+              556541127684875
+            ],
+            "audit": [
+              [
+                1,
+                556536627684875,
+                "leased"
+              ],
+              [
+                2,
+                556536667791333,
+                "restricted"
+              ],
+              [
+                3,
+                556536755594083,
+                "canary_verified"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        }
+      ],
+      "baseline_unchanged": true,
+      "status_checks": 0
+    }
+  ]
+}

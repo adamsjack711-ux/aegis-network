@@ -1,0 +1,1185 @@
+{
+  "environment": {
+    "when_utc": "2026-11-20T01:30:59.015718+00:00",
+    "topology": "one-host loopback fixture",
+    "candidate_env": []
+  },
+  "trials": [
+    {
+      "source_commit": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+      "scenario": "evidence_idle",
+      "trace": [
+        {
+          "event": "healthy_http_control",
+          "at_ns": 558032387478375,
+          "started_ns": 558032271143458,
+          "result": [
+            {
+              "event": "GET",
+              "at_ns": 558032367137375,
+              "started_ns": 558032363626416,
+              "path": "/fixture-marker",
+              "target": "canary",
+              "status": 403,
+              "body": "fixture route restricted",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032368561291,
+              "started_ns": 558032367140500,
+              "path": "/health",
+              "target": "canary",
+              "status": 200,
+              "body": "canary:/health",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032369878666,
+              "started_ns": 558032368563416,
+              "path": "/ok",
+              "target": "canary",
+              "status": 200,
+              "body": "canary:/ok",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032370915458,
+              "started_ns": 558032369881291,
+              "path": "/fixture-marker",
+              "target": "replica-a",
+              "status": 403,
+              "body": "fixture route restricted",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032372132375,
+              "started_ns": 558032370916708,
+              "path": "/health",
+              "target": "replica-a",
+              "status": 200,
+              "body": "replica-a:/health",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032373258500,
+              "started_ns": 558032372134041,
+              "path": "/ok",
+              "target": "replica-a",
+              "status": 200,
+              "body": "replica-a:/ok",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032374247458,
+              "started_ns": 558032373260625,
+              "path": "/fixture-marker",
+              "target": "replica-b",
+              "status": 403,
+              "body": "fixture route restricted",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032375409583,
+              "started_ns": 558032374249291,
+              "path": "/health",
+              "target": "replica-b",
+              "status": 200,
+              "body": "replica-b:/health",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558032376446166,
+              "started_ns": 558032375411375,
+              "path": "/ok",
+              "target": "replica-b",
+              "status": 200,
+              "body": "replica-b:/ok",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            }
+          ]
+        },
+        {
+          "event": "healthy_disk",
+          "at_ns": 558032388358750,
+          "started_ns": 558032387505166,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-a",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-b",
+                1,
+                "restricted"
+              ]
+            ],
+            "rollout": [
+              "confirmed",
+              558032209796041,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "authority_cut_started",
+          "at_ns": 558032388374666
+        },
+        {
+          "event": "authority_cut_applied",
+          "at_ns": 558032388379166,
+          "generation": 1
+        },
+        {
+          "event": "authority_deadline",
+          "at_ns": 558032388383666,
+          "deadline_ns": 558033263607708
+        },
+        {
+          "event": "pre_external_probe_disk",
+          "at_ns": 558033315997458,
+          "started_ns": 558033314572666,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-a",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-b",
+                1,
+                "restricted"
+              ]
+            ],
+            "rollout": [
+              "confirmed",
+              558032209796041,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "first_post_fault_external_gets",
+          "at_ns": 558033426850333,
+          "started_ns": 558033316001958,
+          "result": [
+            {
+              "event": "GET",
+              "at_ns": 558033408288791,
+              "started_ns": 558033404346750,
+              "path": "/fixture-marker",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033409492291,
+              "started_ns": 558033408291416,
+              "path": "/health",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033410546000,
+              "started_ns": 558033409494291,
+              "path": "/ok",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033411632416,
+              "started_ns": 558033410548333,
+              "path": "/fixture-marker",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033412599291,
+              "started_ns": 558033411633708,
+              "path": "/health",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033413705625,
+              "started_ns": 558033412601125,
+              "path": "/ok",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033414772166,
+              "started_ns": 558033413707958,
+              "path": "/fixture-marker",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033415921250,
+              "started_ns": 558033414773625,
+              "path": "/health",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033416919458,
+              "started_ns": 558033415923500,
+              "path": "/ok",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 1
+            }
+          ]
+        },
+        {
+          "event": "post_external_probe_disk",
+          "at_ns": 558033427656583,
+          "started_ns": 558033426872375,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-a",
+                1,
+                "restricted"
+              ],
+              [
+                "replica-b",
+                1,
+                "restricted"
+              ]
+            ],
+            "rollout": [
+              "confirmed",
+              558032209796041,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033486646500,
+          "target": "canary",
+          "route": "/fixture-marker",
+          "expected_status": 503,
+          "snapshot_started_ns": 558033485980333,
+          "disk": {
+            "targets": [
+              [
+                "canary",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-a",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-b",
+                2,
+                "quarantined"
+              ]
+            ],
+            "rollout": [
+              "recovery_required",
+              558033485199125,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ],
+              [
+                7,
+                558033485199125,
+                "quarantined"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033487877500,
+          "target": "canary",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033489081833,
+          "target": "canary",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033490335708,
+          "target": "replica-a",
+          "route": "/fixture-marker",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033491359250,
+          "target": "replica-a",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033492429083,
+          "target": "replica-a",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033493461208,
+          "target": "replica-b",
+          "route": "/fixture-marker",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033494446458,
+          "target": "replica-b",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033495418416,
+          "target": "replica-b",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033521379458,
+          "target": "canary",
+          "route": "/fixture-marker",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033522859291,
+          "target": "canary",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033524535541,
+          "target": "canary",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033525476583,
+          "target": "replica-a",
+          "route": "/fixture-marker",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033526296000,
+          "target": "replica-a",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033527451958,
+          "target": "replica-a",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033528528750,
+          "target": "replica-b",
+          "route": "/fixture-marker",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033529590916,
+          "target": "replica-b",
+          "route": "/health",
+          "expected_status": 503
+        },
+        {
+          "event": "internal_probe_start",
+          "at_ns": 558033530555625,
+          "target": "replica-b",
+          "route": "/ok",
+          "expected_status": 503
+        },
+        {
+          "event": "monitor_result",
+          "at_ns": 558033532546708,
+          "result": "safe_hold"
+        },
+        {
+          "event": "durable_after_monitor_before_external_gets",
+          "at_ns": 558033533140083,
+          "started_ns": 558033532562166,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-a",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-b",
+                2,
+                "quarantined"
+              ]
+            ],
+            "rollout": [
+              "safe_hold",
+              558033485199125,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ],
+              [
+                7,
+                558033485199125,
+                "quarantined"
+              ],
+              [
+                8,
+                558033531900208,
+                "safe_hold"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "separate_read_only_gets_after_hold",
+          "at_ns": 558033648325125,
+          "started_ns": 558033533146708,
+          "result": [
+            {
+              "event": "GET",
+              "at_ns": 558033629075083,
+              "started_ns": 558033625401125,
+              "path": "/fixture-marker",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033630311458,
+              "started_ns": 558033629078291,
+              "path": "/health",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033631305500,
+              "started_ns": 558033630313541,
+              "path": "/ok",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033632517791,
+              "started_ns": 558033631308375,
+              "path": "/fixture-marker",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033633437875,
+              "started_ns": 558033632519708,
+              "path": "/health",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033634401125,
+              "started_ns": 558033633439833,
+              "path": "/ok",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033635613708,
+              "started_ns": 558033634403750,
+              "path": "/fixture-marker",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033636570833,
+              "started_ns": 558033635615625,
+              "path": "/health",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033637559583,
+              "started_ns": 558033636572541,
+              "path": "/ok",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            }
+          ]
+        },
+        {
+          "event": "post_gets_disk",
+          "at_ns": 558033649214875,
+          "started_ns": 558033648349416,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-a",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-b",
+                2,
+                "quarantined"
+              ]
+            ],
+            "rollout": [
+              "safe_hold",
+              558033485199125,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ],
+              [
+                7,
+                558033485199125,
+                "quarantined"
+              ],
+              [
+                8,
+                558033531900208,
+                "safe_hold"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "restart_disk",
+          "at_ns": 558033754199833,
+          "started_ns": 558033753705541,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-a",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-b",
+                2,
+                "quarantined"
+              ]
+            ],
+            "rollout": [
+              "safe_hold",
+              558033697351291,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ],
+              [
+                7,
+                558033485199125,
+                "quarantined"
+              ],
+              [
+                8,
+                558033531900208,
+                "safe_hold"
+              ],
+              [
+                9,
+                558033697351291,
+                "recovery_recheck"
+              ],
+              [
+                10,
+                558033753228791,
+                "safe_hold"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        },
+        {
+          "event": "read_only_gets_after_restart",
+          "at_ns": 558033873827916,
+          "started_ns": 558033754202083,
+          "result": [
+            {
+              "event": "GET",
+              "at_ns": 558033853825000,
+              "started_ns": 558033849784625,
+              "path": "/fixture-marker",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033855091875,
+              "started_ns": 558033853828833,
+              "path": "/health",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033856263625,
+              "started_ns": 558033855093750,
+              "path": "/ok",
+              "target": "canary",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "canary",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033857451250,
+              "started_ns": 558033856266875,
+              "path": "/fixture-marker",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033858538833,
+              "started_ns": 558033857453625,
+              "path": "/health",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033859731750,
+              "started_ns": 558033858540916,
+              "path": "/ok",
+              "target": "replica-a",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-a",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033860970791,
+              "started_ns": 558033859734375,
+              "path": "/fixture-marker",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033861854500,
+              "started_ns": 558033860972500,
+              "path": "/health",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            },
+            {
+              "event": "GET",
+              "at_ns": 558033862858041,
+              "started_ns": 558033861856416,
+              "path": "/ok",
+              "target": "replica-b",
+              "status": 503,
+              "body": "fixture quarantined",
+              "lab": "ab331d745473cd481f136096be6bc431",
+              "served_target": "replica-b",
+              "fence": 2
+            }
+          ]
+        },
+        {
+          "event": "post_restart_gets_disk",
+          "at_ns": 558033874645333,
+          "started_ns": 558033873848708,
+          "result": {
+            "targets": [
+              [
+                "canary",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-a",
+                2,
+                "quarantined"
+              ],
+              [
+                "replica-b",
+                2,
+                "quarantined"
+              ]
+            ],
+            "rollout": [
+              "safe_hold",
+              558033697351291,
+              558036636685625
+            ],
+            "audit": [
+              [
+                1,
+                558032136685625,
+                "leased"
+              ],
+              [
+                2,
+                558032148094291,
+                "restricted"
+              ],
+              [
+                3,
+                558032188351875,
+                "canary_verified"
+              ],
+              [
+                4,
+                558032199025125,
+                "restricted"
+              ],
+              [
+                5,
+                558032209796041,
+                "restricted"
+              ],
+              [
+                6,
+                558032262696041,
+                "confirmed"
+              ],
+              [
+                7,
+                558033485199125,
+                "quarantined"
+              ],
+              [
+                8,
+                558033531900208,
+                "safe_hold"
+              ],
+              [
+                9,
+                558033697351291,
+                "recovery_recheck"
+              ],
+              [
+                10,
+                558033753228791,
+                "safe_hold"
+              ]
+            ],
+            "generation": 1,
+            "rollout_generation": 1
+          }
+        }
+      ]
+    }
+  ]
+}

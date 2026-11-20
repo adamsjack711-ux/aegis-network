@@ -1,0 +1,15 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "51e5601cdb5f1330828063518d62c342ba8721da",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "ea341c1cbe728a79532c74f946858209a10f5dbb097d61aad5c9fe733c8b2770",
+  "trials": [
+    {
+      "durable_state_unchanged": true,
+      "scenario": "interrupted_transaction",
+      "status": "pass",
+      "status_checks": 2,
+      "write_outcome": "denied"
+    }
+  ]
+}

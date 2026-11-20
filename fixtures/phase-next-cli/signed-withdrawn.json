@@ -1,0 +1,51 @@
+{
+  "adapter_version": "mesh-events-v1",
+  "events": [
+    {
+      "finding": {
+        "applicability": "authorized-lab",
+        "artifact_id": "00000000-0000-4000-8000-000000000501",
+        "evidence": [
+          {
+            "method": "advisory",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "uri": "urn:aegis:independent-cli-fixture"
+          }
+        ],
+        "expires_at": "2030-01-01T00:00:00Z",
+        "issued_at": "2026-11-01T00:00:00Z",
+        "mitigation_template": "observe-only",
+        "publisher_id": "validator-fixture",
+        "schema_version": "1.0",
+        "sequence": 1,
+        "software": {
+          "affected_versions": [
+            "1:8.0-1"
+          ],
+          "purl": "pkg:deb/debian/curl"
+        },
+        "vulnerability_id": "AEGIS-CLI-501"
+      },
+      "key_id": "validator",
+      "kind": "finding",
+      "signature": "FFcrYRYg4yeaRDZexwSWtVSVsQi4d5qUHI6JaqYcC5CxN7GDZ+ocIsFqomLvvdWVMObXcT03FvIoEp3fJrBOBw=="
+    },
+    {
+      "key_id": "validator",
+      "kind": "revocation",
+      "revocation": {
+        "expires_at": "2030-01-01T00:00:00Z",
+        "issued_at": "2026-11-19T00:00:00Z",
+        "publisher_id": "validator-fixture",
+        "reason": "withdrawn",
+        "revocation_id": "00000000-0000-4000-8000-000000000502",
+        "schema_version": "1.1",
+        "sequence": 2,
+        "target_artifact_id": "00000000-0000-4000-8000-000000000501",
+        "target_publisher_id": "validator-fixture",
+        "target_sha256": "7b5e1b0bd94c32a72e9c5a904e1886348a8e5da8001b35948c1098998130fe83"
+      },
+      "signature": "nft9SOHYwGBuSropH2YqpcG4jR2J5X31ZmYoF7jntkk6sFBd+/n0+v71d1edJi3dZV7srWDSk+ZvfPcMDTp0Cw=="
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "at_utc": "2026-11-20T00:59:01.064830+00:00",
+  "pin": "unavailable",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "reason": "no exact-pin CLI command supplied",
+  "status": "skipped",
+  "topology": "one-host syscall fixture"
+}

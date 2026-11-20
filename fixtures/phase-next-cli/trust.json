@@ -1,0 +1,16 @@
+{
+  "grants": [
+    {
+      "expires_at": "2031-01-01T00:00:00+00:00",
+      "key_id": "validator",
+      "not_before": "2026-01-01T00:00:00+00:00",
+      "public_key": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w=",
+      "publisher_id": "validator-fixture",
+      "revoked_at": null,
+      "roles": [
+        "finding",
+        "revocation"
+      ]
+    }
+  ]
+}

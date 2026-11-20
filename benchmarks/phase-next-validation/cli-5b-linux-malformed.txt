@@ -1,0 +1,3 @@
+{"status": "unknown", "error": "cannot read local intelligence JSON"}
+CLI_EXIT=2
+/tmp/explicit-aegis/identity.json

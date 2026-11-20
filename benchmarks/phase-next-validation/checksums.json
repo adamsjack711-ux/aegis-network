@@ -1,0 +1,506 @@
+{
+  "at_utc": "2026-11-20T01:40:18.049906+00:00",
+  "hash": "SHA-256",
+  "files": [
+    {
+      "path": "docs/phase-next-acceptance-frozen.md",
+      "bytes": 7564,
+      "sha256": "60d7624a0b01b27a843c74b25df472702befdb38620df6e16f65ea70b2c06438"
+    },
+    {
+      "path": "docs/phase-next-validation.md",
+      "bytes": 12641,
+      "sha256": "1ec6920ab9f717b635ec889a1b8827aa0decaec0f72185d631c2a0dd98753fb7"
+    },
+    {
+      "path": "docs/phase-next-findings.md",
+      "bytes": 4354,
+      "sha256": "d885b69445f48f27a97eeb519fb2514e8a0eaeb2be17b24fd9b2f3de0649da67"
+    },
+    {
+      "path": "fixtures/phase-next-ai-holdout-v1.json",
+      "bytes": 5606,
+      "sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
+    },
+    {
+      "path": "fixtures/phase-next-ai-claim-map-v1.json",
+      "bytes": 2126,
+      "sha256": "7abc8a6ad9ddd1b56afbaeb790a089d474f2c434c1f40abc68fd104e4cc91bdb"
+    },
+    {
+      "path": "scripts/phase_next_native_trial.py",
+      "bytes": 17871,
+      "sha256": "ec731d48fd02c2aa7a3651d2bb8926130eefe09079907072281acae1a8d3f26b"
+    },
+    {
+      "path": "scripts/phase_next_native_oracle.py",
+      "bytes": 8801,
+      "sha256": "beeacac32e3b371951c8359cfaf00727a1b79c1edfc9c5602d79afc1b9784601"
+    },
+    {
+      "path": "scripts/phase_next_ai_eval.py",
+      "bytes": 6662,
+      "sha256": "60102a4e27c33e22e77ee8cf3161c485cb1598529ff5c862d1417864f0ea0c29"
+    },
+    {
+      "path": "scripts/phase_next_5a_adapter.py",
+      "bytes": 3443,
+      "sha256": "172cd273c04e8d1513d3d1e78ca4a67aa903177f31d60005c20b3ce4f092e7e4"
+    },
+    {
+      "path": "scripts/phase_next_5a_security.py",
+      "bytes": 5157,
+      "sha256": "d87605a8f3dd647b515cc6b5b2d22af13b33a59cf5e72456e58dd58f96bcf882"
+    },
+    {
+      "path": "scripts/phase_next_cli_safety.py",
+      "bytes": 5368,
+      "sha256": "64aeaa95910cd27b48760945b58036c0e5e5c80a4ef647978346900086f088b3"
+    },
+    {
+      "path": "scripts/phase_next_contract_audit.py",
+      "bytes": 3800,
+      "sha256": "596839617f9fcf3eb2df7dd4d17a572db0bc02ac7cceb09ff087e423542a0a46"
+    },
+    {
+      "path": "scripts/phase_next_5b_fixtures.py",
+      "bytes": 4159,
+      "sha256": "c9a9fd010a01a4b9d21417c973713dbea47c4af3f8ac7806787cecf3b5825c0b"
+    },
+    {
+      "path": "scripts/phase_next_5b_oracle.py",
+      "bytes": 4942,
+      "sha256": "b199839b4906c65fa4834eb2a24754d11b35cc07fd1cbaffb7e2a7c418df59c3"
+    },
+    {
+      "path": "scripts/phase_next_5b_resource_driver.py",
+      "bytes": 2366,
+      "sha256": "01c8f1e639e27c4e06894e336b89e24d4bae917934d9614fe844d0f7a3e716cd"
+    },
+    {
+      "path": "scripts/phase_next_5b_api_guard.py",
+      "bytes": 2844,
+      "sha256": "25b5db30775c3d690cdb99806af5e760c285580bc369cd5b2af452bbf859960e"
+    },
+    {
+      "path": "scripts/phase_next_manifest.py",
+      "bytes": 2266,
+      "sha256": "06da81e56a56b81c1723973b499d2ef73457093fa5b4cdbbf6fb6df854f2f2fa"
+    },
+    {
+      "path": "benchmarks/phase4e-adversarial/observer-order-native.json",
+      "bytes": 164071,
+      "sha256": "53f68d9f6231259cb70fa778dc489e3c05282ae4855179bc09bf7038511099a7"
+    },
+    {
+      "path": "benchmarks/phase4e-adversarial/observer-order-native-repeat.json",
+      "bytes": 96201,
+      "sha256": "07d0e5850770d76650005428488414d9e4c6446568be392be5bcf3145964b165"
+    },
+    {
+      "path": "benchmarks/phase4e-adversarial/observer-order-b.json",
+      "bytes": 8078,
+      "sha256": "799e4a0bf7b24b605013f44ac1abc9004721d4df16d20990eac3e962bd643d1e"
+    },
+    {
+      "path": "benchmarks/phase4e-adversarial/observer-order-b-repeat.json",
+      "bytes": 8222,
+      "sha256": "5de0f31406363f7092e0ebd9f2ff88266b55a49a7bb71f0bb73f1f54853cb96b"
+    },
+    {
+      "path": "benchmarks/phase4e/integrated-final-348.xml",
+      "bytes": 159685,
+      "sha256": "83b3aaaec48989ebba2c5362115752a83095c366efb90b7b9e59352509db72a3"
+    },
+    {
+      "path": "benchmarks/phase4e-withdrawal/baseline-sigkill.json",
+      "bytes": 12330,
+      "sha256": "c6e81d5982bdd7ddbaf73cef45e15a0204a644b3843a0b0308047765ffe782fe"
+    },
+    {
+      "path": "fixtures/phase-next-cli/dpkg-duplicate",
+      "bytes": 162,
+      "sha256": "32eea6b59b174be484298bea40dde8104c6f862a43e9c8ae731a10bae953de41"
+    },
+    {
+      "path": "fixtures/phase-next-cli/dpkg-status",
+      "bytes": 164,
+      "sha256": "84ae8d0a09bcc08da9426053ceb829d240b954ea9b817e0e40fcce575d80998f"
+    },
+    {
+      "path": "fixtures/phase-next-cli/dpkg-truncated",
+      "bytes": 61,
+      "sha256": "2879578052d5bcf29f488e2a710ca243ed601905026804850eac1e4f606e20c7"
+    },
+    {
+      "path": "fixtures/phase-next-cli/malformed-feed.json",
+      "bytes": 8,
+      "sha256": "8f9302f65614f26c0ac129b3a69b2617d858989920ca60be65da649dc4b34118"
+    },
+    {
+      "path": "fixtures/phase-next-cli/os-release",
+      "bytes": 10,
+      "sha256": "374b6b0ce4fc9819fd0d5616c7d371cc2d45a5a9b759af0e84315bf26a12c4f5"
+    },
+    {
+      "path": "fixtures/phase-next-cli/signed-current.json",
+      "bytes": 1031,
+      "sha256": "9c49dd4b1ba1df9cfee47066f2fbfdc039037234dedd8250a27360d54365f989"
+    },
+    {
+      "path": "fixtures/phase-next-cli/signed-expired.json",
+      "bytes": 1031,
+      "sha256": "f86be794a04b486b88371e9ca6db1a9b296834ad7a64540dbf806c5bcccfa894"
+    },
+    {
+      "path": "fixtures/phase-next-cli/signed-unsupported-range.json",
+      "bytes": 1033,
+      "sha256": "60290c90700d45826670bb3cda99563a34bf59fc99355b9f53056acf3c823e7f"
+    },
+    {
+      "path": "fixtures/phase-next-cli/signed-withdrawn.json",
+      "bytes": 1744,
+      "sha256": "543aa0f5f6bfe45fc2ada1cfe8f8550e41da58c9b6d5a47667426425b483f375"
+    },
+    {
+      "path": "fixtures/phase-next-cli/trust.json",
+      "bytes": 363,
+      "sha256": "b451c45fef49f0f89fba7512e28aa0cbccf5a55656a9e5f4cb44fe9e807ac0cb"
+    },
+    {
+      "path": "fixtures/phase-next-cli/unsigned-observation.json",
+      "bytes": 211,
+      "sha256": "458b34d16e10e1687ecfa2d39e7a0fc5552f34508e13c5694d982bd15a62bd3c"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/ai-5a-holdout.json",
+      "bytes": 14918,
+      "sha256": "1fbc80b9f97f7ecca3a6ec4ce6395aee077e44ab5e0f1b40bb2d906d08a28cad"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/ai-5a-security.json",
+      "bytes": 7279,
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/ai-pending.json",
+      "bytes": 521,
+      "sha256": "2bff509ec94875deb6565c98160ef4c99da7306e77c57e87825898de55f17334"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-api-guard.json",
+      "bytes": 755,
+      "sha256": "0a41133c80f47da0d74a72e089993f003d7b1f175203d2beaf9c0d812bcc4257"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "bytes": 471,
+      "sha256": "26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-duplicate.txt",
+      "bytes": 1568,
+      "sha256": "b3399319263015e0877bf34ed663dfd00c0a49b8f4ae7fe7ee9cacba30681d3b"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-malformed.txt",
+      "bytes": 115,
+      "sha256": "4ba5589406171e78a798c5d10397753d2622ca392b656f049848abaac9dfbcfe"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-partial.txt",
+      "bytes": 1572,
+      "sha256": "89672c0fd86a5d70b530ed65f1d2853ccdc9aff177413f7fcedd5b6554c58e1e"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "bytes": 2160,
+      "sha256": "3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-signed-cases.txt",
+      "bytes": 6384,
+      "sha256": "d23dd9db40df70e757db9f0de41da473549f3cd03eff148f087b7af3f09cdcb1"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-resource-100.json",
+      "bytes": 777,
+      "sha256": "d8b6ed65431a0406cfec39829aa0a5e43ab41704c4fea7b15be4fac4a1db39be"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-resource-10000.json",
+      "bytes": 787,
+      "sha256": "35bae56b5bdaed82035504c7755cf4bcfae99b9497bf9678d85295c87a3a26c9"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-5b-resource-100000.json",
+      "bytes": 795,
+      "sha256": "ddbe71e440ad5d31142384349531dc4eba4a7fd76def742ee5b57732cd34d677"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/cli-pending.json",
+      "bytes": 242,
+      "sha256": "aab1b7d4a80ae86be481c329f51a827b9964ddc74b2bf26a9e91367d782975d2"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/contract-5a.json",
+      "bytes": 3147,
+      "sha256": "1236a9e08deac000c90f5d3200ed3df6cfb802d730343d5ed61742594d47f4d8"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/contract-5b.json",
+      "bytes": 2216,
+      "sha256": "3b20e8f0129138f87b12e9334c3b0a3b15ef3b4b450cc99288d16b7aca6c049a"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/contract-baseline.json",
+      "bytes": 833,
+      "sha256": "278610945b0ec82112809c433d96b25c23c1f75b6a31c8d4c6803dd9e045ed57"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-idle-deadline-score.json",
+      "bytes": 1001,
+      "sha256": "87345c98f26360e0668fc41e450eaec07521fe2845bc4126911a6dffbdf6fcc8"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-idle-deadline.json",
+      "bytes": 33251,
+      "sha256": "27b270233757ddd24233771a2b00423c68e1d6075079081e070fffa3559eb210"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-idle-score.json",
+      "bytes": 546,
+      "sha256": "1edd6b5e0f8a4f435358246be98599ab236623d4c67a91e4f5ee442d89553637"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-idle.json",
+      "bytes": 32845,
+      "sha256": "25c343f84a306e1873d4caf418d8d1daa7baa95fd72eee40e061b59fc685aac6"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-monitor-score.json",
+      "bytes": 1004,
+      "sha256": "eee92b05ffe48463cd3709feb2efe0173013fd84f54da9d3f7cc25ed538eb5d7"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-evidence-monitor.json",
+      "bytes": 26042,
+      "sha256": "1f0be15e875a0842ac4a53b0e7a4758558531d005e32af8b3437e4eb40374751"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-interrupted-transaction-score.json",
+      "bytes": 484,
+      "sha256": "501e79c056b09559a3f1549cd4fddc9d68f38ac2949bfa84ea5dfe6163614883"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-interrupted-transaction.json",
+      "bytes": 2780,
+      "sha256": "ea341c1cbe728a79532c74f946858209a10f5dbb097d61aad5c9fe733c8b2770"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-idle-score.json",
+      "bytes": 1031,
+      "sha256": "7503723b2a98878cd5711b4ac489a83849b0d495a3f18cbb9b9b24f030e16f99"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-idle.json",
+      "bytes": 35715,
+      "sha256": "685e80d9cb05888ead261eea91dc464bca89d432b5972a5339847ff733ee85ec"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-monitor-score.json",
+      "bytes": 1034,
+      "sha256": "81b56b1a7f2b0df5aee54ec4d19c4a7bc4ff5df1fd48ce0a5c9d4018a758fd1b"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-monitor.json",
+      "bytes": 28645,
+      "sha256": "8a75c3848c5c8cf35b1390305364107caab548de527c69b967d227a91a5cc955"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-snapshot-race-rescore.json",
+      "bytes": 1168,
+      "sha256": "66cdc2f67fe922b333d1da747a2686c8c00bd22c2db004d703db36bb860074a7"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-snapshot-race-score.json",
+      "bytes": 1114,
+      "sha256": "c30e1f3757be9e54db5df3c2be0e9a0d64285c7aac24ac4cde8323ebe5b36351"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-ownership-snapshot-race.json",
+      "bytes": 37185,
+      "sha256": "f0d41118b429c51541f2a4cbb4cb501b5b77e1449d73643e70bd5578d32adf2a"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "bytes": 5684,
+      "sha256": "3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "bytes": 5683,
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-revoked-evidence-score.json",
+      "bytes": 477,
+      "sha256": "1c3f2bbb704c4e3f2f1d0d63c72ec7fb7d4aa8ca61d6b0dac2c9503443c5ed8a"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-revoked-evidence.json",
+      "bytes": 2772,
+      "sha256": "527c8b3621c07d87cde3a7fc26d4ca5ac5e0277b81b499f7885483253fad4282"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-route-snapshot-race-score.json",
+      "bytes": 1161,
+      "sha256": "a497b69e694b754eeadc076d8e19a9a3b8c4ffbe9044b62eb1c9bd7f382fae70"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-route-snapshot-race.json",
+      "bytes": 37711,
+      "sha256": "60062ef9744aa10c2415e4b6c543cedbefb7693c63a9d440b4618d78d4bc0a13"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-stale-approval-score.json",
+      "bytes": 478,
+      "sha256": "5a20b287a0a58b9797d89fae24d779e865a6dccaa49b8fe6bc49c6818e1cad1f"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-stale-approval.json",
+      "bytes": 1819,
+      "sha256": "f0be72dba37a95394aec04f3313fd62c0f204eab084765006d748ceb8acad110"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-stale-trust-cut-score.json",
+      "bytes": 476,
+      "sha256": "c264c78b350c75b0fa27715e6b9e6c5061ba1ffb6d0cdb636d32699bf2ba52d0"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-4f-stale-trust-cut.json",
+      "bytes": 2803,
+      "sha256": "5ebb373473c042180d694a3bf5a62066ee2dea462c0f1f38477f0e46f0895be7"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-idle-deadline-score.json",
+      "bytes": 990,
+      "sha256": "f75bbb0dac7fe9372a4c7839315f4b34abbca01fae70cdc53705d8d2e0bb7f6d"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-idle-deadline.json",
+      "bytes": 32999,
+      "sha256": "266cd43a40bfae8cf49e8bde7fc6fbe593f183f125cdd00772786c9230feceef"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-idle-score.json",
+      "bytes": 546,
+      "sha256": "8f5d479b6c8eb1adf170009500c66cc57322689a513e948038c44497f80c9e52"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-idle.json",
+      "bytes": 25099,
+      "sha256": "dc14c18761cbac7a063930c8acc930cdf189c2fd82d4c1fd8988f843545a511c"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-monitor-restart-score.json",
+      "bytes": 1004,
+      "sha256": "6ff6f4a4fcd5025c725e484cf90449c8fd31ebccf4750bfde1f185987bd87b5c"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-evidence-monitor-restart.json",
+      "bytes": 26042,
+      "sha256": "f3a0681240724ac8bc211f175e46ad9a6ffe132e58ad83e5ef0de7aeb56b340e"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-interrupted-score.json",
+      "bytes": 484,
+      "sha256": "4f2cd513e8aed11ffec3a4e84c1d035c150603f4595219c2a25f4bfa936a6dce"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-interrupted.json",
+      "bytes": 2755,
+      "sha256": "a524f84c0126d7f54a549055c14c6ff33f2a2d2045345bb6b8c94fc7868b9fd5"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-ownership-idle-reopen-score.json",
+      "bytes": 1020,
+      "sha256": "dbd943d8d0e462be920fb634a5a5f061c27161d256c2c833195b1d27bd6ac2dc"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-ownership-idle-reopen.json",
+      "bytes": 35337,
+      "sha256": "81bb1954e87eabe5249fe2b194b21494db1538e4c4c3a3a0a908a71134299920"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-ownership-snapshot-race-score.json",
+      "bytes": 923,
+      "sha256": "4c9f652aca2f4e29f0e4fbdf28d2359ae5dbceaf3f3957cab6e2bcc6699c7f97"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-ownership-snapshot-race.json",
+      "bytes": 28131,
+      "sha256": "2cccf5350c5305327f04dbfef82293ba4d183b892c7361eae37a69e98e4bb710"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-revoked-evidence-score.json",
+      "bytes": 477,
+      "sha256": "41305c9f2976da1ee969d5b19233d1140dad229e67db93827de6ceaa3a66c33f"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-revoked-evidence.json",
+      "bytes": 2772,
+      "sha256": "35c9a6db33dd177557e3dabd9ea47ffe647586d6e20f90c052e84dbc93f48bec"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-route-snapshot-race-score.json",
+      "bytes": 1149,
+      "sha256": "1daba67627b65a68f205efa3fa5592f196a718f1aaa284fc05fddf64b68e554a"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-route-snapshot-race.json",
+      "bytes": 38761,
+      "sha256": "2752f0bb79066eaff9ec32764ee8a56f7dbcbad52a6ee215d5ee722c09d1e1c9"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-score.json",
+      "bytes": 2250,
+      "sha256": "8eec31a0bc8ab41694177537fedf58c269b38a10fca6b09ea31ee8528423ff13"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-stale-approval-score.json",
+      "bytes": 478,
+      "sha256": "3eef1ae0b582637dc68619154db965ec1bac4e4c596e07e8459bc2c1bb3a9365"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-stale-approval.json",
+      "bytes": 1794,
+      "sha256": "f2d55b988ac606e7b05e74fbc9e84fcd8e658e431addbd7610f1c89bcd7cf52a"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-stale-trust-score.json",
+      "bytes": 476,
+      "sha256": "82c0a69c13da19416e5c6d0c8ae60ed302fd7c7994a42d9dd2a94c04ee7f92f5"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-stale-trust.json",
+      "bytes": 2803,
+      "sha256": "16070ac08bc8ab465e570f403bd36b6bcac4878a227006b90d700cc87dc795f8"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/native-baseline-trial.json",
+      "bytes": 61531,
+      "sha256": "0884105f3e252a167aeccc74e9ad0989020dc40c35440e3efdd750bbd35c3b7f"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/predecessor-native-repeat-score.json",
+      "bytes": 2568,
+      "sha256": "5d2c92e72bf685927b36b10c294def98195e0f9de9fa07c249e93d97ca059a08"
+    },
+    {
+      "path": "benchmarks/phase-next-validation/predecessor-native-score.json",
+      "bytes": 2437,
+      "sha256": "aac2fbf7733d1bea6e3373207261169be78f122c373b2593efb2dd6878bd6443"
+    }
+  ]
+}

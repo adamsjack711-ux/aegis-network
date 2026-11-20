@@ -1,0 +1,12 @@
+{
+  "advisories": [
+    {
+      "affected_versions": [
+        "1:8.0-1"
+      ],
+      "purl": "pkg:deb/debian/curl",
+      "vulnerability_id": "AEGIS-CLI-501"
+    }
+  ],
+  "schema_version": "observation-v1"
+}

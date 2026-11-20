@@ -1,0 +1,105 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "1fff1c572a461adf7fc4bad057f092cb2f61f70d",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "07d0e5850770d76650005428488414d9e4c6446568be392be5bcf3145964b165",
+  "trials": [
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 552757036883208,
+      "first_snapshot_ns": 552757537948750,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "confirmed",
+      "pre_request_targets": [
+        [
+          "canary",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-a",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-b",
+          1,
+          "restricted"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": null,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_idle",
+      "status": "fail"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 552758664890666,
+      "first_snapshot_ns": 552758725999291,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "confirmed",
+      "pre_request_targets": [
+        [
+          "canary",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-a",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-b",
+          1,
+          "restricted"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": null,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_monitor",
+      "status": "fail"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 552759653377041,
+      "first_snapshot_ns": 552759712084500,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "evidence_monitor",
+      "status": "pass"
+    },
+    {
+      "reason": "observer ordering is not exercised",
+      "scenario": "writer_lock",
+      "status": "inconclusive"
+    }
+  ]
+}

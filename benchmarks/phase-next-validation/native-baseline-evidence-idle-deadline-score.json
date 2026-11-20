@@ -1,0 +1,38 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "266cd43a40bfae8cf49e8bde7fc6fbe593f183f125cdd00772786c9230feceef",
+  "trials": [
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 558032388379166,
+      "first_snapshot_ns": 558033315997458,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "confirmed",
+      "pre_request_targets": [
+        [
+          "canary",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-a",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-b",
+          1,
+          "restricted"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "evidence_idle",
+      "status": "fail"
+    }
+  ]
+}
