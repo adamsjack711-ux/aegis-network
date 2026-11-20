@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-independent-validation/scripts/phase5a1_evaluate.py", line 36, in <module>
+    main()
+    ~~~~^^
+  File "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-independent-validation/scripts/phase5a1_evaluate.py", line 22, in main
+    raise ValueError("benchmark requires clean source worktree")
+ValueError: benchmark requires clean source worktree

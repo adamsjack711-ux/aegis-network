@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-independent-validation/scripts/phase_next_six_val_5a1.py", line 88, in <module>
+    print(json.dumps(score(args.root.resolve(), json.loads(args.report.read_bytes())), sort_keys=True))
+                                                           ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py", line 976, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/pathlib/__init__.py", line 970, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'benchmarks/alpha-independent-validation/ai-baseline-offline.json'
