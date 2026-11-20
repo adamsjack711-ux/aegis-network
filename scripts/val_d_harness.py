@@ -59,16 +59,26 @@ def withdrawal(paths, expected_pin):
         timings = {name: raw.get(name + "_withdrawal_ms", {}) for name in ("independent", "mixed")}
         observed_pairs = sum("submit_to_durable_audit_ms" in item for item in timings.values())
         elapsed = {name: item.get("submit_to_durable_audit_ms") for name, item in timings.items()}
+        admitted_ids = {row.get("event_id") for row in raw.get("queued_journal_order", [])
+                        if row.get("sent_at") is None}
+        pre_restart_admitted = {raw.get("independent_withdrawal_id"),
+                                raw.get("mixed_withdrawal_id")}.issubset(admitted_ids)
+        admission_lower_bound = {name: item.get("restart_request_to_durable_audit_ms")
+                                 for name, item in timings.items()}
         missing = (source != expected_pin or expected_pairs != 2 * len(actor_ids)
-                   or len(denials) != expected_pairs or observed_pairs != expected_pairs)
-        ceiling_breach = any(value is not None and value > LIMIT_MS for value in elapsed.values())
+                   or len(denials) != expected_pairs or observed_pairs != expected_pairs
+                   or not pre_restart_admitted or any(value is None for value in admission_lower_bound.values()))
+        ceiling_breach = any(value is not None and value > LIMIT_MS
+                             for value in admission_lower_bound.values())
         status = "inconclusive" if missing else "fail" if ceiling_breach else "pass"
         rows.append({"file": str(path), "sha256": digest(path), "source_pin": source,
                      "enrolled_agents": len(actor_ids), "targeted_pairs": expected_pairs,
                      "durable_denials": len(denials), "timed_pairs": observed_pairs,
                      "ordinary_enqueued": raw.get("ordinary_enqueued"),
                      "submission_to_durable_denial_ms": elapsed,
-                     "admission_to_denial": "not recorded by this legacy driver",
+                     "pre_restart_durable_admission_witness": pre_restart_admitted,
+                     "admission_to_denial_lower_bound_ms": admission_lower_bound,
+                     "admission_to_denial_exact_ms": "not recorded by this legacy driver",
                      "physical_target_hold": "not observed; dry-run agent audit only",
                      "status": status})
     return {"source_pin": expected_pin, "five_second_limit_ms": LIMIT_MS,
@@ -120,6 +130,45 @@ def ai(corpus_path, evaluation_path):
     return result
 
 
+def cli(probe_path, resource_paths, source_pin, image_digest):
+    probe = json.loads(Path(probe_path).read_text())
+    defaults = ("status_no_feed", "findings_no_feed", "findings_missing_trust", "inventory")
+    default_rows = {name: {"created": probe[name]["created"],
+                           "status": "pass" if not probe[name]["created"] else "fail"}
+                    for name in defaults}
+    explicit = probe["inventory_explicit_state"]["created"]
+    explicit_ok = explicit == ["chosen", "chosen/identity.json"]
+    resource_rows = []
+    for path in resource_paths:
+        data = json.loads(Path(path).read_text())
+        n = data["rows"]
+        runs = data["runs"]
+        complete = len(runs) == 3 and all(r["reported_count"] == n and
+                                           r["inventory_complete"] for r in runs)
+        budget = all(r["wall_ms"] <= 5000 and r["cpu_ms"] <= 5000 and
+                     r["peak_rss_kib_at_least"] <= 256 * 1024 for r in runs) if n == 100000 else True
+        resource_rows.append({"rows": n, "file": str(path), "sha256": digest(path),
+                              "runs": len(runs), "complete": complete, "budget": budget,
+                              "max_wall_ms": max(r["wall_ms"] for r in runs),
+                              "max_cpu_ms": max(r["cpu_ms"] for r in runs),
+                              "max_peak_rss_kib_at_least": max(r["peak_rss_kib_at_least"] for r in runs),
+                              "status": "pass" if complete and budget else "fail"})
+    source_checks = all(row["status"] == "pass" for row in default_rows.values()) and explicit_ok
+    resource_checks = ({row["rows"] for row in resource_rows} == {100, 10000, 100000}
+                       and all(row["status"] == "pass" for row in resource_rows))
+    return {"source_pin": source_pin, "image_digest": image_digest,
+            "probe_sha256": digest(probe_path), "default_cases": default_rows,
+            "default_pass": sum(row["status"] == "pass" for row in default_rows.values()),
+            "default_denominator": len(defaults),
+            "explicit_state_control": "pass" if explicit_ok else "fail",
+            "resource_cases": resource_rows,
+            "source_level_status": "pass" if source_checks and resource_checks else "fail",
+            "wheel_install_uninstall": "skipped: no offline built wheel at this clean pin",
+            "syscall_observer": "skipped: no tracer in cached image",
+            "platform_matrix": "incomplete: synthetic Debian os-release on cached Kali only",
+            "cli_alpha_release_status": "NO-GO"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     subs = parser.add_subparsers(dest="command", required=True)
@@ -138,6 +187,12 @@ def main():
     p.add_argument("--corpus", type=Path, required=True)
     p.add_argument("evaluation", type=Path)
     p.add_argument("--output", type=Path)
+    p = subs.add_parser("score-cli")
+    p.add_argument("--source-pin", required=True)
+    p.add_argument("--image-digest", required=True)
+    p.add_argument("--probe", type=Path, required=True)
+    p.add_argument("resources", type=Path, nargs="+")
+    p.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.command == "verify-originals":
         result = originals(args.root)
@@ -145,8 +200,10 @@ def main():
         result = pin(args.root, args.expected)
     elif args.command == "score-withdrawal":
         result = withdrawal(args.inputs, args.source_pin)
-    else:
+    elif args.command == "score-ai":
         result = ai(args.corpus, args.evaluation)
+    else:
+        result = cli(args.probe, args.resources, args.source_pin, args.image_digest)
     if args.output:
         write(args.output, result)
     print(json.dumps(result, sort_keys=True))
