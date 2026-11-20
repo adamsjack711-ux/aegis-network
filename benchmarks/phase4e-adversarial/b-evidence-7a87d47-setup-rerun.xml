@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="1.329" timestamp="2026-11-19T17:27:18.971117-07:00" hostname="MacBookPro.lan"><testcase classname="tests.identity_lab.test_evidence_fixture" name="test_exact_evidence_in_b_transaction[none-None]" file="tests/identity_lab/test_evidence_fixture.py" line="106" time="0.045"><error message="failed on setup with &quot;PermissionError: [Errno 1] Operation not permitted&quot;">tests/identity_lab/conftest.py:196: in lab
+    with running(Lab(Path(path), lease_ns=lease_ns)) as scenario:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/identity_lab/conftest.py:63: in __init__
+    self.endpoints = self.addresses()
+                     ^^^^^^^^^^^^^^^^
+tests/identity_lab/conftest.py:94: in addresses
+    sock.bind(("127.0.0.1", 0))
+E   PermissionError: [Errno 1] Operation not permitted</error></testcase></testsuite></testsuites>

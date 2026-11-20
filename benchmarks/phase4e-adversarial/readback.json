@@ -63,6 +63,198 @@
     "skipped": 0,
     "tests": 1
   },
+  "b-evidence-7a87d47-full-privileged.xml": {
+    "b_marker_containment": {
+      "approval-after-ownership": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current"
+        ]
+      },
+      "approval-after-status": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "command-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "credential-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "former-assignment": {
+        "decision": "assignment is outside the target's durable fence",
+        "receipts_after_trial": 0,
+        "trace": []
+      },
+      "healthy": {
+        "decision": "allowed",
+        "receipts_after_trial": 1,
+        "trace": []
+      },
+      "native-fresh-after-status": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "native-plan-after-ownership": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current"
+        ]
+      },
+      "peer-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "wall-rollback": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "wrong-cut": {
+        "decision": "local Evidence cut differs from the exact approval or deployment",
+        "receipts_after_trial": 0,
+        "trace": []
+      }
+    },
+    "b_status_predicate_denied_at_cutoff": true,
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 24
+  },
+  "b-evidence-7a87d47-full-windows.xml": {
+    "b_marker_containment": {
+      "approval-after-ownership": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current"
+        ]
+      },
+      "approval-after-status": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "command-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "credential-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "former-assignment": {
+        "decision": "assignment is outside the target's durable fence",
+        "receipts_after_trial": 0,
+        "trace": []
+      },
+      "healthy": {
+        "decision": "allowed",
+        "receipts_after_trial": 1,
+        "trace": []
+      },
+      "native-fresh-after-status": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "native-plan-after-ownership": {
+        "decision": "bound Evidence authorization reached its exclusive deadline",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current"
+        ]
+      },
+      "peer-after-status": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "wall-rollback": {
+        "decision": "bound identity validity window has closed",
+        "receipts_after_trial": 1,
+        "trace": [
+          "ownership-current",
+          "native-status-current"
+        ]
+      },
+      "wrong-cut": {
+        "decision": "local Evidence cut differs from the exact approval or deployment",
+        "receipts_after_trial": 0,
+        "trace": []
+      }
+    },
+    "b_status_predicate_denied_at_cutoff": true,
+    "errors": 1,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 24
+  },
+  "b-evidence-7a87d47-setup-rerun-privileged.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "b-evidence-7a87d47-setup-rerun.xml": {
+    "errors": 1,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
   "b-evidence-9276d5e-focused.xml": {
     "errors": 0,
     "failures": 0,
