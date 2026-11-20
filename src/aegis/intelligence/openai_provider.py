@@ -7,6 +7,7 @@ an approved experiment runner; this module is never used by the offline evaluato
 from __future__ import annotations
 
 import json
+import threading
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
@@ -30,6 +31,8 @@ class OpenAIResponsesProvider:
     api_key: str = field(repr=False)
     authorized: bool = False
     timeout_seconds: float = 15.0
+    _gate: threading.BoundedSemaphore = field(default_factory=lambda: threading.BoundedSemaphore(1),
+                                              init=False, repr=False, compare=False)
 
     def __post_init__(self):
         if not self.model or len(self.model) > 128 or not self.api_key:
@@ -40,6 +43,14 @@ class OpenAIResponsesProvider:
     def complete_json(self, instructions: str, payload: str, *, max_output_tokens: int) -> ProviderResult:
         if not self.authorized:
             raise PermissionError("external inference has not been authorized")
+        if not self._gate.acquire(timeout=self.timeout_seconds):
+            raise TimeoutError("provider concurrency limit")
+        try:
+            return self._complete_once(instructions, payload, max_output_tokens=max_output_tokens)
+        finally:
+            self._gate.release()
+
+    def _complete_once(self, instructions: str, payload: str, *, max_output_tokens: int) -> ProviderResult:
         if not 100 <= max_output_tokens <= 1000:
             raise ValueError("provider output token limit")
         if len(instructions.encode()) + len(payload.encode()) > 20_000:
