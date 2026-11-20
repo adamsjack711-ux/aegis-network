@@ -138,10 +138,26 @@ class Fence(Record):
     target: Name
 
 
+class Authority(Record):
+    fence: Fence
+    phase: Literal["preparing", "active"]
+
+
+LossReason = Literal["expired", "authority-denied", "authority-unavailable", "retired", "restart"]
+
+
+class HoldEvent(Record):
+    reason: LossReason
+    observed_ns: Tick
+    detected_ns: Tick
+    prepared_ns: Tick
+
+
 class InstalledFence(Record):
     assignment: Assignment
     boot: RecordID
     held: bool = False
+    loss: HoldEvent | None = None
 
 
 class State(Record):
