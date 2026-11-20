@@ -1,0 +1,1 @@
+PermissionError live inference is disabled in the offline Investigator socket_calls 0
