@@ -2,6 +2,8 @@
 
 **Source reference:** `29455087922a728a41936d8c5c79ff9942e1e3df`; latest reviewed docs/tests candidate `e6e58edb02c68797dc6e23a36a3c0fd1d443cfd9`. The external packaging harness `b4f42a4` has no actual reviewed dependency wheelhouse; its two equal wheel/sdist pairs were built from an extracted cache and are **diagnostic**, not release artifacts. The external privacy report `b4976e1` is a Debian 13/Python 3.13 **source-module** run, not an installed console.
 
+The isolated master candidate now includes the reviewed offline packaging harness and a bounded local grant reader, but no reviewed dependency archive or fresh installed cell became available. The table below remains unchanged at the final intake pin.
+
 | Fresh non-root cell | Reviewed original dependencies | Exact installed wheel and `aegis` console | Frozen 100,000-row hard 256 MiB and syscall controls | Release result |
 | --- | --- | --- | --- | --- |
 | Debian 13 / Python 3.12 | Missing reviewed Hatchling/runtime wheel archives | 0 attempted | 0 installed children attempted | **Unverified** |
