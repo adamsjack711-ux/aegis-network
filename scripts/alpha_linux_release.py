@@ -98,6 +98,15 @@ def validate_provenance(wheelhouse: Path) -> dict:
             "wheels": entries}
 
 
+def verify_install_review(pin: str, provenance: dict) -> None:
+    """Use the review selected by the validation checkout, independently of the supply."""
+    binding = json.loads((ROOT / "supply-prep/install-review.json").read_text())
+    expected = {key: provenance[key] for key in
+                ("manifest_sha256", "provenance_sha256", "review_commit")}
+    if binding != {"source_commit": pin, **expected}:
+        raise builder.OfflineBuildError("release inputs differ from pinned independent review")
+
+
 def command(argv: list[str], **kwargs) -> subprocess.CompletedProcess[str]:
     return subprocess.run(argv, capture_output=True, text=True, check=False, **kwargs)
 
@@ -207,6 +216,7 @@ def release(pin: str, wheelhouse: Path, output: Path, images: dict[str, str] | N
         if wheelhouse.resolve() != wheelhouse:
             raise builder.OfflineBuildError("wheelhouse path must be canonical")
         provenance = validate_provenance(wheelhouse)
+        verify_install_review(pin, provenance)
         report["wheelhouse"] = provenance
         with tempfile.TemporaryDirectory(prefix="aegis-release-input-") as temporary:
             frozen = Path(temporary) / "wheels"

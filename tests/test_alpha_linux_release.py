@@ -61,6 +61,20 @@ class ReleaseGateTests(unittest.TestCase):
             with self.assertRaisesRegex(release.builder.OfflineBuildError, "not present"):
                 release.validate_provenance(self.wheels)
 
+    def test_install_review_rejects_unrelated_commit_or_changed_bytes(self):
+        (self.root / "supply-prep").mkdir()
+        approved = dict(manifest_sha256="1" * 64, provenance_sha256="2" * 64, review_commit="a" * 40)
+        pin = "b" * 40
+        (self.root / "supply-prep/install-review.json").write_text(json.dumps(
+            {"source_commit": pin, **approved}))
+        with mock.patch.object(release, "ROOT", self.root):
+            release.verify_install_review(pin, approved)
+            for key in approved:
+                with self.subTest(key=key), self.assertRaises(release.builder.OfflineBuildError):
+                    release.verify_install_review(pin, {**approved, key: "0" * len(approved[key])})
+            with self.assertRaises(release.builder.OfflineBuildError):
+                release.verify_install_review("0" * 40, approved)
+
     def test_missing_review_record_stops_before_build(self):
         (self.wheels / "provenance.json").unlink()
         report = release.release("b" * 40, self.wheels.resolve(), self.root / "out")
