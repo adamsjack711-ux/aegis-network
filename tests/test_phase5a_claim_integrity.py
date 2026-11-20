@@ -139,3 +139,47 @@ def test_v1_raw_result_cannot_be_read_as_checked_v2():
     ):
         with pytest.raises(ValidationError):
             ResearchResult.model_validate_json(json.dumps(legacy))
+
+
+def test_v2_reader_rejects_missing_check_and_tampered_reportable_outcome():
+    asset, claims, source = source_case(versions=[])
+    result = research(asset, claims, claims[0].vulnerability_id, FixtureProvider(
+        draft("affected", "Confirmed affected 1.5.")), source_snapshots=(source,))
+    encoded = result.model_dump(mode="json")
+    assert encoded["candidate_outcome"] == encoded["check"]["reportable_outcome"] == "unknown"
+    for tampered in (
+        {**encoded, "check": None},
+        {**encoded, "candidate_outcome": "affected"},
+    ):
+        with pytest.raises(ValidationError):
+            ResearchResult.model_validate_json(json.dumps(tampered))
+
+
+def test_v2_reader_binds_raw_hypothesis_and_check_metadata():
+    asset, claims, source = source_case()
+    result = research(asset, claims, claims[0].vulnerability_id, FixtureProvider(
+        draft("affected", "Version 1.5 is listed.")), source_snapshots=(source,))
+    encoded = result.model_dump(mode="json")
+    assert ResearchResult.model_validate_json(json.dumps(encoded)).check.disposition == "research-consistent"
+    variants = []
+    raw = json.loads(json.dumps(encoded))
+    raw["raw_hypothesis"]["points"][0]["text"] = "Invented remote execution."
+    variants.append(raw)
+    raw = json.loads(json.dumps(encoded))
+    raw["raw_hypothesis"]["candidate_outcome"] = "unaffected"
+    variants.append(raw)
+    raw = json.loads(json.dumps(encoded))
+    raw["check"]["disposition"] = "needs-evidence"
+    variants.append(raw)
+    raw = json.loads(json.dumps(encoded))
+    raw["check"]["point_support"][0]["fact_ids"] = ["F99"]
+    variants.append(raw)
+    raw = json.loads(json.dumps(encoded))
+    raw["check"]["research_result_digest"] = "0" * 64
+    variants.append(raw)
+    raw = json.loads(json.dumps(encoded))
+    raw["check"]["source_snapshot_digests"] = ["0" * 64]
+    variants.append(raw)
+    for tampered in variants:
+        with pytest.raises(ValidationError):
+            ResearchResult.model_validate_json(json.dumps(tampered))

@@ -5,7 +5,7 @@ import json
 import re
 import time
 from typing import Literal, Protocol
-from pydantic import Field, ValidationError
+from pydantic import Field, ValidationError, model_validator
 
 from .baseline import assess, normalize
 from .models import Asset, Claim, Record, SourceSnapshot
@@ -89,19 +89,17 @@ class ResearchCheck(Record):
     point_support: tuple[PointSupport, ...]
 
 
-class ResearchResult(Record):
+class ResearchPayload(Record):
     schema_version: Literal["phase5a-research-v2"]
     asset_alias: str = "asset-1"
     vulnerability_id: str
-    baseline_outcome: str
-    # The default outcome is the checked, reportable research appraisal.
-    candidate_outcome: str
-    model_candidate_outcome: str
+    baseline_outcome: Literal["affected", "unaffected", "unknown", "conflicting"]
+    model_candidate_outcome: Literal["affected", "unaffected", "unknown", "conflicting"]
     # All generated prose is quarantined as raw, explicitly unchecked research.
     # This record has no top-level reportable points or explanation fields.
     raw_hypothesis: Draft
     citations: dict[str, dict[str, str]]
-    independently_verified: bool = False
+    independently_verified: Literal[False] = False
     provider: str
     model: str
     provider_version: str | None
@@ -109,49 +107,85 @@ class ResearchResult(Record):
     usage: Usage
     estimated_cost_usd: float | None
     latency_ms: float
-    check: ResearchCheck | None = None
 
 
-def _check(result: ResearchResult, claims: tuple[Claim, ...],
+def _integrity_digest(record: dict) -> str:
+    """Unkeyed serialization check, never evidence of source authenticity."""
+    content = {**record, "check": {**record["check"]}}
+    content["check"].pop("research_result_digest", None)
+    return hashlib.sha256(json.dumps(content, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def _expected_fields(payload: ResearchPayload, binding: str):
+    reasons = []
+    if binding != "digest-checked":
+        reasons.append("source-binding-unavailable")
+    if payload.baseline_outcome in {"unknown", "conflicting"}:
+        reasons.append("deterministic-" + payload.baseline_outcome)
+    if payload.model_candidate_outcome != payload.baseline_outcome:
+        reasons.append("model-exceeds-deterministic-evidence" if
+                       payload.baseline_outcome in {"unknown", "conflicting"} and
+                       payload.model_candidate_outcome in {"affected", "unaffected"} else
+                       "model-contradicts-deterministic-evidence")
+    points = []
+    for field in ("points", "ambiguities", "prerequisites"):
+        for index, point in enumerate(getattr(payload.raw_hypothesis, field)):
+            points.append(PointSupport(field=field, index=index, fact_ids=point.fact_ids))
+    points.append(PointSupport(field="local_explanation", index=0,
+                               fact_ids=payload.raw_hypothesis.local_explanation.fact_ids))
+    if points:
+        reasons.append("unsupported-free-text-claim")
+    consistent = binding == "digest-checked" and payload.baseline_outcome in {
+        "affected", "unaffected"} and payload.model_candidate_outcome == payload.baseline_outcome
+    reportable = (payload.baseline_outcome if consistent else
+                  "conflicting" if binding == "digest-checked" and
+                  payload.baseline_outcome == "conflicting" else "unknown")
+    return ("research-consistent" if consistent else "needs-evidence",
+            reportable, tuple(reasons), tuple(points))
+
+
+class ResearchResult(ResearchPayload):
+    # This is the only reportable outcome; the provider answer stays in raw_hypothesis.
+    candidate_outcome: Literal["affected", "unaffected", "unknown", "conflicting"]
+    check: ResearchCheck
+
+    @model_validator(mode="after")
+    def valid_checked_result(self):
+        check = self.check
+        if self.model_candidate_outcome != self.raw_hypothesis.candidate_outcome or (
+            check.model_candidate_outcome != self.model_candidate_outcome or
+            check.deterministic_outcome != self.baseline_outcome or
+            check.reportable_outcome != self.candidate_outcome
+        ):
+            raise ValueError("research outcome and check mismatch")
+        if check.source_binding == "digest-checked" and not check.source_snapshot_digests:
+            raise ValueError("checked research has no source digests")
+        expected = _expected_fields(self, check.source_binding)
+        if (check.disposition, check.reportable_outcome, check.reason_codes,
+                check.point_support) != expected:
+            raise ValueError("research check metadata mismatch")
+        if check.research_result_digest != _integrity_digest(self.model_dump(mode="json")):
+            raise ValueError("research result digest mismatch")
+        return self
+
+
+def _check(result: ResearchPayload, claims: tuple[Claim, ...],
            source_snapshots: tuple[SourceSnapshot, ...] | None) -> ResearchCheck:
     # A SourceRef digest alone does not bind Claim.summary or its structured fields.
     # Reparse exact immutable bytes before treating the baseline as source-backed.
     bound = bool(source_snapshots) and tuple(
         claim for source in source_snapshots for claim in normalize(source)
     ) == claims
-    reasons = []
-    if not bound:
-        reasons.append("source-binding-unavailable")
-    if result.baseline_outcome in {"unknown", "conflicting"}:
-        reasons.append("deterministic-" + result.baseline_outcome)
-    if result.model_candidate_outcome != result.baseline_outcome:
-        reasons.append("model-exceeds-deterministic-evidence" if
-                       result.baseline_outcome in {"unknown", "conflicting"} and
-                       result.model_candidate_outcome in {"affected", "unaffected"} else
-                       "model-contradicts-deterministic-evidence")
-    points = []
-    for field in ("points", "ambiguities", "prerequisites"):
-        for index, point in enumerate(getattr(result.raw_hypothesis, field)):
-            points.append(PointSupport(field=field, index=index, fact_ids=point.fact_ids))
-    points.append(PointSupport(field="local_explanation", index=0,
-                               fact_ids=result.raw_hypothesis.local_explanation.fact_ids))
-    # Citation membership is not semantic entailment. No model prose is promoted.
-    if points:
-        reasons.append("unsupported-free-text-claim")
-    consistent = bound and result.baseline_outcome in {"affected", "unaffected"} and (
-        result.model_candidate_outcome == result.baseline_outcome)
-    reportable = (result.baseline_outcome if consistent else
-                  "conflicting" if bound and result.baseline_outcome == "conflicting" else "unknown")
-    raw = result.model_dump(mode="json", exclude={"check", "candidate_outcome"})
-    digest = hashlib.sha256(json.dumps(raw, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-    return ResearchCheck(research_result_digest=digest,
+    binding = "digest-checked" if bound else "unavailable"
+    disposition, reportable, reasons, points = _expected_fields(result, binding)
+    return ResearchCheck(research_result_digest="0" * 64,
                          source_snapshot_digests=tuple(source.sha256 for source in source_snapshots or ()),
-                         source_binding="digest-checked" if bound else "unavailable",
+                         source_binding=binding,
                          model_candidate_outcome=result.model_candidate_outcome,
                          deterministic_outcome=result.baseline_outcome,
-                         disposition="research-consistent" if consistent else "needs-evidence",
+                         disposition=disposition,
                          reportable_outcome=reportable,
-                         reason_codes=tuple(reasons), point_support=tuple(points))
+                         reason_codes=reasons, point_support=points)
 
 
 def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, provider: JSONProvider,
@@ -213,9 +247,9 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
     if input_usd_per_million is not None and output_usd_per_million is not None:
         cost = round((result.usage.input_tokens * input_usd_per_million +
                       result.usage.output_tokens * output_usd_per_million) / 1_000_000, 8)
-    research_result = ResearchResult(schema_version="phase5a-research-v2",
+    research_result = ResearchPayload(schema_version="phase5a-research-v2",
                           vulnerability_id=vulnerability_id, baseline_outcome=baseline.outcome,
-                          candidate_outcome="unknown", model_candidate_outcome=draft.candidate_outcome,
+                          model_candidate_outcome=draft.candidate_outcome,
                           raw_hypothesis=draft, citations=citations,
                           provider=result.provider, model=result.model,
                           provider_version=result.provider_version,
@@ -224,4 +258,8 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
                                              "prompt_version": "1"}, usage=result.usage,
                           estimated_cost_usd=cost, latency_ms=round(latency, 3))
     check = _check(research_result, claims, source_snapshots)
-    return research_result.model_copy(update={"candidate_outcome": check.reportable_outcome, "check": check})
+    checked = {**research_result.model_dump(mode="json"),
+               "candidate_outcome": check.reportable_outcome,
+               "check": check.model_dump(mode="json")}
+    checked["check"]["research_result_digest"] = _integrity_digest(checked)
+    return ResearchResult.model_validate_json(json.dumps(checked))
