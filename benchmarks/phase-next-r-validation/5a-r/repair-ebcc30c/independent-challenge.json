@@ -1,0 +1,376 @@
+{
+  "arbitrary_version_quote_accepted": false,
+  "artifact_boundary": {
+    "Evidence": "rejected:ValidationError",
+    "SignedFinding": "rejected:ValidationError"
+  },
+  "association_spoofs": {
+    "acquisition": "rejected",
+    "source_role": "rejected"
+  },
+  "candidate_source_hashes": {
+    "src/aegis/intelligence/alpha_eval.py": "701ef4a2ae2b72ae098853be12ca51e244832743b5c896365df531e9c8523bbc",
+    "src/aegis/intelligence/source_claim.py": "005fa4841ee35263bcd89e6af03ae5def1930f4aea87f54184c49da51a714ade"
+  },
+  "source_pin": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762",
+  "tampered_bytes": [
+    {
+      "accepted": false,
+      "case": "suffix"
+    },
+    {
+      "accepted": false,
+      "case": "prefix"
+    }
+  ],
+  "unrelated_database_effect": null,
+  "unrelated_database_effect_accepted": false,
+  "v_corpus_sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f",
+  "v_rows": [
+    {
+      "exact": true,
+      "expected": "affected",
+      "id": "V01-exact-affected",
+      "inconclusive": false,
+      "observed": "affected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "2.3.4",
+            "byte_end": 28,
+            "byte_start": 23,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "affected",
+            "product_ecosystem": "npm",
+            "product_name": "granite-api",
+            "quote": "2.3.4",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-01",
+            "source_locator": "utf8-byte:23:28",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "granite-api",
+            "source_role": "vendor",
+            "source_sha256": "6a1866428b9a202e5a0b8cf46292d038e8013397b6cdae425ca849de749bf534",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-affected-version"
+          },
+          "claim_error": null,
+          "decision": "affected",
+          "id": "vendor-01",
+          "reason": "explicit-affected-version"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "V02-fixed-boundary",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "2.3.5",
+            "byte_end": 44,
+            "byte_start": 39,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "npm",
+            "product_name": "granite-api",
+            "quote": "2.3.5",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-02",
+            "source_locator": "utf8-byte:39:44",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "granite-api",
+            "source_role": "vendor",
+            "source_sha256": "8c6ec872231bb87e68f5d5f8671b446b083c2eb18f580d4d5211707062e5921d",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-fixed-or-unaffected"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-02",
+          "reason": "explicit-fixed-or-unaffected"
+        }
+      ]
+    },
+    {
+      "exact": false,
+      "expected": "unaffected",
+      "id": "V03-ecosystem-collision",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-03",
+          "reason": "identity-unresolved"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V04-official-conflict",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.8.0",
+            "byte_end": 29,
+            "byte_start": 24,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "pypi",
+            "product_name": "marble-auth",
+            "quote": "1.8.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-04",
+            "source_locator": "utf8-byte:24:29",
+            "source_product_ecosystem": "pypi",
+            "source_product_name": "marble-auth",
+            "source_role": "vendor",
+            "source_sha256": "0582cf3970510ccd5023fbcef446a4b32925f9ae6340231b52230458c22b334d",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-fixed-or-unaffected"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-04",
+          "reason": "explicit-fixed-or-unaffected"
+        },
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.8.0",
+            "byte_end": 29,
+            "byte_start": 24,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "affected",
+            "product_ecosystem": "pypi",
+            "product_name": "marble-auth",
+            "quote": "1.8.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "registry-04",
+            "source_locator": "utf8-byte:24:29",
+            "source_product_ecosystem": "pypi",
+            "source_product_name": "marble-auth",
+            "source_role": "registry",
+            "source_sha256": "ed1b3c67e06826c0c56f665ab9ee9eaa5fb30f31c542bdafcb232378e77eb1e2",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-affected-version"
+          },
+          "claim_error": null,
+          "decision": "affected",
+          "id": "registry-04",
+          "reason": "explicit-affected-version"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V05-prerelease",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-05",
+          "reason": "unassessed-prerelease"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V06-unconfirmed",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-06",
+          "reason": "no-explicit-product-identity"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "V07-injection",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.1.0",
+            "byte_end": 45,
+            "byte_start": 40,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "npm",
+            "product_name": "palisade",
+            "quote": "1.1.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-07",
+            "source_locator": "utf8-byte:40:45",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "palisade",
+            "source_role": "vendor",
+            "source_sha256": "5975fb8da15bde78f4ac56cec1aa1ad3f2701bde4e706cb5e7a864cd4a735f4b",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-fixed-or-unaffected"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-07",
+          "reason": "explicit-fixed-or-unaffected"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V08-invented-citation",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "registry-08",
+          "reason": "no-supported-version-predicate"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V09-alias-unknown",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-09",
+          "reason": "identity-unresolved"
+        }
+      ]
+    },
+    {
+      "exact": false,
+      "expected": "unaffected",
+      "id": "V10-withdrawn",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-10",
+          "reason": "withdrawn-or-unconfirmed"
+        }
+      ]
+    },
+    {
+      "exact": false,
+      "expected": "unaffected",
+      "id": "V11-epoch",
+      "inconclusive": true,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-11",
+          "reason": "unsupported-debian-epoch"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "V12-empty",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": []
+    }
+  ],
+  "v_summary": {
+    "claim_errors": 0,
+    "exact": 9,
+    "false_affected": 0,
+    "inconclusive": 1,
+    "planned": 12
+  },
+  "visible_36": {
+    "baseline": {
+      "abstentions": 20,
+      "completed": 34,
+      "correct": 33,
+      "false_negative_including_abstention": 0,
+      "false_positive": 0,
+      "gold_affected": 5,
+      "inconclusive": 2,
+      "planned": 36,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 5
+    },
+    "planned": 36,
+    "scripted_provider": {
+      "billed_tokens": null,
+      "completed": 36,
+      "failed": 0,
+      "positive_points_attempted": 36,
+      "positive_points_emitted": 0,
+      "positive_points_unsupported_attempted": 36,
+      "status": "executed",
+      "synthetic_token_estimate": 5369,
+      "unsupported_positive_points_emitted": 0,
+      "usd_cost": null
+    },
+    "source_claims": {
+      "attempted": 23,
+      "authenticated_real_advisory": 0,
+      "effect_emitted": 1,
+      "emitted": 15,
+      "independently_semantic_adjudicated": 0,
+      "positive_attempted": 10,
+      "positive_emitted": 6
+    }
+  }
+}
