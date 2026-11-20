@@ -2,7 +2,7 @@
 
 The approved baseline `3bfd2ab` has an offline deterministic advisory matcher and private `phase5a-research-v2` result. The previous scripted development corpus was 12/12 for both deterministic and scripted provider, with **zero demonstrated model advantage**. A separate independent holdout had 9 correct of 11 mappable cases, two conservative unknown disagreements and one Debian epoch case inconclusive. An unkeyed checksum on a serialized v2 record is not source authentication. [Prior independent review](phase-next-remediation-candidate-review.md).
 
-VAL-D froze the [acceptance oracle](../../phase-next-alpha-astra/docs/phase-next-alpha-validation-freeze.md) at `5c5d94f9c3b9ca99c29301bc743767233599ab4f` before implementation review and owns the new blind labels. This architecture does not authorize an external provider, feed, endpoint, credential or model call.
+VAL-D froze the [acceptance oracle](phase-next-alpha-validation-freeze.md) at `5c5d94f9c3b9ca99c29301bc743767233599ab4f` before implementation review and owns the new blind labels. This architecture does not authorize an external provider, feed, endpoint, credential or model call.
 
 ## Read-only pipeline and frozen interfaces
 

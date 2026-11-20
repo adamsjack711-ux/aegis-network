@@ -1,6 +1,6 @@
 # Phase 5B-A installable observation-only Linux alpha gate
 
-This is the integration lead's acceptance boundary aligned with VAL-D's independently [frozen oracle](../../phase-next-alpha-astra/docs/phase-next-alpha-validation-freeze.md) at `5c5d94f9c3b9ca99c29301bc743767233599ab4f`. The approved baseline `3bfd2ab` contains source-level CLI observation but withholds the installed `aegis` console entry point because independent wheel, tracing, Ubuntu and resource gates remain incomplete. [Retained failure and previous review](phase-next-remediation-candidate-review.md).
+This is the integration lead's acceptance boundary aligned with VAL-D's independently [frozen oracle](phase-next-alpha-validation-freeze.md) at `5c5d94f9c3b9ca99c29301bc743767233599ab4f`. The approved baseline `3bfd2ab` contains source-level CLI observation but withholds the installed `aegis` console entry point because independent wheel, tracing, Ubuntu and resource gates remain incomplete. [Retained failure and previous review](phase-next-remediation-candidate-review.md).
 
 ## Frozen data and authority contracts
 
