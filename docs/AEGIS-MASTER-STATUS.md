@@ -1,5 +1,13 @@
 # Aegis master status
 
+## Current decision — Phase 5 Alpha orchestration
+
+The current isolated candidate is `integration/phase5-alpha-orchestration` from reviewed baseline `8292e531194216a578c32c912d066f98cdbce9ea`. Its product/evidence pin `0045e88db170221a22269a79982d8530f2fd250a` passed independent review at `f47150d76c84025ade79db05e86423252ab5e802`; subsequent commits add only documentation and that review's raw evidence. The branch contains offline Scout, a **squashed offline-only Investigator final tree**, 5B release prerequisites and an inert 4F recovery model. It excludes live model transport, live advisory feed, Scout–Investigator adapter code, Diagnostic Runner source and any authority-changing recovery protocol. All nine frozen authority hashes match the baseline. The final full local source suite recorded **452 passed, 37 skipped, one historical xfail and five passing subtests**, with zero failures/errors. VAL parsed the same JUnit as 452 passed, 38 skipped including the xfail. Its independent focused checks were 57/57 research and 6/6 inert recovery. These are source/lab results, not installed Linux or distributed deployment acceptance.
+
+**Release decisions:** isolated offline research source **GO**; observation-only Linux alpha **NO-GO** (0/4 fresh installed cells and unresolved custody), real-model intelligence **NO-GO** (zero authorized calls or billed cost), Diagnostic Runner preview **NO-GO** (0/72 contained safety), and distributed autonomous enforcement **NO-GO** (30.6-second withdrawal miss against unchanged five-second all-agent requirement). Master and all original worktrees, branches and failure evidence remain untouched. [Architecture/ownership](phase5-ai-orchestration.md) · [CLI integration](alpha-release-integration-plan.md) · [Runner boundary](phase5c-integration-contracts.md) · [Recovery decision](phase4f-recovery-decision.md) · [final independent review](phase5-alpha-validation-integrated-0045-review.md).
+
+The sections below retain earlier phase history and opening state; the current decision above supersedes their dated status snapshots.
+
 ## Reviewed baseline
 
 Phase 4E integration is `ee739cacfaa3f81a0994b4d7802fd2943c067d86` on `integration/phase4e`. The checkout is clean. No subsequent integration commit was observed during this preparation. Master remains separately dirty at `14440ee226c58aa6e8e06517ab1601b2d672798c`. Phase 4D and 4E security reports, the latest D adversarial validation at `39a17e4`, and raw local benchmarks were reviewed. Original failure evidence remains at its existing paths.
@@ -261,7 +269,7 @@ The independent freeze was committed at `f5da1814162c821e0491b7591837b6623113294
 | 5B-Release | `a353a1693ccabdf85b0e34ebb7aaf47297f46a61` | GO prerequisites/docs/raw; 52 focused pass/one historical xfail; installed alpha NO-GO | Docs/raw at `1f9ac23`, no package or CLI source change |
 | 5C-Runner | `6c7714688f4efe1b3dd25bd358ce0a9eb09196f9` | HOLD shared source: same-UID PTY consent spoof and no pinned containment/tracer; 14/14 focused | Held in original isolated branch; no CLI or worker intake |
 | 4F-Recovery | `cc17e924e1b4dbc8b7e0029fa152531deb144e6c` | GO proposal/inert tests 6/6; HOLD authority-changing contracts; five-second gate still failed | Docs/inert tests at `3759a2c`; native T4/T5 unchanged |
-| VAL-1 | `f47150d76c84025ade79db05e86423252ab5e802` | Frozen and independently reviewed five owner pins, c777 candidate, offline Investigator revision and final 0045 product tree | Prior reports/raw integrated through `0045e88`; final report import follows |
+| VAL-1 | `f47150d76c84025ade79db05e86423252ab5e802` | Frozen and independently reviewed five owner pins, c777 candidate, offline Investigator revision and final 0045 product tree | Reports/raw integrated through final review; no owner source edits |
 
 Successive full source regressions on isolated candidate intakes: Release docs **424 passed/37 skipped/one historical xfail** (`after-5b-docs-junit.xml`); 4F inert model **430 passed/37 skipped/one xfail plus five subtests** (`after-4f-inert-junit.xml`); Scout **441 passed/37 skipped/one xfail plus five subtests** (`after-scout-junit.xml`). All had zero failed tests, 16 warnings, used local disposable Unix/loopback services on macOS arm64/Python 3.15, and are not installed Linux release acceptance. These three JUnits, original 30.6-second withdrawal trace, grant race reproductions, 5A unsupported-positive cases and CLI default-write failures remain retained.
 
