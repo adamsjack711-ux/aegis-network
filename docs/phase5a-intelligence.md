@@ -37,7 +37,7 @@ PYTHONPATH=src ../../.venv/bin/python scripts/phase5a_evaluate.py
 PYTHONPATH=src ../../.venv/bin/python -m pytest -q tests/test_phase5a_intelligence.py
 ```
 
-The request names one authorized target, local source files and their declared official-format URIs. The CLI rejects a mismatched target, any `https` source mode, or any non-`none` research provider. It emits a JSON report with source pins, all normalized claims and an assessment. It does not sign, publish, scan a host, run a model, or change a defended target. The report is research input for human and independent Evidence review.
+The request names one authorized target, local source files and their declared official-format URIs. The CLI reads at most 64 KiB for the request and 8 MiB per local source before parsing. It rejects a mismatched target, any `https` source mode, or any non-`none` research provider. It emits a JSON report with source pins, all normalized claims and an assessment. It does not sign, publish, scan a host, run a model, or change a defended target. The report is research input for human and independent Evidence review.
 
 ## Evaluation and limits
 
@@ -54,7 +54,7 @@ The synthetic [corpus](../tests/fixtures/phase5a_cases.json) and [manifest](../t
 
 This is a single synthetic fixture run. It demonstrates parser and boundary behavior, not real model accuracy, production source authentication, independent claim truth, or a statistically meaningful advantage. Unsupported prose claims have only author labels in this corpus; a real model run requires independent claim-by-claim adjudication, repeated paired trials, actual token/cost accounting and held-out cases. The small binary denominator makes precision and recall unsuitable for promotion. Live feed and model enrollment, license review, revision/withdrawal history, ecosystem comparators and a reviewed bridge into existing Evidence are future decisions. No source or model output from this branch has a path to protected authority.
 
-The focused Phase 5A suite passed 8/8. A broader `PYTHONPATH=src:scripts` run was stopped after 103 passes, 32 skips, 28 failures and 10 errors because existing Phase 4 fixture services could not bind Unix sockets in this sandbox (`PermissionError: Operation not permitted`). The first plain full-suite attempt also lacked `scripts` on `PYTHONPATH` and stopped during collection. Neither run is a full-suite acceptance result. No shared source files were changed to address that environment limit.
+The focused Phase 5A suite passed 9/9. A broader `PYTHONPATH=src:scripts` run was stopped after 103 passes, 32 skips, 28 failures and 10 errors because existing Phase 4 fixture services could not bind Unix sockets in this sandbox (`PermissionError: Operation not permitted`). The first plain full-suite attempt also lacked `scripts` on `PYTHONPATH` and stopped during collection. Neither run is a full-suite acceptance result. No shared source files were changed to address that environment limit.
 
 ## Private field map against the provisional contract
 

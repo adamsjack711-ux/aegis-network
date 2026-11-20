@@ -72,6 +72,25 @@ def test_cli_rejects_network_mode_before_fetch(monkeypatch, tmp_path):
         runpy.run_path(str(Path(__file__).parents[1] / "scripts" / "phase5a_research.py"), run_name="__main__")
 
 
+def test_cli_rejects_oversize_local_input_before_parsing(monkeypatch, tmp_path):
+    from aegis.intelligence.feeds import MAX_BYTES
+    script = str(Path(__file__).parents[1] / "scripts" / "phase5a_research.py")
+    oversized = tmp_path / "large.json"
+    with oversized.open("wb") as handle:
+        handle.truncate(MAX_BYTES + 1)
+    request = json.loads((Path(__file__).parent / "fixtures" / "phase5a_request.json").read_text())
+    request["sources"][0]["path"] = str(oversized)
+    path = tmp_path / "request.json"
+    path.write_text(json.dumps(request))
+    monkeypatch.setattr(sys, "argv", ["phase5a_research.py", str(path)])
+    with pytest.raises(ValueError, match="local input exceeds"):
+        runpy.run_path(script, run_name="__main__")
+    with path.open("wb") as handle:
+        handle.truncate(64 * 1024 + 1)
+    with pytest.raises(ValueError, match="local input exceeds"):
+        runpy.run_path(script, run_name="__main__")
+
+
 def test_prompt_is_data_and_private_identifiers_are_redacted():
     item, claims = case()
     asset = Asset.model_validate(item["asset"])

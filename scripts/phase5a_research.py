@@ -5,6 +5,18 @@ import json
 from pathlib import Path
 
 from aegis.intelligence import Asset, archive_snapshot, assess, normalize, snapshot
+from aegis.intelligence.feeds import MAX_BYTES
+
+
+REQUEST_MAX_BYTES = 64 * 1024
+
+
+def read_bounded(path: Path, limit: int) -> bytes:
+    with path.open("rb") as handle:
+        content = handle.read(limit + 1)
+    if len(content) > limit:
+        raise ValueError(f"local input exceeds {limit} byte limit")
+    return content
 
 
 def main():
@@ -12,7 +24,7 @@ def main():
     parser.add_argument("request", type=Path, help="local JSON request with an authorized target")
     parser.add_argument("--output", type=Path, help="local JSON report path; stdout by default")
     args = parser.parse_args()
-    request = json.loads(args.request.read_text())
+    request = json.loads(read_bounded(args.request, REQUEST_MAX_BYTES))
     asset = Asset.model_validate(request["asset"])
     if request.get("authorized_target") != asset.asset_id:
         raise ValueError("explicit authorized_target must match asset_id")
@@ -24,7 +36,7 @@ def main():
     snapshots = []
     for item in feeds:
         if item.get("mode") == "fixture":
-            raw = Path(item["path"]).read_bytes()
+            raw = read_bounded(Path(item["path"]), MAX_BYTES)
             snapshots.append(snapshot(item["kind"], item["uri"], raw))
         else:
             raise ValueError("source mode must be fixture")
