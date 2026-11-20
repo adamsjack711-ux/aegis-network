@@ -1,0 +1,90 @@
+{
+  "baseline": "29455087922a728a41936d8c5c79ff9942e1e3df",
+  "entries": [
+    {
+      "baseline_blob": "71f7f95beedfa3dec89e05c706617facc691414e",
+      "bytes": 5683,
+      "copy": "benchmarks/alpha-independent-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98",
+      "source": "benchmarks/phase-next-validation/native-4f-preintake-priority.json"
+    },
+    {
+      "baseline_blob": "e6b596d8dbef40138c7c1ab6c48c9d3679b76f84",
+      "bytes": 1418,
+      "copy": "benchmarks/alpha-independent-validation/original/benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916",
+      "source": "benchmarks/phase-next-validation/phase5b-default-writes.json"
+    },
+    {
+      "baseline_blob": "3354c7e2d591bbe774193d14630cf6ca6c81291e",
+      "bytes": 7279,
+      "copy": "benchmarks/alpha-independent-validation/original/benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133",
+      "source": "benchmarks/phase-next-validation/ai-5a-security.json"
+    },
+    {
+      "baseline_blob": "57cffd5bb1adc882fd72e8bee0dd5b4f04564096",
+      "bytes": 180,
+      "copy": "benchmarks/alpha-independent-validation/original/benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt",
+      "sha256": "e160f03fb08bf078b7fd678a201567fc8f89b60d4775dd04febf68f79baa463d",
+      "source": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt"
+    },
+    {
+      "baseline_blob": "1baa9031a40c13fd933a0e1485defcf5bde0fd1a",
+      "bytes": 28751,
+      "copy": "benchmarks/alpha-independent-validation/original/benchmarks/phase-next-six-validation/original-evidence-manifest.json",
+      "sha256": "87abdaf1f526f86eaae9fee87b811b2330ccaea135abf473634bd1db4edd645a",
+      "source": "benchmarks/phase-next-six-validation/original-evidence-manifest.json"
+    },
+    {
+      "baseline_blob": "e54366184b3ab8471c1c60562d989210efbbeae0",
+      "bytes": 5606,
+      "copy": "benchmarks/alpha-independent-validation/original/fixtures/phase-next-ai-holdout-v1.json",
+      "sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac",
+      "source": "fixtures/phase-next-ai-holdout-v1.json"
+    },
+    {
+      "baseline_blob": "905c4cda83bb9bcd66018ad771f84a885cbf8d24",
+      "bytes": 1036,
+      "copy": "benchmarks/alpha-independent-validation/original/test_grant_race.py",
+      "sha256": "4490db7a0933a76f770e275468d74a1345980d5eb8c1d2550ea21dd88df44e93",
+      "source": "tests/cli_safety_phase5b2/test_grant_race.py"
+    },
+    {
+      "baseline_blob": "c186c349d0196c2622a8631d6b5dad224e9f5ca3",
+      "bytes": 1697,
+      "copy": "benchmarks/alpha-independent-validation/original/grant-race-open.txt",
+      "sha256": "419243a75f9f897b671defc6bd5887568f9e866ea55037e35cfac04ba6451494",
+      "source": "benchmarks/phase-next-six-validation/5b2/grant-race-open.txt"
+    },
+    {
+      "baseline_blob": null,
+      "bytes": 1639,
+      "copy": "benchmarks/alpha-independent-validation/original/grant-race-baseline-replay.txt",
+      "sha256": "a1c60b0c81db5221d8b3af0b8689aa681a268c0820a641a5acb44769f6faaa7e",
+      "source": "new baseline replay"
+    },
+    {
+      "baseline_blob": null,
+      "bytes": 2,
+      "copy": "benchmarks/alpha-independent-validation/original/grant-race-baseline-replay.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source": "new baseline replay"
+    },
+    {
+      "baseline_blob": null,
+      "bytes": 14,
+      "copy": "benchmarks/alpha-independent-validation/original/python-version.txt",
+      "sha256": "b01b5da7ac6a0ecc5ff1aee7998c4ad10df616dc53585c5e44d3c6b916cfaf11",
+      "source": "new baseline replay"
+    },
+    {
+      "baseline_blob": null,
+      "bytes": 147,
+      "copy": "benchmarks/alpha-independent-validation/original/uname.txt",
+      "sha256": "449a4fbfeae84eca78753a50005f4a27121fa57de2c7e70941789a1e67046bd9",
+      "source": "new baseline replay"
+    }
+  ],
+  "prior_retained_manifest_sha256": "87abdaf1f526f86eaae9fee87b811b2330ccaea135abf473634bd1db4edd645a"
+}
