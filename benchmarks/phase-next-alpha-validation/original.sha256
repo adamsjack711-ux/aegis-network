@@ -1,0 +1,14 @@
+87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/ai-5a-security.json
+26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/cli-5b-linux-default-state.txt
+3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/cli-5b-linux-score.json
+9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-default-writes.json
+9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json
+3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority.json
+3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3  benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json
+83b3aaaec48989ebba2c5362115752a83095c366efb90b7b9e59352509db72a3  benchmarks/phase-next-alpha-validation/original/benchmarks/phase4e/integrated-final-348.xml
+d87605a8f3dd647b515cc6b5b2d22af13b33a59cf5e72456e58dd58f96bcf882  benchmarks/phase-next-alpha-validation/original/scripts/phase_next_5a_security.py
+b199839b4906c65fa4834eb2a24754d11b35cc07fd1cbaffb7e2a7c418df59c3  benchmarks/phase-next-alpha-validation/original/scripts/phase_next_5b_oracle.py
+40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1  benchmarks/phase-next-alpha-validation/original/scripts/phase_next_probe_cli.py
+82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050  benchmarks/phase-next-alpha-validation/original/scripts/phase4e_withdrawal_recovery_check.py
+d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac  benchmarks/phase-next-alpha-validation/original/fixtures/phase-next-ai-holdout-v1.json
+7abc8a6ad9ddd1b56afbaeb790a089d474f2c434c1f40abc68fd104e4cc91bdb  benchmarks/phase-next-alpha-validation/original/fixtures/phase-next-ai-claim-map-v1.json

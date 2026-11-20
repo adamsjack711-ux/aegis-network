@@ -1,0 +1,91 @@
+{
+  "baseline_clean_before_copy": true,
+  "baseline_commit": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "baseline_tree": "c837821bb6b47b85dec607bf7a2f6d6d69b13ee3",
+  "files": [
+    {
+      "bytes": 7279,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/ai-5a-security.json",
+      "original_path": "benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133"
+    },
+    {
+      "bytes": 471,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "original_path": "benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "sha256": "26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d"
+    },
+    {
+      "bytes": 2160,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "original_path": "benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "sha256": "3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8"
+    },
+    {
+      "bytes": 1418,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "original_path": "benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916"
+    },
+    {
+      "bytes": 402,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "original_path": "benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "sha256": "9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b"
+    },
+    {
+      "bytes": 5683,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "original_path": "benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98"
+    },
+    {
+      "bytes": 5684,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "original_path": "benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "sha256": "3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3"
+    },
+    {
+      "bytes": 159685,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase4e/integrated-final-348.xml",
+      "original_path": "benchmarks/phase4e/integrated-final-348.xml",
+      "sha256": "83b3aaaec48989ebba2c5362115752a83095c366efb90b7b9e59352509db72a3"
+    },
+    {
+      "bytes": 5157,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/scripts/phase_next_5a_security.py",
+      "original_path": "scripts/phase_next_5a_security.py",
+      "sha256": "d87605a8f3dd647b515cc6b5b2d22af13b33a59cf5e72456e58dd58f96bcf882"
+    },
+    {
+      "bytes": 4942,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/scripts/phase_next_5b_oracle.py",
+      "original_path": "scripts/phase_next_5b_oracle.py",
+      "sha256": "b199839b4906c65fa4834eb2a24754d11b35cc07fd1cbaffb7e2a7c418df59c3"
+    },
+    {
+      "bytes": 1634,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/scripts/phase_next_probe_cli.py",
+      "original_path": "scripts/phase_next_probe_cli.py",
+      "sha256": "40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1"
+    },
+    {
+      "bytes": 13386,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/scripts/phase4e_withdrawal_recovery_check.py",
+      "original_path": "scripts/phase4e_withdrawal_recovery_check.py",
+      "sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050"
+    },
+    {
+      "bytes": 5606,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/fixtures/phase-next-ai-holdout-v1.json",
+      "original_path": "fixtures/phase-next-ai-holdout-v1.json",
+      "sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
+    },
+    {
+      "bytes": 2126,
+      "copy_path": "benchmarks/phase-next-alpha-validation/original/fixtures/phase-next-ai-claim-map-v1.json",
+      "original_path": "fixtures/phase-next-ai-claim-map-v1.json",
+      "sha256": "7abc8a6ad9ddd1b56afbaeb790a089d474f2c434c1f40abc68fd104e4cc91bdb"
+    }
+  ]
+}
