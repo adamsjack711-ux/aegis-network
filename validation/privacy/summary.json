@@ -1,0 +1,62 @@
+{
+  "analysis_sha256": "f8c9d9fe9f6e8cded5ef9b7a5478c19a2a1155e12337f064a1c37fe3c7fffc6e",
+  "candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "cells": {
+    "debian-13-py312": {
+      "changed_only_explicit_create": true,
+      "command_sha256": "6a5861c2a0d45d5569e19937a1f22ce1b99d50ebdce75e7178f557291241cf21",
+      "consumer_sha256": "f43371f4e258cc5fc09c9b71653c7dd1f9b800e2ae0a98489e2bec37a750ea0e",
+      "functional_json_cases": 21,
+      "issuer_sha256": "855bb91558c0e0c2eed2af78110ee9cc38f00ea6ca3c4f5bedcc812b99c4b1d5",
+      "json_cases": 21,
+      "network_attempts": 0,
+      "privacy_fail_invocations": 42,
+      "privilege_attempts": 0,
+      "process_events": 42,
+      "runtime_cache_write_attempts": 210,
+      "traced_invocations": 42
+    },
+    "debian-13-py313": {
+      "changed_only_explicit_create": true,
+      "command_sha256": "9b2386ce09f4ae0e0dd8a569fcd15efdc892a69d41007f5cf0b223415e26a06f",
+      "consumer_sha256": "ecd2e3f7438801be53d9e7d112cf1b6425fe55b120bf3af0d56167470693a613",
+      "functional_json_cases": 21,
+      "issuer_sha256": "af7b0be4d94b108597ac0f15c304c310ac6fbf042fa2a371fe955c03c5e3ca54",
+      "json_cases": 21,
+      "network_attempts": 0,
+      "privacy_fail_invocations": 42,
+      "privilege_attempts": 0,
+      "process_events": 42,
+      "runtime_cache_write_attempts": 3612,
+      "traced_invocations": 42
+    },
+    "ubuntu-2404-py312": {
+      "changed_only_explicit_create": true,
+      "command_sha256": "8657b3e24c1cbe5f9cc2e9b1dd0ad0cdfca316127cf406452cec41ac8b9795fc",
+      "consumer_sha256": "0b480949444a36a8507c1e8e3afc2369cc98c06aca930f08eb79a46772b3aab1",
+      "functional_json_cases": 21,
+      "issuer_sha256": "945ef3ed34a546380fed38c72f2b18f85a10be5647835333ba79c91a017aa6a6",
+      "json_cases": 21,
+      "network_attempts": 0,
+      "privacy_fail_invocations": 42,
+      "privilege_attempts": 0,
+      "process_events": 42,
+      "runtime_cache_write_attempts": 4494,
+      "traced_invocations": 42
+    },
+    "ubuntu-2404-py313": {
+      "changed_only_explicit_create": true,
+      "command_sha256": "33e70782dee29da51790fef58b5822b51ec5b767622e9f0331988ee4fdf5de47",
+      "consumer_sha256": "d7f90251165db415e5d82d471b12d11917f355c535fcaa4cc43ff4491ab72b0f",
+      "functional_json_cases": 21,
+      "issuer_sha256": "ebaef282877a47b4e39bd024289c779f54fea2e08d8b30069ac188b18ff2a407",
+      "json_cases": 21,
+      "network_attempts": 0,
+      "privacy_fail_invocations": 42,
+      "privilege_attempts": 0,
+      "process_events": 42,
+      "runtime_cache_write_attempts": 3612,
+      "traced_invocations": 42
+    }
+  }
+}

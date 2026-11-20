@@ -1,0 +1,22 @@
+# Independent installed CLI privacy appraisal
+
+Candidate source: `fc4a17bc6f9f0c289a645c4fb7006c999ba90e99`. Scored raw data: `validation/console/`, four isolated arm64 Linux cells. The earlier harness run remains in `validation/console-initial/` and is excluded because its doctor exit-code oracle was wrong. This appraisal used no model, network download, candidate source edit, or grant mutation.
+
+**Decision: CLI alpha NO-GO on the frozen zero unrequested write-attempt gate.** All 168 installed command invocations attempted to write CPython bytecode cache files. Read-only image mounts denied them with `EROFS`; their denial does not satisfy a zero-attempt requirement. The logical release privacy denominator is 0/68 default/error cases (17 per cell), and the broader per-format trace denominator is 0/168 invocations. Functional command checks passed 168/168 invocations (84 logical cases, each in JSON and human form). A functional pass is not a privacy pass.
+
+| Cell | Functional JSON/human | Privacy passes | Denied cache attempts | Observed network or privilege syscalls |
+| --- | ---: | ---: | ---: | ---: |
+| Debian 13, Python 3.12 | 42/42 | 0/42 | 210 `openat` | 0 |
+| Debian 13, Python 3.13 | 42/42 | 0/42 | 3,612 `openat` | 0 |
+| Ubuntu 24.04, Python 3.12 | 42/42 | 0/42 | 126 `openat`, 4,368 `mkdirat` | 0 |
+| Ubuntu 24.04, Python 3.13 | 42/42 | 0/42 | 126 `openat`, 3,486 `mkdirat` | 0 |
+
+The `strace` capture includes `%file,%network,%process,%creds`; I counted denied attempts as attempts. Every raw trace had a completion marker. Each case's `before_sha256` and `after_sha256` matched a compressed full-tree manifest; I independently recomputed each change map. All default/error mounted-tree snapshots were unchanged. Only explicit `--state-dir` creation changed the declared `/tmp/chosen` state path and `/tmp` directory metadata. Both JSON and human runs created `0700` state directories and `0600` identity files. Repeated opt-in inventory reused the same asset ID and did not change the snapshots. Symlink ancestor/final inputs returned the expected unknown/error and did not change the snapshots. They did make scoped `EEXIST` checks; these were not counted as unrequested cache effects. No extra process creation was observed beyond the initial CLI `execve` per invocation.
+
+The grant input was a host-custodied, read-only bind mount in these local fixtures. Recorded issuer and consumer UIDs differ (501 and 65534); the consumer saw a `0444` trust file under a `0555` directory and could not write either. A benign current-finding trace shows the trust reader walking `/` and `grants` with `O_NOFOLLOW|O_DIRECTORY`, then opening `trust.json` with `O_NOFOLLOW|O_NONBLOCK` from the parent descriptor. Wrong-role and revoked grants returned unknown/error. These observations support the installed descriptor path and local fixture custody only; they do not establish custody against a host same-UID writer, ACL ambiguity, a mutable bind source, or same-inode modification.
+
+Scope limits: the mounted-tree manifest includes `/tmp`, `/var/lib/dpkg`, `/dev`, `/etc/hosts`, `/etc/resolv.conf`, and `/etc/hostname`; kernel pseudo-filesystems and the separate observer output mount are excluded. The tracer selection does not capture ordinary `write(2)` calls to preopened descriptors or every possible kernel interface. The absence of observed network calls is limited to this run and the selected syscall set. The read-only container and `--network=none` are additional isolation controls, not evidence that the CLI never attempted an effect. CPU, memory, uninstall, and artifact provenance require separate review of their raw records.
+
+Raw evidence: `validation/privacy/analysis.json` gives per-invocation trace SHA-256, full-manifest digests, syscall counts, denied counts, and hashed sample lines. `validation/privacy/summary.json` binds cell-level raw metadata and the analysis digest. `validation/privacy/analyze.py` is an independent read-only parser. The raw per-case traces and tree manifests remain under `validation/console/<cell>/`; neither they nor owner harness files were edited here.
+
+Remediation requirement: ensure the installed CLI entrypoint suppresses bytecode-cache attempts under the normal documented invocation, then rerun all four exact installed cells with the frozen trace and tree oracle. A workaround supplied only by the test harness would not demonstrate normal user behavior. Preserve this failing raw run and the original first run.
