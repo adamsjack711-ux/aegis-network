@@ -1,0 +1,35 @@
+{
+  "input_bytes": 8800,
+  "input_sha256": "b63e10ab4af94b0b2da7d959bd8221641ccf519b91818d59f88f28da18fb19b0",
+  "rows": 100,
+  "runs": [
+    {
+      "cpu_ms": 109.316,
+      "exit_code": 2,
+      "inventory_complete": true,
+      "peak_rss_kib_at_least": 37696,
+      "reported_count": 100,
+      "stderr": "",
+      "wall_ms": 113.307
+    },
+    {
+      "cpu_ms": 104.567,
+      "exit_code": 2,
+      "inventory_complete": true,
+      "peak_rss_kib_at_least": 38172,
+      "reported_count": 100,
+      "stderr": "",
+      "wall_ms": 107.663
+    },
+    {
+      "cpu_ms": 101.15,
+      "exit_code": 2,
+      "inventory_complete": true,
+      "peak_rss_kib_at_least": 38172,
+      "reported_count": 100,
+      "stderr": "",
+      "wall_ms": 104.132
+    }
+  ],
+  "uid": 65534
+}

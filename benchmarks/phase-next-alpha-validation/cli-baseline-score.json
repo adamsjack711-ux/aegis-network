@@ -1,0 +1,69 @@
+{
+  "cli_alpha_release_status": "NO-GO",
+  "default_cases": {
+    "findings_missing_trust": {
+      "created": [],
+      "status": "pass"
+    },
+    "findings_no_feed": {
+      "created": [],
+      "status": "pass"
+    },
+    "inventory": {
+      "created": [],
+      "status": "pass"
+    },
+    "status_no_feed": {
+      "created": [],
+      "status": "pass"
+    }
+  },
+  "default_denominator": 4,
+  "default_pass": 4,
+  "explicit_state_control": "pass",
+  "image_digest": "sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab",
+  "platform_matrix": "incomplete: synthetic Debian os-release on cached Kali only",
+  "probe_sha256": "21fb318d10479a8ab51851be56b252e1b4330de7d8856e6d01cb7064eccaad2e",
+  "resource_cases": [
+    {
+      "budget": true,
+      "complete": true,
+      "file": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-100.json",
+      "max_cpu_ms": 109.316,
+      "max_peak_rss_kib_at_least": 38172,
+      "max_wall_ms": 113.307,
+      "rows": 100,
+      "runs": 3,
+      "sha256": "e857abc15e8ab86494123acf415968618d119f102b48694b9c193c241b906841",
+      "status": "pass"
+    },
+    {
+      "budget": true,
+      "complete": true,
+      "file": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-10000.json",
+      "max_cpu_ms": 215.268,
+      "max_peak_rss_kib_at_least": 43052,
+      "max_wall_ms": 221.515,
+      "rows": 10000,
+      "runs": 3,
+      "sha256": "b672481048a34e4a35113317d5548a6d1c84cb48715e816a857245d9a6dfd957",
+      "status": "pass"
+    },
+    {
+      "budget": true,
+      "complete": true,
+      "file": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-100000.json",
+      "max_cpu_ms": 546.001,
+      "max_peak_rss_kib_at_least": 103572,
+      "max_wall_ms": 550.864,
+      "rows": 100000,
+      "runs": 3,
+      "sha256": "45cc58c2e1ebe6d16e7262cbdeec4347f2daf8b4c6a4377b3d1478229a38d534",
+      "status": "pass"
+    }
+  ],
+  "source_level_status": "pass",
+  "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "syscall_observer": "skipped: no tracer in cached image",
+  "wheel_install_uninstall": "skipped: no offline built wheel at this clean pin"
+}

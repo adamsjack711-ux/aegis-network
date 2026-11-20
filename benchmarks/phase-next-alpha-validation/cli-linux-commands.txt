@@ -1,0 +1,29 @@
+Run from /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation.
+Candidate source: clean 3bfd2abea430bc8036105ce85adfdc78706d367d.
+Cached image: sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab (lab-kali).
+All runs used --network none, --read-only, UID 65534, no capabilities and no-new-privileges. No image pull.
+
+Default-write/explicit-state probe:
+docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 65534:65534 --tmpfs /tmp:rw,noexec,nosuid,size=32m -e PYTHONPATH=/candidate/src -e PYTHONDONTWRITEBYTECODE=1 -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-remediation-integration/src:/candidate/src:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/scripts/phase_next_probe_cli.py:/probe.py:ro sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab python3 /probe.py > benchmarks/phase-next-alpha-validation/cli-baseline-kali-probe.json
+
+Resource diagnostic, once each for ROWS=100, ROWS=10000 and ROWS=100000, with separate containers and three command repeats per container. Replace ROWS and output filename literally for each invocation. The actual three values and output files are present in the raw JSON:
+docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 65534:65534 --cpus 1 --memory 512m --pids-limit 64 --tmpfs /tmp:rw,noexec,nosuid,mode=1777,size=32m --tmpfs /var/lib/dpkg:rw,noexec,nosuid,mode=1777,size=32m -e PYTHONPATH=/candidate/src -e PYTHONDONTWRITEBYTECODE=1 -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-remediation-integration/src:/candidate/src:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/scripts/phase_next_5b_resource_driver.py:/driver.py:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/fixtures/phase-next-cli/os-release:/etc/os-release:ro sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab python3 /driver.py --rows ROWS --repeats 3 > benchmarks/phase-next-alpha-validation/cli-baseline-resource-ROWS.json
+
+Score the recorded probe and three size rows:
+python3 scripts/val_d_harness.py score-cli --source-pin 3bfd2abea430bc8036105ce85adfdc78706d367d --image-digest sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab --probe benchmarks/phase-next-alpha-validation/cli-baseline-kali-probe.json benchmarks/phase-next-alpha-validation/cli-baseline-resource-100.json benchmarks/phase-next-alpha-validation/cli-baseline-resource-10000.json benchmarks/phase-next-alpha-validation/cli-baseline-resource-100000.json --output /tmp/val-d-cli-score.json
+
+Candidate exact Git archive offline build:
+python3 scripts/val_d_packaging.py --candidate-root ../phase5b-alpha-packaging --source-pin 0df40c933ba7d49d0fb58c075be2abc6dab0cd08 --output benchmarks/phase-next-alpha-validation/cli-candidate-build.json
+
+The byte-identical candidate wheel was copied from the first offline build to benchmarks/phase-next-alpha-validation/wheels/aegis_network-0.1.0-py3-none-any.whl; SHA-256 is 0e4a815ad95f5fab9d8bb997bec4ea8f67896460db86bb838441ca7318cbd0fa.
+
+Installed-wheel Debian 13 non-root read-only probe:
+docker run --rm --pull never --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 1000:1000 --cpus 1 --memory 512m --pids-limit 64 --tmpfs /tmp:rw,exec,nosuid,mode=1777,size=512m -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/benchmarks/phase-next-alpha-validation/wheels/aegis_network-0.1.0-py3-none-any.whl:/wheel/aegis_network-0.1.0-py3-none-any.whl:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/scripts/val_d_installed_cli_probe.py:/probe.py:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/fixtures/phase-next-cli:/fixture:ro sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e python3 /probe.py > benchmarks/phase-next-alpha-validation/cli-candidate-debian-install.json
+
+The final probe script additionally checks a signed supplied-file Finding. The same command was rerun with output file benchmarks/phase-next-alpha-validation/cli-candidate-debian-install-v2.json; the earlier five-case raw file is retained.
+
+Installed-wheel Debian 13 synthetic resource matrix:
+docker run --rm --pull never --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 1000:1000 --cpus 1 --memory 512m --pids-limit 64 --tmpfs /tmp:rw,exec,nosuid,mode=1777,size=512m --tmpfs /var/lib/dpkg:rw,noexec,nosuid,mode=1777,size=32m -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/benchmarks/phase-next-alpha-validation/wheels/aegis_network-0.1.0-py3-none-any.whl:/wheel/aegis_network-0.1.0-py3-none-any.whl:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/scripts/val_d_installed_cli_probe.py:/probe.py:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/scripts/phase_next_5b_resource_driver.py:/driver.py:ro -v /Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-validation/fixtures/phase-next-cli:/fixture:ro sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e python3 /probe.py --resource > benchmarks/phase-next-alpha-validation/cli-candidate-debian-resource.json
+
+Cached Ubuntu 24.04 prerequisite check (venv failed before candidate wheel installation):
+docker run --rm --pull never --network none --read-only --cap-drop ALL --security-opt no-new-privileges --user 1000:1000 --cpus 1 --memory 512m --pids-limit 64 --tmpfs /tmp:rw,exec,nosuid,mode=1777,size=512m sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60 python3 -m venv /tmp/val-d-ubuntu-venv 2>&1 | tee benchmarks/phase-next-alpha-validation/cli-candidate-ubuntu-prerequisite.txt

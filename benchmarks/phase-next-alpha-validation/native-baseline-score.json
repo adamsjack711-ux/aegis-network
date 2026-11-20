@@ -1,0 +1,192 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "dd98b820589d2a1a7d8679e1def755437f21dcbeff6e41dda64c9cb25cfb833c",
+  "trials": [
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 570134830336125,
+      "first_snapshot_ns": 570135333319208,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_idle",
+      "status": "pass"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 570136440810875,
+      "first_snapshot_ns": 570136500777208,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_monitor",
+      "status": "pass"
+    },
+    {
+      "complete_route_inventory": true,
+      "concurrent_sample_count": 3,
+      "cut_ns": 570137434015250,
+      "first_snapshot_ns": 570137938366166,
+      "inconsistent_sample_count": 1,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_snapshot_race",
+      "stale_route_response_permitted": false,
+      "status": "pass"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 570139049016625,
+      "first_snapshot_ns": 570139979696375,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "evidence_idle",
+      "status": "pass"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 570141171674625,
+      "first_snapshot_ns": 570141230539708,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "evidence_monitor",
+      "status": "pass"
+    },
+    {
+      "durable_state_unchanged": true,
+      "scenario": "stale_approval",
+      "status": "pass",
+      "status_checks": null,
+      "write_outcome": "denied"
+    },
+    {
+      "durable_state_unchanged": true,
+      "scenario": "interrupted_transaction",
+      "status": "pass",
+      "status_checks": 2,
+      "write_outcome": "denied"
+    },
+    {
+      "durable_state_unchanged": true,
+      "scenario": "revoked_evidence",
+      "status": "pass",
+      "status_checks": 0,
+      "write_outcome": "denied"
+    },
+    {
+      "durable_state_unchanged": true,
+      "scenario": "stale_trust_cut",
+      "status": "pass",
+      "status_checks": 0,
+      "write_outcome": "denied"
+    }
+  ]
+}

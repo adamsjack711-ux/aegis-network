@@ -1,0 +1,240 @@
+{
+  "baseline": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "candidate_pins": {
+    "ai_offline": "99e866453a504aa070ee4e0b177da42b621ab67b",
+    "cli": "0df40c933ba7d49d0fb58c075be2abc6dab0cd08",
+    "withdrawal": "aec828ddd075db344277ddbc8cf87122d37fb4d1"
+  },
+  "captured_at_utc": "2026-11-20T05:16:54.738437+00:00",
+  "files": [
+    {
+      "bytes": 6123,
+      "path": "benchmarks/phase-next-alpha-validation/ai-baseline-claim-challenge.json",
+      "sha256": "a2903d90e905942aabf331f8d5ec982eee6f0f53b2fd420099ba0c6324ce943e"
+    },
+    {
+      "bytes": 166218,
+      "path": "benchmarks/phase-next-alpha-validation/ai-candidate-scripted-eval.json",
+      "sha256": "bcec2b30cd3bbffc371bb03b01b650a6711a2dbd37c9cf8b56cf1e8175f95d15"
+    },
+    {
+      "bytes": 11342,
+      "path": "benchmarks/phase-next-alpha-validation/ai-holdout-deterministic.json",
+      "sha256": "19037d9e56744abbae2d7514f8d8b8c32eebf6b51cb4c33706753afe531cd489"
+    },
+    {
+      "bytes": 773,
+      "path": "benchmarks/phase-next-alpha-validation/ai-holdout-score.json",
+      "sha256": "0eaca04fe61f4938f1c2eabd2ffbe4376810289e048d2111356937a769e9cc83"
+    },
+    {
+      "bytes": 7279,
+      "path": "benchmarks/phase-next-alpha-validation/ai-original-fresh.json",
+      "sha256": "9f595d748b6c5d522cb9f079bcd12a8a1289c9a69c8e3fa356f192f3aa1188cf"
+    },
+    {
+      "bytes": 818,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-kali-probe.json",
+      "sha256": "21fb318d10479a8ab51851be56b252e1b4330de7d8856e6d01cb7064eccaad2e"
+    },
+    {
+      "bytes": 602,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-offline-build-cache.txt",
+      "sha256": "3054c8c60a27ddfcc8fe50cdc92bf53c0a783c93e39d7c25566d9641cf3a0afd"
+    },
+    {
+      "bytes": 600,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-offline-build.json",
+      "sha256": "3ffb029a99f3187289080a0697a13f011de4893fb9e33b3a4500411dc554823a"
+    },
+    {
+      "bytes": 776,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-100.json",
+      "sha256": "e857abc15e8ab86494123acf415968618d119f102b48694b9c193c241b906841"
+    },
+    {
+      "bytes": 787,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-10000.json",
+      "sha256": "b672481048a34e4a35113317d5548a6d1c84cb48715e816a857245d9a6dfd957"
+    },
+    {
+      "bytes": 795,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-resource-100000.json",
+      "sha256": "45cc58c2e1ebe6d16e7262cbdeec4347f2daf8b4c6a4377b3d1478229a38d534"
+    },
+    {
+      "bytes": 2162,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-score.json",
+      "sha256": "1805a75881e7bf7495d268e1d330145cb72710c75cdf30980548032a014a3ef9"
+    },
+    {
+      "bytes": 11217,
+      "path": "benchmarks/phase-next-alpha-validation/cli-baseline-status-challenge.json",
+      "sha256": "b91e9a3f926291288772f38875abef715c6234d924f14699c52c41cf8c5f2d2c"
+    },
+    {
+      "bytes": 29491,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-build.json",
+      "sha256": "f94e018fcc78eb1edd8716282ece0c16e202c97bac47eea161f332399f3c8c10"
+    },
+    {
+      "bytes": 24177,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-debian-install-v2.json",
+      "sha256": "cd6ec5aa4f65c4e1ed256523f88e2467989b8d45b2956f4762263695e8d29581"
+    },
+    {
+      "bytes": 22018,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-debian-install.json",
+      "sha256": "4ba31a871637082a0ee8bf997e1258b3d8867d43dc60307ebd82d544382811b6"
+    },
+    {
+      "bytes": 10078,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-debian-resource.json",
+      "sha256": "c75c5af84acda3deabf3e436ea09def8d370ad475ed62f9a93aa15ddfcc46a80"
+    },
+    {
+      "bytes": 1617,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-package-score.json",
+      "sha256": "f1cfc28f6e4fc6c4f97bb05f1cba9d4bad5ddc7141f71175e09b1314d173ebe0"
+    },
+    {
+      "bytes": 394,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-ubuntu-install-attempt.txt",
+      "sha256": "47058081a02d209291e172d17de51931613d1f5d34a879d32929b7af0f194535"
+    },
+    {
+      "bytes": 401,
+      "path": "benchmarks/phase-next-alpha-validation/cli-candidate-ubuntu-prerequisite.txt",
+      "sha256": "1c8cf65cc91abf8427bda48b86f2a7492ff05e8861eab6b6078bdf09c054be0c"
+    },
+    {
+      "bytes": 5907,
+      "path": "benchmarks/phase-next-alpha-validation/cli-linux-commands.txt",
+      "sha256": "f00e7b1a285f85f15e02207005864c744cba07c6ed04090b635a12f619698f85"
+    },
+    {
+      "bytes": 2160,
+      "path": "benchmarks/phase-next-alpha-validation/cli-original-rescore.json",
+      "sha256": "3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8"
+    },
+    {
+      "bytes": 173132,
+      "path": "benchmarks/phase-next-alpha-validation/native-baseline-fresh.json",
+      "sha256": "dd98b820589d2a1a7d8679e1def755437f21dcbeff6e41dda64c9cb25cfb833c"
+    },
+    {
+      "bytes": 4706,
+      "path": "benchmarks/phase-next-alpha-validation/native-baseline-score.json",
+      "sha256": "a25bf8af6294e4d45a223bd0f57459c61c50880dafcd51fd52a18fe977ca4d6c"
+    },
+    {
+      "bytes": 4631,
+      "path": "benchmarks/phase-next-alpha-validation/original-copies-manifest.json",
+      "sha256": "9d2e740e1d16f743c47ecbf549a6d1dc63131cdfcd5ab6fc403e8917b74a336c"
+    },
+    {
+      "bytes": 2327,
+      "path": "benchmarks/phase-next-alpha-validation/original.sha256",
+      "sha256": "d94199e7e71069d9090a512d559a95731a0262311ca8193fd0c0724b7da4186a"
+    },
+    {
+      "bytes": 156265,
+      "path": "benchmarks/phase-next-alpha-validation/wheels/aegis_network-0.1.0-py3-none-any.whl",
+      "sha256": "0e4a815ad95f5fab9d8bb997bec4ea8f67896460db86bb838441ca7318cbd0fa"
+    },
+    {
+      "bytes": 10406,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-alive-control.json",
+      "sha256": "393db91229cdfd1f7b47ed3ce0d2f6ec7ef27a1f495d64700b43aeaf6a34ee04"
+    },
+    {
+      "bytes": 23310,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-1.json",
+      "sha256": "926cc40057be3403308a6f631a11208e3ba992d8fb39c5e8e880fd23d27e58de"
+    },
+    {
+      "bytes": 23313,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-2.json",
+      "sha256": "e76d070f08db6bd8ab20053cf2fb62a511b04124bb16ea0a7a32845dfafb4682"
+    },
+    {
+      "bytes": 23307,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-3.json",
+      "sha256": "3a19394760d577c590ee7a46d40856c99659989fa6b2468ea4d4173b77258b45"
+    },
+    {
+      "bytes": 2726,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-score.json",
+      "sha256": "75e218a985c8983dafbdcb6a5a372a61c3648902f574152d553b1c5a840a976e"
+    },
+    {
+      "bytes": 23314,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-candidate-fresh.json",
+      "sha256": "b652b75630ddd10c0c4f0054b01a0f448fc17a862cba26e014ad6d36bda34cec"
+    },
+    {
+      "bytes": 1048,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-candidate-score.json",
+      "sha256": "24b1decd37c727b52dd1e48be4efb681a01becc7b0abb3daec3b217badfecbb8"
+    },
+    {
+      "bytes": 1264,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll-score.json",
+      "sha256": "3fe370e3db7858acd64b17775775b1133a348e2de6c0c86a39dcd2c9b1ffc7da"
+    },
+    {
+      "bytes": 23865,
+      "path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll.json",
+      "sha256": "7d3815117191db46eaa7bb7527563a5bf2bdce13d2c23e17322ea1c3c7b8dbe8"
+    },
+    {
+      "bytes": 11620,
+      "path": "docs/phase-next-alpha-acceptance-frozen.md",
+      "sha256": "fbc764d18ca5261d1e12085af3603c2540d7682801e9254795d08c2817d108c4"
+    },
+    {
+      "bytes": 4975,
+      "path": "docs/phase-next-alpha-findings.md",
+      "sha256": "d7ce3a21339dcbad17d7a582c2eefb16d80073f56358b109eba0ec8d0da13eef"
+    },
+    {
+      "bytes": 11967,
+      "path": "docs/phase-next-alpha-independent-results.md",
+      "sha256": "e99e44645aeb268729ded128507b7de3f68d5334b4223bccacb852609934f74f"
+    },
+    {
+      "bytes": 4578,
+      "path": "fixtures/phase-next-alpha-ai-holdout-v1.json",
+      "sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f"
+    },
+    {
+      "bytes": 2600,
+      "path": "scripts/val_d_deterministic.py",
+      "sha256": "37282da764bbd5f0227bc21e45b3e24d5c82df75f13851727e879a5a0ec0e44b"
+    },
+    {
+      "bytes": 17993,
+      "path": "scripts/val_d_harness.py",
+      "sha256": "2f5d64fac5885bd68e24fb12a486cb679fd5e202f3ee30b8eae178d3ef247498"
+    },
+    {
+      "bytes": 4974,
+      "path": "scripts/val_d_installed_cli_probe.py",
+      "sha256": "75a1e282acc21357537d4b674c02b8b08af612d9d51245995f66bfc0f298dffa"
+    },
+    {
+      "bytes": 3680,
+      "path": "scripts/val_d_packaging.py",
+      "sha256": "fdd09ea83cc5120d720543a11a7a19808de8b2e110cd429814f4b8166b097163"
+    },
+    {
+      "bytes": 16311,
+      "path": "scripts/val_d_withdrawal_poll.py",
+      "sha256": "50a55558f7eced11c54dd76873fb5f02b2348f9ed38c1fee23a1442c6dd626d7"
+    }
+  ],
+  "freeze_commit": "a469d130afb8a553d6ab867acf519bc7eb851e9b",
+  "harness_commit": "9165edd719e02b9705adc6f4e0e6e5f928084603",
+  "original_failure_copies": "benchmarks/phase-next-alpha-validation/original-copies-manifest.json",
+  "schema_version": "val-d-evidence-manifest-v1"
+}

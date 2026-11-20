@@ -1,0 +1,32 @@
+{
+  "attempted_trials": 1,
+  "eligible_pairs": 2,
+  "five_second_limit_ms": 5000.0,
+  "observed_pairs": 2,
+  "source_pin": "aec828ddd075db344277ddbc8cf87122d37fb4d1",
+  "status": "fail",
+  "trials": [
+    {
+      "admission_to_denial_exact_ms": "not recorded by this legacy driver",
+      "admission_to_denial_lower_bound_ms": {
+        "independent": 30549.914,
+        "mixed": 30554.699
+      },
+      "durable_denials": 2,
+      "enrolled_agents": 1,
+      "file": "benchmarks/phase-next-alpha-validation/withdrawal-kv-candidate-fresh.json",
+      "ordinary_enqueued": 4,
+      "physical_target_hold": "not observed; dry-run agent audit only",
+      "pre_restart_durable_admission_witness": true,
+      "sha256": "b652b75630ddd10c0c4f0054b01a0f448fc17a862cba26e014ad6d36bda34cec",
+      "source_pin": "aec828ddd075db344277ddbc8cf87122d37fb4d1",
+      "status": "fail",
+      "submission_to_durable_denial_ms": {
+        "independent": 30615.784,
+        "mixed": 30602.722
+      },
+      "targeted_pairs": 2,
+      "timed_pairs": 2
+    }
+  ]
+}

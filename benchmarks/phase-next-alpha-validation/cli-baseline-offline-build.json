@@ -1,0 +1,16 @@
+{
+  "candidate_dirty": false,
+  "candidate_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "command": [
+    "uv",
+    "build",
+    "--offline",
+    "--out-dir",
+    "/private/tmp/val-d-offline-dist",
+    "/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-remediation-integration"
+  ],
+  "exit_code": 2,
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "stderr": "error: Failed to initialize cache at `/Users/jackadams-lovell/.cache/uv`\n  Caused by: failed to open file `/Users/jackadams-lovell/.cache/uv/sdists-v9/.git`: Operation not permitted (os error 1)\n",
+  "stdout": ""
+}
