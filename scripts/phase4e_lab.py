@@ -28,8 +28,8 @@ from aegis.journal.witness import collect_receipt
 from aegis.phase3c import COHORT, MESH_TEMPLATE, PACKAGE, REFERENCE, VERSION, claim_bytes
 from aegis.phase4e.history import make_tree
 from aegis.phase4e.protocol import Floor, Leaf, MAX_RECORDS, Wire
-from aegis.phase4e.service import Endpoint, RemotePin, load_policy
-from aegis.phase4e.status import Gate, Reader, finding_wire
+from aegis.phase4e.service import Endpoint, load_policy, reader_from_config
+from aegis.phase4e.status import Gate, finding_wire
 
 
 def public(key):
@@ -50,7 +50,7 @@ def grants(lab):
 
 
 class Lab:
-    def __init__(self, path, *, retirement=3600, status_ms=3000):
+    def __init__(self, path, *, retirement=3600, status_ms=3000, profile="checkpoint-v1"):
         path.mkdir(mode=0o700, exist_ok=True)
         self.path, self.stack = path, ExitStack()
         self.configs, self.processes = {}, {}
@@ -75,7 +75,7 @@ class Lab:
             "not_before": self.retired, "expires_at": self.evidence.now + 7200,
         })
         self.config = {
-            "stream": "phase4e-local", "cohort": COHORT,
+            "stream": "phase4e-local", "cohort": COHORT, "status_profile": profile,
             "coordinator": {"key": public(self.keys["cp"]), "domain": "checkpoint-org"},
             "publisher": {"key": public(self.keys["status"]), "domain": "status-org"},
             "witnesses": {name: {"key": public(self.keys[name]), "domain": f"{name}-org"} for name in self.names},
@@ -119,8 +119,6 @@ class Lab:
         self.operators = {name: self.connect(remote) for name, remote in self.admin.items()}
         self.admissions = {actor: {name: self.connect(remote) for name, remote in remotes.items()}
                            for actor, remotes in self.admission.items()}
-        self.reader = self.new_reader()
-        self.gate = Gate(self.reader, self.publisher.status, "lab-writer")
 
     def set_role(self, service, role, **fields):
         config = self.configs[service]
@@ -139,10 +137,19 @@ class Lab:
         return self.credential("anchor", f"pin:{namespace}")
 
     def reader_config(self, namespace):
-        return {"anchor": self.anchor(namespace, canonical(Floor(context=self.policy.context))),
-                "namespace": namespace, "archives": [self.credential(archive, "snapshot")
-                                                       for archive in ("arc", "mirror")],
-                "witnesses": {name: self.credential(name, "view") for name in self.names}}
+        config = {"anchor": self.anchor(namespace, canonical(Floor(context=self.policy.context))),
+                  "namespace": namespace, "archives": [self.credential(archive, "snapshot")
+                                                         for archive in ("arc", "mirror")],
+                  "witnesses": {name: self.credential(name, "view") for name in self.names}}
+        if self.policy.status_profile == "withdrawal-v2":
+            retention = f"{namespace}-withdrawals"
+            config["withdrawals"] = {
+                "db": str(self.path / f"{retention}.db"),
+                "anchor": self.anchor(retention, EMPTY_CHAIN),
+                "namespace": retention,
+                "witnesses": {name: self.credential(name, "withdrawals-v2") for name in self.names},
+            }
+        return config
 
     def connect(self, remote):
         endpoint = Endpoint(**remote)
@@ -150,10 +157,10 @@ class Lab:
         return endpoint
 
     def new_reader(self):
-        config = self.reader_settings
-        return Reader(self.policy, {name: self.connect(remote).view for name, remote in config["witnesses"].items()},
-                      tuple(self.connect(remote).snapshot for remote in config["archives"]),
-                      RemotePin(self.connect(config["anchor"]), config["namespace"]), Clock())
+        reader = reader_from_config(self.reader_settings, self.policy, Clock(), connect=self.connect)
+        if reader.withdrawals is not None:
+            self.stack.callback(reader.withdrawals.ledger.close)
+        return reader
 
     def __enter__(self):
         for name, config in self.configs.items():
@@ -165,6 +172,8 @@ class Lab:
                 self.start(name, wait=False)
             for name in self.services[1:]:
                 self.ready(name)
+            self.reader = self.new_reader()
+            self.gate = Gate(self.reader, self.publisher.status, "lab-writer")
         except BaseException:
             self.__exit__()
             raise

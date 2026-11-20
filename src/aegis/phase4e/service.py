@@ -21,8 +21,10 @@ from ..journal.protocol import Clock, Hash, Head, JournalBlocked, SignedHead, Vo
 from ..journal.storage import SQLitePin
 from ..trust import PublisherGrant
 from .history import Archive, Witness, make_tree
-from .protocol import (Authority, Challenge, Leaf, MAX_RECORDS, SignedStatus, Snapshot, TrustPolicy, View, Wire)
+from .protocol import (Authority, Challenge, Leaf, MAX_RECORDS, SignedStatus, Snapshot, TrustPolicy, View, Wire,
+                       WithdrawalView)
 from .status import Publisher, Reader
+from .withdrawals import WithdrawalReader
 
 MAX_BODY = 6 * 1024 * 1024
 
@@ -64,6 +66,9 @@ class Endpoint:
 
     def view(self, challenge):
         return self.call("/view", View, challenge)
+
+    def withdrawal_view(self, challenge):
+        return self.call("/v2/withdrawals", WithdrawalView, challenge)
 
     def snapshot(self, size):
         return self.call(f"/snapshot/{size}", Snapshot)
@@ -117,6 +122,7 @@ def load_policy(config):
         }, quorum=config["quorum"], faults=config["faults"], epoch_seconds=config["epoch_seconds"],
         max_age=config["max_age"], status_ms=config["status_ms"], mesh_grants=mesh,
         mesh_domains=mesh_domains, trust=Trust(evidence),
+        status_profile=config.get("status_profile", "checkpoint-v1"),
     )
 
 
@@ -128,9 +134,17 @@ def archive_sources(config):
     return tuple(endpoint(remote).snapshot for remote in config["archives"])
 
 
-def reader_from_config(config, policy, clock):
-    return Reader(policy, {name: endpoint(remote).view for name, remote in config["witnesses"].items()},
-                  archive_sources(config), pin_from_config(config), clock)
+def reader_from_config(config, policy, clock, *, connect=endpoint):
+    witnesses = {name: connect(remote).view for name, remote in config["witnesses"].items()}
+    archives = tuple(connect(remote).snapshot for remote in config["archives"])
+    pin = RemotePin(connect(config["anchor"]), config["namespace"])
+    withdrawals = None
+    if policy.status_profile == "withdrawal-v2":
+        lane = config["withdrawals"]
+        sources = {name: connect(remote).withdrawal_view for name, remote in lane["witnesses"].items()}
+        retention = RemotePin(connect(lane["anchor"]), lane["namespace"])
+        withdrawals = WithdrawalReader(policy, sources, Path(lane["db"]), retention, clock)
+    return Reader(policy, witnesses, archives, pin, clock, withdrawals=withdrawals)
 
 
 def pin_from_config(config):
@@ -224,6 +238,12 @@ def create_app(config):
         async def view(request: Request):
             auth(request, "view")
             return witness.view(await body(request, Challenge))
+
+        if policy.status_profile == "withdrawal-v2":
+            @app.post("/v2/withdrawals")
+            async def withdrawals(request: Request):
+                auth(request, "withdrawals-v2")
+                return witness.withdrawal_view(await body(request, Challenge))
 
     elif role == "archive":
         archive = Archive(Path(config["db"]), policy)

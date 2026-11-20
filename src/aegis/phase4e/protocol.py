@@ -66,6 +66,12 @@ class View(StrictModel, frozen=True):
     signature: Signature
 
 
+class WithdrawalView(StrictModel, frozen=True):
+    witness: Name
+    leaves: Annotated[tuple[Leaf, ...], Field(max_length=MAX_RECORDS)]
+    signature: Signature
+
+
 class Status(StrictModel, frozen=True):
     challenge: Hash
     head: Hash
@@ -96,7 +102,7 @@ class Authority:
 class TrustPolicy:
     def __init__(self, *, stream, cohort, coordinator, publisher, witnesses, quorum, faults,
                  epoch_seconds, max_age, status_ms, mesh_grants, mesh_domains, trust,
-                 profiles=frozenset({runner.LOCAL_PROFILE})):
+                 profiles=frozenset({runner.LOCAL_PROFILE}), status_profile="checkpoint-v1"):
         if (len(witnesses), quorum, faults) != (4, 3, 1):
             raise ValueError("Phase 4E-C requires three of four witness domains with one fault")
         authorities = (coordinator, publisher, *witnesses.values())
@@ -131,10 +137,14 @@ class TrustPolicy:
                 or domains & (publishers | verifiers | revokers)):
             raise ValueError("publisher, verifier, revoker and infrastructure domains overlap or are incomplete")
 
+        if status_profile not in ("checkpoint-v1", "withdrawal-v2"):
+            raise ValueError("unknown Phase 4E-C status profile")
         self.cohort, self.publisher, self.status_ms = cohort, publisher, status_ms
+        self.status_profile = status_profile
         self.trust, self.profiles = Trust(list(evidence_grants)), frozenset(profiles)
         scope_pin = digest([
-            "aegis-phase4e-v1", stream, status_ms, MAX_RECORDS, MAX_ORDINARY,
+            "aegis-phase4e-v1" if status_profile == "checkpoint-v1" else "aegis-phase4e-withdrawal-v2",
+            stream, status_ms, MAX_RECORDS, MAX_ORDINARY,
             sorted((n, w.domain) for n, w in witnesses.items()),
             coordinator.domain, publisher.domain, publisher.key.public_bytes_raw().hex(),
             sorted((p, k, d) for (p, k), d in mesh_domains.items()),
@@ -193,13 +203,27 @@ class TrustPolicy:
         self.journal.check_receipt(leaf.receipt)
         return self.authenticate(leaf.wire, admission.epoch * self.journal.epoch_seconds, historical=True)
 
-    def expiry(self, challenge, head, now):
-        cutoff_deadline = self.journal.deadline(head, now)
+    def check_withdrawal(self, leaf, witness):
+        admission = leaf.receipt.admission
+        votes = leaf.receipt.votes
+        if (admission.event != digest(leaf.wire) or admission.context != self.context
+                or len(votes) != 1 or votes[0].operator != witness):
+            raise JournalBlocked("withdrawal does not bind its enrolled witness receipt")
+        self.journal.check_vote(admission, votes[0])
+        record, _, _ = self.authenticate(leaf.wire, admission.epoch * self.journal.epoch_seconds, historical=True)
+        if not is_withdrawal(record):
+            raise JournalBlocked("withdrawal view contained a non-revocation record")
+        return record
+
+    def challenge_deadline(self, challenge, now):
         remaining = challenge.issued_ms + self.status_ms - now.upper * 1000
         if (challenge.context != self.context or challenge.subject.scope.cohort != self.cohort
                 or challenge.issued_ms > now.lower * 1000 or remaining <= 0):
             raise JournalBlocked("status challenge is outside scope or freshness")
-        return min(cutoff_deadline, now.monotonic + remaining / 1000)
+        return now.monotonic + remaining / 1000
+
+    def expiry(self, challenge, head, now):
+        return min(self.journal.deadline(head, now), self.challenge_deadline(challenge, now))
 
 
 def message(purpose, value):
@@ -215,6 +239,10 @@ def verify(key, purpose, value, signature):
 
 def view_binding(challenge, signed):
     return [digest(challenge), digest(signed)]
+
+
+def withdrawal_binding(challenge, witness, leaves):
+    return [digest(challenge), witness, [digest(leaf) for leaf in leaves]]
 
 
 def is_withdrawal(record):
