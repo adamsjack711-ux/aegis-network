@@ -1,0 +1,5 @@
+strace=unavailable
+perf=unavailable
+uid=1000 gid=1000 groups=1000
+aarch64
+Python 3.14.6

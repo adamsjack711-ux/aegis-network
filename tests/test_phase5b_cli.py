@@ -240,6 +240,32 @@ def test_default_and_failure_paths_make_no_persistent_writes(tmp_path):
             assert body.get("identity_scope", "none") == "none"
 
 
+def test_default_observation_uses_no_python_network_or_process_api(tmp_path, monkeypatch, capsys):
+    import socket
+    import aegis.cli as cli
+
+    release, db = inventory_files(tmp_path)
+    monkeypatch.setattr(cli, "collect_snapshot", lambda asset_id: collect_snapshot(
+        asset_id, os_release=release, dpkg_status=db, now=NOW))
+    calls = []
+
+    def forbidden(name):
+        def blocked(*_args, **_kwargs):
+            calls.append(name)
+            raise AssertionError(name)
+        return blocked
+
+    monkeypatch.setattr(socket, "socket", forbidden("socket.socket"))
+    monkeypatch.setattr(socket, "create_connection", forbidden("socket.create_connection"))
+    monkeypatch.setattr(subprocess, "Popen", forbidden("subprocess.Popen"))
+    monkeypatch.setattr(os, "system", forbidden("os.system"))
+    assert main(["inventory", "--json"]) == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["package_count"] == 1
+    assert output["asset_id"] is None and output["identity_scope"] == "none"
+    assert calls == []
+
+
 def test_explicit_identity_opt_in_is_confined(tmp_path, monkeypatch, capsys):
     release, db = inventory_files(tmp_path)
     import aegis.cli as cli
