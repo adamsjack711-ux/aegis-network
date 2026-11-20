@@ -1,0 +1,150 @@
+{
+  "approved_baseline": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "benchmarks": [
+    {
+      "architecture": "aarch64",
+      "distribution": "debian",
+      "installed_package_bytes": 1306644,
+      "inventory_packages": 87,
+      "python": "3.12.16",
+      "samples": {
+        "doctor": {
+          "max_peak_rss_mib": 35.742,
+          "max_wall_ms": 107.548,
+          "median_cpu_ms": 103.105,
+          "median_wall_ms": 104.492,
+          "min_wall_ms": 102.46,
+          "runs": 10
+        },
+        "inventory": {
+          "max_peak_rss_mib": 35.867,
+          "max_wall_ms": 112.844,
+          "median_cpu_ms": 103.768,
+          "median_wall_ms": 104.197,
+          "min_wall_ms": 101.061,
+          "runs": 10
+        },
+        "startup_help": {
+          "max_peak_rss_mib": 35.742,
+          "max_wall_ms": 109.883,
+          "median_cpu_ms": 105.776,
+          "median_wall_ms": 106.157,
+          "min_wall_ms": 102.859,
+          "runs": 10
+        }
+      },
+      "schema_version": "phase5b-alpha-benchmark-v1",
+      "wheel_bytes": 156265
+    },
+    {
+      "architecture": "aarch64",
+      "distribution": "ubuntu",
+      "installed_package_bytes": 1308943,
+      "inventory_packages": 506,
+      "python": "3.12.3",
+      "samples": {
+        "doctor": {
+          "max_peak_rss_mib": 33.77,
+          "max_wall_ms": 152.692,
+          "median_cpu_ms": 124.928,
+          "median_wall_ms": 151.041,
+          "min_wall_ms": 145.084,
+          "runs": 10
+        },
+        "inventory": {
+          "max_peak_rss_mib": 34.875,
+          "max_wall_ms": 152.288,
+          "median_cpu_ms": 125.107,
+          "median_wall_ms": 150.425,
+          "min_wall_ms": 145.866,
+          "runs": 10
+        },
+        "startup_help": {
+          "max_peak_rss_mib": 33.543,
+          "max_wall_ms": 149.315,
+          "median_cpu_ms": 118.892,
+          "median_wall_ms": 144.906,
+          "min_wall_ms": 140.083,
+          "runs": 10
+        }
+      },
+      "schema_version": "phase5b-alpha-benchmark-v1",
+      "wheel_bytes": 156265
+    }
+  ],
+  "build_backend": "setuptools==84.2.1 (cached, offline)",
+  "container_controls": [
+    "--pull never",
+    "--network none",
+    "--read-only",
+    "--user 1000:1000",
+    "--cap-drop ALL",
+    "--security-opt no-new-privileges",
+    "--memory 256m",
+    "--cpus 1"
+  ],
+  "focused_adjacent_tests": {
+    "passed": 28
+  },
+  "frozen_default_state_oracle_passes": 2,
+  "full_local_suite": {
+    "note": "run with local Unix socket permissions",
+    "passed": 353,
+    "skipped": 37,
+    "warning_count": 1
+  },
+  "harness_sha256": {
+    "scripts/benchmark_phase5b_alpha.py": "3aaabee2fbe8d18dc53ff545c62879ea4d91f0137eaf8e8cccde4b17974ebb73",
+    "scripts/phase5b_alpha_probe.py": "cd1431e85e638ce8ebbe777fccb320cfd6812192a52d61ce49a8f06c5ffc11fc",
+    "scripts/phase_next_probe_cli.py": "40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1",
+    "scripts/smoke_phase5b_linux.sh": "fc58ff80ddc7fbf69133586f11ce7c44990e491b19a3c438cde861aef9fc9c30"
+  },
+  "images": {
+    "debian": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "ubuntu": "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60"
+  },
+  "install_uninstall_passes": 4,
+  "limitations": [
+    "no cached syscall tracer",
+    "Ubuntu runtime dependencies reused from cached Debian image rather than resolved independently",
+    "arm64 and Python 3.12 only in actual distribution installs"
+  ],
+  "malformed_inventory_results": 2,
+  "observer_review": "a9b0d0e1d45b64ce833343dbfa3dd9f034a20770",
+  "offline_rebuilds_identical": true,
+  "probe_results": [
+    {
+      "distribution": "debian",
+      "exact_version_mismatch": "unmatched",
+      "explicit_state": "identity-only",
+      "implicit_writes": 0,
+      "invalid_signature": "rejected",
+      "package_count": 87,
+      "range_version": "unknown",
+      "runtime_enforcement_imports": 0,
+      "signed_exact_match": "unknown-independent-status",
+      "withdrawn": "unknown"
+    },
+    {
+      "distribution": "ubuntu",
+      "exact_version_mismatch": "unmatched",
+      "explicit_state": "identity-only",
+      "implicit_writes": 0,
+      "invalid_signature": "rejected",
+      "package_count": 506,
+      "range_version": "unknown",
+      "runtime_enforcement_imports": 0,
+      "signed_exact_match": "unknown-independent-status",
+      "withdrawn": "unknown"
+    }
+  ],
+  "raw_log_sha256": "4c5592fb7a8fc312cc3695cc44ccf7cff67c0585c076156d40f066efd589ce40",
+  "reproduce": [
+    "bash scripts/build_phase5b_alpha.sh FULL_COMMIT OUTPUT_DIR",
+    "bash scripts/smoke_phase5b_linux.sh",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest -q -p no:cacheprovider"
+  ],
+  "schema_version": "phase5b-alpha-validation-v1",
+  "validated_code_commit": "2bc4c135aeb38ad06770c3484c5bd67157046b47",
+  "wheel_sha256": "0e4a815ad95f5fab9d8bb997bec4ea8f67896460db86bb838441ca7318cbd0fa"
+}
