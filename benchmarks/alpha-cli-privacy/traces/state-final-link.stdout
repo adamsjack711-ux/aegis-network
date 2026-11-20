@@ -1,0 +1,1 @@
+{"schema_version": "observation-error-v2", "status": "unknown", "independent_status": "unknown", "error": "state directory parent must exist without symlinks and be writable"}

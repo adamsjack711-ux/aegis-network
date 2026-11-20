@@ -1,0 +1,13 @@
+{
+  "asset_id": null,
+  "captured_at": "2026-11-20T07:21:06.182897Z",
+  "cli_version": "0.1.0",
+  "distribution": "unknown",
+  "identity_scope": "none",
+  "inventory_complete": false,
+  "inventory_reason": "malformed installed package architecture",
+  "package_count": 0,
+  "packages": [],
+  "schema_version": "inventory-v2",
+  "snapshot_id": "0b400d3790dd14741bfdc7be6dd95278a0a21f5e28961e62c410f45612bbb6c4"
+}

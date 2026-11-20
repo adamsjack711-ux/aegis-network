@@ -1,0 +1,1 @@
+{"schema_version": "observation-error-v2", "status": "unknown", "independent_status": "unknown", "error": "signed Mesh feed requires --trust"}

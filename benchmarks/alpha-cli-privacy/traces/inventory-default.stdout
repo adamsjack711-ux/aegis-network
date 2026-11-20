@@ -1,0 +1,26 @@
+{
+  "asset_id": null,
+  "captured_at": "2026-11-20T07:20:11.670409Z",
+  "cli_version": "0.1.0",
+  "distribution": "debian",
+  "identity_scope": "none",
+  "inventory_complete": true,
+  "inventory_reason": "complete",
+  "package_count": 1,
+  "packages": [
+    {
+      "architecture": "amd64",
+      "asset_id": null,
+      "collected_at": "2026-11-20T07:20:11.671406Z",
+      "confidence": "installed-binary-package",
+      "ecosystem": "deb",
+      "limitation": "Binary package identity only; source-package and reachability mapping unavailable",
+      "name": "curl",
+      "purl": "pkg:deb/debian/curl",
+      "source": "dpkg-status",
+      "version": "1:8.0-1"
+    }
+  ],
+  "schema_version": "inventory-v2",
+  "snapshot_id": "b92072b61ef86865252fd894f5cfd76c4e6015f9f04b952de0c371e5bec52e58"
+}

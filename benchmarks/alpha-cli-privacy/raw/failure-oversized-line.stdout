@@ -1,0 +1,13 @@
+{
+  "asset_id": null,
+  "captured_at": "2026-11-20T07:21:06.729146Z",
+  "cli_version": "0.1.0",
+  "distribution": "unknown",
+  "identity_scope": "none",
+  "inventory_complete": false,
+  "inventory_reason": "dpkg status exceeds input limit",
+  "package_count": 0,
+  "packages": [],
+  "schema_version": "inventory-v2",
+  "snapshot_id": "a8b4b5531e7be08445293a529828e4ac22fe7249c53a19cb45ebca92f7ad9a52"
+}

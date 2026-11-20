@@ -1,0 +1,19 @@
+{
+  "asset_id": null,
+  "claim_count": 1,
+  "cli_version": "0.1.0",
+  "distribution": "debian",
+  "identity_scope": "none",
+  "independent_status": "unknown",
+  "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+  "intelligence_scope": "supplied-signed-events-only",
+  "inventory_complete": true,
+  "inventory_reason": "complete",
+  "mode": "observation-only",
+  "network": "offline",
+  "overall_assessment": "unknown",
+  "package_count": 1,
+  "potential_findings": 1,
+  "schema_version": "status-v2",
+  "unknown_claims": 0
+}
