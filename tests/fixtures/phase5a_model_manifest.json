@@ -1,0 +1,172 @@
+{
+  "schema_version": "phase5a-model-corpus-manifest-v1",
+  "scoring_unit": "asset-vulnerability point",
+  "adjudication": "Existing 12 author-labeled synthetic cases plus 8 new author-labeled variants; independent validation pending for these labels. Frozen independent H01-H12 labels remain in the separate validator holdout.",
+  "evaluation_at": "2026-11-19T12:00:00+00:00",
+  "corpus_sha256": "9a2427c19ca90d47ef235859776f8e126fa0a59ab88c61f9b0e756420c08f6ff",
+  "cases": [
+    {
+      "id": "osv-affected",
+      "gold": "affected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "osv-fixed",
+      "gold": "unaffected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "osv-prerelease",
+      "gold": "unknown",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "osv-conflicting",
+      "gold": "conflicting",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "519f13f35b99d1a583be4de2bf1e5e8bcd05e3f2a53ceaba3df3db829734c825"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "kev-no-version",
+      "gold": "unknown",
+      "source_sha256": [
+        "3609c3446738dc1b5cafee48b5b9a6a0513fb86fe16c99f085c2bb31435b77a2"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "nvd-config",
+      "gold": "unknown",
+      "source_sha256": [
+        "f32255a7e8b5673cffeaffb9d51bd98bf5beb5b2f0f21cc5433b600d65efddf4"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "ecosystem-collision",
+      "gold": "unknown",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "stale-snapshot",
+      "gold": "unknown",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "withdrawn-advisory",
+      "gold": "unknown",
+      "source_sha256": [
+        "0a150fa96e73a18c078d2570a403671bd03a7ad25a06e0be241f7de5a85d4ccc"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "prompt-injection-data",
+      "gold": "affected",
+      "source_sha256": [
+        "5bbf03dca3d5671f3452ee251fd796fcb61351a324bc1a49a4e5f24c431bc024"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "source-correction-conflict",
+      "gold": "conflicting",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "13bb3780b7bdae16490b4ed614843d00eba02427460f5bb4d292ecef504862a2"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "alias-ambiguity",
+      "gold": "conflicting",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "3ae07c784e6fdbf8e08a70b13ea068da90a51efdcf26e75059bad611543a6b93"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "boundary-introduced-inclusive",
+      "gold": "affected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "boundary-below-introduced",
+      "gold": "unaffected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "boundary-before-fixed",
+      "gold": "affected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "boundary-after-fixed",
+      "gold": "unaffected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "ambiguous-local-version",
+      "gold": "unknown",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "kev-positive-trap",
+      "gold": "unknown",
+      "source_sha256": [
+        "3609c3446738dc1b5cafee48b5b9a6a0513fb86fe16c99f085c2bb31435b77a2"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "stale-positive-trap",
+      "gold": "unknown",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ],
+      "label_owner": "author; independent review pending"
+    },
+    {
+      "id": "withdrawn-positive-trap",
+      "gold": "unknown",
+      "source_sha256": [
+        "0a150fa96e73a18c078d2570a403671bd03a7ad25a06e0be241f7de5a85d4ccc"
+      ],
+      "label_owner": "author; independent review pending"
+    }
+  ]
+}

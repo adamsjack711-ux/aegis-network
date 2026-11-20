@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import time
+from datetime import datetime
 from typing import Literal, Protocol
 from pydantic import Field, ValidationError, model_validator
 
@@ -191,11 +192,12 @@ def _check(result: ResearchPayload, claims: tuple[Claim, ...],
 def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, provider: JSONProvider,
              *, max_input_bytes: int = 10000, max_output_tokens: int = 700,
              source_snapshots: tuple[SourceSnapshot, ...] | None = None,
+             now: datetime | None = None,
              input_usd_per_million: float | None = None,
              output_usd_per_million: float | None = None) -> ResearchResult:
     if not 1000 <= max_input_bytes <= 20000 or not 100 <= max_output_tokens <= 1000:
         raise ValueError("research budget outside allowed limits")
-    baseline = assess(asset, claims, vulnerability_id)
+    baseline = assess(asset, claims, vulnerability_id, now=now)
     relevant = [claim for claim in claims if vulnerability_id in (claim.vulnerability_id, *claim.aliases)][:12]
     if not relevant:
         raise ValueError("research requires at least one source claim")
@@ -219,7 +221,7 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
     payload = json.dumps({"task": "research", "vulnerability_id": vulnerability_id,
                           "asset": {"alias": "asset-1", "version": safe_version,
                                     "configuration_present": asset.configuration is not None},
-                          "baseline_outcome": baseline.outcome, "facts": facts},
+                          "facts": facts},
                          sort_keys=True, separators=(",", ":"))
     if len(payload.encode()) + len(INSTRUCTIONS.encode()) > max_input_bytes:
         raise ValueError("research input exceeds byte budget")
@@ -255,7 +257,7 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
                           provider_version=result.provider_version,
                           experiment_config={"max_input_bytes": max_input_bytes,
                                              "max_output_tokens": max_output_tokens,
-                                             "prompt_version": "1"}, usage=result.usage,
+                                             "prompt_version": "2"}, usage=result.usage,
                           estimated_cost_usd=cost, latency_ms=round(latency, 3))
     check = _check(research_result, claims, source_snapshots)
     checked = {**research_result.model_dump(mode="json"),
