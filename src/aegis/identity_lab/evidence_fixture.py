@@ -78,9 +78,13 @@ class _PendingWrite:
     commit_denial: Exception | None = None
 
     def check_current(self) -> None:
-        if monotonic_ns() >= min(self.approval.expires_ns, self.appraisal.plan.expires_ns):
+        deadline = min(self.approval.expires_ns, self.appraisal.plan.expires_ns)
+        if monotonic_ns() >= deadline:
             raise Denied("bound Evidence authorization reached its exclusive deadline")
-        if not self.appraisal.gate.status_current():
+        status_current = self.appraisal.gate.status_current()
+        if monotonic_ns() >= deadline:
+            raise Denied("bound Evidence authorization reached its exclusive deadline")
+        if not status_current:
             raise Denied("bound Evidence or witnessed cut is no longer current")
 
     def authorize_sql(self, action, operation, _unused, _database, _trigger):

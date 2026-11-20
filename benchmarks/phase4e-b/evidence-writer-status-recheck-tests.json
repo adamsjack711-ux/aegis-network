@@ -1,0 +1,62 @@
+{
+  "identity_source": "79cd10a72aac169047f63fe137988ce881304f25",
+  "adapter_sha256": "411f8403b053dbc158729898e2b8504b2703bf222595bb2085ecf6b63af2f734",
+  "tests_sha256": "799e8d7a1b89ddbdcfa7c528be1efdd5e1c178652f66d4e0a0628e461ea415b4",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "sqlite": "3.54.1",
+  "scope": "one host, loopback mTLS and native lab status, inert marker",
+  "result": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suite_seconds": 19.184,
+  "case_results": [
+    {
+      "id": "test_exact_evidence_in_b_transaction[none-None]",
+      "seconds": 1.722
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-cut-cut differs]",
+      "seconds": 1.978
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-approval-approval signature]",
+      "seconds": 1.9
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-plan-exact mutation and native plan]",
+      "seconds": 1.795
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[wrong-target-exact mutation and native plan]",
+      "seconds": 1.823
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[stale-generation-durable fence]",
+      "seconds": 2.023
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[new-witness-cut-native appraisal is unavailable]",
+      "seconds": 1.768
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[expiry-after-owner-exclusive deadline]",
+      "seconds": 2.072
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[native-expiry-after-owner-exclusive deadline]",
+      "seconds": 1.94
+    },
+    {
+      "id": "test_exact_evidence_in_b_transaction[expiry-during-status-read-exclusive deadline]",
+      "seconds": 1.879
+    }
+  ],
+  "delayed_status_control": {
+    "before_fix": "On cb6f294 with the new regression, the expected denial did not occur.",
+    "fixed": "The clock reached the exclusive cutoff after the healthy status read. The marker, version and receipts stayed unchanged and the same nonce committed once under the healthy test clock."
+  }
+}

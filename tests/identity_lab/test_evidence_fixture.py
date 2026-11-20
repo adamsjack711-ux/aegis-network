@@ -114,6 +114,7 @@ def inspect(target_path):
     ("new-witness-cut", "native appraisal is unavailable"),
     ("expiry-after-owner", "exclusive deadline"),
     ("native-expiry-after-owner", "exclusive deadline"),
+    ("expiry-during-status-read", "exclusive deadline"),
 ])
 def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, monkeypatch):
     native, network = native_appraisal
@@ -143,18 +144,20 @@ def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, m
     elif fault == "new-witness-cut":
         network.publish(network.seal())
         asyncio.run(native.gate.refresh())
-    elif fault == "expiry-after-owner":
+    elif fault in {"expiry-after-owner", "expiry-during-status-read"}:
         body = body.model_copy(update={"expires_ns": native.plan.expires_ns - 1_000_000_000})
     elif fault == "native-expiry-after-owner":
         body = body.model_copy(update={"expires_ns": native.plan.expires_ns + 1_000_000_000})
     approval = sign_evidence_approval(body, key)
     before = inspect(path)
 
-    if fault in {"expiry-after-owner", "native-expiry-after-owner"}:
+    if fault in {"expiry-after-owner", "native-expiry-after-owner", "expiry-during-status-read"}:
         base_apply = Target.apply
         base_current = Target.require_current
+        base_status = native.gate.status_current
         staged = []
         checked_owner = []
+        checked_status = []
         cutoff = min(body.expires_ns, native.plan.expires_ns)
         assert monotonic_ns() < cutoff
 
@@ -169,14 +172,27 @@ def test_exact_evidence_in_b_transaction(lab, native_appraisal, fault, reason, m
             base_current(writer, offered)
             checked_owner.append(True)
 
+        def final_status():
+            result = base_status()
+            if checked_owner:
+                assert result
+                checked_status.append(True)
+            return result
+
         with monkeypatch.context() as patches:
             patches.setattr(Target, "apply", stage)
             patches.setattr(Target, "require_current", final_owner)
-            patches.setattr(evidence_fixture, "monotonic_ns",
-                            lambda: cutoff if checked_owner else monotonic_ns())
+            if fault == "expiry-during-status-read":
+                patches.setattr(native.gate, "status_current", final_status)
+                expire_at = checked_status
+            else:
+                expire_at = checked_owner
+            patches.setattr(evidence_fixture, "monotonic_ns", lambda: cutoff if expire_at else monotonic_ns())
             with pytest.raises(Denied, match=reason):
                 target.write_verified(peer, request, approval, native)
         assert staged == checked_owner == [True]
+        if fault == "expiry-during-status-read":
+            assert checked_status == [True]
         assert inspect(path) == before
         # The requested write's nonce was rolled back with the marker update.
         asyncio.run(native.gate.refresh())
