@@ -396,6 +396,56 @@ def test_required_profile_denies_unenrolled_replacement_database(enrolled, tmp_p
     assert replacement.history() == []
 
 
+def test_paused_old_owner_and_two_successors_compete_after_target_fence(enrolled):
+    """A target-home fence works locally even while the old broker lease lives."""
+    store, operator, key = enrolled
+    old = claim(store, key, BROKERS[0])
+    old_plan = plan_for(old)
+    old_approval = operator.approve(old_plan, old_plan.digest)
+    assert store.ownership.fence(old.assignment.generation) == 2
+
+    ready = Event()
+    def successor(broker):
+        ready.wait(timeout=2)
+        try:
+            return claim(target_store(store.path, operator), key, broker)
+        except Denied:
+            return None
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(successor, broker) for broker in BROKERS]
+        ready.set()
+        successors = [future.result(timeout=4) for future in futures]
+    winners = [session for session in successors if session is not None]
+    assert len(winners) == 1
+    assert winners[0].assignment.generation == 3
+    with pytest.raises(Denied, match="stale"):
+        store.begin(old_plan, old_approval, baseline(old_plan),
+                    command=old.command("begin", old_plan.digest))
+    assert store.history() == []
+    assert [row[0] for row in records(store)] == ["enroll", "claim", "fence", "claim"]
+
+
+def test_restored_unanchored_target_home_resurrects_old_owner_diagnostic(enrolled, tmp_path):
+    """Counterexample: a copied home needs an independent rollback floor."""
+    store, operator, key = enrolled
+    old = claim(store, key, BROKERS[0])
+    snapshot = tmp_path / "before-fence.db"
+    with sqlite3.connect(store.path) as live, sqlite3.connect(snapshot) as saved:
+        live.backup(saved)
+    store.ownership.fence(old.assignment.generation)
+    claim(store, key, BROKERS[1])
+    with pytest.raises(Denied, match="stale"):
+        store.ownership.check(old.assignment)
+    # This simulates a restore of the entire target home without an external
+    # floor. It is a diagnostic of today's boundary, not a recovery protocol.
+    with sqlite3.connect(snapshot) as saved, sqlite3.connect(store.path) as live:
+        saved.backup(live)
+    restored = target_store(store.path, operator)
+    assert restored.ownership.check(old.assignment) > monotonic_ns()
+    assert [row[0] for row in records(restored)] == ["enroll", "claim"]
+
+
 @asynccontextmanager
 async def live_broker():
     name = f"aegis-t3-{uuid4().hex}"

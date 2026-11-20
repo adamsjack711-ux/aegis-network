@@ -1,0 +1,240 @@
+{
+  "deadline_ms": 5000,
+  "diagnostic_denominator": {
+    "crash_pairs": 10,
+    "crash_pairs_over_5000_ms": 10,
+    "crash_trials": 5,
+    "healthy_pairs": 4,
+    "healthy_pairs_within_5000_ms": 4,
+    "healthy_trials": 2
+  },
+  "frozen_release_matrix": {
+    "full_oracle_evaluable_fault_pairs": 0,
+    "full_oracle_evaluable_healthy_pairs": 0,
+    "ordinary_pending_required_per_fault_run": 1000,
+    "required_fault_agent_pairs": 72,
+    "required_healthy_agent_pairs": 18,
+    "status": "unrun; historical diagnostics cannot enter the numerator"
+  },
+  "source": "retained one-host dry-run diagnostics; exact input bytes hashed per trial",
+  "trials": [
+    {
+      "broker_start_return_ms": 175.931,
+      "busy_kv_claims": 30,
+      "claim_from_restart_ms": 30478.094,
+      "file": "benchmarks/phase-next-remediation/4f-sigkill-fault.json",
+      "first_critical_wire_from_restart_ms": 30524.323,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 30527.484,
+          "submit_to_confirmed_ack_ms": 30591.015,
+          "submit_to_durable_dry_run_denial_ms": 30589.201,
+          "withdrawal_id": "d9b1a725-c55b-4b11-a92c-a2cd3e64712b",
+          "within_5000_ms": false
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 30532.324,
+          "submit_to_confirmed_ack_ms": 30578.713,
+          "submit_to_durable_dry_run_denial_ms": 30576.431,
+          "withdrawal_id": "10ce9871-d841-4613-acfa-cf05b471a5eb",
+          "within_5000_ms": false
+        }
+      ],
+      "pre_intake_sigkill": true,
+      "read_only_denial_matches_findings": true,
+      "sha256": "19d7bbcccb69ad7238fd93588e04634c8e02c08528b437d8eb703dea20fee17d",
+      "source_pin": "2fa7321618fc5e7435b339ffa9368de258198d21"
+    },
+    {
+      "broker_start_return_ms": 196.228,
+      "busy_kv_claims": 30,
+      "claim_from_restart_ms": 30503.451,
+      "file": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-1.json",
+      "first_critical_wire_from_restart_ms": 30551.384,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 30554.514,
+          "submit_to_confirmed_ack_ms": 30618.402,
+          "submit_to_durable_dry_run_denial_ms": 30616.8,
+          "withdrawal_id": "c0c9fdba-6ab1-4df3-97a7-1e57cef218be",
+          "within_5000_ms": false
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 30558.631,
+          "submit_to_confirmed_ack_ms": 30605.658,
+          "submit_to_durable_dry_run_denial_ms": 30604.231,
+          "withdrawal_id": "bdc548c6-27b4-4730-9433-1a28a57c11a4",
+          "within_5000_ms": false
+        }
+      ],
+      "pre_intake_sigkill": true,
+      "read_only_denial_matches_findings": true,
+      "sha256": "fbb13cb3fef546f6e6a31bbdd4b1df436face6a56cb866bc867442c0bcce3894",
+      "source_pin": "613efe36e56609bfe4c62740b2ecdee3ae0aeec4"
+    },
+    {
+      "broker_start_return_ms": 186.787,
+      "busy_kv_claims": 30,
+      "claim_from_restart_ms": 30486.977,
+      "file": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-2.json",
+      "first_critical_wire_from_restart_ms": 30535.923,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 30539.239,
+          "submit_to_confirmed_ack_ms": 30605.925,
+          "submit_to_durable_dry_run_denial_ms": 30604.164,
+          "withdrawal_id": "c38da8c5-b755-4156-83ed-7748e6c219dd",
+          "within_5000_ms": false
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 30543.517,
+          "submit_to_confirmed_ack_ms": 30592.525,
+          "submit_to_durable_dry_run_denial_ms": 30591.067,
+          "withdrawal_id": "2862a34e-36b0-4800-a0a9-70cccb2e8124",
+          "within_5000_ms": false
+        }
+      ],
+      "pre_intake_sigkill": true,
+      "read_only_denial_matches_findings": true,
+      "sha256": "172c1effa3935cece06a082829b73c5ffa26d1249ed77bb03d5d5a82594f6487",
+      "source_pin": "613efe36e56609bfe4c62740b2ecdee3ae0aeec4"
+    },
+    {
+      "broker_start_return_ms": 186.589,
+      "busy_kv_claims": 30,
+      "claim_from_restart_ms": 30498.117,
+      "file": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-3.json",
+      "first_critical_wire_from_restart_ms": 30550.186,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 30553.404,
+          "submit_to_confirmed_ack_ms": 30615.184,
+          "submit_to_durable_dry_run_denial_ms": 30613.554,
+          "withdrawal_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a",
+          "within_5000_ms": false
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 30557.573,
+          "submit_to_confirmed_ack_ms": 30602.326,
+          "submit_to_durable_dry_run_denial_ms": 30600.894,
+          "withdrawal_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a",
+          "within_5000_ms": false
+        }
+      ],
+      "pre_intake_sigkill": true,
+      "read_only_denial_matches_findings": true,
+      "sha256": "7b169af7589df3171d4a5236847964bff97e47dfd9f8fc654a13e46ba09fae1b",
+      "source_pin": "613efe36e56609bfe4c62740b2ecdee3ae0aeec4"
+    },
+    {
+      "broker_start_return_ms": 197.705,
+      "busy_kv_claims": 30,
+      "claim_from_restart_ms": 30499.251,
+      "file": "benchmarks/phase4f-kv-recovery/baseline-sigkill.json",
+      "first_critical_wire_from_restart_ms": 30543.382,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 30548.66,
+          "submit_to_confirmed_ack_ms": 30612.772,
+          "submit_to_durable_dry_run_denial_ms": 30610.679,
+          "withdrawal_id": "514d7ded-6ed5-4fbc-b71c-f0f1089bcfba",
+          "within_5000_ms": false
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 30553.422,
+          "submit_to_confirmed_ack_ms": 30600.936,
+          "submit_to_durable_dry_run_denial_ms": 30598.738,
+          "withdrawal_id": "7a7b5036-72db-496a-81d9-e3cc6d31bfb3",
+          "within_5000_ms": false
+        }
+      ],
+      "pre_intake_sigkill": true,
+      "read_only_denial_matches_findings": true,
+      "sha256": "8cc699a8d7a478f0ed789cef40ac84a402526349636ce833e393833b51eda95f",
+      "source_pin": "3298273c285d2f6819df7016eb35c83819dd8335"
+    },
+    {
+      "broker_start_return_ms": 177.609,
+      "busy_kv_claims": 0,
+      "claim_from_restart_ms": null,
+      "file": "benchmarks/phase-next-remediation/4f-broker-control.json",
+      "first_critical_wire_from_restart_ms": 1708.433,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 1706.051,
+          "submit_to_confirmed_ack_ms": 1779.766,
+          "submit_to_durable_dry_run_denial_ms": 1767.656,
+          "withdrawal_id": "06278ea3-23a2-42a5-867e-17105e5bd820",
+          "within_5000_ms": true
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 1710.792,
+          "submit_to_confirmed_ack_ms": 1780.621,
+          "submit_to_durable_dry_run_denial_ms": 1753.683,
+          "withdrawal_id": "c64ebd59-709d-4fa8-b5ba-d3fa12650c39",
+          "within_5000_ms": true
+        }
+      ],
+      "pre_intake_sigkill": false,
+      "read_only_denial_matches_findings": true,
+      "sha256": "bec42e65ee8876db7926eff65a10832c51b0c328a56ca0d630cf7100f96444c1",
+      "source_pin": "2fa7321618fc5e7435b339ffa9368de258198d21"
+    },
+    {
+      "broker_start_return_ms": 171.996,
+      "busy_kv_claims": 0,
+      "claim_from_restart_ms": null,
+      "file": "benchmarks/phase4f-withdrawal-recovery/broker-restart-no-kill.json",
+      "first_critical_wire_from_restart_ms": 1700.774,
+      "ordinary_pending": 6,
+      "pairs": [
+        {
+          "kind": "independent",
+          "restart_to_durable_dry_run_denial_ms": 1699.135,
+          "submit_to_confirmed_ack_ms": 1767.908,
+          "submit_to_durable_dry_run_denial_ms": 1759.519,
+          "withdrawal_id": "c3434071-2af1-4c8f-a03c-30c5608b5a3f",
+          "within_5000_ms": true
+        },
+        {
+          "kind": "mixed",
+          "restart_to_durable_dry_run_denial_ms": 1703.261,
+          "submit_to_confirmed_ack_ms": 1776.193,
+          "submit_to_durable_dry_run_denial_ms": 1746.994,
+          "withdrawal_id": "4bb00015-964a-4f0b-a198-28e1cd6b8a5f",
+          "within_5000_ms": true
+        }
+      ],
+      "pre_intake_sigkill": false,
+      "read_only_denial_matches_findings": true,
+      "sha256": "db348df0d224c56c0e1fb060fd4067b5e1592ed260b735c60953ffd43e873ad5",
+      "source_pin": "613efe36e56609bfe4c62740b2ecdee3ae0aeec4"
+    }
+  ],
+  "unmeasured": [
+    "native T4/T5 withdrawal acceptance",
+    "target-side durable restriction",
+    "target generation/fence",
+    "agent-owned native proof provenance",
+    "physical multi-host custody",
+    "CPU/RSS"
+  ]
+}

@@ -31,7 +31,8 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
             self.trust_path.write_text(json.dumps(trust))
             self.mixed_key_id = mixed["key_id"]
 
-    lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5, timeout=90), directory, env)
+    lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5,
+                              timeout=180 if ordinary_count >= 1000 else 90), directory, env)
     agent_id = str(uuid4())
     async with httpx.AsyncClient(trust_env=False, timeout=10) as client:
         try:
@@ -226,8 +227,8 @@ def main():
     parser.add_argument("--kill-agent", action="store_true")
     parser.add_argument("--priority", action="store_true", help="exercise the opt-in separate priority stream")
     args = parser.parse_args()
-    if not 1 <= args.ordinary_count <= 200:
-        parser.error("--ordinary-count must be between 1 and 200")
+    if not 1 <= args.ordinary_count <= 1000:
+        parser.error("--ordinary-count must be between 1 and 1000")
     checkout = args.checkout.resolve()
     if args.priority:
         os.environ["AEGIS_PHASE4E_PRIORITY"] = "1"
