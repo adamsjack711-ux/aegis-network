@@ -1,0 +1,12 @@
+{
+  "loaded": [
+    "aegis.artifact",
+    "aegis.cli",
+    "aegis.intelligence_adapter",
+    "aegis.local_observer",
+    "aegis.observer_grants",
+    "aegis.trust"
+  ],
+  "blocked": [],
+  "blocked_count": 0
+}
