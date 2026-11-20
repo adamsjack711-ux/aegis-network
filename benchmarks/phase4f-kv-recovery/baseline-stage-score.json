@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "agent_sigkill": true,
+      "broker_start_return_ms": 197.705,
+      "busy_attempts": 30,
+      "claim_success_from_restart_ms": 30499.251,
+      "durable_denial_and_priority_control": "pass",
+      "file": "benchmarks/phase4f-kv-recovery/baseline-sigkill.json",
+      "first_critical_receipt_from_restart_ms": 30543.382,
+      "five_second_submit_to_durable_denial": "fail",
+      "independent_submit_to_denial_ms": 30610.679,
+      "mixed_submit_to_denial_ms": 30598.738,
+      "sha256": "8cc699a8d7a478f0ed789cef40ac84a402526349636ce833e393833b51eda95f",
+      "source_pin": "3298273c285d2f6819df7016eb35c83819dd8335",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    }
+  ],
+  "denominator": {
+    "sigkill_trials": 1,
+    "targeted_pairs": 2,
+    "trials": 1
+  },
+  "diagnostic_pass": 1,
+  "five_second_fail": 1,
+  "limitations": "One host, one broker, one dry-run agent per trial; no native T4/T5 or target hold timestamp. Controller and child perf_counter_ns comparable only within one host."
+}
