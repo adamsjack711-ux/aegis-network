@@ -1,0 +1,144 @@
+{
+  "source_commit": "79cd10a72aac169047f63fe137988ce881304f25",
+  "full_local_live": {
+    "totals": {
+      "tests": 290,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "duration_s": 113.551,
+    "identity_cases": [
+      {
+        "name": "test_simultaneous_authenticated_broker_claims",
+        "duration_s": 1.75,
+        "result": "passed"
+      },
+      {
+        "name": "test_former_owner_signed_command_denied_at_actual_writer",
+        "duration_s": 1.897,
+        "result": "passed"
+      },
+      {
+        "name": "test_distinct_leaf_with_same_uri_and_separate_proof_key",
+        "duration_s": 1.639,
+        "result": "passed"
+      },
+      {
+        "name": "test_expired_leaf_during_recovery_and_rotated_key",
+        "duration_s": 1.871,
+        "result": "passed"
+      },
+      {
+        "name": "test_broker_loss_and_reconciliation",
+        "duration_s": 2.075,
+        "result": "passed"
+      },
+      {
+        "name": "test_stale_home_snapshot_and_independent_anchor",
+        "duration_s": 2.394,
+        "result": "passed"
+      },
+      {
+        "name": "test_target_restarts_during_partial_transfer",
+        "duration_s": 2.307,
+        "result": "passed"
+      },
+      {
+        "name": "test_old_approval_cannot_authorize_new_generation",
+        "duration_s": 1.729,
+        "result": "passed"
+      },
+      {
+        "name": "test_broker_and_signing_roles_are_separate",
+        "duration_s": 1.652,
+        "result": "passed"
+      },
+      {
+        "name": "test_lease_expiry_allows_new_broker_without_operator[2000000000]",
+        "duration_s": 3.778,
+        "result": "passed"
+      },
+      {
+        "name": "test_restored_anchor_cannot_reset_newer_home_floor",
+        "duration_s": 2.257,
+        "result": "passed"
+      },
+      {
+        "name": "test_restarted_writer_holds_after_same_generation_restore",
+        "duration_s": 2.117,
+        "result": "passed"
+      },
+      {
+        "name": "test_lost_anchor_latches_quarantine_before_any_serving_request",
+        "duration_s": 2.346,
+        "result": "passed"
+      },
+      {
+        "name": "test_serving_denial_does_not_commit_hold_while_writer_lock_is_owned",
+        "duration_s": 1.663,
+        "result": "passed"
+      },
+      {
+        "name": "test_live_retirement_waits_for_all_target_barriers",
+        "duration_s": 1.974,
+        "result": "passed"
+      },
+      {
+        "name": "test_final_write_guard_rolls_back_buffered_effect_and_receipt[home-unavailable]",
+        "duration_s": 1.788,
+        "result": "passed"
+      },
+      {
+        "name": "test_final_write_guard_rolls_back_buffered_effect_and_receipt[watchdog-denial]",
+        "duration_s": 1.686,
+        "result": "passed"
+      },
+      {
+        "name": "test_commit_refuses_to_wait_on_reader_after_authorizing",
+        "duration_s": 1.667,
+        "result": "passed"
+      }
+    ],
+    "warnings": [
+      "Inherited Starlette TestClient and httpx deprecation"
+    ]
+  },
+  "focused_docker": {
+    "totals": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "duration_s": 52.427,
+    "identity_cases": [
+      {
+        "name": "test_broker_loss_and_reconciliation",
+        "duration_s": 9.762,
+        "result": "passed"
+      },
+      {
+        "name": "test_target_restarts_during_partial_transfer",
+        "duration_s": 11.341,
+        "result": "passed"
+      },
+      {
+        "name": "test_lease_expiry_allows_new_broker_without_operator[2000000000]",
+        "duration_s": 8.98,
+        "result": "passed"
+      },
+      {
+        "name": "test_lost_anchor_latches_quarantine_before_any_serving_request",
+        "duration_s": 13.549,
+        "result": "passed"
+      },
+      {
+        "name": "test_live_retirement_waits_for_all_target_barriers",
+        "duration_s": 8.745,
+        "result": "passed"
+      }
+    ],
+    "deselected": 13
+  }
+}
