@@ -1,0 +1,44 @@
+{
+  "build": {
+    "backend_cache": "/private/tmp/aegis-phase5b-uv-cache/archive-v0/RoEoJI62QqB45TEv/hatchling-1.33.0.dist-info/RECORD",
+    "backend_note": "Extracted uv cache; original Hatchling wheel bytes unavailable, RECORD hash is not wheel hash.",
+    "backend_record_sha256": "e3b5d3ab14063323c18d7edb898bc0975a3634c636394030766a44798f481df0",
+    "command": "SOURCE_DATE_EPOCH=1735689600 UV_CACHE_DIR=/private/tmp/aegis-phase5b-uv-cache uv build --offline --wheel --sdist --out-dir /private/tmp/aegis-5b-alpha-876988-run3",
+    "sdist_sha256": "d73bca0e0f36a231b3f5a77d51e8c0ed25faf87d056aabfb1ea6cd3380de85fc",
+    "wheel_sha256": "7f4701b30303f47e645374f6d0ee085e74e927bd06dfc26da533ae5bd60a8698"
+  },
+  "classification": "owner-reported; not independently accepted",
+  "files": {
+    "aegis-5b-alpha-876988-build.log": {
+      "bytes": 232,
+      "sha256": "f4eb8bb62673dc23bfc762a9e993ac12daffb22a4850f9aaca6a1bb6d9fc5dea"
+    },
+    "aegis-5b-alpha-876988-debian-matrix.json": {
+      "bytes": 28378,
+      "sha256": "8452bc53afa2ab9e25caf8713be7866fceed98936c5acfffaca983b2b5df204a"
+    },
+    "aegis-5b-alpha-876988-debian-resource.json": {
+      "bytes": 1667,
+      "sha256": "2f04fdab1f8290136f8a5bb0f103d11782e58c9540add2312a9937502ce882f1"
+    },
+    "aegis-5b-alpha-876988-ubuntu-hybrid-matrix.json": {
+      "bytes": 28377,
+      "sha256": "8191de94756be71799e286d2074e9b9bc7655868ff182431cebc6e02bb153613"
+    },
+    "aegis-5b-alpha-876988-ubuntu-hybrid-resource.json": {
+      "bytes": 1665,
+      "sha256": "4f916e1f3a9b760a74656ff8ad259777be06c673ddc4d5f2daa8475500cba16a"
+    }
+  },
+  "implementation_commit": "876988ba30abed9c2954668d02b2c4c13f84e50f",
+  "limitations": [
+    "Ubuntu diagnostic mounted read-only Python dependencies copied from cached Debian image; it does not prove independent Ubuntu dependency installation.",
+    "No cached syscall tracer was available; no-attempted-network/exec/privilege-syscall gate is inconclusive.",
+    "The wheel contains enforcement modules even though the CLI import path avoids them.",
+    "The raw matrices and resource runs are owner measurements, not independent VAL-D acceptance."
+  ],
+  "test_images": {
+    "debian": "aegis_phase4_baseline-coordinator:latest sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "ubuntu_hybrid": "mcr.microsoft.com/playwright/python:v1.50.0-noble sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60"
+  }
+}
