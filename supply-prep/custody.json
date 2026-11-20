@@ -1,0 +1,34 @@
+[
+  {
+    "cell": "debian-13-py312",
+    "issuer_uid": 501,
+    "custodian_uid": 501,
+    "public_grant_sha256": "baee14fb31bb1f9e5f1c268baf8e065f6931096fad7c6128688f80e4d3db5753",
+    "host_permissions": "drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /\ndrwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users\ndrwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell\n 0: group:everyone deny delete\ndrwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network\ndrwxr-xr-x  107 jackadams-lovell  staff  3424 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees\ndr-xr-xr-x@   3 jackadams-lovell  staff    96 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmp9d06cu01\n-r--r--r--@   1 jackadams-lovell  staff   270 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmp9d06cu01/grant.json\n",
+    "consumer": "uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\n/ 0:0 755\n/grants 0:0 555\n/grants/grant.json 65534:65534 444\nbaee14fb31bb1f9e5f1c268baf8e065f6931096fad7c6128688f80e4d3db5753  /grants/grant.json\n/grants ro,relatime\n"
+  },
+  {
+    "cell": "debian-13-py313",
+    "issuer_uid": 501,
+    "custodian_uid": 501,
+    "public_grant_sha256": "68da90b52750b9a2f1d2d87a43ed23413398d38b0a936f6669d8546b98f129b3",
+    "host_permissions": "drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /\ndrwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users\ndrwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell\n 0: group:everyone deny delete\ndrwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network\ndrwxr-xr-x  107 jackadams-lovell  staff  3424 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees\ndr-xr-xr-x@   3 jackadams-lovell  staff    96 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpvd6qr5d1\n-r--r--r--@   1 jackadams-lovell  staff   270 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpvd6qr5d1/grant.json\n",
+    "consumer": "uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\n/ 0:0 755\n/grants 0:0 555\n/grants/grant.json 65534:65534 444\n68da90b52750b9a2f1d2d87a43ed23413398d38b0a936f6669d8546b98f129b3  /grants/grant.json\n/grants ro,relatime\n"
+  },
+  {
+    "cell": "ubuntu-2404-py312",
+    "issuer_uid": 501,
+    "custodian_uid": 501,
+    "public_grant_sha256": "d1caae8423c3e517419b2f256f58da2197a6bfb15c2d4828b219ecf994df57b8",
+    "host_permissions": "drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /\ndrwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users\ndrwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell\n 0: group:everyone deny delete\ndrwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network\ndrwxr-xr-x  107 jackadams-lovell  staff  3424 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees\ndr-xr-xr-x@   3 jackadams-lovell  staff    96 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpip7bwmux\n-r--r--r--@   1 jackadams-lovell  staff   270 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpip7bwmux/grant.json\n",
+    "consumer": "uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\n/ 0:0 755\n/grants 0:0 555\n/grants/grant.json 65534:65534 444\nd1caae8423c3e517419b2f256f58da2197a6bfb15c2d4828b219ecf994df57b8  /grants/grant.json\n/grants ro,relatime\n"
+  },
+  {
+    "cell": "ubuntu-2404-py313",
+    "issuer_uid": 501,
+    "custodian_uid": 501,
+    "public_grant_sha256": "52faf33c803066c7b01538f1fedef8e9b1622619ce6c524c149eddb2ca39a7ff",
+    "host_permissions": "drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /\ndrwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users\ndrwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell\n 0: group:everyone deny delete\ndrwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network\ndrwxr-xr-x  107 jackadams-lovell  staff  3424 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees\ndr-xr-xr-x@   3 jackadams-lovell  staff    96 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpjo2d7fye\n-r--r--r--@   1 jackadams-lovell  staff   270 Nov 20 12:35 /Users/jackadams-lovell/aegis-network/.worktrees/tmpjo2d7fye/grant.json\n",
+    "consumer": "uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)\n/ 0:0 755\n/grants 0:0 555\n/grants/grant.json 65534:65534 444\n52faf33c803066c7b01538f1fedef8e9b1622619ce6c524c149eddb2ca39a7ff  /grants/grant.json\n/grants ro,relatime\n"
+  }
+]
