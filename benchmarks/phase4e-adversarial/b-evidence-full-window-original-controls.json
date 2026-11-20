@@ -1,0 +1,124 @@
+{
+  "identity_source": "79cd10a72aac169047f63fe137988ce881304f25",
+  "red_adapter_source": "fba23321b8f5732a513b650e1bc5ccd8a6b13fe9",
+  "fixed_adapter_sha256": "3f418728907af681f747f7f169192e8aab6668d92ee7cd6a26e1ca985ed1e683",
+  "tests_sha256": "797ba4bdb282cc7ecc79b347fca411045deab440b352d9b33016c337477c07c6",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "sqlite": "3.54.1",
+  "scope": "one host, loopback mTLS ownership and native lab status, inert marker",
+  "red_controls": {
+    "totals": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suite_seconds": 3.898,
+    "cases": [
+      {
+        "id": "test_exact_evidence_in_b_transaction[freshness-during-status-read-exclusive deadline]",
+        "seconds": 1.775,
+        "result": "failed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[credential-during-status-read-identity validity window]",
+        "seconds": 1.81,
+        "result": "failed"
+      }
+    ]
+  },
+  "fixed_controls": {
+    "totals": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suite_seconds": 3.875,
+    "cases": [
+      {
+        "id": "test_exact_evidence_in_b_transaction[freshness-during-status-read-exclusive deadline]",
+        "seconds": 1.798,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[credential-during-status-read-identity validity window]",
+        "seconds": 1.795,
+        "result": "passed"
+      }
+    ]
+  },
+  "fixed_fixture_suite": {
+    "totals": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suite_seconds": 23.098,
+    "cases": [
+      {
+        "id": "test_exact_evidence_in_b_transaction[none-None]",
+        "seconds": 2.15,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[wrong-cut-cut differs]",
+        "seconds": 1.744,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[wrong-approval-approval signature]",
+        "seconds": 2.161,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[wrong-plan-exact mutation and native plan]",
+        "seconds": 1.927,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[wrong-target-exact mutation and native plan]",
+        "seconds": 1.993,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[stale-generation-durable fence]",
+        "seconds": 1.915,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[new-witness-cut-native appraisal is unavailable]",
+        "seconds": 1.816,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[expiry-after-owner-exclusive deadline]",
+        "seconds": 1.775,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[native-expiry-after-owner-exclusive deadline]",
+        "seconds": 1.703,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[expiry-during-status-read-exclusive deadline]",
+        "seconds": 1.954,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[freshness-during-status-read-exclusive deadline]",
+        "seconds": 1.873,
+        "result": "passed"
+      },
+      {
+        "id": "test_exact_evidence_in_b_transaction[credential-during-status-read-identity validity window]",
+        "seconds": 1.802,
+        "result": "passed"
+      }
+    ]
+  },
+  "readback": "Both probes assert unchanged marker, version and receipts. The same nonce commits once under the healthy test clock."
+}
