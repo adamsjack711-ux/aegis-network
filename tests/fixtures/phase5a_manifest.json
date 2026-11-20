@@ -1,0 +1,95 @@
+{
+  "adjudication": "Author-labeled synthetic cases, inspected against explicit structured fields; no live authority or independent reviewer.",
+  "cases": [
+    {
+      "gold": "affected",
+      "id": "osv-affected",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "gold": "unaffected",
+      "id": "osv-fixed",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "osv-prerelease",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "gold": "conflicting",
+      "id": "osv-conflicting",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "519f13f35b99d1a583be4de2bf1e5e8bcd05e3f2a53ceaba3df3db829734c825"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "kev-no-version",
+      "source_sha256": [
+        "3609c3446738dc1b5cafee48b5b9a6a0513fb86fe16c99f085c2bb31435b77a2"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "nvd-config",
+      "source_sha256": [
+        "f32255a7e8b5673cffeaffb9d51bd98bf5beb5b2f0f21cc5433b600d65efddf4"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "ecosystem-collision",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "stale-snapshot",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "gold": "unknown",
+      "id": "withdrawn-advisory",
+      "source_sha256": [
+        "0a150fa96e73a18c078d2570a403671bd03a7ad25a06e0be241f7de5a85d4ccc"
+      ]
+    },
+    {
+      "gold": "affected",
+      "id": "prompt-injection-data",
+      "source_sha256": [
+        "5bbf03dca3d5671f3452ee251fd796fcb61351a324bc1a49a4e5f24c431bc024"
+      ]
+    },
+    {
+      "gold": "conflicting",
+      "id": "source-correction-conflict",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "13bb3780b7bdae16490b4ed614843d00eba02427460f5bb4d292ecef504862a2"
+      ]
+    },
+    {
+      "gold": "conflicting",
+      "id": "alias-ambiguity",
+      "source_sha256": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309",
+        "3ae07c784e6fdbf8e08a70b13ea068da90a51efdcf26e75059bad611543a6b93"
+      ]
+    }
+  ],
+  "corpus_sha256": "cba6b33415f287b33dcf13d4aca9f99a21ae56c4375b4cd588c64b673cc5fb65",
+  "schema_version": "phase5a-corpus-manifest-v1",
+  "scoring_unit": "asset-vulnerability point"
+}
