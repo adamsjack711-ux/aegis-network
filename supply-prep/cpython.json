@@ -1,0 +1,14 @@
+[
+  {
+    "name": "cpython-3.12.13+20260623-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260623/cpython-3.12.13%2B20260623-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "digest": "sha256:b85154b9c7ca9de3f85f2c9f032d503151db16ef198de86b885fc61890c075ed",
+    "asset_id": 455814420
+  },
+  {
+    "name": "cpython-3.13.14+20260623-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260623/cpython-3.13.14%2B20260623-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "digest": "sha256:e931d7a393f54902503f8745ceb35420e7dd50a067e78e5f45c71404f7a15b30",
+    "asset_id": 455814769
+  }
+]

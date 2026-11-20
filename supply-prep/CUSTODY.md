@@ -1,0 +1,7 @@
+# Disposable validation grant custody
+
+For each cell, the validation operator issues a synthetic Ed25519 fixture grant on a disposable local issuer filesystem. Generate the private signing key in memory and sign the test fixture there. Record the operator, run ID, publisher/key IDs, public fingerprint, permitted role, validity interval and revocation state. Only the public grant and signed fixture cross into the validation container.
+
+The release custodian stages those public files and checks their SHA-256 against the issuer's record. Use a dedicated directory owned by the custodian with no group/other write permissions. Mount it read-only at /grants, with directory mode 0555 and file mode 0444. The consumer is the installed aegis process, UID/GID 65534:65534 with all capabilities dropped. Keep private signing material, tokens and grant contents out of reports and process arguments. Use only public file paths as arguments.
+
+Before use, record the actual issuer/custodian and consumer identities, stat each ancestor and file, inspect effective ACLs including inherited/default entries, reject symlinks and reject any untrusted writer on the backing store. Record mount flags from the consumer namespace and verify that the consumer can read but cannot write or replace the file. Abort the cell if these observations differ from policy or ACLs cannot be established. Record verification result and grant digest, then destroy the disposable custody store after the run. No validation grants were issued, held or consumed during input preparation.

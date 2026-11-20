@@ -1,0 +1,130 @@
+[
+  {
+    "cell": "debian-13-py312",
+    "image": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--rm",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--tmpfs",
+      "/tmp:rw,exec,nosuid,nodev,size=512m,mode=1777",
+      "-v",
+      "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-fc4a-inputs:/inputs:ro",
+      "--entrypoint",
+      "sh",
+      "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+      "-c",
+      "cat /etc/os-release; id; python3 -V\npython3 -m venv /tmp/venv && /tmp/venv/bin/pip --isolated install --no-index --no-cache-dir --find-links /inputs/wheels hatchling==1.33.0 'cryptography>=44,<47' 'pydantic>=2.10,<3' 'fastapi>=0.115,<1' 'httpx>=0.27,<1' 'nats-py>=2.9,<3' 'psycopg[binary]>=3.2,<4' 'uvicorn>=0.30,<1' && /tmp/venv/bin/pip check\necho resolution_exit=$?\n/inputs/strace -f -e trace=%file,%network,%process,%creds -o /tmp/sample python3 -B -c 'import socket,os; open(\"/tmp/sample-file\",\"w\").close(); socket.socket().close(); os.getuid()'\necho tracer_exit=$?\ncat /tmp/sample"
+    ],
+    "markers": [
+      "VERSION_ID=\"13\"",
+      "Python 3.12.16",
+      "resolution_exit=0",
+      "tracer_exit=0"
+    ]
+  },
+  {
+    "cell": "debian-13-py313",
+    "image": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--rm",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--tmpfs",
+      "/tmp:rw,exec,nosuid,nodev,size=512m,mode=1777",
+      "-v",
+      "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-fc4a-inputs:/inputs:ro",
+      "--entrypoint",
+      "sh",
+      "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+      "-c",
+      "cat /etc/os-release; id; python3 -V\npython3 -m venv /tmp/venv && /tmp/venv/bin/pip --isolated install --no-index --no-cache-dir --find-links /inputs/wheels hatchling==1.33.0 'cryptography>=44,<47' 'pydantic>=2.10,<3' 'fastapi>=0.115,<1' 'httpx>=0.27,<1' 'nats-py>=2.9,<3' 'psycopg[binary]>=3.2,<4' 'uvicorn>=0.30,<1' && /tmp/venv/bin/pip check\necho resolution_exit=$?\n/inputs/strace -f -e trace=%file,%network,%process,%creds -o /tmp/sample python3 -B -c 'import socket,os; open(\"/tmp/sample-file\",\"w\").close(); socket.socket().close(); os.getuid()'\necho tracer_exit=$?\ncat /tmp/sample"
+    ],
+    "markers": [
+      "VERSION_ID=\"13\"",
+      "Python 3.13.18",
+      "resolution_exit=0",
+      "tracer_exit=0"
+    ]
+  },
+  {
+    "cell": "ubuntu-2404-py312",
+    "image": "sha256:c955040430a4cd8bee1b84aa6a038d6cf0fca28644b7e71f3f17280a84f358ec",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--rm",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--tmpfs",
+      "/tmp:rw,exec,nosuid,nodev,size=512m,mode=1777",
+      "-v",
+      "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-fc4a-inputs:/inputs:ro",
+      "--entrypoint",
+      "sh",
+      "sha256:c955040430a4cd8bee1b84aa6a038d6cf0fca28644b7e71f3f17280a84f358ec",
+      "-c",
+      "cat /etc/os-release; id; python3 -V\npython3 -m venv /tmp/venv && /tmp/venv/bin/pip --isolated install --no-index --no-cache-dir --find-links /inputs/wheels hatchling==1.33.0 'cryptography>=44,<47' 'pydantic>=2.10,<3' 'fastapi>=0.115,<1' 'httpx>=0.27,<1' 'nats-py>=2.9,<3' 'psycopg[binary]>=3.2,<4' 'uvicorn>=0.30,<1' && /tmp/venv/bin/pip check\necho resolution_exit=$?\n/inputs/strace -f -e trace=%file,%network,%process,%creds -o /tmp/sample python3 -B -c 'import socket,os; open(\"/tmp/sample-file\",\"w\").close(); socket.socket().close(); os.getuid()'\necho tracer_exit=$?\ncat /tmp/sample"
+    ],
+    "markers": [
+      "VERSION_ID=\"24.04\"",
+      "Python 3.12.13",
+      "resolution_exit=0",
+      "tracer_exit=0"
+    ]
+  },
+  {
+    "cell": "ubuntu-2404-py313",
+    "image": "sha256:f28569db398ff4d8d9edbe4887411861566a6c5f573d40a9ae559785e0e2dc86",
+    "command": [
+      "docker",
+      "--context",
+      "colima",
+      "run",
+      "--rm",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--user=65534:65534",
+      "--tmpfs",
+      "/tmp:rw,exec,nosuid,nodev,size=512m,mode=1777",
+      "-v",
+      "/Users/jackadams-lovell/aegis-network/.worktrees/alpha-fc4a-inputs:/inputs:ro",
+      "--entrypoint",
+      "sh",
+      "sha256:f28569db398ff4d8d9edbe4887411861566a6c5f573d40a9ae559785e0e2dc86",
+      "-c",
+      "cat /etc/os-release; id; python3 -V\npython3 -m venv /tmp/venv && /tmp/venv/bin/pip --isolated install --no-index --no-cache-dir --find-links /inputs/wheels hatchling==1.33.0 'cryptography>=44,<47' 'pydantic>=2.10,<3' 'fastapi>=0.115,<1' 'httpx>=0.27,<1' 'nats-py>=2.9,<3' 'psycopg[binary]>=3.2,<4' 'uvicorn>=0.30,<1' && /tmp/venv/bin/pip check\necho resolution_exit=$?\n/inputs/strace -f -e trace=%file,%network,%process,%creds -o /tmp/sample python3 -B -c 'import socket,os; open(\"/tmp/sample-file\",\"w\").close(); socket.socket().close(); os.getuid()'\necho tracer_exit=$?\ncat /tmp/sample"
+    ],
+    "markers": [
+      "VERSION_ID=\"24.04\"",
+      "Python 3.13.14",
+      "resolution_exit=0",
+      "tracer_exit=0"
+    ]
+  }
+]
