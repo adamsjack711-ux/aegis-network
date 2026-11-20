@@ -186,7 +186,8 @@ def cli(probe_path, resource_paths, source_pin, image_digest):
             "cli_alpha_release_status": "NO-GO"}
 
 
-def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin):
+def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin,
+                debian_resource_path=None):
     build = json.loads(Path(build_path).read_text())
     debian = json.loads(Path(debian_path).read_text())
     wheel_sha = build.get("wheel_sha256", [])
@@ -213,6 +214,26 @@ def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin):
                    and explicit.get("identity_dir_mode") == "0o700"
                    and explicit.get("identity_file_mode") == "0o600")
     ubuntu_text = Path(ubuntu_prerequisite_path).read_text()
+    resources = None
+    if debian_resource_path:
+        resource_raw = json.loads(Path(debian_resource_path).read_text())
+        resources = []
+        for count in (100, 10000, 100000):
+            item = resource_raw.get("resource_rows", {}).get(str(count), {})
+            parsed = item.get("parsed") or {}
+            runs = parsed.get("runs", [])
+            okay = item.get("exit_code") == 0 and len(runs) == 3 and all(
+                row.get("reported_count") == count and row.get("inventory_complete")
+                and row.get("wall_ms", float("inf")) <= 5000
+                and row.get("cpu_ms", float("inf")) <= 5000
+                and row.get("peak_rss_kib_at_least", float("inf")) <= 256 * 1024
+                for row in runs)
+            resources.append({"rows": count, "runs": len(runs),
+                              "max_wall_ms": max((row["wall_ms"] for row in runs), default=None),
+                              "max_cpu_ms": max((row["cpu_ms"] for row in runs), default=None),
+                              "max_peak_rss_kib_at_least": max((row["peak_rss_kib_at_least"]
+                                                                for row in runs), default=None),
+                              "status": "pass" if okay else "fail"})
     return {"source_pin": source_pin, "build_sha256": digest(build_path),
             "debian_probe_sha256": digest(debian_path),
             "ubuntu_prerequisite_sha256": digest(ubuntu_prerequisite_path),
@@ -221,6 +242,8 @@ def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin):
             "debian_default_zero_writes": "pass" if pure else "fail",
             "debian_default_denominator": len(needed),
             "debian_explicit_state": "pass" if explicit_ok else "fail",
+            "debian_resource_sha256": digest(debian_resource_path) if debian_resource_path else None,
+            "debian_resource_rows": resources,
             "ubuntu_install": "skipped: cached image lacks ensurepip/python3.12-venv"
             if "ensurepip is not" in ubuntu_text else "inconclusive",
             "python_313": "skipped: no cached image",
@@ -257,6 +280,7 @@ def main():
     p.add_argument("--build", type=Path, required=True)
     p.add_argument("--debian", type=Path, required=True)
     p.add_argument("--ubuntu-prerequisite", type=Path, required=True)
+    p.add_argument("--debian-resource", type=Path)
     p.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.command == "verify-originals":
@@ -270,7 +294,8 @@ def main():
     elif args.command == "score-cli":
         result = cli(args.probe, args.resources, args.source_pin, args.image_digest)
     else:
-        result = cli_package(args.build, args.debian, args.ubuntu_prerequisite, args.source_pin)
+        result = cli_package(args.build, args.debian, args.ubuntu_prerequisite,
+                             args.source_pin, args.debian_resource)
     if args.output:
         write(args.output, result)
     print(json.dumps(result, sort_keys=True))
