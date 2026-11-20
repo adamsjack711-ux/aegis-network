@@ -1,0 +1,24 @@
+# Phase 4F-B withdrawal recovery and fencing gate
+
+The accepted baseline is `3bfd2ab`. Four independent/owner fresh pre-intake SIGKILL plus broker-restart trials at the prior pin took **30.589–30.617 seconds** from withdrawal submission to first durable dry-run denial; two agent-alive broker controls took about 1.76 seconds. Instrumentation localized the dominant delay to 30 busy broker KV lease claims. This is a **reproduced five-second failure**, retained under `benchmarks/phase4f-withdrawal-recovery/` and `benchmarks/phase-next-remediation/`. [Prior independent finding](phase-next-remediation-candidate-review.md).
+
+VAL-D owns the exact frozen fault oracle before implementation review. This document defines the security boundary and may be strengthened, not weakened, by that freeze.
+
+## Authority contract
+
+- Native T4/T5 remains authoritative for current Evidence and withdrawal status. Mesh signatures, journal rows, HTTP receipts, broker ACKs and replay cursors never grant a positive protected write.
+- Every protected writer requires exact current local approval, target identity/generation, owner generation, fencing and earliest expiry in one checked transaction. A stale or competing owner cannot write, including after broker failover, snapshot restore or a delayed ACK.
+- A deny-only hold may be considered before lease transfer only with independently verified status and a reviewed durable target-side concurrency rule. It cannot create positive authority or advance ACK/cursor as the old owner. Lease TTL reduction or force deletion is prohibited without independent stale-owner fencing proof.
+- Unknown, revoked, expired, contradictory or unavailable status blocks new positive authority. Recovery cannot reopen a known vulnerable path. The inherited **5,000 ms all-agent withdrawal reporting deadline is unchanged**.
+
+## Required independent fault matrix
+
+1. Pin source, cached broker/database images, event IDs, enrolled agent roster, targeted agent-withdrawal pairs, fault timing, eligibility and censoring rules before each run. Use one-host monotonic stage timings only within that host; correlate cross-process stages with event IDs and measured clock-offset bounds. Record submission, durable journal admission, outbox publication, broker ready, agent start, KV attempts/claim, critical receipt/replay, signed/trust verification, SQLite denial, target hold, ACK/cursor and read-only observation separately.
+2. Run the frozen minimum of **three enrolled agents × two witnessed withdrawals × three fresh repeats × four fault arms = 72 targeted pairs**, plus **18** healthy broker-restart control pairs. The four arms are pre-intake SIGKILL plus broker restart/backlog, partition/rejoin, lost ACK/replay, and stale owner/successor transfer. For every declared eligible pair, independently read committed local denial before any observer request. Require **all** eligible pairs to have durable denial no later than 5,000 ms from the frozen submission origin; also report admission-to-denial and connectivity restoration separately. Do not reset the primary timer at restart or substitute p95, broker ACK, cursor movement, quarantine already present or HTTP response for new denial.
+3. Inject lost/delayed ACK, duplicate/reordered events, publisher sequence conflicts, stale owner signed commands, competing successors, broker partitions and rejoin, disconnected agent, stale/withdrawn Evidence, conflicting T4/T5 status and restored checkpoints. Require idempotent logical decisions, no cursor advance before durable denial, denial preservation after restart and no stale-owner target write. Report unreachable agents and isolation intervals rather than silently excluding them.
+4. Exercise all declared protected routes/replicas in disposable target fixtures. Check pre-observation durable hold, monotone target fencing, failed canary/partial rollout, rollback and same-generation recovery. Independent read-only target state plus route probes must agree. No real-system enforcement or external host is authorized.
+5. Report denominator, p50/p95/p99 and maximum submission-to-denial, per-stage latency, backlog, CPU, RSS and recovery time with repeats and failures. Distinguish dry-run SQLite denial from physical lab target protection. At 3/10/100 agents, use simulated or local disposable topology only and label it; physical multi-host remains unverified without enrolled hosts/credentials and separate authorization.
+
+## Decision
+
+The five-second all-agent gate remains **OPEN / NO-GO** until an independently reviewed exact integrated commit passes the frozen fault matrix. A local deny-only result may be accepted as a narrower safety property, never as proof of cross-broker ownership or distributed enforcement. If a safe protocol cannot meet the deadline under the stated fault model, keep the capability disabled and record the impossibility/required authority change rather than hiding the miss.
