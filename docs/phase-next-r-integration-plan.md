@@ -1,0 +1,38 @@
+# Phase-next remediation: isolated ownership and integration plan
+
+Baseline: clean `d15a3a756b8066c5cb2d98665662220e52f4a7d6` on `integration/phase-next-alpha-astra`. The dedicated candidate is `integration/phase-next-r-astra` in `.worktrees/phase-next-r-integration-astra`. Master remains `14440ee226c58aa6e8e06517ab1601b2d672798c` with its pre-existing uncommitted work untouched. All previous specialist and validation worktrees, including original failure reproductions, remain intact. This plan creates no enforcement authority.
+
+## Frozen authority and existing decisions
+
+`SignedFinding 1.0` canonical Ed25519 bytes and grants, exact `InventoryItem(purl, version)` matching, native T4/T5 status, local exact approval, target generation/fence, and the five-second **all-agent** durable-denial deadline are frozen. Mesh receipt, HTTP 202, ACK, cursor and AI research output cannot become native Trust status or protected-write authority. Unknown/stale/conflicting Evidence closes new positive authority; a durable restriction survives loss of network or owner. No public scanning, external model/feed calls, production deployment or master merge is authorized.
+
+Independent acceptance `b81dac88c895aa074e534d7ea0feb6341b4347e6` froze before candidate review at `a469d130afb8a553d6ab867acf519bc7eb851e9b`: CLI needs independent Debian/Ubuntu and Python 3.12/3.13 installed-console checks, syscall effects, zero default writes, and peak RSS ≤256 MiB at 100,000 rows under a 512 MiB hard limit. The current unique 5B candidate measured 297.8/295.9 MiB and 3/3 cgroup OOM kills at a 256 MiB hard limit. AI's independent deterministic holdout is 11/12 but no real-model accuracy, latency or billed cost exists. 4F read-only SQLite denied-state was still absent 30,559.741 ms after restart despite pre-restart durable admission. These are open release failures, not estimates.
+
+## Specialist ownership
+
+| Role | Branch and worktree | Owned implementation/test surface | Contract boundary |
+| --- | --- | --- | --- |
+| VAL-R independent | `test/phase-next-r-astra` / `.worktrees/phase-next-r-val-astra` | Freeze oracle, retained failure manifest, fresh blinded fixtures, independently run adversarial tests, raw results and exact-pin GO/NO-GO. Freeze must be committed before review of implementation changes. | No edits to specialist code or relaxed assertions; unavailable arms are skipped. |
+| 5B-R CLI release | `feat/phase5b-release-r-astra` / `.worktrees/phase-next-r-5b-astra` | Observer CLI, private loader/adapter, build metadata **only after compatibility review**, Linux packaging/tests/benchmarks and support matrix. Compare prior `876988b` and `0df40c9` without copying overlapping work blindly. | No signed, exact inventory, T4/T5, Rapid writer or shared grant semantics change. Shared `config.py`, `trust.py`, `core.py` need a versioned proposal before edit. |
+| 4F-R distributed recovery | `feat/phase4f-recovery-r-astra` / `.worktrees/phase-next-r-4f-astra` | First a concrete versioned owner-generation, target transaction and ACK/cursor protocol; later approved `identity.py`, `ownership.py`, `agent_runtime.py` and native target-store code/tests/raw. | No TTL shortcut, force-delete or preclaim authority. Native T4/T5 authoritative; all protected writers and stale-owner rollback paths included. |
+| 5A-R intelligence | `feat/phase5a-research-r-astra` / `.worktrees/phase-next-r-5a-astra` | Private `src/aegis/intelligence/`, advisory fixtures/evaluator, source-support tests and bounded dormant model adapter. Examine 11/12 holdout and label-visible 33/34 separately. | No `artifact.py`, Evidence attestation, local approval, protected writer or outbound call. Real-model experiment requires separately reviewed endpoint/model, data boundary, budget and billing oracle. |
+| Integration lead | `integration/phase-next-r-astra` / `.worktrees/phase-next-r-integration-astra` | Contract decisions, status, risk register, sequential accepted intake and exact integrated regression. | Never merge master or another agent's dirty work; no shared-contract adoption before review. |
+
+The four specialists have been addressed through verified agent channels. Only the assigned owner edits each implementation lane. Existing worktrees are references, not scratch spaces for this cycle. An overlap is resolved by a written interface proposal and clean exact source pin, not by simultaneous edits.
+
+## Dependency-aware sequence
+
+1. VAL-R commits the independent release freeze and cryptographic manifest of all retained failures **before reviewing new code**. 5B-R and 4F-R may inspect and measure in their own lanes while the freeze is prepared; their code changes wait for the freeze. 5A-R starts after a concurrency slot is available and receives the same frozen oracle.
+2. Review 4F-R's revised transfer protocol as a versioned contract before permitting authority-changing implementation. It must identify a monotonic, rollback-resistant generation home, independently witnessed withdrawal acceptance/freshness, an all-writer transfer barrier, exact target transaction and generation-bound ACK/cursor. If any field or failure state is unspecified, keep the current fail-closed lease wait and five-second NO-GO.
+3. Review 5B-R's build/runtime compatibility proposal before choosing between the private observer loader and the shared publisher-config refactor. Preserve the existing grant interpretation and default package consumers. Optimize only measured memory work; run direct installed-console and syscall/no-write matrix on fresh pinned Linux environments. Missing Python 3.13 or Ubuntu dependencies remain skips and alpha NO-GO.
+4. 5A-R produces independently source-supported points on sealed exact bytes. A real-model arm remains dormant until a separate authorization decision with model artifact/endpoint, export scope, token/CPU cost bound and no-authority guard. Scripted results do not stand in for real-model quality.
+5. VAL-R reviews each **clean exact implementation commit** and publishes raw evidence plus per-scope GO/NO-GO. The lead imports only independently accepted, contract-compatible changes, one scope at a time, to the isolated candidate. Run the complete regression suite with `PYTHONPATH=src:scripts` and authorized localhost-only fixtures after **each code intake**, retaining every failure, skip and JUnit. Cross-component native/CLI/AI boundaries are challenged again at the final pin. No unaccepted feature enters the candidate merely because its focused tests pass.
+
+## Release decisions and open risks at start
+
+- CLI alpha **NO-GO**: 256 MiB envelope, independent Ubuntu installation, Python 3.13, attempted-effect trace, package/loader compatibility and observer-only packaging are open.
+- AI research release **NO-GO**: real-model factual accuracy, p50/p95 latency, billed cost, source authentication and a hidden corpus are unmeasured. The integrated offline evaluator is a narrower lab research tool.
+- 4F five-second all-agent withdrawal **NO-GO**: durable denial absent after 30.559 s in a fresh crash trial; 1,000-row backlog, fleet and physical target proof incomplete. Existing owner-transfer proposal is **REVISE** and implementation authorization has not been granted.
+- Distributed autonomous enforcement and production **NO-GO**: independent physical home/witness/target custody, cross-broker generation fencing, ACK/cursor barriers and rollback anchor are unproven.
+
+The acceptance freeze, specialist pins, independent verdicts, code-intake commits, full-suite counts, latency/resource changes and unresolved risks will be appended to this plan and `AEGIS-MASTER-STATUS.md` as work proceeds.
