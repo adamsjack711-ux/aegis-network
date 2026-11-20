@@ -2,6 +2,8 @@
 
 `withdrawal-v2` is an opt-in shadow profile. It preserves the existing 3-of-4 checkpoint threshold and adds a signed withdrawal view from each of the four enrolled witnesses before either the publisher or relying reader can return a positive result. The native shared writer remains on its existing T4/T5 path. The reproduced `checkpoint-v1` behavior and its evidence at `f169234` remain the historical control. [Integration finding and baseline evidence](phase4e-trust-integration-review.md)
 
+Independent validation found a post-I/O expiry race at the original pin and measured the separate shadow fix at `8042097bbcd2a0f30d146d5057a6c846ee3ac746`. The full results preserve the original failure and the remaining integration gates. [Independent withdrawal validation](phase4e-withdrawal-independent-validation.md)
+
 ## Protocol and denial precedence
 
 | Concern | Behavior |
