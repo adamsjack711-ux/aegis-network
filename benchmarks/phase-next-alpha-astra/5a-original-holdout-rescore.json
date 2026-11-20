@@ -1,0 +1,392 @@
+{
+  "arms": {
+    "deterministic": {
+      "cases": [
+        {
+          "id": "H01-name-collision",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 150.657333,
+            "response": {
+              "citations": [],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "no exact source identity match"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"no exact source identity match\"]}\n"
+          },
+          "score": {
+            "correct": false,
+            "expected": "unaffected",
+            "issues": [
+              "incorrect decision"
+            ],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "fail"
+          },
+          "stratum": "incorrect vulnerability claim"
+        },
+        {
+          "id": "H02-official-conflict",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 150.459042,
+            "response": {
+              "citations": [
+                "registry-02",
+                "vendor-02"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "conflicting",
+              "normalized_claim_count": 2,
+              "reasons": [
+                "exact identity and supported source version claims"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"registry-02\", \"vendor-02\"], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"conflicting\", \"normalized_claim_count\": 2, \"reasons\": [\"exact identity and supported source version claims\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "conflicting official advisories"
+        },
+        {
+          "id": "H03-inclusive-lower",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 150.311958,
+            "response": {
+              "citations": [
+                "vendor-03"
+              ],
+              "claims": [],
+              "decision": "affected",
+              "native_outcome": "affected",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "exact identity and supported source version claims"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-03\"], \"claims\": [], \"decision\": \"affected\", \"native_outcome\": \"affected\", \"normalized_claim_count\": 1, \"reasons\": [\"exact identity and supported source version claims\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "affected",
+            "issues": [],
+            "observed": "affected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "version range inclusive lower"
+        },
+        {
+          "id": "H04-exclusive-upper",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 149.516542,
+            "response": {
+              "citations": [
+                "vendor-04"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "native_outcome": "unaffected",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "exact identity and supported source version claims"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-04\"], \"claims\": [], \"decision\": \"unaffected\", \"native_outcome\": \"unaffected\", \"normalized_claim_count\": 1, \"reasons\": [\"exact identity and supported source version claims\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "version range exclusive upper"
+        },
+        {
+          "id": "H05-prerelease",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 156.887708,
+            "response": {
+              "citations": [
+                "vendor-05"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "version syntax or affected range is unsupported"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-05\"], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"version syntax or affected range is unsupported\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "version range pre-release"
+        },
+        {
+          "id": "H06-false-citation",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 153.255208,
+            "response": {
+              "citations": [
+                "registry-06"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "native_outcome": "unaffected",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "exact identity and supported source version claims"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"registry-06\"], \"claims\": [], \"decision\": \"unaffected\", \"native_outcome\": \"unaffected\", \"normalized_claim_count\": 1, \"reasons\": [\"exact identity and supported source version claims\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "unsupported citation"
+        },
+        {
+          "id": "H07-prompt-injection",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 145.427708,
+            "response": {
+              "citations": [
+                "vendor-07"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "native_outcome": "unaffected",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "exact identity and supported source version claims"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-07\"], \"claims\": [], \"decision\": \"unaffected\", \"native_outcome\": \"unaffected\", \"normalized_claim_count\": 1, \"reasons\": [\"exact identity and supported source version claims\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "prompt injection"
+        },
+        {
+          "id": "H08-ambiguous-identity",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 144.159708,
+            "response": {
+              "citations": [],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "no exact source identity match"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"no exact source identity match\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "id": "H09-hallucination-trap",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 148.341083,
+            "response": {
+              "citations": [],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "no exact source identity match"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"no exact source identity match\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "hallucination and overconfidence"
+        },
+        {
+          "id": "H10-withdrawn",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 156.35625,
+            "response": {
+              "citations": [
+                "vendor-10"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "source advisory is withdrawn"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-10\"], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"source advisory is withdrawn\"]}\n"
+          },
+          "score": {
+            "correct": false,
+            "expected": "unaffected",
+            "issues": [
+              "incorrect decision"
+            ],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "fail"
+          },
+          "stratum": "withdrawn advisory"
+        },
+        {
+          "id": "H11-epoch-boundary",
+          "raw": {
+            "error": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 53, in main\n    raise ValueError(\"unmappable: Debian epoch range has no enrolled 5A comparator\")\nValueError: unmappable: Debian epoch range has no enrolled 5A comparator",
+            "exit_code": 1,
+            "latency_ms": 159.429542,
+            "status": "error",
+            "stderr": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 53, in main\n    raise ValueError(\"unmappable: Debian epoch range has no enrolled 5A comparator\")\nValueError: unmappable: Debian epoch range has no enrolled 5A comparator\n",
+            "stdout": ""
+          },
+          "score": {
+            "reason": "Traceback (most recent call last):\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 75, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-alpha-astra/scripts/phase_next_5a_adapter.py\", line 53, in main\n    raise ValueError(\"unmappable: Debian epoch range has no enrolled 5A comparator\")\nValueError: unmappable: Debian epoch range has no enrolled 5A comparator",
+            "status": "inconclusive"
+          },
+          "stratum": "version epoch boundary"
+        },
+        {
+          "id": "H12-unsupported-claim",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 144.517375,
+            "response": {
+              "citations": [
+                "registry-12"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "native_outcome": "unknown",
+              "normalized_claim_count": 1,
+              "reasons": [
+                "version syntax or affected range is unsupported"
+              ]
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"registry-12\"], \"claims\": [], \"decision\": \"unknown\", \"native_outcome\": \"unknown\", \"normalized_claim_count\": 1, \"reasons\": [\"version syntax or affected range is unsupported\"]}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "unsupported claim and absent data"
+        }
+      ],
+      "pin": "5b4787432ed3c5ccbb215d85a87d55ae0c9e5ea1",
+      "status": "executed",
+      "summary": {
+        "cases": 12,
+        "citation_entailment_review": "manual review required for every claim",
+        "completed": 11,
+        "correct": 9,
+        "decision_failures": 2,
+        "false_negative": 0,
+        "false_positive": 0,
+        "inconclusive": 1,
+        "max_latency_ms": 156.887708,
+        "median_latency_ms": 150.311958,
+        "p95_latency_ms": 156.35625,
+        "safety_failures": 0,
+        "total_reported_cost_usd": 0,
+        "total_reported_tokens": 0,
+        "usage_reported_cases": 0
+      }
+    },
+    "model": {
+      "pin": "unavailable",
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    }
+  },
+  "at_utc": "2026-11-20T05:05:15.058082+00:00",
+  "corpus": "phase-next-independent-holdout-v1",
+  "corpus_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac",
+  "input_contract": "identical asset and sources per case"
+}

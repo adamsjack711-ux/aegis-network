@@ -1,0 +1,25 @@
+# Independent Phase 5A exact-pin review
+
+Primary candidate: clean `feat/phase5a-eval-astra` `99e866453a504aa070ee4e0b177da42b621ab67b`, implementation parent `c6bceb624be1f071b5b728afa8de53ad43611dfa`. It adds a private offline fixture evaluator and leaves ResearchResult.v2, SignedFinding, Evidence, Trust, approvals and protected writers unchanged. All 29 copied sealed files (24-case corpus, manifest, 27 raw sources) equal the validator's originals byte-for-byte. Corpus SHA-256: `7f88e132b92d528fb01573f37e00c8af4698919bf3747c583f3ec74fb7dbc82d`; manifest: `20a3a37da8f941f17e6db514d1437d8d6575140e2e3bde61fc2cad9c6d4a234b`; prior 12 cases: `d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac`. Labels were visible during parser development, so accuracy is development-informed.
+
+## Exact-pin results
+
+Reran `scripts/phase5a_alpha_evaluate.py --root . --repeats 3` and scored all rows independently. Raw rerun SHA-256: `f5c6fedf2d4c7ea5e5be0c9bfe9fe22bcf22c119ccafa909393329ed`. Focused exact-pin tests: **24 passed, zero failed/skipped**. Full regression was not independently rerun.
+
+Every trial: **36 planned, 34 evaluable, two inconclusive** (`H11-epoch-boundary`, `P02-debian-epoch-fixed`). Deterministic outcome **33/34 exact**; H10 withdrawn is conservative `unknown` versus label `unaffected`. Five of five affected labels are classified affected, with **zero false affected**. The inert scripted arm attempts 36 fabricated remote-execution points, all unsupported by phrase absence, with **zero emitted as supported**. Raw scripted decisions yield 29 false affected; checked decisions yield zero false affected and 24/34 exact. All raw points retain `support=unchecked`; all 108 row objects across three trials reject `SignedFinding` parsing. Source citations stay within each case's sealed source IDs. Conflict, prompt-injection, stale and withdrawn controls create no protected authority in this path.
+
+Trial process wall **11.438 / 3.718 / 3.591 ms**; CPU **9.364 / 3.691 / 3.575 ms**; peak RSS high-water mark **36.37 / 36.42 / 36.49 MB**. Deterministic per-case p95 **0.270 / 0.025 / 0.023 ms**; inert provider p95 **0.017 / 0.020 / 0.013 ms**. One-process monotonic timing excludes interpreter startup and output writing. Real local model: **0/36 attempted**. Model latency, billed cost, advantage and real advisory authentication remain unmeasured.
+
+Phrase absence rejects this fabricated impact; phrase presence would not establish semantic entailment. `checked=affected` means deterministic version matching only; it does not make attached unchecked prose reportable. The vendor/registry roles are synthetic. `OfflineBudget` checks elapsed time after provider return and cannot preempt a blocking future provider. Only the inert local scripted adapter ran.
+
+## Separate external source/provider branch
+
+External unmerged `feat/phase5a-model-evaluation` exact `5b4787432ed3c5ccbb215d85a87d55ae0c9e5ea1` is separate from the sealed candidate. I retrospectively reviewed its eight new author-labeled synthetic cases: **8/8 labels agree** under the current fixture/comparator policy; all eight source digests match its manifest. Five scripted positive cases have semantic issues: two boundary cases say version `1.5` for assets `1.0` or `1.99`, and KEV, stale and withdrawn traps assert unsupported affected status. This review is not blind or live-source authentication.
+
+Exact external offline reruns: deterministic **20/20 author labels**; scripted raw **17/20** with three false affected traps; checked scripted **20/20** with 18 attached positive points unchecked. Focused tests **24 passed**. Original independent H01–H12 adapter rerun: **9/11 completed correct**, one epoch inconclusive, two conservative `unknown` versus `unaffected`, zero false affected. The new sealed 24-case fixture is **0/24 evaluable through that branch's H-only claim map**: every new ID raises a missing-case `KeyError`; those are adapter incompatibilities, not decision failures. Unauthorised `--mode model` exited 2 without creating output. No provider was called. Its HTTPS transport remains dormant and requires separate endpoint/DNS review and authorization.
+
+Raw files under `benchmarks/phase-next-alpha-astra/5a-*` retain both source pins, all outputs and skips. Neither the 20/20 author score nor scripted 17/20 measures independent model quality.
+
+## Decision
+
+**GO for integrating the primary candidate as an isolated offline, read-only fixture evaluator after cross-component regression. NO-GO for real AI intelligence, source-authenticated intake, model advantage, external provider calls, semantic claim support or enforcement authority.** Native T4/T5 remains authoritative. Resolve comparator inconclusives, obtain a fresh hidden corpus, adjudicate every positive point against exact source bytes, and enroll a local model with measured CPU/GPU, latency and cost before model-benefit claims. A future provider requires a hard out-of-process deadline and explicit network authorization.
