@@ -1,0 +1,16 @@
+{
+  "case": "final",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/alias",
+    "inventory"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: state directory parent must exist without symlinks and be writable\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "e99eaf790751bc1152910a5b6a2f44c54cb7fbeb405f5eee6cf628fb152799d5",
+  "after_sha256": "e99eaf790751bc1152910a5b6a2f44c54cb7fbeb405f5eee6cf628fb152799d5"
+}

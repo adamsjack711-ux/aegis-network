@@ -1,0 +1,50 @@
+{
+  "case": "create",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/chosen",
+    "inventory"
+  ],
+  "rc": 0,
+  "stdout": "Asset 14697c43-2bd9-4b57-81db-dcaf47681e97 \u00b7 debian \u00b7 1 installed binary packages \u00b7 complete=True\npkg:deb/debian/curl 1:8.0-1 [arm64]\n",
+  "stderr": "",
+  "passed": true,
+  "change": {
+    "/tmp": [
+      [
+        17407,
+        0,
+        0,
+        1795205994876603801
+      ],
+      [
+        17407,
+        0,
+        0,
+        1795206006405523544
+      ]
+    ],
+    "/tmp/chosen": [
+      null,
+      [
+        16832,
+        65534,
+        65534,
+        1795206006406523537
+      ]
+    ],
+    "/tmp/chosen/identity.json": [
+      null,
+      [
+        33152,
+        65534,
+        65534,
+        1795206006406523537,
+        "0b78d989aaa427cb72964fc59bf99622900d24d3da9c412e5bd1444c4ec77520"
+      ]
+    ]
+  },
+  "before_sha256": "87430c00da56ceb2ba7f5b29971df103d8ee9dad2f71953a97df1cb0e8897d74",
+  "after_sha256": "b044261f9f2112ae418b077cdff470619dd2751139e135924df073eacea31e65"
+}

@@ -1,0 +1,18 @@
+{
+  "case": "malformed",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/malformed.json",
+    "--trust",
+    "/grants/trust.json"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: cannot read local intelligence JSON\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "5b3dfc6c05c8f52a5b70df8f8e8b7f2b12a4c33f9489adec3ddd202bcaa1f4cd",
+  "after_sha256": "5b3dfc6c05c8f52a5b70df8f8e8b7f2b12a4c33f9489adec3ddd202bcaa1f4cd"
+}

@@ -1,0 +1,458 @@
+{
+  "debian-13-py312": {
+    "ancestor-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "f243d518d59284c3277107a03a2726cf9967118fa3ce757a367dc9970d00ee6d",
+      "writes": []
+    },
+    "ancestor-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "f8d425a32bae72759f3059e33f0facfb79970e40168d4eae0de436ab3e8e2cf6",
+      "writes": []
+    },
+    "create-human": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "85eb2ee4417ed28c366a78b38be099159f4b452628f497f2ca377021188d466c",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "create-json": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "a18a701bca32f309cc18d83157a4a29c6ec897b2a7063a52008585cbb2487a1f",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "final-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "12fd8c53d8340277b3d05c298fe7e7f051095a8410411667310c59f3ca6b8dbd",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "final-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "4188d44c645f8a339e2b0309cfa871745fbc4baf944eb1a66f7f81dbb8d3d1e5",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-human": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "a6bbb4e76802302691a0fd9132c1a8c2eed04c9d9d4b4a9c99bc4c65d4bab70a",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-json": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "c34a46bac4ea1de6b8a8b30f632c282c2e5ca5e2a20f186d26fd544d374f2faf",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    }
+  },
+  "debian-13-py313": {
+    "ancestor-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "709df6d30520f6a570a5cd2cf0c021390ee7ce00eae63c5aa1ff14c4ae451033",
+      "writes": []
+    },
+    "ancestor-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "948e5b481133fced3001eb4566bd391b0599a8106821803d9347fe6e5bcfe3d2",
+      "writes": []
+    },
+    "create-human": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "4fa7422617ef55ff1e6905339ef3fa8959edbc8a33ef68acb539ff75d0a821a1",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "create-json": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "03a40d057d0007274b361cb499cc87773ebed60d48182459512bbbf1236e98b8",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "final-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "955dff4a8f15edddc8e744859af289a91a0ec14a58f3797c7065a784850f6f60",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "final-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "ee1db72560889d14fd8f510e60b68fafccebd2277cb1a76c5e7c0f112a0ffde0",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-human": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "25d440a383946cf43d1c937a3d7f624de8657bc306905a5dbf4e973311cd966b",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-json": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "c7e3deec7b334342fd510c417303ec8ce2e38acd59ff2c5d87cf8e856c51f67d",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    }
+  },
+  "ubuntu-2404-py312": {
+    "ancestor-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "f412bfb9c4449fabe5f714147bc21ba12a76eb83fe656ace793a989d8e3bebe4",
+      "writes": []
+    },
+    "ancestor-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "ee0edc9682501fef506e31f078b7bcc77aa53206a5184498680fe7fc464671e4",
+      "writes": []
+    },
+    "create-human": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "0ff506c226da24e677aeb0af4bbbe6e61a09d005d2a3a53dd9bdc119c39c6ae1",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "create-json": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "81f42b72c3a5350e585621a14c5fe76b0ad72b8e7b8f9e3ab9cc229ef0c63809",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "final-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "9070d5d8a8e00e16ea0ff6500b798f431b8625f2e0d393826a604c107f3e31e7",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "final-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "f9956e7ae336b0585daabc2dea97fe0c7d17e3e3e0ef56e8f43bdaeed816bb5a",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-human": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "91a1af77b48ab01d6b5ecf56f5b5f285d2d42655cdf0cc54886bb415d4193f7a",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-json": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "b21ecab9deb469c9c1072d0514493f81c43a91374eb2dd042f52e69ffebb8301",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    }
+  },
+  "ubuntu-2404-py313": {
+    "ancestor-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "982c94e2f81106f1274e48154bf46dfec9f9c39f2d807a87b9e1c3a48e8d4ab0",
+      "writes": []
+    },
+    "ancestor-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "6e450a2afe3f4c4025396a019e36cd0416b3deb366d3d8917df76939b6ccf1fe",
+      "writes": []
+    },
+    "create-human": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "bdec8e51ee5b0eee683e3cd5aaecf937e0b58d7ba4b5864fe329079636b8d80f",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "create-json": {
+      "changes": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ],
+      "rc": 0,
+      "trace_sha256": "efd955075d8460ba56ae961859d6baa1454616c092e417b389147768802fd6f6",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ]
+    },
+    "final-human": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "147852dcbe621b26ccc4919f01d3779d46971258e8cba345a8c3df90f02d0034",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "final-json": {
+      "changes": [],
+      "rc": 2,
+      "trace_sha256": "39633267f31386151a913274ea84d2bc24162125190b20ecc8d1de84d4b0fdf3",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-human": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "5c0df9bbbee88e703a08dac2372198d9e044116f41b98722016d05b4a45d4d79",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    },
+    "repeat-json": {
+      "changes": [],
+      "rc": 0,
+      "trace_sha256": "e97b3d384caf061882e2ea06c55f6c6f704752702dea8037a8dd5761e679d7c1",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ]
+    }
+  }
+}

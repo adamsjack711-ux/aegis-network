@@ -1,0 +1,50 @@
+{
+  "case": "create",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/chosen",
+    "inventory"
+  ],
+  "rc": 0,
+  "stdout": "Asset f5e73843-b66d-4604-b721-8e50c47e1469 \u00b7 ubuntu \u00b7 1 installed binary packages \u00b7 complete=True\npkg:deb/ubuntu/curl 1:8.0-1 [arm64]\n",
+  "stderr": "",
+  "passed": true,
+  "change": {
+    "/tmp": [
+      [
+        17407,
+        0,
+        0,
+        1795206026577383132
+      ],
+      [
+        17407,
+        0,
+        0,
+        1795206036870311491
+      ]
+    ],
+    "/tmp/chosen": [
+      null,
+      [
+        16832,
+        65534,
+        65534,
+        1795206036871311484
+      ]
+    ],
+    "/tmp/chosen/identity.json": [
+      null,
+      [
+        33152,
+        65534,
+        65534,
+        1795206036871311484,
+        "c145610f523e013791b4a767fa28bc10fcf9bfcffb2653305f3fc26d058497e3"
+      ]
+    ]
+  },
+  "before_sha256": "be28a2f2cf0fb189a9904410714784ae03233f633c1aa288e40f996f1d1c28b0",
+  "after_sha256": "dad89e687bc664e98d9cb34ab48688ab4da7ad7df428e45c1c42b5c6e5566565"
+}

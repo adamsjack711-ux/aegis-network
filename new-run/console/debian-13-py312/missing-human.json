@@ -1,0 +1,18 @@
+{
+  "case": "missing",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/missing.json",
+    "--trust",
+    "/grants/trust.json"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: cannot read local intelligence JSON\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "5562661977ea595f9d0960ab1c8eb97df7d47041119c1db3bd2d0431d2d9215b",
+  "after_sha256": "5562661977ea595f9d0960ab1c8eb97df7d47041119c1db3bd2d0431d2d9215b"
+}

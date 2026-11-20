@@ -1,0 +1,18 @@
+drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /
+drwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users
+drwxr-xr-x+ 239 jackadams-lovell  staff  7648 Nov 20 13:00 /Users/jackadams-lovell
+ 0: group:everyone deny delete
+drwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network
+drwxr-xr-x  112 jackadams-lovell  staff  3584 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees
+dr-xr-xr-x   13 jackadams-lovell  staff   416 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m
+-r--r--r--    1 jackadams-lovell  staff  2003 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/conflict.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/current.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/expired.json
+-r--r--r--    1 jackadams-lovell  staff  1038 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/future.json
+-r--r--r--    1 jackadams-lovell  staff     8 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/malformed.json
+-r--r--r--    1 jackadams-lovell  staff  1033 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/range.json
+-r--r--r--    1 jackadams-lovell  staff   407 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/revoked.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/signature.json
+-r--r--r--    1 jackadams-lovell  staff   377 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/trust.json
+-r--r--r--    1 jackadams-lovell  staff  1744 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/withdrawn.json
+-r--r--r--    1 jackadams-lovell  staff   358 Nov 20 13:20 /Users/jackadams-lovell/aegis-network/.worktrees/tmp96wqar3m/wrong-role.json

@@ -1,0 +1,90 @@
+{
+  "candidate": "7f9f2a23909ad4f3aee7a5860ea1d5bed8e57730",
+  "sdist_sha256": "8bf568725cc7f39b291a531b4cbd6018cef171e56a546e2bbb0e1d5f41e45ed2",
+  "cells": [
+    {
+      "cell": "debian-13-py312",
+      "image": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+      "wheel_sha256": "d537263a4e15e56dd2ffc940b2ad99c3b4e78486d09b21e52fd69383eb64f50b",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_pass_fail_unrun": [
+        21,
+        0,
+        0
+      ],
+      "traced_invocations": 42,
+      "resource_pass_fail_unrun": [
+        17,
+        0,
+        0
+      ],
+      "hard_peak_rss_mib": 148.918,
+      "hard_max_wall_s": 2.310624,
+      "hard_max_cpu_s": 1.465777
+    },
+    {
+      "cell": "debian-13-py313",
+      "image": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+      "wheel_sha256": "d537263a4e15e56dd2ffc940b2ad99c3b4e78486d09b21e52fd69383eb64f50b",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_pass_fail_unrun": [
+        21,
+        0,
+        0
+      ],
+      "traced_invocations": 42,
+      "resource_pass_fail_unrun": [
+        17,
+        0,
+        0
+      ],
+      "hard_peak_rss_mib": 151.949,
+      "hard_max_wall_s": 2.43618,
+      "hard_max_cpu_s": 1.677261
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "image": "sha256:c955040430a4cd8bee1b84aa6a038d6cf0fca28644b7e71f3f17280a84f358ec",
+      "wheel_sha256": "d537263a4e15e56dd2ffc940b2ad99c3b4e78486d09b21e52fd69383eb64f50b",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_pass_fail_unrun": [
+        21,
+        0,
+        0
+      ],
+      "traced_invocations": 42,
+      "resource_pass_fail_unrun": [
+        17,
+        0,
+        0
+      ],
+      "hard_peak_rss_mib": 153.188,
+      "hard_max_wall_s": 2.16898,
+      "hard_max_cpu_s": 1.547092
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "image": "sha256:f28569db398ff4d8d9edbe4887411861566a6c5f573d40a9ae559785e0e2dc86",
+      "wheel_sha256": "d537263a4e15e56dd2ffc940b2ad99c3b4e78486d09b21e52fd69383eb64f50b",
+      "install": "PASS",
+      "uninstall": "PASS",
+      "console_pass_fail_unrun": [
+        21,
+        0,
+        0
+      ],
+      "traced_invocations": 42,
+      "resource_pass_fail_unrun": [
+        17,
+        0,
+        0
+      ],
+      "hard_peak_rss_mib": 154.41,
+      "hard_max_wall_s": 2.411111,
+      "hard_max_cpu_s": 1.634256
+    }
+  ]
+}

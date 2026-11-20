@@ -1,0 +1,15 @@
+{
+  "case": "inventory",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "inventory",
+    "--json"
+  ],
+  "rc": 0,
+  "stdout": "{\n  \"asset_id\": null,\n  \"captured_at\": \"2026-11-20T20:20:05.883761Z\",\n  \"cli_version\": \"0.1.0\",\n  \"distribution\": \"ubuntu\",\n  \"identity_scope\": \"none\",\n  \"inventory_complete\": true,\n  \"inventory_reason\": \"complete\",\n  \"package_count\": 1,\n  \"packages\": [\n    {\n      \"architecture\": \"arm64\",\n      \"asset_id\": null,\n      \"collected_at\": \"2026-11-20T20:20:05.884634Z\",\n      \"confidence\": \"installed-binary-package\",\n      \"ecosystem\": \"deb\",\n      \"limitation\": \"Binary package identity only; source-package and reachability mapping unavailable\",\n      \"name\": \"curl\",\n      \"purl\": \"pkg:deb/ubuntu/curl\",\n      \"source\": \"dpkg-status\",\n      \"version\": \"1:8.0-1\"\n    }\n  ],\n  \"schema_version\": \"inventory-v2\",\n  \"snapshot_id\": \"996b663683faffd5503f99f21fb29cbaa47243ed207681b9a4662fba7c75a2fa\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "125c9f5c7aa7faf3f3bfffa19ee3784b38318ae54b9fccb2664890be3617fe21",
+  "after_sha256": "125c9f5c7aa7faf3f3bfffa19ee3784b38318ae54b9fccb2664890be3617fe21"
+}

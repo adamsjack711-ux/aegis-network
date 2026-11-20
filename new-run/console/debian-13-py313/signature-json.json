@@ -1,0 +1,19 @@
+{
+  "case": "signature",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/signature.json",
+    "--trust",
+    "/grants/trust.json",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"invalid or untrusted signed Mesh event\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "77e1ae70255a1310534284a2d9a2a2c93ed0e9d8987f5a906f2478c3e60310ac",
+  "after_sha256": "77e1ae70255a1310534284a2d9a2a2c93ed0e9d8987f5a906f2478c3e60310ac"
+}

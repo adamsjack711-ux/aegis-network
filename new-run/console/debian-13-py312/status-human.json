@@ -1,0 +1,14 @@
+{
+  "case": "status",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "status"
+  ],
+  "rc": 2,
+  "stdout": "schema_version: status-v2\nasset_id: None\nidentity_scope: none\ncli_version: 0.1.0\ndistribution: debian\nintelligence_scope: supplied-signed-events-only\npackage_count: 1\ninventory_complete: True\ninventory_reason: complete\nnetwork: offline\nmode: observation-only\nindependent_status: unknown\nindependent_status_reason: NO_VERIFIABLE_T4_T5_PROOF\noverall_assessment: unknown\npotential_findings: unknown; no signed local finding file supplied\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "27b7c7f2387963a0a191be7e64400dde3abdeedfdf76a925a3ab147f1de14326",
+  "after_sha256": "27b7c7f2387963a0a191be7e64400dde3abdeedfdf76a925a3ab147f1de14326"
+}

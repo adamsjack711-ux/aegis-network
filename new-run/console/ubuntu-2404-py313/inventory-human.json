@@ -1,0 +1,14 @@
+{
+  "case": "inventory",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "inventory"
+  ],
+  "rc": 0,
+  "stdout": "Asset unspecified (no persisted identity) \u00b7 ubuntu \u00b7 1 installed binary packages \u00b7 complete=True\npkg:deb/ubuntu/curl 1:8.0-1 [arm64]\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "668a703fed620aa06c0eb29ea09f7fa34884c155e3ca654de960a5dde0201725",
+  "after_sha256": "668a703fed620aa06c0eb29ea09f7fa34884c155e3ca654de960a5dde0201725"
+}
