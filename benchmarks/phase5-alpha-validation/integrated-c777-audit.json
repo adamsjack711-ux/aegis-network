@@ -1,0 +1,183 @@
+{
+  "authority": [
+    {
+      "baseline_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "current_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "frozen_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "matches_frozen": true,
+      "path": "src/aegis/artifact.py"
+    },
+    {
+      "baseline_sha256": "35435851de6852e99875f824c2ece8e0f33ffc85f32f871c65768f7638f85523",
+      "current_sha256": "35435851de6852e99875f824c2ece8e0f33ffc85f32f871c65768f7638f85523",
+      "frozen_sha256": "35435851de6852e99875f824c2ece8e0f33ffc85f32f871c65768f7638f85523",
+      "matches_frozen": true,
+      "path": "src/aegis/local_observer.py"
+    },
+    {
+      "baseline_sha256": "4f1d90573d5f4d3f0b8dd0b245dbddf0c3ccded56318b2239e518803c4d01343",
+      "current_sha256": "4f1d90573d5f4d3f0b8dd0b245dbddf0c3ccded56318b2239e518803c4d01343",
+      "frozen_sha256": "4f1d90573d5f4d3f0b8dd0b245dbddf0c3ccded56318b2239e518803c4d01343",
+      "matches_frozen": true,
+      "path": "src/aegis/trust.py"
+    },
+    {
+      "baseline_sha256": "90502a186843dd0a2efb951c1b1d9ad3f9a49f77344c94c8726acd8aba0f3a03",
+      "current_sha256": "90502a186843dd0a2efb951c1b1d9ad3f9a49f77344c94c8726acd8aba0f3a03",
+      "frozen_sha256": "90502a186843dd0a2efb951c1b1d9ad3f9a49f77344c94c8726acd8aba0f3a03",
+      "matches_frozen": true,
+      "path": "src/aegis/config.py"
+    },
+    {
+      "baseline_sha256": "95f592222046ec8f87de52acf152842d9f1f7a59deb223b66311a2ab8ef29138",
+      "current_sha256": "95f592222046ec8f87de52acf152842d9f1f7a59deb223b66311a2ab8ef29138",
+      "frozen_sha256": "95f592222046ec8f87de52acf152842d9f1f7a59deb223b66311a2ab8ef29138",
+      "matches_frozen": true,
+      "path": "src/aegis/intelligence_adapter.py"
+    },
+    {
+      "baseline_sha256": "a9b38d1d8bbe25cf3d6dec28df978c6b280aa6742492865fcadc9c23091141f0",
+      "current_sha256": "a9b38d1d8bbe25cf3d6dec28df978c6b280aa6742492865fcadc9c23091141f0",
+      "frozen_sha256": "a9b38d1d8bbe25cf3d6dec28df978c6b280aa6742492865fcadc9c23091141f0",
+      "matches_frozen": true,
+      "path": "src/aegis/trust_lab/native_evidence.py"
+    },
+    {
+      "baseline_sha256": "46e846bcd6cd86f2e4a90b424efbd740baa08c99a7c6202deafa5e51ebc3b3dc",
+      "current_sha256": "46e846bcd6cd86f2e4a90b424efbd740baa08c99a7c6202deafa5e51ebc3b3dc",
+      "frozen_sha256": "46e846bcd6cd86f2e4a90b424efbd740baa08c99a7c6202deafa5e51ebc3b3dc",
+      "matches_frozen": true,
+      "path": "src/aegis/mitigation/store.py"
+    },
+    {
+      "baseline_sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2",
+      "current_sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2",
+      "frozen_sha256": "b035580a3fd6bcab72ec7ff79021ab887672b80d2c210378abbb5a0e176fdfe2",
+      "matches_frozen": true,
+      "path": "docs/phase4f-recovery-acceptance.md"
+    },
+    {
+      "baseline_sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d",
+      "current_sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d",
+      "frozen_sha256": "75441afec8a04d8609134bdc6657029ef6fe5262fa35bae6fa31dc7d7028db0d",
+      "matches_frozen": true,
+      "path": "docs/phase5c-diagnostic-threat-acceptance.md"
+    }
+  ],
+  "baseline": "8292e531194216a578c32c912d066f98cdbce9ea",
+  "candidate": "c777ce8562248b3bc1dbc7200575162c6c300852",
+  "junit": [
+    {
+      "case_count": 462,
+      "error": 0,
+      "failure": 0,
+      "name": "integration-freeze",
+      "passed": 424,
+      "sha256": "7b23db5db333c57cab07ca198fee5695c95200923ce438a586e77e0b03d1f116",
+      "skipped": 38,
+      "skips_by_reason": {
+        "credentialed disposable mTLS tests require AEGIS_PHASE4E_LIVE=1": 30,
+        "requires the Phase 4E loopback priority profile": 3,
+        "requires the legacy loopback single-stream profile": 1,
+        "set AEGIS_PHASE4A_LIVE=1 to authorize disposable Docker and fault tests": 1,
+        "set AEGIS_PHASE4D_LIVE=1 for a disposable loopback NATS replacement": 1,
+        "set AEGIS_PHASE4D_T3_LIVE=1 for two disposable loopback NATS brokers": 1,
+        "trust stat/read race awaits shared grant parser compatibility review": 1
+      },
+      "testsuite": [
+        {
+          "errors": "0",
+          "failures": "0",
+          "skipped": "38",
+          "tests": "462",
+          "time": "145.498"
+        }
+      ],
+      "xfail": 1
+    },
+    {
+      "case_count": 462,
+      "error": 0,
+      "failure": 0,
+      "name": "after-5b-docs",
+      "passed": 424,
+      "sha256": "4b907afa81a92bbce9918d88bd21dc32855601e0a58b7de9de0a5b2100a0f9ba",
+      "skipped": 38,
+      "skips_by_reason": {
+        "credentialed disposable mTLS tests require AEGIS_PHASE4E_LIVE=1": 30,
+        "requires the Phase 4E loopback priority profile": 3,
+        "requires the legacy loopback single-stream profile": 1,
+        "set AEGIS_PHASE4A_LIVE=1 to authorize disposable Docker and fault tests": 1,
+        "set AEGIS_PHASE4D_LIVE=1 for a disposable loopback NATS replacement": 1,
+        "set AEGIS_PHASE4D_T3_LIVE=1 for two disposable loopback NATS brokers": 1,
+        "trust stat/read race awaits shared grant parser compatibility review": 1
+      },
+      "testsuite": [
+        {
+          "errors": "0",
+          "failures": "0",
+          "skipped": "38",
+          "tests": "462",
+          "time": "145.638"
+        }
+      ],
+      "xfail": 1
+    },
+    {
+      "case_count": 468,
+      "error": 0,
+      "failure": 0,
+      "name": "after-4f-inert",
+      "passed": 430,
+      "sha256": "33c9f18005c6016dbde0d60b4eba3530eae9009f33427ceeb237170fd1d25e73",
+      "skipped": 38,
+      "skips_by_reason": {
+        "credentialed disposable mTLS tests require AEGIS_PHASE4E_LIVE=1": 30,
+        "requires the Phase 4E loopback priority profile": 3,
+        "requires the legacy loopback single-stream profile": 1,
+        "set AEGIS_PHASE4A_LIVE=1 to authorize disposable Docker and fault tests": 1,
+        "set AEGIS_PHASE4D_LIVE=1 for a disposable loopback NATS replacement": 1,
+        "set AEGIS_PHASE4D_T3_LIVE=1 for two disposable loopback NATS brokers": 1,
+        "trust stat/read race awaits shared grant parser compatibility review": 1
+      },
+      "testsuite": [
+        {
+          "errors": "0",
+          "failures": "0",
+          "skipped": "38",
+          "tests": "473",
+          "time": "146.479"
+        }
+      ],
+      "xfail": 1
+    },
+    {
+      "case_count": 479,
+      "error": 0,
+      "failure": 0,
+      "name": "after-scout",
+      "passed": 441,
+      "sha256": "676f81fbddf9e1d9bccf7c39f675c6642ffa84d6d14639d25f04075b5679cb20",
+      "skipped": 38,
+      "skips_by_reason": {
+        "credentialed disposable mTLS tests require AEGIS_PHASE4E_LIVE=1": 30,
+        "requires the Phase 4E loopback priority profile": 3,
+        "requires the legacy loopback single-stream profile": 1,
+        "set AEGIS_PHASE4A_LIVE=1 to authorize disposable Docker and fault tests": 1,
+        "set AEGIS_PHASE4D_LIVE=1 for a disposable loopback NATS replacement": 1,
+        "set AEGIS_PHASE4D_T3_LIVE=1 for two disposable loopback NATS brokers": 1,
+        "trust stat/read race awaits shared grant parser compatibility review": 1
+      },
+      "testsuite": [
+        {
+          "errors": "0",
+          "failures": "0",
+          "skipped": "38",
+          "tests": "484",
+          "time": "150.078"
+        }
+      ],
+      "xfail": 1
+    }
+  ]
+}
