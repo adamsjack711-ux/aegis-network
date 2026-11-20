@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import secrets
 import sqlite3
-from threading import Event
+from threading import Event, RLock
 import time
 
 from ..ownership import Action, CommandProof, OwnershipHome
@@ -23,6 +23,7 @@ class RouteState:
     fence: int
     deadline_ns: int | None = None
     ownership_utc_window: tuple[int, int] | None = None
+    target: str | None = None
 
 
 class TargetStore:
@@ -35,6 +36,8 @@ class TargetStore:
         self.path = path
         self._operator = operator
         self._outage = Event()
+        self._authority_loss = Event()
+        self._commit_lock = RLock()
         self._authorize = authorize
         self._status_current = status_current
         self._require_identity = require_identity
@@ -42,11 +45,12 @@ class TargetStore:
 
     @contextmanager
     def _authorized_write(self, plan: Plan, action: Action, command: CommandProof | None,
-                          target: str | None = None):
+                          target: str | None = None, approval: Approval | None = None,
+                          grant: str | None = None):
         if self._authorize is None and plan.evidence_binding is not None:
             raise Denied("evidence-bound plan requires local authorization")
         authorization = self._authorize(plan) if self._authorize is not None else nullcontext()
-        with authorization as evidence, self._transaction(write=True) as db:
+        with authorization as evidence, self._commit_lock, self._transaction(write=True) as db:
             row = self.ownership.read(db)
             assignment = None
             if self._require_identity:
@@ -57,13 +61,33 @@ class TargetStore:
                 raise Denied("enrolled target requires the identity-fenced writer")
             if self._status_current is not None and not self._status_current():
                 raise Denied("local status expired before the target transaction")
+            if self._authority_loss.is_set():
+                raise Denied("native authority loss was already latched")
             yield db, evidence
+            # The approval is part of the protected transaction, including its
+            # final deadline. A staged target change and command receipt roll
+            # back together when the approval expires during the operation.
+            if approval is not None:
+                if action == "begin":
+                    self._operator.check(plan, approval, time.monotonic_ns())
+                else:
+                    self._operator.check_grant(plan, approval, target, grant, time.monotonic_ns())
             if self._status_current is not None and not self._status_current():
                 raise Denied("local status expired before the target commit")
+            if self._authority_loss.is_set():
+                raise Denied("native authority loss was already latched")
             if assignment is not None:
                 self.ownership.recheck_target(db, assignment, command)
                 rollout = self._rollout(db)
-                if time.monotonic_ns() >= min(plan.expires_ns, self._effective_deadline(rollout)):
+                owner_deadlines = self.ownership.deadlines(self.ownership.read(db))
+                if owner_deadlines is None:
+                    raise Denied("ownership expired before the target commit")
+                deadline = min(plan.expires_ns, command.body.expires_ns, owner_deadlines[0])
+                if approval is not None:
+                    deadline = min(deadline, approval.expires_ns)
+                if rollout is not None:
+                    deadline = min(deadline, self._effective_deadline(rollout))
+                if time.monotonic_ns() >= deadline:
                     raise Denied("approved rollout expired before the target commit")
 
     def create(self) -> None:
@@ -91,20 +115,25 @@ class TargetStore:
             """)
 
     @contextmanager
-    def _transaction(self, *, write: bool = False, create: bool = False):
+    def _transaction(self, *, write: bool = False, create: bool = False,
+                     read_only: bool = False):
         db = None
         try:
-            mode = "rwc" if create else "rw"
+            mode = "rwc" if create else "ro" if read_only else "rw"
             db = sqlite3.connect(f"{self.path.as_uri()}?mode={mode}", uri=True, timeout=0.2)
             db.row_factory = sqlite3.Row
             if create:
                 db.execute("PRAGMA journal_mode = WAL")
-            db.execute("PRAGMA synchronous = FULL")
+            if read_only:
+                db.execute("PRAGMA query_only = ON")
+            else:
+                db.execute("PRAGMA synchronous = FULL")
             db.execute("BEGIN IMMEDIATE" if write else "BEGIN")
             yield db
             db.commit()
         except sqlite3.Error:
-            self._outage.set()
+            if not read_only:
+                self._outage.set()
             raise
         finally:
             if db is not None:
@@ -133,11 +162,11 @@ class TargetStore:
         )
 
     def inventory(self) -> tuple[str, dict[str, RouteState]]:
-        with self._transaction() as db:
+        with self._transaction(read_only=True) as db:
             return self._lab_id(db), self._targets(db)
 
     def history(self) -> list[dict]:
-        with self._transaction() as db:
+        with self._transaction(read_only=True) as db:
             return [dict(row) | {"detail": json.loads(row["detail"])} for row in db.execute(
                 "SELECT * FROM audit ORDER BY seq"
             )]
@@ -147,6 +176,7 @@ class TargetStore:
         rollout = self._rollout(db)
         if (
             self._outage.is_set()
+            or self._authority_loss.is_set()
             or rollout is None
             or rollout["plan"] != plan.digest
             or rollout["phase"] not in {"applying", "expanding", "confirmed"}
@@ -163,7 +193,7 @@ class TargetStore:
 
     def begin(self, plan: Plan, approval: Approval, baseline: Observation, *,
               command: CommandProof | None = None) -> None:
-        with self._authorized_write(plan, "begin", command) as (db, evidence_context):
+        with self._authorized_write(plan, "begin", command, approval=approval) as (db, evidence_context):
             now = time.monotonic_ns()
             lab_id = self._lab_id(db)
             plan.validate(lab_id, now)
@@ -190,7 +220,8 @@ class TargetStore:
 
     def restrict(self, plan: Plan, approval: Approval, target: str, grant: str, *,
                  command: CommandProof | None = None) -> None:
-        with self._authorized_write(plan, "restrict", command, target) as (db, _):
+        with self._authorized_write(plan, "restrict", command, target,
+                                    approval=approval, grant=grant) as (db, _):
             now = time.monotonic_ns()
             rollout = self._active(db, now, plan)
             self._operator.check_grant(plan, approval, target, grant, now)
@@ -251,9 +282,9 @@ class TargetStore:
             raise Denied("incomplete, stale or wrong-generation HTTP evidence")
 
     def status(self) -> str:
-        with self._transaction() as db:
+        with self._transaction(read_only=True) as db:
             rollout = self._rollout(db)
-            if self._outage.is_set():
+            if self._outage.is_set() or self._authority_loss.is_set():
                 return "recovery_required"
             if rollout is None:
                 return "ready"
@@ -279,27 +310,41 @@ class TargetStore:
 
     @contextmanager
     def route(self, target: str, *, marker: bool):
-        # Serialize marker admission and response with target writes. Benign traffic
-        # in the identity profile also serializes with ownership changes.
-        with self._transaction(write=marker or self._require_identity) as db:
+        # Observation has no write privilege. The watchdog owns durable denial;
+        # a route can still fail closed before its transaction becomes visible.
+        with self._transaction(read_only=True) as db:
             row = db.execute("SELECT fence, mode FROM target WHERE id = ?", (target,)).fetchone()
             if row is None:
                 raise Denied("proxy target absent from its enrolled inventory")
             rollout = self._rollout(db)
             deadline = self._effective_deadline(rollout) if rollout is not None else None
             ownership = self._route_ownership(db, rollout)
-            if self._outage.is_set() or ownership is None or (deadline is not None and (
+            if self._outage.is_set() or self._authority_loss.is_set() or ownership is None or (deadline is not None and (
                 time.monotonic_ns() >= deadline
                 or (self._status_current is not None and not self._status_current())
             )):
-                yield RouteState("quarantined", row["fence"])
+                yield RouteState("quarantined", row["fence"], target=target)
             else:
                 ownership_ns, ownership_utc_window = ownership
                 if deadline is not None and ownership_ns is not None:
                     deadline = min(deadline, ownership_ns)
-                yield RouteState(row["mode"], row["fence"], deadline, ownership_utc_window)
+                yield RouteState(row["mode"], row["fence"], deadline, ownership_utc_window, target)
 
     def response_permitted(self, state: RouteState) -> bool:
+        if state.target is not None:
+            # A fresh, read-only snapshot rejects a response prepared before
+            # a local fence or quarantine committed. This does not turn the
+            # observer into a writer or claim remote-to-local atomicity.
+            try:
+                with self._transaction(read_only=True) as db:
+                    row = db.execute("SELECT fence, mode FROM target WHERE id = ?",
+                                     (state.target,)).fetchone()
+                    rollout = self._rollout(db)
+                    if (row is None or row["fence"] != state.fence or row["mode"] != state.mode
+                            or self._route_ownership(db, rollout) is None):
+                        return False
+            except (Denied, sqlite3.Error):
+                return False
         if state.ownership_utc_window is not None:
             start, end = state.ownership_utc_window
             if not start <= time.time_ns() < end:
@@ -330,6 +375,43 @@ class TargetStore:
                 db.execute("UPDATE rollout SET phase = 'recovery_required', changed_ns = ?", (now,))
                 self._audit(db, now, "recovery_recheck", rollout["plan"], reason=reason)
             return tuple((target, targets[target].fence) for target in TARGETS)
+
+    def quarantine_if_authority_lost(self) -> bool:
+        """Latch a deny-only hold without a serving or observer request.
+
+        Trust appraisal is sampled before the writer lock. The local loss
+        latch and protected commit share a process mutex; the durable hold
+        shares the SQLite writer lock with protected mutations.
+        """
+        with self._transaction(read_only=True) as db:
+            rollout = self._rollout(db)
+            if rollout is None or rollout["phase"] not in {"applying", "expanding", "confirmed"}:
+                return False
+        try:
+            status_lost = self._status_current is not None and not self._status_current()
+        except Exception:
+            status_lost = True
+        with self._commit_lock:
+            if status_lost:
+                # No guarded mutation can commit between this local latch and
+                # the durable hold: both use this process-local commit lock.
+                self._authority_loss.set()
+            with self._transaction(write=True) as db:
+                rollout = self._rollout(db)
+                if rollout is None or rollout["phase"] not in {"applying", "expanding", "confirmed"}:
+                    return False
+                ownership = self._route_ownership(db, rollout)
+                if ownership is not None and not self._authority_loss.is_set():
+                    return False
+                targets = self._targets(db)
+                if tuple(targets) != TARGETS:
+                    raise Denied("cannot establish complete quarantine scope")
+                now = time.monotonic_ns()
+                db.execute("UPDATE target SET mode = 'quarantined', fence = fence + 1")
+                db.execute("UPDATE rollout SET phase = 'recovery_required', changed_ns = ?", (now,))
+                reason = "ownership lost" if ownership is None else "native Trust status lost"
+                self._audit(db, now, "quarantined", rollout["plan"], reason=reason)
+                return True
 
     def record_recovery(self, evidence: Observation) -> None:
         with self._transaction(write=True) as db:

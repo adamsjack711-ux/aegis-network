@@ -447,12 +447,22 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
                             await writer.transition(controller.restrict, plan, approval, TARGETS[1],
                                                     action="restrict", target=TARGETS[1])
                         retain(record_property, "retained_pending_cut", state)
-                    state, routes = snapshot(store.path), probe(lab.endpoints)
+                    # The native target now persists the deny-only hold before
+                    # any independent route probe, including idle T5 loss.
+                    hold_deadline = time.monotonic() + 2
+                    while time.monotonic() < hold_deadline:
+                        state = snapshot(store.path)
+                        if all(row[2] == "quarantined" for row in state["targets"]):
+                            break
+                        await asyncio.sleep(.01)
+                    assert all(row[2] == "quarantined" for row in state["targets"])
+                    routes = probe(lab.endpoints)
                     retain(record_property, "authority_loss", {"db": state, "http": routes})
-                    assert state["targets"] == [("canary", 1, "restricted"),
-                                                ("replica-a", 0, "open"), ("replica-b", 0, "open")]
+                    assert state["targets"] == [("canary", 2, "quarantined"),
+                                                ("replica-a", 1, "quarantined"),
+                                                ("replica-b", 1, "quarantined")]
                     assert [row[3]["target"] for row in state["audit"] if row[1] == "restricted"] == [TARGETS[0]]
-                    fences = dict(zip(TARGETS, (1, 0, 0), strict=True))
+                    fences = dict(zip(TARGETS, (2, 1, 1), strict=True))
                     assert_routes(routes, lab_id, {target: ("quarantined", f) for target, f in fences.items()})
                 with Lab(store.path, authorize=gate.authorize, status_current=gate.status_current,
                          require_identity=True) as restarted:
@@ -460,7 +470,7 @@ def test_local_writer_boundaries(tmp_path, record_property, monkeypatch, case):
                     retain(record_property, "restart_during_outage", {"db": state, "http": routes})
                     assert state["phase"] == "safe_hold"
                     assert [row[3]["target"] for row in state["audit"] if row[1] == "restricted"] == [TARGETS[0]]
-                    assert_routes(routes, lab_id, {target: ("quarantined", f + 1) for target, f in fences.items()})
+                    assert_routes(routes, lab_id, {target: ("quarantined", f) for target, f in fences.items()})
 
     asyncio.run(run())
 

@@ -1,0 +1,183 @@
+{
+  "profile": "disposable native one-host SQLite and loopback HTTP",
+  "fault": "status",
+  "trials": [
+    {
+      "trial": 1,
+      "cut_to_hold_read_ms": 21.183209,
+      "cut_to_observer_done_ms": 57.603042,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 2,
+      "cut_to_hold_read_ms": 12.452916,
+      "cut_to_observer_done_ms": 54.037333,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 3,
+      "cut_to_hold_read_ms": 26.84625,
+      "cut_to_observer_done_ms": 67.1685,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 4,
+      "cut_to_hold_read_ms": 20.203959,
+      "cut_to_observer_done_ms": 60.575834,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 5,
+      "cut_to_hold_read_ms": 14.604208,
+      "cut_to_observer_done_ms": 56.229875,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 6,
+      "cut_to_hold_read_ms": 6.819542,
+      "cut_to_observer_done_ms": 49.13075,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 7,
+      "cut_to_hold_read_ms": 13.914708,
+      "cut_to_observer_done_ms": 53.797291,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 8,
+      "cut_to_hold_read_ms": 28.418375,
+      "cut_to_observer_done_ms": 69.998167,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    }
+  ],
+  "source": "scripts/benchmark_phase4f_native.py"
+}

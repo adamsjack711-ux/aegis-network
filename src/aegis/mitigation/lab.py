@@ -91,6 +91,9 @@ class Controller:
                 if status == "safe_hold":
                     return
                 if status == "confirmed":
+                    # Establish a durable hold before the health observer runs.
+                    if self.store.quarantine_if_authority_lost():
+                        continue
                     self.verify(plan)
                     continue
                 reason = f"health monitor saw status {status}"
@@ -114,6 +117,16 @@ class Lab:
         self._resources = ExitStack()
         self._stop = Event()
         self._monitor: Thread | None = None
+        self._authority_watch: Thread | None = None
+
+    def _watch_authority(self) -> None:
+        while not self._stop.wait(0.02):
+            try:
+                self.store.quarantine_if_authority_lost()
+            except (Denied, sqlite3.Error):
+                # The serving path denies while storage is unavailable. Retry
+                # the durable hold independently of observer traffic.
+                continue
 
     def __enter__(self):
         with ExitStack() as owned:
@@ -143,6 +156,9 @@ class Lab:
             if restarting and self.store.status() != "ready":
                 self.controller.rollback("restart reconciliation")
             self._resources = owned.pop_all()
+        if self.store._require_identity:
+            self._authority_watch = Thread(target=self._watch_authority, daemon=True)
+            self._authority_watch.start()
         return self
 
     def execute(self, plan: Plan, approval: Approval) -> int:
@@ -156,4 +172,6 @@ class Lab:
         self._stop.set()
         if self._monitor is not None:
             self._monitor.join()
+        if self._authority_watch is not None:
+            self._authority_watch.join()
         self._resources.close()
