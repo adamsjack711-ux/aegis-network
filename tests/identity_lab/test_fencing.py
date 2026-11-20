@@ -1,10 +1,12 @@
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from datetime import datetime, timedelta, timezone
+import json
 from pathlib import Path
 from shutil import copyfile
 import sqlite3
 from threading import Barrier
-from time import sleep, time_ns
+from time import monotonic, sleep, time_ns
 from uuid import uuid4
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
@@ -13,9 +15,10 @@ import pytest
 from aegis.artifact import Finding, sign, verify
 from aegis.identity_lab.protocol import (
     Admission, Assignment, Denied, Fence, Mutation, SessionRequest, Stamp, Unavailable, Write,
-    approve, command, make_claim,
+    approve, command, make_claim, principal,
 )
-from aegis.identity_lab.transport import AuthenticationFailed, Endpoint
+from aegis.identity_lab.services import Target
+from aegis.identity_lab.transport import AuthenticationFailed, Endpoint, Peer
 
 
 def offer(lab, agent, broker, generation=None):
@@ -157,7 +160,7 @@ def test_stale_home_snapshot_and_independent_anchor(lab, tmp_path):
     lab.start("home")
     with pytest.raises(Unavailable, match="independent anchor"):
         lab.call("operator", "home", "/status")
-    with pytest.raises(Unavailable, match="independent anchor"):
+    with pytest.raises((Denied, Unavailable), match="independent anchor|held writer"):
         lab.call("agent-b", "broker-b", "/write", write)
     with pytest.raises(Unavailable, match="independent anchor"):
         claim(lab, proof=offer(lab, "agent-a", "broker-a", old.generation))
@@ -236,15 +239,20 @@ def test_broker_and_signing_roles_are_separate(lab):
     fake_approval = approve(invalid.approval.body.mutation, lab.instances["agent-a"])
     with pytest.raises(Denied, match="signature"):
         lab.call("agent-a", "broker-a", "/write", invalid.model_copy(update={"approval": fake_approval}))
+    fence = Fence(assignment=assigned, target="target-a")
+    for route in ("/fence", "/retire"):
+        with pytest.raises(Denied, match="TLS identity"):
+            lab.call("broker-a", "target-a", route, fence)
     with pytest.raises(Denied, match="TLS identity"):
-        lab.call("broker-a", "target-a", "/fence", Fence(assignment=assigned, target="target-a"))
+        lab.call("target-b", "home", "/authority", fence)
     assert raw_receipts(lab) == []
 
 
 @pytest.mark.parametrize("lab", [2_000_000_000], indirect=True)
 def test_lease_expiry_allows_new_broker_without_operator(lab):
     old = claim(lab)
-    sleep(max(0, (old.expires_ns - time_ns()) / 1_000_000_000) + 0.05)
+    sleep(max(0, (old.expires_ns - time_ns()) / 1_000_000_000))
+    assert all(row["fence"]["loss"]["reason"] == "expired" for row in wait_held(lab).values())
     assert read(lab)["effective"] == "quarantined"
     new = claim(lab, "agent-b", "broker-b")
     assert new.deployment == old.deployment and new.generation == old.generation + 1
@@ -265,7 +273,7 @@ def test_restored_anchor_cannot_reset_newer_home_floor(lab, tmp_path):
     assert anchor(lab).generation == old.generation < assigned.generation
     with pytest.raises(Unavailable, match="local ownership floor"):
         recover(lab)
-    with pytest.raises(Unavailable, match="independent anchor"):
+    with pytest.raises((Denied, Unavailable), match="independent anchor|held writer"):
         lab.call("agent-b", "broker-b", "/write", plan(lab, assigned))
     assert raw_receipts(lab) == []
 
@@ -292,25 +300,146 @@ def test_restarted_writer_holds_after_same_generation_restore(lab, tmp_path):
     assert raw_receipts(lab) == [(successor.generation, "observing")]
 
 
-def test_lost_anchor_latches_quarantine_until_a_new_generation(lab):
+def disk_state(lab, target):
+    uri = lab.database(target).as_uri() + "?mode=ro"
+    until = monotonic() + 1
+    while True:
+        try:
+            with closing(sqlite3.connect(uri, uri=True, timeout=0.1)) as db:
+                db.execute("BEGIN")
+                raw, = db.execute("SELECT body FROM record").fetchone()
+                version, marker = db.execute("SELECT version,value FROM marker").fetchone()
+                receipts = db.execute("SELECT generation,marker FROM receipts ORDER BY rowid").fetchall()
+            return {"fence": json.loads(raw) if raw is not None else None, "version": version,
+                    "marker": marker, "receipts": receipts}
+        except sqlite3.OperationalError as exc:
+            # A reader on the host can briefly see the guest's journal during commit.
+            code = exc.sqlite_errorcode & 0xff
+            if code not in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED, sqlite3.SQLITE_READONLY):
+                raise
+            if monotonic() >= until:
+                raise
+            sleep(0.005)
+
+
+def wait_held(lab, targets=None, *, timeout=3):
+    targets = targets or lab.targets
+    until = monotonic() + timeout
+    while monotonic() < until:
+        state = {target: disk_state(lab, target) for target in targets}
+        if all(row["fence"]["held"] for row in state.values()):
+            return state
+        sleep(0.01)
+    raise AssertionError(f"durable hold did not appear: {state}")
+
+
+def test_lost_anchor_latches_quarantine_before_any_serving_request(lab):
     assigned = claim(lab)
+    prior = {}
     for target in lab.targets:
         lab.call("agent-a", "broker-a", "/write", plan(lab, assigned, target))
-    old_a = plan(lab, assigned, "target-a")
-    old_b = plan(lab, assigned, "target-b")
+        prior[target] = plan(lab, assigned, target)
+        assert disk_state(lab, target)["marker"] == "observing"
     lab.stop("anchor")
-    assert read(lab, "target-a")["marker"] == "quarantined"
-    with pytest.raises(Unavailable):
-        lab.call("agent-a", "broker-a", "/write", old_b)
+    # There is no /read, write, broker operation or health check in this window.
+    held = wait_held(lab)
+    for target, row in held.items():
+        assert row["marker"] == "quarantined"
+        assert row["fence"]["loss"]["reason"] == "authority-unavailable"
+        assert row["receipts"] == [(assigned.generation, "observing")]
+        assert read(lab, target)["effective"] == "quarantined"
+        assert disk_state(lab, target) == row
+
     lab.start("anchor")
     assert lab.call("operator", "home", "/status")["generation"] == assigned.generation
-    for target, request in zip(lab.targets, (old_a, old_b), strict=True):
-        assert read(lab, target)["marker"] == "quarantined"
+    for target, request in prior.items():
         with pytest.raises(Denied, match="held writer requires a new generation"):
             lab.call("agent-a", "broker-a", "/write", request)
-        assert raw_receipts(lab, target) == [(assigned.generation, "observing")]
+        assert disk_state(lab, target) == held[target]
     recover(lab)
     successor = claim(lab, "agent-b", "broker-b")
     for target in lab.targets:
-        lab.call("agent-b", "broker-b", "/write", plan(lab, successor, target))
+        fresh = plan(lab, successor, target)
+        with pytest.raises(Denied, match="exact target and assignment"):
+            lab.call("agent-b", "broker-b", "/write",
+                     fresh.model_copy(update={"approval": prior[target].approval}))
+        lab.call("agent-b", "broker-b", "/write", fresh)
         assert raw_receipts(lab, target)[-1] == (successor.generation, "observing")
+
+
+def test_serving_denial_does_not_commit_hold_while_writer_lock_is_owned(lab):
+    assigned = claim(lab)
+    for target in lab.targets:
+        lab.call("agent-a", "broker-a", "/write", plan(lab, assigned, target))
+    with closing(sqlite3.connect(lab.database("target-a"))) as lock:
+        lock.execute("BEGIN IMMEDIATE")
+        lab.stop("anchor")
+        before = disk_state(lab, "target-a")
+        response = read(lab, "target-a")
+        assert response["effective"] == "quarantined" and response["marker"] == "observing"
+        assert not before["fence"]["held"] and disk_state(lab, "target-a") == before
+        lock.rollback()
+    assert len(wait_held(lab)) == 2
+
+
+def test_live_retirement_waits_for_all_target_barriers(lab):
+    old = claim(lab)
+    lab.call("agent-a", "broker-a", "/write", plan(lab, old))
+    prior = plan(lab, old)
+    lab.stop("target-b")
+    with pytest.raises(Unavailable):
+        recover(lab)
+    still_active = lab.call("operator", "home", "/status")
+    assert still_active["phase"] == "active" and still_active["generation"] == old.generation
+    assert disk_state(lab, "target-a")["fence"]["loss"]["reason"] == "retired"
+    with pytest.raises(Denied, match="held writer"):
+        lab.call("broker-a", "target-a", "/write", prior)
+    lab.start("target-b")
+    assert recover(lab)["generation"] > old.generation
+    assert disk_state(lab, "target-b")["fence"]["held"]
+
+
+
+@pytest.mark.parametrize("failure", ["home-unavailable", "watchdog-denial"])
+def test_final_write_guard_rolls_back_buffered_effect_and_receipt(lab, monkeypatch, failure):
+    assigned = claim(lab)
+    request = plan(lab, assigned)
+    before = disk_state(lab, "target-a")
+    writer = Target("target-a", lab.database("target-a"), lab.policy, lab.client("target-a"),
+                    lab.endpoints, boot=before["fence"]["boot"])
+    checked = writer.require_current
+
+    def lose_authority(assignment):
+        # The protected marker and receipt have been staged but remain invisible to
+        # another SQLite connection at the moment the last authority check runs.
+        assert disk_state(lab, "target-a") == before
+        if failure == "home-unavailable":
+            raise Unavailable("simulated authority loss during writer transaction")
+        checked(assignment)
+        writer.remember_loss(assignment, "authority-unavailable")
+
+    monkeypatch.setattr(writer, "require_current", lose_authority)
+    peer = Peer(principal("broker-a"), "", assigned.expires_ns)
+    with pytest.raises(Unavailable if failure == "home-unavailable" else Denied):
+        writer.write(peer, request)
+    after = disk_state(lab, "target-a")
+    assert after["marker"] == "quarantined" and after["receipts"] == []
+    assert after["version"] == before["version"]
+    if failure == "home-unavailable":
+        assert after["fence"]["held"]
+
+
+
+def test_commit_refuses_to_wait_on_reader_after_authorizing(lab):
+    assigned = claim(lab)
+    request = plan(lab, assigned)
+    before = disk_state(lab, "target-a")
+    with closing(sqlite3.connect(lab.database("target-a").as_uri() + "?mode=ro", uri=True)) as reader:
+        reader.execute("BEGIN")
+        assert reader.execute("SELECT value FROM marker").fetchone() == ("quarantined",)
+        with pytest.raises(Unavailable, match="durable store unavailable"):
+            lab.call("agent-a", "broker-a", "/write", request)
+        assert reader.execute("SELECT COUNT(*) FROM receipts").fetchone() == (0,)
+    assert disk_state(lab, "target-a") == before
+    lab.call("agent-a", "broker-a", "/write", request)
+    assert raw_receipts(lab) == [(assigned.generation, "observing")]
