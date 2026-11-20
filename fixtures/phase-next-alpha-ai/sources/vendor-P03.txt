@@ -1,0 +1,1 @@
+AEGIS-ADV-P03 explicitly lists PyPI spruce-http 3.0.0rc1 as affected. No other pre-release or impact type is assessed.

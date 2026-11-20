@@ -1,0 +1,1 @@
+AEGIS-ADV-F02 concerns npm cedar-view 2.5.0. The PyPI package named cedar-view is a distinct product and is not covered by this notice.

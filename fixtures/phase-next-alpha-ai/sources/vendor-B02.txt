@@ -1,0 +1,1 @@
+AEGIS-ADV-B01 affects PyPI maple-json >=1.2.0 and <1.4.0. Release 1.4.0 is outside the range and fixed.

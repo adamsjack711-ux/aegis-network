@@ -1,0 +1,1 @@
+AEGIS-ADV-C01: npm birch-core versions through 4.1.0 are affected. This notice has not been reconciled with the vendor.

@@ -1,0 +1,1 @@
+AEGIS-ADV-W03 is under investigation for PyPI pine-sync. No affected versions, impact, fix or mitigation have been established; 8.4.0 must not be asserted affected.

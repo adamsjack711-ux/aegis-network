@@ -1,0 +1,1 @@
+AEGIS-ADV-A01 affects Maven org.example:willow-api 1.5.0. An unrelated npm package has the same short name; the asset ecosystem is unknown.

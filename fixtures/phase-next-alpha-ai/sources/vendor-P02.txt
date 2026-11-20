@@ -1,0 +1,1 @@
+AEGIS-ADV-P02 affects Debian spruce-lib before 2:1.0-1. Epoch 2 version 1.0-1 is fixed.
