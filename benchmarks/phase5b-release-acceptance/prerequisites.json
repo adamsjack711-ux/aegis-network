@@ -1,0 +1,59 @@
+{
+  "schema": "phase5b-release-prerequisites-v1",
+  "source_reference": "8292e531194216a578c32c912d066f98cdbce9ea",
+  "pyproject_sha256": "a78ac9949438f6b8fa517adedd7d89183eda96a73d2e7509726425b5eb291f7b",
+  "release_preflight": {
+    "command": "python3 scripts/alpha_linux_release.py 8292e531194216a578c32c912d066f98cdbce9ea /private/tmp/aegis-alpha-reviewed-wheelhouse benchmarks/phase5b-release-acceptance/preflight-attempt",
+    "exit_code": 2,
+    "status": "incomplete",
+    "reason": "reviewed wheelhouse directory is missing or aliased",
+    "raw_report": "preflight-attempt/release-report.json"
+  },
+  "dependency_manifest": {
+    "status": "unresolved",
+    "reason": "No reviewed original-archive wheelhouse, frozen version resolution or original archive hashes were supplied. Installed distributions and extracted caches are not original wheel archives.",
+    "build_backend_required_by_release_helper": "hatchling==1.33.0",
+    "direct_runtime_requirements": [
+      "cryptography>=44,<47",
+      "pydantic>=2.10,<3",
+      "fastapi>=0.115,<1",
+      "httpx>=0.27,<1",
+      "nats-py>=2.9,<3",
+      "psycopg[binary]>=3.2,<4",
+      "uvicorn>=0.30,<1"
+    ],
+    "missing_original_archives_confirmed_in_searched_roots": [
+      "hatchling-1.33.0-py3-none-any.whl",
+      "cryptography Linux-compatible wheel archives for Python 3.12 and 3.13",
+      "pydantic_core Linux-compatible wheel archives for Python 3.12 and 3.13"
+    ],
+    "also_unresolved": [
+      "Hatchling build dependency wheels",
+      "exact versions, original archive hashes, licenses and supplier custody for every direct and transitive runtime dependency on each platform",
+      "independent review commit binding every original archive and its provenance"
+    ],
+    "searched_roots": [
+      "/private/tmp",
+      "/Users/jackadams-lovell/.cache/uv",
+      "/Users/jackadams-lovell/aegis-network/.worktrees"
+    ],
+    "search_scope_note": "Read-only local inventory; absence is limited to the searched roots. Historical Aegis-built wheels were found but do not supply dependency provenance."
+  },
+  "cells": [
+    {"id": "debian-13-py312", "image": "aegis_phase4_baseline-coordinator:latest", "image_id": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e", "observed_python": "3.12.16", "status": "skipped", "reason": "reviewed original-archive wheelhouse missing"},
+    {"id": "debian-13-py313", "image": "python:3.13-slim", "image_id": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90", "observed_python": "3.13.18", "status": "skipped", "reason": "reviewed original-archive wheelhouse missing"},
+    {"id": "ubuntu-2404-py312", "image": "mcr.microsoft.com/playwright/python:v1.50.0-noble", "image_id": "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60", "observed_python": "3.12.3", "status": "skipped", "reason": "reviewed original-archive wheelhouse missing"},
+    {"id": "ubuntu-2404-py313", "image": null, "image_id": null, "observed_python": null, "status": "skipped", "reason": "reviewed original-archive wheelhouse and cached Ubuntu 24.04/Python 3.13 image missing"}
+  ],
+  "denominators": {
+    "reproducible_wheel_sdist_builds": {"planned": 2, "attempted": 0, "passed": 0, "skipped": 2},
+    "fresh_installed_cells": {"planned": 4, "attempted": 0, "passed": 0, "skipped": 4},
+    "installed_console_logical_cases": {"planned": 84, "attempted": 0, "passed": 0, "skipped": 84},
+    "installed_resource_privacy_children": {"planned": 68, "attempted": 0, "passed": 0, "skipped": 68},
+    "installed_syscall_traces": {"attempted": 0, "passed": 0, "status": "unverified"},
+    "installed_uninstall_checks": {"planned": 4, "attempted": 0, "passed": 0, "skipped": 4}
+  },
+  "network_downloads": 0,
+  "image_pulls": 0,
+  "alpha_approval": "not_decided"
+}
