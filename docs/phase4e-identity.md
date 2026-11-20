@@ -1,5 +1,7 @@
 # Phase 4E-B · Multi-host identity and durable fencing
 
+The later [proactive quarantine follow-up](phase4e-watchdog.md) records the independent observer-order failure and the corrective B marker pin. This document describes the original benchmark pin.
+
 The opt-in identity lab exercises two authenticated broker adapters and two separately writable synthetic targets. One ownership home allocates deployment generations. The home activates a replacement only after both target writers acknowledge the exact generation from their mutation transactions. A former owner's signed command and approval are denied at the target, including when delivered directly by the previously assigned broker.
 
 The branch starts at the approved Phase 4E baseline `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f`. T1 specifies a stable UUID, exact workload enrollment, independent instance proof, a home and an all-writer barrier. T3 establishes the proof, approval, and mutation ordering inside one SQLite transaction and leaves transport peer identity to an adapter. Phase 4C finding 4C-02 and T6 identify the remaining broker admission, external recovery floor and independently hosted writer gates. This lab moves those three boundaries onto separate authenticated processes and files. [T1 research](../../../docs/research/aegis-trust-identity.md) · [T3](phase4d-t3-identity.md) · [4C-02](phase4c-adversarial.md#4c-02--high--broker-local-leases-cannot-establish-deployment-wide-identity) · [T6 dispositions](phase4d-security-review.md)

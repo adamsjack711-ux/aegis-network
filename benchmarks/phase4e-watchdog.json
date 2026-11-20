@@ -1,0 +1,2826 @@
+{
+  "environment": {
+    "source_commit": "79cd10a72aac169047f63fe137988ce881304f25",
+    "when_utc": "2026-11-20T00:09:14.413455+00:00",
+    "project": "disposable loopback mTLS",
+    "clock": "one host monotonic clock",
+    "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.15.2"
+  },
+  "trials": [
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553523025942375,
+        "fault_confirmed_ns": 553523029775791,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553522990215625,
+          "reply_ns": 553523004508916,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553523008203416,
+          "reply_ns": 553523021785625,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553523030054583,
+          "sql_confirmed_ns": 553523030207875,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "44e4d15f1f301ac3b05e32bdfc9f8442",
+                "deployment": "4ff94260-1e5f-4be6-a0cb-02f1b83c4e60",
+                "enrollment": "f75fdd07e489fe16ee4595b9f87aa434cbd7916cfcb56a96eaf253a2dece4028",
+                "expires_ns": 1795133386297413000,
+                "generation": 1,
+                "issued_ns": 1795133356297413000
+              },
+              "boot": "95b00e793b1f311f83a15f6d9aa7e46f",
+              "held": true,
+              "loss": {
+                "detected_ns": 553523027884875,
+                "observed_ns": 553523027882583,
+                "prepared_ns": 553523028209416,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553523028804083,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553523028797166,
+            "reason": "authority-unavailable",
+            "observed_ns": 553523027882583,
+            "detected_ns": 553523027884875,
+            "prepared_ns": 553523028209416
+          },
+          "report_collected_ns": 553523332977250
+        },
+        "target-a": {
+          "sql_started_ns": 553523080963875,
+          "sql_confirmed_ns": 553523081131916,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "44e4d15f1f301ac3b05e32bdfc9f8442",
+                "deployment": "4ff94260-1e5f-4be6-a0cb-02f1b83c4e60",
+                "enrollment": "f75fdd07e489fe16ee4595b9f87aa434cbd7916cfcb56a96eaf253a2dece4028",
+                "expires_ns": 1795133386297413000,
+                "generation": 1,
+                "issued_ns": 1795133356297413000
+              },
+              "boot": "c53461bafbb6a7bdf939c7749d3011d0",
+              "held": true,
+              "loss": {
+                "detected_ns": 553523079083000,
+                "observed_ns": 553523079082041,
+                "prepared_ns": 553523079308916,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553523079924500,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553523079916875,
+            "reason": "authority-unavailable",
+            "observed_ns": 553523079082041,
+            "detected_ns": 553523079083000,
+            "prepared_ns": 553523079308916
+          },
+          "report_collected_ns": 553523333166250
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553523293336666,
+          "denial_observed_ns": 553523299941583,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553523299945125,
+          "denial_observed_ns": 553523302687041,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553524901839041,
+        "fault_confirmed_ns": 553524903483416,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553524860576625,
+          "reply_ns": 553524874558041,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553524878540833,
+          "reply_ns": 553524897696291,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553524942183583,
+          "sql_confirmed_ns": 553524942344625,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "16c0c0f7afe383f01fffd09ea1344111",
+                "deployment": "6ef99cfc-a342-4c40-875f-0ccacd5b445f",
+                "enrollment": "3f677886d6f0a05513a2dc7667bafe95a6b513aa83cd0275fd8a133d8669afda",
+                "expires_ns": 1795133388169009000,
+                "generation": 1,
+                "issued_ns": 1795133358169009000
+              },
+              "boot": "2ec287b9b4add6ac0d93a17364cc6bfd",
+              "held": true,
+              "loss": {
+                "detected_ns": 553524940797500,
+                "observed_ns": 553524940796291,
+                "prepared_ns": 553524941023625,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553524941632666,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553524941625541,
+            "reason": "authority-unavailable",
+            "observed_ns": 553524940796291,
+            "detected_ns": 553524940797500,
+            "prepared_ns": 553524941023625
+          },
+          "report_collected_ns": 553525214219541
+        },
+        "target-b": {
+          "sql_started_ns": 553524952984166,
+          "sql_confirmed_ns": 553524953152541,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "16c0c0f7afe383f01fffd09ea1344111",
+                "deployment": "6ef99cfc-a342-4c40-875f-0ccacd5b445f",
+                "enrollment": "3f677886d6f0a05513a2dc7667bafe95a6b513aa83cd0275fd8a133d8669afda",
+                "expires_ns": 1795133388169009000,
+                "generation": 1,
+                "issued_ns": 1795133358169009000
+              },
+              "boot": "94cbc7ea5470a35892c04adb023e8b6d",
+              "held": true,
+              "loss": {
+                "detected_ns": 553524951297333,
+                "observed_ns": 553524951296375,
+                "prepared_ns": 553524951497041,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553524952037916,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553524952032375,
+            "reason": "authority-unavailable",
+            "observed_ns": 553524951296375,
+            "detected_ns": 553524951297333,
+            "prepared_ns": 553524951497041
+          },
+          "report_collected_ns": 553525214401750
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553525175542875,
+          "denial_observed_ns": 553525182199625,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553525182203541,
+          "denial_observed_ns": 553525184852875,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553527008293708,
+        "fault_confirmed_ns": 553527009652833,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553526971344875,
+          "reply_ns": 553526986518583,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553526990420791,
+          "reply_ns": 553527005802708,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553527054124666,
+          "sql_confirmed_ns": 553527054264208,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "a31adbb19f8fcc25c4f4362174fbb531",
+                "deployment": "b8ec686a-3326-4273-88f4-a997e4363ac5",
+                "enrollment": "ab060617599b41a855d4cf78c07f188940bfe3e32cf4ec6dcd44e92a21548dd2",
+                "expires_ns": 1795133390277365000,
+                "generation": 1,
+                "issued_ns": 1795133360277365000
+              },
+              "boot": "a83bcab205974afaca43c024dad51ab4",
+              "held": true,
+              "loss": {
+                "detected_ns": 553527051173750,
+                "observed_ns": 553527051172416,
+                "prepared_ns": 553527051384750,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553527052055708,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553527052048291,
+            "reason": "authority-unavailable",
+            "observed_ns": 553527051172416,
+            "detected_ns": 553527051173750,
+            "prepared_ns": 553527051384750
+          },
+          "report_collected_ns": 553527315534166
+        },
+        "target-a": {
+          "sql_started_ns": 553527056781250,
+          "sql_confirmed_ns": 553527056946958,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "a31adbb19f8fcc25c4f4362174fbb531",
+                "deployment": "b8ec686a-3326-4273-88f4-a997e4363ac5",
+                "enrollment": "ab060617599b41a855d4cf78c07f188940bfe3e32cf4ec6dcd44e92a21548dd2",
+                "expires_ns": 1795133390277365000,
+                "generation": 1,
+                "issued_ns": 1795133360277365000
+              },
+              "boot": "9708f8f28d56808bdc50ecddcf8b9a25",
+              "held": true,
+              "loss": {
+                "detected_ns": 553527055910708,
+                "observed_ns": 553527055909375,
+                "prepared_ns": 553527056098625,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553527056565833,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553527056560541,
+            "reason": "authority-unavailable",
+            "observed_ns": 553527055909375,
+            "detected_ns": 553527055910708,
+            "prepared_ns": 553527056098625
+          },
+          "report_collected_ns": 553527315731041
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553527275210125,
+          "denial_observed_ns": 553527282329791,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553527282333625,
+          "denial_observed_ns": 553527284866333,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553528991461541,
+        "fault_confirmed_ns": 553528993045458,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553528956653833,
+          "reply_ns": 553528970884291,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553528974604375,
+          "reply_ns": 553528989031208,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553529015009041,
+          "sql_confirmed_ns": 553529015133375,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "661450cc2451469fbc189107747ee0aa",
+                "deployment": "bd1525f5-634d-42fd-aab1-094af22e5108",
+                "enrollment": "cce59280096e6e125b328799aec01062a71d42d713723258bb9a1cb37a02c8a2",
+                "expires_ns": 1795133392264887000,
+                "generation": 1,
+                "issued_ns": 1795133362264887000
+              },
+              "boot": "9ddc52321c9e2e90a328f2923e5f0542",
+              "held": true,
+              "loss": {
+                "detected_ns": 553529013904458,
+                "observed_ns": 553529013903500,
+                "prepared_ns": 553529014179208,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553529014850541,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553529014843291,
+            "reason": "authority-unavailable",
+            "observed_ns": 553529013903500,
+            "detected_ns": 553529013904458,
+            "prepared_ns": 553529014179208
+          },
+          "report_collected_ns": 553529285288875
+        },
+        "target-a": {
+          "sql_started_ns": 553529030322875,
+          "sql_confirmed_ns": 553529030503250,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "661450cc2451469fbc189107747ee0aa",
+                "deployment": "bd1525f5-634d-42fd-aab1-094af22e5108",
+                "enrollment": "cce59280096e6e125b328799aec01062a71d42d713723258bb9a1cb37a02c8a2",
+                "expires_ns": 1795133392264887000,
+                "generation": 1,
+                "issued_ns": 1795133362264887000
+              },
+              "boot": "614437406cff54585f71ca074d06750a",
+              "held": true,
+              "loss": {
+                "detected_ns": 553529028644375,
+                "observed_ns": 553529028643583,
+                "prepared_ns": 553529028855041,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553529029485833,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553529029479416,
+            "reason": "authority-unavailable",
+            "observed_ns": 553529028643583,
+            "detected_ns": 553529028644375,
+            "prepared_ns": 553529028855041
+          },
+          "report_collected_ns": 553529285482291
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553529249108500,
+          "denial_observed_ns": 553529255505750,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553529255509625,
+          "denial_observed_ns": 553529258235000,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553530952042916,
+        "fault_confirmed_ns": 553530955848083,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553530916651208,
+          "reply_ns": 553530931037416,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553530934525541,
+          "reply_ns": 553530947960208,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553530956086666,
+          "sql_confirmed_ns": 553530956229291,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "deeb32d69c22c772bbcec839e338eeec",
+                "deployment": "b8707e4c-474d-4521-9392-15a161bffa96",
+                "enrollment": "8b817ed91032021f681b42b928b2e971e9390e02425c2009585c27f878200961",
+                "expires_ns": 1795133394224666000,
+                "generation": 1,
+                "issued_ns": 1795133364224666000
+              },
+              "boot": "a9d5cdfd47c83f61c71da9f15b738529",
+              "held": true,
+              "loss": {
+                "detected_ns": 553530953849458,
+                "observed_ns": 553530953848791,
+                "prepared_ns": 553530954123458,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553530954645791,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553530954639666,
+            "reason": "authority-unavailable",
+            "observed_ns": 553530953848791,
+            "detected_ns": 553530953849458,
+            "prepared_ns": 553530954123458
+          },
+          "report_collected_ns": 553531236177375
+        },
+        "target-a": {
+          "sql_started_ns": 553530974630125,
+          "sql_confirmed_ns": 553530974825875,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "deeb32d69c22c772bbcec839e338eeec",
+                "deployment": "b8707e4c-474d-4521-9392-15a161bffa96",
+                "enrollment": "8b817ed91032021f681b42b928b2e971e9390e02425c2009585c27f878200961",
+                "expires_ns": 1795133394224666000,
+                "generation": 1,
+                "issued_ns": 1795133364224666000
+              },
+              "boot": "fa4f1b1046ca256b233bffd73d2b6313",
+              "held": true,
+              "loss": {
+                "detected_ns": 553530973348875,
+                "observed_ns": 553530973347666,
+                "prepared_ns": 553530973560166,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553530974113791,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553530974108000,
+            "reason": "authority-unavailable",
+            "observed_ns": 553530973347666,
+            "detected_ns": 553530973348875,
+            "prepared_ns": 553530973560166
+          },
+          "report_collected_ns": 553531236372375
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553531199134166,
+          "denial_observed_ns": 553531205884291,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553531205887666,
+          "denial_observed_ns": 553531208358208,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553532782781708,
+        "fault_confirmed_ns": 553532784086500,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553532747964375,
+          "reply_ns": 553532762155958,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553532765742875,
+          "reply_ns": 553532780667208,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553532798345000,
+          "sql_confirmed_ns": 553532798466250,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "f39941c40a2a062191fa65303611968b",
+                "deployment": "1380cce6-a5c1-4fb8-aaa3-50402ccadc8e",
+                "enrollment": "941c808e080e2abd63ee8ec3174e5eea5cec10a5892ab85ce5c4556b7e1a94bd",
+                "expires_ns": 1795133396056435000,
+                "generation": 1,
+                "issued_ns": 1795133366056435000
+              },
+              "boot": "e620f9649ef5dd992cf0a2b4e3ccdaef",
+              "held": true,
+              "loss": {
+                "detected_ns": 553532795988500,
+                "observed_ns": 553532795987416,
+                "prepared_ns": 553532796164708,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553532796730708,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553532796724250,
+            "reason": "authority-unavailable",
+            "observed_ns": 553532795987416,
+            "detected_ns": 553532795988500,
+            "prepared_ns": 553532796164708
+          },
+          "report_collected_ns": 553533082359416
+        },
+        "target-a": {
+          "sql_started_ns": 553532824645750,
+          "sql_confirmed_ns": 553532824884083,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "f39941c40a2a062191fa65303611968b",
+                "deployment": "1380cce6-a5c1-4fb8-aaa3-50402ccadc8e",
+                "enrollment": "941c808e080e2abd63ee8ec3174e5eea5cec10a5892ab85ce5c4556b7e1a94bd",
+                "expires_ns": 1795133396056435000,
+                "generation": 1,
+                "issued_ns": 1795133366056435000
+              },
+              "boot": "2f079aa3a93cfa75e122c46ad0ef9127",
+              "held": true,
+              "loss": {
+                "detected_ns": 553532823871333,
+                "observed_ns": 553532823870416,
+                "prepared_ns": 553532824127125,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553532824750208,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553532824741875,
+            "reason": "authority-unavailable",
+            "observed_ns": 553532823870416,
+            "detected_ns": 553532823871333,
+            "prepared_ns": 553532824127125
+          },
+          "report_collected_ns": 553533082559333
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553533044359000,
+          "denial_observed_ns": 553533051101625,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553533051105541,
+          "denial_observed_ns": 553533053498750,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553534794505833,
+        "fault_confirmed_ns": 553534795823958,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553534758510500,
+          "reply_ns": 553534774305583,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553534778183666,
+          "reply_ns": 553534792330791,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553534837421750,
+          "sql_confirmed_ns": 553534837542875,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "13b50c4c3db5776b8745bc63541e0b1d",
+                "deployment": "001ca0c2-9d73-41d0-bbbd-129f12ad42bb",
+                "enrollment": "2137a0be4e6a40c422fe8f9b1db2ce509dc95f7f5dbf7fdf0aa6140fab74c89f",
+                "expires_ns": 1795133398066636000,
+                "generation": 1,
+                "issued_ns": 1795133368066636000
+              },
+              "boot": "f5611b7c0a039277e4af9c1e626e8c35",
+              "held": true,
+              "loss": {
+                "detected_ns": 553534835469958,
+                "observed_ns": 553534835468875,
+                "prepared_ns": 553534835680750,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553534836319791,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553534836312708,
+            "reason": "authority-unavailable",
+            "observed_ns": 553534835468875,
+            "detected_ns": 553534835469958,
+            "prepared_ns": 553534835680750
+          },
+          "report_collected_ns": 553535094278375
+        },
+        "target-a": {
+          "sql_started_ns": 553534840070666,
+          "sql_confirmed_ns": 553534840329833,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "13b50c4c3db5776b8745bc63541e0b1d",
+                "deployment": "001ca0c2-9d73-41d0-bbbd-129f12ad42bb",
+                "enrollment": "2137a0be4e6a40c422fe8f9b1db2ce509dc95f7f5dbf7fdf0aa6140fab74c89f",
+                "expires_ns": 1795133398066636000,
+                "generation": 1,
+                "issued_ns": 1795133368066636000
+              },
+              "boot": "09ca0d36030d834adb18f0ca7a5ce607",
+              "held": true,
+              "loss": {
+                "detected_ns": 553534839352500,
+                "observed_ns": 553534839351166,
+                "prepared_ns": 553534839569916,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553534840181000,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553534840173125,
+            "reason": "authority-unavailable",
+            "observed_ns": 553534839351166,
+            "detected_ns": 553534839352500,
+            "prepared_ns": 553534839569916
+          },
+          "report_collected_ns": 553535094533458
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553535055901500,
+          "denial_observed_ns": 553535062589166,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553535062592791,
+          "denial_observed_ns": 553535065140541,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "anchor-loss",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "fault_start_ns": 553536759146916,
+        "fault_confirmed_ns": 553536760634666,
+        "former_broker_offline": true
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553536724717625,
+          "reply_ns": 553536738164250,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553536741545750,
+          "reply_ns": 553536755008500,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553536763885000,
+          "sql_confirmed_ns": 553536765398958,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "3005c8a97e3bef383c2af188d2a87492",
+                "deployment": "ed0878b4-fde6-460a-85dc-c555bd21ae45",
+                "enrollment": "50d828ff26f7774acd49a8fad30dc665d240d901273134c8200d7898a46c55d0",
+                "expires_ns": 1795133400034049000,
+                "generation": 1,
+                "issued_ns": 1795133370034049000
+              },
+              "boot": "17acb6ecf2d808bcd6e82d934dc2b674",
+              "held": true,
+              "loss": {
+                "detected_ns": 553536763212208,
+                "observed_ns": 553536763211083,
+                "prepared_ns": 553536763483625,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553536764189625,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553536764180250,
+            "reason": "authority-unavailable",
+            "observed_ns": 553536763211083,
+            "detected_ns": 553536763212208,
+            "prepared_ns": 553536763483625
+          },
+          "report_collected_ns": 553537041405416
+        },
+        "target-a": {
+          "sql_started_ns": 553536781504375,
+          "sql_confirmed_ns": 553536781676125,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "3005c8a97e3bef383c2af188d2a87492",
+                "deployment": "ed0878b4-fde6-460a-85dc-c555bd21ae45",
+                "enrollment": "50d828ff26f7774acd49a8fad30dc665d240d901273134c8200d7898a46c55d0",
+                "expires_ns": 1795133400034049000,
+                "generation": 1,
+                "issued_ns": 1795133370034049000
+              },
+              "boot": "bc552f37a613e851afa25cd1e1a3571d",
+              "held": true,
+              "loss": {
+                "detected_ns": 553536779476125,
+                "observed_ns": 553536779475083,
+                "prepared_ns": 553536779696875,
+                "reason": "authority-unavailable"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553536780325041,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553536780317916,
+            "reason": "authority-unavailable",
+            "observed_ns": 553536779475083,
+            "detected_ns": 553536779476125,
+            "prepared_ns": 553536779696875
+          },
+          "report_collected_ns": 553537041599666
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553536998764833,
+          "denial_observed_ns": 553537005605708,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553537005609708,
+          "denial_observed_ns": 553537008218791,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "expiry",
+      "assignment_generation": 1,
+      "lease_ns": 2000000000,
+      "loss": {
+        "lease_expires_wall_ns": 1795133373875504000,
+        "wall_before_ns": 1795133371947483000,
+        "sample_monotonic_ns": 553538602382541,
+        "wall_after_ns": 1795133371947483000,
+        "earliest_projected_expiry_ns": 553540530403541,
+        "latest_projected_expiry_ns": 553540530403541
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553538569151666,
+          "reply_ns": 553538584163916,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553538587821625,
+          "reply_ns": 553538602138250,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553540537156375,
+          "sql_confirmed_ns": 553540537392041,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "d468e5a3984ff69633a9aea282a46754",
+                "deployment": "4100bba8-b2ff-4995-b9e9-85241748d519",
+                "enrollment": "29f69e701992e5564bcb671859ae7e7cb33c25b362d30f067a439fc8be55449a",
+                "expires_ns": 1795133373875504000,
+                "generation": 1,
+                "issued_ns": 1795133371875504000
+              },
+              "boot": "e09f53f52027de937abac38a9dcdfa98",
+              "held": true,
+              "loss": {
+                "detected_ns": 553540534614875,
+                "observed_ns": 553540534613541,
+                "prepared_ns": 553540534857708,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553540535697750,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553540535689208,
+            "reason": "expired",
+            "observed_ns": 553540534613541,
+            "detected_ns": 553540534614875,
+            "prepared_ns": 553540534857708
+          },
+          "report_collected_ns": 553540832984375
+        },
+        "target-b": {
+          "sql_started_ns": 553540561918083,
+          "sql_confirmed_ns": 553540562161208,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "d468e5a3984ff69633a9aea282a46754",
+                "deployment": "4100bba8-b2ff-4995-b9e9-85241748d519",
+                "enrollment": "29f69e701992e5564bcb671859ae7e7cb33c25b362d30f067a439fc8be55449a",
+                "expires_ns": 1795133373875504000,
+                "generation": 1,
+                "issued_ns": 1795133371875504000
+              },
+              "boot": "f64b999cd98ab8da121aca12a8be65c8",
+              "held": true,
+              "loss": {
+                "detected_ns": 553540559481208,
+                "observed_ns": 553540559479666,
+                "prepared_ns": 553540559704916,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553540560438625,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553540560421583,
+            "reason": "expired",
+            "observed_ns": 553540559479666,
+            "detected_ns": 553540559481208,
+            "prepared_ns": 553540559704916
+          },
+          "report_collected_ns": 553540833174458
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553540792143375,
+          "denial_observed_ns": 553540798981583,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553540798987583,
+          "denial_observed_ns": 553540801829041,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "expiry",
+      "assignment_generation": 1,
+      "lease_ns": 2000000000,
+      "loss": {
+        "lease_expires_wall_ns": 1795133377681872000,
+        "wall_before_ns": 1795133375761485000,
+        "sample_monotonic_ns": 553542416371416,
+        "wall_after_ns": 1795133375761486000,
+        "earliest_projected_expiry_ns": 553544336757416,
+        "latest_projected_expiry_ns": 553544336758416
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553542378296333,
+          "reply_ns": 553542393495208,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553542397344291,
+          "reply_ns": 553542416130791,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-b": {
+          "sql_started_ns": 553544350591625,
+          "sql_confirmed_ns": 553544350748625,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "cfc8dc116c9b503be220cb23e7c34ff7",
+                "deployment": "c60a00d2-8db7-44b9-8ddc-619d7916c168",
+                "enrollment": "5f1486882d05b51e180efd6f73e6b4a807377e5417795b0283c2c61722d14280",
+                "expires_ns": 1795133377681872000,
+                "generation": 1,
+                "issued_ns": 1795133375681872000
+              },
+              "boot": "d8fe0b57eacc81bd44b403041e9c96ae",
+              "held": true,
+              "loss": {
+                "detected_ns": 553544349376666,
+                "observed_ns": 553544349375583,
+                "prepared_ns": 553544349525208,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553544350571291,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553544350564583,
+            "reason": "expired",
+            "observed_ns": 553544349375583,
+            "detected_ns": 553544349376666,
+            "prepared_ns": 553544349525208
+          },
+          "report_collected_ns": 553544630188916
+        },
+        "target-a": {
+          "sql_started_ns": 553544361306708,
+          "sql_confirmed_ns": 553544362717833,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "cfc8dc116c9b503be220cb23e7c34ff7",
+                "deployment": "c60a00d2-8db7-44b9-8ddc-619d7916c168",
+                "enrollment": "5f1486882d05b51e180efd6f73e6b4a807377e5417795b0283c2c61722d14280",
+                "expires_ns": 1795133377681872000,
+                "generation": 1,
+                "issued_ns": 1795133375681872000
+              },
+              "boot": "ad69e57ce34f4aa3ffaca1bab640c8f2",
+              "held": true,
+              "loss": {
+                "detected_ns": 553544360715750,
+                "observed_ns": 553544360714833,
+                "prepared_ns": 553544360866208,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553544361449791,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553544361444541,
+            "reason": "expired",
+            "observed_ns": 553544360714833,
+            "detected_ns": 553544360715750,
+            "prepared_ns": 553544360866208
+          },
+          "report_collected_ns": 553544630512041
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553544593083916,
+          "denial_observed_ns": 553544599832375,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553544599835833,
+          "denial_observed_ns": 553544602338708,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "expiry",
+      "assignment_generation": 1,
+      "lease_ns": 2000000000,
+      "loss": {
+        "lease_expires_wall_ns": 1795133381560878000,
+        "wall_before_ns": 1795133379629498000,
+        "sample_monotonic_ns": 553546284370208,
+        "wall_after_ns": 1795133379629499000,
+        "earliest_projected_expiry_ns": 553548215749208,
+        "latest_projected_expiry_ns": 553548215750208
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553546252138916,
+          "reply_ns": 553546266553916,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553546270281291,
+          "reply_ns": 553546284150458,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553548220761791,
+          "sql_confirmed_ns": 553548221083208,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "d48fae5b6b83603279b6910b6460c8e0",
+                "deployment": "79424a73-6da8-4e31-b03f-c99f6fda88ea",
+                "enrollment": "85bdd2649f48f9f762fc02e639a88ba415e79a8b0ba751d31945805139f7a391",
+                "expires_ns": 1795133381560878000,
+                "generation": 1,
+                "issued_ns": 1795133379560878000
+              },
+              "boot": "e95d4c3bdb1aa4b9f3a054f398790acd",
+              "held": true,
+              "loss": {
+                "detected_ns": 553548216772625,
+                "observed_ns": 553548216770958,
+                "prepared_ns": 553548217090208,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553548217895750,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553548217888458,
+            "reason": "expired",
+            "observed_ns": 553548216770958,
+            "detected_ns": 553548216772625,
+            "prepared_ns": 553548217090208
+          },
+          "report_collected_ns": 553548499592375
+        },
+        "target-b": {
+          "sql_started_ns": 553548234641416,
+          "sql_confirmed_ns": 553548234834916,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "d48fae5b6b83603279b6910b6460c8e0",
+                "deployment": "79424a73-6da8-4e31-b03f-c99f6fda88ea",
+                "enrollment": "85bdd2649f48f9f762fc02e639a88ba415e79a8b0ba751d31945805139f7a391",
+                "expires_ns": 1795133381560878000,
+                "generation": 1,
+                "issued_ns": 1795133379560878000
+              },
+              "boot": "715d2d7ebf2a5fb547406190c8fded6c",
+              "held": true,
+              "loss": {
+                "detected_ns": 553548232351791,
+                "observed_ns": 553548232350375,
+                "prepared_ns": 553548232594916,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553548233397875,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553548233389708,
+            "reason": "expired",
+            "observed_ns": 553548232350375,
+            "detected_ns": 553548232351791,
+            "prepared_ns": 553548232594916
+          },
+          "report_collected_ns": 553548499776166
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553548459212041,
+          "denial_observed_ns": 553548465802833,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553548465806708,
+          "denial_observed_ns": 553548468238458,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "expiry",
+      "assignment_generation": 1,
+      "lease_ns": 2000000000,
+      "loss": {
+        "lease_expires_wall_ns": 1795133385461097000,
+        "wall_before_ns": 1795133383543571000,
+        "sample_monotonic_ns": 553550198428708,
+        "wall_after_ns": 1795133383543572000,
+        "earliest_projected_expiry_ns": 553552115953708,
+        "latest_projected_expiry_ns": 553552115954708
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553550165724625,
+          "reply_ns": 553550180167875,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553550183858000,
+          "reply_ns": 553550198210000,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553552129627000,
+          "sql_confirmed_ns": 553552129766250,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "29891464116258be584ce6653d0484a4",
+                "deployment": "4a23f1d4-b0ba-4a3c-8cf8-33fdd3bc2334",
+                "enrollment": "eaaddef4abbc118177d7a03e291aab3a1e4cbfaa2f70dd92ef0a55123066e717",
+                "expires_ns": 1795133385461097000,
+                "generation": 1,
+                "issued_ns": 1795133383461097000
+              },
+              "boot": "510559faa287eaa6efd4abd3ed1fd797",
+              "held": true,
+              "loss": {
+                "detected_ns": 553552126801750,
+                "observed_ns": 553552126800458,
+                "prepared_ns": 553552126981666,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553552128034625,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553552128028416,
+            "reason": "expired",
+            "observed_ns": 553552126800458,
+            "detected_ns": 553552126801750,
+            "prepared_ns": 553552126981666
+          },
+          "report_collected_ns": 553552404368666
+        },
+        "target-b": {
+          "sql_started_ns": 553552143100333,
+          "sql_confirmed_ns": 553552143284375,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "29891464116258be584ce6653d0484a4",
+                "deployment": "4a23f1d4-b0ba-4a3c-8cf8-33fdd3bc2334",
+                "enrollment": "eaaddef4abbc118177d7a03e291aab3a1e4cbfaa2f70dd92ef0a55123066e717",
+                "expires_ns": 1795133385461097000,
+                "generation": 1,
+                "issued_ns": 1795133383461097000
+              },
+              "boot": "c43b247a0db9e2bffd327e374febd40c",
+              "held": true,
+              "loss": {
+                "detected_ns": 553552142114583,
+                "observed_ns": 553552142113500,
+                "prepared_ns": 553552142301958,
+                "reason": "expired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553552142995083,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553552142987041,
+            "reason": "expired",
+            "observed_ns": 553552142113500,
+            "detected_ns": 553552142114583,
+            "prepared_ns": 553552142301958
+          },
+          "report_collected_ns": 553552404612916
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553552365001375,
+          "denial_observed_ns": 553552371410958,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553552371414541,
+          "denial_observed_ns": 553552374023333,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553554047968625,
+        "retired_confirmed_ns": 553554069475375,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553554014300625,
+          "reply_ns": 553554028713875,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553554032612083,
+          "reply_ns": 553554047723416,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553554069521375,
+          "sql_confirmed_ns": 553554069768041,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "0ecb3a766bebba5ac97d98c7333f126d",
+                "deployment": "6242e47e-307c-4492-9ae0-66ee621f1b42",
+                "enrollment": "973fab499b7c1fd2106026a5e1f1b97c0a00ef8d68de8fd02c988d772a6bb474",
+                "expires_ns": 1795133417315542000,
+                "generation": 1,
+                "issued_ns": 1795133387315542000
+              },
+              "boot": "fb6b0f198db32c3e611e96ba2e14e29d",
+              "held": true,
+              "loss": {
+                "detected_ns": 553554058905208,
+                "observed_ns": 553554058903958,
+                "prepared_ns": 553554059062333,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553554059695000,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553554059685958,
+            "reason": "retired",
+            "observed_ns": 553554058903958,
+            "detected_ns": 553554058905208,
+            "prepared_ns": 553554059062333
+          },
+          "report_collected_ns": 553554324326875
+        },
+        "target-b": {
+          "sql_started_ns": 553554069770875,
+          "sql_confirmed_ns": 553554069907583,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "0ecb3a766bebba5ac97d98c7333f126d",
+                "deployment": "6242e47e-307c-4492-9ae0-66ee621f1b42",
+                "enrollment": "973fab499b7c1fd2106026a5e1f1b97c0a00ef8d68de8fd02c988d772a6bb474",
+                "expires_ns": 1795133417315542000,
+                "generation": 1,
+                "issued_ns": 1795133387315542000
+              },
+              "boot": "43e5c4f651da9f6a23cea9ab33dfd4ac",
+              "held": true,
+              "loss": {
+                "detected_ns": 553554062388541,
+                "observed_ns": 553554062387250,
+                "prepared_ns": 553554062545375,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553554063130833,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553554063119000,
+            "reason": "retired",
+            "observed_ns": 553554062387250,
+            "detected_ns": 553554062388541,
+            "prepared_ns": 553554062545375
+          },
+          "report_collected_ns": 553554324513833
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553554287575166,
+          "denial_observed_ns": 553554294309541,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553554294313500,
+          "denial_observed_ns": 553554296785625,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553554060052958,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553554056622625,
+          "ack_received_ns": 553554060051791
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553554063462125,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553554060085583,
+          "ack_received_ns": 553554063461166
+        }
+      ],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553555937164708,
+        "retired_confirmed_ns": 553555957681750,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553555903317125,
+          "reply_ns": 553555918289291,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553555922114458,
+          "reply_ns": 553555936902958,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553555957703083,
+          "sql_confirmed_ns": 553555957937541,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "e0b51efa0e34c3a89f6c26e60853a15b",
+                "deployment": "e3db6963-c283-47f1-9350-19e9139f9922",
+                "enrollment": "0b0816d121da962ddc0fea7cc926202d4c4b608e1a3e2ab7675ce8dad668d12f",
+                "expires_ns": 1795133419205079000,
+                "generation": 1,
+                "issued_ns": 1795133389205079000
+              },
+              "boot": "b1efacd86730f82e80694fe27ee47840",
+              "held": true,
+              "loss": {
+                "detected_ns": 553555947300000,
+                "observed_ns": 553555947298166,
+                "prepared_ns": 553555947482541,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553555948113125,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553555948105125,
+            "reason": "retired",
+            "observed_ns": 553555947298166,
+            "detected_ns": 553555947300000,
+            "prepared_ns": 553555947482541
+          },
+          "report_collected_ns": 553556299833583
+        },
+        "target-b": {
+          "sql_started_ns": 553555957940708,
+          "sql_confirmed_ns": 553555958083500,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "e0b51efa0e34c3a89f6c26e60853a15b",
+                "deployment": "e3db6963-c283-47f1-9350-19e9139f9922",
+                "enrollment": "0b0816d121da962ddc0fea7cc926202d4c4b608e1a3e2ab7675ce8dad668d12f",
+                "expires_ns": 1795133419205079000,
+                "generation": 1,
+                "issued_ns": 1795133389205079000
+              },
+              "boot": "f56b372c2189a07ce3b675ec159aeee6",
+              "held": true,
+              "loss": {
+                "detected_ns": 553555950869333,
+                "observed_ns": 553555950868458,
+                "prepared_ns": 553555951017666,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553555951489666,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553555951484458,
+            "reason": "retired",
+            "observed_ns": 553555950868458,
+            "detected_ns": 553555950869333,
+            "prepared_ns": 553555951017666
+          },
+          "report_collected_ns": 553556300066166
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553556217554125,
+          "denial_observed_ns": 553556240151000,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553556240161166,
+          "denial_observed_ns": 553556249618708,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553555948542541,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553555944731583,
+          "ack_received_ns": 553555948541166
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553555951732500,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553555948592375,
+          "ack_received_ns": 553555951731541
+        }
+      ],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553557951592416,
+        "retired_confirmed_ns": 553557973191666,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553557916071291,
+          "reply_ns": 553557931103416,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553557935066791,
+          "reply_ns": 553557951346083,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553557973213000,
+          "sql_confirmed_ns": 553557973531125,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "7327650a28c3260d065a2c137422229c",
+                "deployment": "e97765be-7c77-4209-91cb-44fa8d4b512a",
+                "enrollment": "61552a25969649c769ca3b9a9eec1b83767e6747dab7546075fcd1d9fd04bc80",
+                "expires_ns": 1795133421222284000,
+                "generation": 1,
+                "issued_ns": 1795133391222284000
+              },
+              "boot": "0b98a9e82d6f7e6ca24305f3f7f86069",
+              "held": true,
+              "loss": {
+                "detected_ns": 553557962683791,
+                "observed_ns": 553557962682500,
+                "prepared_ns": 553557962825500,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553557963478708,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553557963468375,
+            "reason": "retired",
+            "observed_ns": 553557962682500,
+            "detected_ns": 553557962683791,
+            "prepared_ns": 553557962825500
+          },
+          "report_collected_ns": 553558244427958
+        },
+        "target-b": {
+          "sql_started_ns": 553557973537625,
+          "sql_confirmed_ns": 553557973741375,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "7327650a28c3260d065a2c137422229c",
+                "deployment": "e97765be-7c77-4209-91cb-44fa8d4b512a",
+                "enrollment": "61552a25969649c769ca3b9a9eec1b83767e6747dab7546075fcd1d9fd04bc80",
+                "expires_ns": 1795133421222284000,
+                "generation": 1,
+                "issued_ns": 1795133391222284000
+              },
+              "boot": "d1ef270988d265aff88fc124504306d0",
+              "held": true,
+              "loss": {
+                "detected_ns": 553557966094291,
+                "observed_ns": 553557966093291,
+                "prepared_ns": 553557966246000,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553557966727958,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553557966721041,
+            "reason": "retired",
+            "observed_ns": 553557966093291,
+            "detected_ns": 553557966094291,
+            "prepared_ns": 553557966246000
+          },
+          "report_collected_ns": 553558244723375
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553558203903375,
+          "denial_observed_ns": 553558210476500,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553558210479583,
+          "denial_observed_ns": 553558213143833,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553557963773333,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553557960398583,
+          "ack_received_ns": 553557963772166
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553557967006333,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553557963800750,
+          "ack_received_ns": 553557967005375
+        }
+      ],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553559913666750,
+        "retired_confirmed_ns": 553559934353583,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553559878778333,
+          "reply_ns": 553559893786916,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553559897270833,
+          "reply_ns": 553559913423666,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553559934373750,
+          "sql_confirmed_ns": 553559934591583,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "488679064e1b84312a38207908f104f7",
+                "deployment": "2202f11b-a80c-46b9-872a-20cb2f8c110a",
+                "enrollment": "36fb9570a06ccacdbbf533786e48e91e7b9506e14dcd1bc8c9cd18080123e7c0",
+                "expires_ns": 1795133423182846000,
+                "generation": 1,
+                "issued_ns": 1795133393182846000
+              },
+              "boot": "a4d61b18bc2d811913662441532d99c6",
+              "held": true,
+              "loss": {
+                "detected_ns": 553559924061750,
+                "observed_ns": 553559924060791,
+                "prepared_ns": 553559924206166,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553559924769125,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553559924762416,
+            "reason": "retired",
+            "observed_ns": 553559924060791,
+            "detected_ns": 553559924061750,
+            "prepared_ns": 553559924206166
+          },
+          "report_collected_ns": 553560198519500
+        },
+        "target-b": {
+          "sql_started_ns": 553559934594750,
+          "sql_confirmed_ns": 553559934741500,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "488679064e1b84312a38207908f104f7",
+                "deployment": "2202f11b-a80c-46b9-872a-20cb2f8c110a",
+                "enrollment": "36fb9570a06ccacdbbf533786e48e91e7b9506e14dcd1bc8c9cd18080123e7c0",
+                "expires_ns": 1795133423182846000,
+                "generation": 1,
+                "issued_ns": 1795133393182846000
+              },
+              "boot": "5432b72da66236946f7e95164f77c43d",
+              "held": true,
+              "loss": {
+                "detected_ns": 553559927491250,
+                "observed_ns": 553559927490083,
+                "prepared_ns": 553559927641125,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553559928163083,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553559928158125,
+            "reason": "retired",
+            "observed_ns": 553559927490083,
+            "detected_ns": 553559927491250,
+            "prepared_ns": 553559927641125
+          },
+          "report_collected_ns": 553560198961333
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553560158102375,
+          "denial_observed_ns": 553560164669250,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553560164673541,
+          "denial_observed_ns": 553560167302625,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553559925047125,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553559921955458,
+          "ack_received_ns": 553559925046000
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553559928461875,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553559925074500,
+          "ack_received_ns": 553559928461041
+        }
+      ],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553561898971041,
+        "retired_confirmed_ns": 553561920518041,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553561865667875,
+          "reply_ns": 553561879880958,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553561883798458,
+          "reply_ns": 553561898721833,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553561920537750,
+          "sql_confirmed_ns": 553561920766000,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "8e7617c8cb1ca90ee4d30c7692a455fd",
+                "deployment": "f69d56f5-201e-468c-9713-adb394e0e81c",
+                "enrollment": "1ce724a922573f2e80c3386bfd774a98afc15d847a1a4eef892778589f565a57",
+                "expires_ns": 1795133425172011000,
+                "generation": 1,
+                "issued_ns": 1795133395172011000
+              },
+              "boot": "fc185ff3c59907809981089bea46cb78",
+              "held": true,
+              "loss": {
+                "detected_ns": 553561909525416,
+                "observed_ns": 553561909524125,
+                "prepared_ns": 553561909673250,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553561910324791,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553561910314583,
+            "reason": "retired",
+            "observed_ns": 553561909524125,
+            "detected_ns": 553561909525416,
+            "prepared_ns": 553561909673250
+          },
+          "report_collected_ns": 553562186439500
+        },
+        "target-b": {
+          "sql_started_ns": 553561920768958,
+          "sql_confirmed_ns": 553561920908916,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "8e7617c8cb1ca90ee4d30c7692a455fd",
+                "deployment": "f69d56f5-201e-468c-9713-adb394e0e81c",
+                "enrollment": "1ce724a922573f2e80c3386bfd774a98afc15d847a1a4eef892778589f565a57",
+                "expires_ns": 1795133425172011000,
+                "generation": 1,
+                "issued_ns": 1795133395172011000
+              },
+              "boot": "e54b092344bb4a46a54bae3d8bacee43",
+              "held": true,
+              "loss": {
+                "detected_ns": 553561913112458,
+                "observed_ns": 553561913111291,
+                "prepared_ns": 553561913268583,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553561913843166,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553561913835916,
+            "reason": "retired",
+            "observed_ns": 553561913111291,
+            "detected_ns": 553561913112458,
+            "prepared_ns": 553561913268583
+          },
+          "report_collected_ns": 553562186638958
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553562144292583,
+          "denial_observed_ns": 553562150828833,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553562150834041,
+          "denial_observed_ns": 553562153581875,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553561910677583,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553561907236000,
+          "ack_received_ns": 553561910676750
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553561914134208,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553561910705958,
+          "ack_received_ns": 553561914133375
+        }
+      ],
+      "broker_ack_ns": null
+    },
+    {
+      "mode": "retirement",
+      "assignment_generation": 1,
+      "lease_ns": 30000000000,
+      "loss": {
+        "request_start_ns": 553563731086833,
+        "retired_confirmed_ns": 553563751660458,
+        "retired_floor": 2
+      },
+      "writes_before_loss": {
+        "target-a": {
+          "request_ns": 553563695964875,
+          "reply_ns": 553563710513333,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        },
+        "target-b": {
+          "request_ns": 553563714508708,
+          "reply_ns": 553563730752625,
+          "response": {
+            "version": 2,
+            "generation": 1
+          }
+        }
+      },
+      "durable_hold": {
+        "target-a": {
+          "sql_started_ns": 553563751680250,
+          "sql_confirmed_ns": 553563751910000,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "c88581452401d22329c034f473df8767",
+                "deployment": "580be2e8-4d9f-4cd2-adf0-7e104061af89",
+                "enrollment": "c3e5fa04ec3f21a0c43f35fbc1d8be71386cfb2762003f6d8c9153a01b1258e4",
+                "expires_ns": 1795133427003201000,
+                "generation": 1,
+                "issued_ns": 1795133397003201000
+              },
+              "boot": "1159b4141ee2fe6a62f7dc939cec9f5d",
+              "held": true,
+              "loss": {
+                "detected_ns": 553563741792958,
+                "observed_ns": 553563741791750,
+                "prepared_ns": 553563741943625,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553563742543625,
+            "target": "target-a",
+            "generation": 1,
+            "commit_observed_ns": 553563742538291,
+            "reason": "retired",
+            "observed_ns": 553563741791750,
+            "detected_ns": 553563741792958,
+            "prepared_ns": 553563741943625
+          },
+          "report_collected_ns": 553564015235208
+        },
+        "target-b": {
+          "sql_started_ns": 553563751915333,
+          "sql_confirmed_ns": 553563752055541,
+          "state": {
+            "fence": {
+              "assignment": {
+                "agent": "agent-a",
+                "broker": "broker-a",
+                "claim_id": "c88581452401d22329c034f473df8767",
+                "deployment": "580be2e8-4d9f-4cd2-adf0-7e104061af89",
+                "enrollment": "c3e5fa04ec3f21a0c43f35fbc1d8be71386cfb2762003f6d8c9153a01b1258e4",
+                "expires_ns": 1795133427003201000,
+                "generation": 1,
+                "issued_ns": 1795133397003201000
+              },
+              "boot": "b186364409265b408738ecfa415e5fe3",
+              "held": true,
+              "loss": {
+                "detected_ns": 553563744985041,
+                "observed_ns": 553563744984083,
+                "prepared_ns": 553563745125458,
+                "reason": "retired"
+              }
+            },
+            "version": 3,
+            "marker": "quarantined",
+            "receipts": [
+              [
+                1,
+                "observing"
+              ]
+            ]
+          },
+          "report": {
+            "event": "durable-hold",
+            "report_ns": 553563745663416,
+            "target": "target-b",
+            "generation": 1,
+            "commit_observed_ns": 553563745655875,
+            "reason": "retired",
+            "observed_ns": 553563744984083,
+            "detected_ns": 553563744985041,
+            "prepared_ns": 553563745125458
+          },
+          "report_collected_ns": 553564015604416
+        }
+      },
+      "serving_denial": {
+        "target-a": {
+          "target": "target-a",
+          "request_ns": 553563974775791,
+          "denial_observed_ns": 553563981270041,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        },
+        "target-b": {
+          "target": "target-b",
+          "request_ns": 553563981275166,
+          "denial_observed_ns": 553563983874875,
+          "result": {
+            "generation": 1,
+            "version": 3,
+            "marker": "quarantined",
+            "effective": "quarantined",
+            "writes": 1
+          }
+        }
+      },
+      "target_retirement_acks": [
+        {
+          "event": "retirement-ack",
+          "report_ns": 553563742813708,
+          "target": "target-a",
+          "generation": 1,
+          "request_started_ns": 553563739652125,
+          "ack_received_ns": 553563742812708
+        },
+        {
+          "event": "retirement-ack",
+          "report_ns": 553563745933708,
+          "target": "target-b",
+          "generation": 1,
+          "request_started_ns": 553563742842750,
+          "ack_received_ns": 553563745932666
+        }
+      ],
+      "broker_ack_ns": null
+    }
+  ]
+}
