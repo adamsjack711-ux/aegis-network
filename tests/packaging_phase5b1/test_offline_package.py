@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tomllib
+import zipfile
 
 import pytest
 
@@ -105,3 +106,27 @@ def test_aliased_and_oversized_manifest_fails_closed(tmp_path):
     alias.symlink_to(wheelhouse, target_is_directory=True)
     with pytest.raises(builder.OfflineBuildError, match="canonical"):
         builder.build("a" * 40, alias, tmp_path / "dist", sys.executable)
+
+
+def test_wheel_inspection_requires_exact_console_and_default_dependencies(tmp_path):
+    wheel = tmp_path / "fixture.whl"
+    prefix = "aegis_network-0.1.0.dist-info/"
+    metadata = ("Name: aegis-network\nVersion: 0.1.0\nRequires-Python: >=3.12\n" +
+                "".join(f"Requires-Dist: {name}>=1\n" for name in
+                        ("cryptography", "pydantic", "fastapi", "httpx", "nats-py",
+                         "psycopg[binary]", "uvicorn")) + "\n")
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(prefix + "METADATA", metadata)
+        archive.writestr(prefix + "WHEEL", "Wheel-Version: 1.0\nTag: py3-none-any\n")
+        archive.writestr(prefix + "RECORD", "fixture\n")
+        archive.writestr(prefix + "entry_points.txt", "[console_scripts]\naegis = aegis.cli:main\n")
+    inspected = builder.inspect_wheel(wheel)
+    assert inspected["requires_python"] == ">=3.12"
+    assert len(inspected["requires_dist"]) == 7
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(prefix + "METADATA", metadata.replace("Requires-Dist: pydantic>=1\n", ""))
+        archive.writestr(prefix + "WHEEL", "Wheel-Version: 1.0\n")
+        archive.writestr(prefix + "RECORD", "fixture\n")
+        archive.writestr(prefix + "entry_points.txt", "[console_scripts]\naegis = aegis.cli:main\n")
+    with pytest.raises(builder.OfflineBuildError, match="parser requirement"):
+        builder.inspect_wheel(wheel)

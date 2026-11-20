@@ -95,6 +95,30 @@ def exact_source(pin: str, target: Path) -> None:
         stream.extractall(target, filter="data")
 
 
+def inspect_wheel(path: Path) -> dict:
+    with zipfile.ZipFile(path) as archive:
+        names = archive.namelist()
+        members = {}
+        for suffix in ("METADATA", "WHEEL", "RECORD", "entry_points.txt"):
+            matching = [name for name in names if name.endswith(f".dist-info/{suffix}")]
+            if len(matching) != 1:
+                raise OfflineBuildError(f"wheel {suffix} is missing or ambiguous")
+            members[suffix] = archive.read(matching[0]).decode("utf-8")
+    metadata = Parser().parsestr(members["METADATA"])
+    requirements = metadata.get_all("Requires-Dist", [])
+    if metadata.get("Name") != "aegis-network" or metadata.get("Version") != "0.1.0" or \
+            metadata.get("Requires-Python") != ">=3.12":
+        raise OfflineBuildError("unexpected wheel identity or Python requirement")
+    expected = ("cryptography", "pydantic", "fastapi", "httpx", "nats-py", "psycopg", "uvicorn")
+    if any(not any(re.match(rf"^{re.escape(name)}(?:\[|[ <>=!~])", item, re.IGNORECASE)
+                   for item in requirements) for name in expected):
+        raise OfflineBuildError("default lab or direct parser requirement missing")
+    if "aegis = aegis.cli:main" not in members["entry_points.txt"]:
+        raise OfflineBuildError("unexpected console entry point")
+    return {"members": names, "requires_python": metadata.get("Requires-Python"),
+            "requires_dist": requirements, "wheel_metadata": members["WHEEL"]}
+
+
 def build(pin: str, wheelhouse: Path, output: Path, python: str) -> dict:
     requested_wheelhouse = wheelhouse.expanduser().absolute()
     if requested_wheelhouse.resolve() != requested_wheelhouse:
@@ -129,21 +153,11 @@ def build(pin: str, wheelhouse: Path, output: Path, python: str) -> dict:
     sdists = list(output.glob("aegis_network-*.tar.gz"))
     if len(wheels) != 1 or len(sdists) != 1:
         raise OfflineBuildError("build did not produce one wheel and one source distribution")
-    with zipfile.ZipFile(wheels[0]) as archive:
-        names = archive.namelist()
-        metadata_names = [name for name in names if name.endswith(".dist-info/METADATA")]
-        entry_names = [name for name in names if name.endswith(".dist-info/entry_points.txt")]
-        if len(metadata_names) != 1 or len(entry_names) != 1:
-            raise OfflineBuildError("wheel metadata or console entry is missing")
-        metadata = Parser().parsestr(archive.read(metadata_names[0]).decode())
-        entry_points = archive.read(entry_names[0]).decode()
-        if "aegis = aegis.cli:main" not in entry_points:
-            raise OfflineBuildError("unexpected console entry point")
+    inspected = inspect_wheel(wheels[0])
     report = {"source_commit": pin, "source_date_epoch": EPOCH,
               "wheelhouse": approved, "python": python,
               "wheel": {"file": wheels[0].name, "sha256": digest(wheels[0]), "bytes": wheels[0].stat().st_size,
-                        "members": names, "requires_python": metadata.get("Requires-Python"),
-                        "requires_dist": metadata.get_all("Requires-Dist", [])},
+                        **inspected},
               "sdist": {"file": sdists[0].name, "sha256": digest(sdists[0]),
                         "bytes": sdists[0].stat().st_size}}
     (output / "build-report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
