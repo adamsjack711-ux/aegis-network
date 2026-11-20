@@ -1,5 +1,6 @@
 """Run inside an offline, unprivileged, read-only Linux container."""
 
+import argparse
 from hashlib import sha256
 import json
 import os
@@ -37,6 +38,9 @@ def tree():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--resource", action="store_true")
+    args = parser.parse_args()
     assert os.geteuid() == 1000
     assert WHEEL.exists()
     venv.EnvBuilder(with_pip=True, system_site_packages=True).create(ROOT)
@@ -77,13 +81,23 @@ def main():
                                          if identity.parent.exists() else None)
     else:
         explicit = None
+    resource_rows = {}
+    if args.resource and install["exit_code"] == 0:
+        for count in (100, 10000, 100000):
+            measured = call([python, "/driver.py", "--rows", count, "--repeats", 3], env)
+            try:
+                measured["parsed"] = json.loads(measured["stdout"])
+            except json.JSONDecodeError:
+                measured["parsed"] = None
+            resource_rows[str(count)] = measured
     uninstall = call([python, "-m", "pip", "uninstall", "-y", "aegis-network"], env)
     dist_info = sorted(str(path) for path in (ROOT / "lib").rglob("aegis_network-*.dist-info"))
     print(json.dumps({"uid": os.geteuid(), "python": sys.version, "os_release":
                       Path("/etc/os-release").read_text(), "wheel_sha256": sha256(WHEEL.read_bytes()).hexdigest(),
                       "install": install, "candidate_module_origin": origin,
                       "entry_point_present_after_install": bool(cases),
-                      "cases": cases, "explicit_state": explicit, "uninstall": uninstall,
+                      "cases": cases, "explicit_state": explicit, "resource_rows": resource_rows,
+                      "uninstall": uninstall,
                       "entry_point_present_after_uninstall": entry.exists(),
                       "candidate_dist_info_after_uninstall": dist_info}, sort_keys=True))
 

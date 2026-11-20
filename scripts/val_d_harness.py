@@ -186,6 +186,48 @@ def cli(probe_path, resource_paths, source_pin, image_digest):
             "cli_alpha_release_status": "NO-GO"}
 
 
+def cli_package(build_path, debian_path, ubuntu_prerequisite_path, source_pin):
+    build = json.loads(Path(build_path).read_text())
+    debian = json.loads(Path(debian_path).read_text())
+    wheel_sha = build.get("wheel_sha256", [])
+    build_ok = (build.get("source_pin") == source_pin and
+                [run.get("exit_code") for run in build.get("builds", [])] == [0, 0] and
+                build.get("byte_reproducible") and len(wheel_sha) == 2 and
+                "aegis = aegis.cli:main" in
+                (build.get("wheel_info") or {}).get("entry_points", ""))
+    cases = debian.get("cases", {})
+    needed = {"status_no_feed", "findings_no_feed", "findings_missing_feed",
+              "inventory", "malformed_feed"}
+    pure = set(cases) == needed and all(
+        not row.get("created") and not row.get("removed") and not row.get("modified")
+        for row in cases.values())
+    explicit = debian.get("explicit_state") or {}
+    installed = (debian.get("uid") == 1000 and debian.get("wheel_sha256") == wheel_sha[0]
+                 and debian.get("install", {}).get("exit_code") == 0
+                 and debian.get("entry_point_present_after_install")
+                 and "/tmp/val-d-venv/" in debian.get("candidate_module_origin", {}).get("stdout", "")
+                 and debian.get("uninstall", {}).get("exit_code") == 0
+                 and not debian.get("entry_point_present_after_uninstall")
+                 and not debian.get("candidate_dist_info_after_uninstall"))
+    explicit_ok = (explicit.get("created") == ["val-d-chosen", "val-d-chosen/identity.json"]
+                   and explicit.get("identity_dir_mode") == "0o700"
+                   and explicit.get("identity_file_mode") == "0o600")
+    ubuntu_text = Path(ubuntu_prerequisite_path).read_text()
+    return {"source_pin": source_pin, "build_sha256": digest(build_path),
+            "debian_probe_sha256": digest(debian_path),
+            "ubuntu_prerequisite_sha256": digest(ubuntu_prerequisite_path),
+            "wheel_sha256": wheel_sha, "reproducible_offline_build": "pass" if build_ok else "fail",
+            "debian_nonroot_install_uninstall": "pass" if installed else "fail",
+            "debian_default_zero_writes": "pass" if pure else "fail",
+            "debian_default_denominator": len(needed),
+            "debian_explicit_state": "pass" if explicit_ok else "fail",
+            "ubuntu_install": "skipped: cached image lacks ensurepip/python3.12-venv"
+            if "ensurepip is not" in ubuntu_text else "inconclusive",
+            "python_313": "skipped: no cached image",
+            "syscall_trace": "skipped: no cached tracer",
+            "cli_alpha_release_status": "NO-GO"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     subs = parser.add_subparsers(dest="command", required=True)
@@ -210,6 +252,12 @@ def main():
     p.add_argument("--probe", type=Path, required=True)
     p.add_argument("resources", type=Path, nargs="+")
     p.add_argument("--output", type=Path)
+    p = subs.add_parser("score-cli-package")
+    p.add_argument("--source-pin", required=True)
+    p.add_argument("--build", type=Path, required=True)
+    p.add_argument("--debian", type=Path, required=True)
+    p.add_argument("--ubuntu-prerequisite", type=Path, required=True)
+    p.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.command == "verify-originals":
         result = originals(args.root)
@@ -219,8 +267,10 @@ def main():
         result = withdrawal(args.inputs, args.source_pin)
     elif args.command == "score-ai":
         result = ai(args.corpus, args.evaluation)
-    else:
+    elif args.command == "score-cli":
         result = cli(args.probe, args.resources, args.source_pin, args.image_digest)
+    else:
+        result = cli_package(args.build, args.debian, args.ubuntu_prerequisite, args.source_pin)
     if args.output:
         write(args.output, result)
     print(json.dumps(result, sort_keys=True))
