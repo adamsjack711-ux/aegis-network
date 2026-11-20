@@ -1,0 +1,387 @@
+{
+  "source": {
+    "head": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+    "instrumentation_sha256": {
+      "compose.phase4a.yaml": "264439f222a46bc154ec192a08e474e67785d20588541c888cda7ecffd25c9d6",
+      "scripts/phase4a_bench.py": "4a3d9887134caac0b89826969f553b285022ca12af905fe84a228cf263e21f2a",
+      "scripts/phase4a_coordinator.py": "bea1120b87d5d552204f72f6d60f3e7f60764772d494e9ffc383a8fb75a33e1b",
+      "scripts/phase4a_peer.py": "2b0359d1b1bd5c8f0ea267eb8c392a5e828bfcc2fc8fc19982b7e96492efc02d",
+      "scripts/phase4a_worker.py": "b4b4b879af4fb888a76b5b43c1b4e1c32897f36e9b9bfe7c2ed33fa5fafb7eca",
+      "src/aegis/agent_runtime.py": "c46fac20034762c1403007aba0e81c8c37182402a125f04e53f0a47585cd5ce7",
+      "src/aegis/api.py": "e14907705da33bf715a7bf38325631f2f6705f480d2faabd4ed353f29348ac41",
+      "src/aegis/mesh.py": "6a013f3c961a7cb928dddf6a65bce93cebab7a0e71d7a3899e59dcd6d4880b1d"
+    }
+  },
+  "oracle_sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050",
+  "postgres_source_sha256": "397e438a4284c3551ac7602b95f34d0e8539ac9ce6b93fe127f5fed6d5423c39",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "docker_image_ids": {
+    "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+    "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+  },
+  "scope": "one host, one broker, one database, one dry-run agent",
+  "profile": "priority",
+  "agent_sigkill": false,
+  "recovery_stages": {
+    "clock": "one-host monotonic perf_counter_ns; process-local stage spans and controller milestones",
+    "enrolled_agent_ids": [
+      "be8b3327-558b-403a-8dc6-6202d7ab33be"
+    ],
+    "targeted_agent_withdrawal_pairs": 2,
+    "broker_stop_duration_ms": 266.751,
+    "broker_start_duration_ms": 199.723,
+    "sigkill_to_reap_ms": null,
+    "agent_spawn_requested_from_restart_ms": null,
+    "trace": [
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -381.233,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -367.174,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -116.026,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -103.203,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 147.082,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 1654.376,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 1655.768,
+        "revision": null,
+        "detail": 1,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 1657.365,
+        "revision": null,
+        "detail": null,
+        "event_id": "579fae3e-49c0-407e-bde6-ebac4203bcad"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1658.724,
+        "revision": null,
+        "detail": null,
+        "event_id": "579fae3e-49c0-407e-bde6-ebac4203bcad"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 1679.06,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 1680.574,
+        "revision": null,
+        "detail": null,
+        "event_id": "203a3eba-3272-49bc-9add-3e93a78ee272"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1682.039,
+        "revision": null,
+        "detail": null,
+        "event_id": "203a3eba-3272-49bc-9add-3e93a78ee272"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 1904.493,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1911.661,
+        "revision": null,
+        "detail": null,
+        "event_id": "0f916568-ddb3-403a-abb1-b3e98d170a37"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 1916.876,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1928.31,
+        "revision": null,
+        "detail": null,
+        "event_id": "7a2a11c6-a275-45a9-b68c-267d8bdb9743"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1930.61,
+        "revision": null,
+        "detail": null,
+        "event_id": "06133a5a-8201-404b-af12-61e783168233"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1933.362,
+        "revision": null,
+        "detail": null,
+        "event_id": "a7258e42-2d01-4fdf-bc25-12016e088151"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1951.085,
+        "revision": null,
+        "detail": null,
+        "event_id": "8b6f664d-d94f-4a8f-a6c3-895d65b2fbc2"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1953.502,
+        "revision": null,
+        "detail": null,
+        "event_id": "6e5a52ea-2399-4b4e-af4d-da5c80b0bdc2"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1969.807,
+        "revision": null,
+        "detail": null,
+        "event_id": "9c8b053e-12ce-47b7-96d9-9e67da7c46ac"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 1973.079,
+        "revision": null,
+        "detail": null,
+        "event_id": "01de9c99-60f3-4805-a590-0383aca93add"
+      }
+    ]
+  },
+  "ordinary_enqueued": 6,
+  "ordinary_findings_ahead_of_independent_withdrawal": null,
+  "ordinary_capacity_isolation": {
+    "normal_stream_head_while_critical_acked": 2,
+    "ordinary_outbox_rows_still_pending": 8,
+    "critical_ack_count": 2,
+    "durable_effective_denial_count": 2
+  },
+  "all_logical_broker_acks": 10,
+  "effective_denials_from_read_only_sqlite": [
+    "8a669be5-3ea6-4a35-85e4-7794f795a4ad",
+    "cbc5f5c0-9863-4279-844d-79ad700e47ca"
+  ],
+  "legacy_replay_cursor_at_readback": 12,
+  "queued_journal_order": [
+    {
+      "position": 1,
+      "event_id": "cbc5f5c0-9863-4279-844d-79ad700e47ca",
+      "sent_at": "2026-11-20T05:37:16.143009+00:00"
+    },
+    {
+      "position": 2,
+      "event_id": "8a669be5-3ea6-4a35-85e4-7794f795a4ad",
+      "sent_at": "2026-11-20T05:37:16.162652+00:00"
+    },
+    {
+      "position": 3,
+      "event_id": "0f916568-ddb3-403a-abb1-b3e98d170a37",
+      "sent_at": null
+    },
+    {
+      "position": 4,
+      "event_id": "7a2a11c6-a275-45a9-b68c-267d8bdb9743",
+      "sent_at": null
+    },
+    {
+      "position": 5,
+      "event_id": "06133a5a-8201-404b-af12-61e783168233",
+      "sent_at": null
+    },
+    {
+      "position": 6,
+      "event_id": "a7258e42-2d01-4fdf-bc25-12016e088151",
+      "sent_at": null
+    },
+    {
+      "position": 7,
+      "event_id": "8b6f664d-d94f-4a8f-a6c3-895d65b2fbc2",
+      "sent_at": null
+    },
+    {
+      "position": 8,
+      "event_id": "6e5a52ea-2399-4b4e-af4d-da5c80b0bdc2",
+      "sent_at": null
+    },
+    {
+      "position": 9,
+      "event_id": "9c8b053e-12ce-47b7-96d9-9e67da7c46ac",
+      "sent_at": null
+    },
+    {
+      "position": 10,
+      "event_id": "579fae3e-49c0-407e-bde6-ebac4203bcad",
+      "sent_at": null
+    },
+    {
+      "position": 11,
+      "event_id": "203a3eba-3272-49bc-9add-3e93a78ee272",
+      "sent_at": null
+    },
+    {
+      "position": 12,
+      "event_id": "01de9c99-60f3-4805-a590-0383aca93add",
+      "sent_at": null
+    }
+  ],
+  "broker_order_after_restart": [
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 3,
+      "event_id": "0f916568-ddb3-403a-abb1-b3e98d170a37",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 4,
+      "event_id": "7a2a11c6-a275-45a9-b68c-267d8bdb9743",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 4
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 5,
+      "event_id": "06133a5a-8201-404b-af12-61e783168233",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 5
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 6,
+      "event_id": "a7258e42-2d01-4fdf-bc25-12016e088151",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 6
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 7,
+      "event_id": "8b6f664d-d94f-4a8f-a6c3-895d65b2fbc2",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 7
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 8,
+      "event_id": "6e5a52ea-2399-4b4e-af4d-da5c80b0bdc2",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 8
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 9,
+      "event_id": "9c8b053e-12ce-47b7-96d9-9e67da7c46ac",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 10,
+      "event_id": "01de9c99-60f3-4805-a590-0383aca93add",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 1,
+      "event_id": "579fae3e-49c0-407e-bde6-ebac4203bcad",
+      "kind": "revocation",
+      "publisher": "lab-revoker",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 2,
+      "event_id": "203a3eba-3272-49bc-9add-3e93a78ee272",
+      "kind": "revocation",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 2
+    }
+  ],
+  "independent_withdrawal_id": "579fae3e-49c0-407e-bde6-ebac4203bcad",
+  "mixed_withdrawal_id": "203a3eba-3272-49bc-9add-3e93a78ee272",
+  "independent_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1708.115,
+    "submit_to_confirmed_ack_ms": 1716.398,
+    "restart_request_to_durable_audit_ms": 1650.425,
+    "restart_request_to_confirmed_ack_ms": 1658.708
+  },
+  "mixed_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 1694.383,
+    "submit_to_confirmed_ack_ms": 1722.593,
+    "restart_request_to_durable_audit_ms": 1653.815,
+    "restart_request_to_confirmed_ack_ms": 1682.024
+  }
+}

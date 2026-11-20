@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "agent_sigkill": true,
+      "broker_start_return_ms": 202.144,
+      "busy_attempts": 30,
+      "claim_success_from_restart_ms": 30505.279,
+      "durable_denial_and_priority_control": "pass",
+      "file": "/tmp/phase4f-safe-baseline-sigkill.json",
+      "first_critical_receipt_from_restart_ms": 30551.585,
+      "five_second_submit_to_durable_denial": "fail",
+      "independent_submit_to_denial_ms": 30618.895,
+      "mixed_submit_to_denial_ms": 30606.212,
+      "sha256": "031f871671e8c06aac7e62dcf8c12c297d61bb8f52756bb8abc45ee43d4a32e6",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    },
+    {
+      "agent_sigkill": false,
+      "broker_start_return_ms": 199.723,
+      "busy_attempts": 0,
+      "claim_success_from_restart_ms": null,
+      "durable_denial_and_priority_control": "pass",
+      "file": "/tmp/phase4f-safe-baseline-alive.json",
+      "first_critical_receipt_from_restart_ms": 1655.768,
+      "five_second_submit_to_durable_denial": "pass",
+      "independent_submit_to_denial_ms": 1708.115,
+      "mixed_submit_to_denial_ms": 1694.383,
+      "sha256": "54fb559cfead158a78a57dc0ab04af41234f2a09a90122a5f618e796279f752e",
+      "source_pin": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "stage_diagnostic": "pass",
+      "targeted_agent_withdrawal_pairs": 2
+    }
+  ],
+  "denominator": {
+    "sigkill_trials": 1,
+    "targeted_pairs": 4,
+    "trials": 2
+  },
+  "diagnostic_pass": 2,
+  "five_second_fail": 1,
+  "limitations": "One host, one broker, one dry-run agent per trial; no native T4/T5 or target hold timestamp. Controller and child perf_counter_ns comparable only within one host."
+}

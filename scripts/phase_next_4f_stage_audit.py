@@ -36,7 +36,8 @@ def main() -> None:
         durable = (run["profile"] == "priority" and
                    stages["targeted_agent_withdrawal_pairs"] == 2 and denied == intended and
                    withdrawal_ids <= journal_ids and
-                   run["all_logical_broker_acks"] == 8 and pending == 6)
+                   run["all_logical_broker_acks"] == run["ordinary_enqueued"] + 4 and
+                   pending == run["ordinary_enqueued"] + 2)
         killed = run["agent_sigkill"]
         stage_order = (claim_ms is not None and first_wire is not None and
                        stages["broker_start_duration_ms"] < claim_ms < first_wire <

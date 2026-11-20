@@ -1,0 +1,41 @@
+# Phase 4F-R baseline, acceptance status and handoff
+
+Source: `d15a3a756b8066c5cb2d98665662220e52f4a7d6`, isolated branch `feat/phase4f-safe-recovery`. Raw fault runs precede the documentation and non-contract scorer correction in this branch. No lease, ownership, target, T4/T5, transport, approval, ACK or runtime source changed. All trials use disposable local Docker on one host. The existing [Main Astra REVISE decision](phase4f-kv-contract-decision.md) remains in force; the revised [decision request](phase4f-safe-recovery-decision.md) is pending written review.
+
+## Original failure and fresh reproduction
+
+Retained independent pre-intake SIGKILL traces at native 4F pin `51e5601cdb5f1330828063518d62c342ba8721da` measured first dry-run denial at **30,609.654** and **30,709.573 ms** from submission. The prior instrumented fresh trials at `613efe36e56609bfe4c62740b2ecdee3ae0aeec4` measured **30,616.800 / 30,604.164 / 30,613.554 ms**. These are preserved in `benchmarks/phase-next-validation/native-4f-preintake-priority{,-repeat}.json` and `benchmarks/phase4f-withdrawal-recovery/`. Original Phase 4E pre-intake and post-audit controls and their limitations are recorded in [independent validation](phase-next-independent-validation.md) and [Phase 4E benchmarks](phase4e-benchmarks.md).
+
+One new fresh-state pre-intake SIGKILL plus broker restart, six pending ordinary findings, and two signed scoped withdrawals on the requested source pin gave:
+
+| Eligible withdrawal type | Submission to durable dry-run SQLite denial | Restart request to denial | Submission to confirmed broker ACK | Five seconds |
+| --- | ---: | ---: | ---: | --- |
+| Independent revoker | **30,618.895 ms** | 30,554.715 ms | 30,620.591 ms | FAIL |
+| Mixed publisher sequence | **30,606.212 ms** | 30,558.739 ms | 30,607.555 ms | FAIL |
+
+The worker started at 399.182 ms and connected to the broker at 401.917 ms after restart request. Its 31 KV attempts had 30 busy results; successful claim occurred at 30,505.403 ms, critical receipt at 30,551.585 ms, and first durable audit at 30,554.749 ms. Broker startup returned in 202.144 ms. Both withdrawal decisions and exact effective denials were later read from SQLite; ordinary rows were held while critical delivery completed. The harness asserts two unique durable revocation decisions, journal ordering and eventual ACK. This is **2/2 eligible dry-run pairs missing the deadline**. It does not measure independent native T4/T5 acceptance or a protected target hold.
+
+The matched agent-alive broker-restart control, also with six ordinary findings and both withdrawals, reached dry-run denial at **1,708.115** and **1,694.383 ms** after submission. It had no busy replacement claims. The critical path difference supports the retained-lease diagnosis; it does not establish a safe workaround. The one-host stage scorer reports 2/2 diagnostic passes, one timing-failed trial and one timing-passed control. The scorer previously hard-coded the four-ordinary-row expectation (eight ACKs/six pending rows); its branch-only correction derives counts from `ordinary_enqueued`. That changes scoring for the six-row trial, not the raw timestamps or authority behavior.
+
+## Fault and safety checks
+
+Existing C05 disposable live tests exercised pre-intake and post-audit agent death, lost ACK/replay behavior, and an agent partition/reconciliation: **2 passed, 2 deselected**. In its two-agent death arm, independent read-only observation found the pre-intake denial at **30,445.722 ms** from withdrawal submission; the post-audit denial was already durable at **45.238 ms** even though its broker ACK floor was zero. After both agents restarted, their ACK observations were **30,446.460 / 30,430.593 ms**, respectively. The partition arm had no denial or ACK while isolated; after rejoin it observed denial at **1,957.519 ms** and ACK at **1,958.938 ms** from its recorded restoration origin. These are dry-run actor states, not protected target holds. Focused native T4/T5, ownership, target and withdrawal regressions: **40 passed, 1 optional live-broker skip**. The optional disposable two-broker fencing case then passed separately (**1 passed, 17 deselected**). The first focused attempt had 15 socket-bind failures under the restricted sandbox; rerunning with authorized local sockets yielded the stated pass result. These controls verify existing behavior, not the unimplemented v1 denial/transfer contract. The 72 targeted-pair/18 healthy-control frozen oracle was **not** run: **0/72 candidate pairs and 0/18 candidate controls evaluable**, because there is no approved candidate or native per-agent denial integration. Existing dry-run failures independently keep the gate failed.
+
+Resource impact: **zero runtime delta** from this branch's documentation and scorer-only change. The disposable reproduction used one broker, one database and one dry-run agent per trial. CPU, RSS, storage growth, target hold cost and 3/10/100-agent scaling were not recorded by this harness; no production resource claim is made. The raw JSON records local image IDs, source hashes, platform and one-host monotonic timings. Physical multi-host latency, independent witness custody and rollback-anchor durability remain unverified.
+
+## Decision and exact reproduction
+
+**NO-GO** for five-second all-agent withdrawal recovery and distributed autonomous enforcement. Keep the 30-second broker lease and all existing generation fencing and native authority. Main Astra written approval of the [versioned contract](phase4f-safe-recovery-decision.md) is required before shared code changes. An approved implementation still requires an independent exact-pin rerun of all 72 targeted pairs and 18 healthy controls, every eligible agent's read-only durable denial time, zero stale positive writes, monotone target fences, and all mandatory fault arms. A broker ACK, already held target, eventual recovery or omitted agent cannot score a pass.
+
+From `.worktrees/phase4f-safe-recovery` with the repository virtual environment and an authorized disposable local Docker socket:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase4e_withdrawal_recovery_check.py . --authorize-local-lab --kill-agent --priority --ordinary-count 6 --output /tmp/phase4f-safe-baseline-sigkill.json
+PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase4e_withdrawal_recovery_check.py . --authorize-local-lab --priority --ordinary-count 6 --output /tmp/phase4f-safe-baseline-alive.json
+PYTHONDONTWRITEBYTECODE=1 ../../.venv/bin/python scripts/phase_next_4f_stage_audit.py --output /tmp/phase4f-safe-baseline-score.json /tmp/phase4f-safe-baseline-sigkill.json /tmp/phase4f-safe-baseline-alive.json
+AEGIS_PHASE4E_LIVE=1 AEGIS_PHASE4E_PRIORITY=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest -q -p no:cacheprovider tests/phase4e/test_withdrawal_delivery.py -k C05
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest -q -p no:cacheprovider tests/phase4e/test_withdrawal_status.py tests/phase4d/test_ownership.py tests/phase4d/test_native_enforcement.py tests/test_phase4e_withdrawal.py
+AEGIS_PHASE4D_T3_LIVE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest -q -p no:cacheprovider tests/phase4d/test_ownership.py -k live_independent_jetstream_leases_cannot_override_home
+```
+
+Raw evidence: [SIGKILL](../benchmarks/phase4f-safe-recovery/baseline-sigkill.json) SHA-256 `031f871671e8c06aac7e62dcf8c12c297d61bb8f52756bb8abc45ee43d4a32e6`; [alive control](../benchmarks/phase4f-safe-recovery/baseline-alive.json) `54fb559cfead158a78a57dc0ab04af41234f2a09a90122a5f618e796279f752e`; [scorer](../benchmarks/phase4f-safe-recovery/baseline-score.json) `62ead80e17f7572571a181c4e029c590e4dbf4e90be2594fc36b80bf4c53cfe2`; [C05 JUnit](../benchmarks/phase4f-safe-recovery/c05-faults.xml) `84db97977b340ca7957d1a7d69e5924780356bc309439098b8753d3973cf3fcb`; [focused JUnit](../benchmarks/phase4f-safe-recovery/focused-safety.xml) `63a1d4015b50e9588c1fcba3250dfd48f2765553e268976a9f4da380d32ce1c6`; [two-broker JUnit](../benchmarks/phase4f-safe-recovery/two-broker-fence.xml) `1a094fa750336a0e3bced3f2b416e071583884badf2d51fa17b8d54bc0b03fe7`.
