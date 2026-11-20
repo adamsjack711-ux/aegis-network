@@ -95,11 +95,20 @@ def exact_source(pin: str, target: Path) -> None:
         stream.extractall(target, filter="data")
 
 
-def inspect_wheel(path: Path) -> dict:
+def inspect_wheel(path: Path, expected_launcher: bytes | None = None) -> dict:
     with zipfile.ZipFile(path) as archive:
         names = archive.namelist()
         members = {}
-        for suffix in ("METADATA", "WHEEL", "RECORD", "entry_points.txt"):
+        required = ["METADATA", "WHEEL", "RECORD"]
+        if expected_launcher is None:
+            required.append("entry_points.txt")
+        else:
+            launcher = "aegis_network-0.1.0.data/scripts/aegis"
+            if (names.count(launcher) != 1 or archive.read(launcher) != expected_launcher
+                    or not (archive.getinfo(launcher).external_attr >> 16 & stat.S_IXUSR)
+                    or any(name.endswith(".dist-info/entry_points.txt") for name in names)):
+                raise OfflineBuildError("missing, altered or ambiguous executable launcher")
+        for suffix in required:
             matching = [name for name in names if name.endswith(f".dist-info/{suffix}")]
             if len(matching) != 1:
                 raise OfflineBuildError(f"wheel {suffix} is missing or ambiguous")
@@ -113,7 +122,7 @@ def inspect_wheel(path: Path) -> dict:
     if any(not any(re.match(rf"^{re.escape(name)}(?:\[|[ <>=!~])", item, re.IGNORECASE)
                    for item in requirements) for name in expected):
         raise OfflineBuildError("default lab or direct parser requirement missing")
-    if "aegis = aegis.cli:main" not in members["entry_points.txt"]:
+    if expected_launcher is None and "aegis = aegis.cli:main" not in members["entry_points.txt"]:
         raise OfflineBuildError("unexpected console entry point")
     return {"members": names, "requires_python": metadata.get("Requires-Python"),
             "requires_dist": requirements, "wheel_metadata": members["WHEEL"]}
@@ -134,6 +143,8 @@ def build(pin: str, wheelhouse: Path, output: Path, python: str) -> dict:
         source = scratch / "source"
         source.mkdir()
         exact_source(pin, source)
+        launcher = source / "src/aegis/launcher/aegis"
+        expected_launcher = launcher.read_bytes() if launcher.exists() else None
         environment = os.environ | {"SOURCE_DATE_EPOCH": EPOCH, "PIP_NO_INDEX": "1",
                                     "PIP_DISABLE_PIP_VERSION_CHECK": "1", "PIP_CONFIG_FILE": os.devnull,
                                     "PYTHONDONTWRITEBYTECODE": "1"}
@@ -153,7 +164,7 @@ def build(pin: str, wheelhouse: Path, output: Path, python: str) -> dict:
     sdists = list(output.glob("aegis_network-*.tar.gz"))
     if len(wheels) != 1 or len(sdists) != 1:
         raise OfflineBuildError("build did not produce one wheel and one source distribution")
-    inspected = inspect_wheel(wheels[0])
+    inspected = inspect_wheel(wheels[0], expected_launcher)
     report = {"source_commit": pin, "source_date_epoch": EPOCH,
               "wheelhouse": approved, "python": python,
               "wheel": {"file": wheels[0].name, "sha256": digest(wheels[0]), "bytes": wheels[0].stat().st_size,
