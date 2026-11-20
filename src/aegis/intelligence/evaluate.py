@@ -44,8 +44,9 @@ def evaluate(corpus: Path, provider: JSONProvider | None = None) -> dict:
                      "input_tokens": result.usage.input_tokens, "output_tokens": result.usage.output_tokens,
                      "estimated_cost_usd": result.estimated_cost_usd,
                      "citation_valid": all(fact in result.citations for point in
-                                           (*result.points, *result.ambiguities, *result.prerequisites,
-                                            result.local_explanation) for fact in point.fact_ids),
+                                           (*result.raw_hypothesis.points, *result.raw_hypothesis.ambiguities,
+                                            *result.raw_hypothesis.prerequisites,
+                                            result.raw_hypothesis.local_explanation) for fact in point.fact_ids),
                      "unsupported_claims": case.get("fixture_unsupported_claims", 0) if provider is None else None})
 
     def metrics(field):

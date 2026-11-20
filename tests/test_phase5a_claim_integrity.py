@@ -53,7 +53,11 @@ def test_original_unsupported_positive_is_explicitly_unknown_and_unchecked():
     assert "model-exceeds-deterministic-evidence" in result.check.reason_codes
     assert "source-binding-unavailable" in result.check.reason_codes
     assert all(point.support == "unchecked" for point in result.check.point_support)
-    assert result.points[0].support == result.local_explanation.support == "unchecked"
+    assert result.raw_hypothesis.points[0].support == "unchecked"
+    assert result.raw_hypothesis.local_explanation.support == "unchecked"
+    public = result.model_dump(mode="json")
+    assert "points" not in public and "local_explanation" not in public
+    assert public["raw_hypothesis"]["points"][0]["support"] == "unchecked"
     assert result.independently_verified is False
     with pytest.raises(ValidationError):
         SignedFinding.model_validate(result.model_dump(mode="json"))
@@ -70,7 +74,8 @@ def test_source_backed_version_outcome_does_not_verify_fabricated_impact():
     assert result.check.source_binding == "digest-checked"
     assert result.check.source_snapshot_digests == (source.sha256,)
     assert all(point.support == "unchecked" for point in result.check.point_support)
-    assert all(point.support == "unchecked" for point in result.points)
+    assert all(point.support == "unchecked" for point in result.raw_hypothesis.points)
+    assert "points" not in result.model_dump(mode="json")
     assert "unsupported-free-text-claim" in result.check.reason_codes
 
 
@@ -101,7 +106,7 @@ def test_supported_negative_source_is_advisory_only():
         source_snapshots=(source,))
     assert result.candidate_outcome == "unaffected"
     assert result.check.disposition == "research-consistent"
-    assert result.points[0].support == "unchecked"
+    assert result.raw_hypothesis.points[0].support == "unchecked"
     assert result.independently_verified is False
 
 

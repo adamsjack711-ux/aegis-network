@@ -97,11 +97,9 @@ class ResearchResult(Record):
     # The default outcome is the checked, reportable research appraisal.
     candidate_outcome: str
     model_candidate_outcome: str
-    points: tuple[ResearchPoint, ...]
-    ambiguities: tuple[ResearchPoint, ...]
-    prerequisites: tuple[ResearchPoint, ...]
-    local_explanation: ResearchPoint
-    lab_experiments: tuple[str, ...]
+    # All generated prose is quarantined as raw, explicitly unchecked research.
+    # This record has no top-level reportable points or explanation fields.
+    raw_hypothesis: Draft
     citations: dict[str, dict[str, str]]
     independently_verified: bool = False
     provider: str
@@ -133,10 +131,10 @@ def _check(result: ResearchResult, claims: tuple[Claim, ...],
                        "model-contradicts-deterministic-evidence")
     points = []
     for field in ("points", "ambiguities", "prerequisites"):
-        for index, point in enumerate(getattr(result, field)):
+        for index, point in enumerate(getattr(result.raw_hypothesis, field)):
             points.append(PointSupport(field=field, index=index, fact_ids=point.fact_ids))
     points.append(PointSupport(field="local_explanation", index=0,
-                               fact_ids=result.local_explanation.fact_ids))
+                               fact_ids=result.raw_hypothesis.local_explanation.fact_ids))
     # Citation membership is not semantic entailment. No model prose is promoted.
     if points:
         reasons.append("unsupported-free-text-claim")
@@ -217,10 +215,7 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
                       result.usage.output_tokens * output_usd_per_million) / 1_000_000, 8)
     research_result = ResearchResult(vulnerability_id=vulnerability_id, baseline_outcome=baseline.outcome,
                           candidate_outcome="unknown", model_candidate_outcome=draft.candidate_outcome,
-                          points=draft.points,
-                          ambiguities=draft.ambiguities, prerequisites=draft.prerequisites,
-                          local_explanation=draft.local_explanation,
-                          lab_experiments=draft.lab_experiments, citations=citations,
+                          raw_hypothesis=draft, citations=citations,
                           provider=result.provider, model=result.model,
                           provider_version=result.provider_version,
                           experiment_config={"max_input_bytes": max_input_bytes,
