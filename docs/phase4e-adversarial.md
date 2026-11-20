@@ -17,7 +17,8 @@ The integration lead approved Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f
 | Pre-intake and post-audit crash, A `4c6f674c1915ee255222f02c38c2e2c010421b1f` and combined `4918dadacc8dedd96d1c4b506e5f746040a01941` | The pre-intake agent first had a durable denial visible at 30.434 and 30.479 s from HTTP submission. The post-audit agent already had a denial at 50.269 and 47.655 ms, and its broker ACK was first observed at 30.434 and 30.477 s. Each recovered agent retained one durable decision and advanced its broker ACK floor. Both runs were dry-run transport. |
 | Combined agent-only broker partition | Withdrawal reached JetStream while the disconnected worker had no durable local denial or ACK advancement. After rejoin the independent observer read the denial at 1.964 s and the broker ACK at 1.968 s. Target state during the transport-only run is unobserved. |
 | One-witness admission at original C and combined source | The enrolled witness returned a valid, durably recorded receipt for a synthetic Evidence withdrawal. Scoped appraisal remained `reproduced` on both exact pins. After quorum receipt, a separate delayed-archive trial held before inclusion and again after restart. The one-witness trial appraises only and attempts zero target writes. |
-| B restore at combined source | Restoring only the older home snapshot while retaining a newer external anchor rejected the staged current-owner write. The observing marker latched to quarantine on the observer read. The old action receipt stayed intact. A higher reconciled generation with new exact approval was required for another effect. The test observes the latch at read time. |
+| B restore at combined source | Restoring only the older home snapshot while retaining a newer external anchor rejected the staged current-owner write. A follow-up snapshot immediately after that rejected write showed quarantine already durable. The independent HTTPS observation left the snapshot unchanged. The old action receipt stayed intact. A higher reconciled generation with new exact approval was required for another effect. |
+| Inherited Evidence contradiction and certified-view continuity on combined source | Both focused regressions passed. The inherited shared writer invalidated an exact plan after contradictory Evidence. The native T5 relying floor rejected older and conflicting certified status. These checks exercised the predecessor gates. |
 | A transport-to-proof contract `c1e5702202ad317396856ee4af89590e14a57a16` | The focused receipt contract test passed. It separated transport delivery from independent receipt and inclusion, and showed the existing reader holding the prior cut needs a separate discovery path for early receipt. That pin proposes a deny-only adapter, and its delta adds a contract test and documentation. No runtime adapter is exercised by that result. |
 
 The native writer constructs the T6 `EvidenceGate`, checks its journal and `NativeEvidenceStatus`, and signs local commands for the shared SQLite `OwnershipHome`. At the reviewed combined pin, Phase 4E-C `Gate` appraises an independently witnessed common cut in its own service lane, and Phase 4E-B owns a separate synthetic marker and receipt store. A common exact-plan binding across that cut, B owner and writer barrier, broker generation and ACK lane, and actual guarded mitigation transaction remains unimplemented. The tests preserve the distinct claims of each path.
@@ -41,6 +42,7 @@ Severity describes the observed defect or the consequence of an open deployment 
 | 4E-D04 · Crash drill import error | Test tooling | The initial controlled crash test imported its durable-name helper from the wrong module at both pins. Both diagnostic reports are retained. The correction keeps the crash and ACK assertions intact. |
 | 4E-D05 · Single-witness withdrawal can leave positive Evidence | High | Reproduced at original C and the reviewed combined pin. One authenticated witness had durably accepted the withdrawal and returned its signed receipt, while the remaining witnesses still supported fresh positive appraisal. This is inside C's stated pre-quorum availability trade-off and fails the stricter release guard tested here. No target write or marker reopening was attempted. |
 | 4E-D06 · Five-second all-agent withdrawal reporting gate | Medium | Open. The exact crashed pre-intake agents yielded no independent durable denial observation within five seconds. Both post-audit agents retained an early denial, with ACK observations around 30.4 s. Transport-only runs supply no independent actuator or quarantine evidence. |
+| 4E-D07 · Idle pre-observation quarantine | High | Related integration validation at `c32532c4aa709a4a11d9c53cf87deefb392efca8` reports reproducible durable-hold ordering failures on the idle ownership-loss path and the separate B marker service. Our B stale-restore path exercises an explicit rejected write before the observer, so its durable latch result covers that path. The separate integration artifacts retain both idle runs under `docs/phase4e-observer-order.md` and the `observer-order-*.json` files. |
 
 ## Scenario coverage
 
@@ -56,9 +58,9 @@ The table records the scope of independently observed behavior at the named pins
 | I02 | Partial | Two mutually authenticated B broker adapters yielded one active generation. Real JetStream generation-bound ACK and cursor fencing are outside that adapter. |
 | I03 | Partial | The native writer denied the old generation after a transfer. The B writer barrier held during one writer outage, and stale signed intent added zero receipts. Real JetStream generation-bound ACK remains open. |
 | I04 | Partial | A modeled signed-assignment expiry stopped peer writes. HTTP and audit showed restrictive recovery and fences advanced on restart. Transport credential expiry remains open. |
-| I05 | Partial | At the B local marker boundary, an older home restore with a current separate anchor denied the staged write, preserved the sole prior receipt and durably quarantined the marker on observation. New exact approval followed a higher generation and a fresh barrier. Broker cursor/ACK and joint writer restore remain open. |
+| I05 | Partial | At the B local marker boundary, an older home restore with a current separate anchor denied the staged write and preserved the sole prior receipt. A read-only snapshot confirmed durable quarantine before the observer request. New exact approval followed a higher generation and a fresh barrier. Broker cursor/ACK and joint writer restore remain open. |
 | E01 | Partial | A legitimate verifier outside the enrolled trust set added zero corroborating records. The known signed head was unchanged. A trusted-identity forgery campaign is outside this run. |
-| E02 | Blocked | Contradictory independently produced observations at the integrated candidate's writer remain untested. |
+| E02 | Partial | The inherited shared-writer contradiction regression passed on the exact combined source. Contradictory C Evidence at the actual guarded writer remains blocked on wiring. |
 | E03 | Partial | A duly signed verifier-key withdrawal advanced both witness archives and the reader's durable floor. Exact appraisal remained denied after reopening the reader. End-to-end write binding under this specific withdrawal remains open. |
 | E04 | Partial | Independent signatures bind exact scope, challenge and validity. The shared T6 writer denied progression when the signed newer cut remained unresolved and an older cut was presented. Conflicting C status at the actual writer remains open. |
 | E05 | Partial | Independent C processes appraised with three witnesses and held with two. The native writer stopped expansion and served restrictive HTTP on status loss. Operational custody and deliberate witness dishonesty remain open. |
@@ -67,7 +69,7 @@ The table records the scope of independently observed behavior at the named pins
 | M03 | Pass in fixture | Unavailable status and modeled owner expiry each left exactly one canary restriction and zero peer restriction writes. HTTP and durable fences were inspected independently. |
 | M04 | Partial | Restart of restrictive state advanced fences and produced verified safe hold. An independently anchored old snapshot challenge remains open. |
 | M05 | Pass in fixture | The audit retained `recovery_required` while one HTTP endpoint was unreachable. Both reachable replicas were quarantined. Restart restored full observation at fence two. |
-| M06 | Partial | Probes bracketed recovery and observed no protected marker reopening. Continuous sampling and deployed fault windows remain open. |
+| M06 | Partial, separate idle gate failed | Probes bracketed the exercised recovery and observed no protected marker reopening. Integration validation reports that idle ownership loss can precede durable quarantine. Continuous sampling and deployed fault windows remain open. |
 | C01 | Blocked | A broker restart and an Evidence withdrawal were exercised separately. Their simultaneous effect at an integrated guard remains open. |
 | C02 | Blocked | Home transfer and Evidence status were checked separately. The joint stale-checkpoint path remains untested. |
 | C03 | Blocked | The witnessed fixture rejected use of coordinator replay during local controls. An untrustworthy coordinator under a real network partition remains untested. |
@@ -139,6 +141,18 @@ export PYTHONPATH="$candidate/src:$candidate/tests/phase4d:$candidate/scripts:$c
 Expect the strict single-witness assertion to fail at the named pin, with the quorum and native T6 guard cases passing. For the older shared-writer control, export `16e71ed1ccaf96209054fa3e5ddd03dd6e24b273` and run only `test_defensive_validation.py` with priority off. For the earlier A pins, run the priority cap test on `6e8bedccb184f3b4268670c93bc22310234c4f5e` and the crash test on `4c6f674c1915ee255222f02c38c2e2c010421b1f`. For B, export `cb7986d1abb7491e73f5ce53bb01778ba7159d94` and copy and run only the identity observer. For C, export `f1692340b03521d44877b6ba4a2799db66a4576d` and run only the Trust observer. Artifacts retain the exact cases and the earlier diagnostic failures.
 
 Run the restored-home observer on the combined pin with the durable B quarantine latch. Run only the barrier observer on the earlier B pin. To reproduce the receipt contract check, export `c1e5702202ad317396856ee4af89590e14a57a16` and select `tests/phase4d/test_journal.py::test_native_receipt_binds_reencoded_transport_envelope_before_inclusion` with the source on `PYTHONPATH`.
+
+Repeat the inherited Evidence conflict controls on the combined source with priority off.
+
+```sh
+(
+  cd "$candidate"
+  AEGIS_PHASE4E_PRIORITY=0 "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+    tests/test_phase3c_pipeline.py::test_contradiction_invalidates_exact_plan_even_with_cached_positive \
+    tests/phase4d_t5/test_independent_status.py::test_durable_floor_rejects_older_and_conflicting_certified_views \
+    --junitxml="$scratch/inherited-evidence-conflict.xml" --tb=short
+)
+```
 
 The inherited Docker suite requires a real Git checkout because the Phase 4A workload records the exact source identity.
 
