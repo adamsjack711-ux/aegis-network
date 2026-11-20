@@ -1,0 +1,9 @@
+{
+  "revision": "f1692340b03521d44877b6ba4a2799db66a4576d",
+  "recorded_utc": "2026-11-20T00:09:32.353578+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "oracle_sha256": "01cdc7d89a6b13ad44a6327c5dac2427efdb3caaf9f3bbcfd37ecdfea0b9a853",
+  "violations": [],
+  "historical_prediction_after_one_receipt": "reproduced"
+}

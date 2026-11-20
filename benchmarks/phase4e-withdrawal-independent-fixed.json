@@ -1,0 +1,1130 @@
+{
+  "revision": "8042097bbcd2a0f30d146d5057a6c846ee3ac746",
+  "recorded_utc": "2026-11-20T00:13:38.900872+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "oracle_sha256": "01cdc7d89a6b13ad44a6327c5dac2427efdb3caaf9f3bbcfd37ecdfea0b9a853",
+  "violations": [],
+  "trials": [
+    {
+      "records": 4,
+      "profile": "checkpoint-v1",
+      "observations": {
+        "healthy": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 72.099083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 93.784459
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 44.898042
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.739083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 36.97525
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 39.695542
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.969667
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.631666
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.613625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 40.136333
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 39.178917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 37.84575
+          }
+        ],
+        "one_lane_down": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 51.634917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 34.786959
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 33.126292
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 33.3235
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.634792
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 36.592875
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 36.843167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.60225
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.770083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.881208
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 39.0555
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 36.514625
+          }
+        ],
+        "valid_unrelated": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 50.485833
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 39.120959
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 60.663375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 95.444291
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 34.972958
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 32.965708
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 33.683458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 34.266125
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 34.486458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 35.989625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 34.995042
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 35.829458
+          }
+        ],
+        "exact_pre_inclusion": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.798458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 37.386542
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.741375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.376042
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 39.711541
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 40.362625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.746
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.378417
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 38.682416
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 40.433541
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 35.457667
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 40.433166
+          }
+        ]
+      }
+    },
+    {
+      "records": 4,
+      "profile": "withdrawal-v2",
+      "observations": {
+        "healthy": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 71.564625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 56.646292
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 54.442792
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 58.345375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 57.871459
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 51.736125
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 56.26675
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 54.962292
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 52.4835
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 50.570958
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 50.352334
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 52.610084
+          }
+        ],
+        "one_lane_down": [
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 37.264917
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 9.033958
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 13.787875
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 12.565375
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.251833
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 8.545833
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.965042
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.68825
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 9.907542
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 9.272291
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 8.130542
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 8.729542
+          }
+        ],
+        "valid_unrelated": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 73.366958
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 57.63675
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 62.846833
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 54.901125
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 56.511875
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 136.385166
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 71.425958
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 54.660333
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 52.591541
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 55.095333
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 54.455625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 58.413083
+          }
+        ],
+        "exact_pre_inclusion": [
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 61.43825
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 59.439667
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 57.986792
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 62.382167
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 61.289542
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 60.259417
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 59.458583
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 59.519667
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 57.51525
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 59.599333
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 58.940125
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 59.773
+          }
+        ]
+      }
+    },
+    {
+      "records": 128,
+      "profile": "withdrawal-v2",
+      "observations": {
+        "healthy": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 481.289916
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 540.311917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 472.982084
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 463.239334
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 462.028667
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 466.315708
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 501.656708
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 460.889625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 459.438541
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 459.073458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 459.568583
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 476.491667
+          }
+        ],
+        "one_lane_down": [
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 8.156208
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 6.435292
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 5.871583
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 6.36975
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 6.197166
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 6.549459
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.27625
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.936917
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.362458
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.907625
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.760792
+          },
+          {
+            "outcome": "held",
+            "reason": "fresh authenticated withdrawal views required from all enrolled witnesses",
+            "ms": 7.340875
+          }
+        ],
+        "valid_unrelated": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 477.051667
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 463.57525
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 464.093625
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 464.55025
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 463.582667
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 461.445791
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 475.783917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 462.281375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 465.923167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 460.906042
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 467.603167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 479.809083
+          }
+        ],
+        "exact_pre_inclusion": [
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 488.293209
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 481.143833
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 487.04925
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 482.890083
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 473.282083
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 476.7265
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 475.33675
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 571.123833
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 478.48125
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 485.048208
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 478.854917
+          },
+          {
+            "outcome": "inconclusive",
+            "reason": "revoked",
+            "ms": 468.529167
+          }
+        ]
+      }
+    },
+    {
+      "records": 128,
+      "profile": "checkpoint-v1",
+      "observations": {
+        "healthy": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 461.11025
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 453.668792
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 529.59875
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 569.426209
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 458.740083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 458.178958
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 452.059917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 468.904458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 453.424084
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 490.151167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 455.880209
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 471.330708
+          }
+        ],
+        "one_lane_down": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 465.539375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 460.044458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 597.277208
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 523.054917
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 460.262
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 462.527167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 461.367375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 475.121416
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 459.751083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 458.502959
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 458.673916
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 454.241208
+          }
+        ],
+        "valid_unrelated": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 468.428208
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 462.173209
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 461.809542
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 467.665542
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 576.721208
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 461.822458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 626.768583
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 459.582375
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 458.142125
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 453.198875
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 449.014417
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 448.288
+          }
+        ],
+        "exact_pre_inclusion": [
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 449.065292
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 445.293792
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 447.432042
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 445.4855
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 446.668208
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 452.744417
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 466.928291
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 448.617583
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 449.101458
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 452.311083
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 451.762167
+          },
+          {
+            "outcome": "reproduced",
+            "reason": "quorum",
+            "ms": 450.037875
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "4/checkpoint-v1": {
+      "healthy": {
+        "reproduced": 12
+      },
+      "one_lane_down": {
+        "reproduced": 12
+      },
+      "valid_unrelated": {
+        "reproduced": 12
+      },
+      "exact_pre_inclusion": {
+        "reproduced": 12
+      }
+    },
+    "4/withdrawal-v2": {
+      "healthy": {
+        "reproduced": 12
+      },
+      "one_lane_down": {
+        "held": 12
+      },
+      "valid_unrelated": {
+        "reproduced": 12
+      },
+      "exact_pre_inclusion": {
+        "inconclusive": 12
+      }
+    },
+    "128/withdrawal-v2": {
+      "healthy": {
+        "reproduced": 12
+      },
+      "one_lane_down": {
+        "held": 12
+      },
+      "valid_unrelated": {
+        "reproduced": 12
+      },
+      "exact_pre_inclusion": {
+        "inconclusive": 12
+      }
+    },
+    "128/checkpoint-v1": {
+      "healthy": {
+        "reproduced": 12
+      },
+      "one_lane_down": {
+        "reproduced": 12
+      },
+      "valid_unrelated": {
+        "reproduced": 12
+      },
+      "exact_pre_inclusion": {
+        "reproduced": 12
+      }
+    }
+  },
+  "ordering_and_restore": {
+    "unauthorized_http_codes": [
+      403,
+      409,
+      409
+    ],
+    "unique_durable_receipts": 2,
+    "delayed_older_issue": "revoked",
+    "reordered_view": "revoked",
+    "duplicate_view_entries": "held",
+    "repeated_admission": "deduplicated",
+    "witness_publisher_reader_restart": "revoked",
+    "stale_store_restore": "held",
+    "exact_store_restore": "revoked"
+  },
+  "stale_and_conflicts": {
+    "old_nonce": "held",
+    "delayed_valid_view": "held",
+    "relevant_same_nonce_conflict": "held",
+    "unrelated_same_nonce_conflict": "reproduced",
+    "publisher_alone_missing_lane": "held"
+  },
+  "approval_schedules": {
+    "receipt_between_reader_and_publisher_samples": "held",
+    "old_approval_after_observed_interruption": "held",
+    "receipt_after_both_samples": "no-effect approval accepted within deadline",
+    "retry_with_fresh_views": "revoked"
+  },
+  "expiry": {
+    "final_relying_anchor": {
+      "outcome": "held",
+      "reason": "status expired during appraisal",
+      "ms": 1034.490625,
+      "ms_after_signed_expiry": 33.986083984375
+    },
+    "approval_anchor": {
+      "outcome": "held",
+      "ms_after_deadline": 36.99946776032448
+    },
+    "final_publisher_anchor": {
+      "outcome": "held",
+      "reason": "status expired before publication",
+      "ms": 1037.575208,
+      "ms_after_signed_expiry": 37.612060546875
+    }
+  }
+}
