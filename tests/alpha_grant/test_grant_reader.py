@@ -234,16 +234,19 @@ def test_r03_os_errors_close_opened_descriptor(tmp_path: Path, monkeypatch, seam
         opened.append(fd)
         return fd
 
-    monkeypatch.setattr(adapter.os, "open", capture_open)
-    if seam == "fstat":
-        monkeypatch.setattr(adapter.os, "fstat", lambda fd: (_ for _ in ()).throw(OSError("injected fstat")))
-    if seam == "read":
-        monkeypatch.setattr(adapter.os, "read", lambda fd, size: (_ for _ in ()).throw(OSError("injected read")))
-    with pytest.raises(OSError):
-        adapter._read_local_grants(path)
+    # os is a process-global module; scope the fault to the reader invocation so
+    # pytest's own fstat/read calls cannot be mistaken for a product failure.
+    with monkeypatch.context() as fault:
+        fault.setattr(adapter.os, "open", capture_open)
+        if seam == "fstat":
+            fault.setattr(adapter.os, "fstat", lambda fd: (_ for _ in ()).throw(OSError("injected fstat")))
+        if seam == "read":
+            fault.setattr(adapter.os, "read", lambda fd, size: (_ for _ in ()).throw(OSError("injected read")))
+        with pytest.raises(OSError):
+            adapter._read_local_grants(path)
     for fd in opened:
         with pytest.raises(OSError):
-            original_fstat(fd)
+            os.fstat(fd)
 
 
 @pytest.mark.parametrize("invalid", [b"\xff", b"{", b'{"grants":[{}]}'])
