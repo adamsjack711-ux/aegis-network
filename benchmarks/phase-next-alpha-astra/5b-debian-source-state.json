@@ -1,0 +1,19 @@
+{
+  "ancestor": {
+    "error": "state directory path must not contain a user-controlled symlink",
+    "rejected": true
+  },
+  "explicit": {
+    "dir_mode": "0o700",
+    "file_mode": "0o600",
+    "files": [
+      "identity.json"
+    ],
+    "stable_uuid4": true
+  },
+  "final": {
+    "error": "state directory must not be a symlink",
+    "rejected": true
+  },
+  "outside_unchanged": true
+}
