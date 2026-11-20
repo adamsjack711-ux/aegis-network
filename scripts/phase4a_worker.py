@@ -72,6 +72,13 @@ class MeasuredAudit(SqliteAudit):
     record_revocation = timed_audit_write(SqliteAudit.record_revocation)
     record_override = timed_audit_write(SqliteAudit.record_override)
 
+    def advance_journal(self, position, *, critical=False):
+        before = self.journal_position(critical=critical)
+        start = time.perf_counter_ns()
+        super().advance_journal(position, critical=critical)
+        report("cursor_advance", lane="critical" if critical else "ordinary",
+               before=before, after=self.journal_position(critical=critical), start=start)
+
 
 async def run(args):
     report("process_started", pid=os.getpid())

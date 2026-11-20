@@ -1,0 +1,10 @@
+{
+  "benchmarks/phase4f-kv-recovery-alive-control.json": "7f8eba9347503172686c6a8b6b9eabaa4505f3f6945c14b922e4a9a3bd928049",
+  "benchmarks/phase4f-kv-recovery-c05.xml": "80b44f6f199590e63ce5a4959031f1158c1bc563abb585b4b5a9d1f2f6043072",
+  "benchmarks/phase4f-kv-recovery-cursor-sigkill.json": "bad63d78d544f2d17155ac58fd937f790c0762d22b75e6c9e7251a90fed336e4",
+  "benchmarks/phase4f-kv-recovery-instrumented-sigkill.json": "66426126bd2f7bd9e25a3ca2d8aeb0007227042641e5049df07e7ecd016a26e5",
+  "benchmarks/phase4f-kv-recovery-score.json": "5f6b732937dadaf61418457fe3dd929b534ae0bdb9ff06600da559db1037a257",
+  "benchmarks/phase4f-kv-recovery-sigkill-1.json": "0df6889752f43b28ca8e71a76873cdf0ec9014b535859b6b9827686cfe8d0111",
+  "benchmarks/phase4f-kv-recovery-sigkill-2.json": "7e4a8c632f3671c5303ac4de92046dde3273f1b8f8e6285ff2aa01d62803f462",
+  "benchmarks/phase4f-kv-recovery-sigkill-3.json": "7b5b891efa0ae6fd602cebe5aa531c0813a17eb327beff0b55bd38b71b6ce9e9"
+}

@@ -1,0 +1,240 @@
+{
+  "crash_gate_pass": false,
+  "limit_ms": 5000,
+  "trials": [
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": true,
+      "all_pairs_pass": false,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "9512efcf-e02b-42dc-bfad-d0a5937c621d"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-sigkill-1.json",
+      "observed_pairs": [
+        {
+          "agent_id": "9512efcf-e02b-42dc-bfad-d0a5937c621d",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29596.891,
+          "submit_to_broker_ack_ms_observational": 29664.139,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29662.35,
+          "target_finding_id": "1e15395a-ec2f-46d0-a4ad-b515de7da3eb",
+          "withdrawal_id": "767bfc00-5ced-4cb4-88b9-6f9cee5e859d",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "9512efcf-e02b-42dc-bfad-d0a5937c621d",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29601.581,
+          "submit_to_broker_ack_ms_observational": 29650.799,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29649.319,
+          "target_finding_id": "19bfe8cd-e344-4b34-a252-c5874fd03d34",
+          "withdrawal_id": "26e4e69e-b075-44ac-84b1-1bf0f779379a",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    },
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": true,
+      "all_pairs_pass": false,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "33fcc52e-f4fe-45ac-a76f-4b17e631edb6"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-sigkill-2.json",
+      "observed_pairs": [
+        {
+          "agent_id": "33fcc52e-f4fe-45ac-a76f-4b17e631edb6",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29548.291,
+          "submit_to_broker_ack_ms_observational": 29617.567,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29615.833,
+          "target_finding_id": "6aea64fd-b075-4698-afa2-9cf22966ca94",
+          "withdrawal_id": "12329a3c-b54f-4ea2-bcc9-c339076f5d41",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "33fcc52e-f4fe-45ac-a76f-4b17e631edb6",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29553.14,
+          "submit_to_broker_ack_ms_observational": 29605.751,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29602.089,
+          "target_finding_id": "434e349f-d079-4844-8b1c-d45f864ebbf1",
+          "withdrawal_id": "ec437c08-6d61-45d4-a7dc-efb7c5973344",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    },
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": true,
+      "all_pairs_pass": false,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "1f062a18-69f8-4455-86d2-c366dce73f52"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-sigkill-3.json",
+      "observed_pairs": [
+        {
+          "agent_id": "1f062a18-69f8-4455-86d2-c366dce73f52",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29579.704,
+          "submit_to_broker_ack_ms_observational": 29649.386,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29647.879,
+          "target_finding_id": "9797558a-6a93-4f7f-8a9f-50fc02594a8d",
+          "withdrawal_id": "28855728-c272-4f6e-9046-be9fa174b6cc",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "1f062a18-69f8-4455-86d2-c366dce73f52",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "reported commit already exceeds limit; later readback cannot pass",
+          "restart_request_to_worker_commit_ms": 29583.953,
+          "submit_to_broker_ack_ms_observational": 29634.945,
+          "submit_to_read_only_denial_upper_ms": null,
+          "submit_to_worker_commit_ms": 29633.551,
+          "target_finding_id": "1dda0953-8bc1-4aee-93fd-b0d3e87ace54",
+          "withdrawal_id": "ef36a012-3087-4e6d-a85f-ede78e13c31a",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    },
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": true,
+      "all_pairs_pass": false,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "bd36d46d-0f23-40b2-98af-1f7ce701ba8b"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-instrumented-sigkill.json",
+      "observed_pairs": [
+        {
+          "agent_id": "bd36d46d-0f23-40b2-98af-1f7ce701ba8b",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 29544.548,
+          "submit_to_broker_ack_ms_observational": 29611.813,
+          "submit_to_read_only_denial_upper_ms": 29629.508,
+          "submit_to_worker_commit_ms": 29610.243,
+          "target_finding_id": "5726038b-3556-4236-b219-f4d8d450f893",
+          "withdrawal_id": "bb6b1702-9bfd-4ded-bd66-e2f17603b384",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "bd36d46d-0f23-40b2-98af-1f7ce701ba8b",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 29548.535,
+          "submit_to_broker_ack_ms_observational": 29598.268,
+          "submit_to_read_only_denial_upper_ms": 29612.191,
+          "submit_to_worker_commit_ms": 29596.914,
+          "target_finding_id": "107355a1-bb20-4796-aafb-07b67216316d",
+          "withdrawal_id": "f3573e16-ceea-49db-a3d0-04ed28d04085",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    },
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": true,
+      "all_pairs_pass": false,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "789f5772-01be-4a92-87f0-441dc0b2eea0"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-cursor-sigkill.json",
+      "observed_pairs": [
+        {
+          "agent_id": "789f5772-01be-4a92-87f0-441dc0b2eea0",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 30560.425,
+          "submit_to_broker_ack_ms_observational": 30624.946,
+          "submit_to_read_only_denial_upper_ms": 30634.96,
+          "submit_to_worker_commit_ms": 30623.497,
+          "target_finding_id": "288b58b1-f74e-44ce-981d-5d081acff0c6",
+          "withdrawal_id": "b60bb094-2318-4f1d-af71-bca4dffc8546",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "789f5772-01be-4a92-87f0-441dc0b2eea0",
+          "eligible_after_restoration": true,
+          "outcome": "fail",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 30564.396,
+          "submit_to_broker_ack_ms_observational": 30613.063,
+          "submit_to_read_only_denial_upper_ms": 30619.245,
+          "submit_to_worker_commit_ms": 30611.753,
+          "target_finding_id": "209912cf-7996-4b83-95a4-134ed3a53b1c",
+          "withdrawal_id": "b5c66172-ae6a-4d97-ba14-4b8d1d8b2dae",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    },
+    {
+      "acceptance_setup_valid": true,
+      "agent_sigkill": false,
+      "all_pairs_pass": true,
+      "declared_pairs": 2,
+      "enrolled_agents": [
+        "dbb783aa-90ed-4756-9078-51551e16c917"
+      ],
+      "file": "benchmarks/phase4f-kv-recovery-alive-control.json",
+      "observed_pairs": [
+        {
+          "agent_id": "dbb783aa-90ed-4756-9078-51551e16c917",
+          "eligible_after_restoration": true,
+          "outcome": "pass",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 1311.392,
+          "submit_to_broker_ack_ms_observational": 1382.812,
+          "submit_to_read_only_denial_upper_ms": 1388.955,
+          "submit_to_worker_commit_ms": 1372.105,
+          "target_finding_id": "61c544bb-9bb2-4089-b30a-ca25ff8e166a",
+          "withdrawal_id": "913f2cb1-ea3e-489c-93d8-e303966cfeb3",
+          "withdrawal_type": "independent"
+        },
+        {
+          "agent_id": "dbb783aa-90ed-4756-9078-51551e16c917",
+          "eligible_after_restoration": true,
+          "outcome": "pass",
+          "reason": "independent read-only denial upper bound",
+          "restart_request_to_worker_commit_ms": 1314.062,
+          "submit_to_broker_ack_ms_observational": 1389.312,
+          "submit_to_read_only_denial_upper_ms": 1372.962,
+          "submit_to_worker_commit_ms": 1358.783,
+          "target_finding_id": "276a546f-7beb-448e-bb11-030ecf535e1d",
+          "withdrawal_id": "827c3984-3fd6-435c-a889-0f8c62723071",
+          "withdrawal_type": "mixed-sequence"
+        }
+      ],
+      "ordinary_enqueued": 24
+    }
+  ]
+}

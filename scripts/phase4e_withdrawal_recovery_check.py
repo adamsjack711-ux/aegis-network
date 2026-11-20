@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import platform
 import signal
+import sqlite3
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -33,6 +34,7 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
 
     lab = Lab(SimpleNamespace(coordinators=1, sample_interval=0.5, timeout=90), directory, env)
     agent_id = str(uuid4())
+    observer = None
     async with httpx.AsyncClient(trust_env=False, timeout=10) as client:
         try:
             await lab.start_services(client)
@@ -50,6 +52,8 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                 capacity = await lab.js.stream_info(bench.STREAM)
                 capacity.config.max_bytes = ordinary_stream.state.bytes
                 await lab.js.update_stream(capacity.config)
+            from aegis.identity import LEASE_BUCKET
+            lease_before = await (await lab.js.key_value(LEASE_BUCKET)).get(agent_id)
 
             broker_stop_requested_ns = bench.now()
             await asyncio.to_thread(lab.compose, "stop", "-t", "0", "nats")
@@ -65,6 +69,38 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
             mixed_withdraw = await lab.post(client, mixed_revoke, "mixed-withdrawal")
             later = await lab.post(client, lab.make_finding(mixed, 3), "mixed-later")
             queued = set(ordinary) | {earlier, withdraw, mixed_withdraw, later}
+
+            # Read-only polling gives a conservative observation upper bound
+            # for each exact local denial and the separate replay cursor.
+            audit_path = directory / agent_id / "audit.db"
+            denial_pairs = {withdraw: event_id(targets[0]), mixed_withdraw: event_id(targets[1])}
+            denial_observed = {}
+            cursor_observed = None
+
+            async def observe_durable_state():
+                nonlocal cursor_observed
+                while sum("first_present_ns" in state for state in denial_observed.values()) < len(denial_pairs):
+                    sampled = bench.now()
+                    with sqlite3.connect(f"{audit_path.resolve().as_uri()}?mode=ro", uri=True) as db:
+                        cursor = db.execute("SELECT position FROM critical_recovery_cursor WHERE singleton=1").fetchone()[0]
+                        if cursor and cursor_observed is None:
+                            cursor_observed = {"position": cursor, "observed_ns": sampled}
+                        for withdrawal_id, target_id in denial_pairs.items():
+                            row = db.execute(
+                                "SELECT 1 FROM revoked_targets AS rt "
+                                "JOIN revocation_decisions AS rd ON rd.event_id=rt.revocation_id "
+                                "WHERE rd.event_id=? AND rt.artifact_id=? "
+                                "AND rd.outcome='revoked_dry_run' AND rd.authenticated=1",
+                                (withdrawal_id, target_id),
+                            ).fetchone()
+                            state = denial_observed.setdefault(withdrawal_id, {"last_absent_ns": None})
+                            if row and "first_present_ns" not in state:
+                                state["first_present_ns"] = sampled
+                            elif not row:
+                                state["last_absent_ns"] = sampled
+                    await asyncio.sleep(0.025)
+
+            observer = asyncio.create_task(observe_durable_state())
 
             rows = await asyncio.to_thread(lab.outbox_rows)
             assert [row["event_id"] for row in rows] == [*map(event_id, targets), *ordinary, earlier,
@@ -101,6 +137,7 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                              "critical_ack_count": 2, "durable_effective_denial_count": len(negative)}
                 await lab.js.update_stream(ordinary_stream.config)
             await lab.wait_acks(list(queued))
+            await asyncio.wait_for(observer, timeout=5)
 
             order = []
             for stream, head in heads.items():
@@ -110,7 +147,8 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                     event = parse_event(message.data)
                     order.append({"stream": stream, "stream_sequence": sequence, "event_id": event_id(event),
                                   "kind": event.kind, "publisher": event_payload(event).publisher_id,
-                                  "publisher_sequence": event_payload(event).sequence})
+                                  "publisher_sequence": event_payload(event).sequence,
+                                  "broker_published_at_utc": message.time.isoformat() if message.time else None})
 
             # Check the earliest delivery for every logical envelope. Keep all
             # stream records so physical redelivery remains observable.
@@ -153,11 +191,13 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
             trace_log = lab.fleet.agents[agent_id][1]
             trace_log.read()
             stage_kinds = {"process_started", "broker_connected", "claim_stage", "claimed",
-                           "critical_stage", "withdrawal_commit", "ack"}
+                           "critical_stage", "withdrawal_commit", "cursor_advance", "ack"}
             stage_trace = [
                 {"kind": row["kind"], "stage": row.get("stage"),
                  "from_restart_request_ms": bench.ms(restart_requested_ns, row["ns"]),
                  "revision": row.get("revision"), "detail": row.get("detail"),
+                 "lane": row.get("lane"), "cursor_before": row.get("before"),
+                 "cursor_after": row.get("after"),
                  "event_id": (row.get("decision") or {}).get("event_id")}
                 for row in trace_log.rows if row["kind"] in stage_kinds
                 and row["ns"] >= broker_stop_requested_ns
@@ -181,6 +221,9 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                 "python": platform.python_version(),
                 "docker_image_ids": lab.images,
                 "scope": "one host, one broker, one database, one dry-run agent",
+                "native_t4_t5_receipt": None,
+                "native_target_durable_denial": None,
+                "native_measurement_note": "dry-run Mesh audit only; native T4/T5 and protected target were not enrolled",
                 "profile": "priority" if priority else "legacy",
                 "agent_sigkill": kill_agent,
                 "recovery_stages": {
@@ -194,7 +237,32 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                     "agent_spawn_requested_from_restart_ms": (
                         bench.ms(restart_requested_ns, agent_spawn_requested_ns)
                         if kill_agent else None),
+                    "worker_failure_observed_from_restart_ms": (
+                        bench.ms(restart_requested_ns, sigkill_reaped_ns) if kill_agent else None),
+                    "retained_kv_revision_before_stop": lease_before.revision,
+                    "first_critical_cursor_readback": (
+                        {"position": cursor_observed["position"],
+                         "from_restart_request_ms": bench.ms(restart_requested_ns, cursor_observed["observed_ns"])}
+                        if cursor_observed else None),
                     "trace": stage_trace,
+                },
+                "durable_intake": {
+                    eid: {"journal_position": next(row["position"] for row in rows if row["event_id"] == eid),
+                          "submit_started_from_restart_ms": bench.ms(restart_requested_ns, lab.events[eid]["start"]),
+                          "http_accepted_from_restart_ms": bench.ms(restart_requested_ns, lab.events[eid]["http_end"]),
+                          "intake_commit_window": "after submit start and no later than HTTP 202 response"}
+                    for eid in denial_pairs
+                },
+                "durable_denial_readback": {
+                    eid: {"target_finding_id": target_id,
+                          "last_absent_from_restart_ms": (
+                              bench.ms(restart_requested_ns, denial_observed[eid]["last_absent_ns"])
+                              if denial_observed[eid]["last_absent_ns"] is not None else None),
+                          "first_present_from_restart_ms": bench.ms(
+                              restart_requested_ns, denial_observed[eid]["first_present_ns"]),
+                          "submit_to_first_present_ms": bench.ms(
+                              lab.events[eid]["start"], denial_observed[eid]["first_present_ns"])}
+                    for eid, target_id in denial_pairs.items()
                 },
                 "ordinary_enqueued": ordinary_count,
                 "ordinary_findings_ahead_of_independent_withdrawal": (
@@ -212,6 +280,9 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                 "mixed_withdrawal_ms": timing(mixed_withdraw),
             }
         finally:
+            if observer is not None and not observer.done():
+                observer.cancel()
+                await asyncio.gather(observer, return_exceptions=True)
             await lab.stop()
             if lab.failures:
                 raise RuntimeError("; ".join(lab.failures))
