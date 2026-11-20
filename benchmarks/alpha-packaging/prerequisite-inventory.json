@@ -1,0 +1,28 @@
+{
+  "schema": "alpha-packaging-prerequisites-v1",
+  "source_baseline": "29455087922a728a41936d8c5c79ff9942e1e3df",
+  "scope": "read-only local artifact and cached-image inventory",
+  "network_calls": 0,
+  "image_pulls": 0,
+  "searched_archive_roots": [
+    "/private/tmp",
+    "/Users/jackadams-lovell/aegis-network/.worktrees",
+    "/Users/jackadams-lovell/.cache/uv"
+  ],
+  "actual_dependency_archives_found_in_searched_roots": {
+    "hatchling": 0,
+    "cryptography": 0,
+    "pydantic_core": 0
+  },
+  "historical_aegis_built_archives_present": true,
+  "cells": [
+    {"id": "debian-13-python-3.12", "image_id": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e", "observed_python": "3.12.16", "image_present": true, "fresh_install": "skipped-missing-reviewed-wheelhouse"},
+    {"id": "debian-13-python-3.13", "image_id": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90", "observed_python": "3.13.18", "image_present": true, "fresh_install": "skipped-missing-reviewed-wheelhouse"},
+    {"id": "ubuntu-24.04-python-3.12", "image_id": "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60", "observed_python": "3.12.3", "image_present": true, "fresh_install": "skipped-missing-reviewed-wheelhouse"},
+    {"id": "ubuntu-python-3.13", "image_id": null, "observed_python": null, "image_present": false, "fresh_install": "skipped-missing-image-and-reviewed-wheelhouse"}
+  ],
+  "offline_build_pairs": {"planned": 2, "attempted": 0, "passed": 0, "failed": 0, "skipped": 2},
+  "fresh_installed_cells": {"planned": 4, "attempted": 0, "passed": 0, "failed": 0, "skipped": 4},
+  "minimum_installed_logical_cases": {"planned": 84, "attempted": 0, "passed": 0, "failed": 0, "skipped": 84},
+  "release_decision": "NO-GO"
+}
