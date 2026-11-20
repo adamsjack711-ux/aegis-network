@@ -165,7 +165,8 @@ cat /tmp/install.json
 '''
     argv = ["docker", "run", "--rm", "--pull", "never", "--network", "none", "--read-only",
             "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--user", "65534:65534",
-            "--tmpfs", "/tmp:rw,nosuid,nodev,size=512m,mode=1777",
+            "--tmpfs", "/tmp:rw,noexec,nosuid,nodev,size=512m,mode=1777",
+            "--tmpfs", "/tmp/venv:rw,exec,nosuid,nodev,uid=65534,gid=65534,mode=0700,size=256m",
             "--mount", f"type=bind,src={wheelhouse},dst=/wheels,readonly",
             "--mount", f"type=bind,src={dist},dst=/dist,readonly",
             "-e", f"AEGIS_DISTRO={distro}", "-e", f"AEGIS_RELEASE={release}",
