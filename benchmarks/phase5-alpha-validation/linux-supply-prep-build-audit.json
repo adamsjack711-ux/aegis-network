@@ -1,0 +1,48 @@
+{
+  "builds": [
+    {
+      "files": [
+        {
+          "found_matching_files": [
+            "aegis_network-0.1.0-py3-none-any.whl"
+          ],
+          "kind": "wheel",
+          "reported_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5"
+        },
+        {
+          "found_matching_files": [
+            "aegis_network-0.1.0.tar.gz"
+          ],
+          "kind": "sdist",
+          "reported_sha256": "3aeb30b7c3c9befd89b5ecc3cf71b3c3b14e63b45662e45b902544eb6cb61908"
+        }
+      ],
+      "label": 1,
+      "report_sha256": "8910f499e4f87c8d11b563e30f05f75528ac6264bcec0ddbf6c110d4fe281d36",
+      "source_commit": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99"
+    },
+    {
+      "files": [
+        {
+          "found_matching_files": [
+            "aegis_network-0.1.0-py3-none-any.whl"
+          ],
+          "kind": "wheel",
+          "reported_sha256": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5"
+        },
+        {
+          "found_matching_files": [
+            "aegis_network-0.1.0.tar.gz"
+          ],
+          "kind": "sdist",
+          "reported_sha256": "3aeb30b7c3c9befd89b5ecc3cf71b3c3b14e63b45662e45b902544eb6cb61908"
+        }
+      ],
+      "label": 2,
+      "report_sha256": "8910f499e4f87c8d11b563e30f05f75528ac6264bcec0ddbf6c110d4fe281d36",
+      "source_commit": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99"
+    }
+  ],
+  "candidate_commit_present": true,
+  "reports_identical": true
+}

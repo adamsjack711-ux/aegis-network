@@ -1,0 +1,440 @@
+{
+  "actual_wheel_count": 32,
+  "checks": [
+    {
+      "cell": "debian-13-py312",
+      "markers": [
+        "VERSION_ID=\"13\"",
+        "Python 3.12.16",
+        "resolution_exit=0",
+        "tracer_exit=0"
+      ]
+    },
+    {
+      "cell": "debian-13-py313",
+      "markers": [
+        "VERSION_ID=\"13\"",
+        "Python 3.13.18",
+        "resolution_exit=0",
+        "tracer_exit=0"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "markers": [
+        "VERSION_ID=\"24.04\"",
+        "Python 3.12.13",
+        "resolution_exit=0",
+        "tracer_exit=0"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "markers": [
+        "VERSION_ID=\"24.04\"",
+        "Python 3.13.14",
+        "resolution_exit=0",
+        "tracer_exit=0"
+      ]
+    }
+  ],
+  "extra_on_disk": [],
+  "manifest_copy_equal": true,
+  "manifest_count": 32,
+  "manifest_sha256": "39653937e83dd3d53a4becf9009c9a87234dddd7cf07bfb263451ae5cfed3784",
+  "missing_from_disk": [],
+  "original_candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "provenance_copy_equal": true,
+  "provenance_count": 32,
+  "provenance_sha256": "e1b4e383f76342651061800c25cb8981456dcdc37763ca2f8f6f78ae53caa530",
+  "review_commit": null,
+  "rows": [
+    {
+      "bytes": 5286,
+      "file": "annotated_doc-0.0.7-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "6bc31bbbec6dfaaedc1676dbc11dbda96fe22a2b5c400e9ebad113fec44a9dc6",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 13427,
+      "file": "annotated_types-0.8.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 134521,
+      "file": "anyio-4.16.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "c66ae634e0b8228396b801741beb3294326d4b6102f7bba4041c0dfb58c29026",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 135082,
+      "file": "certifi-2026.10.23-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 222389,
+      "file": "cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "68e62fe11f30d5ca8289242866f0a5291402d8529ca2178ab8afc5c9694ae890",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 222369,
+      "file": "cffi-2.1.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "f16c709686a78c727bbbf059f92b0bf41c6fc60deec706d2dc19f529175a6125",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 126163,
+      "file": "click-8.5.1-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 4279805,
+      "file": "cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "8a469028a86f12eb7d2fe97162d0634026d92a21f3ae0ac87ed1c4a447886c83",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 159475,
+      "file": "fastapi-0.165.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "896f48462042bb4f162147eb8fac7e858753dc1f486765709baf105d70e4fc5b",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 37515,
+      "file": "h11-0.16.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 78750,
+      "file": "hatchling-1.33.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "415290b84f464d2884303fca8974d38e7b85579069fab02a15db0828fbb1446d",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 78784,
+      "file": "httpcore-1.0.9-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 73517,
+      "file": "httpx-0.28.1-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 69583,
+      "file": "idna-3.20-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 97786,
+      "file": "nats_py-2.17.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "fc7d01f68957462220d6bdce310cad1707eeb5fbd369903d84217b18ea341c0e",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 60335,
+      "file": "opentelemetry_api-1.45.2-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "2cbd737377e710ee740d261c94e93fa0f08e6d037c18f17513cc0a2d94479a34",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 129956,
+      "file": "packaging-26.3-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 57328,
+      "file": "pathspec-1.1.1-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 27082,
+      "file": "pluggy-1.7.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 219041,
+      "file": "psycopg-3.3.9-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "d2d7d04a1ce6dab4f5b27316bea3b52585cafa2f2d631e5b09dd69823f5c26f6",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 4132657,
+      "file": "psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "b081348d8992af26e9b252f04876c286428418a6b7845d8d4caae2044b259668",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 4132455,
+      "file": "psycopg_binary-3.3.9-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "366e2021a785afed9154f83f64793f662348a9ef244fef9779175c0906e8aacc",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 62600,
+      "file": "pycparser-3.12-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 494865,
+      "file": "pydantic-2.14.4-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "653a2ad9f6d8858529c77c72717d0ea991d6c6837fe683246b2f4b2bbfc3fadc",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 2131910,
+      "file": "pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "07a62d44515d674d750cfd86b7ce1dd93111be870f378d7c27b37aeb78d0cb4a",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 2131539,
+      "file": "pydantic_core-2.50.5-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "8bbe282e79dc71b24ba7be284eacf27c8ddff8f26911e2030a0dd123c6aed326",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 80571,
+      "file": "starlette-1.10.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "478c0ab3b4ced6e82719849c118fa406f0278a3499c1a898cd15cd31bdc38ce4",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 52225,
+      "file": "tomlkit-0.15.2-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "05562412163a3037b94497385fb7f9204c637bc605af7a48199e41cf2272f437",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 14232,
+      "file": "trove_classifiers-2026.9.21.13-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "8b1ff4f9c191b1040b71c37f1e445ab99732911e3cd91de52838453a854d7a17",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 45571,
+      "file": "typing_extensions-4.16.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 14874,
+      "file": "typing_inspection-0.4.5-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "bc210535442b39e1bf2805e0c7a17dfd6a4ace760c84c7f7d16245d23a6b1c39",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    },
+    {
+      "bytes": 87427,
+      "file": "uvicorn-0.54.0-py3-none-any.whl",
+      "license_matches": true,
+      "matches_manifest": true,
+      "matches_provenance": true,
+      "metadata_identity_matches": true,
+      "sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
+      "source_matches": true,
+      "tags_match": true,
+      "zip_test": null
+    }
+  ],
+  "supply_worktree_head": "f5410d7ff4c1c73fc0b81895c4201ababaf570c2",
+  "tracer_mode": "0o555",
+  "tracer_sha256": "e4f0c42a07574df2fc6b353f5bc24423099d8c896cee72c605671d878fedeb5a"
+}

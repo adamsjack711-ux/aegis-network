@@ -1,0 +1,42 @@
+{
+  "owner_commit": "c3b1e1f6162a234c508738925b9e4a1ca24569e2",
+  "rows": [
+    {
+      "cell": "debian-13-py312",
+      "child_exec": true,
+      "control_write": true,
+      "denied_write": true,
+      "setuid_denied": true,
+      "sha256": "50ef055d397c0bcb275b26c048d742ea5d40cf32fd65dff06dd9bfb2ee0dac60",
+      "socket_connect_failed": true
+    },
+    {
+      "cell": "debian-13-py313",
+      "child_exec": true,
+      "control_write": true,
+      "denied_write": true,
+      "setuid_denied": true,
+      "sha256": "daa04fb5b43ca52a669e4a690bdf8a0de098dfefc941c392f2841715517bd082",
+      "socket_connect_failed": true
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "child_exec": true,
+      "control_write": true,
+      "denied_write": true,
+      "setuid_denied": true,
+      "sha256": "ad178c6bc3ac218254a1633feab60473612b09f54c180b573df013a068d240ac",
+      "socket_connect_failed": true
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "child_exec": true,
+      "control_write": true,
+      "denied_write": true,
+      "setuid_denied": true,
+      "sha256": "894bb3628d1634991f3dbea6fb80c51ad64969eaf4ac601fa757082530bb98ce",
+      "socket_connect_failed": true
+    }
+  ],
+  "scope": "control script only, not installed aegis console"
+}

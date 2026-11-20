@@ -1,0 +1,51 @@
+{
+  "candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "owner_pin": "c9f2c8ea5028a7b50e8806aead00b8d99533e46e",
+  "rows": [
+    {
+      "path": "supply-prep/manifest.json",
+      "sha256": "39653937e83dd3d53a4becf9009c9a87234dddd7cf07bfb263451ae5cfed3784",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/provenance.json",
+      "sha256": "e1b4e383f76342651061800c25cb8981456dcdc37763ca2f8f6f78ae53caa530",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/checks.json",
+      "sha256": "eb3760f2ee2f4ee776cb85fd08164b54068cf55bb609047e213ba433e67d9b6f",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/cpython.json",
+      "sha256": "330617f82c34a2cd8e1c13a4b246af9ef3cef18cf512369f0a4d0ea5c4e5c9aa",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/build-1.json",
+      "sha256": "8910f499e4f87c8d11b563e30f05f75528ac6264bcec0ddbf6c110d4fe281d36",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/build-2.json",
+      "sha256": "8910f499e4f87c8d11b563e30f05f75528ac6264bcec0ddbf6c110d4fe281d36",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/custody.json",
+      "sha256": "76494e85e312629c0dac318f7e212651cb0a2243e38dbd831250842c775ab176",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "supply-prep/tracer-verification.json",
+      "sha256": "891400484fa53904e4a0b32a2e5e69939752acfe0e8fc9b8fdee7359d88b74af",
+      "worktree_matches_pin": true
+    },
+    {
+      "path": "scripts/alpha_linux_release.py",
+      "sha256": "7b11d182cda5f2f15c9df240b85cf55ab4636143ba37d9c7f6461181ff1a0cad",
+      "worktree_matches_pin": false
+    }
+  ]
+}
