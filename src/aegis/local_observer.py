@@ -62,7 +62,7 @@ def distribution(path: Path = Path("/etc/os-release")) -> str:
     return distro
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Package:
     name: str
     ecosystem: str
@@ -76,7 +76,7 @@ class Package:
     limitation: str = "Binary package identity only; source-package and reachability mapping unavailable"
 
     def as_dict(self) -> dict[str, str | None]:
-        return vars(self).copy()
+        return {name: getattr(self, name) for name in self.__dataclass_fields__}
 
 
 @dataclass(frozen=True)
@@ -101,9 +101,23 @@ def collect_snapshot(asset_id: str | None, *, os_release: Path = Path("/etc/os-r
         # Absence cannot be inferred from a failed source. No partial package
         # rows are promoted to an authoritative inventory snapshot.
         packages, complete, reason = (), False, str(exc)
-    identity = [(p.purl, p.version, p.architecture) for p in packages]
-    digest = hashlib.sha256(json.dumps([asset_id, complete, reason, identity], sort_keys=True,
-                                       separators=(",", ":")).encode("utf-8")).hexdigest()
+    # Keep the v2 snapshot digest byte-for-byte compatible without constructing
+    # a second 100,000-row identity list and a large serialized copy of it.
+    digest_state = hashlib.sha256()
+    def add(value: str) -> None:
+        digest_state.update(value.encode("utf-8"))
+    add("[")
+    for value in (asset_id, complete, reason):
+        add(json.dumps(value, sort_keys=True, separators=(",", ":")))
+        add(",")
+    add("[")
+    for index, package in enumerate(packages):
+        if index:
+            add(",")
+        add(json.dumps((package.purl, package.version, package.architecture),
+                       sort_keys=True, separators=(",", ":")))
+    add("]]")
+    digest = digest_state.hexdigest()
     return InventorySnapshot(asset_id, packages, complete, reason, captured_at, digest)
 
 

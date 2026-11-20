@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Protocol
 
 from .artifact import SignedFinding, SignedRevocation, canonical_bytes, parse_event, verify
-from .config import load_publishers
+from .publisher_config import load_publishers
 from .local_observer import (
     Advisory, MAX_ADVISORIES, MAX_FEED_BYTES, ObservationError, _read_bounded,
     utc_now,

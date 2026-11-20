@@ -48,7 +48,7 @@ def _emit(data: object, json_output: bool, command: str) -> None:
             print(f"{safe(item['purl'])} {safe(item['version'])} [{safe(item['architecture'])}]")
     elif command == "findings":
         assert isinstance(data, dict)
-        print(f"{data['current_exact_package_match_count']} current local claims with exact package matches; {data['observation_count']} signed claims observed; independent Evidence status unknown")
+        print(f"{data['current_exact_package_match_count']} possible exposure matches from current local claims; {data['observation_count']} signed claims observed; independent Evidence status unknown")
         for item in data["findings"]:
             print(" ".join(safe(item[key]) for key in
                            ("finding_id", "software_match", "vulnerability_id", "purl", "installed_version")))
@@ -60,6 +60,39 @@ def _emit(data: object, json_output: bool, command: str) -> None:
         assert isinstance(data, dict)
         for key, value in data.items():
             print(f"{safe(key)}: {safe(value)}")
+
+
+def _stream_inventory_json(args: argparse.Namespace) -> int:
+    """Serialize each package once, after validating the complete snapshot."""
+    asset_id = asset_identity(args.state_dir) if args.state_dir is not None else None
+    snapshot = collect_snapshot(asset_id)
+    packages = snapshot.packages
+    distro = packages[0].purl.split("/")[1] if packages else "unknown"
+    metadata = {"schema_version": "inventory-v2", "cli_version": CLI_VERSION,
+                "asset_id": asset_id, "snapshot_id": snapshot.snapshot_id,
+                "identity_scope": "explicit-local" if args.state_dir is not None else "none",
+                "captured_at": snapshot.captured_at, "distribution": distro,
+                "inventory_complete": snapshot.complete, "inventory_reason": snapshot.reason,
+                "package_count": len(packages)}
+    # Match the ordinary sorted, indented JSON schema while bounding the
+    # serializer to one package at a time. No partial inventory is published.
+    keys = sorted((*metadata, "packages"))
+    sys.stdout.write("{\n")
+    for position, key in enumerate(keys):
+        sys.stdout.write("  " + json.dumps(key) + ": ")
+        if key == "packages":
+            sys.stdout.write("[")
+            for index, package in enumerate(packages):
+                sys.stdout.write((",\n" if index else "\n") +
+                                 json.dumps(package.as_dict(), sort_keys=True, indent=2))
+            if packages:
+                sys.stdout.write("\n")
+            sys.stdout.write("]")
+        else:
+            sys.stdout.write(json.dumps(metadata[key], sort_keys=True, indent=2))
+        sys.stdout.write(",\n" if position < len(keys) - 1 else "\n")
+    sys.stdout.write("}\n")
+    return 0 if snapshot.complete else 2
 
 
 def run(args: argparse.Namespace) -> tuple[object, int]:
@@ -168,6 +201,8 @@ def run(args: argparse.Namespace) -> tuple[object, int]:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "inventory" and args.json:
+            return _stream_inventory_json(args)
         data, code = run(args)
     except (ObservationError, OSError) as exc:
         if args.json:

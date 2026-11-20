@@ -1,0 +1,4 @@
+  "package_count": 100000,
+100000
+39089273 /tmp/inventory.json
+aaf26c1c6afb075e97684f01e56ebf882c7e9b7b80b68e6edbf915f3d480866b  /tmp/inventory.json

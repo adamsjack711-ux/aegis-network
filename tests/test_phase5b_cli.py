@@ -82,6 +82,25 @@ def test_supported_distribution_identity_and_exact_version(tmp_path):
     assert match_findings(packages, [claim(["1:8.0-1"], "pkg:deb/ubuntu/curl")], now=NOW)[0]["software_match"] == "unmatched"
 
 
+def test_streamed_inventory_preserves_snapshot_and_all_rows(tmp_path, monkeypatch, capsys):
+    release, db = inventory_files(tmp_path, status="".join(
+        f"Package: package{i:04d}\nStatus: install ok installed\n"
+        f"Architecture: amd64\nVersion: 1:{i}.0-1\n\n" for i in range(1000)))
+    snapshot = collect_snapshot(None, os_release=release, dpkg_status=db, now=NOW)
+    old_identity = [(p.purl, p.version, p.architecture) for p in snapshot.packages]
+    old_digest = hashlib.sha256(json.dumps(
+        [None, True, "complete", old_identity], sort_keys=True,
+        separators=(",", ":")).encode()).hexdigest()
+    assert snapshot.snapshot_id == old_digest
+    import aegis.cli as cli
+    monkeypatch.setattr(cli, "collect_snapshot", lambda asset_id: snapshot)
+    assert main(["inventory", "--json"]) == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["snapshot_id"] == old_digest
+    assert output["package_count"] == len(output["packages"]) == 1000
+    assert output["packages"] == [package.as_dict() for package in snapshot.packages]
+
+
 def test_unsupported_missing_malformed_and_partial_inventory(tmp_path):
     release, db = inventory_files(tmp_path, "fedora")
     assert not collect_snapshot("asset", os_release=release, dpkg_status=db).complete
