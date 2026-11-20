@@ -13,3 +13,27 @@ A withdrawal takes effect at successful COMMIT of Scout.ingest in the local data
 | Redeliver A after W, close and reopen consumer, redeliver A again | No new result or resurrection, historical identity and status preserved |
 
 All five schedules use offline fixtures and explicit call boundaries without sleeps. Review must check the final SQL write, the reader snapshot and absence of a second publication path. Malformed, missing, lossy or stale input must hold. Tests must include independent semantic attribution and revision/source digest checks. No network, real provider, publication, signing or protected writer participates.
+
+## Read research history
+
+Point `read_history` at the existing SQLite database initialized by `ThreatScout` and `OfflineHandoff`. Use the source kind and advisory ID recorded by Scout.
+
+```python
+from pathlib import Path
+
+from aegis.intelligence.handoff import read_history
+
+rows = read_history(Path("private/scout.sqlite"), source_kind="osv", advisory_id="OSV-2099-1")
+for row in rows:
+    print(row["sequence"], row["status"])
+```
+
+Each call opens a read-only connection and returns one fresh snapshot of committed results and revision status. Call again after a commit to refresh the report.
+
+| Result | Meaning |
+| --- | --- |
+| `[]` | The database opened and contains no saved research for that source kind and advisory ID. |
+| `sqlite3.OperationalError: unable to open database file` | Check the database path and the reader's access to the file and its parent directories. |
+| `sqlite3.OperationalError: Incomplete research history schema ...` | Use a database initialized by both `ThreatScout` and `OfflineHandoff`, or have the writer initialize it before reporting. |
+
+**Low-priority follow-up.** Include the resolved database path in the SQLite open error and add a hint to check that the file exists and is readable.
