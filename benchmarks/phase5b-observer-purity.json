@@ -1,0 +1,27 @@
+{
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.15.2"
+  },
+  "runs": [
+    {
+      "advisories": 100,
+      "cpu_ms": 31.74,
+      "input_disk_mib": 0.09,
+      "packages": 1000,
+      "python_peak_mib": 0.72,
+      "software_matches": 100,
+      "wall_ms": 31.84
+    },
+    {
+      "advisories": 1000,
+      "cpu_ms": 310.45,
+      "input_disk_mib": 0.89,
+      "packages": 10000,
+      "python_peak_mib": 6.47,
+      "software_matches": 1000,
+      "wall_ms": 310.92
+    }
+  ],
+  "scope": "single process, synthetic dpkg status and in-memory normalized unsigned claim records, no network or signature parsing"
+}
