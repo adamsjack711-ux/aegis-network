@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from itertools import combinations
+from itertools import chain, combinations
 import math
 import secrets
 from threading import RLock
@@ -45,10 +45,13 @@ def _fork(left, right):
 
 
 class Reader:
-    def __init__(self, policy, witnesses, archives, pin, clock):
+    def __init__(self, policy, witnesses, archives, pin, clock, *, withdrawals=None):
         if set(witnesses) != set(policy.journal.operators) or not archives:
             raise ValueError("reader requires pinned witness endpoints and at least one archive")
+        if (policy.status_profile == "withdrawal-v2") != (withdrawals is not None):
+            raise ValueError("reader withdrawal configuration does not match its status profile")
         self.policy, self.witnesses, self.archives, self.pin, self.clock = policy, witnesses, archives, pin, clock
+        self.withdrawals = withdrawals
         self.lock = RLock()
 
     def _views(self, challenge):
@@ -61,11 +64,18 @@ class Reader:
         with self.lock:
             return self._read(challenge)
 
+    def current(self, checkpoint, withdrawals):
+        return (self.pin.read() == checkpoint
+                and (self.withdrawals is None or self.withdrawals.ledger.pin.read() == withdrawals))
+
     def _read(self, challenge):
         original = self.pin.read()
         floor = Floor.model_validate_json(original)
         if original != canonical(floor) or floor.context != self.policy.context or floor.fork:
             raise JournalBlocked("protected status floor is conflicted or outside its pinned history")
+        withdrawals, withdrawal_deadline, withdrawal_floor = (
+            self.withdrawals.read(challenge) if self.withdrawals else ((), math.inf, None)
+        )
         views = self._views(challenge)
         known = tuple(cut for cut in (floor.verified, floor.pending) if cut is not None)
         candidates = tuple(dict.fromkeys(view.signed for view in views))
@@ -80,7 +90,7 @@ class Reader:
                              key=lambda vote: vote.operator))
         self.policy.journal.check_cut(Cut(signed=signed, votes=votes))
         head = signed.head
-        deadline = self.policy.expiry(challenge, head, self.clock.sample())
+        deadline = min(withdrawal_deadline, self.policy.expiry(challenge, head, self.clock.sample()))
         latest = floor.pending or floor.verified
         if latest and head.epoch < latest.head.epoch:
             raise JournalBlocked("checkpoint rolls back the protected status floor")
@@ -111,10 +121,13 @@ class Reader:
                 fork = floor.model_copy(update={"pending": signed, "fork": (earlier, signed)})
                 self.pin.advance(original, canonical(fork))
                 raise
+        history.withdrawals = tuple((wire, record) for wire, record in withdrawals
+                                    if digest(wire) not in history.events)
+        history.withdrawal_floor = withdrawal_floor
         updated = canonical(Floor(context=self.policy.context, verified=signed))
         if original != updated:
             self.pin.advance(original, updated)
-        elif self.pin.read() != original:
+        if not self.current(updated, withdrawal_floor):
             raise JournalBlocked("protected status floor changed during replay")
         return head, history, min(deadline, self.policy.expiry(challenge, head, self.clock.sample())), updated
 
@@ -135,7 +148,7 @@ def appraise(policy, challenge, head, history, now):
     if any(isinstance(event, SignedRevocation) and
            (event.revocation.target_publisher_id, str(event.revocation.target_artifact_id),
             event.revocation.target_sha256) == finding_target(finding)
-           for _, event in history.events.values()):
+           for _, event in chain(history.events.values(), history.withdrawals)):
         return status("inconclusive", "mesh-withdrawn")
     grant = policy.journal.trust.grants[finding.finding.publisher_id, finding.key_id]
     try:
@@ -146,6 +159,7 @@ def appraise(policy, challenge, head, history, now):
                                grant.revoked_at or grant.expires_at).timestamp() * 1000))
     records = [(digest_bytes(leaf.wire.raw), leaf.wire.raw) for leaf, _ in history.events.values()
                if leaf.wire.lane == "evidence"]
+    records.extend((digest_bytes(wire.raw), wire.raw) for wire, _ in history.withdrawals if wire.lane == "evidence")
     evidence = EvidenceHistory(policy, sorted(records), math.floor(now))
     parent = evidence.manifests.get(subject.scope.bundle_sha256)
     if parent is None:
@@ -180,7 +194,7 @@ class Publisher:
             now = self.reader.clock.sample()
             body = appraise(self.reader.policy, challenge, head, history, now.upper)
             if (self.reader.clock.monotonic() >= deadline
-                    or now.upper * 1000 >= body.expires_ms or self.reader.pin.read() != floor):
+                    or now.upper * 1000 >= body.expires_ms or not self.reader.current(floor, history.withdrawal_floor)):
                 raise JournalBlocked("status expired or advanced before publication")
             return SignedStatus(body=body, signature=self.key.sign(message("status", body)).hex())
 
@@ -191,6 +205,7 @@ class VerifiedStatus:
     binding: str
     deadline: float
     floor: bytes
+    withdrawal_floor: bytes | None = None
 
 
 class Gate:
@@ -227,16 +242,19 @@ class Gate:
         if signed.body != expected:
             raise JournalBlocked("published status disagrees with current scoped witnessed appraisal")
         remaining = expected.expires_ms / 1000 - now.upper
-        if remaining <= 0 or now.monotonic >= deadline or self.reader.pin.read() != floor:
+        if (remaining <= 0 or now.monotonic >= deadline
+                or not self.reader.current(floor, history.withdrawal_floor)):
             raise JournalBlocked("status expired or advanced during appraisal")
         binding = digest([policy.context, subject.model_dump(mode="json"), expected.head,
                           expected.outcome, expected.attestations])
-        return VerifiedStatus(expected, binding, min(deadline, now.monotonic + remaining), floor)
+        return VerifiedStatus(expected, binding, min(deadline, now.monotonic + remaining),
+                              floor, history.withdrawal_floor)
 
     def require_current(self, status):
         now = self.reader.clock.sample()
         if (status is not self._status or status.body.outcome != "reproduced" or now.monotonic >= status.deadline
-                or now.upper * 1000 >= status.body.expires_ms or self.reader.pin.read() != status.floor):
+                or now.upper * 1000 >= status.body.expires_ms
+                or not self.reader.current(status.floor, status.withdrawal_floor)):
             raise JournalBlocked(f"no current enforcement authority: {status.body.reason}")
 
     @contextmanager

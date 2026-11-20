@@ -1,0 +1,246 @@
+{
+  "recorded_utc": "2026-11-19T23:59:12.475466+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "source_sha256": {
+    "src/aegis/phase4e/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/aegis/phase4e/history.py": "6f91d346024e390e91e3ed306ed93d8f888b3d7b9c32ec6a4151cfae7109bc01",
+    "src/aegis/phase4e/protocol.py": "9b46b255a5cb4c07b90b195be564daf1f00ff8846b2e4a1a32163b30392bfe00",
+    "src/aegis/phase4e/service.py": "7476f8c5b2bbd031f18406b878d58b58a24db1d0338d17c71bb22f2c346b0cc7",
+    "src/aegis/phase4e/status.py": "0ecdce91edb22a30db9db78cf6726759be46fd409929fb892051236864a6b3fa",
+    "src/aegis/phase4e/withdrawals.py": "3475e538ab06af43655a6cc0daef243410ba9280ccbfefd450497c6c084a02c4",
+    "scripts/benchmark_phase4e_trust.py": "fbceb202d2d6573308900f989e7c0849ce77b5644e54698bcc266aaaedafd03d",
+    "scripts/phase4e_lab.py": "22e43212de33cdb1b14e39fefb73e559682d632b117400abda49482c2e7e27c7",
+    "scripts/benchmark_phase4e_withdrawal_status.py": "12d206436d1a993df7d27e5f9933ee3da875eae1bb6ab90c7c4002bd84154150"
+  },
+  "trials": [
+    {
+      "profile": "checkpoint-v1",
+      "records": 4,
+      "healthy_positive": [
+        12,
+        12
+      ],
+      "healthy_appraisal_ms": [
+        52.826792,
+        40.353958,
+        36.572875,
+        38.486458,
+        36.9345,
+        35.731542,
+        36.498667,
+        35.955333,
+        37.034584,
+        38.094166,
+        36.919167,
+        35.976958
+      ],
+      "publisher_response_ms": [
+        26.072917,
+        20.482958,
+        18.636916,
+        19.555416,
+        18.3295,
+        18.13175,
+        18.267875,
+        17.909666,
+        18.309,
+        20.062917,
+        18.438291,
+        17.733958
+      ],
+      "one_witness_offline_positive": [
+        12,
+        12
+      ],
+      "one_witness_offline_ms": [
+        41.238584,
+        37.2065,
+        35.710375,
+        42.762042,
+        40.049083,
+        39.13925,
+        37.595833,
+        38.955875,
+        37.743792,
+        36.878541,
+        37.038292,
+        37.624125
+      ],
+      "single_receipt_refresh_ms": 36.255459,
+      "single_receipt_outcome": "reproduced",
+      "single_receipt_reason": "quorum"
+    },
+    {
+      "profile": "withdrawal-v2",
+      "records": 4,
+      "healthy_positive": [
+        12,
+        12
+      ],
+      "healthy_appraisal_ms": [
+        61.518917,
+        48.371292,
+        51.409042,
+        49.359833,
+        48.20975,
+        51.875708,
+        47.206459,
+        48.5295,
+        51.339167,
+        55.978708,
+        54.392125,
+        56.868709
+      ],
+      "publisher_response_ms": [
+        30.13225,
+        23.8425,
+        25.676292,
+        24.167083,
+        23.948291,
+        25.434083,
+        23.61225,
+        24.211417,
+        26.46125,
+        28.727834,
+        27.633208,
+        27.26725
+      ],
+      "one_witness_offline_positive": [
+        0,
+        12
+      ],
+      "one_witness_offline_ms": [
+        9.527708,
+        9.0415,
+        7.846792,
+        7.9115,
+        6.406125,
+        6.590083,
+        6.311792,
+        6.147125,
+        6.537666,
+        6.057583,
+        6.432167,
+        5.81675
+      ],
+      "single_receipt_refresh_ms": 60.593417,
+      "single_receipt_outcome": "inconclusive",
+      "single_receipt_reason": "revoked"
+    },
+    {
+      "profile": "withdrawal-v2",
+      "records": 128,
+      "healthy_positive": [
+        12,
+        12
+      ],
+      "healthy_appraisal_ms": [
+        490.060792,
+        545.34725,
+        489.0835,
+        481.603375,
+        548.050375,
+        473.37975,
+        478.040542,
+        546.325541,
+        471.294083,
+        479.878792,
+        487.59675,
+        533.639166
+      ],
+      "publisher_response_ms": [
+        246.246208,
+        302.53625,
+        245.615792,
+        239.559083,
+        309.287042,
+        234.09525,
+        240.294333,
+        308.993166,
+        235.137042,
+        239.789875,
+        229.358083,
+        261.340584
+      ],
+      "one_witness_offline_positive": [
+        0,
+        12
+      ],
+      "one_witness_offline_ms": [
+        7.257083,
+        6.695667,
+        7.348375,
+        7.083417,
+        6.180792,
+        6.401125,
+        6.408834,
+        5.604167,
+        5.787709,
+        5.321709,
+        5.303958,
+        6.272292
+      ],
+      "single_receipt_refresh_ms": 468.153417,
+      "single_receipt_outcome": "inconclusive",
+      "single_receipt_reason": "revoked"
+    },
+    {
+      "profile": "checkpoint-v1",
+      "records": 128,
+      "healthy_positive": [
+        12,
+        12
+      ],
+      "healthy_appraisal_ms": [
+        457.739041,
+        448.056708,
+        451.889208,
+        457.292333,
+        462.430084,
+        460.819083,
+        463.054958,
+        460.185875,
+        462.632667,
+        462.189625,
+        464.244417,
+        459.613625
+      ],
+      "publisher_response_ms": [
+        229.507625,
+        225.010125,
+        224.325,
+        226.908625,
+        234.775625,
+        228.959875,
+        232.276625,
+        230.581625,
+        232.026458,
+        230.908083,
+        231.324833,
+        228.328459
+      ],
+      "one_witness_offline_positive": [
+        12,
+        12
+      ],
+      "one_witness_offline_ms": [
+        480.181625,
+        459.081833,
+        460.472542,
+        460.722875,
+        458.603792,
+        459.292917,
+        475.195666,
+        460.604833,
+        465.52775,
+        455.388708,
+        463.4385,
+        534.087375
+      ],
+      "single_receipt_refresh_ms": 448.215209,
+      "single_receipt_outcome": "reproduced",
+      "single_receipt_reason": "quorum"
+    }
+  ]
+}

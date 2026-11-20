@@ -9,7 +9,8 @@ from ..journal.merkle import Tree, verify_inclusion
 from ..journal.protocol import Admission, JournalBlocked, SignedHead, canonical, digest, vote
 from ..journal.storage import WitnessLedger
 from ..journal.witness import verify_extension
-from .protocol import Leaf, MAX_ORDINARY, MAX_RECORDS, Snapshot, View, Wire, is_withdrawal, message, view_binding
+from .protocol import (Leaf, MAX_ORDINARY, MAX_RECORDS, Snapshot, View, Wire, WithdrawalView,
+                       is_withdrawal, message, view_binding, withdrawal_binding)
 
 
 class Archive:
@@ -56,6 +57,8 @@ class History:
         if self.tree.root(head.size).hex() != head.root:
             raise JournalBlocked("archive root mismatch")
         self.events, self.identities = {}, {}
+        self.withdrawals = ()
+        self.withdrawal_floor = None
         for leaf in snapshot.leaves:
             record, identities, _ = policy.check_leaf(leaf, head.epoch)
             event = leaf.receipt.admission.event
@@ -109,6 +112,7 @@ class Witness:
         self.name, self.key, self.policy, self.clock, self.archives = name, key, policy, clock, archives
         self.ledger = WitnessLedger(path, pin, bytes.fromhex(policy.context) + name.encode())
         self.intake, self.votes, self.pending, self.identities = {}, {}, {}, {}
+        self.withdrawals = {}
         self.latest = None
         self.exhausted = False
         self.last_epoch = -1
@@ -126,6 +130,8 @@ class Witness:
             self.intake[event] = (wire, admission)
             self.votes[event, admission.epoch] = (wire, admission)
             self.pending.setdefault(event, (admission.epoch, record["withdrawal"]))
+            if record["withdrawal"]:
+                self.withdrawals.setdefault(event, admission.epoch)
             self.identities.update((tuple(identity), event) for identity in record["identities"])
         elif record["kind"] == "exhausted":
             self.exhausted = True
@@ -179,8 +185,11 @@ class Witness:
             self.ledger.ensure()
             if (event, epoch) not in self.votes:
                 raise JournalBlocked("receipt unavailable from this witness")
-            wire, admission = self.votes[event, epoch]
-            return Leaf(wire=wire, receipt={"admission": admission, "votes": (vote(self.name, self.key, admission),)})
+            return self._receipt(event, epoch)
+
+    def _receipt(self, event, epoch):
+        wire, admission = self.votes[event, epoch]
+        return Leaf(wire=wire, receipt={"admission": admission, "votes": (vote(self.name, self.key, admission),)})
 
     def seal(self, signed):
         with self.ledger.lock:
@@ -210,3 +219,15 @@ class Witness:
             self.policy.expiry(challenge, self.latest.head, self.clock.sample())
             return View(signed=self.latest, coverage=vote(self.name, self.key, self.latest),
                         signature=self.key.sign(message("view", view_binding(challenge, self.latest))).hex())
+
+
+    def withdrawal_view(self, challenge):
+        with self.ledger.lock:
+            self.ledger.ensure()
+            if self.policy.status_profile != "withdrawal-v2" or self.exhausted:
+                raise JournalBlocked("withdrawal view unavailable")
+            self.policy.challenge_deadline(challenge, self.clock.sample())
+            leaves = tuple(self._receipt(event, epoch) for event, epoch in self.withdrawals.items())
+            self.policy.challenge_deadline(challenge, self.clock.sample())
+            signature = self.key.sign(message("withdrawal-view.v2", withdrawal_binding(challenge, self.name, leaves)))
+            return WithdrawalView(witness=self.name, leaves=leaves, signature=signature.hex())
