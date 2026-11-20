@@ -1,0 +1,103 @@
+{
+  "at_utc": "2026-11-20T01:14:50.522611+00:00",
+  "cases": [
+    {
+      "case": "offline_feed_fetch",
+      "error": "ValueError: external feed retrieval is not enrolled",
+      "outcome": "rejected",
+      "socket_calls": 0,
+      "status": "pass"
+    },
+    {
+      "case": "duplicate_json_key",
+      "error": "ValueError: duplicate JSON key",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "oversized_feed",
+      "error": "ValueError: feed body exceeds limit",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "unknown_fact_id",
+      "error": "ValueError: research cites unknown source facts",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "executable_model_instruction",
+      "error": "ValueError: research contains executable instruction syntax",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "unsupported_positive_point",
+      "outcome": "accepted",
+      "result": {
+        "ambiguities": [],
+        "asset_alias": "asset-1",
+        "baseline_outcome": "unknown",
+        "candidate_outcome": "affected",
+        "citations": {
+          "F1": {
+            "acquisition": "fixture",
+            "pointer": "/summary",
+            "retrieved_at": "2026-11-20T01:14:50.522611+00:00",
+            "sha256": "89fcc9c17d7380e044d78bd6d2864f864b6d2264c7f5693fa7971c408086a87e",
+            "uri": "https://fixture.invalid/H09"
+          }
+        },
+        "estimated_cost_usd": null,
+        "experiment_config": {
+          "max_input_bytes": 10000,
+          "max_output_tokens": 700,
+          "prompt_version": "1"
+        },
+        "independently_verified": false,
+        "lab_experiments": [],
+        "latency_ms": 0.024,
+        "local_explanation": {
+          "fact_ids": [
+            "F1"
+          ],
+          "text": "Confirmed affected 5.0-2 with remote execution."
+        },
+        "model": "fixture-v1",
+        "points": [
+          {
+            "fact_ids": [
+              "F1"
+            ],
+            "text": "Confirmed affected 5.0-2 with remote execution."
+          }
+        ],
+        "prerequisites": [],
+        "provider": "fixture",
+        "provider_version": "1",
+        "schema_version": "phase5a-research-v1",
+        "usage": {
+          "input_tokens": 140,
+          "output_tokens": 72
+        },
+        "vulnerability_id": "AEGIS-ADV-109"
+      },
+      "status": "fail"
+    },
+    {
+      "case": "research_cannot_parse_as_signed_finding",
+      "error": "ValidationError: 21 validation errors for SignedFinding\nfinding\n  Field required [type=missing, input_value={'schema_version': 'phase...ne, 'latency_ms': 0.024}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nsignature\n  Field required [type=missing, input_value={'schema_version': 'phase...ne, 'latency_ms': 0.024}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nschema_version\n  Extra inputs are not permitted [type=extra_forbidden, input_value='phase5a-research-v1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nasset_alias\n  Extra inputs are not permitted [type=extra_forbidden, input_value='asset-1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nvulnerability_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='AEGIS-ADV-109', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nbaseline_outcome\n  Extra inputs are not permitted [type=extra_forbidden, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ncandidate_outcome\n  Extra inputs are not permitted [type=extra_forbidden, input_value='affected', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\npoints\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[{'text': 'Confirmed affe....', 'fact_ids': ['F1']}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nambiguities\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nprerequisites\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nlocal_explanation\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'text': 'Confirmed affec...n.', 'fact_ids': ['F1']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nlab_experiments\n  Extra inputs are not permitted [type=extra_forbidden, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ncitations\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'F1': {'uri': 'https://f...cquisition': 'fixture'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nindependently_verified\n  Extra inputs are not permitted [type=extra_forbidden, input_value=False, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nprovider\n  Extra inputs are not permitted [type=extra_forbidden, input_value='fixture', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nmodel\n  Extra inputs are not permitted [type=extra_forbidden, input_value='fixture-v1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nprovider_version\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nexperiment_config\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'max_input_bytes': 10000..., 'prompt_version': '1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nusage\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'input_tokens': 140, 'output_tokens': 72}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nestimated_cost_usd\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nlatency_ms\n  Extra inputs are not permitted [type=extra_forbidden, input_value=0.024, input_type=float]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden",
+      "outcome": "rejected",
+      "status": "pass"
+    }
+  ],
+  "model_evidence": "none; scripted responses test validation controls only",
+  "source_pin": "e3da3876df413f080095dc7568a664f75ffba5b6",
+  "summary": {
+    "fail": 1,
+    "inconclusive": 0,
+    "pass": 6
+  },
+  "topology": "offline one-process fixture"
+}

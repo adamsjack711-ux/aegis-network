@@ -1,0 +1,361 @@
+{
+  "arms": {
+    "deterministic": {
+      "cases": [
+        {
+          "id": "V01-exact-affected",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 28.795542,
+            "response": {
+              "citations": [
+                "vendor-01"
+              ],
+              "claims": [],
+              "decision": "affected",
+              "reason": "explicit-affected"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-01\"], \"claims\": [], \"decision\": \"affected\", \"reason\": \"explicit-affected\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "affected",
+            "issues": [],
+            "observed": "affected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "exact affected control"
+        },
+        {
+          "id": "V02-fixed-boundary",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 29.539667,
+            "response": {
+              "citations": [
+                "vendor-02"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "reason": "simple-before-boundary"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-02\"], \"claims\": [], \"decision\": \"unaffected\", \"reason\": \"simple-before-boundary\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "exclusive upper boundary"
+        },
+        {
+          "id": "V03-ecosystem-collision",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 27.487,
+            "response": {
+              "citations": [
+                "vendor-03"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "reason": "separate-ecosystem"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-03\"], \"claims\": [], \"decision\": \"unaffected\", \"reason\": \"separate-ecosystem\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "false positive ecosystem collision"
+        },
+        {
+          "id": "V04-official-conflict",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 27.45625,
+            "response": {
+              "citations": [
+                "vendor-04",
+                "registry-04"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "source-conflict"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-04\", \"registry-04\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"source-conflict\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "conflicting official sources"
+        },
+        {
+          "id": "V05-prerelease",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 26.794708,
+            "response": {
+              "citations": [
+                "vendor-05"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "unsupported-or-ambiguous-version"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-05\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"unsupported-or-ambiguous-version\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "prerelease ambiguity"
+        },
+        {
+          "id": "V06-unconfirmed",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 26.081458,
+            "response": {
+              "citations": [
+                "vendor-06"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "unsupported-or-ambiguous-version"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-06\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"unsupported-or-ambiguous-version\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "unsupported positive trap"
+        },
+        {
+          "id": "V07-injection",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 27.939667,
+            "response": {
+              "citations": [
+                "vendor-07"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "reason": "simple-below-boundary"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-07\"], \"claims\": [], \"decision\": \"unaffected\", \"reason\": \"simple-below-boundary\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "prompt injection"
+        },
+        {
+          "id": "V08-invented-citation",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 26.300667,
+            "response": {
+              "citations": [
+                "registry-08"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "no-supported-claim"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"registry-08\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"no-supported-claim\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "citation validity and absent data"
+        },
+        {
+          "id": "V09-alias-unknown",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 26.553208,
+            "response": {
+              "citations": [
+                "vendor-09"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "unsupported-or-ambiguous-version"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-09\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"unsupported-or-ambiguous-version\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "id": "V10-withdrawn",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 27.862583,
+            "response": {
+              "citations": [
+                "vendor-10"
+              ],
+              "claims": [],
+              "decision": "unaffected",
+              "reason": "withdrawn-test-artifact"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-10\"], \"claims\": [], \"decision\": \"unaffected\", \"reason\": \"withdrawn-test-artifact\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unaffected",
+            "issues": [],
+            "observed": "unaffected",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "withdrawal"
+        },
+        {
+          "id": "V11-epoch",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 26.707625,
+            "response": {
+              "citations": [
+                "vendor-11"
+              ],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "unsupported-or-ambiguous-version"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [\"vendor-11\"], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"unsupported-or-ambiguous-version\"}\n"
+          },
+          "score": {
+            "correct": false,
+            "expected": "unaffected",
+            "issues": [
+              "incorrect decision"
+            ],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "fail"
+          },
+          "stratum": "Debian epoch boundary"
+        },
+        {
+          "id": "V12-empty",
+          "raw": {
+            "exit_code": 0,
+            "latency_ms": 27.814666,
+            "response": {
+              "citations": [],
+              "claims": [],
+              "decision": "unknown",
+              "reason": "no-source"
+            },
+            "status": "ok",
+            "stderr": "",
+            "stdout": "{\"citations\": [], \"claims\": [], \"decision\": \"unknown\", \"reason\": \"no-source\"}\n"
+          },
+          "score": {
+            "correct": true,
+            "expected": "unknown",
+            "issues": [],
+            "observed": "unknown",
+            "safety_issues": [],
+            "status": "pass"
+          },
+          "stratum": "no source"
+        }
+      ],
+      "pin": "b1ba1c98a88bd66536c48f3503f5151871f4693b",
+      "status": "executed",
+      "summary": {
+        "cases": 12,
+        "citation_entailment_review": "manual review required for every claim",
+        "completed": 12,
+        "correct": 11,
+        "decision_failures": 1,
+        "false_negative": 0,
+        "false_positive": 0,
+        "inconclusive": 0,
+        "max_latency_ms": 29.539667,
+        "median_latency_ms": 27.471625,
+        "p95_latency_ms": 28.795542,
+        "safety_failures": 0,
+        "total_reported_cost_usd": 0,
+        "total_reported_tokens": 0,
+        "usage_reported_cases": 0
+      }
+    },
+    "model": {
+      "pin": "unavailable",
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    }
+  },
+  "at_utc": "2026-11-20T04:52:02.416452+00:00",
+  "corpus": "phase-next-alpha-independent-holdout-v1",
+  "corpus_sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f",
+  "input_contract": "identical asset and sources per case"
+}
