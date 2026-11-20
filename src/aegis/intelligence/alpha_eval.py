@@ -15,6 +15,8 @@ from typing import Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .source_claim import affirmative_effect, build_atomic_claim
+
 
 _OUTCOMES = {"affected", "unaffected", "unknown"}
 _IDENTITY = re.compile(r"\b(npm|pypi|debian|maven)(?:\s+package|\s+source\s+package)?\s+([a-z0-9_.:@-]+)", re.I)
@@ -220,6 +222,7 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
         reasons = []
         decisions = []
         citations = []
+        attempted_claims = []
         for source in case["sources"]:
             role = source.get("role", "unknown")
             if role == "unverified-blog":
@@ -234,6 +237,12 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
             if decision in {"affected", "unaffected"}:
                 decisions.append(decision)
                 citations.append(source["id"])
+                attempted_claims.append(build_atomic_claim(root, source, case["asset"],
+                                                            polarity=decision, predicate=reason))
+                if decision == "affected" and affirmative_effect(_clean_text(source["text"]), case["asset"]):
+                    attempted_claims.append(build_atomic_claim(root, source, case["asset"],
+                                                                polarity=decision, predicate=reason,
+                                                                kind="effect"))
         if len(set(decisions)) > 1:
             outcome, status = "unknown", "completed"
             reasons.append("contradictory-source-claims")
@@ -243,17 +252,19 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
         else:
             outcome = "unknown"
             status = "inconclusive" if "unsupported-debian-epoch" in reasons else "completed"
+        emitted_claims = [claim for claim in attempted_claims if outcome in {"affected", "unaffected"}
+                          and claim.polarity == outcome]
         baseline_ms = (time.perf_counter_ns() - started) / 1_000_000
         baseline_cpu_ms = (time.process_time_ns() - cpu_started) / 1_000_000
         row = {"id": case["id"], "stratum": case["stratum"], "expected": case["expected"],
                "status": status, "baseline": outcome, "reasons": reasons,
                "citations": citations, "source_ids": [s["id"] for s in case["sources"]],
+               "source_claims_attempted": [claim.model_dump(mode="json") for claim in attempted_claims],
+               "source_claims_emitted": [claim.model_dump(mode="json") for claim in emitted_claims],
                "baseline_wall_ms": round(baseline_ms, 4), "baseline_cpu_ms": round(baseline_cpu_ms, 4),
                "expected_impact": case.get("expected_impact"),
-               "supported_impact": "availability degradation" if outcome == "affected" and any(
-                   s["id"] in citations and
-                   "availability degradation" in _clean_text(s["text"]).lower() for s in case["sources"]
-               ) else None}
+               "supported_impact": "availability degradation" if any(
+                   claim.claim_kind == "effect" for claim in emitted_claims) else None}
         if scripted:
             payload = json.dumps({"asset": case["asset"], "sources": case["sources"]},
                                  sort_keys=True, separators=(",", ":")).encode()
@@ -298,9 +309,19 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
                            unsupported_positive_points_emitted=0)
         rows.append(row)
     completed_scripted = [r for r in rows if r.get("scripted_status") == "completed"]
-    return {"schema_version": "phase5a-alpha-eval-v1", "mode": "offline-scripted-stress" if scripted else "deterministic",
+    return {"schema_version": "phase5a-alpha-eval-v2", "mode": "offline-scripted-stress" if scripted else "deterministic",
             "seal": seal, "planned_cases": len(rows), "new_cases": 24, "prior_cases": 12,
             "rows": rows, "baseline": _score(rows, "baseline"),
+            "source_claims": {"attempted": sum(len(r["source_claims_attempted"]) for r in rows),
+                              "emitted": sum(len(r["source_claims_emitted"]) for r in rows),
+                              "positive_attempted": sum(c["polarity"] == "affected" for r in rows
+                                                        for c in r["source_claims_attempted"]),
+                              "positive_emitted": sum(c["polarity"] == "affected" for r in rows
+                                                      for c in r["source_claims_emitted"]),
+                              "effect_emitted": sum(c["claim_kind"] == "effect" for r in rows
+                                                    for c in r["source_claims_emitted"]),
+                              "independently_semantic_adjudicated": 0,
+                              "authenticated_real_advisory": 0},
             "raw_scripted": _score([r for r in rows if r.get("scripted_status") == "completed"],
                                    "raw_hypothesis") if scripted else {"status": "skipped"},
             "checked_scripted": _score([r for r in rows if r.get("scripted_status") == "completed"], "checked")
@@ -328,6 +349,7 @@ def evaluate_alpha(root: Path, *, scripted: bool = True, budget: OfflineBudget |
             "process_peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (
                 1 if sys.platform == "darwin" else 1024),
             "limitations": ["Synthetic fixture roles are not source authentication.",
+                            "Atomic source records bind bytes and parser decisions; semantic truth requires independent review.",
                             "Raw scripted prose is unchecked and never reportable.",
                             "Phrase absence is a negative source check; phrase presence would need human entailment review.",
                             "No real model, billed tokens, provider cost, or model advantage measured.",
