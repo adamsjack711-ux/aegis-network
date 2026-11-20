@@ -1,0 +1,14 @@
+# Phase-next six: contract decision record
+
+| Decision | Status | Reason and required review |
+| --- | --- | --- |
+| Use `ec939e14a5acd438ff0d5fa562ed61a70b68f3c9` as the common source reference | **Approved for isolated lanes** | Latest independently reviewed integration present at inspection; no descendant integration branch exists. Full product suite on its source passed 373/37 at `da05e02`, with later documentation-only commits. Does not imply release readiness. |
+| Preserve SignedFinding 1.0 and exact inventory matching | **Frozen** | No silent advisory range, distribution alias or uncertain package conversion to an exact match. Any change requires a versioned proposal and signed golden/old-new compatibility tests. |
+| Preserve native T4/T5 and local enforcement authority | **Frozen** | Phase 4E-C remains shadow-only. Unknown/conflicting/stale status blocks new writes; AI/diagnostic outputs, ACKs and cursors do not confer authority. |
+| 5B package and grant-loader boundary | **Review required** | Baseline `pyproject.toml` has no console script and carries lab dependencies. Separate prior branches propose incompatible backends/dependency/grant-loader arrangements. 5B-1 owns metadata proposal; 5B-2 owns CLI runtime. No shared loader relocation or backend switch until old/new import and grant semantics are independently verified. |
+| 5B observer output and identity | **Private v2 provisional; no silent revision** | Default commands must remain observation-only with zero unrequested persistent writes. `independent_status=unknown` stays explicit without native proof. 5B-2 may propose a versioned v3; 5B-1 packages only an accepted reader/output combination. |
+| 5A source claim/evaluator | **Private v3, research-only** | The repaired source-claim checks at `ebcc30c` are parser-consistent fixtures, not authenticated Evidence. No model-generated output converts to SignedFinding, verifier attestation or approval. A real OpenAI call is **not authorized** by this planning decision. |
+| 4F native withdrawal recovery | **REVISE; no source intake** | VAL-R `5f6fb71` identified missing independently retrievable latest accepted-withdrawal floor, atomic native admission/anchor ordering, exact Evidence digest namespace, and generation/old-writer barriers. Only inert deny-only design prototypes are currently permitted. The five-second gate is unchanged. |
+| 5C Diagnostic Runner | **Provisional architecture only** | Diagnostic output must remain an observation with provenance/uncertainty and no signing or action authority. Main and VAL-1 will review a proposed versioned interface before implementation. No public scanning, exploitation or arbitrary command transport. |
+
+Authority-bearing changes require explicit Main architecture decision after independent VAL-1 review. A branch name, green specialist tests or a valid signature alone never grants contract adoption.
