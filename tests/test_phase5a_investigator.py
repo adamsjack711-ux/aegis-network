@@ -66,6 +66,24 @@ def test_source_excerpt_is_exact_and_audit_has_no_private_content():
         verify_investigation(advisory, bad, now=NOW)
 
 
+def test_offline_research_has_no_signed_finding_or_evidence_authority(monkeypatch):
+    from aegis import artifact
+
+    def forbidden_sign(*args, **kwargs):
+        raise AssertionError("research crossed signed finding boundary")
+
+    monkeypatch.setattr(artifact, "sign", forbidden_sign)
+    advisory, response = sample()
+    result = investigate(advisory, ScriptedProvider(response), now=NOW)
+    verify_investigation(advisory, result, now=NOW)
+    assert result.candidate.independently_verified is False
+    assert result.audit.cost_usd is None
+    with pytest.raises(Exception):
+        artifact.SignedFinding.model_validate(result.candidate.model_dump())
+    with pytest.raises(Exception):
+        artifact.Evidence.model_validate(result.candidate.model_dump())
+
+
 def test_conflict_remains_conflicting_and_unsupported_positive_abstains():
     advisory, response = sample(3)
     response["proposed_outcome"] = "affected"
@@ -94,36 +112,38 @@ def test_invalid_model_claim_is_rejected(mutation):
     assert result.candidate.excerpts == ()
 
 
-def test_live_provider_is_inert_without_exact_authorization(monkeypatch):
+def test_live_provider_is_inert_even_with_caller_authorization_and_key(monkeypatch):
     advisory, _ = sample()
     called = []
-    monkeypatch.setattr("httpx.Client.stream", lambda *a, **k: called.append(True))
-    with pytest.raises(PermissionError, match="authorization"):
+    monkeypatch.setenv("OPENAI_API_KEY", "throwaway-test-key")
+    monkeypatch.setattr("socket.socket.connect", lambda *a, **k: called.append(True))
+    with pytest.raises(PermissionError, match="offline"):
         investigate(advisory, OpenAIProvider(), now=NOW)
-    assert not called
     auth = Authorization(model="gpt-4.1-mini-2025-04-14", corpus_sha256="a" * 64,
                          spending_cap_usd=Decimal("0.001"),
                          input_usd_per_million=Decimal("1"),
                          output_usd_per_million=Decimal("4"))
-    with pytest.raises(PermissionError, match="authorization"):
+    with pytest.raises(PermissionError, match="offline"):
         investigate(advisory, OpenAIProvider(auth), authorization=auth,
                     ledger=SpendLedger(auth), corpus_sha256="b" * 64, now=NOW)
-    assert not called
-    with pytest.raises(ValueError, match="cap"):
+    with pytest.raises(PermissionError, match="offline"):
         investigate(advisory, OpenAIProvider(auth), authorization=auth,
                     ledger=SpendLedger(auth),
                     corpus_sha256="a" * 64, now=NOW)
+    with pytest.raises(PermissionError, match="disabled"):
+        OpenAIProvider(auth).complete("instructions", "private payload", Limits())
+    with pytest.raises(PermissionError, match="disabled"):
+        investigate(advisory, ScriptedProvider({}), authorization=auth,
+                    ledger=SpendLedger(auth), corpus_sha256="a" * 64, now=NOW)
     assert not called
 
 
-def test_shared_spend_ledger_limits_multiple_live_calls_without_network():
+def test_custom_provider_cannot_claim_offline_to_bypass_transport_gate():
     advisory, response = sample()
     auth = Authorization(model="test-live", corpus_sha256="a" * 64,
                          spending_cap_usd=Decimal("0.03"),
                          input_usd_per_million=Decimal("1"),
                          output_usd_per_million=Decimal("4"))
-    ledger = SpendLedger(auth)
-
     class InertLive:
         live = True
         model = "test-live"
@@ -136,15 +156,14 @@ def test_shared_spend_ledger_limits_multiple_live_calls_without_network():
                               model=self.model, input_tokens=12_000, output_tokens=512)
 
     provider = InertLive()
-    for _ in range(2):
-        result = investigate(advisory, provider, authorization=auth, ledger=ledger,
-                             corpus_sha256="a" * 64, now=NOW)
-        assert result.candidate.reportable_outcome == "affected"
-    assert provider.calls == 2
-    with pytest.raises(ValueError, match="cap"):
-        investigate(advisory, provider, authorization=auth, ledger=ledger,
+    with pytest.raises(PermissionError, match="offline"):
+        investigate(advisory, provider, authorization=auth, ledger=SpendLedger(auth),
                     corpus_sha256="a" * 64, now=NOW)
-    assert provider.calls == 2
+    assert provider.calls == 0
+    provider.live = False  # Self-declared offline status is not an authorization.
+    with pytest.raises(PermissionError, match="offline"):
+        investigate(advisory, provider, now=NOW)
+    assert provider.calls == 0
 
 
 def test_budgets_and_versioned_input_are_strict():
@@ -162,16 +181,14 @@ def test_budgets_and_versioned_input_are_strict():
         AdvisoryInput.model_validate({**advisory.model_dump(), "schema_version": "other"})
 
 
-def test_provider_deadline_and_output_limit_fail_closed():
+def test_provider_deadline_and_output_limit_fail_closed(monkeypatch):
     advisory, response = sample()
-
-    class SlowProvider(ScriptedProvider):
-        def complete(self, instructions, payload, limits):
-            time.sleep(0.01)
-            return super().complete(instructions, payload, limits)
-
-    late = investigate(advisory, SlowProvider(response),
-                       limits=Limits(timeout_seconds=0.001), now=NOW)
+    from aegis.intelligence import investigator as investigator_module
+    ticks = iter((0.0, 0.01, 0.02))
+    with monkeypatch.context() as clock_patch:
+        clock_patch.setattr(investigator_module.time, "perf_counter", lambda: next(ticks))
+        late = investigate(advisory, ScriptedProvider(response),
+                           limits=Limits(timeout_seconds=0.001), now=NOW)
     assert late.check.status == "rejected"
     assert late.candidate.reportable_outcome == "unknown"
     response["uncertainties"] = ["x" * 1_000]

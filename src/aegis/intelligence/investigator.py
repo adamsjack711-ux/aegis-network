@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
 import threading
 import time
@@ -16,7 +15,6 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Literal, Protocol
 
-import httpx
 from pydantic import Field, ValidationError, model_validator
 
 from .baseline import assess, normalize
@@ -120,43 +118,16 @@ class ScriptedProvider:
 
 
 class OpenAIProvider:
-    """Dormant Responses adapter. Authorization is checked by investigate first."""
+    """Compatibility placeholder. Live transport is intentionally unavailable."""
 
     live = True
     model = "gpt-4.1-mini-2025-04-14"
-    endpoint = "https://api.openai.com/v1/responses"
 
     def __init__(self, authorization: Authorization | None = None):
         self.authorization = authorization
 
     def complete(self, instructions: str, payload: str, limits: Limits) -> ModelReply:
-        if self.authorization is None or self.authorization.model != self.model:
-            raise PermissionError("OpenAI provider is not authorized")
-        key = os.environ.get("OPENAI_API_KEY")
-        if not key:
-            raise ValueError("OPENAI_API_KEY is absent")
-        request = {"model": self.model, "instructions": instructions,
-                   "input": payload, "max_output_tokens": limits.max_output_tokens,
-                   "store": False, "text": {"format": {"type": "json_object"}}}
-        started = time.monotonic()
-        with httpx.Client(timeout=limits.timeout_seconds, follow_redirects=False) as client:
-            with client.stream("POST", self.endpoint, json=request,
-                               headers={"Authorization": f"Bearer {key}"}) as response:
-                response.raise_for_status()
-                chunks = bytearray()
-                for chunk in response.iter_bytes(chunk_size=8_192):
-                    chunks.extend(chunk)
-                    if len(chunks) > 65_536 or time.monotonic() - started > limits.timeout_seconds:
-                        raise ValueError("OpenAI response byte or deadline limit")
-                data = json.loads(chunks)
-        if data.get("status") != "completed" or data.get("model") != self.model:
-            raise ValueError("incomplete or different model response")
-        content = "".join(part.get("text", "") for item in data.get("output", [])
-                          if item.get("type") == "message" for part in item.get("content", [])
-                          if part.get("type") == "output_text")
-        usage = data.get("usage") or {}
-        return ModelReply(content=content, provider="openai", model=self.model,
-                          input_tokens=usage["input_tokens"], output_tokens=usage["output_tokens"])
+        raise PermissionError("live inference is disabled in the offline Investigator")
 
 
 class DraftClaim(Record):
@@ -259,6 +230,13 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
                 ledger: SpendLedger | None = None,
                 corpus_sha256: str | None = None,
                 now: datetime | None = None) -> Investigation:
+    # Caller-created Authorization and SpendLedger are not an operator grant.
+    # Only the exact inert fixture provider can observe input. A custom provider
+    # cannot opt into the offline path by claiming live=False.
+    if type(provider) is not ScriptedProvider:
+        raise PermissionError("only the offline ScriptedProvider is available")
+    if authorization is not None or ledger is not None or corpus_sha256 is not None:
+        raise PermissionError("live authorization parameters are disabled in the offline Investigator")
     limits = limits or Limits()
     claims = tuple(claim for source in advisory.sources for claim in normalize(source))
     baseline = assess(advisory.asset, claims, advisory.vulnerability_id, now=now)
@@ -281,18 +259,6 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
                             "sources": [s.sha256 for s in advisory.sources]})
     if len(payload.encode()) + len(INSTRUCTIONS.encode()) > limits.max_input_bytes:
         raise ValueError("investigator input budget exceeded")
-    reserved = Decimal(0)
-    if provider.live:
-        if (authorization is None or corpus_sha256 != authorization.corpus_sha256 or
-                provider.model != authorization.model or ledger is None or
-                ledger.authorization != authorization):
-            raise PermissionError("live inference needs exact model, corpus and cap authorization")
-        if isinstance(provider, OpenAIProvider) and provider.authorization != authorization:
-            raise PermissionError("provider authorization mismatch")
-        reserved = ((Decimal(limits.max_input_bytes) * authorization.input_usd_per_million +
-                     Decimal(limits.max_output_tokens) * authorization.output_usd_per_million)
-                    / Decimal(1_000_000))
-        ledger.reserve(reserved)
     started = time.perf_counter()
     reply = None
     draft = None
@@ -330,7 +296,7 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
                for e in excerpts):
             reasons.append("instruction-like-source-excerpt")
     except (ValueError, ValidationError, TimeoutError, KeyError, TypeError,
-            AttributeError, httpx.HTTPError) as exc:
+            AttributeError) as exc:
         reasons.append("rejected-" + type(exc).__name__.lower())
         draft = None
         excerpts = []
@@ -339,19 +305,7 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
               baseline.outcome in {"affected", "unaffected"} else "needs-evidence")
     reportable: Outcome = (baseline.outcome if status == "research-consistent" else
                            "conflicting" if baseline.outcome == "conflicting" else "unknown")
-    cost = None
-    if reply and authorization and provider.live:
-        cost = ((Decimal(reply.input_tokens) * authorization.input_usd_per_million +
-                 Decimal(reply.output_tokens) * authorization.output_usd_per_million)
-                / Decimal(1_000_000))
-        if cost > authorization.spending_cap_usd:
-            reasons.append("actual-cost-exceeds-cap")
-            status, reportable = "rejected", "unknown"
-    if provider.live and ledger:
-        ledger.settle(reserved, cost)
-        if ledger.spent_usd > ledger.authorization.spending_cap_usd:
-            reasons.append("actual-cost-exceeds-cap")
-            status, reportable = "rejected", "unknown"
+    cost = None  # No provider billing or external inference in the offline build.
     check = ResearchCheck(input_sha256=input_digest,
                           source_digests=tuple(s.sha256 for s in advisory.sources),
                           status=status, reason_codes=tuple(reasons),
