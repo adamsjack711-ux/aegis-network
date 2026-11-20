@@ -7,7 +7,7 @@ from hashlib import sha256
 from aegis.artifact import SignedFinding
 from aegis.intelligence import Asset, assess, normalize, snapshot
 from aegis.intelligence.models import Claim, SourceRef, VersionClaim
-from aegis.intelligence.research import FixtureProvider, research
+from aegis.intelligence.research import FixtureProvider, ResearchResult, research
 from pydantic import ValidationError
 import pytest
 
@@ -122,3 +122,20 @@ def test_unsupported_version_and_mismatched_model_abstain():
     assert result.baseline_outcome == "affected"
     assert result.candidate_outcome == "unknown"
     assert "model-contradicts-deterministic-evidence" in result.check.reason_codes
+
+
+def test_v1_raw_result_cannot_be_read_as_checked_v2():
+    asset, claims, source = source_case()
+    result = research(asset, claims, claims[0].vulnerability_id, FixtureProvider(
+        draft("affected", "Version 1.5 is listed.")), source_snapshots=(source,))
+    encoded = result.model_dump(mode="json")
+    assert encoded["schema_version"] == "phase5a-research-v2"
+    assert ResearchResult.model_validate_json(json.dumps(encoded)).check.disposition == "research-consistent"
+    for legacy in (
+        {**encoded, "schema_version": "phase5a-research-v1"},
+        {key: value for key, value in encoded.items() if key != "schema_version"},
+        {**encoded, "schema_version": "phase5a-research-v1", "points":
+         encoded["raw_hypothesis"]["points"]},
+    ):
+        with pytest.raises(ValidationError):
+            ResearchResult.model_validate_json(json.dumps(legacy))

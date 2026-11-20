@@ -90,7 +90,7 @@ class ResearchCheck(Record):
 
 
 class ResearchResult(Record):
-    schema_version: str = "phase5a-research-v1"
+    schema_version: Literal["phase5a-research-v2"]
     asset_alias: str = "asset-1"
     vulnerability_id: str
     baseline_outcome: str
@@ -213,7 +213,8 @@ def research(asset: Asset, claims: tuple[Claim, ...], vulnerability_id: str, pro
     if input_usd_per_million is not None and output_usd_per_million is not None:
         cost = round((result.usage.input_tokens * input_usd_per_million +
                       result.usage.output_tokens * output_usd_per_million) / 1_000_000, 8)
-    research_result = ResearchResult(vulnerability_id=vulnerability_id, baseline_outcome=baseline.outcome,
+    research_result = ResearchResult(schema_version="phase5a-research-v2",
+                          vulnerability_id=vulnerability_id, baseline_outcome=baseline.outcome,
                           candidate_outcome="unknown", model_candidate_outcome=draft.candidate_outcome,
                           raw_hypothesis=draft, citations=citations,
                           provider=result.provider, model=result.model,
