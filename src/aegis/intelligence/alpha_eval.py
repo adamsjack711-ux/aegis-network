@@ -76,6 +76,8 @@ def _source_decision(text: str, asset: dict) -> tuple[str, str]:
     lower = clean.lower()
     if "withdrawn" in lower or "no affected versions" in lower or "under investigation" in lower:
         return "unknown", "withdrawn-or-unconfirmed"
+    if "only when" in lower or "configuration unknown" in lower:
+        return "unknown", "configuration-unverified"
     version = asset["version"]
     if ":" in version and ecosystem == "deb":
         return "unknown", "unsupported-debian-epoch"

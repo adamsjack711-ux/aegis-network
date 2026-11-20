@@ -46,6 +46,12 @@ def test_backport_exact_identity_does_not_swallow_sentence_period():
                                    "version": "1.2-3+deb12u1"}) == ("unaffected", "explicit-fixed-or-unaffected")
 
 
+def test_conditional_advisory_without_verified_configuration_abstains():
+    text = "npm maple-plugin 2.0.0 is affected only when the optional parser is enabled."
+    assert _source_decision(text, {"ecosystem": "npm", "name": "maple-plugin",
+                                   "version": "2.0.0"}) == ("unknown", "configuration-unverified")
+
+
 def test_openai_response_contract_with_in_memory_transport(monkeypatch):
     payload = {"status": "completed", "model": "test-model", "usage": {"input_tokens": 12,
                "output_tokens": 20}, "output": [{"type": "message", "role": "assistant",

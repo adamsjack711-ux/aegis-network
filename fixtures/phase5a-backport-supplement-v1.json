@@ -33,6 +33,20 @@
       ],
       "expected": "unknown",
       "rationale": "Contradictory distribution notices require abstention."
+    },
+    {
+      "id": "C01-conditional-configuration",
+      "asset": {"ecosystem": "npm", "name": "maple-plugin", "version": "2.0.0"},
+      "sources": [{"id": "vendor-C01", "role": "vendor", "text": "AEGIS-ADV-C01: npm maple-plugin 2.0.0 is affected only when the optional remote parser is enabled. The installed configuration is unknown."}],
+      "expected": "unknown",
+      "rationale": "A package version match does not establish the required runtime configuration."
+    },
+    {
+      "id": "M01-no-source",
+      "asset": {"ecosystem": "npm", "name": "maple-plugin", "version": "2.0.0"},
+      "sources": [],
+      "expected": "unknown",
+      "rationale": "No advisory bytes or citation exist."
     }
   ]
 }
