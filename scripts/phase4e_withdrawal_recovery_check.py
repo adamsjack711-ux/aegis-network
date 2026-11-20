@@ -51,7 +51,9 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                 capacity.config.max_bytes = ordinary_stream.state.bytes
                 await lab.js.update_stream(capacity.config)
 
+            broker_stop_requested_ns = bench.now()
             await asyncio.to_thread(lab.compose, "stop", "-t", "0", "nats")
+            broker_stop_complete_ns = bench.now()
             ordinary = []
             for sequence in range(3, ordinary_count + 3):
                 ordinary.append(await lab.post(client, lab.make_finding(publisher, sequence), "ordinary"))
@@ -69,13 +71,21 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                                                        withdraw, mixed_withdraw, later]
             assert {row["event_id"] for row in rows if row["sent_at"] is None} == queued
             if kill_agent:
+                sigkill_sent_ns = bench.now()
                 lab.fleet.signal(agent_id, signal.SIGKILL)
                 await asyncio.to_thread(worker.wait, 10)
                 lab.fleet.processes.pop(agent_id)
+                sigkill_reaped_ns = bench.now()
+            else:
+                sigkill_sent_ns = sigkill_reaped_ns = None
             restart_requested_ns = bench.now()
             await asyncio.to_thread(lab.compose, "start", "nats")
+            broker_start_returned_ns = bench.now()
             if kill_agent:
+                agent_spawn_requested_ns = bench.now()
                 worker, _ = lab.fleet.start(agent_id, index=2)
+            else:
+                agent_spawn_requested_ns = None
             isolation = None
             if priority:
                 await lab.wait_acks([withdraw, mixed_withdraw])
@@ -137,6 +147,22 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
             assert all(row[3:] == ("REVOCATION_ACCEPTED", 1) for row in revocations)
             assert effective == {(event_id(target),) for target in targets}
 
+            # All processes in this disposable lab run on one host. These
+            # perf_counter_ns samples share its monotonic clock; do not apply
+            # their offsets to remote peers or unsynchronized wall clocks.
+            trace_log = lab.fleet.agents[agent_id][1]
+            trace_log.read()
+            stage_kinds = {"process_started", "broker_connected", "claim_stage", "claimed",
+                           "critical_stage", "withdrawal_commit", "ack"}
+            stage_trace = [
+                {"kind": row["kind"], "stage": row.get("stage"),
+                 "from_restart_request_ms": bench.ms(restart_requested_ns, row["ns"]),
+                 "revision": row.get("revision"), "detail": row.get("detail"),
+                 "event_id": (row.get("decision") or {}).get("event_id")}
+                for row in trace_log.rows if row["kind"] in stage_kinds
+                and row["ns"] >= broker_stop_requested_ns
+            ]
+
             def timing(eid):
                 started = lab.events[eid]["start"]
                 committed = lab.fleet.commits[eid][agent_id]["ns"]
@@ -157,6 +183,19 @@ async def check(bench, directory, env, ordinary_count, kill_agent, priority):
                 "scope": "one host, one broker, one database, one dry-run agent",
                 "profile": "priority" if priority else "legacy",
                 "agent_sigkill": kill_agent,
+                "recovery_stages": {
+                    "clock": "one-host monotonic perf_counter_ns; process-local stage spans and controller milestones",
+                    "enrolled_agent_ids": [agent_id],
+                    "targeted_agent_withdrawal_pairs": 2,
+                    "broker_stop_duration_ms": bench.ms(broker_stop_requested_ns, broker_stop_complete_ns),
+                    "broker_start_duration_ms": bench.ms(restart_requested_ns, broker_start_returned_ns),
+                    "sigkill_to_reap_ms": (bench.ms(sigkill_sent_ns, sigkill_reaped_ns)
+                                           if kill_agent else None),
+                    "agent_spawn_requested_from_restart_ms": (
+                        bench.ms(restart_requested_ns, agent_spawn_requested_ns)
+                        if kill_agent else None),
+                    "trace": stage_trace,
+                },
                 "ordinary_enqueued": ordinary_count,
                 "ordinary_findings_ahead_of_independent_withdrawal": (
                     None if priority else sum(first[eid] < first[withdraw] for eid in ordinary)

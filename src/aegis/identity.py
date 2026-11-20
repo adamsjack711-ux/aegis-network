@@ -43,7 +43,7 @@ class IdentityLease:
         self.lock = asyncio.Lock()
 
     @classmethod
-    async def claim(cls, js, agent_id: str, wait_seconds: float = 0):
+    async def claim(cls, js, agent_id: str, wait_seconds: float = 0, *, on_attempt=None):
         canonical_agent_id(agent_id)
         try:
             kv = await js.key_value(LEASE_BUCKET)
@@ -60,13 +60,19 @@ class IdentityLease:
         deadline = time.monotonic() + wait_seconds
         while True:
             checked_at = time.monotonic()
+            if on_attempt is not None:
+                on_attempt("attempt", time.perf_counter_ns(), None)
             try:
                 revision = await kv.create(agent_id, token)
                 break
             except KeyWrongLastSequenceError as exc:
+                if on_attempt is not None:
+                    on_attempt("busy", time.perf_counter_ns(), None)
                 if time.monotonic() >= deadline:
                     raise IdentityInUse("agent identity already has an active broker lease") from exc
                 await asyncio.sleep(1)
+        if on_attempt is not None:
+            on_attempt("claimed", time.perf_counter_ns(), revision)
         lease = cls(kv, agent_id, token, revision, checked_at)
         lease.require_live()
         return lease

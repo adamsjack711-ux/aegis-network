@@ -1,0 +1,873 @@
+{
+  "source": {
+    "head": "613efe36e56609bfe4c62740b2ecdee3ae0aeec4",
+    "instrumentation_sha256": {
+      "compose.phase4a.yaml": "264439f222a46bc154ec192a08e474e67785d20588541c888cda7ecffd25c9d6",
+      "scripts/phase4a_bench.py": "4a3d9887134caac0b89826969f553b285022ca12af905fe84a228cf263e21f2a",
+      "scripts/phase4a_coordinator.py": "bea1120b87d5d552204f72f6d60f3e7f60764772d494e9ffc383a8fb75a33e1b",
+      "scripts/phase4a_peer.py": "2b0359d1b1bd5c8f0ea267eb8c392a5e828bfcc2fc8fc19982b7e96492efc02d",
+      "scripts/phase4a_worker.py": "b4b4b879af4fb888a76b5b43c1b4e1c32897f36e9b9bfe7c2ed33fa5fafb7eca",
+      "src/aegis/agent_runtime.py": "c46fac20034762c1403007aba0e81c8c37182402a125f04e53f0a47585cd5ce7",
+      "src/aegis/api.py": "e14907705da33bf715a7bf38325631f2f6705f480d2faabd4ed353f29348ac41",
+      "src/aegis/mesh.py": "6a013f3c961a7cb928dddf6a65bce93cebab7a0e71d7a3899e59dcd6d4880b1d"
+    }
+  },
+  "oracle_sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050",
+  "postgres_source_sha256": "397e438a4284c3551ac7602b95f34d0e8539ac9ce6b93fe127f5fed6d5423c39",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "docker_image_ids": {
+    "nats": "sha256:b83efabe3e7def1e0a4a31ec6e078999bb17c80363f881df35edc70fcb6bb927",
+    "postgres": "sha256:1d5b02d3a9941fbd52437db4107f8c52d6297dac553ca1e5c299ebb3756b4857"
+  },
+  "scope": "one host, one broker, one database, one dry-run agent",
+  "profile": "priority",
+  "agent_sigkill": true,
+  "recovery_stages": {
+    "clock": "one-host monotonic perf_counter_ns; process-local stage spans and controller milestones",
+    "enrolled_agent_ids": [
+      "25ad6748-b599-4aae-93b3-ee5c801e677e"
+    ],
+    "targeted_agent_withdrawal_pairs": 2,
+    "broker_stop_duration_ms": 285.01,
+    "broker_start_duration_ms": 186.589,
+    "sigkill_to_reap_ms": 3.898,
+    "agent_spawn_requested_from_restart_ms": 186.589,
+    "trace": [
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -388.715,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -374.047,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": -122.906,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": -110.794,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "process_started",
+        "stage": null,
+        "from_restart_request_ms": 378.336,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "broker_connected",
+        "stage": null,
+        "from_restart_request_ms": 381.077,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 382.514,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 384.65,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 1385.204,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 1387.49,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 2387.801,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 2390.272,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 3391.435,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 3393.947,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 4395.097,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 4397.505,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 5398.514,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 5400.584,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 6401.782,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 6406.063,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 7406.594,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 7408.831,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 8410.024,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 8414.224,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 9415.419,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 9418.258,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 10419.249,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 10421.747,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 11422.995,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 11426.513,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 12427.374,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 12429.505,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 13430.627,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 13432.734,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 14433.871,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 14436.24,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 15437.446,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 15442.08,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 16443.24,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 16445.811,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 17447.029,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 17450.343,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 18451.489,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 18453.784,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 19454.18,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 19457.504,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 20458.678,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 20461.618,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 21462.788,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 21465.132,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 22466.37,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 22469.431,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 23470.577,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 23472.779,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 24473.075,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 24477.157,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 25478.39,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 25480.753,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 26481.617,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 26483.83,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 27484.903,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 27487.463,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 28488.601,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 28491.437,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 29492.119,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "busy",
+        "from_restart_request_ms": 29494.435,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "attempt",
+        "from_restart_request_ms": 30495.618,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claim_stage",
+        "stage": "claimed",
+        "from_restart_request_ms": 30498.117,
+        "revision": 8,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "claimed",
+        "stage": null,
+        "from_restart_request_ms": 30498.277,
+        "revision": 8,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 30530.581,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_subscribed",
+        "from_restart_request_ms": 30548.139,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 30550.186,
+        "revision": null,
+        "detail": 1,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 30553.442,
+        "revision": null,
+        "detail": null,
+        "event_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30555.054,
+        "revision": null,
+        "detail": null,
+        "event_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_received",
+        "from_restart_request_ms": 30555.871,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "withdrawal_commit",
+        "stage": null,
+        "from_restart_request_ms": 30557.607,
+        "revision": null,
+        "detail": null,
+        "event_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30559.02,
+        "revision": null,
+        "detail": null,
+        "event_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 30563.989,
+        "revision": null,
+        "detail": 2,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30791.013,
+        "revision": null,
+        "detail": null,
+        "event_id": "a7e4542f-65b0-4087-bc7f-3a5d8d38850b"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30806.352,
+        "revision": null,
+        "detail": null,
+        "event_id": "8d2b529f-fb21-41a9-8c7f-ec36bbefa496"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_start",
+        "from_restart_request_ms": 30814.54,
+        "revision": null,
+        "detail": null,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30821.466,
+        "revision": null,
+        "detail": null,
+        "event_id": "d7e6c7cd-b78e-41f6-afbc-14aa5286ab58"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30823.741,
+        "revision": null,
+        "detail": null,
+        "event_id": "d05bffff-8ddd-4884-9a75-6931f6081f63"
+      },
+      {
+        "kind": "critical_stage",
+        "stage": "critical_replay_end",
+        "from_restart_request_ms": 30827.327,
+        "revision": null,
+        "detail": 0,
+        "event_id": null
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30839.087,
+        "revision": null,
+        "detail": null,
+        "event_id": "169f189b-de28-43fd-a1f6-45aa336021f4"
+      },
+      {
+        "kind": "ack",
+        "stage": null,
+        "from_restart_request_ms": 30855.235,
+        "revision": null,
+        "detail": null,
+        "event_id": "784d84ce-61e0-4afe-a16f-e59f4a3c6676"
+      }
+    ]
+  },
+  "ordinary_enqueued": 4,
+  "ordinary_findings_ahead_of_independent_withdrawal": null,
+  "ordinary_capacity_isolation": {
+    "normal_stream_head_while_critical_acked": 2,
+    "ordinary_outbox_rows_still_pending": 6,
+    "critical_ack_count": 2,
+    "durable_effective_denial_count": 2
+  },
+  "all_logical_broker_acks": 8,
+  "effective_denials_from_read_only_sqlite": [
+    "7907eea9-9f59-4b5a-8b42-8699b7ea1acc",
+    "7eee2f6b-48c8-4412-883e-79cd2a653299"
+  ],
+  "legacy_replay_cursor_at_readback": 10,
+  "queued_journal_order": [
+    {
+      "position": 1,
+      "event_id": "7907eea9-9f59-4b5a-8b42-8699b7ea1acc",
+      "sent_at": "2026-11-20T02:17:50.125507+00:00"
+    },
+    {
+      "position": 2,
+      "event_id": "7eee2f6b-48c8-4412-883e-79cd2a653299",
+      "sent_at": "2026-11-20T02:17:50.144085+00:00"
+    },
+    {
+      "position": 3,
+      "event_id": "a7e4542f-65b0-4087-bc7f-3a5d8d38850b",
+      "sent_at": null
+    },
+    {
+      "position": 4,
+      "event_id": "8d2b529f-fb21-41a9-8c7f-ec36bbefa496",
+      "sent_at": null
+    },
+    {
+      "position": 5,
+      "event_id": "d7e6c7cd-b78e-41f6-afbc-14aa5286ab58",
+      "sent_at": null
+    },
+    {
+      "position": 6,
+      "event_id": "d05bffff-8ddd-4884-9a75-6931f6081f63",
+      "sent_at": null
+    },
+    {
+      "position": 7,
+      "event_id": "169f189b-de28-43fd-a1f6-45aa336021f4",
+      "sent_at": null
+    },
+    {
+      "position": 8,
+      "event_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a",
+      "sent_at": null
+    },
+    {
+      "position": 9,
+      "event_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a",
+      "sent_at": null
+    },
+    {
+      "position": 10,
+      "event_id": "784d84ce-61e0-4afe-a16f-e59f4a3c6676",
+      "sent_at": null
+    }
+  ],
+  "broker_order_after_restart": [
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 3,
+      "event_id": "a7e4542f-65b0-4087-bc7f-3a5d8d38850b",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 4,
+      "event_id": "8d2b529f-fb21-41a9-8c7f-ec36bbefa496",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 4
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 5,
+      "event_id": "d7e6c7cd-b78e-41f6-afbc-14aa5286ab58",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 5
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 6,
+      "event_id": "d05bffff-8ddd-4884-9a75-6931f6081f63",
+      "kind": "finding",
+      "publisher": "lab-publisher",
+      "publisher_sequence": 6
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 7,
+      "event_id": "169f189b-de28-43fd-a1f6-45aa336021f4",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_FINDINGS",
+      "stream_sequence": 8,
+      "event_id": "784d84ce-61e0-4afe-a16f-e59f4a3c6676",
+      "kind": "finding",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 3
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 1,
+      "event_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a",
+      "kind": "revocation",
+      "publisher": "lab-revoker",
+      "publisher_sequence": 1
+    },
+    {
+      "stream": "AEGIS_WITHDRAWALS",
+      "stream_sequence": 2,
+      "event_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a",
+      "kind": "revocation",
+      "publisher": "lab-publisher-b",
+      "publisher_sequence": 2
+    }
+  ],
+  "independent_withdrawal_id": "1c251047-f36c-4af2-a2c8-ad873c25ef4a",
+  "mixed_withdrawal_id": "8708c2be-5fd9-4127-9f4e-961ba3461e2a",
+  "independent_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 30613.554,
+    "submit_to_confirmed_ack_ms": 30615.184,
+    "restart_request_to_durable_audit_ms": 30553.404,
+    "restart_request_to_confirmed_ack_ms": 30555.034
+  },
+  "mixed_withdrawal_ms": {
+    "submit_to_durable_audit_ms": 30600.894,
+    "submit_to_confirmed_ack_ms": 30602.326,
+    "restart_request_to_durable_audit_ms": 30557.573,
+    "restart_request_to_confirmed_ack_ms": 30559.005
+  }
+}

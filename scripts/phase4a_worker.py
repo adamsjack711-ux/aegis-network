@@ -74,6 +74,7 @@ class MeasuredAudit(SqliteAudit):
 
 
 async def run(args):
+    report("process_started", pid=os.getpid())
     async def disconnected():
         report("disconnected")
 
@@ -86,15 +87,19 @@ async def run(args):
     connection = await nats.connect(f"nats://127.0.0.1:{args.broker_port}",
                                     name=f"phase4a-{args.id}", error_cb=error,
                                     disconnected_cb=disconnected, reconnected_cb=reconnected)
+    report("broker_connected")
     js = connection.jetstream()
     start = time.perf_counter_ns()
+    def claim_stage(stage, ns, revision):
+        report("claim_stage", stage=stage, stage_ns=ns, revision=revision)
     try:
         try:
-            lease = await IdentityLease.claim(js, args.id, wait_seconds=args.claim_timeout)
+            lease = await IdentityLease.claim(js, args.id, wait_seconds=args.claim_timeout,
+                                              on_attempt=claim_stage)
         except IdentityInUse:
             report("identity_in_use", start=start, pid=os.getpid())
             return 3
-        report("claimed", start=start, pid=os.getpid())
+        report("claimed", start=start, pid=os.getpid(), revision=lease.revision)
         renew = asyncio.create_task(renew_lease(lease))
         audit = None
         try:
@@ -122,6 +127,9 @@ async def run(args):
                 if args.stop_before_withdrawal_ack:
                     os.kill(os.getpid(), signal.SIGSTOP)
 
+            def critical_stage(stage, ns, detail):
+                report("critical_stage", stage=stage, stage_ns=ns, detail=detail)
+
             def acked(message, decision, received, leased, committed, ack):
                 metadata = message.metadata
                 report("ack", lane="withdrawal" if message.subject == CRITICAL_SUBJECT else "ordinary", decision=asdict(decision), received=received, leased=leased,
@@ -134,7 +142,8 @@ async def run(args):
                 await consume(agent, audit, js, lease, renew, client, durable_name(args.id),
                               before_message=before_message if args.delay else None,
                               on_reconcile=reconciled, on_ack=acked, priority=priority_enabled(),
-                              on_critical_commit=critical_committed)
+                              on_critical_commit=critical_committed,
+                              on_critical_stage=critical_stage)
         finally:
             renew.cancel()
             await asyncio.gather(renew, return_exceptions=True)
