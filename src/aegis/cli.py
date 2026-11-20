@@ -48,7 +48,7 @@ def _emit(data: object, json_output: bool, command: str) -> None:
             print(f"{safe(item['purl'])} {safe(item['version'])} [{safe(item['architecture'])}]")
     elif command == "findings":
         assert isinstance(data, dict)
-        print(f"{data['current_exact_package_match_count']} current local claims with exact package matches; {data['observation_count']} signed claims observed; independent Evidence status unknown")
+        print(f"{data['current_exact_package_match_count']} possible exposure matches from current local claims; {data['observation_count']} signed claims observed; independent Evidence status unknown")
         for item in data["findings"]:
             print(" ".join(safe(item[key]) for key in
                            ("finding_id", "software_match", "vulnerability_id", "purl", "installed_version")))
