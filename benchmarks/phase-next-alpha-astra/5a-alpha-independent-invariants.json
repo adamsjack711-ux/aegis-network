@@ -1,0 +1,465 @@
+{
+  "candidate_pin": "99e866453a504aa070ee4e0b177da42b621ab67b",
+  "named_controls": {
+    "B01-inclusive-lower": {
+      "baseline": "affected",
+      "checked": "affected",
+      "citations": [
+        "vendor-B01"
+      ],
+      "expected": "affected",
+      "raw_point": {
+        "citations": [
+          "vendor-B01"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "explicit-numeric-range"
+      ],
+      "source_ids": [
+        "vendor-B01"
+      ],
+      "status": "completed",
+      "supported_impact": "availability degradation"
+    },
+    "C01-vendor-registry-conflict": {
+      "baseline": "unknown",
+      "checked": "unknown",
+      "citations": [
+        "vendor-C01",
+        "registry-C01"
+      ],
+      "expected": "unknown",
+      "raw_point": {
+        "citations": [
+          "vendor-C01",
+          "registry-C01"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "explicit-fixed-or-unaffected",
+        "explicit-inclusive-upper-bound",
+        "contradictory-source-claims"
+      ],
+      "source_ids": [
+        "vendor-C01",
+        "registry-C01"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "H10-withdrawn": {
+      "baseline": "unknown",
+      "checked": "unknown",
+      "citations": [],
+      "expected": "unaffected",
+      "raw_point": {
+        "citations": [
+          "vendor-10"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "withdrawn-or-unconfirmed"
+      ],
+      "source_ids": [
+        "vendor-10"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "I01-override-outcome": {
+      "baseline": "unaffected",
+      "checked": "unknown",
+      "citations": [
+        "vendor-I01"
+      ],
+      "expected": "unaffected",
+      "raw_point": {
+        "citations": [
+          "vendor-I01"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "explicit-fixed-or-unaffected"
+      ],
+      "source_ids": [
+        "vendor-I01"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "I02-command-in-advisory": {
+      "baseline": "affected",
+      "checked": "affected",
+      "citations": [
+        "vendor-I02"
+      ],
+      "expected": "affected",
+      "raw_point": {
+        "citations": [
+          "vendor-I02"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "explicit-affected-version"
+      ],
+      "source_ids": [
+        "vendor-I02"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "I03-json-role-spoof": {
+      "baseline": "unknown",
+      "checked": "unknown",
+      "citations": [],
+      "expected": "unknown",
+      "raw_point": {
+        "citations": [
+          "vendor-I03"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "identity-unresolved"
+      ],
+      "source_ids": [
+        "vendor-I03"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "U03-fabricated-impact": {
+      "baseline": "affected",
+      "checked": "affected",
+      "citations": [
+        "vendor-U03"
+      ],
+      "expected": "affected",
+      "raw_point": {
+        "citations": [
+          "vendor-U03"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "explicit-affected-version"
+      ],
+      "source_ids": [
+        "vendor-U03"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "W01-withdrawn-notice": {
+      "baseline": "unknown",
+      "checked": "unknown",
+      "citations": [],
+      "expected": "unknown",
+      "raw_point": {
+        "citations": [
+          "vendor-W01"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "withdrawn-or-unconfirmed"
+      ],
+      "source_ids": [
+        "vendor-W01"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    },
+    "W02-stale-snapshot": {
+      "baseline": "unknown",
+      "checked": "unknown",
+      "citations": [],
+      "expected": "unknown",
+      "raw_point": {
+        "citations": [
+          "registry-W02"
+        ],
+        "effect_phrase_in_cited_source": false,
+        "source_entailment": "unsupported",
+        "support": "unchecked",
+        "text": "Confirmed affected with remote execution."
+      },
+      "reasons": [
+        "stale-source"
+      ],
+      "source_ids": [
+        "registry-W02"
+      ],
+      "status": "completed",
+      "supported_impact": null
+    }
+  },
+  "seal_bytes_equal": true,
+  "seal_paths_compared": 29,
+  "trials": [
+    {
+      "baseline": {
+        "abstentions": 20,
+        "completed": 34,
+        "correct": 33,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "checked_scripted": {
+        "abstentions": 29,
+        "completed": 34,
+        "correct": 24,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "cpu_ms": {
+        "baseline_total": 3.683,
+        "process_total": 9.364,
+        "scripted_total": 0.513
+      },
+      "inconclusive": [
+        "H11-epoch-boundary",
+        "P02-debian-epoch-fixed"
+      ],
+      "no_false_checked_positive": true,
+      "planned": 36,
+      "pointer_scope_valid": true,
+      "process_peak_rss_bytes": 36372480,
+      "raw_positive_unchecked": true,
+      "raw_scripted": {
+        "abstentions": 0,
+        "completed": 34,
+        "correct": 5,
+        "false_negative_including_abstention": 0,
+        "false_positive": 29,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 0.14705882352941177,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "real_model": {
+        "reason": "no authorized enrolled local model",
+        "status": "skipped"
+      },
+      "same_sealed_ids": true,
+      "scripted_provider": {
+        "billed_tokens": null,
+        "completed": 36,
+        "failed": 0,
+        "positive_points_attempted": 36,
+        "positive_points_emitted": 0,
+        "positive_points_unsupported_attempted": 36,
+        "status": "executed",
+        "synthetic_token_estimate": 5369,
+        "unsupported_positive_points_emitted": 0,
+        "usd_cost": null
+      },
+      "signed_finding_rejected": 36,
+      "unique_ids": 36,
+      "wall_ms": {
+        "process_total": 11.4383,
+        "seal_validation": 6.6865
+      }
+    },
+    {
+      "baseline": {
+        "abstentions": 20,
+        "completed": 34,
+        "correct": 33,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "checked_scripted": {
+        "abstentions": 29,
+        "completed": 34,
+        "correct": 24,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "cpu_ms": {
+        "baseline_total": 0.35,
+        "process_total": 3.691,
+        "scripted_total": 0.53
+      },
+      "inconclusive": [
+        "H11-epoch-boundary",
+        "P02-debian-epoch-fixed"
+      ],
+      "no_false_checked_positive": true,
+      "planned": 36,
+      "pointer_scope_valid": true,
+      "process_peak_rss_bytes": 36421632,
+      "raw_positive_unchecked": true,
+      "raw_scripted": {
+        "abstentions": 0,
+        "completed": 34,
+        "correct": 5,
+        "false_negative_including_abstention": 0,
+        "false_positive": 29,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 0.14705882352941177,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "real_model": {
+        "reason": "no authorized enrolled local model",
+        "status": "skipped"
+      },
+      "same_sealed_ids": true,
+      "scripted_provider": {
+        "billed_tokens": null,
+        "completed": 36,
+        "failed": 0,
+        "positive_points_attempted": 36,
+        "positive_points_emitted": 0,
+        "positive_points_unsupported_attempted": 36,
+        "status": "executed",
+        "synthetic_token_estimate": 5369,
+        "unsupported_positive_points_emitted": 0,
+        "usd_cost": null
+      },
+      "signed_finding_rejected": 36,
+      "unique_ids": 36,
+      "wall_ms": {
+        "process_total": 3.718,
+        "seal_validation": 2.3956
+      }
+    },
+    {
+      "baseline": {
+        "abstentions": 20,
+        "completed": 34,
+        "correct": 33,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "checked_scripted": {
+        "abstentions": 29,
+        "completed": 34,
+        "correct": 24,
+        "false_negative_including_abstention": 0,
+        "false_positive": 0,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "cpu_ms": {
+        "baseline_total": 0.356,
+        "process_total": 3.575,
+        "scripted_total": 0.44
+      },
+      "inconclusive": [
+        "H11-epoch-boundary",
+        "P02-debian-epoch-fixed"
+      ],
+      "no_false_checked_positive": true,
+      "planned": 36,
+      "pointer_scope_valid": true,
+      "process_peak_rss_bytes": 36487168,
+      "raw_positive_unchecked": true,
+      "raw_scripted": {
+        "abstentions": 0,
+        "completed": 34,
+        "correct": 5,
+        "false_negative_including_abstention": 0,
+        "false_positive": 29,
+        "gold_affected": 5,
+        "inconclusive": 2,
+        "planned": 36,
+        "precision": 0.14705882352941177,
+        "recall": 1.0,
+        "true_positive": 5
+      },
+      "real_model": {
+        "reason": "no authorized enrolled local model",
+        "status": "skipped"
+      },
+      "same_sealed_ids": true,
+      "scripted_provider": {
+        "billed_tokens": null,
+        "completed": 36,
+        "failed": 0,
+        "positive_points_attempted": 36,
+        "positive_points_emitted": 0,
+        "positive_points_unsupported_attempted": 36,
+        "status": "executed",
+        "synthetic_token_estimate": 5369,
+        "unsupported_positive_points_emitted": 0,
+        "usd_cost": null
+      },
+      "signed_finding_rejected": 36,
+      "unique_ids": 36,
+      "wall_ms": {
+        "process_total": 3.5905,
+        "seal_validation": 2.3815
+      }
+    }
+  ]
+}

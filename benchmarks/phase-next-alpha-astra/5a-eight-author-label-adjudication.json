@@ -1,0 +1,118 @@
+{
+  "adjudication": "Independent retrospective review of exact synthetic source bodies, not blind and not live source authentication.",
+  "candidate_pin": "5b4787432ed3c5ccbb215d85a87d55ae0c9e5ea1",
+  "cases": [
+    {
+      "author_label": "affected",
+      "id": "boundary-introduced-inclusive",
+      "independent_fixture_decision": "affected",
+      "label_agrees": true,
+      "reason": "OSV PyPI acme-parser range starts at 1.0 inclusive; asset is 1.0.",
+      "scripted_semantic_issues": [
+        "Raw scripted point says version 1.5, not asset 1.0."
+      ],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "unaffected",
+      "id": "boundary-below-introduced",
+      "independent_fixture_decision": "unaffected",
+      "label_agrees": true,
+      "reason": "OSV range starts at 1.0; asset 0.9 is below it.",
+      "scripted_semantic_issues": [],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "affected",
+      "id": "boundary-before-fixed",
+      "independent_fixture_decision": "affected",
+      "label_agrees": true,
+      "reason": "OSV range fixes at 2.0 exclusive; asset 1.99 is below it.",
+      "scripted_semantic_issues": [
+        "Raw scripted point says version 1.5, not asset 1.99."
+      ],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "unaffected",
+      "id": "boundary-after-fixed",
+      "independent_fixture_decision": "unaffected",
+      "label_agrees": true,
+      "reason": "OSV range fixes at 2.0; asset 2.1 is above it.",
+      "scripted_semantic_issues": [],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "unknown",
+      "id": "ambiguous-local-version",
+      "independent_fixture_decision": "unknown",
+      "label_agrees": true,
+      "reason": "1.5+local needs comparator semantics outside this matcher; unknown is conservative.",
+      "scripted_semantic_issues": [],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "unknown",
+      "id": "kev-positive-trap",
+      "independent_fixture_decision": "unknown",
+      "label_agrees": true,
+      "reason": "KEV fixture names product and exploitation but no affected version interval.",
+      "scripted_semantic_issues": [
+        "Raw scripted affected claim lacks version support."
+      ],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "3609c3446738dc1b5cafee48b5b9a6a0513fb86fe16c99f085c2bb31435b77a2"
+      ]
+    },
+    {
+      "author_label": "unknown",
+      "id": "stale-positive-trap",
+      "independent_fixture_decision": "unknown",
+      "label_agrees": true,
+      "reason": "OSV retrieved 2025-01-01 is stale at frozen 2026-11-19 appraisal under seven-day policy.",
+      "scripted_semantic_issues": [
+        "Raw scripted affected claim ignores freshness."
+      ],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "af7f9acfabc48381ef825cec45c9da5f1e144d5a94c2b4bf2c651149053aa309"
+      ]
+    },
+    {
+      "author_label": "unknown",
+      "id": "withdrawn-positive-trap",
+      "independent_fixture_decision": "unknown",
+      "label_agrees": true,
+      "reason": "GHSA withdrawn_at precedes frozen appraisal.",
+      "scripted_semantic_issues": [
+        "Raw scripted affected claim ignores withdrawal."
+      ],
+      "source_digest_matches_manifest": true,
+      "source_digests": [
+        "0a150fa96e73a18c078d2570a403671bd03a7ad25a06e0be241f7de5a85d4ccc"
+      ]
+    }
+  ],
+  "summary": {
+    "label_agreement": 8,
+    "reviewed": 8,
+    "scripted_semantic_issue_cases": 5,
+    "source_digest_matches": 8
+  }
+}

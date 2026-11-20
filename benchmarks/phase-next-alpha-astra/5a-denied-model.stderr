@@ -1,0 +1,11 @@
+usage: phase5a_model_evaluate.py [-h] [--corpus CORPUS] --output OUTPUT
+                                 [--mode {deterministic,scripted,model}]
+                                 [--authorize-external-model-calls]
+                                 [--endpoint ENDPOINT]
+                                 [--model-name MODEL_NAME]
+                                 [--token-env TOKEN_ENV]
+                                 [--timeout-seconds TIMEOUT_SECONDS]
+                                 [--input-usd-per-million INPUT_USD_PER_MILLION]
+                                 [--output-usd-per-million OUTPUT_USD_PER_MILLION]
+                                 [--max-run-cost-usd MAX_RUN_COST_USD]
+phase5a_model_evaluate.py: error: model mode requires --authorize-external-model-calls

@@ -1,0 +1,13 @@
+{
+  "loaded": [
+    "aegis.intelligence",
+    "aegis.intelligence.baseline",
+    "aegis.intelligence.feeds",
+    "aegis.intelligence.model_evaluation",
+    "aegis.intelligence.models",
+    "aegis.intelligence.provider",
+    "aegis.intelligence.research"
+  ],
+  "blocked": [],
+  "blocked_count": 0
+}
