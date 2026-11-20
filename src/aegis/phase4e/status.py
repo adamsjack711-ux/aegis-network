@@ -182,6 +182,10 @@ def appraise(policy, challenge, head, history, now):
     return status(result.outcome, result.reason, result.attestation_sha256)
 
 
+def _monotonic_expiry(sample, expires_ms):
+    return sample.monotonic + (expires_ms / 1000 - sample.upper)
+
+
 class Publisher:
     def __init__(self, reader, key):
         if key.public_key() != reader.policy.publisher.key:
@@ -193,10 +197,14 @@ class Publisher:
             head, history, deadline, floor = self.reader.read(challenge)
             now = self.reader.clock.sample()
             body = appraise(self.reader.policy, challenge, head, history, now.upper)
-            if (self.reader.clock.monotonic() >= deadline
-                    or now.upper * 1000 >= body.expires_ms or not self.reader.current(floor, history.withdrawal_floor)):
-                raise JournalBlocked("status expired or advanced before publication")
-            return SignedStatus(body=body, signature=self.key.sign(message("status", body)).hex())
+            deadline = min(deadline, _monotonic_expiry(now, body.expires_ms))
+            if not self.reader.current(floor, history.withdrawal_floor):
+                raise JournalBlocked("status floor advanced before publication")
+            signed = SignedStatus(body=body, signature=self.key.sign(message("status", body)).hex())
+            now = self.reader.clock.sample()
+            if now.monotonic >= deadline or now.upper * 1000 >= body.expires_ms:
+                raise JournalBlocked("status expired before publication")
+            return signed
 
 
 @dataclass(frozen=True)
@@ -239,23 +247,26 @@ class Gate:
         verify(policy.publisher.key, "status", signed.body, signed.signature)
         now = self.reader.clock.sample()
         expected = appraise(policy, challenge, head, history, now.upper)
+        deadline = min(deadline, _monotonic_expiry(now, expected.expires_ms))
         if signed.body != expected:
             raise JournalBlocked("published status disagrees with current scoped witnessed appraisal")
-        remaining = expected.expires_ms / 1000 - now.upper
-        if (remaining <= 0 or now.monotonic >= deadline
-                or not self.reader.current(floor, history.withdrawal_floor)):
-            raise JournalBlocked("status expired or advanced during appraisal")
         binding = digest([policy.context, subject.model_dump(mode="json"), expected.head,
                           expected.outcome, expected.attestations])
-        return VerifiedStatus(expected, binding, min(deadline, now.monotonic + remaining),
-                              floor, history.withdrawal_floor)
+        if not self.reader.current(floor, history.withdrawal_floor):
+            raise JournalBlocked("status floor advanced during appraisal")
+        now = self.reader.clock.sample()
+        deadline = min(deadline, _monotonic_expiry(now, expected.expires_ms))
+        if now.monotonic >= deadline:
+            raise JournalBlocked("status expired during appraisal")
+        return VerifiedStatus(expected, binding, deadline, floor, history.withdrawal_floor)
 
     def require_current(self, status):
-        now = self.reader.clock.sample()
-        if (status is not self._status or status.body.outcome != "reproduced" or now.monotonic >= status.deadline
-                or now.upper * 1000 >= status.body.expires_ms
+        if (status is not self._status or status.body.outcome != "reproduced"
                 or not self.reader.current(status.floor, status.withdrawal_floor)):
             raise JournalBlocked(f"no current enforcement authority: {status.body.reason}")
+        now = self.reader.clock.sample()
+        if now.monotonic >= status.deadline or now.upper * 1000 >= status.body.expires_ms:
+            raise JournalBlocked("status expired before approval use")
 
     @contextmanager
     def authorize(self, status, reviewed_binding):
