@@ -1,0 +1,52 @@
+{
+  "architecture": "aarch64",
+  "kernel": "6.8.0-117-generic",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.1 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.1 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "packages": [
+    {
+      "installed": false,
+      "name": "aegis-network"
+    },
+    {
+      "installed": false,
+      "name": "cryptography"
+    },
+    {
+      "installed": false,
+      "name": "cffi"
+    },
+    {
+      "installed": false,
+      "name": "pycparser"
+    },
+    {
+      "installed": false,
+      "name": "pydantic"
+    },
+    {
+      "installed": false,
+      "name": "pydantic-core"
+    },
+    {
+      "installed": false,
+      "name": "annotated-types"
+    },
+    {
+      "installed": false,
+      "name": "typing-extensions"
+    },
+    {
+      "installed": false,
+      "name": "typing-inspection"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/dist-packages",
+      "name": "pip",
+      "record_sha256": "222baff744bc6a86803d910d764e7ee6969bbb82f6cb48ca73eb4b52d5de3201",
+      "version": "25.0"
+    }
+  ],
+  "python": "3.12.3 (main, Jan 17 2025, 18:03:48) [GCC 13.3.0]",
+  "uid": 1000
+}

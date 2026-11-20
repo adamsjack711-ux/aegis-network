@@ -11,7 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 
-REQUIRED = {"cryptography", "cffi", "pycparser", "pydantic", "pydantic_core", "annotated_types", "typing_extensions", "typing_inspection"}
+REQUIRED = {"aegis_network", "cryptography", "cffi", "pycparser", "pydantic", "pydantic_core", "annotated_types", "typing_extensions", "typing_inspection"}
 
 
 def verify(directory: Path, manifest_path: Path) -> None:
@@ -33,6 +33,8 @@ def verify(directory: Path, manifest_path: Path) -> None:
             raise ValueError(f"missing provenance or review: {filename}")
         if filename in files:
             raise ValueError(f"duplicate wheel: {filename}")
+        if (directory / filename).is_symlink():
+            raise ValueError(f"wheel must be a regular file: {filename}")
         files.add(filename)
         names.add(filename.split("-")[0].lower())
         digest = hashlib.sha256((directory / filename).read_bytes()).hexdigest()

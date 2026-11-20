@@ -1,0 +1,15 @@
+sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e linux/arm64
+Processing /wheels/aegis_network-0.1.0-py3-none-any.whl
+Installing collected packages: aegis-network
+  Attempting uninstall: aegis-network
+    Found existing installation: aegis-network 0.1.0
+    Not uninstalling aegis-network at /usr/local/lib/python3.12/site-packages, outside environment /tmp/aegis-venv
+    Can't uninstall 'aegis-network'. No files were found to uninstall.
+Successfully installed aegis-network-0.1.0
+inventory debian 87 none
+doctor unknown
+WARNING: The directory '/home/aegis/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Found existing installation: aegis-network 0.1.0
+Uninstalling aegis-network-0.1.0:
+  Successfully uninstalled aegis-network-0.1.0
+uninstall-pass

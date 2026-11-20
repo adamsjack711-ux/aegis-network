@@ -1,0 +1,17 @@
+{
+  "schema_version": "phase5b-wheelhouse-v1",
+  "status": "incomplete",
+  "reviewed_dependency_wheels": 0,
+  "wheels": [],
+  "missing": [
+    "cryptography",
+    "cffi",
+    "pycparser",
+    "pydantic",
+    "pydantic-core",
+    "annotated-types",
+    "typing-extensions",
+    "typing-inspection"
+  ],
+  "reason": "No original Linux dependency wheel files or upstream-authenticated hashes were available offline. The macOS uv cache and installed Debian RECORD hashes cannot authenticate Linux wheels."
+}

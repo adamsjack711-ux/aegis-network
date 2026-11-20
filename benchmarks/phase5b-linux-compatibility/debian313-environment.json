@@ -1,0 +1,52 @@
+{
+  "architecture": "aarch64",
+  "kernel": "6.8.0-117-generic",
+  "os_release": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "packages": [
+    {
+      "installed": false,
+      "name": "aegis-network"
+    },
+    {
+      "installed": false,
+      "name": "cryptography"
+    },
+    {
+      "installed": false,
+      "name": "cffi"
+    },
+    {
+      "installed": false,
+      "name": "pycparser"
+    },
+    {
+      "installed": false,
+      "name": "pydantic"
+    },
+    {
+      "installed": false,
+      "name": "pydantic-core"
+    },
+    {
+      "installed": false,
+      "name": "annotated-types"
+    },
+    {
+      "installed": false,
+      "name": "typing-extensions"
+    },
+    {
+      "installed": false,
+      "name": "typing-inspection"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.13/site-packages",
+      "name": "pip",
+      "record_sha256": "63de8c3e2a99d5fc7b9caeb24f49dc1374415c8f0ca591ed0b682229dd21ba34",
+      "version": "26.2.2"
+    }
+  ],
+  "python": "3.13.18 (main, Nov  5 2026, 08:08:09) [GCC 14.2.0]",
+  "uid": 1000
+}

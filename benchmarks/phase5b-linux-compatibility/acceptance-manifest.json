@@ -1,0 +1,59 @@
+{
+  "builder": {
+    "backend": "hatchling==1.33.0",
+    "backend_record_sha256": "e3b5d3ab14063323c18d7edb898bc0975a3634c636394030766a44798f481df0",
+    "cache_path": "/private/tmp/aegis-phase5b-uv-cache",
+    "cache_provenance": "locally supplied; integrity snapshot in docs/phase-next-alpha-5b-cache-supplement.md; upstream authentication not established",
+    "offline": true,
+    "source_date_epoch": 1735689600,
+    "tool": "uv"
+  },
+  "debian_preinstalled_matrix": {
+    "initial": {
+      "fail": 1,
+      "failure": "stale human-text assertion in copied harness",
+      "pass": 32
+    },
+    "rerun": {
+      "fail": 0,
+      "pass": 33
+    }
+  },
+  "fresh_install": {
+    "debian312": "blocked: cryptography wheel absent",
+    "debian313": "blocked: cryptography wheel absent",
+    "ubuntu312": "blocked: cryptography wheel absent"
+  },
+  "host": {
+    "python": "3.15.2",
+    "system": "macOS-27.0.1-arm64-arm-64bit-Mach-O"
+  },
+  "images": {
+    "debian312": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+    "debian313": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "ubuntu312": "sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60"
+  },
+  "reference_commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9",
+  "runtime_wheelhouse": {
+    "missing": [
+      "cryptography",
+      "cffi",
+      "pycparser",
+      "pydantic",
+      "pydantic-core",
+      "annotated-types",
+      "typing-extensions",
+      "typing-inspection"
+    ],
+    "reviewed_dependency_wheels": 0,
+    "status": "unavailable"
+  },
+  "schema_version": "phase5b-acceptance-evidence-v1",
+  "source_commit": "e75757c40c4ce1e327e93bb459974f823074432e",
+  "wheel": {
+    "filename": "aegis_network-0.1.0-py3-none-any.whl",
+    "sha256_build_a": "37ca4c6d5b5cdea1e770fd29fe93236a1a521bf4cd7d3b1ef2be71b55a6810d1",
+    "sha256_build_b": "37ca4c6d5b5cdea1e770fd29fe93236a1a521bf4cd7d3b1ef2be71b55a6810d1",
+    "size": 166143
+  }
+}

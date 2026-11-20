@@ -1,0 +1,79 @@
+{
+  "architecture": "aarch64",
+  "kernel": "6.8.0-117-generic",
+  "os_release": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "packages": [
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "aegis-network",
+      "record_sha256": "76fb6cbec96f5661e1a8fad5f3b4991088b8617dbf05f67ddd42b896f6bcdce0",
+      "version": "0.1.0"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "cryptography",
+      "record_sha256": "6329674422003f14eca5e7eae9105e0c554a4b70e5310913ae8b3e930f401cca",
+      "version": "46.0.7"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "cffi",
+      "record_sha256": "9551ddab6668f50d5edca4c77b3cdff723f27402f2a671a898d31c382e5b2f11",
+      "version": "2.1.1"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "pycparser",
+      "record_sha256": "aa4140358193698685bab079a76cdb95f9eccc370b0be2278f783657dd6d23ea",
+      "version": "3.12"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "pydantic",
+      "record_sha256": "65e5ba4b565f8683ae8d68dc522404b17bb01df3d85d7a2847a21a973d152dac",
+      "version": "2.14.4"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "pydantic-core",
+      "record_sha256": "daafee3b4947887a15c357f06712364952039eaa290d374ca79ac57bebeb8310",
+      "version": "2.50.5"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "annotated-types",
+      "record_sha256": "3999aa3e7cd1afa1ae67b55bf5b04bbc3ca55fdd6c7dcfe571b1aad05da849af",
+      "version": "0.8.0"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "typing-extensions",
+      "record_sha256": "a346a921aa5be35b34ced3258614183d152887b954caaae5de2a94be72d5f2ec",
+      "version": "4.16.0"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "typing-inspection",
+      "record_sha256": "1bf7915cfc02a44e71139f6e784e234a7018625b2dcab4ad00745679da05c4ca",
+      "version": "0.4.5"
+    },
+    {
+      "installed": true,
+      "location": "/usr/local/lib/python3.12/site-packages",
+      "name": "pip",
+      "record_sha256": "9c8fa39729845b5e3a0fe3470e9d99f271baafe923e98d6df06def5888835ceb",
+      "version": "25.0.1"
+    }
+  ],
+  "python": "3.12.16 (main, Nov  5 2026, 08:06:14) [GCC 14.2.0]",
+  "uid": 1000
+}

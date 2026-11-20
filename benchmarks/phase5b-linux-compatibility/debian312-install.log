@@ -1,0 +1,7 @@
+sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e linux/arm64
+WARNING: The directory '/home/aegis/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Looking in links: /wheels
+Processing /wheels/aegis_network-0.1.0-py3-none-any.whl
+INFO: pip is looking at multiple versions of aegis-network to determine which version is compatible with other requirements. This could take a while.
+ERROR: Could not find a version that satisfies the requirement cryptography<47,>=44 (from aegis-network) (from versions: none)
+ERROR: No matching distribution found for cryptography<47,>=44
