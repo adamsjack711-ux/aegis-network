@@ -1,0 +1,25 @@
+{
+  "corpus": "scout-corpus-v1",
+  "duplicate_replays": 800,
+  "durable_events_after_restart": 7,
+  "durable_events_before_restart": 7,
+  "fresh_intakes": 800,
+  "fresh_ms": {
+    "max": 1.609792,
+    "median": 0.6143335,
+    "p95": 0.778
+  },
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "process_cpu_seconds": 0.896019,
+  "process_peak_rss_raw": 40861696,
+  "process_peak_rss_unit": "bytes",
+  "python": "3.15.2",
+  "replay_ms": {
+    "max": 3.315625,
+    "median": 0.434687,
+    "p95": 0.557417
+  },
+  "rounds": 100,
+  "scope": "single process; includes JSON decode, normalization, validation and SQLite write; excludes interpreter startup",
+  "tracemalloc_peak_bytes": 617956
+}
