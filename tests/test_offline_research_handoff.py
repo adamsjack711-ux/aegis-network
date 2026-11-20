@@ -239,10 +239,40 @@ def test_read_history_after_withdrawal(tmp_path):
 
 def test_read_history_requires_initialized_database(tmp_path):
     path = tmp_path / 'empty.sqlite'
-    with pytest.raises(sqlite3.OperationalError):
-        read_history(path, 'osv', AID)
-    assert not path.exists()
     path.touch()
     with pytest.raises(sqlite3.OperationalError, match='Initialize this database'):
         read_history(path, 'osv', AID)
     assert path.read_bytes() == b''
+
+
+@pytest.mark.parametrize('unreadable', [False, True], ids=['missing', 'unreadable'])
+def test_read_history_open_diagnostic(tmp_path, monkeypatch, unreadable):
+    monkeypatch.chdir(tmp_path)
+    path = Path('private #1.sqlite')
+    if unreadable:
+        if os.geteuid() == 0:
+            pytest.skip('file permission denial requires an unprivileged reader')
+        ThreatScout(path).close()
+        OfflineHandoff(path).close()
+        original = path.read_bytes()
+        path.chmod(0)
+    try:
+        if unreadable:
+            assert not os.access(path, os.R_OK)
+        before = set(tmp_path.iterdir())
+        with pytest.raises(sqlite3.OperationalError) as caught:
+            read_history(path, 'osv', AID)
+        exc = caught.value
+        assert exc.sqlite_errorcode == sqlite3.SQLITE_CANTOPEN
+        assert exc.sqlite_errorname == 'SQLITE_CANTOPEN'
+        assert str(path.resolve()) in str(exc)
+        assert 'Check that the file exists' in str(exc)
+        assert 'reader can read it' in str(exc)
+        assert 'traverse its parent directories' in str(exc)
+        assert set(tmp_path.iterdir()) == before
+    finally:
+        if unreadable:
+            path.chmod(0o600)
+    if unreadable:
+        assert path.read_bytes() == original
+        assert read_history(path, 'osv', AID) == []

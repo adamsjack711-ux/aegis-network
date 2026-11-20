@@ -146,7 +146,15 @@ class OfflineHandoff:
 
 def read_history(path: Path, source_kind: str, advisory_id: str) -> list[dict]:
     """Read one snapshot of an initialized handoff database via a read-only connection."""
-    with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
+    resolved = path.resolve()
+    try:
+        db = sqlite3.connect(resolved.as_uri() + "?mode=ro", uri=True)
+    except sqlite3.OperationalError as exc:
+        # Keep SQLite's error code and name on the original exception.
+        exc.args = (f"{exc}: {resolved}. Check that the file exists, the reader can read it, "
+                    "and the reader can traverse its parent directories.",)
+        raise
+    with closing(db):
         try:
             return _history(db, source_kind, advisory_id)
         except sqlite3.OperationalError as exc:

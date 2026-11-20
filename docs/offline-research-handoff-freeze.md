@@ -33,7 +33,5 @@ Each call opens a read-only connection and returns one fresh snapshot of committ
 | Result | Meaning |
 | --- | --- |
 | `[]` | The database opened and contains no saved research for that source kind and advisory ID. |
-| `sqlite3.OperationalError: unable to open database file` | Check the database path and the reader's access to the file and its parent directories. |
+| `sqlite3.OperationalError: unable to open database file: ...` | The message includes the resolved path. Check that the file exists, the reporting account can read it, and that account can traverse each parent directory. The exception retains SQLite’s original error code. |
 | `sqlite3.OperationalError: Incomplete research history schema ...` | Use a database initialized by both `ThreatScout` and `OfflineHandoff`, or have the writer initialize it before reporting. |
-
-**Low-priority follow-up.** Include the resolved database path in the SQLite open error and add a hint to check that the file exists and is readable.
