@@ -18,6 +18,8 @@ def main():
         raise ValueError("repeats must be 1-10")
     root = args.root.resolve()
     pin = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    if subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True).strip():
+        raise ValueError("offline benchmark requires a clean exact source checkout")
     trials = [evaluate_alpha(root) for _ in range(args.repeats)]
     report = {"schema_version": "phase5a-alpha-benchmark-v1", "source_pin": pin,
               "trials": trials, "real_model": {"status": "skipped", "reason": "no enrolled local model"},

@@ -108,6 +108,7 @@ def test_prompt_is_data_and_private_identifiers_are_redacted():
     assert "private-prod-1" not in captured["payload"]
     assert "secret-host.internal" not in captured["payload"]
     assert "acme-parser" not in captured["payload"]
+    assert "baseline_outcome" not in captured["payload"]
     assert "untrusted data" in captured["instructions"]
 
 

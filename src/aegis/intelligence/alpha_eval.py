@@ -64,7 +64,9 @@ def _source_decision(text: str, asset: dict) -> tuple[str, str]:
     if not identity:
         return "unknown", "no-explicit-product-identity"
     ecosystem = {"debian": "deb"}.get(identity.group(1).lower(), identity.group(1).lower())
-    name = identity.group(2).lower()
+    # The regex admits dots inside package names; sentence punctuation is not
+    # part of the package identity. Keep internal dots and namespace colons.
+    name = identity.group(2).lower().rstrip(".,;")
     if ecosystem != asset["ecosystem"].lower() or name != asset["name"].lower():
         if asset["ecosystem"].lower() != "unknown" and (
             "unrelated" in clean.lower() or "distinct product" in clean.lower()

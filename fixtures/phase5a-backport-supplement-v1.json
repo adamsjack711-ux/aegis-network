@@ -1,0 +1,38 @@
+{
+  "corpus": "phase5a-backport-supplement-v1",
+  "label_owner": "research-validation implementation; independent review pending",
+  "source_authenticity": "synthetic local fixtures",
+  "cases": [
+    {
+      "id": "D01-fixed-backport-exact",
+      "asset": {"ecosystem": "deb", "name": "maple-lib", "version": "1.2-3+deb12u1"},
+      "sources": [{"id": "distro-D01", "role": "distribution", "text": "AEGIS-ADV-D01 concerns Debian maple-lib. Version 1.2-3+deb12u1 is fixed by a distribution backport; upstream 1.2 remains vulnerable."}],
+      "expected": "unaffected",
+      "rationale": "Exact installed distribution package and revision are stated fixed."
+    },
+    {
+      "id": "D02-backport-without-binary-map",
+      "asset": {"ecosystem": "deb", "name": "maple-bin", "version": "1.2-3+deb12u1"},
+      "sources": [{"id": "distro-D02", "role": "distribution", "text": "AEGIS-ADV-D02 says Debian source package maple-src 1.2-3+deb12u1 includes a security backport. No source-to-binary mapping for maple-bin is supplied."}],
+      "expected": "unknown",
+      "rationale": "Source package statement does not establish installed binary identity."
+    },
+    {
+      "id": "D03-upstream-only-version",
+      "asset": {"ecosystem": "deb", "name": "maple-lib", "version": "1.2-3+deb12u1"},
+      "sources": [{"id": "upstream-D03", "role": "upstream", "text": "AEGIS-ADV-D03 affects upstream maple-lib before 1.3. This advisory does not assess Debian backports."}],
+      "expected": "unknown",
+      "rationale": "Upstream numeric comparison cannot resolve a distribution revision."
+    },
+    {
+      "id": "D04-conflicting-backport-notices",
+      "asset": {"ecosystem": "deb", "name": "maple-lib", "version": "1.2-3+deb12u1"},
+      "sources": [
+        {"id": "distro-D04a", "role": "distribution", "text": "AEGIS-ADV-D04: Debian maple-lib 1.2-3+deb12u1 is fixed by backport."},
+        {"id": "distro-D04b", "role": "distribution", "text": "AEGIS-ADV-D04: Debian maple-lib 1.2-3+deb12u1 remains affected; review pending."}
+      ],
+      "expected": "unknown",
+      "rationale": "Contradictory distribution notices require abstention."
+    }
+  ]
+}
