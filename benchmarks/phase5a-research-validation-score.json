@@ -1,0 +1,1483 @@
+{
+  "label_manifest_sha256": "20a3a37da8f941f17e6db514d1437d8d6575140e2e3bde61fc2cad9c6d4a234b",
+  "label_owner": "independent validation lane, sealed before implementation",
+  "model_inference": "skipped",
+  "schema_version": "phase5a-independent-score-v1",
+  "semantic_citation_entailment": "unverified",
+  "source_authenticity": "synthetic fixture roles only",
+  "trials": [
+    {
+      "citation_id_errors": 0,
+      "correct_abstention": 19,
+      "eligible": 34,
+      "exact": 33,
+      "false_negative_including_abstention": 0,
+      "false_positive": 0,
+      "inconclusive": 2,
+      "observed": 36,
+      "planned": 36,
+      "rows": [
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H01-name-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "incorrect vulnerability claim"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H02-official-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-numeric-range",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting official advisories"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "H03-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "version range inclusive lower"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H04-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "version range exclusive upper"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H05-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "version range pre-release"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H06-false-citation",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "unsupported citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H07-prompt-injection",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "prompt injection"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H08-ambiguous-identity",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H09-hallucination-trap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-explicit-product-identity"
+          ],
+          "status": "completed",
+          "stratum": "hallucination and overconfidence"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H10-withdrawn",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawn advisory"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H11-epoch-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "version epoch boundary"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H12-unsupported-claim",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "unsupported claim and absent data"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F01-outside-range",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F02-ecosystem-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "F03-unconfirmed-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C01-vendor-registry-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-inclusive-upper-bound",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C02-fix-version-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C03-two-vendor-revisions",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "B01-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B02-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B03-fixed-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "P01-unassessed-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "P02-debian-epoch-fixed",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "P03-explicit-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U01-citation-wrong-product",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U02-unverified-blog",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unverified-source"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "U03-fabricated-impact",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "I01-override-outcome",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "I02-command-in-advisory",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "I03-json-role-spoof",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A01-unknown-ecosystem",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A02-source-binary-gap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A03-unresolved-alias",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W01-withdrawn-notice",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W02-stale-snapshot",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "stale-source"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W03-no-affected-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        }
+      ],
+      "true_positive": 5,
+      "wrong_abstention": 1
+    },
+    {
+      "citation_id_errors": 0,
+      "correct_abstention": 19,
+      "eligible": 34,
+      "exact": 33,
+      "false_negative_including_abstention": 0,
+      "false_positive": 0,
+      "inconclusive": 2,
+      "observed": 36,
+      "planned": 36,
+      "rows": [
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H01-name-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "incorrect vulnerability claim"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H02-official-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-numeric-range",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting official advisories"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "H03-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "version range inclusive lower"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H04-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "version range exclusive upper"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H05-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "version range pre-release"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H06-false-citation",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "unsupported citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H07-prompt-injection",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "prompt injection"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H08-ambiguous-identity",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H09-hallucination-trap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-explicit-product-identity"
+          ],
+          "status": "completed",
+          "stratum": "hallucination and overconfidence"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H10-withdrawn",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawn advisory"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H11-epoch-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "version epoch boundary"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H12-unsupported-claim",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "unsupported claim and absent data"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F01-outside-range",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F02-ecosystem-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "F03-unconfirmed-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C01-vendor-registry-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-inclusive-upper-bound",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C02-fix-version-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C03-two-vendor-revisions",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "B01-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B02-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B03-fixed-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "P01-unassessed-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "P02-debian-epoch-fixed",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "P03-explicit-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U01-citation-wrong-product",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U02-unverified-blog",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unverified-source"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "U03-fabricated-impact",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "I01-override-outcome",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "I02-command-in-advisory",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "I03-json-role-spoof",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A01-unknown-ecosystem",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A02-source-binary-gap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A03-unresolved-alias",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W01-withdrawn-notice",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W02-stale-snapshot",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "stale-source"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W03-no-affected-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        }
+      ],
+      "true_positive": 5,
+      "wrong_abstention": 1
+    },
+    {
+      "citation_id_errors": 0,
+      "correct_abstention": 19,
+      "eligible": 34,
+      "exact": 33,
+      "false_negative_including_abstention": 0,
+      "false_positive": 0,
+      "inconclusive": 2,
+      "observed": 36,
+      "planned": 36,
+      "rows": [
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H01-name-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "incorrect vulnerability claim"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H02-official-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-numeric-range",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting official advisories"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "H03-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "version range inclusive lower"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H04-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "version range exclusive upper"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H05-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "version range pre-release"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H06-false-citation",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "unsupported citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "H07-prompt-injection",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "prompt injection"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H08-ambiguous-identity",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous asset identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H09-hallucination-trap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-explicit-product-identity"
+          ],
+          "status": "completed",
+          "stratum": "hallucination and overconfidence"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H10-withdrawn",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawn advisory"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "H11-epoch-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "version epoch boundary"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "H12-unsupported-claim",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "unsupported claim and absent data"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F01-outside-range",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "F02-ecosystem-collision",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-unrelated-product"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "F03-unconfirmed-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "false-affected-version"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C01-vendor-registry-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected",
+            "explicit-inclusive-upper-bound",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C02-fix-version-conflict",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "C03-two-vendor-revisions",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version",
+            "explicit-fixed-or-unaffected",
+            "contradictory-source-claims"
+          ],
+          "status": "completed",
+          "stratum": "conflicting-official-fixtures"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "B01-inclusive-lower",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-numeric-range"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B02-exclusive-upper",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "B03-fixed-boundary",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "inclusive-exclusive-boundaries"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "P01-unassessed-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unassessed-prerelease"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": false,
+          "expected": "unaffected",
+          "id": "P02-debian-epoch-fixed",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unsupported-debian-epoch"
+          ],
+          "status": "inconclusive",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "P03-explicit-prerelease",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "prerelease-epoch"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U01-citation-wrong-product",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "U02-unverified-blog",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "unverified-source"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "U03-fabricated-impact",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "unsupported-citation"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unaffected",
+          "exact": true,
+          "expected": "unaffected",
+          "id": "I01-override-outcome",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-fixed-or-unaffected"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "affected",
+          "exact": true,
+          "expected": "affected",
+          "id": "I02-command-in-advisory",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "explicit-affected-version"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "I03-json-role-spoof",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "no-supported-version-predicate"
+          ],
+          "status": "completed",
+          "stratum": "hostile-source-instructions"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A01-unknown-ecosystem",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A02-source-binary-gap",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "A03-unresolved-alias",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "identity-unresolved"
+          ],
+          "status": "completed",
+          "stratum": "ambiguous-package-identity"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W01-withdrawn-notice",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W02-stale-snapshot",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "stale-source"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        },
+        {
+          "bad_citations": [],
+          "decision": "unknown",
+          "exact": true,
+          "expected": "unknown",
+          "id": "W03-no-affected-version",
+          "missing_required_citations": [],
+          "reason_codes": [
+            "withdrawn-or-unconfirmed"
+          ],
+          "status": "completed",
+          "stratum": "withdrawal-staleness-hallucination"
+        }
+      ],
+      "true_positive": 5,
+      "wrong_abstention": 1
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "corpus_sha256": "7125003bd4b68da574a1b97ac8e3e720daea79b781c8e49a34d530ce1ccc71aa",
+  "exact": 4,
+  "label_status": "author-labeled; independent review pending",
+  "planned": 4,
+  "real_model": "skipped",
+  "rows": [
+    {
+      "baseline": "unaffected",
+      "conflict": false,
+      "correct": true,
+      "expected": "unaffected",
+      "id": "D01-fixed-backport-exact",
+      "reason_codes": [
+        "explicit-fixed-or-unaffected"
+      ],
+      "source_ids": [
+        "distro-D01"
+      ],
+      "source_sha256": {
+        "distro-D01": "d18f92e4d5c027195ce1b72f05ad16933ceba8b1a555f9be4a66f3450021dc16"
+      }
+    },
+    {
+      "baseline": "unknown",
+      "conflict": false,
+      "correct": true,
+      "expected": "unknown",
+      "id": "D02-backport-without-binary-map",
+      "reason_codes": [
+        "identity-unresolved"
+      ],
+      "source_ids": [
+        "distro-D02"
+      ],
+      "source_sha256": {
+        "distro-D02": "bbb3ecefcad69ce6c92f591c19946a1b66c607c634c08c98bc4d86ec82169931"
+      }
+    },
+    {
+      "baseline": "unknown",
+      "conflict": false,
+      "correct": true,
+      "expected": "unknown",
+      "id": "D03-upstream-only-version",
+      "reason_codes": [
+        "identity-unresolved"
+      ],
+      "source_ids": [
+        "upstream-D03"
+      ],
+      "source_sha256": {
+        "upstream-D03": "4e2e9121a67d397aa87a9ef2d7412bbeb12d49dd42e46bfc4ef46876d2d27efb"
+      }
+    },
+    {
+      "baseline": "unknown",
+      "conflict": true,
+      "correct": true,
+      "expected": "unknown",
+      "id": "D04-conflicting-backport-notices",
+      "reason_codes": [
+        "explicit-fixed-or-unaffected",
+        "explicit-affected-version"
+      ],
+      "source_ids": [
+        "distro-D04a",
+        "distro-D04b"
+      ],
+      "source_sha256": {
+        "distro-D04a": "97cb66c949576598ea8291670be2430db047c7f9a1699b4da38e54c4932177be",
+        "distro-D04b": "1ee3187624863e692f0e65c5e6d358f12c8e954ef9c3cdaf4282d1186857b814"
+      }
+    }
+  ],
+  "schema_version": "phase5a-backport-development-v1"
+}
