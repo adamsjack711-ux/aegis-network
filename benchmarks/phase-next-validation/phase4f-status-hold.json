@@ -1,0 +1,73 @@
+{
+  "profile": "disposable native one-host SQLite and loopback HTTP",
+  "fault": "status",
+  "trials": [
+    {
+      "trial": 1,
+      "cut_to_hold_read_ms": 20.171416,
+      "cut_to_observer_done_ms": 59.264208,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 2,
+      "cut_to_hold_read_ms": 20.009458,
+      "cut_to_observer_done_ms": 59.30025,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    },
+    {
+      "trial": 3,
+      "cut_to_hold_read_ms": 27.903916,
+      "cut_to_observer_done_ms": 64.740041,
+      "observer_started_after_hold_read": true,
+      "observer_requests": 18,
+      "observation_changed_database": false,
+      "fences": [
+        [
+          "canary",
+          2
+        ],
+        [
+          "replica-a",
+          2
+        ],
+        [
+          "replica-b",
+          2
+        ]
+      ]
+    }
+  ],
+  "source": "scripts/benchmark_phase4f_native.py"
+}
