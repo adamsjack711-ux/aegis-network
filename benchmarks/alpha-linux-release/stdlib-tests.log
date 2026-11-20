@@ -1,0 +1,30 @@
+IMAGE=[aegis_phase4_baseline-coordinator:latest] ID=sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e
+test_missing_review_record_stops_before_build (test_alpha_linux_release.ReleaseGateTests.test_missing_review_record_stops_before_build) ... ok
+test_pip_archive_report_must_match_original_hash (test_alpha_linux_release.ReleaseGateTests.test_pip_archive_report_must_match_original_hash) ... ok
+test_review_commit_must_resolve_locally (test_alpha_linux_release.ReleaseGateTests.test_review_commit_must_resolve_locally) ... ok
+test_wheel_archive_identity_and_hash_are_checked (test_alpha_linux_release.ReleaseGateTests.test_wheel_archive_identity_and_hash_are_checked) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.004s
+
+OK
+IMAGE=[python:3.13-slim] ID=sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+test_missing_review_record_stops_before_build (test_alpha_linux_release.ReleaseGateTests.test_missing_review_record_stops_before_build) ... ok
+test_pip_archive_report_must_match_original_hash (test_alpha_linux_release.ReleaseGateTests.test_pip_archive_report_must_match_original_hash) ... ok
+test_review_commit_must_resolve_locally (test_alpha_linux_release.ReleaseGateTests.test_review_commit_must_resolve_locally) ... ok
+test_wheel_archive_identity_and_hash_are_checked (test_alpha_linux_release.ReleaseGateTests.test_wheel_archive_identity_and_hash_are_checked) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.012s
+
+OK
+IMAGE=[mcr.microsoft.com/playwright/python:v1.50.0-noble] ID=sha256:706130e55f22d2c81e272e0bf987be194bbbca232ab554b440f3116e74b00b60
+test_missing_review_record_stops_before_build (test_alpha_linux_release.ReleaseGateTests.test_missing_review_record_stops_before_build) ... ok
+test_pip_archive_report_must_match_original_hash (test_alpha_linux_release.ReleaseGateTests.test_pip_archive_report_must_match_original_hash) ... ok
+test_review_commit_must_resolve_locally (test_alpha_linux_release.ReleaseGateTests.test_review_commit_must_resolve_locally) ... ok
+test_wheel_archive_identity_and_hash_are_checked (test_alpha_linux_release.ReleaseGateTests.test_wheel_archive_identity_and_hash_are_checked) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK

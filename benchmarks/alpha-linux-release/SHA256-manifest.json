@@ -1,0 +1,69 @@
+{
+  "files": {
+    "alpha-linux-release-preflight.stdout": {
+      "bytes": 162,
+      "sha256": "c2e0e291f5a39a99de5728c67116fe7a8e416f144aee17f5903d66532a8862ea"
+    },
+    "alpha-linux-release/attempt/release-report.json": {
+      "bytes": 190,
+      "sha256": "37e7d8b18dd31c40d0136c746e24b339f5ecb881b80afe182d65d129ea86d5af"
+    },
+    "alpha-linux-release/cached-images.txt": {
+      "bytes": 752,
+      "sha256": "756302eff4c02c51818df925d63b8df959e22a8711f2209a72cc214dd611db26"
+    },
+    "alpha-linux-release/diagnostic/a/aegis_network-0.1.0-py3-none-any.whl": {
+      "bytes": 168699,
+      "sha256": "4c3b6a9edcc78efc2dada9f3a88e8dbe4e3fb472abafe438336936425033502d"
+    },
+    "alpha-linux-release/diagnostic/a/aegis_network-0.1.0.tar.gz": {
+      "bytes": 131839,
+      "sha256": "8a074b379fe8c4bac82f8dc70c7a183a409198e596be3c77ea151209c7f9d306"
+    },
+    "alpha-linux-release/diagnostic/a/build.stderr": {
+      "bytes": 240,
+      "sha256": "54d04dda9f09b90690de5a69d1a0b268acf6d27f42823a4376efa8669854d590"
+    },
+    "alpha-linux-release/diagnostic/a/build.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alpha-linux-release/diagnostic/b/aegis_network-0.1.0-py3-none-any.whl": {
+      "bytes": 168699,
+      "sha256": "4c3b6a9edcc78efc2dada9f3a88e8dbe4e3fb472abafe438336936425033502d"
+    },
+    "alpha-linux-release/diagnostic/b/aegis_network-0.1.0.tar.gz": {
+      "bytes": 131839,
+      "sha256": "8a074b379fe8c4bac82f8dc70c7a183a409198e596be3c77ea151209c7f9d306"
+    },
+    "alpha-linux-release/diagnostic/b/build.stderr": {
+      "bytes": 240,
+      "sha256": "9f4fa5b859b76ca08c5acaea634a73d5b7ed95dd788b303d41d285201f31fd4d"
+    },
+    "alpha-linux-release/diagnostic/b/build.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alpha-linux-release/diagnostic/inspection.json": {
+      "bytes": 736,
+      "sha256": "f4cb817730118bbcb18b41fdab6ba4696c07735406240d0971278a4f2c58d11c"
+    },
+    "alpha-linux-release/diagnostic/result.json": {
+      "bytes": 805,
+      "sha256": "63514a1913b5e8d7a4b055fc0e439a2176da7593a65daa8a81281f66322f20c1"
+    },
+    "alpha-linux-release/host-tests.log": {
+      "bytes": 670,
+      "sha256": "cad71ff59637de86f3d7072b4ef545e5d5dad88684020dd3cf0806f077021657"
+    },
+    "alpha-linux-release/source-dependencies.json": {
+      "bytes": 746,
+      "sha256": "1502046bc25d6e9990fe6237d50bcbf9c100e29ad54456332e9a005369f1c8be"
+    },
+    "alpha-linux-release/stdlib-tests.log": {
+      "bytes": 2367,
+      "sha256": "734a3bdfbf0e82633364477fe1e71311c2a37c7c45e1a16ecae882b812b4a474"
+    }
+  },
+  "schema": "aegis-alpha-linux-release-evidence-v1"
+}

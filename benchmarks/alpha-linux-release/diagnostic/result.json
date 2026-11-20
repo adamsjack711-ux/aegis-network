@@ -1,0 +1,23 @@
+{
+  "backend": "local extracted uv cache, original archive provenance unavailable",
+  "builds": [
+    {
+      "artifacts": {
+        "aegis_network-0.1.0-py3-none-any.whl": "4c3b6a9edcc78efc2dada9f3a88e8dbe4e3fb472abafe438336936425033502d",
+        "aegis_network-0.1.0.tar.gz": "8a074b379fe8c4bac82f8dc70c7a183a409198e596be3c77ea151209c7f9d306"
+      },
+      "exit_code": 0,
+      "label": "a"
+    },
+    {
+      "artifacts": {
+        "aegis_network-0.1.0-py3-none-any.whl": "4c3b6a9edcc78efc2dada9f3a88e8dbe4e3fb472abafe438336936425033502d",
+        "aegis_network-0.1.0.tar.gz": "8a074b379fe8c4bac82f8dc70c7a183a409198e596be3c77ea151209c7f9d306"
+      },
+      "exit_code": 0,
+      "label": "b"
+    }
+  ],
+  "release_eligible": false,
+  "source_commit": "29455087922a728a41936d8c5c79ff9942e1e3df"
+}

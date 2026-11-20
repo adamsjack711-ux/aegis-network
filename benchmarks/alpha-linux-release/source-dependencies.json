@@ -1,0 +1,29 @@
+{
+  "build_system": {
+    "build-backend": "hatchling.build",
+    "requires": [
+      "hatchling"
+    ]
+  },
+  "console_scripts": {
+    "aegis": "aegis.cli:main"
+  },
+  "direct_runtime_requirements": [
+    "cryptography>=44,<47",
+    "pydantic>=2.10,<3",
+    "fastapi>=0.115,<1",
+    "httpx>=0.27,<1",
+    "nats-py>=2.9,<3",
+    "psycopg[binary]>=3.2,<4",
+    "uvicorn>=0.30,<1"
+  ],
+  "pyproject_sha256": "a78ac9949438f6b8fa517adedd7d89183eda96a73d2e7509726425b5eb291f7b",
+  "requires_python": ">=3.12",
+  "resolution_status": "unavailable: no reviewed original-archive wheelhouse",
+  "resolved_archive_hashes": [],
+  "source_commit": "29455087922a728a41936d8c5c79ff9942e1e3df",
+  "test_extra": [
+    "httpx>=0.27,<1",
+    "pytest>=8,<10"
+  ]
+}
