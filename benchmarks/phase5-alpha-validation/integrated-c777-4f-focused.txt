@@ -1,0 +1,11 @@
+test_competing_successors_and_partial_writer_barrier (test_protocol_model.RecoveryProtocolModelTests.test_competing_successors_and_partial_writer_barrier) ... ok
+test_crash_positions_lost_ack_and_old_session_cursor (test_protocol_model.RecoveryProtocolModelTests.test_crash_positions_lost_ack_and_old_session_cursor) ... ok
+test_five_seconds_requires_agent_and_authority_availability (test_protocol_model.RecoveryProtocolModelTests.test_five_seconds_requires_agent_and_authority_availability) ... ok
+test_retained_trace_is_exact_and_misses_frozen_gate (test_protocol_model.RecoveryProtocolModelTests.test_retained_trace_is_exact_and_misses_frozen_gate) ... ok
+test_stale_snapshot_cannot_restore_authority (test_protocol_model.RecoveryProtocolModelTests.test_stale_snapshot_cannot_restore_authority) ... ok
+test_target_hold_is_independent_but_not_agent_denial (test_protocol_model.RecoveryProtocolModelTests.test_target_hold_is_independent_but_not_agent_denial) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
