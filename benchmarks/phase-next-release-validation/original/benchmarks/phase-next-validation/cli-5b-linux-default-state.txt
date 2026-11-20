@@ -1,0 +1,14 @@
+{
+  "asset_id": "8053fe21-8fed-4701-b326-ab4cdd98bdb4",
+  "cli_version": "0.1.0",
+  "distribution": "unknown",
+  "intelligence_scope": "supplied-signed-events-only",
+  "inventory_complete": false,
+  "inventory_reason": "unsupported distribution: kali (Debian and Ubuntu only)",
+  "mode": "observation-only",
+  "network": "offline",
+  "package_count": 0,
+  "potential_findings": "unknown; no signed local finding file supplied"
+}
+CLI_EXIT=2
+/tmp/state/aegis/identity.json

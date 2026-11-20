@@ -1,0 +1,281 @@
+{
+  "baseline_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+  "baseline_tree": "0e5b452718a87645fcb92ad29dc207a849c98b21",
+  "files": [
+    {
+      "bytes": 2,
+      "copy": "original/benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.exit",
+      "git_blob": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "copy": "original/benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.stderr",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 180,
+      "copy": "original/benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt",
+      "git_blob": "57cffd5bb1adc882fd72e8bee0dd5b4f04564096",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt",
+      "sha256": "e160f03fb08bf078b7fd678a201567fc8f89b60d4775dd04febf68f79baa463d"
+    },
+    {
+      "bytes": 1661,
+      "copy": "original/benchmarks/phase-next-alpha-astra/5b-final-debian-rusage-512m.json",
+      "git_blob": "6503ec110f50eb70793a7783fd2379a7623e3285",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-rusage-512m.json",
+      "sha256": "0c4f031d0d7d17a16658a1ad3cf55aadad3340adc06a6473db1c1bc2bcf9a716"
+    },
+    {
+      "bytes": 1652,
+      "copy": "original/benchmarks/phase-next-alpha-astra/5b-final-ubuntu-hybrid-rusage-512m.json",
+      "git_blob": "2cffcb2c5e00693a03e58fc50f40c693a33bec85",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-alpha-astra/5b-final-ubuntu-hybrid-rusage-512m.json",
+      "sha256": "f10d67f9168513a39e63186d903076ddaf872bc64188f6450e6f05da47baee73"
+    },
+    {
+      "bytes": 10404,
+      "copy": "original/benchmarks/phase-next-remediation/4f-broker-control.json",
+      "git_blob": "39a08e1f5eee2b9b4700fb4e3d5d2799ba252c01",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/4f-broker-control.json",
+      "sha256": "bec42e65ee8876db7926eff65a10832c51b0c328a56ca0d630cf7100f96444c1"
+    },
+    {
+      "bytes": 23106,
+      "copy": "original/benchmarks/phase-next-remediation/4f-sigkill-fault.json",
+      "git_blob": "1d1ce74dc5f4c386163b387c7daffd676fef2f6f",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/4f-sigkill-fault.json",
+      "sha256": "19d7bbcccb69ad7238fd93588e04634c8e02c08528b437d8eb703dea20fee17d"
+    },
+    {
+      "bytes": 6123,
+      "copy": "original/benchmarks/phase-next-remediation/5a-claim-challenge-adversarial.json",
+      "git_blob": "f6ee1bc5913ae4c760438b9b4fb5bf0283952c9d",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5a-claim-challenge-adversarial.json",
+      "sha256": "f86164584d6e8354a61aaac13c3899bfe488c169b59a68a7688d03445ae72999"
+    },
+    {
+      "bytes": 5722,
+      "copy": "original/benchmarks/phase-next-remediation/5a-claim-challenge.json",
+      "git_blob": "81fe3c9aaabbb660e23c8d44cca5d2ec27b74175",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5a-claim-challenge.json",
+      "sha256": "9afbc135015a88adb95a9c5f463fd9bccd40dde92075e82a8ef54761f48cac13"
+    },
+    {
+      "bytes": 8274,
+      "copy": "original/benchmarks/phase-next-remediation/5a-original-seven.json",
+      "git_blob": "739608c3eeb095c00b26010cc5c716f5a4580a43",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5a-original-seven.json",
+      "sha256": "f5721fb0f91752c626e33e105623f891168a5a077f0e8c11ecf972982f8449a8"
+    },
+    {
+      "bytes": 818,
+      "copy": "original/benchmarks/phase-next-remediation/5b-five-case-linux.json",
+      "git_blob": "336a8504f4e9ff9baafff8ac99b4e0d303bcfe5c",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5b-five-case-linux.json",
+      "sha256": "50d99d9b78aa2c80aca59d1420e862e113cc057e422f1360419c2aee79fe1582"
+    },
+    {
+      "bytes": 510,
+      "copy": "original/benchmarks/phase-next-remediation/5b-offline-wheel-attempt.json",
+      "git_blob": "bab0c5f7a8d6dd82fb6af13a6675010f171d99a2",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5b-offline-wheel-attempt.json",
+      "sha256": "6c5e44a737e5774fb389952e408399e5d82c5f58f56d368832739e15826bb45d"
+    },
+    {
+      "bytes": 11217,
+      "copy": "original/benchmarks/phase-next-remediation/5b-status-challenge-api-guard.json",
+      "git_blob": "ea8a0823f7c37c48be2c5e03ddb2b6cdf0bfa19d",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-remediation/5b-status-challenge-api-guard.json",
+      "sha256": "8a89d4b793ab29dc62fe66df725a1aef1d1e0452572acd9a95523906f33bcfe1"
+    },
+    {
+      "bytes": 7279,
+      "copy": "original/benchmarks/phase-next-validation/ai-5a-security.json",
+      "git_blob": "3354c7e2d591bbe774193d14630cf6ca6c81291e",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133"
+    },
+    {
+      "bytes": 471,
+      "copy": "original/benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "git_blob": "4a76348868ab48538666f1f12130aaeb4eb526c6",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "sha256": "26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d"
+    },
+    {
+      "bytes": 2160,
+      "copy": "original/benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "git_blob": "9c71bb44ac8330680d12cb7a7ecc15a8076d2bcb",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "sha256": "3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8"
+    },
+    {
+      "bytes": 5684,
+      "copy": "original/benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "git_blob": "81c2b4db475b9be50e1ac43be3d69ab319cfd60c",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "sha256": "3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3"
+    },
+    {
+      "bytes": 5683,
+      "copy": "original/benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "git_blob": "71f7f95beedfa3dec89e05c706617facc691414e",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98"
+    },
+    {
+      "bytes": 1418,
+      "copy": "original/benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "git_blob": "e6b596d8dbef40138c7c1ab6c48c9d3679b76f84",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916"
+    },
+    {
+      "bytes": 402,
+      "copy": "original/benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "git_blob": "b05cb5a4fc546efd645e3d4f6a0fc151ac5fc9ef",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "sha256": "9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b"
+    },
+    {
+      "bytes": 159685,
+      "copy": "original/benchmarks/phase4e/integrated-final-348.xml",
+      "git_blob": "c838a505d3097202a2f96064ab78204dcbde5d13",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase4e/integrated-final-348.xml",
+      "sha256": "83b3aaaec48989ebba2c5362115752a83095c366efb90b7b9e59352509db72a3"
+    },
+    {
+      "bytes": 23308,
+      "copy": "original/benchmarks/phase4f-withdrawal-recovery/sigkill-restart-1.json",
+      "git_blob": "92905e91acdc823f00540dab71a566f4a4ef10f1",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-1.json",
+      "sha256": "fbb13cb3fef546f6e6a31bbdd4b1df436face6a56cb866bc867442c0bcce3894"
+    },
+    {
+      "bytes": 23310,
+      "copy": "original/benchmarks/phase4f-withdrawal-recovery/sigkill-restart-2.json",
+      "git_blob": "83129f373a166f42233857ae8adb41bf54ec543b",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-2.json",
+      "sha256": "172c1effa3935cece06a082829b73c5ffa26d1249ed77bb03d5d5a82594f6487"
+    },
+    {
+      "bytes": 23310,
+      "copy": "original/benchmarks/phase4f-withdrawal-recovery/sigkill-restart-3.json",
+      "git_blob": "05de399c350f2f92d91d25eab94cd86c3016118c",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-3.json",
+      "sha256": "7b169af7589df3171d4a5236847964bff97e47dfd9f8fc654a13e46ba09fae1b"
+    },
+    {
+      "bytes": 7564,
+      "copy": "original/docs/phase-next-acceptance-frozen.md",
+      "git_blob": "fd211dacefb7d55cff66dcdd981d052e6ff9a99c",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "docs/phase-next-acceptance-frozen.md",
+      "sha256": "60d7624a0b01b27a843c74b25df472702befdb38620df6e16f65ea70b2c06438"
+    },
+    {
+      "bytes": 14340,
+      "copy": "original/docs/phase-next-remediation-validation-freeze.md",
+      "git_blob": "68addbeef202dc1de9eae7654e85a6cee646bf27",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "docs/phase-next-remediation-validation-freeze.md",
+      "sha256": "92819ca60a96d909ab3953c7634fb89173212891372fd5666f10759512e971a1"
+    },
+    {
+      "bytes": 2126,
+      "copy": "original/fixtures/phase-next-ai-claim-map-v1.json",
+      "git_blob": "6c86a26e5128ce96b33556a0477b101a735ec843",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "fixtures/phase-next-ai-claim-map-v1.json",
+      "sha256": "7abc8a6ad9ddd1b56afbaeb790a089d474f2c434c1f40abc68fd104e4cc91bdb"
+    },
+    {
+      "bytes": 5606,
+      "copy": "original/fixtures/phase-next-ai-holdout-v1.json",
+      "git_blob": "e54366184b3ab8471c1c60562d989210efbbeae0",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "fixtures/phase-next-ai-holdout-v1.json",
+      "sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
+    },
+    {
+      "bytes": 13386,
+      "copy": "original/scripts/phase4e_withdrawal_recovery_check.py",
+      "git_blob": "124a75280bed5212c82d6a8521cf7a3b1c535bf8",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "scripts/phase4e_withdrawal_recovery_check.py",
+      "sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050"
+    },
+    {
+      "bytes": 5157,
+      "copy": "original/scripts/phase_next_5a_security.py",
+      "git_blob": "778c5fcf37f0cf2aabd276dd42b96c8e499ba658",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "scripts/phase_next_5a_security.py",
+      "sha256": "d87605a8f3dd647b515cc6b5b2d22af13b33a59cf5e72456e58dd58f96bcf882"
+    },
+    {
+      "bytes": 4942,
+      "copy": "original/scripts/phase_next_5b_oracle.py",
+      "git_blob": "902675d377623fbdd5b0b8a7041deb3e29943e54",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "scripts/phase_next_5b_oracle.py",
+      "sha256": "b199839b4906c65fa4834eb2a24754d11b35cc07fd1cbaffb7e2a7c418df59c3"
+    },
+    {
+      "bytes": 1634,
+      "copy": "original/scripts/phase_next_probe_cli.py",
+      "git_blob": "0e9eab0a6a2292672e0e71327179139b1b49d296",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "origin_path": "scripts/phase_next_probe_cli.py",
+      "sha256": "40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1"
+    },
+    {
+      "bytes": 11620,
+      "copy": "oracles/phase-next-alpha-acceptance-frozen.md",
+      "git_blob": "02eee3247997c171fd05596acbb81d8d1118ca0d",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "origin_path": "docs/phase-next-alpha-acceptance-frozen.md",
+      "sha256": "fbc764d18ca5261d1e12085af3603c2540d7682801e9254795d08c2817d108c4"
+    },
+    {
+      "bytes": 4578,
+      "copy": "oracles/phase-next-alpha-ai-holdout-v1.json",
+      "git_blob": "b34b0156fe8b56e0719f949edc08a8d32500a20e",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "origin_path": "fixtures/phase-next-alpha-ai-holdout-v1.json",
+      "sha256": "d7a728ba657920e6adffbf26004c39fccaefa16ab55053df5a399692113c2f5f"
+    }
+  ],
+  "schema": "VAL-R-freeze-v1",
+  "val_d_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+  "val_d_tree": "f53a873dfe90021cf031fd57b2bf0a7dd170c5aa"
+}
