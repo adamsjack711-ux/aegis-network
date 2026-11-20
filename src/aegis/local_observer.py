@@ -170,56 +170,86 @@ def collect_inventory(asset_id: str | None, *, os_release: Path = Path("/etc/os-
 
 
 def state_directory(path: Path) -> Path:
-    # Canonicalize an existing parent, but reject user-controlled aliasing.
-    # macOS exposes /var and /tmp as fixed root-owned links to /private;
-    # these exact OS aliases are permitted before resolving the parent.
-    system_aliases = {Path("/var"): Path("/private/var"),
-                      Path("/tmp"): Path("/private/tmp")}
-    for part in path.parents:
-        if part.is_symlink() and (part not in system_aliases or
-                                  part.lstat().st_uid != 0 or
-                                  part.resolve() != system_aliases[part]):
-            raise ObservationError("state directory path must not contain a user-controlled symlink")
-    try:
-        canonical = path.parent.resolve(strict=True) / path.name
-    except OSError as exc:
-        raise ObservationError("state directory parent must exist and be writable") from exc
-    if canonical.is_symlink():
-        raise ObservationError("state directory must not be a symlink")
-    try:
-        canonical.mkdir(mode=0o700, parents=False, exist_ok=True)
-    except OSError as exc:
-        raise ObservationError("state directory parent must exist and be writable") from exc
-    if not stat.S_ISDIR(canonical.stat().st_mode):
-        raise ObservationError("state directory must be a directory")
-    mode = stat.S_IMODE(canonical.stat().st_mode)
-    if mode & 0o077:
-        raise ObservationError("state directory must be private (mode 0700)")
+    directory, canonical = _open_state_directory(path)
+    os.close(directory)
     return canonical
 
 
-def asset_identity(path: Path) -> str:
-    directory = state_directory(path)
-    identity = directory / "identity.json"
-    if not identity.exists():
-        value = str(uuid4())
+def _open_state_directory(path: Path) -> tuple[int, Path]:
+    """Anchor each path component and the final directory to open descriptors."""
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_CLOEXEC", 0)
+    nofollow = getattr(os, "O_NOFOLLOW", None)
+    if nofollow is None or not hasattr(os, "O_DIRECTORY"):
+        raise ObservationError("secure state directory traversal is unavailable")
+    absolute = path.absolute()
+    parts = absolute.parts[1:]
+    if not parts or ".." in parts or any(part in {"", "."} for part in parts):
+        raise ObservationError("invalid state directory path")
+    if parts[0] in {"var", "tmp"}:
+        alias = Path("/") / parts[0]
+        target = Path("/private") / parts[0]
         try:
-            fd = os.open(identity, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0), 0o600)
+            if alias.is_symlink() and alias.lstat().st_uid == 0 and alias.resolve() == target:
+                parts = ("private", parts[0], *parts[1:])
+        except OSError as exc:
+            raise ObservationError("invalid system state directory alias") from exc
+    canonical = Path("/").joinpath(*parts)
+    fd = os.open("/", flags | nofollow)
+    try:
+        for part in parts[:-1]:
+            next_fd = os.open(part, flags | nofollow, dir_fd=fd)
+            os.close(fd)
+            fd = next_fd
+        try:
+            os.mkdir(parts[-1], mode=0o700, dir_fd=fd)
+        except FileExistsError:
+            pass
+        directory = os.open(parts[-1], flags | nofollow, dir_fd=fd)
+        try:
+            if stat.S_IMODE(os.fstat(directory).st_mode) & 0o077:
+                raise ObservationError("state directory must be private (mode 0700)")
+            return directory, canonical
+        except BaseException:
+            os.close(directory)
+            raise
+    except OSError as exc:
+        raise ObservationError("state directory parent must exist without symlinks and be writable") from exc
+    finally:
+        os.close(fd)
+
+
+def asset_identity(path: Path) -> str:
+    directory, _ = _open_state_directory(path)
+    try:
+        flags = getattr(os, "O_NOFOLLOW") | getattr(os, "O_CLOEXEC", 0)
+        try:
+            fd = os.open("identity.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL | flags,
+                         0o600, dir_fd=directory)
         except FileExistsError:
             pass
         else:
             with os.fdopen(fd, "w", encoding="utf-8") as stream:
-                json.dump({"asset_id": value}, stream)
+                json.dump({"asset_id": str(uuid4())}, stream)
                 stream.write("\n")
-    if identity.is_symlink() or stat.S_IMODE(identity.stat().st_mode) & 0o077:
-        raise ObservationError("identity file must be private (mode 0600) and not a symlink")
-    try:
-        data = json.loads(_read_bounded(identity, 4096))
+        fd = os.open("identity.json", os.O_RDONLY | flags | getattr(os, "O_NONBLOCK", 0),
+                     dir_fd=directory)
+        with os.fdopen(fd, "rb") as stream:
+            meta = os.fstat(stream.fileno())
+            if not stat.S_ISREG(meta.st_mode) or stat.S_IMODE(meta.st_mode) & 0o077:
+                raise ObservationError("identity file must be private (mode 0600) and not a symlink")
+            raw = stream.read(4097)
+            if len(raw) > 4096:
+                raise ObservationError("invalid local asset identity")
+        data = json.loads(raw)
         value = data["asset_id"]
         if set(data) != {"asset_id"} or UUID(value).version != 4:
             raise ValueError("invalid asset identity")
+    except ObservationError:
+        raise
     except (OSError, ValueError, KeyError, TypeError) as exc:
         raise ObservationError("invalid local asset identity") from exc
+    finally:
+        os.close(directory)
     return value
 
 

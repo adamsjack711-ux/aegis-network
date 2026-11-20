@@ -1,0 +1,74 @@
+baseline=ec939e14a5acd438ff0d5fa562ed61a70b68f3c9
+python=3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]
+argv=['/Users/jackadams-lovell/aegis-network/.venv/bin/python', '-m', 'pytest', '-q', 'tests/cli_safety_phase5b2/test_state_races.py']
+exit=1
+stdout:
+FF...                                                                    [100%]
+=================================== FAILURES ===================================
+____________ test_replaced_final_directory_cannot_receive_identity _____________
+
+tmp_path = PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-432/test_replaced_final_directory_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10722da70>
+
+    def test_replaced_final_directory_cannot_receive_identity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        outside = tmp_path / "outside"
+        outside.mkdir(mode=0o700)
+        state = tmp_path / "state"
+        original = os.mkdir
+    
+        def replace_final(path, mode=0o777, *, dir_fd=None):
+            result = original(path, mode, dir_fd=dir_fd)
+            if Path(path).name == "state":
+                state.rmdir()
+                state.symlink_to(outside, target_is_directory=True)
+            return result
+    
+        monkeypatch.setattr(os, "mkdir", replace_final)
+        blocked = False
+        try:
+            asset_identity(state)
+        except ObservationError:
+            blocked = True
+>       assert not (outside / "identity.json").exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = (PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-432/test_replaced_final_directory_0/outside') / 'identity.json').exists
+
+tests/cli_safety_phase5b2/test_state_races.py:31: AssertionError
+_____________ test_replaced_parent_symlink_cannot_receive_identity _____________
+
+tmp_path = PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-432/test_replaced_parent_symlink_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10722d350>
+
+    def test_replaced_parent_symlink_cannot_receive_identity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        parent = tmp_path / "parent"
+        parent.mkdir(mode=0o700)
+        outside = tmp_path / "outside"
+        outside.mkdir(mode=0o700)
+        state = parent / "state"
+        original = os.mkdir
+    
+        def replace_parent(path, mode=0o777, *, dir_fd=None):
+            if Path(path).name == "state":
+                parent.rmdir()
+                parent.symlink_to(outside, target_is_directory=True)
+            return original(path, mode, dir_fd=dir_fd)
+    
+        monkeypatch.setattr(os, "mkdir", replace_parent)
+        blocked = False
+        try:
+            asset_identity(state)
+        except ObservationError:
+            blocked = True
+>       assert not (outside / "state" / "identity.json").exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = ((PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-432/test_replaced_parent_symlink_c0/outside') / 'state') / 'identity.json').exists
+
+tests/cli_safety_phase5b2/test_state_races.py:55: AssertionError
+=========================== short test summary info ============================
+FAILED tests/cli_safety_phase5b2/test_state_races.py::test_replaced_final_directory_cannot_receive_identity
+FAILED tests/cli_safety_phase5b2/test_state_races.py::test_replaced_parent_symlink_cannot_receive_identity
+2 failed, 3 passed in 0.07s
+
+stderr:

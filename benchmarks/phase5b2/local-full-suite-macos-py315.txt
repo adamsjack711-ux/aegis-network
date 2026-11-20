@@ -1,0 +1,1582 @@
+x.....ssssssssssssssssssssssssssssss.................................... [ 17%]
+...........FFFF.FFF.........Fs..FFFFFFFFFF.................sFFFFFFFFF... [ 34%]
+......................FFFFFFFFFFFEEEE..EEEEEEEF.ssssFFFFF............... [ 51%]
+..........................EEEEEEEEEEFFEEEE.FFFFF..FFs................... [ 69%]
+........................................................................ [ 86%]
+...................FF...................................                 [100%]
+==================================== ERRORS ====================================
+_____ ERROR at setup of test_relying_status_checks_time_after_final_anchor _____
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+________ ERROR at setup of test_approval_checks_time_after_final_anchor ________
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+_____ ERROR at setup of test_publisher_checks_time_after_final_io[anchor] ______
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+_____ ERROR at setup of test_publisher_checks_time_after_final_io[signer] ______
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+___ ERROR at setup of test_direct_receipt_withholding_and_independent_proof ____
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+__ ERROR at setup of test_evidence_revocation_blocks_peer_commit_after_canary __
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_obsolete_positive_status_even_with_publisher_signature _
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_role_credentials_and_signed_scope_cannot_be_substituted _
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+__________ ERROR at setup of test_quorum_loss_and_isolation_deadline ___________
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_mirror_reconciles_archive_corruption_and_old_witness_restore _
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+__________ ERROR at setup of test_fork_intersection_and_two_colluders __________
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+____ ERROR at setup of test_real_http_protection_canary_order_and_rollback _____
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_preflight_and_authorization_reject_out_of_scope_and_replay _
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_changed_preflight_and_unhealthy_baseline_do_not_lease _
+E   PermissionError: [Errno 1] Operation not permitted
+______ ERROR at setup of test_concurrent_grant_consumption_has_one_winner ______
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_incomplete_misrouted_or_stale_evidence_cannot_confirm _
+E   PermissionError: [Errno 1] Operation not permitted
+_____ ERROR at setup of test_live_monitor_rolls_back_after_upstream_outage _____
+E   PermissionError: [Errno 1] Operation not permitted
+_______ ERROR at setup of test_proxy_outage_does_not_count_as_safe_hold ________
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_nonresponsive_store_fails_closed_and_latches_until_verified _
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_expiry_quarantines_entire_partial_rollout_without_controller _
+E   PermissionError: [Errno 1] Operation not permitted
+__ ERROR at setup of test_stale_health_evidence_fails_closed_without_monitor ___
+E   PermissionError: [Errno 1] Operation not permitted
+______ ERROR at setup of test_only_one_listener_set_can_own_an_inventory _______
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_rollout_automatically_quarantines_if_stage_health_fails[canary] _
+E   PermissionError: [Errno 1] Operation not permitted
+_ ERROR at setup of test_rollout_automatically_quarantines_if_stage_health_fails[replica-b] _
+E   PermissionError: [Errno 1] Operation not permitted
+____ ERROR at setup of test_stale_canary_evidence_fences_delayed_expansion _____
+E   PermissionError: [Errno 1] Operation not permitted
+=================================== FAILURES ===================================
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+    
+    During handling of the above exception, another exception occurred:
+    
+    Traceback (most recent call last):
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/starlette/routing.py", line 668, in lifespan
+        await receive()
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/telemetry/_runtime.py", line 214, in wrapped_receive
+        message = await receive()
+                  ^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+        return await self.receive_queue.get()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/queues.py", line 186, in get
+        await getter
+    asyncio.exceptions.CancelledError
+    
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 201, in _run_module_as_main
+      File "<frozen runpy>", line 87, in _run_code
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 316, in <module>
+        main()
+        ~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/src/aegis/phase4e/service.py", line 312, in main
+        uvicorn.run(create_app(config), uds=str(socket), log_level="warning", access_log=False)
+        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/main.py", line 632, in run
+        server.run()
+        ~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 86, in run
+        return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 205, in run
+        return runner.run(main)
+               ~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/runners.py", line 128, in run
+        return self._loop.run_until_complete(task)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+        return future.result()
+               ~~~~~~~~~~~~~^^
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 90, in serve
+        await self._serve(sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 105, in _serve
+        await self.startup(sockets=sockets)
+      File "/Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/uvicorn/server.py", line 171, in startup
+        server = await loop.create_unix_server(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            create_protocol, path=config.uds, ssl=config.ssl, backlog=config.backlog
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+        ^
+      File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py", line 311, in create_unix_server
+        sock.bind(path)
+        ~~~~~~~~~^^^^^^
+    PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4e_lab.py:208: RuntimeError: anchor startup failed: ERROR:    Traceback (most recent call last):
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/Users/jackadams-lovell/aegis-network/.worktrees/phase5b2-cli-safety-astra/scripts/phase4a_bench.py:240: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/asyncio/unix_events.py:311: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+E   PermissionError: [Errno 1] Operation not permitted
+/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/socketserver.py:475: PermissionError: [Errno 1] Operation not permitted
+=============================== warnings summary ===============================
+../../.venv/lib/python3.15/site-packages/fastapi/testclient.py:1
+  /Users/jackadams-lovell/aegis-network/.venv/lib/python3.15/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/phase4c/test_defensive_boundaries.py::test_publisher_denial_cannot_lease_fixture[wrong-signer-INVALID_SIGNATURE]
+FAILED tests/phase4c/test_defensive_boundaries.py::test_publisher_denial_cannot_lease_fixture[wrong-role-PUBLISHER_ROLE_DENIED]
+FAILED tests/phase4c/test_defensive_boundaries.py::test_publisher_denial_cannot_lease_fixture[expired-PUBLISHER_KEY_INVALID_TIME]
+FAILED tests/phase4c/test_defensive_boundaries.py::test_publisher_denial_cannot_lease_fixture[revoked-PUBLISHER_KEY_REVOKED]
+FAILED tests/phase4c/test_defensive_boundaries.py::test_plan_review_and_initial_status_are_both_required
+FAILED tests/phase4c/test_defensive_boundaries.py::test_signed_journal_withdrawal_after_canary_stops_expansion
+FAILED tests/phase4c/test_defensive_boundaries.py::test_lease_expiry_fails_closed_before_recovery_and_stays_closed_after_reconnect
+FAILED tests/phase4d/test_journal.py::test_witnessed_write_gate_blocks_peers_after_canary_without_legacy_journal
+FAILED tests/phase4d/test_native_enforcement.py::test_idle_ownership_loss_precedes_side_effect_free_observation
+FAILED tests/phase4d/test_native_enforcement.py::test_same_generation_restore_and_restart_keep_hold
+FAILED tests/phase4d/test_native_enforcement.py::test_idle_native_status_loss_precedes_probe_and_survives_recovery
+FAILED tests/phase4d/test_native_enforcement.py::test_read_only_route_snapshot_rechecks_concurrent_owner_transfer
+FAILED tests/phase4d/test_native_enforcement.py::test_transfer_requires_fresh_plan_and_approval
+FAILED tests/phase4d/test_native_enforcement.py::test_approval_expiry_after_staging_rolls_back_target_and_receipt
+FAILED tests/phase4d/test_native_enforcement.py::test_trust_status_expiry_between_check_and_commit_rolls_back
+FAILED tests/phase4d/test_native_enforcement.py::test_remote_failure_immediately_after_last_check_has_bounded_gap
+FAILED tests/phase4d/test_native_enforcement.py::test_remote_status_failure_just_after_last_status_check_is_not_atomic
+FAILED tests/phase4d/test_native_enforcement.py::test_native_status_latch_serializes_with_inflight_protected_write
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[legacy]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[none]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[journal-withdrawal]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[evidence-withdrawal]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[stale-ownership]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[offline-status]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[missing-audit]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[critical-ack-unavailable]
+FAILED tests/phase4d/test_trust_composition.py::test_native_trust_rechecks_each_peer_write[offline-witness-pending]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[M01_stale]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[M02_missing]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[healthy]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[C04_status_loss]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[I04_expiry]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[T6_journal_quorum]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[T6_unresolved_cut]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[T6_revoked_evidence]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[T6_exact_intent]
+FAILED tests/phase4e/test_defensive_validation.py::test_local_writer_boundaries[T6_stale_owner]
+FAILED tests/phase4e/test_defensive_validation.py::test_M05_unavailable_replica_blocks_verified_hold
+FAILED tests/phase4e/test_trust_services.py::test_historical_withdrawal_replay_and_key_rotation
+FAILED tests/phase4e/test_withdrawal_status.py::test_one_witness_withdrawal_overrides_the_same_checkpoint[checkpoint-v1-reproduced]
+FAILED tests/phase4e/test_withdrawal_status.py::test_one_witness_withdrawal_overrides_the_same_checkpoint[withdrawal-v2-inconclusive]
+FAILED tests/phase4e/test_withdrawal_status.py::test_four_fresh_lanes_even_if_three_checkpoint_signers_available
+FAILED tests/phase4e/test_withdrawal_status.py::test_authenticated_snapshot_replay_and_forged_withdrawal_cannot_latch
+FAILED tests/phase4e/test_withdrawal_status.py::test_single_receipt_survives_missing_lane_retraction_and_rollback
+FAILED tests/test_phase3b_containment.py::test_process_crash_during_expansion_recovers_without_reopening[True]
+FAILED tests/test_phase3b_containment.py::test_process_crash_during_expansion_recovers_without_reopening[False]
+FAILED tests/test_phase3c_pipeline.py::test_contradiction_invalidates_exact_plan_even_with_cached_positive
+FAILED tests/test_phase3c_pipeline.py::test_partial_rollout_withdrawal_leaves_safe_hold_and_no_peer_writes
+FAILED tests/test_phase3c_pipeline.py::test_inexact_approval_and_stale_status_never_write
+FAILED tests/test_phase3c_pipeline.py::test_phase4d_ownership_with_real_evidence_and_target_readback[healthy]
+FAILED tests/test_phase3c_pipeline.py::test_phase4d_ownership_with_real_evidence_and_target_readback[failover-after-canary]
+FAILED tests/test_phase4a_distributed.py::test_compose_port_collision_retries_before_starting_the_fleet
+FAILED tests/test_phase4a_distributed.py::test_peer_proxy_uses_only_loopback_and_private_unix_socket
+FAILED tests/trust_lab/test_phase4d_shadow.py::test_native_exact_bundle_and_prototype_cut_remain_non_executable[True]
+FAILED tests/trust_lab/test_phase4d_shadow.py::test_native_exact_bundle_and_prototype_cut_remain_non_executable[False]
+ERROR tests/phase4e/test_status_expiry.py::test_relying_status_checks_time_after_final_anchor
+ERROR tests/phase4e/test_status_expiry.py::test_approval_checks_time_after_final_anchor
+ERROR tests/phase4e/test_status_expiry.py::test_publisher_checks_time_after_final_io[anchor]
+ERROR tests/phase4e/test_status_expiry.py::test_publisher_checks_time_after_final_io[signer]
+ERROR tests/phase4e/test_trust_services.py::test_direct_receipt_withholding_and_independent_proof
+ERROR tests/phase4e/test_trust_services.py::test_evidence_revocation_blocks_peer_commit_after_canary
+ERROR tests/phase4e/test_trust_services.py::test_obsolete_positive_status_even_with_publisher_signature
+ERROR tests/phase4e/test_trust_services.py::test_role_credentials_and_signed_scope_cannot_be_substituted
+ERROR tests/phase4e/test_trust_services.py::test_quorum_loss_and_isolation_deadline
+ERROR tests/phase4e/test_trust_services.py::test_mirror_reconciles_archive_corruption_and_old_witness_restore
+ERROR tests/phase4e/test_trust_services.py::test_fork_intersection_and_two_colluders
+ERROR tests/test_phase3b_containment.py::test_real_http_protection_canary_order_and_rollback
+ERROR tests/test_phase3b_containment.py::test_preflight_and_authorization_reject_out_of_scope_and_replay
+ERROR tests/test_phase3b_containment.py::test_changed_preflight_and_unhealthy_baseline_do_not_lease
+ERROR tests/test_phase3b_containment.py::test_concurrent_grant_consumption_has_one_winner
+ERROR tests/test_phase3b_containment.py::test_incomplete_misrouted_or_stale_evidence_cannot_confirm
+ERROR tests/test_phase3b_containment.py::test_live_monitor_rolls_back_after_upstream_outage
+ERROR tests/test_phase3b_containment.py::test_proxy_outage_does_not_count_as_safe_hold
+ERROR tests/test_phase3b_containment.py::test_nonresponsive_store_fails_closed_and_latches_until_verified
+ERROR tests/test_phase3b_containment.py::test_expiry_quarantines_entire_partial_rollout_without_controller
+ERROR tests/test_phase3b_containment.py::test_stale_health_evidence_fails_closed_without_monitor
+ERROR tests/test_phase3b_containment.py::test_only_one_listener_set_can_own_an_inventory
+ERROR tests/test_phase3b_containment.py::test_rollout_automatically_quarantines_if_stage_health_fails[canary]
+ERROR tests/test_phase3b_containment.py::test_rollout_automatically_quarantines_if_stage_health_fails[replica-b]
+ERROR tests/test_phase3b_containment.py::test_stale_canary_evidence_fences_delayed_expansion
+55 failed, 298 passed, 37 skipped, 1 xfailed, 1 warning, 25 errors in 33.05s

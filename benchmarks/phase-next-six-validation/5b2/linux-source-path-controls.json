@@ -1,0 +1,1 @@
+{"directory": true, "existing_final_symlink": "denied", "explicit_identity_repeat": true, "explicit_modes": ["0o700", "0o600"], "final_replacement": "denied", "identity_symlink": "denied", "nofollow": true, "outside_identity_written": false, "python": "3.13.18"}
