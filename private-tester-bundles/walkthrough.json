@@ -1,0 +1,19 @@
+{
+  "outcome": "PASS",
+  "bundle": "aegis-tester-7f9f2a2.tar.gz",
+  "bundle_sha256": "81a2521d4dac8706e763a285b80b476d17cd9cc8487641581214fc4b65051e90",
+  "candidate": "7f9f2a23909ad4f3aee7a5860ea1d5bed8e57730",
+  "validation": "26a5e26e7abe0bc12247fd2116375065c380d65d",
+  "image_id": "sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+  "configuration": "Debian 13 arm64 CPython 3.12.16",
+  "consumer_uid": 65534,
+  "network": "none",
+  "only_host_mount": "extracted tester bundle read-only at /bundle",
+  "method": "Ran all four in-container shell blocks verbatim from the extracted README in order. Container exited 0.",
+  "plain_status_exit": 2,
+  "empty_feed_status_exit": 2,
+  "independent_status": "unknown",
+  "uninstall_verified": true,
+  "transcript": "walkthrough.log",
+  "transcript_sha256": "4ba777c4e9f8c97a0d8876352dfd26b5df7057f4c5d2c4bd9a21480cb502a6e2"
+}

@@ -1,0 +1,55 @@
+{
+  "approved_wheel_sha256": "d537263a4e15e56dd2ffc940b2ad99c3b4e78486d09b21e52fd69383eb64f50b",
+  "build_sdist_sha256": [
+    "35aa02d83c389f6dd73f65b1903a6d964ca786dcc191d8dccf7bc6f117b09c35",
+    "35aa02d83c389f6dd73f65b1903a6d964ca786dcc191d8dccf7bc6f117b09c35"
+  ],
+  "build_wheel_sha256": [
+    "4afa7a6669b5f4b719be75bc53367cd4a52877ee59b831b056fb4a61072665b8",
+    "4afa7a6669b5f4b719be75bc53367cd4a52877ee59b831b056fb4a61072665b8"
+  ],
+  "cells": [
+    {
+      "cell": "debian-13-py312",
+      "console_invocations_passed": 42,
+      "install": "pass",
+      "uninstall": "pass"
+    },
+    {
+      "cell": "debian-13-py313",
+      "console_invocations_passed": 42,
+      "install": "pass",
+      "uninstall": "pass"
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "console_invocations_passed": 42,
+      "install": "pass",
+      "uninstall": "pass"
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "console_invocations_passed": 42,
+      "install": "pass",
+      "uninstall": "pass"
+    }
+  ],
+  "changed_archive_members": {
+    "aegis/intelligence/handoff.py": "added",
+    "aegis_network-0.1.0.dist-info/RECORD": "changed"
+  },
+  "console_invocations_passed": 168,
+  "explicit_state_review_passed": 32,
+  "installed_validated_wheel": "packaging-validation/build-1/aegis_network-0.1.0-py3-none-any.whl",
+  "installed_validated_wheel_sha256": "4afa7a6669b5f4b719be75bc53367cd4a52877ee59b831b056fb4a61072665b8",
+  "privacy": {
+    "fail": 0,
+    "inconclusive": 0,
+    "pass": 136,
+    "review": 32
+  },
+  "resource_cases_passed": 68,
+  "resource_output_identity_rows_verified": 2921200,
+  "result": "changed-reproducible-installed-validation-pass",
+  "tested_commit": "9ba94a84fd54ea9052d09e0c73bb6c365cbd5d5d"
+}

@@ -1,0 +1,3 @@
+{"case": "empty-identity", "outcome": "held", "reason": "unsupported-applicability", "revision": "9a05ae5b5212e16146be630c7fbf50471f851ef2cbe085c21d470dc98b80d5ed", "visible": []}
+{"case": "empty-version", "outcome": "held", "reason": "unsupported-applicability", "revision": "2e3047bc62feaea47d34859a47c393b19fabc7ae74ab62ce457196c6865240d0", "visible": []}
+{"case": "empty-osv-events", "outcome": "held", "reason": "unsupported-applicability", "revision": "60ff3c871084ce75a5f8e4d834d1d11978c1145844432abb0aa422fb1e939efa", "visible": []}

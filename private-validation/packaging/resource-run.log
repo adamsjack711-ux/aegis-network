@@ -1,0 +1,9 @@
+debian-13-py312 512 MiB: 14/14; Docker exit 0
+debian-13-py312 256 MiB: 3/3; Docker exit 0
+debian-13-py313 512 MiB: 14/14; Docker exit 0
+debian-13-py313 256 MiB: 3/3; Docker exit 0
+ubuntu-2404-py312 512 MiB: 14/14; Docker exit 0
+ubuntu-2404-py312 256 MiB: 3/3; Docker exit 0
+ubuntu-2404-py313 512 MiB: 14/14; Docker exit 0
+ubuntu-2404-py313 256 MiB: 3/3; Docker exit 0
+{"planned": 68, "attempted": 68, "passed": 68, "failed": 0, "unattempted": 0}

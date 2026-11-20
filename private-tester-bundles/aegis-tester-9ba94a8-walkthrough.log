@@ -1,0 +1,190 @@
++ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
++ uname -m
+aarch64
++ id
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
++ python3 -V
+Python 3.12.16
++ grep  /bundle  /proc/self/mountinfo
+13602 13592 0:37 /aegis-network/.worktrees/private-bundle-stage-9ba94a8/clean/aegis-tester-9ba94a8 /bundle ro,relatime - virtiofs lima-47f51a4f4a9c81d9 rw
++ set -eu
++ cd /bundle
++ sha256sum -c SHA256SUMS
+README.md: OK
+empty-feed.json: OK
+grants/trust.json: OK
+metadata/dependencies.json: OK
+metadata/validated-cells.json: OK
+wheels/aegis_network-0.1.0-py3-none-any.whl: OK
+wheels/annotated_doc-0.0.7-py3-none-any.whl: OK
+wheels/annotated_types-0.8.0-py3-none-any.whl: OK
+wheels/anyio-4.16.0-py3-none-any.whl: OK
+wheels/certifi-2026.10.23-py3-none-any.whl: OK
+wheels/cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/cffi-2.1.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/click-8.5.1-py3-none-any.whl: OK
+wheels/cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl: OK
+wheels/fastapi-0.165.0-py3-none-any.whl: OK
+wheels/h11-0.16.0-py3-none-any.whl: OK
+wheels/httpcore-1.0.9-py3-none-any.whl: OK
+wheels/httpx-0.28.1-py3-none-any.whl: OK
+wheels/idna-3.20-py3-none-any.whl: OK
+wheels/nats_py-2.17.0-py3-none-any.whl: OK
+wheels/opentelemetry_api-1.45.2-py3-none-any.whl: OK
+wheels/psycopg-3.3.9-py3-none-any.whl: OK
+wheels/psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl: OK
+wheels/psycopg_binary-3.3.9-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl: OK
+wheels/pycparser-3.12-py3-none-any.whl: OK
+wheels/pydantic-2.14.4-py3-none-any.whl: OK
+wheels/pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/pydantic_core-2.50.5-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/starlette-1.10.0-py3-none-any.whl: OK
+wheels/typing_extensions-4.16.0-py3-none-any.whl: OK
+wheels/typing_inspection-0.4.5-py3-none-any.whl: OK
+wheels/uvicorn-0.54.0-py3-none-any.whl: OK
++ echo 4afa7a6669b5f4b719be75bc53367cd4a52877ee59b831b056fb4a61072665b8  wheels/aegis_network-0.1.0-py3-none-any.whl
++ sha256sum -c -
+wheels/aegis_network-0.1.0-py3-none-any.whl: OK
++ id -u
++ test 65534 != 0
++ uname -m
++ test aarch64 = aarch64
++ test ! -w /bundle/grants
++ test ! -w /bundle/grants/trust.json
++ cd /tmp
++ mktemp -d /tmp/aegis-tester.XXXXXX
++ venv=/tmp/aegis-tester.JmMXUT
++ python3 -m venv /tmp/aegis-tester.JmMXUT
++ . /tmp/aegis-tester.JmMXUT/bin/activate
++ deactivate nondestructive
++ [ -n  ]
++ [ -n  ]
++ hash -r
++ [ -n  ]
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ ! nondestructive = nondestructive ]
++ uname
++ export VIRTUAL_ENV=/tmp/aegis-tester.JmMXUT
++ _OLD_VIRTUAL_PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ PATH=/tmp/aegis-tester.JmMXUT/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ export PATH
++ VIRTUAL_ENV_PROMPT=(aegis-tester.JmMXUT) 
++ export VIRTUAL_ENV_PROMPT
++ [ -n  ]
++ [ -z  ]
++ _OLD_VIRTUAL_PS1=$ 
++ PS1=((aegis-tester.JmMXUT) ) $ 
++ export PS1
++ hash -r
++ python -m pip --isolated install --no-index --no-cache-dir --only-binary=:all: --find-links=/bundle/wheels /bundle/wheels/aegis_network-0.1.0-py3-none-any.whl
+Looking in links: /bundle/wheels
+Processing /bundle/wheels/aegis_network-0.1.0-py3-none-any.whl
+Processing /bundle/wheels/cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/fastapi-0.165.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/httpx-0.28.1-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/nats_py-2.17.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/psycopg-3.3.9-py3-none-any.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /bundle/wheels/pydantic-2.14.4-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/uvicorn-0.54.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from cryptography<47,>=44->aegis-network==0.1.0)
+Processing /bundle/wheels/starlette-1.10.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/anyio-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/typing_extensions-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/typing_inspection-0.4.5-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/annotated_doc-0.0.7-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/opentelemetry_api-1.45.2-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/certifi-2026.10.23-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/httpcore-1.0.9-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/idna-3.20-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/h11-0.16.0-py3-none-any.whl (from httpcore==1.*->httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /bundle/wheels/annotated_types-0.8.0-py3-none-any.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /bundle/wheels/pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /bundle/wheels/click-8.5.1-py3-none-any.whl (from uvicorn<1,>=0.30->aegis-network==0.1.0)
+Processing /bundle/wheels/pycparser-3.12-py3-none-any.whl (from cffi>=2.0.0->cryptography<47,>=44->aegis-network==0.1.0)
+Installing collected packages: typing-extensions, pycparser, psycopg-binary, nats-py, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, psycopg, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, httpx, cryptography, fastapi, aegis-network
+Successfully installed aegis-network-0.1.0 annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 cffi-2.1.1 click-8.5.1 cryptography-46.0.7 fastapi-0.165.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 nats-py-2.17.0 opentelemetry-api-1.45.2 psycopg-3.3.9 psycopg-binary-3.3.9 pycparser-3.12 pydantic-2.14.4 pydantic-core-2.50.5 starlette-1.10.0 typing-extensions-4.16.0 typing-inspection-0.4.5 uvicorn-0.54.0
++ python -m pip --isolated check
+No broken requirements found.
++ command -v aegis
++ test /tmp/aegis-tester.JmMXUT/bin/aegis = /tmp/aegis-tester.JmMXUT/bin/aegis
++ rc=0
++ aegis status
+schema_version: status-v2
+asset_id: None
+identity_scope: none
+cli_version: 0.1.0
+distribution: debian
+intelligence_scope: supplied-signed-events-only
+package_count: 87
+inventory_complete: True
+inventory_reason: complete
+network: offline
+mode: observation-only
+independent_status: unknown
+independent_status_reason: NO_VERIFIABLE_T4_T5_PROOF
+overall_assessment: unknown
+potential_findings: unknown; no signed local finding file supplied
++ rc=2
++ echo status exit=2
++ test 2 = 2
++ rc=0
++ aegis status --feed /bundle/empty-feed.json --trust /bundle/grants/trust.json
+status exit=2
+schema_version: status-v2
+asset_id: None
+identity_scope: none
+cli_version: 0.1.0
+distribution: debian
+intelligence_scope: supplied-signed-events-only
+package_count: 87
+inventory_complete: True
+inventory_reason: complete
+network: offline
+mode: observation-only
+independent_status: unknown
+independent_status_reason: NO_VERIFIABLE_T4_T5_PROOF
+overall_assessment: unknown
+claim_count: 0
+potential_findings: 0
+unknown_claims: 0
++ rc=2
++ echo empty-feed exit=2
++ test 2 = 2
++ python -B -I -c from pathlib import Path; import sys; from aegis.intelligence import handoff; p = Path(handoff.__file__).resolve(); assert p.is_relative_to(Path(sys.prefix).resolve()); print(handoff.OfflineHandoff.__name__, p)
+empty-feed exit=2
+OfflineHandoff /tmp/aegis-tester.JmMXUT/lib/python3.12/site-packages/aegis/intelligence/handoff.py
++ python -m pip --isolated uninstall -y aegis-network
+Found existing installation: aegis-network 0.1.0
+Uninstalling aegis-network-0.1.0:
+  Successfully uninstalled aegis-network-0.1.0
++ test ! -e /tmp/aegis-tester.JmMXUT/bin/aegis
++ python -c import importlib.util, importlib.metadata as m; assert importlib.util.find_spec("aegis") is None and not list(m.distributions(name="aegis-network"))
++ deactivate
++ [ -n /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin ]
++ PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ export PATH
++ unset _OLD_VIRTUAL_PATH
++ [ -n  ]
++ hash -r
++ [ -n $  ]
++ PS1=$ 
++ export PS1
++ unset _OLD_VIRTUAL_PS1
++ unset VIRTUAL_ENV
++ unset VIRTUAL_ENV_PROMPT
++ [ !  = nondestructive ]
++ unset -f deactivate
++ echo Aegis uninstall verified.
+Aegis uninstall verified.

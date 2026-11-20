@@ -1,0 +1,12 @@
+{
+  "freeze": "41363d30999aeffec49da7f97639648dd5117a5b",
+  "scope": "Private offline research only; one trusted local SQLite file.",
+  "independent_checks": [
+    "Independent reader sees zero rows between a committed withdrawal and resumed publication and zero immediately afterward.",
+    "A fresh post-withdrawal snapshot sees no current result. An already-open WAL reader may retain its old snapshot; opening a fresh read must give the new status.",
+    "When the final writer already holds the SQLite write lock, an attempted withdrawal from a distinct connection cannot commit until the result transaction releases it.",
+    "A conflict on the same advisory prevents current publication even if Scout retains the preceding current_state pointer. Another advisory's unrelated event must not invalidate this result.",
+    "Repeated consumption on two connections and reopening the database preserve result identity, historical payload, version/digest/source attribution and no extra current row.",
+    "A normalized product and an explicit selected alias must both be supported by the same immutable raw source; independently inspect the fixture rather than comparing output to itself."
+  ]
+}

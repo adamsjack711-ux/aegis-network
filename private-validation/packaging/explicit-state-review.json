@@ -1,0 +1,454 @@
+{
+  "checked": 32,
+  "status": "pass",
+  "cases": [
+    {
+      "cell": "debian-13-py312",
+      "case": "ancestor-human",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "ancestor-json",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "create-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "create-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "final-human",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "final-json",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "repeat-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py312",
+      "case": "repeat-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "ancestor-human",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "ancestor-json",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "create-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "create-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "final-human",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "final-json",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "repeat-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "debian-13-py313",
+      "case": "repeat-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "ancestor-human",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "ancestor-json",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "create-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "create-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "final-human",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "final-json",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "repeat-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py312",
+      "case": "repeat-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "ancestor-human",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "ancestor-json",
+      "writes": [],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "create-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "create-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          null
+        ],
+        [
+          "openat",
+          "identity.json",
+          null
+        ]
+      ],
+      "changed_paths": [
+        "/tmp",
+        "/tmp/chosen",
+        "/tmp/chosen/identity.json"
+      ]
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "final-human",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "final-json",
+      "writes": [
+        [
+          "mkdirat",
+          "alias",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "repeat-human",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    },
+    {
+      "cell": "ubuntu-2404-py313",
+      "case": "repeat-json",
+      "writes": [
+        [
+          "mkdirat",
+          "chosen",
+          "EEXIST"
+        ],
+        [
+          "openat",
+          "identity.json",
+          "EEXIST"
+        ]
+      ],
+      "changed_paths": []
+    }
+  ]
+}
