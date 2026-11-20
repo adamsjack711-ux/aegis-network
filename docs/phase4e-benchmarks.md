@@ -51,3 +51,14 @@ C measured warm p95 full appraisal of **47.00 / 150.44 / 491.03 ms** at 4/32/128
 B measured p95 **104.83 ms** for ownership transfer, **31.37 ms** for its two-writer barrier and **13.64 ms** for a new session in the disposable authenticated lab. Its one controlled Docker disconnect and reattach completed retired-broker denial, both durable writer fences and one fresh approved successor write in **3.315 s**. There were zero stale writes. Distinct containers and per-service credential directories exercised actual mTLS and separate writer transactions. They shared the host, VM and temporary lab CA. This is no measurement of native JetStream generation-bound acknowledgements or distributed protection. [Identity method](phase4e-identity.md) · [Raw identity results](../benchmarks/phase4e-identity.json)
 
 A's extra matched run retained the same first-to-ACK ordering effect and reported the priority withdrawal at **2.396 s**, with the legacy worker again acknowledging all 1,000 findings first. The fresh before-intake SIGKILL denial report took **30.366 s**. The after-audit observer reported in **55 ms** while the ACK took **30.467 s**. Independent D pre-intake runs against A and the integrated source observed **30.434 / 30.479 s** before durable denial readback, respectively. D's integrated agent-only broker partition had no audit or ACK during the isolated interval. After rejoin the external observer saw the durable denial in **1.964 s** and the confirmed broker ACK in **1.968 s**. These are local fault observations and do not certify a protected route or an all-agent service bound. [A repeat traces](../benchmarks/phase4e/safety-boundary-review-live.json)
+
+## Withdrawal-v2 shadow cost
+
+For C's paired local shadow comparison at `f7053de6f059535e631cbca9544cd2ee57b2ed48`, 12 warm appraisals per profile used separate private Unix-socket services. Verified checkpoint coverage stays at 3 of 4. V2 also waits for four nonce-bound withdrawal views.
+
+| Records | Original p95 full appraisal | V2 p95 full appraisal | V2 minus original | Positive with one withdrawal endpoint offline |
+| ---: | ---: | ---: | ---: | --- |
+| 4 | 52.83 ms | 61.52 ms | +8.69 ms | Original 12/12, v2 0/12 |
+| 128 | 464.24 ms | 548.05 ms | +83.81 ms | Original 12/12, v2 0/12 |
+
+With one signed scoped withdrawal receipt held outside the checkpoint, the original profile returned a positive result in both sample sizes and v2 returned revoked. From a new challenge, the single measured v2 responses took 60.59 ms at four records and 468.15 ms at 128 records. These samples are local shadow appraisal observations rather than native enforcement latency. The old failure stays in the record. [Strict shadow methodology](phase4e-withdrawal-status-v2.md) · [Raw v1/v2 comparison](../benchmarks/phase4e-withdrawal-status-v2.json)
