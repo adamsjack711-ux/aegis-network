@@ -1,0 +1,19 @@
+{
+  "authorized_target": "lab-asset-1",
+  "asset": {
+    "asset_id": "lab-asset-1",
+    "identity_kind": "purl",
+    "identity": "pkg:pypi/acme-parser",
+    "version": "1.5"
+  },
+  "vulnerability_id": "CVE-2099-0001",
+  "sources": [
+    {
+      "mode": "fixture",
+      "kind": "osv",
+      "uri": "https://api.osv.dev/v1/vulns/OSV-2099-1",
+      "path": "tests/fixtures/phase5a_osv.json"
+    }
+  ],
+  "research_provider": "none"
+}

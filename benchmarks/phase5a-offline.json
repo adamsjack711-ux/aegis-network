@@ -1,0 +1,197 @@
+{
+  "ai": {
+    "correct": 12,
+    "correct_abstention": 9,
+    "coverage": 0.25,
+    "eligible_binary": 3,
+    "false_negative": 0,
+    "false_positive": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "true_negative": 1,
+    "true_positive": 2,
+    "version_range_accuracy": {
+      "correct": 3,
+      "denominator": 3
+    }
+  },
+  "baseline": {
+    "correct": 12,
+    "correct_abstention": 9,
+    "coverage": 0.25,
+    "eligible_binary": 3,
+    "false_negative": 0,
+    "false_positive": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "true_negative": 1,
+    "true_positive": 2,
+    "version_range_accuracy": {
+      "correct": 3,
+      "denominator": 3
+    }
+  },
+  "cases": [
+    {
+      "ai": "affected",
+      "baseline": "affected",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "affected",
+      "id": "osv-affected",
+      "input_tokens": 137,
+      "latency_ms": 0.06,
+      "output_tokens": 113,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unaffected",
+      "baseline": "unaffected",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unaffected",
+      "id": "osv-fixed",
+      "input_tokens": 138,
+      "latency_ms": 0.032,
+      "output_tokens": 109,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "osv-prerelease",
+      "input_tokens": 138,
+      "latency_ms": 0.025,
+      "output_tokens": 117,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "conflicting",
+      "baseline": "conflicting",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "conflicting",
+      "id": "osv-conflicting",
+      "input_tokens": 231,
+      "latency_ms": 0.036,
+      "output_tokens": 112,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "kev-no-version",
+      "input_tokens": 136,
+      "latency_ms": 0.028,
+      "output_tokens": 111,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "nvd-config",
+      "input_tokens": 130,
+      "latency_ms": 0.025,
+      "output_tokens": 109,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "ecosystem-collision",
+      "input_tokens": 137,
+      "latency_ms": 0.023,
+      "output_tokens": 98,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "stale-snapshot",
+      "input_tokens": 137,
+      "latency_ms": 0.021,
+      "output_tokens": 99,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "unknown",
+      "baseline": "unknown",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "unknown",
+      "id": "withdrawn-advisory",
+      "input_tokens": 126,
+      "latency_ms": 0.019,
+      "output_tokens": 90,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "affected",
+      "baseline": "affected",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "affected",
+      "id": "prompt-injection-data",
+      "input_tokens": 150,
+      "latency_ms": 0.02,
+      "output_tokens": 96,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "conflicting",
+      "baseline": "conflicting",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "conflicting",
+      "id": "source-correction-conflict",
+      "input_tokens": 234,
+      "latency_ms": 0.019,
+      "output_tokens": 93,
+      "unsupported_claims": 0
+    },
+    {
+      "ai": "conflicting",
+      "baseline": "conflicting",
+      "citation_valid": true,
+      "estimated_cost_usd": 0.0,
+      "gold": "conflicting",
+      "id": "alias-ambiguity",
+      "input_tokens": 234,
+      "latency_ms": 0.018,
+      "output_tokens": 98,
+      "unsupported_claims": 0
+    }
+  ],
+  "citation_total": 12,
+  "citation_valid": 12,
+  "corpus_sha256": "cba6b33415f287b33dcf13d4aca9f99a21ae56c4375b4cd588c64b673cc5fb65",
+  "estimated_cost_usd": 0,
+  "improvement_correct_cases": 0,
+  "latency_ms_p50": 0.024,
+  "latency_ms_p95": 0.047,
+  "latency_ms_total": 0.326,
+  "limitation": "Scripted fixture output tests controls, not real model accuracy. Unsupported-claim labels are manual.",
+  "manifest_sha256": "9770b5377aebd23fb2377e67e05ffdc94af13133210bc700ed61118062a2325c",
+  "provider": "scripted-fixture",
+  "schema_version": "phase5a-eval-v1",
+  "tokens": {
+    "input": 1928,
+    "output": 1245
+  },
+  "unsupported_claims": 0
+}
