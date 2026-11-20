@@ -130,6 +130,17 @@ def inspect_file(path):
                 assert len(observation["direct_durable_receipt"]["votes"]) == 1
                 assert observation["target_write_attempted"] is False
                 summary["single_witness_appraisal"] = observation["outcome"]
+                if "profile" in observation:
+                    summary["status_profile"] = observation["profile"]
+            elif name == "shadow_v2_scope_restore":
+                observation = json.loads(value)
+                assert len(set(observation["checkpoint_signers"])) == 3
+                assert len(observation["retained_digests"]) == 2
+                assert observation["unauthorized_digest"] not in observation["retained_digests"]
+                assert observation["matched"]["reason"] == "revoked"
+                summary["shadow_v2"] = {key: observation[key] for key in (
+                    "lost_fourth_view", "replayed_view", "stale_relying_restore",
+                )}
             elif name in {"partition_held", "partition_reconnected"}:
                 dispatch[name] = value
         if {"queued_before_restart", "broker_publication", "durable_denial"} <= dispatch.keys():

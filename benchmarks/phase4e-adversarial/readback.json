@@ -143,6 +143,39 @@
     "skipped": 0,
     "tests": 1
   },
+  "f7053de-checkpoint-v1.xml": {
+    "errors": 0,
+    "failures": 1,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "single_witness_appraisal": "reproduced",
+    "skipped": 0,
+    "status_profile": "checkpoint-v1",
+    "tests": 1
+  },
+  "f7053de-withdrawal-v2-faults.xml": {
+    "errors": 0,
+    "failures": 0,
+    "shadow_v2": {
+      "lost_fourth_view": "held",
+      "replayed_view": "held",
+      "stale_relying_restore": "held"
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "f7053de-withdrawal-v2.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "single_witness_appraisal": "inconclusive",
+    "skipped": 0,
+    "status_profile": "withdrawal-v2",
+    "tests": 1
+  },
   "identity-B-1.xml": {
     "errors": 0,
     "failures": 0,
