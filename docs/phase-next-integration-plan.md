@@ -2,7 +2,7 @@
 
 ## Baseline and worktrees
 
-The common clean parent is Phase 4E `ee739cacfaa3f81a0994b4d7802fd2943c067d86`. No later Phase 4E integration commit was present at review. The separate D validation tip is `39a17e4bb162485f3a3bb747d52b597bf431b788`, with its reviewed evidence already imported into Phase 4E. The original master checkout is dirty at `14440ee226c58aa6e8e06517ab1601b2d672798c` and remains untouched. Four new branches start exactly at the parent.
+The common clean parent is Phase 4E `ee739cacfaa3f81a0994b4d7802fd2943c067d86`. No later Phase 4E integration commit was present at review. The separate D validation tip is `39a17e4bb162485f3a3bb747d52b597bf431b788`, with its reviewed evidence already imported into Phase 4E. The original master checkout is dirty at `14440ee226c58aa6e8e06517ab1601b2d672798c` and remains untouched. Four specialist branches and this preparation branch started exactly at the parent. The specialist design commits are Agent 1 `ae83b16ad9159d96e80553b335eef3bfa218fd47`, Agent 2 `086a1df2764bd496a811cff584861bd02570df24`, and Agent 3 `553587615de8319e742a70f28926b4150f8c5094`. Their source-code contracts have not been integrated.
 
 | Assignment | Branch and worktree | Owned files and limits |
 | --- | --- | --- |
@@ -38,3 +38,9 @@ Independent D reviews shared contracts and source diff before running a branch. 
 - Which Linux distributions and package databases can a non-root CLI read consistently, and how should partial inventory affect an exposure observation?
 
 [Phase 4E acceptance and failures](phase4e-integration-plan.md) · [Current risks](phase4e-risk-register.md)
+
+## Preparatory interface review
+
+Agent 1's native proposal matches the frozen 4F authority ordering. Its requested generation token would change persistent consumer state and therefore needs a versioned, migration-aware review before implementation. Agent 2's proposed `ResearchCandidate.v1` is private research data. It must stay separate from signed Finding and Evidence messages, and from the Phase 5B observed exposure record. Agent 3's `ExposureObservation/v1` has its own package and result fields. A conversion from an AI candidate into a CLI observation needs exact source revision, package identity, comparator and uncertainty mapping reviewed by both owners and Agent 4. The CLI cannot interpret a research confidence value as verifier confidence.
+
+During review, untracked `src/aegis/intelligence/{__init__,feeds,models,baseline}.py` appeared in Agent 2's worktree after the clean branch had been created. Agent 2 did not create or commit them. They are preserved in place and are excluded from the design commit. The unreviewed `FeedClient` has network-fetch capability for public advisory endpoints, while this preparation allows local fixture inputs only. Ownership, source provenance and network policy must be resolved before adopting or running that code. No external host or credential was used by this preparation.

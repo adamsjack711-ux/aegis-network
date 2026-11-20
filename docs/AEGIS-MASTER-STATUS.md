@@ -19,3 +19,7 @@ Phase 4E final broad run collected 348 tests, with 346 passes, one Trust startup
 ## Decision
 
 GO for Phase 4F stabilization research, Phase 5A read-only intelligence and Phase 5B observation CLI work in isolated lab worktrees. NO-GO for shared C writer activation, production integration, real-system testing and distributed autonomous enforcement. No original feature branch or master merge is approved. [Integration sequence](phase-next-integration-plan.md)
+
+## Preparation assignments and interface hold
+
+Agent 1 design `ae83b16` proposes native writer and consumer stabilization. Agent 2 design `086a1df` proposes model-independent research contracts. Agent 3 design `5535876` proposes a Debian-first offline CLI. Agent 4 independently challenges all three from `test/phase4f-phase5a-validation`; its preparation result is pending. No implementation branch has been integrated. Untracked network-capable intelligence files appeared in Agent 2's worktree from an unidentified concurrent actor. They are preserved and excluded from approval until ownership and the offline boundary are reviewed. [Assignments and conflict](phase-next-integration-plan.md)
