@@ -1,0 +1,18 @@
+{
+  "case": "revoked",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/current.json",
+    "--trust",
+    "/grants/revoked.json"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: invalid or untrusted signed Mesh event\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "5731bc21c1cdba938eb3da50972a021433f2d4d25836972fa7925f1ad2d2094f",
+  "after_sha256": "5731bc21c1cdba938eb3da50972a021433f2d4d25836972fa7925f1ad2d2094f"
+}

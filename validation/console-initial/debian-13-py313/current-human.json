@@ -1,0 +1,18 @@
+{
+  "case": "current",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/current.json",
+    "--trust",
+    "/grants/trust.json"
+  ],
+  "rc": 0,
+  "stdout": "1 current local claims with exact package matches; 1 signed claims observed; independent Evidence status unknown\n808a6959068abda25e8e530f matched AEGIS-CLI-501 pkg:deb/debian/curl 1:8.0-1\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "d290d986071c7de2caadcf73258c26c1a73c40bd512329174ed8b3b93e389b67",
+  "after_sha256": "d290d986071c7de2caadcf73258c26c1a73c40bd512329174ed8b3b93e389b67"
+}

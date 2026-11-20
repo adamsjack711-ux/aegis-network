@@ -1,0 +1,28 @@
+Looking in links: /wheels
+Processing /dist/aegis_network-0.1.0-py3-none-any.whl
+Processing /wheels/cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl (from aegis-network==0.1.0)
+Processing /wheels/fastapi-0.165.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /wheels/httpx-0.28.1-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /wheels/nats_py-2.17.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /wheels/psycopg-3.3.9-py3-none-any.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /wheels/pydantic-2.14.4-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /wheels/uvicorn-0.54.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /wheels/cffi-2.1.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from cryptography<47,>=44->aegis-network==0.1.0)
+Processing /wheels/starlette-1.10.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/anyio-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/typing_extensions-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/typing_inspection-0.4.5-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/annotated_doc-0.0.7-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/opentelemetry_api-1.45.2-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /wheels/certifi-2026.10.23-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /wheels/httpcore-1.0.9-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /wheels/idna-3.20-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /wheels/h11-0.16.0-py3-none-any.whl (from httpcore==1.*->httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /wheels/psycopg_binary-3.3.9-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /wheels/annotated_types-0.8.0-py3-none-any.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /wheels/pydantic_core-2.50.5-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /wheels/click-8.5.1-py3-none-any.whl (from uvicorn<1,>=0.30->aegis-network==0.1.0)
+Processing /wheels/pycparser-3.12-py3-none-any.whl (from cffi>=2.0.0->cryptography<47,>=44->aegis-network==0.1.0)
+Installing collected packages: typing-extensions, pycparser, psycopg-binary, psycopg, nats-py, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, httpx, cryptography, fastapi, aegis-network
+
+Successfully installed aegis-network-0.1.0 annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 cffi-2.1.1 click-8.5.1 cryptography-46.0.7 fastapi-0.165.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 nats-py-2.17.0 opentelemetry-api-1.45.2 psycopg-3.3.9 psycopg-binary-3.3.9 pycparser-3.12 pydantic-2.14.4 pydantic-core-2.50.5 starlette-1.10.0 typing-extensions-4.16.0 typing-inspection-0.4.5 uvicorn-0.54.0

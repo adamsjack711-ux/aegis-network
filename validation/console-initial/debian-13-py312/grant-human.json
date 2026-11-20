@@ -1,0 +1,18 @@
+{
+  "case": "grant",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/current.json",
+    "--trust",
+    "/grants/wrong-role.json"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: invalid or untrusted signed Mesh event\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "84cc03bc18f5f8be72179f9fff1689ebf82022c82a32fac713b1c3f1f0843795",
+  "after_sha256": "84cc03bc18f5f8be72179f9fff1689ebf82022c82a32fac713b1c3f1f0843795"
+}

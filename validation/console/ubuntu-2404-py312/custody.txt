@@ -1,0 +1,18 @@
+drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /
+drwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users
+drwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell
+ 0: group:everyone deny delete
+drwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network
+drwxr-xr-x  109 jackadams-lovell  staff  3488 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees
+dr-xr-xr-x   13 jackadams-lovell  staff   416 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh
+-r--r--r--    1 jackadams-lovell  staff  2003 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/conflict.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/current.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/expired.json
+-r--r--r--    1 jackadams-lovell  staff  1038 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/future.json
+-r--r--r--    1 jackadams-lovell  staff     8 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/malformed.json
+-r--r--r--    1 jackadams-lovell  staff  1033 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/range.json
+-r--r--r--    1 jackadams-lovell  staff   407 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/revoked.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/signature.json
+-r--r--r--    1 jackadams-lovell  staff   377 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/trust.json
+-r--r--r--    1 jackadams-lovell  staff  1744 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/withdrawn.json
+-r--r--r--    1 jackadams-lovell  staff   358 Nov 20 12:57 /Users/jackadams-lovell/aegis-network/.worktrees/tmpoca_68gh/wrong-role.json

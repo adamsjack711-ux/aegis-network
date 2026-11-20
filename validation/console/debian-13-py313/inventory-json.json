@@ -1,0 +1,15 @@
+{
+  "case": "inventory",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "inventory",
+    "--json"
+  ],
+  "rc": 0,
+  "stdout": "{\n  \"asset_id\": null,\n  \"captured_at\": \"2026-11-20T19:56:48.100840Z\",\n  \"cli_version\": \"0.1.0\",\n  \"distribution\": \"debian\",\n  \"identity_scope\": \"none\",\n  \"inventory_complete\": true,\n  \"inventory_reason\": \"complete\",\n  \"package_count\": 1,\n  \"packages\": [\n    {\n      \"architecture\": \"arm64\",\n      \"asset_id\": null,\n      \"collected_at\": \"2026-11-20T19:56:48.101525Z\",\n      \"confidence\": \"installed-binary-package\",\n      \"ecosystem\": \"deb\",\n      \"limitation\": \"Binary package identity only; source-package and reachability mapping unavailable\",\n      \"name\": \"curl\",\n      \"purl\": \"pkg:deb/debian/curl\",\n      \"source\": \"dpkg-status\",\n      \"version\": \"1:8.0-1\"\n    }\n  ],\n  \"schema_version\": \"inventory-v2\",\n  \"snapshot_id\": \"e2af219816573b190a6dcb784b1d0a5adb94f241e3d714b68aa2627a45139676\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "db7f5dbba7cdea511dcfc040dd4ec3c09ca5963c6e80b1e3e62bcfa3f4edca73",
+  "after_sha256": "db7f5dbba7cdea511dcfc040dd4ec3c09ca5963c6e80b1e3e62bcfa3f4edca73"
+}

@@ -1,0 +1,15 @@
+{
+  "case": "explain",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "explain",
+    "missing"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: --feed is required for findings and explain\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "cce1a20d957ce6a7af01c4e3a9cf00b5b64ccdfd62d123b8918e6085889ce2ab",
+  "after_sha256": "cce1a20d957ce6a7af01c4e3a9cf00b5b64ccdfd62d123b8918e6085889ce2ab"
+}

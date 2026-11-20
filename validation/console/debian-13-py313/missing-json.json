@@ -1,0 +1,19 @@
+{
+  "case": "missing",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/missing.json",
+    "--trust",
+    "/grants/trust.json",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"cannot read local intelligence JSON\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "d7880fa98195b06c830d9faef68ec9630e5145e8549b7fef0acca748e2acd087",
+  "after_sha256": "d7880fa98195b06c830d9faef68ec9630e5145e8549b7fef0acca748e2acd087"
+}

@@ -1,0 +1,15 @@
+{
+  "case": "doctor",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "doctor",
+    "--json"
+  ],
+  "rc": 0,
+  "stdout": "{\n  \"advisories\": \"not configured (pass --feed to findings)\",\n  \"asset_id\": null,\n  \"distribution\": \"ubuntu\",\n  \"enforcement\": \"unavailable\",\n  \"identity_note\": \"not persisted (pass --state-dir to opt in)\",\n  \"identity_scope\": \"none\",\n  \"independent_status\": \"unknown\",\n  \"inventory\": \"1 installed binary packages\",\n  \"network\": \"disabled; no sockets or listeners\",\n  \"ready\": \"yes\",\n  \"schema_version\": \"doctor-v2\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "23dcc7669accfa49a763db1db7927f079ff5d579b3827df160670197bf057d8b",
+  "after_sha256": "23dcc7669accfa49a763db1db7927f079ff5d579b3827df160670197bf057d8b"
+}

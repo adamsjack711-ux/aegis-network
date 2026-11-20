@@ -1,0 +1,16 @@
+{
+  "case": "explain",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "explain",
+    "missing",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"--feed is required for findings and explain\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "f89a1ff025690cd63f074b01a39d717c835cde5f6acd7784faecc621d69b426f",
+  "after_sha256": "f89a1ff025690cd63f074b01a39d717c835cde5f6acd7784faecc621d69b426f"
+}

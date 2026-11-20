@@ -1,0 +1,14 @@
+{
+  "case": "doctor",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "doctor"
+  ],
+  "rc": 0,
+  "stdout": "distribution: ubuntu\nasset_id: None\nidentity_note: not persisted (pass --state-dir to opt in)\ninventory: 1 installed binary packages\nadvisories: not configured (pass --feed to findings)\nnetwork: disabled; no sockets or listeners\nenforcement: unavailable\nschema_version: doctor-v2\nidentity_scope: none\nindependent_status: unknown\nready: yes\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "70c520eba8a8defc2717af05792727dec7ced8964d79d463e562787a17125690",
+  "after_sha256": "70c520eba8a8defc2717af05792727dec7ced8964d79d463e562787a17125690"
+}

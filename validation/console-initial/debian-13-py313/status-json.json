@@ -1,0 +1,15 @@
+{
+  "case": "status",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "status",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\n  \"asset_id\": null,\n  \"cli_version\": \"0.1.0\",\n  \"distribution\": \"debian\",\n  \"identity_scope\": \"none\",\n  \"independent_status\": \"unknown\",\n  \"independent_status_reason\": \"NO_VERIFIABLE_T4_T5_PROOF\",\n  \"intelligence_scope\": \"supplied-signed-events-only\",\n  \"inventory_complete\": true,\n  \"inventory_reason\": \"complete\",\n  \"mode\": \"observation-only\",\n  \"network\": \"offline\",\n  \"overall_assessment\": \"unknown\",\n  \"package_count\": 1,\n  \"potential_findings\": \"unknown; no signed local finding file supplied\",\n  \"schema_version\": \"status-v2\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "7b3effe4c205c17e865f573e518fe49fa5e93ba9bd92eb7244ea10ef1b6c2b7b",
+  "after_sha256": "7b3effe4c205c17e865f573e518fe49fa5e93ba9bd92eb7244ea10ef1b6c2b7b"
+}

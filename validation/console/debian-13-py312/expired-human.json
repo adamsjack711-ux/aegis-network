@@ -1,0 +1,18 @@
+{
+  "case": "expired",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/expired.json",
+    "--trust",
+    "/grants/trust.json"
+  ],
+  "rc": 2,
+  "stdout": "0 current local claims with exact package matches; 1 signed claims observed; independent Evidence status unknown\n808a6959068abda25e8e530f matched AEGIS-CLI-501 pkg:deb/debian/curl 1:8.0-1\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "fb0faa3a5c2ebaad20a5c0370904597ba05ce17f9047b943c22bbe9e347c679f",
+  "after_sha256": "fb0faa3a5c2ebaad20a5c0370904597ba05ce17f9047b943c22bbe9e347c679f"
+}

@@ -1,0 +1,18 @@
+{
+  "case": "conflict",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/conflict.json",
+    "--trust",
+    "/grants/trust.json"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: publisher sequence conflict in local Mesh file\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "c750201971f80bd2aae809a2987e754cdc481b4e394f8a6eae22f0543a827e69",
+  "after_sha256": "c750201971f80bd2aae809a2987e754cdc481b4e394f8a6eae22f0543a827e69"
+}

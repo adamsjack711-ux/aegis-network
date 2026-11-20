@@ -1,0 +1,14 @@
+{
+  "case": "no-feed",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings"
+  ],
+  "rc": 2,
+  "stdout": "",
+  "stderr": "aegis: --feed is required for findings and explain\n",
+  "passed": true,
+  "change": {},
+  "before_sha256": "dcccc7579eaee445fd82eb56567502d39da5c3cfb5570c9bbd471c469d54db5f",
+  "after_sha256": "dcccc7579eaee445fd82eb56567502d39da5c3cfb5570c9bbd471c469d54db5f"
+}

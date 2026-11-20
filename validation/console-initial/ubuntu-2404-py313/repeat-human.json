@@ -1,0 +1,16 @@
+{
+  "case": "repeat",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/chosen",
+    "inventory"
+  ],
+  "rc": 0,
+  "stdout": "Asset 2051ed62-1688-4964-b7ca-5fffc5e97821 \u00b7 ubuntu \u00b7 1 installed binary packages \u00b7 complete=True\npkg:deb/ubuntu/curl 1:8.0-1 [arm64]\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "5f0175246a6bef3f33c49164c02798f4476cf31a8bffbc669d1c0e8ed360c183",
+  "after_sha256": "5f0175246a6bef3f33c49164c02798f4476cf31a8bffbc669d1c0e8ed360c183"
+}

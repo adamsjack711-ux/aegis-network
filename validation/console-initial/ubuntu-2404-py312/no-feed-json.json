@@ -1,0 +1,15 @@
+{
+  "case": "no-feed",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"--feed is required for findings and explain\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "5572c26327fcb848fa1ad786ccbfc5b26f2195c2fec9aae5cf8c71a44d3d58af",
+  "after_sha256": "5572c26327fcb848fa1ad786ccbfc5b26f2195c2fec9aae5cf8c71a44d3d58af"
+}

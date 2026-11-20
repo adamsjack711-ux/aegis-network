@@ -1,0 +1,19 @@
+{
+  "case": "revoked",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/current.json",
+    "--trust",
+    "/grants/revoked.json",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"invalid or untrusted signed Mesh event\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "da52a2196d46327ddf7747ddbffb36c9d5c38fcbf4afb70b56ce93d63aeccbbf",
+  "after_sha256": "da52a2196d46327ddf7747ddbffb36c9d5c38fcbf4afb70b56ce93d63aeccbbf"
+}

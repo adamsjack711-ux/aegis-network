@@ -1,0 +1,18 @@
+{
+  "candidate": "fc4a17bc6f9f0c289a645c4fb7006c999ba90e99",
+  "prep": "4b270926d3d8125946d854fbfea4d0076a913fd6",
+  "approval": "c4cd31a4c7c243c52928b076d1573fd270747ece",
+  "manifest": "39653937e83dd3d53a4becf9009c9a87234dddd7cf07bfb263451ae5cfed3784",
+  "provenance": "076619b22cb864a405eb073828bc57f317772340c3e5f18f70d4c4cc2b19b49c",
+  "wheels": 32,
+  "artifacts": {
+    "build-1": {
+      "aegis_network-0.1.0-py3-none-any.whl": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "aegis_network-0.1.0.tar.gz": "3aeb30b7c3c9befd89b5ecc3cf71b3c3b14e63b45662e45b902544eb6cb61908"
+    },
+    "build-2": {
+      "aegis_network-0.1.0-py3-none-any.whl": "28943894bfe543338a353a538fac3a26e9fd552df730e4cb83921953503727e5",
+      "aegis_network-0.1.0.tar.gz": "3aeb30b7c3c9befd89b5ecc3cf71b3c3b14e63b45662e45b902544eb6cb61908"
+    }
+  }
+}

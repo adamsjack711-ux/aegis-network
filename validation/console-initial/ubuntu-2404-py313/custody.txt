@@ -1,0 +1,18 @@
+drwxr-xr-x   23 root              wheel   736 Sep 24 00:10 /
+drwxr-xr-x    6 root              admin   192 Oct  3 14:59 /Users
+drwxr-xr-x+ 238 jackadams-lovell  staff  7616 Nov 20 11:19 /Users/jackadams-lovell
+ 0: group:everyone deny delete
+drwxr-xr-x   23 jackadams-lovell  staff   736 Nov 19 13:08 /Users/jackadams-lovell/aegis-network
+drwxr-xr-x  109 jackadams-lovell  staff  3488 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees
+dr-xr-xr-x   13 jackadams-lovell  staff   416 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf
+-r--r--r--    1 jackadams-lovell  staff  2003 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/conflict.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/current.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/expired.json
+-r--r--r--    1 jackadams-lovell  staff  1038 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/future.json
+-r--r--r--    1 jackadams-lovell  staff     8 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/malformed.json
+-r--r--r--    1 jackadams-lovell  staff  1033 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/range.json
+-r--r--r--    1 jackadams-lovell  staff   407 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/revoked.json
+-r--r--r--    1 jackadams-lovell  staff  1031 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/signature.json
+-r--r--r--    1 jackadams-lovell  staff   377 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/trust.json
+-r--r--r--    1 jackadams-lovell  staff  1744 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/withdrawn.json
+-r--r--r--    1 jackadams-lovell  staff   358 Nov 20 12:55 /Users/jackadams-lovell/aegis-network/.worktrees/tmp2dntpwzf/wrong-role.json

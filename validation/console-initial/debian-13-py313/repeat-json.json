@@ -1,0 +1,17 @@
+{
+  "case": "repeat",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/chosen",
+    "inventory",
+    "--json"
+  ],
+  "rc": 0,
+  "stdout": "{\n  \"asset_id\": \"f837b177-9723-414c-bcd4-2a4d4f95696a\",\n  \"captured_at\": \"2026-11-20T19:55:37.631231Z\",\n  \"cli_version\": \"0.1.0\",\n  \"distribution\": \"debian\",\n  \"identity_scope\": \"explicit-local\",\n  \"inventory_complete\": true,\n  \"inventory_reason\": \"complete\",\n  \"package_count\": 1,\n  \"packages\": [\n    {\n      \"architecture\": \"arm64\",\n      \"asset_id\": \"f837b177-9723-414c-bcd4-2a4d4f95696a\",\n      \"collected_at\": \"2026-11-20T19:55:37.631853Z\",\n      \"confidence\": \"installed-binary-package\",\n      \"ecosystem\": \"deb\",\n      \"limitation\": \"Binary package identity only; source-package and reachability mapping unavailable\",\n      \"name\": \"curl\",\n      \"purl\": \"pkg:deb/debian/curl\",\n      \"source\": \"dpkg-status\",\n      \"version\": \"1:8.0-1\"\n    }\n  ],\n  \"schema_version\": \"inventory-v2\",\n  \"snapshot_id\": \"2d7452977b1634332b354b4cd408f1666bf9866cca6f09cf953ca634ee39efe0\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "0b7d3f3dccf4d07e16c24379a450dd4a2a47ee8d89e2e94273081376a8727445",
+  "after_sha256": "0b7d3f3dccf4d07e16c24379a450dd4a2a47ee8d89e2e94273081376a8727445"
+}

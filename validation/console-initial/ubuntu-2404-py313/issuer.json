@@ -1,0 +1,18 @@
+{
+  "issuer_uid": 501,
+  "custodian_uid": 501,
+  "consumer_uid": 65534,
+  "digests": {
+    "trust.json": "176b783d03ee5bd72d71265a5a34f66225ecab4d6a9b1d85022e18afa2d37bfa",
+    "range.json": "fae8f50c24ceda8c594dc280d61f6183caa848e6ef5743a8809b4990ff245482",
+    "wrong-role.json": "9ffc3cd1c301ec03509712657846aad91698f5edc1e4d23a78f23ef3b4c07cc6",
+    "withdrawn.json": "a5715d7a7ab3c691cbe2d6cc01a1e3c4470f78ce2d6ee1c547f20e3049d04259",
+    "conflict.json": "ecef7b9b9cf05d56e9145b153e19b89e8f7dc9f0b5aee11e5caf630e8bbecdaa",
+    "current.json": "74f197745b71438b4759c4b67b85bcaf96bad8f4a48478207c3cc3233e36ad6e",
+    "expired.json": "0183a103814a01e0047a52b5e40437c33d9da0e39bd4c222e8a500597a382c91",
+    "malformed.json": "40b5cafe045b9c9e31a1c3fdcfbc89f934906ff06a6276b55c2a0e517be21655",
+    "signature.json": "23fc1750a4b8da8343e65537cbd74ca2a02bd21c99896e16f9496355d6ff9ef6",
+    "revoked.json": "b54d0f167ce601674b8f37e7ccfde2da278dee391ceb45295b7e485a5e332ad9",
+    "future.json": "5c163f04e5074440641c66dbe3afa4252b173631084a80bc32cb325cf9216e21"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "case": "final",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "--state-dir",
+    "/tmp/alias",
+    "inventory",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"state directory parent must exist without symlinks and be writable\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "85d648cd6eed0654c2cb40d4e0a52e7de20677c3e311d8548160700c29093d79",
+  "after_sha256": "85d648cd6eed0654c2cb40d4e0a52e7de20677c3e311d8548160700c29093d79"
+}

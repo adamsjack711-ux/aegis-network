@@ -1,0 +1,19 @@
+{
+  "case": "conflict",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/conflict.json",
+    "--trust",
+    "/grants/trust.json",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\"schema_version\": \"observation-error-v2\", \"status\": \"unknown\", \"independent_status\": \"unknown\", \"error\": \"publisher sequence conflict in local Mesh file\"}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "f4132cbc8dd3a6ce2b72f01b89fd934116db5591e3a3a35bbbd3e7537346aa45",
+  "after_sha256": "f4132cbc8dd3a6ce2b72f01b89fd934116db5591e3a3a35bbbd3e7537346aa45"
+}

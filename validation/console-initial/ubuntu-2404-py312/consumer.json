@@ -1,0 +1,7 @@
+{
+  "uid": 65534,
+  "gid": 65534,
+  "grant_sha": "0ff45bb6c24ea425d275d840275ae5827aceef3faaba46df6c26cdc9af83f01a",
+  "file_mode": "0o100444",
+  "dir_mode": "0o40555"
+}

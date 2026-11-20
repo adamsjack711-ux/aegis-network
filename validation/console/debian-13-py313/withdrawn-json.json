@@ -1,0 +1,19 @@
+{
+  "case": "withdrawn",
+  "argv": [
+    "/tmp/venv/bin/aegis",
+    "findings",
+    "--feed",
+    "/grants/withdrawn.json",
+    "--trust",
+    "/grants/trust.json",
+    "--json"
+  ],
+  "rc": 2,
+  "stdout": "{\n  \"asset_id\": null,\n  \"claim_count\": 1,\n  \"cli_version\": \"0.1.0\",\n  \"current_exact_package_match_count\": 0,\n  \"findings\": [\n    {\n      \"architecture\": \"arm64\",\n      \"artifact_id\": \"00000000-0000-4000-8000-000000000501\",\n      \"asset_id\": null,\n      \"claim_digest\": \"7b5e1b0bd94c32a72e9c5a904e1886348a8e5da8001b35948c1098998130fe83\",\n      \"collected_at\": \"2026-11-20T19:56:52.559383Z\",\n      \"comparator\": \"exact-string\",\n      \"confidence\": \"package-identity-only\",\n      \"finding_id\": \"808a6959068abda25e8e530f\",\n      \"independent_status\": \"unknown\",\n      \"independent_status_reason\": \"NO_VERIFIABLE_T4_T5_PROOF\",\n      \"installed_version\": \"1:8.0-1\",\n      \"intelligence_expires_at\": \"2030-01-01T00:00:00Z\",\n      \"inventory_complete\": true,\n      \"local_claim_status\": \"withdrawn-in-supplied-file\",\n      \"match_reason\": \"EXACT_PACKAGE_VERSION\",\n      \"overall_assessment\": \"unknown\",\n      \"package_name\": \"curl\",\n      \"publisher_authenticity\": \"verified\",\n      \"purl\": \"pkg:deb/debian/curl\",\n      \"software_match\": \"matched\",\n      \"source\": \"aegis-mesh:validator-fixture:00000000-0000-4000-8000-000000000501\",\n      \"summary\": \"Signed Mesh lab finding; no host exploitability conclusion\",\n      \"uncertainty\": \"No current independent Evidence/T4/T5 status; binary/source package and reachability mapping unavailable\",\n      \"verification\": \"signed-mesh-v1-lab-scope\",\n      \"vulnerability_id\": \"AEGIS-CLI-501\"\n    }\n  ],\n  \"identity_scope\": \"none\",\n  \"intelligence_scope\": \"supplied-signed-events-only\",\n  \"inventory_complete\": true,\n  \"inventory_reason\": \"complete\",\n  \"observation_count\": 1,\n  \"schema_version\": \"observation-results-v2\",\n  \"snapshot_id\": \"e2af219816573b190a6dcb784b1d0a5adb94f241e3d714b68aa2627a45139676\"\n}\n",
+  "stderr": "",
+  "passed": true,
+  "change": {},
+  "before_sha256": "d771eb5593abce0a7efa3e79e3082347a2a2f15b6e00b7cc5bf8a88b6e6aa856",
+  "after_sha256": "d771eb5593abce0a7efa3e79e3082347a2a2f15b6e00b7cc5bf8a88b6e6aa856"
+}
