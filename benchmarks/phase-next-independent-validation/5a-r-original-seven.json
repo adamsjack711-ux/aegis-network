@@ -1,0 +1,144 @@
+{
+  "at_utc": "2026-11-20T06:29:36.092718+00:00",
+  "cases": [
+    {
+      "case": "offline_feed_fetch",
+      "error": "ValueError: external feed retrieval is not enrolled",
+      "outcome": "rejected",
+      "socket_calls": 0,
+      "status": "pass"
+    },
+    {
+      "case": "duplicate_json_key",
+      "error": "ValueError: duplicate JSON key",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "oversized_feed",
+      "error": "ValueError: feed body exceeds limit",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "unknown_fact_id",
+      "error": "ValueError: research cites unknown source facts",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "executable_model_instruction",
+      "error": "ValueError: research contains executable instruction syntax",
+      "outcome": "rejected",
+      "status": "pass"
+    },
+    {
+      "case": "unsupported_positive_point",
+      "outcome": "accepted",
+      "result": {
+        "asset_alias": "asset-1",
+        "baseline_outcome": "unknown",
+        "candidate_outcome": "unknown",
+        "check": {
+          "checker_revision": "1",
+          "deterministic_outcome": "unknown",
+          "disposition": "needs-evidence",
+          "model_candidate_outcome": "affected",
+          "point_support": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "points",
+              "index": 0,
+              "support": "unchecked"
+            },
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "local_explanation",
+              "index": 0,
+              "support": "unchecked"
+            }
+          ],
+          "reason_codes": [
+            "source-binding-unavailable",
+            "deterministic-unknown",
+            "model-exceeds-deterministic-evidence",
+            "unsupported-free-text-claim"
+          ],
+          "reportable_outcome": "unknown",
+          "research_result_digest": "4d204194e9bd77c2e38657e3e823755e2a58e936b35c9afe40c460e158951841",
+          "schema_version": "research-check-v1",
+          "source_binding": "unavailable",
+          "source_snapshot_digests": []
+        },
+        "citations": {
+          "F1": {
+            "acquisition": "fixture",
+            "pointer": "/summary",
+            "retrieved_at": "2026-11-20T06:29:36.092718+00:00",
+            "sha256": "89fcc9c17d7380e044d78bd6d2864f864b6d2264c7f5693fa7971c408086a87e",
+            "uri": "https://fixture.invalid/H09"
+          }
+        },
+        "estimated_cost_usd": null,
+        "experiment_config": {
+          "max_input_bytes": 10000,
+          "max_output_tokens": 700,
+          "prompt_version": "1"
+        },
+        "independently_verified": false,
+        "latency_ms": 0.011,
+        "model": "fixture-v1",
+        "model_candidate_outcome": "affected",
+        "provider": "fixture",
+        "provider_version": "1",
+        "raw_hypothesis": {
+          "ambiguities": [],
+          "candidate_outcome": "affected",
+          "lab_experiments": [],
+          "local_explanation": {
+            "fact_ids": [
+              "F1"
+            ],
+            "support": "unchecked",
+            "text": "Confirmed affected 5.0-2 with remote execution."
+          },
+          "points": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "support": "unchecked",
+              "text": "Confirmed affected 5.0-2 with remote execution."
+            }
+          ],
+          "prerequisites": []
+        },
+        "schema_version": "phase5a-research-v2",
+        "usage": {
+          "input_tokens": 140,
+          "output_tokens": 72
+        },
+        "vulnerability_id": "AEGIS-ADV-109"
+      },
+      "status": "fail"
+    },
+    {
+      "case": "research_cannot_parse_as_signed_finding",
+      "error": "ValidationError: 19 validation errors for SignedFinding\nfinding\n  Field required [type=missing, input_value={'schema_version': 'phase...upport': 'unchecked'}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nsignature\n  Field required [type=missing, input_value={'schema_version': 'phase...upport': 'unchecked'}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nschema_version\n  Extra inputs are not permitted [type=extra_forbidden, input_value='phase5a-research-v2', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nasset_alias\n  Extra inputs are not permitted [type=extra_forbidden, input_value='asset-1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nvulnerability_id\n  Extra inputs are not permitted [type=extra_forbidden, input_value='AEGIS-ADV-109', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nbaseline_outcome\n  Extra inputs are not permitted [type=extra_forbidden, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nmodel_candidate_outcome\n  Extra inputs are not permitted [type=extra_forbidden, input_value='affected', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nraw_hypothesis\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'candidate_outcome': 'af..., 'lab_experiments': []}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ncitations\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'F1': {'uri': 'https://f...cquisition': 'fixture'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nindependently_verified\n  Extra inputs are not permitted [type=extra_forbidden, input_value=False, input_type=bool]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nprovider\n  Extra inputs are not permitted [type=extra_forbidden, input_value='fixture', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nmodel\n  Extra inputs are not permitted [type=extra_forbidden, input_value='fixture-v1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nprovider_version\n  Extra inputs are not permitted [type=extra_forbidden, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nexperiment_config\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'max_input_bytes': 10000..., 'prompt_version': '1'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nusage\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'input_tokens': 140, 'output_tokens': 72}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nestimated_cost_usd\n  Extra inputs are not permitted [type=extra_forbidden, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nlatency_ms\n  Extra inputs are not permitted [type=extra_forbidden, input_value=0.011, input_type=float]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ncandidate_outcome\n  Extra inputs are not permitted [type=extra_forbidden, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\ncheck\n  Extra inputs are not permitted [type=extra_forbidden, input_value={'schema_version': 'resea...support': 'unchecked'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden",
+      "outcome": "rejected",
+      "status": "pass"
+    }
+  ],
+  "model_evidence": "none; scripted responses test validation controls only",
+  "source_pin": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762",
+  "summary": {
+    "fail": 1,
+    "inconclusive": 0,
+    "pass": 6
+  },
+  "topology": "offline one-process fixture"
+}

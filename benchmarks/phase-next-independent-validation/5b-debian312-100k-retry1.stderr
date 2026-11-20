@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/probe.py", line 89, in <module>
+    main()
+  File "/probe.py", line 60, in main
+    child = subprocess.Popen([str(console), "inventory", "--json"], env=env,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/local/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+PermissionError: [Errno 13] Permission denied: '/tmp/val1-venv/bin/aegis'

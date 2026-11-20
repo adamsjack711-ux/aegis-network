@@ -1,0 +1,375 @@
+{
+  "file_count": 70,
+  "files": [
+    {
+      "bytes": 1779,
+      "path": "benchmarks/phase-next-independent-validation/4f-retained-rescore.json",
+      "sha256": "eb1a802755c145e829903e6275ad28c7fd68ece4918944ce777eff0f8b915c28"
+    },
+    {
+      "bytes": 6123,
+      "path": "benchmarks/phase-next-independent-validation/5a-r-claim-challenge.json",
+      "sha256": "af9d6597a7402f72967e1cd0e8678323ec8e451e980a4edd5292b76b80a80faf"
+    },
+    {
+      "bytes": 13517,
+      "path": "benchmarks/phase-next-independent-validation/5a-r-independent.json",
+      "sha256": "3d3b7fd8554c99babfd313809b87eace5de307135f8e04f6e85266c54551dca1"
+    },
+    {
+      "bytes": 8274,
+      "path": "benchmarks/phase-next-independent-validation/5a-r-original-seven.json",
+      "sha256": "8cf0aaf070e4fe187a18f9f698292d81c434201a03e01b10f16299eda9554234"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100-measured.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100-measured.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 604572,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100-measured.stdout",
+      "sha256": "e98632a61c6b640c184159fbaf1f61d65fc135c0dd6e6de2f329d4096586dd7e"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-10000-measured.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-10000-measured.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 604591,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-10000-measured.stdout",
+      "sha256": "71b0631f7fab05d56909e8193080f37c38283b2022e7447146712173f764a1e4"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-measured.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-measured.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 604605,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-measured.stdout",
+      "sha256": "27d66353a1fc9a2a7dd768a59271a09e902ca9fb47cfc494e546998f052731ac"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry1.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "bytes": 634,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry1.stderr",
+      "sha256": "815fe3a761714e097a3c62772b1db11a11f323ab9a5b6c72a27ec1a3b7d6338a"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry1.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry2.exit",
+      "sha256": "e3b9c2844b5a5c2677b3a2279db2ec8487491dd9a23d6b22fac153391b3bb63c"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-retry2.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-stream.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-stream.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1068,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k-stream.stdout",
+      "sha256": "52330ed892a0cb8720c768b5eb9f27ad87a6423bb18bd292f502b934403cdc58"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "bytes": 461,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k.stderr",
+      "sha256": "f4657a045c6b7c721bbd5980fbcf3f076bef5f46f7aa13c47e015f8e79fe230a"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-debian312-100k.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-1.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 283,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-1.stderr",
+      "sha256": "04dbfdd08ce641585ed995f363b10a9ce08fbc92061c8fe79ea9813d2af52e77"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-1.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-2.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 283,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-2.stderr",
+      "sha256": "4bb7e8e1d2d91460e9b46c9bb97265970a27091536db8535887f25071f69aa39"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-repro-2.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-stabilization-focused.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 99,
+      "path": "benchmarks/phase-next-independent-validation/5b-stabilization-focused.stdout",
+      "sha256": "ea26b3043b3f029a9e341d543761fc7f78c9ae6a07b40ba95a95439c53029ae7"
+    },
+    {
+      "bytes": 1441,
+      "path": "benchmarks/phase-next-independent-validation/5b-stabilization-focused.xml",
+      "sha256": "d70d1368601ff74221255c61b265f5a027cf4d3196af7b1fb9f6cc0833df23a6"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/5b-wheel-build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 281,
+      "path": "benchmarks/phase-next-independent-validation/5b-wheel-build.stderr",
+      "sha256": "fd95f000f83882dd9640916ca62ac04c7cde611e5aa3a5f5e18c377c07dd5735"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/5b-wheel-build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/env-debian313.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 155,
+      "path": "benchmarks/phase-next-independent-validation/env-debian313.stderr",
+      "sha256": "3c4ddccf1a65262dcfa7d62c9539aa53aaa728366a10c64db6cd158db521f7e5"
+    },
+    {
+      "bytes": 301,
+      "path": "benchmarks/phase-next-independent-validation/env-debian313.stdout",
+      "sha256": "b41762d31826e9433eb4a9e60d719d6b36fec425f8343c8754e290319a613979"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/env-ubuntu2204.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/env-ubuntu2204.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 386,
+      "path": "benchmarks/phase-next-independent-validation/env-ubuntu2204.stdout",
+      "sha256": "594d5ddd35aedb47f00d9c34d140017907a5b9f93c975aba125fc924daac5c07"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/image-pins.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 0,
+      "path": "benchmarks/phase-next-independent-validation/image-pins.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 329,
+      "path": "benchmarks/phase-next-independent-validation/image-pins.stdout",
+      "sha256": "5265de02cb6fa9474c7299b7bec81db28270c0046f9e3728fb9d1be843fd918f"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/integrated-focused.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 99,
+      "path": "benchmarks/phase-next-independent-validation/integrated-focused.stdout",
+      "sha256": "394dbf9dfa7213e1cd7cdbee8c1ffbf14193394627a9715c0b3cbce91d32ce55"
+    },
+    {
+      "bytes": 6716,
+      "path": "benchmarks/phase-next-independent-validation/integrated-focused.xml",
+      "sha256": "953aaa4ed153eb5475add2325b2a1d25c5ce7b86ac15d980a78cf75cdc15a687"
+    },
+    {
+      "bytes": 2,
+      "path": "benchmarks/phase-next-independent-validation/integrated-full.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "bytes": 2957,
+      "path": "benchmarks/phase-next-independent-validation/integrated-full.stdout",
+      "sha256": "97c725959d87094ce579c28fd95b8be53d22b018f933a81a62845087d9b94d07"
+    },
+    {
+      "bytes": 177970,
+      "path": "benchmarks/phase-next-independent-validation/integrated-full.xml",
+      "sha256": "9195d6158f6b3326c759ce6fc7d04aa857c5ab8fa8ea2e8322efab1fff3065bd"
+    },
+    {
+      "bytes": 122,
+      "path": "benchmarks/phase-next-independent-validation/manifest-verification.json",
+      "sha256": "3406a642dbc34fdf841f52dc5ebd97cc3dae4c3e4b03a0478b009b47febe910f"
+    },
+    {
+      "bytes": 52896,
+      "path": "benchmarks/phase-next-independent-validation/original-evidence-manifest.json",
+      "sha256": "37b2449521f57ac905e78bd5c13f218d30a51378129191c0216f304ad423b017"
+    },
+    {
+      "bytes": 1,
+      "path": "benchmarks/phase-next-independent-validation/repro-1/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    {
+      "bytes": 162796,
+      "path": "benchmarks/phase-next-independent-validation/repro-1/aegis_network-0.1.0-py3-none-any.whl",
+      "sha256": "7f972ed4ecebebdeacc2b207be0ba6297047b1be33a1820f6bed2020f455bd57"
+    },
+    {
+      "bytes": 6989387,
+      "path": "benchmarks/phase-next-independent-validation/repro-1/aegis_network-0.1.0.tar.gz",
+      "sha256": "285cb1e331c3475f40bb70fa1c20ab93c8063fbf9879befeb7e65bca9b667bb9"
+    },
+    {
+      "bytes": 1,
+      "path": "benchmarks/phase-next-independent-validation/repro-2/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    {
+      "bytes": 162796,
+      "path": "benchmarks/phase-next-independent-validation/repro-2/aegis_network-0.1.0-py3-none-any.whl",
+      "sha256": "7f972ed4ecebebdeacc2b207be0ba6297047b1be33a1820f6bed2020f455bd57"
+    },
+    {
+      "bytes": 6989387,
+      "path": "benchmarks/phase-next-independent-validation/repro-2/aegis_network-0.1.0.tar.gz",
+      "sha256": "285cb1e331c3475f40bb70fa1c20ab93c8063fbf9879befeb7e65bca9b667bb9"
+    },
+    {
+      "bytes": 4786,
+      "path": "benchmarks/phase-next-independent-validation/runner-probe-expanded.json",
+      "sha256": "1ce17d91d70168e414320868cc2040a61eaebbe33a3f4afdc6ebaa02246f99f1"
+    },
+    {
+      "bytes": 3479,
+      "path": "benchmarks/phase-next-independent-validation/runner-probe.json",
+      "sha256": "3083ad19a9e13859e1af9e596a481d78fcef992462c056f7e8780efe34a4e376"
+    },
+    {
+      "bytes": 3962,
+      "path": "benchmarks/phase-next-independent-validation/source-pins.json",
+      "sha256": "50d0d58b6ffc133d67375c2bd3e3ac138e82933d5e817f40e7e0a2b521f7e059"
+    },
+    {
+      "bytes": 1,
+      "path": "benchmarks/phase-next-independent-validation/wheels/.gitignore",
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+    },
+    {
+      "bytes": 162796,
+      "path": "benchmarks/phase-next-independent-validation/wheels/aegis_network-0.1.0-py3-none-any.whl",
+      "sha256": "89a6aafeaa24ff0c4311a94642c03b47aaf7109977100801ec1fc907a7671c86"
+    },
+    {
+      "bytes": 6989407,
+      "path": "benchmarks/phase-next-independent-validation/wheels/aegis_network-0.1.0.tar.gz",
+      "sha256": "bb5b9ee6fdd66d5fe0ef874915ee84a1d27da73e40b12b9041efda4f1b3ca845"
+    },
+    {
+      "bytes": 12617,
+      "path": "docs/phase-next-val1-findings.md",
+      "sha256": "eb4d8354b1d9c3d84635f94e3a6f849e6659b13e3eb97e9a863ca5c69c8bd978"
+    },
+    {
+      "bytes": 8708,
+      "path": "docs/phase-next-val1-freeze.md",
+      "sha256": "deb17cff9931a399b26389369ec89d4d77b649771ecee935bdfe47b53abf21e1"
+    },
+    {
+      "bytes": 5903,
+      "path": "scripts/val1_cli_linux.py",
+      "sha256": "a9f1d87f76bbf079249d3f1d82dea497b41a81acaad0f1c6582f6f124e5ccd1d"
+    },
+    {
+      "bytes": 7422,
+      "path": "scripts/val1_independent.py",
+      "sha256": "1cbf08b669f2c800480660bc62dad017ac67fa3db587ce722e759d994902330a"
+    }
+  ],
+  "freeze_commit": "2890cf8a17805923a326a1fc5e02d481f9640b08",
+  "source_worktrees_at_handoff": {
+    "ai": {
+      "clean": true,
+      "commit": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762"
+    },
+    "cli": {
+      "clean": true,
+      "commit": "1b30cf864b8559e02509c22ed8c5362a141da448"
+    },
+    "integrated": {
+      "clean": true,
+      "commit": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+    },
+    "recovery_proposal": {
+      "clean": true,
+      "commit": "cf957b18f4cd4a61361122426c6c5ed3a99e5059"
+    }
+  },
+  "starting_reference": "ec939e14a5acd438ff0d5fa562ed61a70b68f3c9"
+}

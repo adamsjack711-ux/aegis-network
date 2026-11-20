@@ -1,0 +1,3 @@
+[aegis_phase4_baseline-coordinator:latest] sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e arm64 linux
+[python:3.13-slim] sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90 arm64 linux
+[ubuntu:22.04] sha256:2edbbc5dc405e9612ba3584ce95480277e3eb374407b5505fe26f17df77c7dbc arm64 linux

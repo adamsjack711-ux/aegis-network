@@ -1,0 +1,119 @@
+{
+  "attempted": 8,
+  "cases": [
+    {
+      "actual_exit": 0,
+      "actual_output": {
+        "negative_control": true,
+        "outcome": "reproduced",
+        "positive_control": true,
+        "reason": "marker-observed"
+      },
+      "case": "positive_registered",
+      "expected_exit": 0,
+      "expected_outcome": "reproduced",
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "4eaa924ca58c0d396c423a12dfb671cf86e9dda4b763068d5c3e08ce7dc83351",
+      "wall_ms": 31.141
+    },
+    {
+      "actual_exit": 0,
+      "actual_output": {
+        "negative_control": true,
+        "outcome": "not-reproduced",
+        "positive_control": true,
+        "reason": "marker-absent"
+      },
+      "case": "negative_registered",
+      "expected_exit": 0,
+      "expected_outcome": "not-reproduced",
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "c63b4a4a3ff61484fa7c1fc055be29314568137710398b7db720be141267ce8f",
+      "wall_ms": 29.877
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "unknown_family",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 30.401
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "unknown_operation",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 30.645
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "command_text",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 30.072
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "extra_role",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 30.936
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "malformed_json",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 29.641
+    },
+    {
+      "actual_exit": 2,
+      "actual_output": null,
+      "case": "oversized",
+      "expected_exit": 2,
+      "expected_outcome": null,
+      "scratch_files": [],
+      "status": "pass",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_ms": 29.832
+    }
+  ],
+  "failed": 0,
+  "host_uid": 501,
+  "passed": 8,
+  "planned": 8,
+  "python": "3.15.2",
+  "scope": "direct fixed worker, same OS identity; no syscall tracer or privilege separation",
+  "worker": "/Users/jackadams-lovell/aegis-network/.worktrees/phase-next-independent-validation/src/aegis/evidence/_worker.py",
+  "worker_sha256": "d59895231de4a29b1ab0607188f264ba54823352107521caf0eba49301d6d275"
+}

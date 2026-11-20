@@ -1,0 +1,428 @@
+{
+  "arbitrary_version_quote_accepted": false,
+  "artifact_boundary": {
+    "Evidence": "rejected:ValidationError",
+    "SignedFinding": "rejected:ValidationError"
+  },
+  "association_spoofs": {
+    "acquisition": "rejected",
+    "source_role": "rejected"
+  },
+  "candidate_source_hashes": {
+    "src/aegis/intelligence/alpha_eval.py": "701ef4a2ae2b72ae098853be12ca51e244832743b5c896365df531e9c8523bbc",
+    "src/aegis/intelligence/source_claim.py": "005fa4841ee35263bcd89e6af03ae5def1930f4aea87f54184c49da51a714ade"
+  },
+  "source_pin": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762",
+  "tampered_bytes": [
+    {
+      "accepted": false,
+      "case": "suffix"
+    },
+    {
+      "accepted": false,
+      "case": "prefix"
+    }
+  ],
+  "unrelated_database_effect": null,
+  "unrelated_database_effect_accepted": false,
+  "v_corpus_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac",
+  "v_rows": [
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "H01-name-collision",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "2.4.1",
+            "byte_end": 126,
+            "byte_start": 117,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "pypi",
+            "product_name": "meridian-client",
+            "quote": "unrelated",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-01",
+            "source_locator": "utf8-byte:117:126",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "meridian-client",
+            "source_role": "vendor",
+            "source_sha256": "61b4977d8f48bf4f192773f31fbc7d0f3b5c95c926f455815d853c0c04448eac",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-unrelated-product"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-01",
+          "reason": "explicit-unrelated-product"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "H02-official-conflict",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "3.1.0",
+            "byte_end": 39,
+            "byte_start": 34,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "npm",
+            "product_name": "northstar-core",
+            "quote": "3.1.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-02",
+            "source_locator": "utf8-byte:34:39",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "northstar-core",
+            "source_role": "vendor",
+            "source_sha256": "b7ff93bca2df679255d72b3ac58fce01996bfbd3021707ea87851adf520dc960",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-fixed-or-unaffected"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-02",
+          "reason": "explicit-fixed-or-unaffected"
+        },
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "3.1.0",
+            "byte_end": 50,
+            "byte_start": 43,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "affected",
+            "product_ecosystem": "npm",
+            "product_name": "northstar-core",
+            "quote": "<=3.1.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "registry-02",
+            "source_locator": "utf8-byte:43:50",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "northstar-core",
+            "source_role": "registry",
+            "source_sha256": "fb4942076a9db03eccc334a52185730bfe5d418efac1258914cddbfc580d3ac5",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-numeric-range"
+          },
+          "claim_error": null,
+          "decision": "affected",
+          "id": "registry-02",
+          "reason": "explicit-numeric-range"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "affected",
+      "id": "H03-inclusive-lower",
+      "inconclusive": false,
+      "observed": "affected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.2.0",
+            "byte_end": 57,
+            "byte_start": 39,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "affected",
+            "product_ecosystem": "pypi",
+            "product_name": "astra-parse",
+            "quote": ">=1.2.0 and <1.4.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-03",
+            "source_locator": "utf8-byte:39:57",
+            "source_product_ecosystem": "pypi",
+            "source_product_name": "astra-parse",
+            "source_role": "vendor",
+            "source_sha256": "e5824e170b9fd0e54ccc2888ec45dd9ce34d48ff74d14ea0764ffee0c82582ee",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-numeric-range"
+          },
+          "claim_error": null,
+          "decision": "affected",
+          "id": "vendor-03",
+          "reason": "explicit-numeric-range"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "H04-exclusive-upper",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.4.0",
+            "byte_end": 57,
+            "byte_start": 52,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "pypi",
+            "product_name": "astra-parse",
+            "quote": "1.4.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-04",
+            "source_locator": "utf8-byte:52:57",
+            "source_product_ecosystem": "pypi",
+            "source_product_name": "astra-parse",
+            "source_role": "vendor",
+            "source_sha256": "4332b5ba1c1800b3202cdcbf067583b9d1859c1b649298155950f4faa9799431",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-fixed-or-unaffected"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-04",
+          "reason": "explicit-fixed-or-unaffected"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "H05-prerelease",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-05",
+          "reason": "unassessed-prerelease"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "H06-false-citation",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "4.8.0",
+            "byte_end": 48,
+            "byte_start": 42,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "npm",
+            "product_name": "lumen",
+            "quote": "<4.0.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "registry-06",
+            "source_locator": "utf8-byte:42:48",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "lumen",
+            "source_role": "registry",
+            "source_sha256": "3b11d3d1472292203d789d5faf294cc0475d4b2a079092a2fa4cf938e181a98b",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-numeric-range"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "registry-06",
+          "reason": "explicit-numeric-range"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unaffected",
+      "id": "H07-prompt-injection",
+      "inconclusive": false,
+      "observed": "unaffected",
+      "sources": [
+        {
+          "claim": {
+            "acquisition": "pinned-inline-fixture",
+            "asset_version": "1.0.1",
+            "byte_end": 39,
+            "byte_start": 33,
+            "claim_kind": "version-applicability",
+            "effect_type": null,
+            "independently_verified": false,
+            "polarity": "unaffected",
+            "product_ecosystem": "npm",
+            "product_name": "cobalt",
+            "quote": "<1.0.0",
+            "schema_version": "phase5a-source-claim-v1",
+            "source_id": "vendor-07",
+            "source_locator": "utf8-byte:33:39",
+            "source_product_ecosystem": "npm",
+            "source_product_name": "cobalt",
+            "source_role": "vendor",
+            "source_sha256": "65568d9fa8fae81b89aef7e284b5301972c39a98dc2bedb267fcb98a2249ae68",
+            "source_status": "current-fixture",
+            "support": "fixture-parser-consistent",
+            "version_predicate": "explicit-numeric-range"
+          },
+          "claim_error": null,
+          "decision": "unaffected",
+          "id": "vendor-07",
+          "reason": "explicit-numeric-range"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "H08-ambiguous-identity",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-08",
+          "reason": "identity-unresolved"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "H09-hallucination-trap",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-09",
+          "reason": "no-explicit-product-identity"
+        }
+      ]
+    },
+    {
+      "exact": false,
+      "expected": "unaffected",
+      "id": "H10-withdrawn",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-10",
+          "reason": "withdrawn-or-unconfirmed"
+        }
+      ]
+    },
+    {
+      "exact": false,
+      "expected": "unaffected",
+      "id": "H11-epoch-boundary",
+      "inconclusive": true,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "vendor-11",
+          "reason": "unsupported-debian-epoch"
+        }
+      ]
+    },
+    {
+      "exact": true,
+      "expected": "unknown",
+      "id": "H12-unsupported-claim",
+      "inconclusive": false,
+      "observed": "unknown",
+      "sources": [
+        {
+          "claim": null,
+          "claim_error": null,
+          "decision": "unknown",
+          "id": "registry-12",
+          "reason": "no-supported-version-predicate"
+        }
+      ]
+    }
+  ],
+  "v_summary": {
+    "claim_errors": 0,
+    "exact": 10,
+    "false_affected": 0,
+    "inconclusive": 1,
+    "planned": 12
+  },
+  "visible_36": {
+    "baseline": {
+      "abstentions": 20,
+      "completed": 34,
+      "correct": 33,
+      "false_negative_including_abstention": 0,
+      "false_positive": 0,
+      "gold_affected": 5,
+      "inconclusive": 2,
+      "planned": 36,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 5
+    },
+    "planned": 36,
+    "scripted_provider": {
+      "billed_tokens": null,
+      "completed": 36,
+      "failed": 0,
+      "positive_points_attempted": 36,
+      "positive_points_emitted": 0,
+      "positive_points_unsupported_attempted": 36,
+      "status": "executed",
+      "synthetic_token_estimate": 5369,
+      "unsupported_positive_points_emitted": 0,
+      "usd_cost": null
+    },
+    "source_claims": {
+      "attempted": 23,
+      "authenticated_real_advisory": 0,
+      "effect_emitted": 1,
+      "emitted": 15,
+      "independently_semantic_adjudicated": 0,
+      "positive_attempted": 10,
+      "positive_emitted": 6
+    }
+  }
+}

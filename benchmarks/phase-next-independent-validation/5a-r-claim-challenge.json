@@ -1,0 +1,224 @@
+{
+  "cases": [
+    {
+      "case": "original_unsupported_alternative_disposition",
+      "observed": {
+        "check": {
+          "checker_revision": "1",
+          "deterministic_outcome": "unknown",
+          "disposition": "needs-evidence",
+          "model_candidate_outcome": "affected",
+          "point_support": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "points",
+              "index": 0,
+              "support": "unchecked"
+            },
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "local_explanation",
+              "index": 0,
+              "support": "unchecked"
+            }
+          ],
+          "reason_codes": [
+            "source-binding-unavailable",
+            "deterministic-unknown",
+            "model-exceeds-deterministic-evidence",
+            "unsupported-free-text-claim"
+          ],
+          "reportable_outcome": "unknown",
+          "research_result_digest": "08a4239d0b089dcaefda4b73cde344aab42da62315533a45418b73e682ad621f",
+          "schema_version": "research-check-v1",
+          "source_binding": "unavailable",
+          "source_snapshot_digests": []
+        },
+        "model": "affected",
+        "raw_hypothesis": {
+          "ambiguities": [],
+          "candidate_outcome": "affected",
+          "lab_experiments": [],
+          "local_explanation": {
+            "fact_ids": [
+              "F1"
+            ],
+            "support": "unchecked",
+            "text": "Confirmed affected 5.0-2 with remote execution."
+          },
+          "points": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "support": "unchecked",
+              "text": "Confirmed affected 5.0-2 with remote execution."
+            }
+          ],
+          "prerequisites": []
+        },
+        "reportable": "unknown",
+        "top_level_points_present": false
+      },
+      "status": "pass"
+    },
+    {
+      "case": "matching_version_does_not_validate_fabricated_impact",
+      "observed": {
+        "check": {
+          "checker_revision": "1",
+          "deterministic_outcome": "affected",
+          "disposition": "research-consistent",
+          "model_candidate_outcome": "affected",
+          "point_support": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "points",
+              "index": 0,
+              "support": "unchecked"
+            },
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "field": "local_explanation",
+              "index": 0,
+              "support": "unchecked"
+            }
+          ],
+          "reason_codes": [
+            "unsupported-free-text-claim"
+          ],
+          "reportable_outcome": "affected",
+          "research_result_digest": "6250372da09f0e96af3fb71167ffe0b43b3ec1ffaf601abdca2c9d20e0b6e268",
+          "schema_version": "research-check-v1",
+          "source_binding": "digest-checked",
+          "source_snapshot_digests": [
+            "a1829628086f796ed7f4a5ac2736f362ad8a716658c60b3320e7d2ef0ef02550"
+          ]
+        },
+        "raw_hypothesis": {
+          "ambiguities": [],
+          "candidate_outcome": "affected",
+          "lab_experiments": [],
+          "local_explanation": {
+            "fact_ids": [
+              "F1"
+            ],
+            "support": "unchecked",
+            "text": "Confirmed remote execution at 1.5."
+          },
+          "points": [
+            {
+              "fact_ids": [
+                "F1"
+              ],
+              "support": "unchecked",
+              "text": "Confirmed remote execution at 1.5."
+            }
+          ],
+          "prerequisites": []
+        },
+        "reportable": "affected",
+        "top_level_points_present": false
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_v1",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_versionless",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_v1_top_level_prose",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "accept_exact_v2",
+      "observed": {
+        "reportable": "affected",
+        "schema_version": "phase5a-research-v2"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_v2_missing_check",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_v2_forged_reportable_outcome",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "reject_unrecomputed_raw_prose_tamper",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "self_consistent_unkeyed_forgery_boundary",
+      "observed": {
+        "accepted": true,
+        "independently_verified": false,
+        "interpretation": "internal consistency only; no source authentication",
+        "reportable": "affected",
+        "source_binding": "digest-checked"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "no_signed_finding_promotion_unsupported",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    },
+    {
+      "case": "no_signed_finding_promotion_matching_impact",
+      "observed": {
+        "rejected_by": "ValidationError"
+      },
+      "status": "pass"
+    }
+  ],
+  "limitations": [
+    "Scripted provider is not a real model or source authentication",
+    "No actuator or Mesh service was exercised"
+  ],
+  "source_pin": "ebcc30c9cfcee54c3e103b6fb8cfafb8b5d4e762",
+  "source_sha256": {
+    "research.py": "2b114a9f9e75eaaffd2259195f5f12c49233de1f40b3df5d99c51d6954ad05dd"
+  },
+  "summary": {
+    "fail": 0,
+    "inconclusive": 0,
+    "pass": 12,
+    "skipped": 0
+  },
+  "topology": "offline one-process scripted provider"
+}
