@@ -1,0 +1,178 @@
+{
+  "baseline_commit": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "baseline_initial_status": "clean; checked before copying validator draft",
+  "files": [
+    {
+      "bytes": 10404,
+      "git_blob": "39a08e1f5eee2b9b4700fb4e3d5d2799ba252c01",
+      "path": "benchmarks/phase-next-remediation/4f-broker-control.json",
+      "sha256": "bec42e65ee8876db7926eff65a10832c51b0c328a56ca0d630cf7100f96444c1"
+    },
+    {
+      "bytes": 23106,
+      "git_blob": "1d1ce74dc5f4c386163b387c7daffd676fef2f6f",
+      "path": "benchmarks/phase-next-remediation/4f-sigkill-fault.json",
+      "sha256": "19d7bbcccb69ad7238fd93588e04634c8e02c08528b437d8eb703dea20fee17d"
+    },
+    {
+      "bytes": 6123,
+      "git_blob": "f6ee1bc5913ae4c760438b9b4fb5bf0283952c9d",
+      "path": "benchmarks/phase-next-remediation/5a-claim-challenge-adversarial.json",
+      "sha256": "f86164584d6e8354a61aaac13c3899bfe488c169b59a68a7688d03445ae72999"
+    },
+    {
+      "bytes": 5722,
+      "git_blob": "81fe3c9aaabbb660e23c8d44cca5d2ec27b74175",
+      "path": "benchmarks/phase-next-remediation/5a-claim-challenge.json",
+      "sha256": "9afbc135015a88adb95a9c5f463fd9bccd40dde92075e82a8ef54761f48cac13"
+    },
+    {
+      "bytes": 8274,
+      "git_blob": "739608c3eeb095c00b26010cc5c716f5a4580a43",
+      "path": "benchmarks/phase-next-remediation/5a-original-seven.json",
+      "sha256": "f5721fb0f91752c626e33e105623f891168a5a077f0e8c11ecf972982f8449a8"
+    },
+    {
+      "bytes": 818,
+      "git_blob": "336a8504f4e9ff9baafff8ac99b4e0d303bcfe5c",
+      "path": "benchmarks/phase-next-remediation/5b-five-case-linux.json",
+      "sha256": "50d99d9b78aa2c80aca59d1420e862e113cc057e422f1360419c2aee79fe1582"
+    },
+    {
+      "bytes": 510,
+      "git_blob": "bab0c5f7a8d6dd82fb6af13a6675010f171d99a2",
+      "path": "benchmarks/phase-next-remediation/5b-offline-wheel-attempt.json",
+      "sha256": "6c5e44a737e5774fb389952e408399e5d82c5f58f56d368832739e15826bb45d"
+    },
+    {
+      "bytes": 11217,
+      "git_blob": "ea8a0823f7c37c48be2c5e03ddb2b6cdf0bfa19d",
+      "path": "benchmarks/phase-next-remediation/5b-status-challenge-api-guard.json",
+      "sha256": "8a89d4b793ab29dc62fe66df725a1aef1d1e0452572acd9a95523906f33bcfe1"
+    },
+    {
+      "bytes": 7279,
+      "git_blob": "3354c7e2d591bbe774193d14630cf6ca6c81291e",
+      "path": "benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133"
+    },
+    {
+      "bytes": 471,
+      "git_blob": "4a76348868ab48538666f1f12130aaeb4eb526c6",
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-default-state.txt",
+      "sha256": "26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d"
+    },
+    {
+      "bytes": 2160,
+      "git_blob": "9c71bb44ac8330680d12cb7a7ecc15a8076d2bcb",
+      "path": "benchmarks/phase-next-validation/cli-5b-linux-score.json",
+      "sha256": "3bf36d89422bf1ba6a87be7f299a898adc4bad60628bca1d901a3e2efc251ac8"
+    },
+    {
+      "bytes": 5684,
+      "git_blob": "81c2b4db475b9be50e1ac43be3d69ab319cfd60c",
+      "path": "benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "sha256": "3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3"
+    },
+    {
+      "bytes": 5683,
+      "git_blob": "71f7f95beedfa3dec89e05c706617facc691414e",
+      "path": "benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98"
+    },
+    {
+      "bytes": 1418,
+      "git_blob": "e6b596d8dbef40138c7c1ab6c48c9d3679b76f84",
+      "path": "benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916"
+    },
+    {
+      "bytes": 402,
+      "git_blob": "b05cb5a4fc546efd645e3d4f6a0fc151ac5fc9ef",
+      "path": "benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "sha256": "9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b"
+    },
+    {
+      "bytes": 159685,
+      "git_blob": "c838a505d3097202a2f96064ab78204dcbde5d13",
+      "path": "benchmarks/phase4e/integrated-final-348.xml",
+      "sha256": "83b3aaaec48989ebba2c5362115752a83095c366efb90b7b9e59352509db72a3"
+    },
+    {
+      "bytes": 23308,
+      "git_blob": "92905e91acdc823f00540dab71a566f4a4ef10f1",
+      "path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-1.json",
+      "sha256": "fbb13cb3fef546f6e6a31bbdd4b1df436face6a56cb866bc867442c0bcce3894"
+    },
+    {
+      "bytes": 23310,
+      "git_blob": "83129f373a166f42233857ae8adb41bf54ec543b",
+      "path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-2.json",
+      "sha256": "172c1effa3935cece06a082829b73c5ffa26d1249ed77bb03d5d5a82594f6487"
+    },
+    {
+      "bytes": 23310,
+      "git_blob": "05de399c350f2f92d91d25eab94cd86c3016118c",
+      "path": "benchmarks/phase4f-withdrawal-recovery/sigkill-restart-3.json",
+      "sha256": "7b169af7589df3171d4a5236847964bff97e47dfd9f8fc654a13e46ba09fae1b"
+    },
+    {
+      "bytes": 7564,
+      "git_blob": "fd211dacefb7d55cff66dcdd981d052e6ff9a99c",
+      "path": "docs/phase-next-acceptance-frozen.md",
+      "sha256": "60d7624a0b01b27a843c74b25df472702befdb38620df6e16f65ea70b2c06438"
+    },
+    {
+      "bytes": 14340,
+      "git_blob": "68addbeef202dc1de9eae7654e85a6cee646bf27",
+      "path": "docs/phase-next-remediation-validation-freeze.md",
+      "sha256": "92819ca60a96d909ab3953c7634fb89173212891372fd5666f10759512e971a1"
+    },
+    {
+      "bytes": 2126,
+      "git_blob": "6c86a26e5128ce96b33556a0477b101a735ec843",
+      "path": "fixtures/phase-next-ai-claim-map-v1.json",
+      "sha256": "7abc8a6ad9ddd1b56afbaeb790a089d474f2c434c1f40abc68fd104e4cc91bdb"
+    },
+    {
+      "bytes": 5606,
+      "git_blob": "e54366184b3ab8471c1c60562d989210efbbeae0",
+      "path": "fixtures/phase-next-ai-holdout-v1.json",
+      "sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
+    },
+    {
+      "bytes": 13386,
+      "git_blob": "124a75280bed5212c82d6a8521cf7a3b1c535bf8",
+      "path": "scripts/phase4e_withdrawal_recovery_check.py",
+      "sha256": "82f0fc0edec09a220f1976d0ab810f4f9b98115039217acb3e35ca77811a8050"
+    },
+    {
+      "bytes": 5157,
+      "git_blob": "778c5fcf37f0cf2aabd276dd42b96c8e499ba658",
+      "path": "scripts/phase_next_5a_security.py",
+      "sha256": "d87605a8f3dd647b515cc6b5b2d22af13b33a59cf5e72456e58dd58f96bcf882"
+    },
+    {
+      "bytes": 4942,
+      "git_blob": "902675d377623fbdd5b0b8a7041deb3e29943e54",
+      "path": "scripts/phase_next_5b_oracle.py",
+      "sha256": "b199839b4906c65fa4834eb2a24754d11b35cc07fd1cbaffb7e2a7c418df59c3"
+    },
+    {
+      "bytes": 1634,
+      "git_blob": "0e9eab0a6a2292672e0e71327179139b1b49d296",
+      "path": "scripts/phase_next_probe_cli.py",
+      "sha256": "40d710f441f7418f5293adba20e4b833876c2e6d800c4841b9507016662c0dc1"
+    }
+  ],
+  "scope": "hash inventory only; original tracked files not copied or modified",
+  "source_pins": {
+    "4f_diagnostic": "2fa7321618fc5e7435b339ffa9368de258198d21",
+    "4f_original": "51e5601cdb5f1330828063518d62c342ba8721da",
+    "5a_original": "e3da3876df413f080095dc7568a664f75ffba5b6",
+    "5a_reader_failure": "6dd62bb3daf2687617c04077594159e1a2dfc04b",
+    "5a_revised": "71a6f864456457769cfb3f844f0cd47aac3a9d95",
+    "5b_original": "cc2e918603beff4cd296b4f39a723b6c30beed06",
+    "5b_revised": "a9b0d0e1d45b64ce833343dbfa3dd9f034a20770"
+  }
+}
