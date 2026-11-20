@@ -1,0 +1,14 @@
+# Phase 5C local Diagnostic Runner integration boundary
+
+**Status:** private proposal; no authority bridge. [Detailed provisional records](phase5c-diagnostic-contract-proposal.md) remain `proposal-v0`. `DiagnosticRequest`, `DiagnosticResult`/`DiagnosticObservation`, local enrollment, installed profile and transcript are research-only. No shared signed contract or CLI default behavior changes here.
+
+An operator must explicitly enroll an authorized disposable local fixture and select an installed, source-reviewed profile. A copied JSON request cannot grant execution. A separate local broker must mint a one-use, nonserializable capability bound to run ID, target enrollment digest, profile/image digest, sealed input digest, budget and short expiry. An optional output capability is separate; default output is bounded stdout and no persistent host write. No arbitrary shell string, dynamic module, download URL, remote target or network connection is accepted. The worker starts only inside a pinned unprivileged container with no network, read-only root, no host-writable descriptor, cap drop, seccomp, cgroup CPU/memory/pids, sealed input and independent syscall tracing. Missing containment or tracer means **no worker launch**. The initial implementation lane may build inert request validation and registry tests without launching a process.
+
+| Boundary | Frozen behavior |
+| --- | --- |
+| 5A research → Runner | Untrusted suggested installed profile ID and source span only; operator independently chooses local enrollment and capability. No model tool call to Runner. |
+| Runner → 5B CLI | No default import/call. Any later explicit local-lab display uses `independent_status="unknown"`, bounded result and no state write unless separately requested. |
+| Runner → `SignedFinding 1.0`, Evidence, T4/T5, Mesh | No adapter. Existing readers reject or ignore the provisional kind. A diagnostic observation is neither verifier attestation nor Evidence. |
+| Runner → local approval, Rapid, protected writer | No reader or action capability. A successful control or transcript digest cannot authorize mitigation or clear a deny-only hold. |
+
+VAL must freeze malformed/duplicate/oversize request, stale/revoked enrollment, wrong digest, replayed capability, unauthorized profile, prompt-injected advisory text, attempted exec/network/write, containment loss, timeout, OOM, crash, cancellation and cleanup cases before implementation review. The prior 5C design had **0/72 safety and 0/30+30 performance trials**; this remains NO-GO for executable prototype until pinned image, seccomp bytes, tracer digest, broker custody and exact acceptance pass. The initial inert parser/registry prototype may be reviewed as a local-only engineering artifact, not a functioning diagnostic worker or a release.
