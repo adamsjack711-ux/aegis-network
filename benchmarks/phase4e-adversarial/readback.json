@@ -63,6 +63,14 @@
     "skipped": 0,
     "tests": 1
   },
+  "combined-identity-restore-preread.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 1
+  },
   "combined-identity-restore.xml": {
     "errors": 0,
     "failures": 0,
@@ -152,6 +160,14 @@
     "signed_status_samples": 0,
     "skipped": 0,
     "tests": 1
+  },
+  "inherited-evidence-conflict.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 2
   },
   "local-baseline-repeat.xml": {
     "errors": 0,

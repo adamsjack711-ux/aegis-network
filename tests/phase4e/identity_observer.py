@@ -161,12 +161,14 @@ def test_I05_restored_home_holds_against_current_anchor(lab, record_property):
     lab.start("home")
     with pytest.raises((Denied, Unavailable)):
         lab.call(current.agent, current.broker, "/write", staged)
-    observed = read_target(lab, target)
     stale = readback(lab)
+    observed = read_target(lab, target)
     record_property("stale_home_restore", json.dumps({"durable": stale, "target": observed}, sort_keys=True))
     assert stale["home"]["generation"] == prior.generation
     assert stale["anchor"]["generation"] == current.generation > prior.generation
+    assert stale["targets"][target]["marker"][1] == "quarantined"
     assert observed["effective"] == observed["marker"] == "quarantined"
+    assert readback(lab) == stale
     assert stale["targets"][target]["receipts"] == [(current.generation, "observing")]
 
     new = claim("agent-a", "broker-a", available_generation())
