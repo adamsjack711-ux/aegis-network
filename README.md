@@ -1,8 +1,8 @@
 # Aegis Network
 
-## Observation-only Linux CLI source preview (Phase 5B)
+## Observation-only Linux CLI alpha (Phase 5B-A)
 
-The isolated source CLI reads local Debian/Ubuntu package metadata and compares exact versions with a locally supplied signed Mesh finding file. It makes no persistent state by default and reports independent Evidence status as unknown. The installable console entry point is withheld pending independent Linux wheel validation. See [the Phase 5B guide](docs/phase5b-linux-cli.md) for current limits and tests.
+The installable `aegis` CLI reads local Debian/Ubuntu package metadata and compares exact versions with a locally supplied signed Mesh finding file. It makes no persistent state by default and reports independent Evidence status as unknown. The isolated alpha was exercised from an offline wheel in actual disposable Debian 13 and Ubuntu 24.04 containers. See [the alpha packaging and compatibility guide](docs/phase5b-alpha-packaging.md) for build, install, limits and test evidence.
 
 Lab-only proof of concept for independently verified, signed defensive findings and local dry-run decisions. The separate Phase 3C fixture can apply an exactly approved route restriction to disposable synthetic replicas.
 
