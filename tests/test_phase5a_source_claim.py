@@ -42,7 +42,8 @@ def test_effect_quote_requires_exact_current_source_and_affected_product():
     assert claim.product_ecosystem == "pypi"
     assert claim.product_name == "maple-json"
     assert claim.asset_version == "1.2.0"
-    assert claim.support == "fixture-text-supported"
+    assert claim.support == "fixture-parser-consistent"
+    assert claim.independently_verified is False
     assert row["supported_impact"] == "availability degradation"
     with pytest.raises(ValidationError):
         SignedFinding.model_validate(effect_data)

@@ -40,7 +40,8 @@ class AtomicSourceClaim(BaseModel):
     version_predicate: str = Field(min_length=1, max_length=128)
     polarity: Literal["affected", "unaffected"]
     effect_type: Literal["availability-degradation"] | None = None
-    support: Literal["fixture-text-supported"] = "fixture-text-supported"
+    support: Literal["fixture-parser-consistent"] = "fixture-parser-consistent"
+    independently_verified: Literal[False] = False
 
     @model_validator(mode="after")
     def coherent_fields(self):
