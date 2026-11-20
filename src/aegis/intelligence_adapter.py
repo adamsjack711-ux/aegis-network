@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import stat
 from datetime import datetime
 from pathlib import Path
 from typing import Protocol
 
 from .artifact import SignedFinding, SignedRevocation, canonical_bytes, parse_event, verify
-from .config import load_publishers
+from .config import load_publishers_bytes
 from .local_observer import (
     Advisory, MAX_ADVISORIES, MAX_FEED_BYTES, ObservationError, _read_bounded,
     utc_now,
@@ -97,6 +98,56 @@ class MeshV1Adapter:
         return results
 
 
+MAX_GRANT_BYTES = 1024 * 1024
+
+
+def _read_grant_file(path: Path) -> bytes:
+    """Read one regular grant inode through no-follow directory descriptors."""
+    nofollow = getattr(os, "O_NOFOLLOW", None)
+    directory_flag = getattr(os, "O_DIRECTORY", None)
+    if nofollow is None or directory_flag is None or not hasattr(os, "O_NONBLOCK"):
+        raise ObservationError("secure publisher grant reads are unavailable")
+    parts = path.absolute().parts[1:]
+    if not parts or any(part in {"", ".", ".."} for part in parts):
+        raise ObservationError("invalid publisher grant path")
+    # macOS's root-owned /var and /tmp aliases point to /private. Do not
+    # permit arbitrary symlinks in either directory or the grant filename.
+    if parts[0] in {"var", "tmp"}:
+        alias = Path("/") / parts[0]
+        target = Path("/private") / parts[0]
+        if alias.is_symlink() and alias.lstat().st_uid == 0 and alias.resolve() == target:
+            parts = ("private", parts[0], *parts[1:])
+    directory = os.open("/", os.O_RDONLY | directory_flag | nofollow | getattr(os, "O_CLOEXEC", 0))
+    try:
+        for part in parts[:-1]:
+            next_directory = os.open(part, os.O_RDONLY | directory_flag | nofollow |
+                                     getattr(os, "O_CLOEXEC", 0), dir_fd=directory)
+            os.close(directory)
+            directory = next_directory
+        fd = os.open(parts[-1], os.O_RDONLY | os.O_NONBLOCK | nofollow |
+                     getattr(os, "O_CLOEXEC", 0), dir_fd=directory)
+        with os.fdopen(fd, "rb") as stream:
+            before = os.fstat(stream.fileno())
+            if not stat.S_ISREG(before.st_mode) or before.st_size > MAX_GRANT_BYTES:
+                raise ObservationError("publisher grant file exceeds input limit or is not regular")
+            if before.st_uid not in {os.geteuid(), 0} or stat.S_IMODE(before.st_mode) & 0o022:
+                raise ObservationError("publisher grant file has unsafe owner or write permissions")
+            data = stream.read(MAX_GRANT_BYTES + 1)
+            after = os.fstat(stream.fileno())
+            if len(data) > MAX_GRANT_BYTES or after.st_size > MAX_GRANT_BYTES:
+                raise ObservationError("publisher grant file exceeds input limit")
+            identity = lambda meta: (meta.st_dev, meta.st_ino, meta.st_mode, meta.st_nlink,
+                                     meta.st_size, meta.st_mtime_ns, meta.st_ctime_ns)
+            if identity(before) != identity(after) or len(data) != after.st_size:
+                raise ObservationError("publisher grant file changed during read")
+            selected = os.stat(parts[-1], dir_fd=directory, follow_symlinks=False)
+            if identity(selected) != identity(after):
+                raise ObservationError("publisher grant path changed during read")
+            return data
+    finally:
+        os.close(directory)
+
+
 def load_intelligence(path: Path, *, trust_path: Path | None = None,
                       now: datetime | None = None) -> list[Advisory]:
     """Dispatch a temporary local file format to an explicitly versioned adapter."""
@@ -111,11 +162,10 @@ def load_intelligence(path: Path, *, trust_path: Path | None = None,
         if trust_path is None:
             raise ObservationError("signed Mesh feed requires --trust")
         try:
-            trust_meta = trust_path.stat()
-            if not stat.S_ISREG(trust_meta.st_mode) or trust_meta.st_size > 1024 * 1024:
-                raise ObservationError("publisher grant file exceeds input limit")
-            trust = load_publishers(str(trust_path))
-        except (OSError, ValueError, KeyError, TypeError) as exc:
+            trust = load_publishers_bytes(_read_grant_file(trust_path))
+        except ObservationError:
+            raise
+        except (OSError, ValueError, KeyError, TypeError, UnicodeError) as exc:
             raise ObservationError("invalid local publisher grants") from exc
         return MeshV1Adapter().advisories(raw, now=now, trust=trust)
     raise ObservationError("unsupported local intelligence adapter version")

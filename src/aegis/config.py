@@ -1,6 +1,7 @@
 """Local trust configuration. Public keys never arrive in event payloads."""
 
 import base64
+import io
 import json
 from datetime import datetime
 from pathlib import Path
@@ -12,7 +13,17 @@ from .trust import PublisherGrant, TrustStore
 
 
 def load_publishers(path: str) -> TrustStore:
-    raw = json.loads(Path(path).read_text())
+    return _parse_publishers(Path(path).read_text())
+
+
+def load_publishers_bytes(data: bytes) -> TrustStore:
+    """Parse already captured grant bytes with the same rules as the path loader."""
+    with io.TextIOWrapper(io.BytesIO(data)) as stream:
+        return _parse_publishers(stream.read())
+
+
+def _parse_publishers(text: str) -> TrustStore:
+    raw = json.loads(text)
     if "grants" not in raw:
         return TrustStore.from_legacy({
             publisher_id: Ed25519PublicKey.from_public_bytes(base64.b64decode(value, validate=True))

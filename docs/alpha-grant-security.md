@@ -1,0 +1,22 @@
+# Alpha grant-file security handoff
+
+Baseline: `29455087922a728a41936d8c5c79ff9942e1e3df`. Branch: `feat/alpha-grant-security`. Scope: the explicitly supplied local `--trust` publisher-grant file in the observation CLI. SignedFinding 1.0, T4/T5, mitigation authority, and the server's grant-loading API are unchanged.
+
+## Reproduction and repair
+
+To rerun the original retained test, make a disposable checkout of `29455087922a728a41936d8c5c79ff9942e1e3df` and run `PYTHONPATH=src /Users/jackadams-lovell/aegis-network/.venv/bin/python -m pytest tests/cli_safety_phase5b2/test_grant_race.py --runxfail -q` there. It fails because the file is replaced after `stat()` and before `load_publishers(path)`; the latter reopens an over-1 MiB JSON file. The original failure transcript is in `benchmarks/alpha-grant/baseline-grant-race.txt`. On this commit, run `PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/cli_safety_phase5b2 tests/test_mesh_reliability.py -q` for the repaired regression and shared-parser tests.
+
+The CLI now walks grant-path components from an open root directory using `O_DIRECTORY|O_NOFOLLOW`, opens the final file relative to its held parent with `O_NOFOLLOW|O_NONBLOCK`, verifies regular type, current or root owner, and no group/other write permission, then reads at most 1 MiB plus one byte from that descriptor. It rejects a size or metadata change during the read and a final-path identity change before parsing. Only the captured bytes reach `config.load_publishers_bytes()`. The existing path loader and new byte loader call one parser body, preserving legacy maps, roles, scoped revocation, dates, duplicate rejection, and key rotation semantics. The CLI still requires an explicit local feed and trust file, remains observation-only, and makes no T4/T5 or mitigation decision.
+
+## Independent review notes
+
+- Rerun the baseline test at the exact baseline pin with `--runxfail`; verify that it fails with `DID NOT RAISE ObservationError`, then rerun the new test at this commit and verify it passes. The new seam replaces before `open`, after `open`, and in-place between descriptor metadata checks.
+- Inspect that every grant byte used for authorization comes from the same descriptor and that no pathname read follows validation. Check that the shared parser has one body and compare old/new loader outcomes on the included legacy, scoped, revoked, expired, duplicate, and malformed vectors.
+- Challenge ancestor and final symlinks, `..`, FIFO/device paths, oversized growth, unsafe file ownership/modes, and simultaneous replacement or in-place mutation. Verify CLI default no-write and independent-status-unknown behavior separately in the surrounding CLI suite.
+- This source-level macOS validation is not an installed Debian/Ubuntu alpha acceptance result. Packaging, Linux syscall, resource, and external independent review gates remain separate.
+
+Local focused result: **19 passed**, one third-party deprecation warning, on macOS/Python 3.15. The broad `PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest -q` run reached **314 passed, 37 skipped, 55 failed, 25 errors**. Lab integration cases could not bind local Unix sockets in this sandbox (`PermissionError: [Errno 1] Operation not permitted`); this run is not a full regression pass and must be repeated in an environment that permits those fixtures.
+
+## Residual races and platform assumptions
+
+This boundary relies on POSIX `open(..., dir_fd=...)`, `O_DIRECTORY`, `O_NOFOLLOW`, `O_NONBLOCK`, `fstat`, nanosecond `mtime`/`ctime`, and `stat(..., follow_symlinks=False)`. It fails closed when required flags are missing. Root-owned macOS `/var` and `/tmp` aliases to `/private` are the only allowed symlink exception. A same-UID writer, privileged actor, or mutable filesystem can alter grant bytes before opening or after the final identity check. Metadata checks detect ordinary concurrent in-place writes but cannot prove an atomic snapshot against a writer that can spoof timestamps or a filesystem with inadequate metadata behavior. The operator must protect the grant file and its ancestors; consent is represented by explicitly supplying `--trust`, not inferred from event content. Replacement after a completed read cannot retroactively change this invocation's captured TrustStore, but immediate revocation across independent processes requires an external coordination mechanism not supplied here.
