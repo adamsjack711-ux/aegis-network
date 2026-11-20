@@ -1,8 +1,8 @@
 {
-  "corpus_sha256": "7125003bd4b68da574a1b97ac8e3e720daea79b781c8e49a34d530ce1ccc71aa",
-  "exact": 4,
+  "corpus_sha256": "d7424fd1babeaa7f83949fd294eca27603d75e8fae64c9d525fa69244cc563dc",
+  "exact": 6,
   "label_status": "author-labeled; independent review pending",
-  "planned": 4,
+  "planned": 6,
   "real_model": "skipped",
   "rows": [
     {
@@ -71,6 +71,32 @@
         "distro-D04a": "97cb66c949576598ea8291670be2430db047c7f9a1699b4da38e54c4932177be",
         "distro-D04b": "1ee3187624863e692f0e65c5e6d358f12c8e954ef9c3cdaf4282d1186857b814"
       }
+    },
+    {
+      "baseline": "unknown",
+      "conflict": false,
+      "correct": true,
+      "expected": "unknown",
+      "id": "C01-conditional-configuration",
+      "reason_codes": [
+        "configuration-unverified"
+      ],
+      "source_ids": [
+        "vendor-C01"
+      ],
+      "source_sha256": {
+        "vendor-C01": "37bf0661287eb1071c04a3b4e096679d76c6f2f2a1e5b395799e18723d7cf136"
+      }
+    },
+    {
+      "baseline": "unknown",
+      "conflict": false,
+      "correct": true,
+      "expected": "unknown",
+      "id": "M01-no-source",
+      "reason_codes": [],
+      "source_ids": [],
+      "source_sha256": {}
     }
   ],
   "schema_version": "phase5a-backport-development-v1"

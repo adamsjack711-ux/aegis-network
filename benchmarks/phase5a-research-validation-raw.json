@@ -5,7 +5,7 @@
     "status": "skipped"
   },
   "schema_version": "phase5a-alpha-benchmark-v1",
-  "source_pin": "d355e63fe55c4ad6dab7e4d91bbecff5d20e8501",
+  "source_pin": "4c5510f41401a1e410b5ff5b8218c79c80a01ec9",
   "trial_count": 3,
   "trials": [
     {
@@ -23,9 +23,9 @@
         "true_positive": 5
       },
       "baseline_latency_ms": {
-        "p50": 0.017,
-        "p95": 0.239,
-        "p99": 0.54
+        "p50": 0.015,
+        "p95": 0.226,
+        "p99": 0.426
       },
       "checked_scripted": {
         "abstentions": 29,
@@ -41,9 +41,9 @@
         "true_positive": 5
       },
       "cpu_ms": {
-        "baseline_total": 3.797,
-        "process_total": 8.07,
-        "scripted_total": 0.536
+        "baseline_total": 3.525,
+        "process_total": 7.421,
+        "scripted_total": 0.497
       },
       "limitations": [
         "Synthetic fixture roles are not source authentication.",
@@ -57,7 +57,7 @@
       "new_cases": 24,
       "planned_cases": 36,
       "prior_cases": 12,
-      "process_peak_rss_bytes": 37994496,
+      "process_peak_rss_bytes": 37879808,
       "raw_scripted": {
         "abstentions": 0,
         "completed": 34,
@@ -78,8 +78,8 @@
       "rows": [
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.03,
-          "baseline_wall_ms": 0.0297,
+          "baseline_cpu_ms": 0.021,
+          "baseline_wall_ms": 0.021,
           "checked": "unknown",
           "citations": [
             "vendor-01"
@@ -93,8 +93,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.046,
-          "provider_wall_ms": 0.032,
+          "provider_cpu_ms": 0.035,
+          "provider_wall_ms": 0.0227,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -120,8 +120,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.652,
-          "baseline_wall_ms": 0.6668,
+          "baseline_cpu_ms": 0.512,
+          "baseline_wall_ms": 0.5115,
           "checked": "unknown",
           "citations": [
             "vendor-02",
@@ -167,8 +167,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.206,
-          "baseline_wall_ms": 0.2061,
+          "baseline_cpu_ms": 0.213,
+          "baseline_wall_ms": 0.2122,
           "checked": "affected",
           "citations": [
             "vendor-03"
@@ -182,8 +182,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.02,
-          "provider_wall_ms": 0.0132,
+          "provider_cpu_ms": 0.019,
+          "provider_wall_ms": 0.0127,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -209,8 +209,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.185,
-          "baseline_wall_ms": 0.1839,
+          "baseline_cpu_ms": 0.187,
+          "baseline_wall_ms": 0.1867,
           "checked": "unknown",
           "citations": [
             "vendor-04"
@@ -225,7 +225,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.014,
-          "provider_wall_ms": 0.0088,
+          "provider_wall_ms": 0.009,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -252,7 +252,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.006,
-          "baseline_wall_ms": 0.0058,
+          "baseline_wall_ms": 0.006,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -264,8 +264,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0069,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0072,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -291,8 +291,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.217,
-          "baseline_wall_ms": 0.2167,
+          "baseline_cpu_ms": 0.195,
+          "baseline_wall_ms": 0.1952,
           "checked": "unknown",
           "citations": [
             "registry-06"
@@ -306,8 +306,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.024,
-          "provider_wall_ms": 0.0192,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0088,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -333,8 +333,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.19,
-          "baseline_wall_ms": 0.19,
+          "baseline_cpu_ms": 0.186,
+          "baseline_wall_ms": 0.1855,
           "checked": "unknown",
           "citations": [
             "vendor-07"
@@ -348,8 +348,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.014,
-          "provider_wall_ms": 0.0085,
+          "provider_cpu_ms": 0.013,
+          "provider_wall_ms": 0.0084,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -375,8 +375,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.004,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.0039,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -388,8 +388,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0077,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.007,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -416,7 +416,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0035,
+          "baseline_wall_ms": 0.0034,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -429,7 +429,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0066,
+          "provider_wall_ms": 0.006,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -455,8 +455,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.004,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -469,7 +469,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0068,
+          "provider_wall_ms": 0.0063,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -495,8 +495,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0038,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0036,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -508,8 +508,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0063,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0058,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -535,8 +535,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.304,
-          "baseline_wall_ms": 0.3046,
+          "baseline_cpu_ms": 0.268,
+          "baseline_wall_ms": 0.2672,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -548,8 +548,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0088,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0087,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -575,8 +575,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.198,
-          "baseline_wall_ms": 0.1965,
+          "baseline_cpu_ms": 0.186,
+          "baseline_wall_ms": 0.1857,
           "checked": "unknown",
           "citations": [
             "vendor-F01"
@@ -593,8 +593,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.015,
-          "provider_wall_ms": 0.0105,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0099,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -620,8 +620,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.007,
-          "baseline_wall_ms": 0.0062,
+          "baseline_cpu_ms": 0.006,
+          "baseline_wall_ms": 0.0061,
           "checked": "unknown",
           "citations": [
             "vendor-F02"
@@ -638,8 +638,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0083,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0076,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -665,8 +665,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.006,
-          "baseline_wall_ms": 0.0054,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.0047,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -681,8 +681,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0077,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0074,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -708,8 +708,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.201,
-          "baseline_wall_ms": 0.2006,
+          "baseline_cpu_ms": 0.194,
+          "baseline_wall_ms": 0.1942,
           "checked": "unknown",
           "citations": [
             "vendor-C01",
@@ -728,7 +728,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.017,
-          "provider_wall_ms": 0.0117,
+          "provider_wall_ms": 0.0115,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -758,8 +758,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.188,
-          "baseline_wall_ms": 0.1882,
+          "baseline_cpu_ms": 0.186,
+          "baseline_wall_ms": 0.1861,
           "checked": "unknown",
           "citations": [
             "vendor-C02",
@@ -778,7 +778,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.019,
-          "provider_wall_ms": 0.0121,
+          "provider_wall_ms": 0.0131,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -808,8 +808,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.193,
-          "baseline_wall_ms": 0.193,
+          "baseline_cpu_ms": 0.182,
+          "baseline_wall_ms": 0.1823,
           "checked": "unknown",
           "citations": [
             "vendor-C03a",
@@ -827,8 +827,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.018,
-          "provider_wall_ms": 0.013,
+          "provider_cpu_ms": 0.017,
+          "provider_wall_ms": 0.0116,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -858,8 +858,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.023,
-          "baseline_wall_ms": 0.023,
+          "baseline_cpu_ms": 0.021,
+          "baseline_wall_ms": 0.0209,
           "checked": "affected",
           "citations": [
             "vendor-B01"
@@ -876,8 +876,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0085,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0082,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -903,8 +903,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.011,
-          "baseline_wall_ms": 0.0105,
+          "baseline_cpu_ms": 0.01,
+          "baseline_wall_ms": 0.0097,
           "checked": "unknown",
           "citations": [
             "vendor-B02"
@@ -922,7 +922,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.008,
+          "provider_wall_ms": 0.0072,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -948,8 +948,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.186,
-          "baseline_wall_ms": 0.1858,
+          "baseline_cpu_ms": 0.174,
+          "baseline_wall_ms": 0.1738,
           "checked": "unknown",
           "citations": [
             "registry-B03"
@@ -993,8 +993,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.008,
-          "baseline_wall_ms": 0.0063,
+          "baseline_cpu_ms": 0.006,
+          "baseline_wall_ms": 0.0061,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1009,8 +1009,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0083,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0077,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1036,8 +1036,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.0044,
+          "baseline_cpu_ms": 0.006,
+          "baseline_wall_ms": 0.0045,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -1053,7 +1053,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0077,
+          "provider_wall_ms": 0.0076,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1079,8 +1079,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.195,
-          "baseline_wall_ms": 0.195,
+          "baseline_cpu_ms": 0.181,
+          "baseline_wall_ms": 0.1811,
           "checked": "affected",
           "citations": [
             "vendor-P03"
@@ -1098,7 +1098,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0086,
+          "provider_wall_ms": 0.0085,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1125,7 +1125,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.0046,
+          "baseline_wall_ms": 0.0047,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1141,7 +1141,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.007,
+          "provider_wall_ms": 0.0076,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1168,7 +1168,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.001,
-          "baseline_wall_ms": 0.0012,
+          "baseline_wall_ms": 0.0009,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1183,8 +1183,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0075,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0076,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1210,8 +1210,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.191,
-          "baseline_wall_ms": 0.1905,
+          "baseline_cpu_ms": 0.187,
+          "baseline_wall_ms": 0.1877,
           "checked": "affected",
           "citations": [
             "vendor-U03"
@@ -1228,8 +1228,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.015,
-          "provider_wall_ms": 0.0096,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0098,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1255,8 +1255,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.177,
-          "baseline_wall_ms": 0.1767,
+          "baseline_cpu_ms": 0.179,
+          "baseline_wall_ms": 0.1791,
           "checked": "unknown",
           "citations": [
             "vendor-I01"
@@ -1273,8 +1273,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.014,
-          "provider_wall_ms": 0.0089,
+          "provider_cpu_ms": 0.015,
+          "provider_wall_ms": 0.0096,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1300,8 +1300,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.192,
-          "baseline_wall_ms": 0.1912,
+          "baseline_cpu_ms": 0.187,
+          "baseline_wall_ms": 0.1867,
           "checked": "affected",
           "citations": [
             "vendor-I02"
@@ -1318,8 +1318,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0088,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0092,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1345,8 +1345,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.183,
-          "baseline_wall_ms": 0.1827,
+          "baseline_cpu_ms": 0.187,
+          "baseline_wall_ms": 0.1877,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1362,7 +1362,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.015,
-          "provider_wall_ms": 0.0102,
+          "provider_wall_ms": 0.0096,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1389,7 +1389,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0045,
+          "baseline_wall_ms": 0.0044,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1404,8 +1404,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0081,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0077,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1432,7 +1432,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0045,
+          "baseline_wall_ms": 0.0043,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1447,8 +1447,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.023,
-          "provider_wall_ms": 0.0188,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0072,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1475,7 +1475,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0039,
+          "baseline_wall_ms": 0.0043,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1491,7 +1491,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0072,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1518,7 +1518,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0042,
+          "baseline_wall_ms": 0.004,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1534,7 +1534,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0072,
+          "provider_wall_ms": 0.0069,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1561,7 +1561,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.001,
-          "baseline_wall_ms": 0.0015,
+          "baseline_wall_ms": 0.0014,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1576,7 +1576,7 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
+          "provider_cpu_ms": 0.011,
           "provider_wall_ms": 0.007,
           "raw_hypothesis": "affected",
           "raw_point": {
@@ -1603,8 +1603,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0039,
+          "baseline_cpu_ms": 0.005,
+          "baseline_wall_ms": 0.004,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1620,7 +1620,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0069,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1647,9 +1647,9 @@
       ],
       "schema_version": "phase5a-alpha-eval-v1",
       "scripted_latency_ms": {
-        "p50": 0.009,
-        "p95": 0.019,
-        "p99": 0.028
+        "p50": 0.008,
+        "p95": 0.014,
+        "p99": 0.021
       },
       "scripted_provider": {
         "billed_tokens": null,
@@ -1670,8 +1670,8 @@
         "prior_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
       },
       "wall_ms": {
-        "process_total": 8.0892,
-        "seal_validation": 3.1708
+        "process_total": 7.4238,
+        "seal_validation": 2.9046
       }
     },
     {
@@ -1690,8 +1690,8 @@
       },
       "baseline_latency_ms": {
         "p50": 0.008,
-        "p95": 0.022,
-        "p99": 0.035
+        "p95": 0.021,
+        "p99": 0.031
       },
       "checked_scripted": {
         "abstentions": 29,
@@ -1707,9 +1707,9 @@
         "true_positive": 5
       },
       "cpu_ms": {
-        "baseline_total": 0.338,
-        "process_total": 3.692,
-        "scripted_total": 0.418
+        "baseline_total": 0.341,
+        "process_total": 3.675,
+        "scripted_total": 0.398
       },
       "limitations": [
         "Synthetic fixture roles are not source authentication.",
@@ -1723,7 +1723,7 @@
       "new_cases": 24,
       "planned_cases": 36,
       "prior_cases": 12,
-      "process_peak_rss_bytes": 38027264,
+      "process_peak_rss_bytes": 37879808,
       "raw_scripted": {
         "abstentions": 0,
         "completed": 34,
@@ -1744,8 +1744,8 @@
       "rows": [
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.012,
-          "baseline_wall_ms": 0.0122,
+          "baseline_cpu_ms": 0.013,
+          "baseline_wall_ms": 0.0118,
           "checked": "unknown",
           "citations": [
             "vendor-01"
@@ -1759,8 +1759,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.031,
-          "provider_wall_ms": 0.017,
+          "provider_cpu_ms": 0.027,
+          "provider_wall_ms": 0.0185,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1786,8 +1786,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.04,
-          "baseline_wall_ms": 0.0405,
+          "baseline_cpu_ms": 0.035,
+          "baseline_wall_ms": 0.0345,
           "checked": "unknown",
           "citations": [
             "vendor-02",
@@ -1802,8 +1802,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.019,
-          "provider_wall_ms": 0.0113,
+          "provider_cpu_ms": 0.017,
+          "provider_wall_ms": 0.0106,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1834,7 +1834,7 @@
         {
           "baseline": "affected",
           "baseline_cpu_ms": 0.018,
-          "baseline_wall_ms": 0.0182,
+          "baseline_wall_ms": 0.0175,
           "checked": "affected",
           "citations": [
             "vendor-03"
@@ -1848,8 +1848,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0077,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0075,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1876,7 +1876,7 @@
         {
           "baseline": "unaffected",
           "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.009,
+          "baseline_wall_ms": 0.0085,
           "checked": "unknown",
           "citations": [
             "vendor-04"
@@ -1891,7 +1891,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0064,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1918,7 +1918,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.0047,
+          "baseline_wall_ms": 0.0048,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -1930,8 +1930,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0063,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0061,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1958,7 +1958,7 @@
         {
           "baseline": "unaffected",
           "baseline_cpu_ms": 0.018,
-          "baseline_wall_ms": 0.0177,
+          "baseline_wall_ms": 0.0174,
           "checked": "unknown",
           "citations": [
             "registry-06"
@@ -1973,7 +1973,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0063,
+          "provider_wall_ms": 0.0061,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -1999,7 +1999,7 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.01,
+          "baseline_cpu_ms": 0.008,
           "baseline_wall_ms": 0.0084,
           "checked": "unknown",
           "citations": [
@@ -2014,8 +2014,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0062,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.006,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2042,7 +2042,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.003,
+          "baseline_wall_ms": 0.0029,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2055,7 +2055,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.009,
-          "provider_wall_ms": 0.006,
+          "provider_wall_ms": 0.0057,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2082,7 +2082,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0035,
+          "baseline_wall_ms": 0.0034,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2094,8 +2094,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.006,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0057,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2135,7 +2135,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.006,
+          "provider_wall_ms": 0.0061,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2174,8 +2174,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0059,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0057,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2201,8 +2201,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0095,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.0086,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2214,8 +2214,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0061,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0058,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2241,8 +2241,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.012,
-          "baseline_wall_ms": 0.0124,
+          "baseline_cpu_ms": 0.015,
+          "baseline_wall_ms": 0.0158,
           "checked": "unknown",
           "citations": [
             "vendor-F01"
@@ -2259,8 +2259,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0086,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0082,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2286,8 +2286,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0044,
+          "baseline_cpu_ms": 0.005,
+          "baseline_wall_ms": 0.0042,
           "checked": "unknown",
           "citations": [
             "vendor-F02"
@@ -2304,8 +2304,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0075,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0071,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2331,8 +2331,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0042,
+          "baseline_cpu_ms": 0.005,
+          "baseline_wall_ms": 0.0041,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2347,8 +2347,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0073,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.007,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2374,8 +2374,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.026,
-          "baseline_wall_ms": 0.025,
+          "baseline_cpu_ms": 0.023,
+          "baseline_wall_ms": 0.0238,
           "checked": "unknown",
           "citations": [
             "vendor-C01",
@@ -2394,7 +2394,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.015,
-          "provider_wall_ms": 0.0108,
+          "provider_wall_ms": 0.01,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2424,8 +2424,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.016,
-          "baseline_wall_ms": 0.0159,
+          "baseline_cpu_ms": 0.015,
+          "baseline_wall_ms": 0.0149,
           "checked": "unknown",
           "citations": [
             "vendor-C02",
@@ -2444,7 +2444,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.014,
-          "provider_wall_ms": 0.0098,
+          "provider_wall_ms": 0.009,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2474,8 +2474,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.017,
-          "baseline_wall_ms": 0.0168,
+          "baseline_cpu_ms": 0.016,
+          "baseline_wall_ms": 0.0164,
           "checked": "unknown",
           "citations": [
             "vendor-C03a",
@@ -2493,8 +2493,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.014,
-          "provider_wall_ms": 0.0096,
+          "provider_cpu_ms": 0.013,
+          "provider_wall_ms": 0.0088,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2525,7 +2525,7 @@
         {
           "baseline": "affected",
           "baseline_cpu_ms": 0.021,
-          "baseline_wall_ms": 0.021,
+          "baseline_wall_ms": 0.0197,
           "checked": "affected",
           "citations": [
             "vendor-B01"
@@ -2542,8 +2542,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0075,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0077,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2570,7 +2570,7 @@
         {
           "baseline": "unaffected",
           "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0094,
+          "baseline_wall_ms": 0.0091,
           "checked": "unknown",
           "citations": [
             "vendor-B02"
@@ -2588,7 +2588,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.007,
+          "provider_wall_ms": 0.0068,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2614,8 +2614,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0085,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.008,
           "checked": "unknown",
           "citations": [
             "registry-B03"
@@ -2633,7 +2633,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0071,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2660,7 +2660,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.006,
-          "baseline_wall_ms": 0.0048,
+          "baseline_wall_ms": 0.0049,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2675,8 +2675,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.007,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0066,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2702,8 +2702,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0039,
+          "baseline_cpu_ms": 0.005,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -2718,8 +2718,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0067,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2745,8 +2745,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.014,
-          "baseline_wall_ms": 0.014,
+          "baseline_cpu_ms": 0.013,
+          "baseline_wall_ms": 0.0139,
           "checked": "affected",
           "citations": [
             "vendor-P03"
@@ -2764,7 +2764,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0067,
+          "provider_wall_ms": 0.0066,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2790,8 +2790,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0034,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.0077,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2806,7 +2806,7 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
+          "provider_cpu_ms": 0.009,
           "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
@@ -2834,7 +2834,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.001,
-          "baseline_wall_ms": 0.001,
+          "baseline_wall_ms": 0.0011,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -2850,7 +2850,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0069,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2876,8 +2876,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.012,
-          "baseline_wall_ms": 0.0123,
+          "baseline_cpu_ms": 0.013,
+          "baseline_wall_ms": 0.0122,
           "checked": "affected",
           "citations": [
             "vendor-U03"
@@ -2895,7 +2895,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.007,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2921,8 +2921,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0077,
+          "baseline_cpu_ms": 0.01,
+          "baseline_wall_ms": 0.0104,
           "checked": "unknown",
           "citations": [
             "vendor-I01"
@@ -2939,8 +2939,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0067,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -2966,8 +2966,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0093,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.009,
           "checked": "affected",
           "citations": [
             "vendor-I02"
@@ -2984,8 +2984,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0069,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0066,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3011,8 +3011,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0095,
+          "baseline_cpu_ms": 0.011,
+          "baseline_wall_ms": 0.0114,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3027,8 +3027,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0076,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.007,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3055,7 +3055,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0032,
+          "baseline_wall_ms": 0.003,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3071,7 +3071,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0069,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3098,7 +3098,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.004,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3114,7 +3114,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0066,
+          "provider_wall_ms": 0.0063,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3141,7 +3141,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0035,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3156,7 +3156,7 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
+          "provider_cpu_ms": 0.009,
           "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
@@ -3183,8 +3183,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0032,
+          "baseline_cpu_ms": 0.007,
+          "baseline_wall_ms": 0.0059,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3199,8 +3199,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0066,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0064,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3227,7 +3227,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.002,
-          "baseline_wall_ms": 0.0013,
+          "baseline_wall_ms": 0.0025,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3243,7 +3243,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0069,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3269,8 +3269,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.0037,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0035,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3285,8 +3285,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0067,
+          "provider_cpu_ms": 0.012,
+          "provider_wall_ms": 0.0083,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3314,8 +3314,8 @@
       "schema_version": "phase5a-alpha-eval-v1",
       "scripted_latency_ms": {
         "p50": 0.007,
-        "p95": 0.011,
-        "p99": 0.015
+        "p95": 0.01,
+        "p99": 0.016
       },
       "scripted_provider": {
         "billed_tokens": null,
@@ -3336,8 +3336,8 @@
         "prior_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
       },
       "wall_ms": {
-        "process_total": 3.6983,
-        "seal_validation": 2.5692
+        "process_total": 3.691,
+        "seal_validation": 2.5773
       }
     },
     {
@@ -3355,9 +3355,9 @@
         "true_positive": 5
       },
       "baseline_latency_ms": {
-        "p50": 0.009,
-        "p95": 0.021,
-        "p99": 0.033
+        "p50": 0.007,
+        "p95": 0.019,
+        "p99": 0.025
       },
       "checked_scripted": {
         "abstentions": 29,
@@ -3373,9 +3373,9 @@
         "true_positive": 5
       },
       "cpu_ms": {
-        "baseline_total": 0.353,
-        "process_total": 3.634,
-        "scripted_total": 0.421
+        "baseline_total": 0.293,
+        "process_total": 3.421,
+        "scripted_total": 0.377
       },
       "limitations": [
         "Synthetic fixture roles are not source authentication.",
@@ -3389,7 +3389,7 @@
       "new_cases": 24,
       "planned_cases": 36,
       "prior_cases": 12,
-      "process_peak_rss_bytes": 38109184,
+      "process_peak_rss_bytes": 37945344,
       "raw_scripted": {
         "abstentions": 0,
         "completed": 34,
@@ -3410,8 +3410,8 @@
       "rows": [
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.015,
-          "baseline_wall_ms": 0.0154,
+          "baseline_cpu_ms": 0.005,
+          "baseline_wall_ms": 0.0057,
           "checked": "unknown",
           "citations": [
             "vendor-01"
@@ -3425,8 +3425,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.029,
-          "provider_wall_ms": 0.0197,
+          "provider_cpu_ms": 0.015,
+          "provider_wall_ms": 0.0096,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3452,8 +3452,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.038,
-          "baseline_wall_ms": 0.0382,
+          "baseline_cpu_ms": 0.026,
+          "baseline_wall_ms": 0.0262,
           "checked": "unknown",
           "citations": [
             "vendor-02",
@@ -3468,8 +3468,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.018,
-          "provider_wall_ms": 0.0114,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0087,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3499,8 +3499,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.019,
-          "baseline_wall_ms": 0.0182,
+          "baseline_cpu_ms": 0.016,
+          "baseline_wall_ms": 0.0159,
           "checked": "affected",
           "citations": [
             "vendor-03"
@@ -3514,8 +3514,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.008,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3541,8 +3541,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.012,
-          "baseline_wall_ms": 0.0107,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.0087,
           "checked": "unknown",
           "citations": [
             "vendor-04"
@@ -3556,8 +3556,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.007,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0058,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3584,7 +3584,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.005,
+          "baseline_wall_ms": 0.0045,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3596,8 +3596,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0067,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0058,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3623,8 +3623,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.018,
-          "baseline_wall_ms": 0.019,
+          "baseline_cpu_ms": 0.017,
+          "baseline_wall_ms": 0.0169,
           "checked": "unknown",
           "citations": [
             "registry-06"
@@ -3638,8 +3638,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0078,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0064,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3665,8 +3665,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0088,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.0078,
           "checked": "unknown",
           "citations": [
             "vendor-07"
@@ -3680,8 +3680,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0066,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0062,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3707,8 +3707,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.003,
+          "baseline_cpu_ms": 0.002,
+          "baseline_wall_ms": 0.0028,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3721,7 +3721,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.009,
-          "provider_wall_ms": 0.0061,
+          "provider_wall_ms": 0.0058,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3747,8 +3747,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0033,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.003,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3760,8 +3760,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0062,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0056,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3788,7 +3788,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0037,
+          "baseline_wall_ms": 0.0032,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -3800,8 +3800,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0064,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0061,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3828,7 +3828,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0034,
+          "baseline_wall_ms": 0.0031,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -3840,8 +3840,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0061,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0057,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3867,8 +3867,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.01,
-          "baseline_wall_ms": 0.0091,
+          "baseline_cpu_ms": 0.008,
+          "baseline_wall_ms": 0.0084,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -3880,8 +3880,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.009,
-          "provider_wall_ms": 0.0061,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.006,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3907,8 +3907,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.015,
-          "baseline_wall_ms": 0.0138,
+          "baseline_cpu_ms": 0.01,
+          "baseline_wall_ms": 0.0102,
           "checked": "unknown",
           "citations": [
             "vendor-F01"
@@ -3925,8 +3925,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0084,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0075,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3952,8 +3952,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.006,
-          "baseline_wall_ms": 0.0045,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.004,
           "checked": "unknown",
           "citations": [
             "vendor-F02"
@@ -3971,7 +3971,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0077,
+          "provider_wall_ms": 0.0069,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -3997,8 +3997,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0045,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.004,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4014,7 +4014,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0074,
+          "provider_wall_ms": 0.0068,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4041,7 +4041,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.024,
-          "baseline_wall_ms": 0.024,
+          "baseline_wall_ms": 0.0227,
           "checked": "unknown",
           "citations": [
             "vendor-C01",
@@ -4059,8 +4059,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.017,
-          "provider_wall_ms": 0.0116,
+          "provider_cpu_ms": 0.013,
+          "provider_wall_ms": 0.0093,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4091,7 +4091,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.016,
-          "baseline_wall_ms": 0.0159,
+          "baseline_wall_ms": 0.0154,
           "checked": "unknown",
           "citations": [
             "vendor-C02",
@@ -4110,7 +4110,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.0094,
+          "provider_wall_ms": 0.0086,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4140,8 +4140,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.017,
-          "baseline_wall_ms": 0.0173,
+          "baseline_cpu_ms": 0.016,
+          "baseline_wall_ms": 0.0159,
           "checked": "unknown",
           "citations": [
             "vendor-C03a",
@@ -4159,8 +4159,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.013,
-          "provider_wall_ms": 0.009,
+          "provider_cpu_ms": 0.014,
+          "provider_wall_ms": 0.0085,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4190,8 +4190,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.02,
-          "baseline_wall_ms": 0.0198,
+          "baseline_cpu_ms": 0.017,
+          "baseline_wall_ms": 0.018,
           "checked": "affected",
           "citations": [
             "vendor-B01"
@@ -4209,7 +4209,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0077,
+          "provider_wall_ms": 0.0069,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4235,8 +4235,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.01,
-          "baseline_wall_ms": 0.0104,
+          "baseline_cpu_ms": 0.009,
+          "baseline_wall_ms": 0.0091,
           "checked": "unknown",
           "citations": [
             "vendor-B02"
@@ -4253,8 +4253,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0071,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0066,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4281,7 +4281,7 @@
         {
           "baseline": "unaffected",
           "baseline_cpu_ms": 0.008,
-          "baseline_wall_ms": 0.0087,
+          "baseline_wall_ms": 0.0078,
           "checked": "unknown",
           "citations": [
             "registry-B03"
@@ -4298,8 +4298,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0073,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4325,8 +4325,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.005,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.0044,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4341,8 +4341,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0073,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4368,8 +4368,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.005,
-          "baseline_wall_ms": 0.0042,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0036,
           "checked": "unknown",
           "citations": [],
           "expected": "unaffected",
@@ -4384,8 +4384,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0072,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0064,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4411,8 +4411,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.016,
-          "baseline_wall_ms": 0.0154,
+          "baseline_cpu_ms": 0.013,
+          "baseline_wall_ms": 0.0134,
           "checked": "affected",
           "citations": [
             "vendor-P03"
@@ -4430,7 +4430,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0066,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4457,7 +4457,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0044,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4472,8 +4472,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0077,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4499,7 +4499,7 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.001,
+          "baseline_cpu_ms": 0.0,
           "baseline_wall_ms": 0.0008,
           "checked": "unknown",
           "citations": [],
@@ -4515,8 +4515,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0077,
+          "provider_cpu_ms": 0.01,
+          "provider_wall_ms": 0.0068,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4542,8 +4542,8 @@
         },
         {
           "baseline": "affected",
-          "baseline_cpu_ms": 0.013,
-          "baseline_wall_ms": 0.0132,
+          "baseline_cpu_ms": 0.012,
+          "baseline_wall_ms": 0.0125,
           "checked": "affected",
           "citations": [
             "vendor-U03"
@@ -4561,7 +4561,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4587,8 +4587,8 @@
         },
         {
           "baseline": "unaffected",
-          "baseline_cpu_ms": 0.01,
-          "baseline_wall_ms": 0.0085,
+          "baseline_cpu_ms": 0.009,
+          "baseline_wall_ms": 0.009,
           "checked": "unknown",
           "citations": [
             "vendor-I01"
@@ -4606,7 +4606,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.007,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4633,7 +4633,7 @@
         {
           "baseline": "affected",
           "baseline_cpu_ms": 0.009,
-          "baseline_wall_ms": 0.0098,
+          "baseline_wall_ms": 0.0088,
           "checked": "affected",
           "citations": [
             "vendor-I02"
@@ -4651,7 +4651,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4677,8 +4677,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.012,
-          "baseline_wall_ms": 0.0106,
+          "baseline_cpu_ms": 0.009,
+          "baseline_wall_ms": 0.0092,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4693,8 +4693,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.012,
-          "provider_wall_ms": 0.0083,
+          "provider_cpu_ms": 0.011,
+          "provider_wall_ms": 0.0068,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4720,8 +4720,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.0034,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0031,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4736,8 +4736,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0072,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4763,8 +4763,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.004,
-          "baseline_wall_ms": 0.004,
+          "baseline_cpu_ms": 0.003,
+          "baseline_wall_ms": 0.0035,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4780,7 +4780,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0073,
+          "provider_wall_ms": 0.0067,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4823,7 +4823,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0078,
+          "provider_wall_ms": 0.0071,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4849,8 +4849,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.0035,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.0032,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4865,8 +4865,8 @@
           "positive_points_emitted": 0,
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
-          "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.0075,
+          "provider_cpu_ms": 0.009,
+          "provider_wall_ms": 0.0068,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4893,7 +4893,7 @@
         {
           "baseline": "unknown",
           "baseline_cpu_ms": 0.001,
-          "baseline_wall_ms": 0.0012,
+          "baseline_wall_ms": 0.0011,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4909,7 +4909,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.01,
-          "provider_wall_ms": 0.0072,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4935,8 +4935,8 @@
         },
         {
           "baseline": "unknown",
-          "baseline_cpu_ms": 0.003,
-          "baseline_wall_ms": 0.004,
+          "baseline_cpu_ms": 0.004,
+          "baseline_wall_ms": 0.0037,
           "checked": "unknown",
           "citations": [],
           "expected": "unknown",
@@ -4952,7 +4952,7 @@
           "positive_points_source_supported": 0,
           "positive_points_unsupported_attempted": 1,
           "provider_cpu_ms": 0.011,
-          "provider_wall_ms": 0.007,
+          "provider_wall_ms": 0.0065,
           "raw_hypothesis": "affected",
           "raw_point": {
             "citations": [
@@ -4980,8 +4980,8 @@
       "schema_version": "phase5a-alpha-eval-v1",
       "scripted_latency_ms": {
         "p50": 0.007,
-        "p95": 0.011,
-        "p99": 0.017
+        "p95": 0.009,
+        "p99": 0.009
       },
       "scripted_provider": {
         "billed_tokens": null,
@@ -5002,8 +5002,8 @@
         "prior_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac"
       },
       "wall_ms": {
-        "process_total": 3.6524,
-        "seal_validation": 2.4834
+        "process_total": 3.4216,
+        "seal_validation": 2.4398
       }
     }
   ]
