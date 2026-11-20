@@ -36,7 +36,11 @@ def _emit(data: object, json_output: bool, command: str) -> None:
         return json.dumps(str(value), ensure_ascii=True)[1:-1]
 
     if json_output:
-        print(json.dumps(data, sort_keys=True, indent=2))
+        # json.dumps materializes the entire pretty-printed inventory and
+        # transiently doubles peak memory at the 100,000-package input bound.
+        # json.dump uses the same encoder and output contract incrementally.
+        json.dump(data, sys.stdout, sort_keys=True, indent=2)
+        sys.stdout.write("\n")
         return
     if command == "inventory":
         assert isinstance(data, dict)
@@ -176,7 +180,17 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print(f"aegis: {exc}", file=sys.stderr)
         return 2
-    _emit(data, args.json, args.command)
+    try:
+        _emit(data, args.json, args.command)
+    except BrokenPipeError:
+        # A closed output consumer is a bounded observation failure, not a
+        # reason to retry, persist state or show a traceback at interpreter
+        # shutdown when stdout is flushed again.
+        try:
+            sys.stdout.close()
+        except OSError:
+            pass
+        return 2
     return code
 
 

@@ -9,7 +9,8 @@ owner-only raw evidence added at `7bd8639`; the separate packaging candidate
 is `0df40c9`. Both diverge from common `3bfd2abe`. The independent alpha
 NO-GO and cache-backed supplement are retained in `b81dac8` and `9c54a14`.
 No implementation from either branch has been copied into this worktree.
-VAL-R's new acceptance freeze is pending; this document is a proposal.
+VAL-R's acceptance freeze is `f419af45d0437e84702c400b1b2cc196376725a6`;
+this remains an owner proposal, not independent acceptance.
 
 ## Reconciliation before implementation
 
@@ -18,7 +19,7 @@ VAL-R's new acceptance freeze is pending; this document is a proposal.
 | Publisher grants | `observer_grants.py` reads bounded local grant JSON and delegates role, time, revocation and scope authorization to the frozen `TrustStore`. Golden tests compare decisions with `config.load_publishers`. Shared config is unchanged. | Moves the loader body from shared `config.py` to `publisher_config.py` and reexports it; the CLI imports the new module. | Prefer a private bounded reader if shared-code freeze remains. Require negative parity vectors and no `core` import. Review the alternative's shared config movement and full regression before any adoption. Do not combine both loaders. |
 | Build and dependencies | Restores the console entry point with Hatchling. Keeps the full lab dependency list and bundles enforcement modules despite an observer-only runtime import graph. Offline owner and cache-backed independent builds succeeded with a supplied integrity-snapshotted cache. | Pins setuptools 84.2.1; narrows required dependencies to cryptography and pydantic, moves lab dependencies into an optional extra. It still packages Aegis modules together. | Choose one reviewed offline build path from exact source. Confirm fresh Ubuntu and Python 3.13 runtime wheels, generated console, install/uninstall and complete lab regression. A change in the package's default dependencies needs integration review. |
 | Output/authority | Signed Finding 1.0 and exact local package match remain separate from `independent_status=unknown`; no protected write follows. | Same source-level CLI intent; packaging changes do not establish independent Evidence status. | Preserve frozen signed bytes, local-grant semantics, private v2 observation schema and zero enforcement authority. |
-| Tests | Adds grant rotation, duplicate publisher/key rejection, malformed top-level input, bounded errors, import graph and Linux matrix/resource scripts. | Its raw `validation.json` reports separate alpha tests, but does not substitute for the frozen independent denominator. Its diff from the common base also removes `tests/test_phase5a_alpha_eval.py`; never copy that deletion. | Retain all original failures and independently rerun at one exact integrated pin. |
+| Tests | Adds grant rotation, duplicate publisher/key rejection, malformed top-level input, bounded errors, import graph and Linux matrix/resource scripts. | Its raw `validation.json` reports separate alpha tests, but does not substitute for the frozen independent denominator. This branch predates the integrated `tests/test_phase5a_alpha_eval.py`; its absence is not an intentional deletion relative to its own parent. | Preserve the later Phase 5A test during any intake. Retain all original failures and independently rerun at one exact integrated pin. |
 
 The two grant approaches both seek to remove the `cli -> config -> core`
 import path. The private reader changes less shared code but duplicates parsing;
