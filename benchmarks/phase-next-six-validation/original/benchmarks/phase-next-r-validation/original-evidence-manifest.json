@@ -1,0 +1,273 @@
+{
+  "baseline": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+  "copies_from_b81": 21,
+  "entries": [
+    {
+      "bytes": 23865,
+      "git_blob": "e7137373de4eec929480745f4f97653d74aa7da7",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll.json",
+      "sha256": "7d3815117191db46eaa7bb7527563a5bf2bdce13d2c23e17322ea1c3c7b8dbe8",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll.json"
+    },
+    {
+      "bytes": 1264,
+      "git_blob": "ee0f4e89cf504b7a620900e7da7644f7c99aad3f",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll-score.json",
+      "sha256": "3fe370e3db7858acd64b17775775b1133a348e2de6c0c86a39dcd2c9b1ffc7da",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-kv-independent-poll-score.json"
+    },
+    {
+      "bytes": 23310,
+      "git_blob": "253ce1f53df9c3aa03694ffcb515cdf145e52b83",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-1.json",
+      "sha256": "926cc40057be3403308a6f631a11208e3ba992d8fb39c5e8e880fd23d27e58de",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-1.json"
+    },
+    {
+      "bytes": 23313,
+      "git_blob": "bf97196456493ae8f4bb1e9ecce5436ac654a5ef",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-2.json",
+      "sha256": "e76d070f08db6bd8ab20053cf2fb62a511b04124bb16ea0a7a32845dfafb4682",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-2.json"
+    },
+    {
+      "bytes": 23307,
+      "git_blob": "e5daea4d1f3f24a6d010f1047fd3b3bd056dccb5",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-3.json",
+      "sha256": "3a19394760d577c590ee7a46d40856c99659989fa6b2468ea4d4173b77258b45",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-3.json"
+    },
+    {
+      "bytes": 2726,
+      "git_blob": "7efd3870f69acc861ada78b9c42431833d4afb02",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-baseline-score.json",
+      "sha256": "75e218a985c8983dafbdcb6a5a372a61c3648902f574152d553b1c5a840a976e",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-score.json"
+    },
+    {
+      "bytes": 10406,
+      "git_blob": "2f17f84fbe1667488b6713e5f97f4458865fdd94",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/withdrawal-baseline-alive-control.json",
+      "sha256": "393db91229cdfd1f7b47ed3ce0d2f6ec7ef27a1f495d64700b43aeaf6a34ee04",
+      "source_path": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-alive-control.json"
+    },
+    {
+      "bytes": 1617,
+      "git_blob": "33cab26e190d73527308af1531fb2ee10de8e20b",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/cli-candidate-package-score.json",
+      "sha256": "f1cfc28f6e4fc6c4f97bb05f1cba9d4bad5ddc7141f71175e09b1314d173ebe0",
+      "source_path": "benchmarks/phase-next-alpha-validation/cli-candidate-package-score.json"
+    },
+    {
+      "bytes": 401,
+      "git_blob": "052010ea2161c815ec1b2190fb05da53b19fee0a",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/cli-candidate-ubuntu-prerequisite.txt",
+      "sha256": "1c8cf65cc91abf8427bda48b86f2a7492ff05e8861eab6b6078bdf09c054be0c",
+      "source_path": "benchmarks/phase-next-alpha-validation/cli-candidate-ubuntu-prerequisite.txt"
+    },
+    {
+      "bytes": 10078,
+      "git_blob": "051be91e0e2824fbb589d322970d2dfd9e36e4d9",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/cli-candidate-debian-resource.json",
+      "sha256": "c75c5af84acda3deabf3e436ea09def8d370ad475ed62f9a93aa15ddfcc46a80",
+      "source_path": "benchmarks/phase-next-alpha-validation/cli-candidate-debian-resource.json"
+    },
+    {
+      "bytes": 24177,
+      "git_blob": "a481ad4a5095600b391b6bf3313ebb57d88b0211",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/cli-candidate-debian-install-v2.json",
+      "sha256": "cd6ec5aa4f65c4e1ed256523f88e2467989b8d45b2956f4762263695e8d29581",
+      "source_path": "benchmarks/phase-next-alpha-validation/cli-candidate-debian-install-v2.json"
+    },
+    {
+      "bytes": 773,
+      "git_blob": "595292e10577f682f95fdcb0e9a1cb9f115326c1",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/ai-holdout-score.json",
+      "sha256": "0eaca04fe61f4938f1c2eabd2ffbe4376810289e048d2111356937a769e9cc83",
+      "source_path": "benchmarks/phase-next-alpha-validation/ai-holdout-score.json"
+    },
+    {
+      "bytes": 11342,
+      "git_blob": "51272e8690f341740743a6d264a35f16cc8f1a81",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/ai-holdout-deterministic.json",
+      "sha256": "19037d9e56744abbae2d7514f8d8b8c32eebf6b51cb4c33706753afe531cd489",
+      "source_path": "benchmarks/phase-next-alpha-validation/ai-holdout-deterministic.json"
+    },
+    {
+      "bytes": 166218,
+      "git_blob": "446f1c20bfe7cd7f087fec79d74b5fa07bf6775e",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/ai-candidate-scripted-eval.json",
+      "sha256": "bcec2b30cd3bbffc371bb03b01b650a6711a2dbd37c9cf8b56cf1e8175f95d15",
+      "source_path": "benchmarks/phase-next-alpha-validation/ai-candidate-scripted-eval.json"
+    },
+    {
+      "bytes": 7279,
+      "git_blob": "63e82f9026377b9fa79219cdd3ca36060d672c70",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/ai-original-fresh.json",
+      "sha256": "9f595d748b6c5d522cb9f079bcd12a8a1289c9a69c8e3fa356f192f3aa1188cf",
+      "source_path": "benchmarks/phase-next-alpha-validation/ai-original-fresh.json"
+    },
+    {
+      "bytes": 7279,
+      "git_blob": "3354c7e2d591bbe774193d14630cf6ca6c81291e",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/ai-5a-security.json",
+      "sha256": "87fbe112ed212e6dfeb0c5421cc5ee7e7f7fc3f17ad86bb1467007957a734133",
+      "source_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/ai-5a-security.json"
+    },
+    {
+      "bytes": 1418,
+      "git_blob": "e6b596d8dbef40138c7c1ab6c48c9d3679b76f84",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-default-writes.json",
+      "sha256": "9371454a176c8ac386a60efa08708e454e3b9c0805d6cb3ad3d25e74fc630916",
+      "source_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-default-writes.json"
+    },
+    {
+      "bytes": 402,
+      "git_blob": "b05cb5a4fc546efd645e3d4f6a0fc151ac5fc9ef",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json",
+      "sha256": "9ea7e50539f96d393d5f861861836d7cd370732f8dbffc3fdfb99891b50be28b",
+      "source_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/phase5b-signed-current-without-independent-status.json"
+    },
+    {
+      "bytes": 5683,
+      "git_blob": "71f7f95beedfa3dec89e05c706617facc691414e",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority.json",
+      "sha256": "3d1ad8c145497e145437e18e03d53310b5bf2a0d66d2c168c243c4d27c27ce98",
+      "source_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority.json"
+    },
+    {
+      "bytes": 5684,
+      "git_blob": "81c2b4db475b9be50e1ac43be3d69ab319cfd60c",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json",
+      "sha256": "3f2710f271626bca3efbfb615ed519ca33f2c25f980dd862d05b5983354092b3",
+      "source_path": "benchmarks/phase-next-alpha-validation/original/benchmarks/phase-next-validation/native-4f-preintake-priority-repeat.json"
+    },
+    {
+      "bytes": 11967,
+      "git_blob": "5f6305f736cfe5b4345e2384fa25996a7544dae6",
+      "origin_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+      "retained_path": "benchmarks/phase-next-r-validation/retained-b81/docs/phase-next-alpha-independent-results.md",
+      "sha256": "e99e44645aeb268729ded128507b7de3f68d5334b4223bccacb852609934f74f",
+      "source_path": "docs/phase-next-alpha-independent-results.md"
+    },
+    {
+      "bytes": 1133,
+      "git_blob": "4d9a2142859b3371534865877d102c0a1572d0f2",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/4f-b-independent-rescore.json",
+      "sha256": "c39bd7c0e1bc541a4f7997885c3c37ce5cf875e31ada6837a1c412940febd72c",
+      "source_path": "benchmarks/phase-next-alpha-astra/4f-b-independent-rescore.json"
+    },
+    {
+      "bytes": 166209,
+      "git_blob": "3d74cc7439281117c22c94ae42288304008046f0",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5a-alpha-exactpin-rerun.json",
+      "sha256": "f5c6fedf2d4c7ea5e3794ad5e5be0c9bfe9fe22bcf22c119ccafa909393329ed",
+      "source_path": "benchmarks/phase-next-alpha-astra/5a-alpha-exactpin-rerun.json"
+    },
+    {
+      "bytes": 12250,
+      "git_blob": "d7ea4d5e0d5ce6b427be802dff90bf2956bcc2dd",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5a-alpha-independent-invariants.json",
+      "sha256": "48775fa58fd51cb70418cb186b23024b3f96b1de77e8fb92a4817e2516d7a496",
+      "source_path": "benchmarks/phase-next-alpha-astra/5a-alpha-independent-invariants.json"
+    },
+    {
+      "bytes": 1659,
+      "git_blob": "e023b3c60143746cd6bfd8fea9876e7c0dfdf868",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-rusage.json",
+      "sha256": "63d4080cf161592a2fc75e7364badea9ffd71d2cbdee5b8b02b0f3803bdc1919",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-rusage.json"
+    },
+    {
+      "bytes": 180,
+      "git_blob": "57cffd5bb1adc882fd72e8bee0dd5b4f04564096",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt",
+      "sha256": "e160f03fb08bf078b7fd678a201567fc8f89b60d4775dd04febf68f79baa463d",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-256m-memory-events.txt"
+    },
+    {
+      "bytes": 1661,
+      "git_blob": "6503ec110f50eb70793a7783fd2379a7623e3285",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-rusage-512m.json",
+      "sha256": "0c4f031d0d7d17a16658a1ad3cf55aadad3340adc06a6473db1c1bc2bcf9a716",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-rusage-512m.json"
+    },
+    {
+      "bytes": 28378,
+      "git_blob": "823b38ee8d40da9132b88a828aca02e5e497e474",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-installed-matrix.json",
+      "sha256": "838e3ced9c2978397f435b723efd0bfe97f488849efd16c393fab6e8c89a18f3",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-debian-installed-matrix.json"
+    },
+    {
+      "bytes": 28377,
+      "git_blob": "255e8ad7aeb8ae88b1d833be28aa6ac9b2c66f82",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-ubuntu-hybrid-installed-matrix.json",
+      "sha256": "1996db801fe707aa24ab0aee630004a1a72211cebdf00d71196b491a53296a99",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-ubuntu-hybrid-installed-matrix.json"
+    },
+    {
+      "bytes": 1108,
+      "git_blob": "4e09168e0999aa8796bb360557382799bfe0ac92",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-cache-build-summary.json",
+      "sha256": "c6048aea132ebd2e31e033445abe6003970f4ddad2a53b850e4f50f9c6f7ab03",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-cache-build-summary.json"
+    },
+    {
+      "bytes": 577,
+      "git_blob": "1f4067b40f642d5901e3cf0d7880cecfe646e0dd",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "benchmarks/phase-next-alpha-astra/5b-final-offline-build.stderr",
+      "sha256": "19b4b91ed9be4a6ec0796d1ddc488dc87b8a2adc33a5f82bd6093dc6f7d676bc",
+      "source_path": "benchmarks/phase-next-alpha-astra/5b-final-offline-build.stderr"
+    },
+    {
+      "bytes": 6021,
+      "git_blob": "4b4046cbcd74a161612c33eba3a5e312335336be",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "docs/phase-next-alpha-5b-cache-supplement.md",
+      "sha256": "b51ac7f62e206c6fb1beac890e5c4dbe73a3d617f8f07b45ce489ae19633cd2d",
+      "source_path": "docs/phase-next-alpha-5b-cache-supplement.md"
+    },
+    {
+      "bytes": 8093,
+      "git_blob": "1e983cc030f7f89d364b053ec91f3b55c5643b66",
+      "origin_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+      "retained_path": "docs/phase-next-alpha-4f-b-independent-review.md",
+      "sha256": "20d7060f90d503682b6090e5e8ae6c5308817548e0a98d0acb2589355243add3",
+      "source_path": "docs/phase-next-alpha-4f-b-independent-review.md"
+    }
+  ],
+  "external_validation_commit": "b81dac88c895aa074e534d7ea0feb6341b4347e6",
+  "schema_version": "phase-next-r-original-evidence-manifest-v1",
+  "tracked_unique_vald": 12
+}

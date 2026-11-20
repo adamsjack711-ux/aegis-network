@@ -1,0 +1,30 @@
+{
+  "cache_manifest_sha256": "ef2506f559f38e8c9840272604015f001dcdc592cf23ab73994ac07ea302ee04",
+  "cache_source": "/private/tmp/aegis-phase5b-uv-cache",
+  "default_timestamp_wheel_sha256": "0a14026c9b98b8d356ef771b2faac9baa998888a5c19a6a6f6f6269f569d9dd3",
+  "hatchling_record_sha256": "e3b5d3ab14063323c18d7edb898bc0975a3634c636394030766a44798f481df0",
+  "matrix": {
+    "debian": {
+      "default_invocations": 24,
+      "explicit_controls": 4,
+      "extra_negatives": 5,
+      "fail": 0,
+      "logical_default_cases": 12,
+      "pass": 33
+    },
+    "ubuntu-hybrid": {
+      "default_invocations": 24,
+      "explicit_controls": 4,
+      "extra_negatives": 5,
+      "fail": 0,
+      "logical_default_cases": 12,
+      "pass": 33
+    }
+  },
+  "network": "disabled",
+  "offline_wheel_sha256": "7f4701b30303f47e645374f6d0ee085e74e927bd06dfc26da533ae5bd60a8698",
+  "owner_reported_wheel_sha256": "7f4701b30303f47e645374f6d0ee085e74e927bd06dfc26da533ae5bd60a8698",
+  "source_cache_unchanged_after_build": true,
+  "source_date_epoch": 1735689600,
+  "source_pin": "876988ba30abed9c2954668d02b2c4c13f84e50f"
+}
