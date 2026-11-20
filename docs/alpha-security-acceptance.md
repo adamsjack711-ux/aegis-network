@@ -1,0 +1,19 @@
+# Alpha security acceptance
+
+Frozen security reference: independent acceptance `ff69241e87ae36916a25489191aa27674a046ecb`; original 44 plus 10 later failure/evidence artifacts verified by `scripts/alpha_readiness_val_manifest.py`. This document records outcomes without changing an acceptance threshold.
+
+| Gate | Current evidence | Decision |
+| --- | --- | --- |
+| SignedFinding 1.0, exact `InventoryItem(purl, version)`, native T4/T5 | No Alpha integrated product source changed these contracts. | **Preserved; no authority expansion.** |
+| Grant file check/read race | Baseline original `--runxfail` fails as expected. Unique owner `644a184` has new FD tests but independent `b2b07e3` found one committed R03 failure and the historical xfail no longer tests the repaired seam. External `8c9c319` awaits independent exact-pin review. | **OPEN; no grant source intake.** |
+| Grant custody and compatibility | Baseline accepted readable 0600, 0644, 0640, 0444, 0400, 0666 and 0622 files. One candidate keeps those modes; another tightens owner/mode without a reviewed migration. Same-UID path custody and ACL behavior remain assumptions. | **Versioned decision required; no silent weakening or tightening.** |
+| CLI default privacy and observation-only status | Source-only offline probe and external traced source observations are retained, but no exact installed artifact has passed the four-cell 84-case/68-child attempted-effect matrix. Missing native Evidence remains `unknown`. | **Release HOLD.** |
+| Offline AI claims | Synthetic deterministic V: 54/66 eligible exact, six epoch inconclusive, zero independently adjudicated semantic source points. External sealed36 baseline reports 33/34 completed exact with two epoch inconclusive, from a different adapter/denominator. | **Research diagnostic only.** No model output to Finding, Evidence, approval or protected writer. |
+| Real model experiment | 0 authorized calls, no verified endpoint/model, exported-byte approval, actual billing oracle or independent semantic point review. | **NO-GO.** |
+| Distributed protected writes | Native T4/T5 remains authoritative. Five-second all-agent durable withdrawal gate, ownership/fencing recovery and rollback anchor remain unproven. | **NO-GO.** |
+
+The original grant race and old 256 MiB OOM failures remain retained. A successful local denial or broker acknowledgement cannot replace the all-agent five-second metric. The Phase 5C Diagnostic Runner remains design-only with no unrestricted terminal execution. No external inference, unreviewed package download, production action, master merge or distributed autonomous enforcement is authorized.
+
+## Proposed real-model authorization boundary
+
+External `94c2555` prepares a sealed synthetic 36-case bundle with canonical JSON SHA-256 `c9677d431a736abd10323a7c0bc2ab6cc298572d029548f51a848c6dedcc1598` and a script ceiling of 36 sequential calls, 300 output tokens per case, 12,000 request bytes and 20 seconds per request. This is a **proposal, not an approved experiment**. The exact model snapshot, destination, prompt/version, maximum input tokens, conservative current pricing, total USD cap, credential issuer and actual billed-cost oracle are unresolved. A caller-writable `authorization: explicit-user-approval` JSON string is not proof of approval. Before any request, a separate authorization must bind the exact model snapshot, reviewed outbound bytes/hash, endpoint/redirect policy, call and token ceilings, USD stop cap, data retention, secret custody and billing review. Stop on uncertain metering or changed inputs. Use the same 34 eligible cases and explicit inconclusive denominator for paired baseline/model comparison, and independently adjudicate source semantics. No model-generated result can be promoted to signed Finding, Evidence, local approval or mitigation authority.
