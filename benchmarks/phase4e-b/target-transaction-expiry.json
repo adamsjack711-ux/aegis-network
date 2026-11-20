@@ -1,0 +1,29 @@
+{
+  "source": "11ecb948de82ef094f4fc48261786ff7600d64de",
+  "scope": "isolated SQLite marker transaction, authenticated loopback home confirms assignment",
+  "before": {
+    "version": 1,
+    "marker": "quarantined",
+    "held": false,
+    "receipts": 0
+  },
+  "after_at_signed_approval_deadline": {
+    "version": 1,
+    "marker": "quarantined",
+    "held": false,
+    "receipts": 0
+  },
+  "healthy_same_nonce_positive_control": {
+    "version": 2,
+    "marker": "observing",
+    "held": false,
+    "receipts": 1
+  },
+  "statements_in_expiry_attempt": [
+    "SELECT",
+    "SELECT",
+    "UPDATE",
+    "INSERT"
+  ],
+  "clock_injection": "write-layer clock reaches signed approval cutoff after receipt INSERT is staged"
+}

@@ -1,0 +1,40 @@
+# Review of the Phase 4E-B writer transaction
+
+The isolated B writer at `11ecb948de82ef094f4fc48261786ff7600d64de` validates the exact operator-signed mutation, writer version, current ownership generation, and installed fence in one SQLite transaction. It stages the synthetic marker and command receipt together, then checks assignment, approval, command, and credential expiry before commit. Its signed mutation also binds the enrollment, target and marker. Its contract has no native Evidence identity, T4 or T5 cut, or Rapid plan input. The later handoff `330294e1326ab30fb1ade096b089d5c175d957cd` leaves those source files unchanged. [Identity review](phase4e-b-independent-review.md)
+
+The native disposable fixture at `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f` already uses a different composition. `EvidenceGate` checks the native finding, bundle, attestations and durable Rapid decision. It binds the witnessed Mesh checkpoint and exact independent Evidence status to a local plan, latches changed or unreachable status for that plan, and supplies a guard around the target transaction. `TargetStore._authorized_write` checks current status before the effect and before commit. The same transaction checks ownership, target fences and plan expiry. The two implementations have separate approvals, state and transaction boundaries. Passing their tests independently establishes their respective fixture controls. [Native gate](../src/aegis/phase3c.py) · [Native writer](../src/aegis/mitigation/store.py) · [Native Evidence status](../src/aegis/trust_lab/native_evidence.py)
+
+## Proposed approval and commit contract
+
+1. Have the local operator sign the exact action and reviewed context. The context covers the deployment and audience, native finding and bundle digest, attestation binding, witnessed Mesh checkpoint, independent Evidence status binding, immutable target/inventory, owner generation, writer fence/version and exclusive deadline. Keep the signed intent distinct from approval. A replacement binding, generation or target requires a new exact approval.
+2. Derive current Evidence and witnessed history from enrolled authority inputs verified by the writer or its separately trusted local status appraiser. Preserve boot and recovery binding, monotonic status floors, contradiction and withdrawal holds, and separate trust custody. A broker-supplied digest is an input to comparison. The writer's decision depends on local validation of the underlying cut and scope.
+3. Serialize changes to the writer's trusted local status and ownership floors with protected mutation. In the target transaction compare the locally verified live context against the approved context and the installed fence. Check once before mutation and again after staging the effect, receipt and audit, immediately before commit. The earliest approval, ownership lease, command, credential, witnessed cutoff, Evidence observation and local status expiry wins. Equality expires the authorization. Use conservative local monotonic deadlines with declared cross-host clock uncertainty. Unavailable time, unverified status or an observed mismatch holds.
+4. On late failure roll back the requested mutation, its consumed nonce and success audit together. Keep the restrictive hold durable independently of the denied effect, for example by rolling back the mutation to a savepoint and then committing only the hold. Quarantine is separate from protection confirmation.
+5. A local transaction can enforce a validated cut and local floor atomically. A remote withdrawal can become known after the last valid cut. Specify the maximum time before that cut expires and how authenticated notification advances the local hold, then test the interval under partition and restore. External I/O under the writer lock needs bounded deadlines and a lock order that permits fencing and safe recovery.
+
+These interfaces remain proposals. B owns the protected runtime transaction and must define the versioned signed fields, provision the local status verifier and pin the writer. C owns proof validation and exact status semantics. An adapter checking Evidence only before forwarding an existing B command has no place to bind or enforce the approved cut at that writer. A composed writer test needs the owned runtime contract first. [Phase 4D deployment limits](phase4d-release-readiness.md)
+
+## Acceptance oracle for the composed writer
+
+| Condition | Required evidence from the same writer |
+| --- | --- |
+| Healthy exact command | Independently read back one marker change, one consumed nonce, and one audit binding the approved native plan, current cut, target, fence and generation. |
+| Matching approval, different current cut | Advance the trusted local T4 checkpoint or T5 Evidence status after preparing the plan. A healthy newly signed cut for the same subject still requires fresh exact local review. Assert zero requested marker mutations and zero new receipts. |
+| Missing, invalid, withheld or withdrawn Evidence | Use the same valid command and operator signature. The writer denies and both the response oracle and writer state show restrictive hold. A legacy coordinator positive cannot override that hold. |
+| Cut or earliest deadline changes before commit | Stage the requested effect and receipt, then force a trusted status version or deadline change before the final check. Verify the staged effect, success row and consumed nonce roll back. Check equality explicitly at the shorter deadline while the longer assignment and command deadlines remain current. |
+| Fence changes and late retries | Race separate exact approvals against target fence and generation changes. A stale command, stale inventory, or same nonce retry can never commit against the successor. Set the expected quorum, target set and recovery anchors before the run. |
+| Recovery | Restart the dependencies with the prior failed plan. Reconcile a complete fresh cut and a valid owner generation. Preserve hold until both exact approval and independent route observations establish recovery. |
+
+The pinned native and B controls below establish separate fixture behaviors and provide comparison evidence for the future composed writer.
+
+## Independent pinned controls
+
+At `ae59a97`, 10 selected native tests passed and 18 were deselected. They covered the composed local fixture, T5 exclusive expiry, replayed or substituted status, and a changed Evidence binding. Run from the pinned checkout with the repository's Python dependencies and disposable loopback fixture access.
+
+```sh
+PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -ra -p no:cacheprovider \
+  tests/phase4d/test_trust_composition.py tests/phase4d_t5/test_independent_status.py \
+  -k 'trust_rechecks or status_and_attestation_expire or fresh_status_binds or missing_duplicate_substituted'
+```
+
+In a separate disposable archive of B `11ecb94`, the isolated target requested current ownership from the loopback home over mTLS. An instrumented call into its writer signed an exact approval ending before the command and assignment. The test-only write-layer clock reached that approval boundary after the target had staged both `UPDATE` and `INSERT`. The final check denied. Read-only SQLite inspection found the original quarantined marker at version 1 and zero receipts. Under the healthy clock, the same command and nonce advanced once to observing at version 2 with one receipt. This control isolates approval expiry and transaction rollback. The composed acceptance oracle still needs the corresponding trusted-cut and status deadline cases. [Raw writer expiry readback](../benchmarks/phase4e-b/target-transaction-expiry.json)
