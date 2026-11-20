@@ -80,3 +80,9 @@ Review approved C `f7053de6f059535e631cbca9544cd2ee57b2ed48` in the explicit sha
 ### 4E-ADR-07 · Transport proof contract only
 
 Review accepted A's proposal and proof regression `4af51b486efa24b98b74f85537cc92293ce0f770` without wiring a runtime adapter. Compare canonical signed native envelope identity across any reserialization. A different record with the same event UUID cannot borrow the first record's receipt. A native early denial proposal uses independently authenticated quorum receipt, and sealed inclusion, exact scope and expiry are separately checked for positive status. A broker acknowledgement, HTTP 202, local replay cursor or sender-supplied digest does not prove any of those conditions. Direct independent discovery and generation-bound consumer state remain open. [Transport proposal](phase4e-withdrawal.md#proposed-verified-transport-to-trust-adapter)
+
+### 4E-ADR-08 · Proactive hold for isolated B only
+
+B `79cd10a72aac169047f63fe137988ce881304f25` adds an authenticated target-owned watchdog and exact private retirement receipts for the marker fixture. The watchdog can commit a hold under the same writer lock before any observer request, and observers cannot persist or clear a hold. Explicit live retirement waits for every enrolled writer's deny barrier. The target checks current ownership and the earliest accepted deadline again after preparing the SQL effect. The native writer and JetStream ownership are unchanged.
+
+This approval is limited to inert fixtures and independently observed loss, expiry and restart behavior. A short outage between observations, a stopped writer or a restore of all trust domains cannot be represented as a proved durable hold. Keep the native observe-before-quarantine finding and exact native Evidence binding open until separately demonstrated. Both failure domains remain explicit in the recorded tests. [Original independent fault](phase4e-observer-order.md)
