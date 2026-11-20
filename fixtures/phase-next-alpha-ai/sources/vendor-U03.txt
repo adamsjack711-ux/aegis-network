@@ -1,0 +1,1 @@
+AEGIS-ADV-U03 lists npm elm-queue 1.0.0 as affected. The notice gives no impact, exploitability, fix or mitigation claim.

@@ -1,0 +1,1 @@
+Snapshot dated 2025-01-01: AEGIS-ADV-W02 listed npm pine-cache 3.0.0 as affected. No later status or withdrawal feed is included for the 2026-11-20 assessment.

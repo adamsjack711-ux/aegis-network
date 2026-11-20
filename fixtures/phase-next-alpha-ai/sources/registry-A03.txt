@@ -1,0 +1,1 @@
+AEGIS-ADV-A03 affects npm package willow-core 2.0.0. A third-party page calls willow-client an alias but the registry does not confirm that identity.

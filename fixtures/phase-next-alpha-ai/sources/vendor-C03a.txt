@@ -1,0 +1,1 @@
+AEGIS-ADV-C03 revision A says npm birch-auth 2.2.2 is affected.

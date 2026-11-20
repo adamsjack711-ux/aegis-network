@@ -1,0 +1,1 @@
+AEGIS-ADV-F03 is under investigation for npm cedar-map. No affected versions or impact have been confirmed. Do not treat 5.0.0 as confirmed affected.
