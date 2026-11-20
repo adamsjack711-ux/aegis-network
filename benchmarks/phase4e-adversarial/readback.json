@@ -121,6 +121,21 @@
     "skipped": 0,
     "tests": 1
   },
+  "combined-shadow-v2-86d2454.xml": {
+    "errors": 0,
+    "failures": 0,
+    "shadow_v2": {
+      "lost_fourth_view": "held",
+      "replayed_view": "held",
+      "stale_relying_restore": "held"
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "single_witness_appraisal": "inconclusive",
+    "skipped": 0,
+    "status_profile": "withdrawal-v2",
+    "tests": 2
+  },
   "combined-trust.xml": {
     "errors": 0,
     "failures": 0,
@@ -253,6 +268,14 @@
     "tests": 15
   },
   "shared-writer-4918dad.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 3,
+    "signed_status_samples": 12,
+    "skipped": 0,
+    "tests": 15
+  },
+  "shared-writer-86d2454.xml": {
     "errors": 0,
     "failures": 0,
     "signed_ownership_requests": 3,
