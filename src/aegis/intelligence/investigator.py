@@ -13,12 +13,12 @@ import threading
 import time
 from datetime import datetime
 from decimal import Decimal
-from typing import Literal, Protocol
+from typing import Annotated, Literal, Protocol
 
 from pydantic import Field, ValidationError, model_validator
 
 from .baseline import assess, normalize
-from .models import Asset, Record, SourceSnapshot
+from .models import Asset, Record, SourceRef, SourceSnapshot
 
 PROMPT_VERSION = "investigator-1"
 INSTRUCTIONS = (
@@ -159,8 +159,7 @@ class SourceDisposition(Record):
     reason_codes: tuple[str, ...]
 
 
-class ResearchCandidate(Record):
-    schema_version: Literal["research-candidate-v1"] = "research-candidate-v1"
+class _ResearchCandidateFields(Record):
     input_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     advisory_id: str
     vulnerability_id: str
@@ -174,6 +173,16 @@ class ResearchCandidate(Record):
     provider: str
     model: str
     prompt_version: Literal["investigator-1"] = PROMPT_VERSION
+
+
+class ResearchCandidate(_ResearchCandidateFields):
+    schema_version: Literal["research-candidate-v1"] = "research-candidate-v1"
+
+
+class StructuredResearchCandidate(_ResearchCandidateFields):
+    schema_version: Literal["research-candidate-v2"] = "research-candidate-v2"
+    # These are the matcher’s source records. Excerpts are unassessed context.
+    applicability_references: tuple[SourceRef, ...]
 
 
 class ResearchCheck(Record):
@@ -203,7 +212,8 @@ class AuditRecord(Record):
 
 
 class Investigation(Record):
-    candidate: ResearchCandidate
+    candidate: Annotated[ResearchCandidate | StructuredResearchCandidate,
+                         Field(discriminator="schema_version")]
     check: ResearchCheck
     audit: AuditRecord
 
@@ -287,8 +297,6 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
             reasons.append("source-disagreement-preserved")
         if draft.proposed_outcome != baseline.outcome:
             reasons.append("model-disagrees-with-deterministic-baseline")
-        if draft.proposed_outcome == "affected" and not any(e.kind == "applicability" for e in excerpts):
-            reasons.append("affected-claim-lacks-excerpt")
         if any(e.kind == "impact" for e in excerpts):
             reasons.append("impact-excerpt-not-independently-verified")
         if any(re.search(r"`|\$\(|\b(?:sudo|curl|wget|bash|nmap|ignore prior rules|"
@@ -310,22 +318,23 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
                           source_digests=tuple(s.sha256 for s in advisory.sources),
                           status=status, reason_codes=tuple(reasons),
                           deterministic_outcome=baseline.outcome, excerpt_count=len(excerpts))
-    candidate = ResearchCandidate(input_sha256=input_digest,
-                                  advisory_id=advisory.advisory_id,
-                                  vulnerability_id=advisory.vulnerability_id,
-                                  baseline_outcome=baseline.outcome,
-                                  model_proposal=draft.proposed_outcome if draft else None,
-                                  reportable_outcome=reportable,
-                                  source_dispositions=tuple(SourceDisposition(
-                                      source_id=sid, source_sha256=source.sha256,
-                                      outcome=one.outcome, reason_codes=one.reasons)
-                                      for sid, source in source_map.items()
-                                      for one in (assess(advisory.asset, normalize(source),
-                                                         advisory.vulnerability_id, now=now),)),
-                                  excerpts=tuple(excerpts),
-                                  uncertainty_codes=tuple(dict.fromkeys((*baseline.reasons, *reasons))),
-                                  provider=reply.provider if reply else "failed",
-                                  model=reply.model if reply else provider.model)
+    candidate = StructuredResearchCandidate(
+        input_sha256=input_digest,
+        advisory_id=advisory.advisory_id,
+        vulnerability_id=advisory.vulnerability_id,
+        baseline_outcome=baseline.outcome,
+        model_proposal=draft.proposed_outcome if draft else None,
+        reportable_outcome=reportable,
+        applicability_references=baseline.references if baseline.outcome in {"affected", "unaffected"} else (),
+        source_dispositions=tuple(SourceDisposition(
+            source_id=sid, source_sha256=source.sha256, outcome=one.outcome, reason_codes=one.reasons)
+            for sid, source in source_map.items()
+            for one in (assess(advisory.asset, normalize(source), advisory.vulnerability_id, now=now),)),
+        excerpts=tuple(excerpts),
+        uncertainty_codes=tuple(dict.fromkeys((*baseline.reasons, *reasons))),
+        provider=reply.provider if reply else "failed",
+        model=reply.model if reply else provider.model,
+    )
     audit = AuditRecord(input_sha256=input_digest, source_digests=check.source_digests,
                         provider=candidate.provider, model=candidate.model,
                         prompt_version=PROMPT_VERSION, status=status, reason_codes=tuple(reasons),
@@ -338,6 +347,8 @@ def investigate(advisory: AdvisoryInput, provider: Provider, *, limits: Limits |
 def verify_investigation(advisory: AdvisoryInput, result: Investigation,
                          *, now: datetime | None = None) -> None:
     """Reopen exact source bytes and recheck a stored private research record."""
+    if any(hashlib.sha256(source.content).hexdigest() != source.sha256 for source in advisory.sources):
+        raise ValueError("research source digest does not match source bytes")
     source_map = {f"S{i}": source for i, source in enumerate(advisory.sources, 1)}
     expected_digest = _digest({"advisory_id": advisory.advisory_id,
                                "vulnerability_id": advisory.vulnerability_id,
@@ -355,10 +366,15 @@ def verify_investigation(advisory: AdvisoryInput, result: Investigation,
     if (result.candidate.input_sha256 != expected_digest or
             result.check.source_digests != tuple(s.sha256 for s in advisory.sources) or
             result.check.deterministic_outcome != baseline.outcome or
+            result.candidate.baseline_outcome != baseline.outcome or
             result.candidate.source_dispositions != expected_sources or
             result.candidate.advisory_id != advisory.advisory_id or
             result.candidate.vulnerability_id != advisory.vulnerability_id):
         raise ValueError("research input binding changed")
+    if isinstance(result.candidate, StructuredResearchCandidate):
+        references = baseline.references if baseline.outcome in {"affected", "unaffected"} else ()
+        if result.candidate.applicability_references != references:
+            raise ValueError("research applicability references changed")
     for excerpt in result.candidate.excerpts:
         source = source_map.get(excerpt.source_id)
         if (source is None or source.sha256 != excerpt.source_sha256 or

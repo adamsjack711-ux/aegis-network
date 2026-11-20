@@ -10,7 +10,7 @@ import pytest
 
 from aegis.intelligence.feeds import snapshot
 from aegis.intelligence.investigator import (
-    AdvisoryInput, Authorization, Limits, OpenAIProvider, ScriptedProvider, SpendLedger,
+    AdvisoryInput, Authorization, Investigation, Limits, OpenAIProvider, ScriptedProvider, SpendLedger,
     investigate, verify_investigation,
 )
 from aegis.intelligence.investigator_eval import evaluate_investigator
@@ -82,6 +82,38 @@ def test_offline_research_has_no_signed_finding_or_evidence_authority(monkeypatc
         artifact.SignedFinding.model_validate(result.candidate.model_dump())
     with pytest.raises(Exception):
         artifact.Evidence.model_validate(result.candidate.model_dump())
+
+
+def test_structured_applicability_is_reportable_without_a_provider_excerpt():
+    advisory, response = sample()
+    source, = advisory.sources
+    body = json.loads(source.content)
+    body["affected"].insert(0, {
+        "package": {"ecosystem": "PyPI", "name": "other-package"},
+        "versions": [advisory.asset.version],
+    })
+    source = snapshot(source.kind, source.uri, json.dumps(body).encode(), retrieved_at=source.retrieved_at)
+    advisory = advisory.model_copy(update={"sources": (source,)})
+    result = investigate(advisory, ScriptedProvider({**response, "claims": []}), now=NOW)
+    reopened = Investigation.model_validate_json(result.model_dump_json())
+    reference, = reopened.candidate.applicability_references
+    assert (reference.pointer, reference.sha256) == ("/affected/1", source.sha256)
+    assert reopened.candidate.schema_version == "research-candidate-v2"
+    assert reopened.candidate.reportable_outcome == "affected" and reopened.candidate.excerpts == ()
+    verify_investigation(advisory, reopened, now=NOW)
+
+
+@pytest.mark.parametrize("change", [{"pointer": "/summary"}, {"sha256": "0" * 64}])
+def test_verifier_rejects_changed_structured_applicability_reference(change):
+    advisory, response = sample()
+    result = investigate(advisory, ScriptedProvider(response), now=NOW)
+    reference, = result.candidate.applicability_references
+    candidate = result.candidate.model_copy(update={
+        "applicability_references": (reference.model_copy(update=change),),
+    })
+    changed = Investigation.model_validate_json(result.model_copy(update={"candidate": candidate}).model_dump_json())
+    with pytest.raises(ValueError, match="applicability references"):
+        verify_investigation(advisory, changed, now=NOW)
 
 
 def test_conflict_remains_conflicting_and_unsupported_positive_abstains():
