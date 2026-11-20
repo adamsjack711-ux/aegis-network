@@ -1,0 +1,1 @@
+{"affected":[{"package":{"ecosystem":"PyPI","name":"acme-parser"},"ranges":[{"events":[{"introduced":"1.0"},{"fixed":"2.0"}],"type":"ECOSYSTEM"}]}],"aliases":["CVE-2099-0001"],"id":"OSV-2099-1","summary":"A crafted request reaches the affected parser."}
