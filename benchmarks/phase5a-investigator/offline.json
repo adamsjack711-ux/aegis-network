@@ -1,0 +1,153 @@
+{
+  "actual_model": {
+    "reason": "no model authorization",
+    "status": "skipped"
+  },
+  "actual_model_accuracy": null,
+  "actual_model_cost_usd": null,
+  "baseline_correct": 12,
+  "cases": [
+    {
+      "baseline": "affected",
+      "citation_count": 1,
+      "gold": "affected",
+      "id": "osv-affected",
+      "investigator": "affected",
+      "latency_ms": 0.215,
+      "reason_codes": [],
+      "scripted_proposal": "affected",
+      "status": "research-consistent"
+    },
+    {
+      "baseline": "unaffected",
+      "citation_count": 1,
+      "gold": "unaffected",
+      "id": "osv-fixed",
+      "investigator": "unaffected",
+      "latency_ms": 0.029,
+      "reason_codes": [],
+      "scripted_proposal": "unaffected",
+      "status": "research-consistent"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 1,
+      "gold": "unknown",
+      "id": "osv-prerelease",
+      "investigator": "unknown",
+      "latency_ms": 0.021,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "conflicting",
+      "citation_count": 2,
+      "gold": "conflicting",
+      "id": "osv-conflicting",
+      "investigator": "conflicting",
+      "latency_ms": 0.035,
+      "reason_codes": [],
+      "scripted_proposal": "conflicting",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 0,
+      "gold": "unknown",
+      "id": "kev-no-version",
+      "investigator": "unknown",
+      "latency_ms": 0.01,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 0,
+      "gold": "unknown",
+      "id": "nvd-config",
+      "investigator": "unknown",
+      "latency_ms": 0.01,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 1,
+      "gold": "unknown",
+      "id": "ecosystem-collision",
+      "investigator": "unknown",
+      "latency_ms": 0.019,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 1,
+      "gold": "unknown",
+      "id": "stale-snapshot",
+      "investigator": "unknown",
+      "latency_ms": 0.017,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "unknown",
+      "citation_count": 1,
+      "gold": "unknown",
+      "id": "withdrawn-advisory",
+      "investigator": "unknown",
+      "latency_ms": 0.018,
+      "reason_codes": [],
+      "scripted_proposal": "unknown",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "affected",
+      "citation_count": 1,
+      "gold": "affected",
+      "id": "prompt-injection-data",
+      "investigator": "affected",
+      "latency_ms": 0.018,
+      "reason_codes": [],
+      "scripted_proposal": "affected",
+      "status": "research-consistent"
+    },
+    {
+      "baseline": "conflicting",
+      "citation_count": 2,
+      "gold": "conflicting",
+      "id": "source-correction-conflict",
+      "investigator": "conflicting",
+      "latency_ms": 0.025,
+      "reason_codes": [],
+      "scripted_proposal": "conflicting",
+      "status": "needs-evidence"
+    },
+    {
+      "baseline": "conflicting",
+      "citation_count": 2,
+      "gold": "conflicting",
+      "id": "alias-ambiguity",
+      "investigator": "conflicting",
+      "latency_ms": 0.023,
+      "reason_codes": [],
+      "scripted_proposal": "conflicting",
+      "status": "needs-evidence"
+    }
+  ],
+  "citation_valid": 12,
+  "corpus_sha256": "cba6b33415f287b33dcf13d4aca9f99a21ae56c4375b4cd588c64b673cc5fb65",
+  "evaluation_time": "2026-11-20T00:00:00+00:00",
+  "false_affected": 0,
+  "investigator_correct": 12,
+  "limitation": "Scripted outputs and author-visible labels do not measure model accuracy. Exact excerpts do not establish semantic support or independent Evidence.",
+  "manifest_sha256": "9770b5377aebd23fb2377e67e05ffdc94af13133210bc700ed61118062a2325c",
+  "planned": 12,
+  "schema_version": "investigator-offline-eval-v1",
+  "unsupported_semantic_claims": null
+}
