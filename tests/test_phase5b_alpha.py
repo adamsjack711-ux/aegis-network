@@ -80,6 +80,27 @@ def test_observer_grants_match_role_time_revocation_and_scope(tmp_path):
     assert decisions(load_observer_publishers(path)) == decisions(load_publishers(str(path)))
 
 
+def test_repeated_publisher_id_matches_shared_key_rotation_semantics(tmp_path):
+    from aegis.config import load_publishers
+
+    path, raw = _grant_file(tmp_path)
+    rotated = raw["grants"][0].copy()
+    rotated["key_id"] = "rotated-key"
+    rotated["public_key"] = base64.b64encode(
+        Ed25519PrivateKey.generate().public_key().public_bytes_raw()
+    ).decode()
+    raw["grants"].append(rotated)
+    path.write_text(json.dumps(raw))
+    observer = load_observer_publishers(path)
+    shared = load_publishers(str(path))
+    assert _grant_fingerprint(observer) == _grant_fingerprint(shared)
+    assert len(observer.grants) == 2
+    for store in (observer, shared):
+        for key_id in ("fixture-key", "rotated-key"):
+            assert store.authorize("fixture-publisher", key_id, "finding",
+                                   datetime(2026, 6, 1, tzinfo=timezone.utc))
+
+
 @pytest.mark.parametrize("mutation", [
     lambda raw: raw["grants"][0].update(roles=["publisher"]),
     lambda raw: raw["grants"][0].update(public_key="invalid-base64"),
@@ -116,6 +137,18 @@ def test_malformed_grant_top_level_rejected_as_bounded_cli_error(tmp_path, monke
     assert output["status"] == output["independent_status"] == "unknown"
     assert len(output["error"]) < 256
     assert not state.exists()
+
+
+@pytest.mark.parametrize("raw", [[], "not-an-object", None, {"grants": "not-a-list"},
+                                  {"grants": [None]}])
+def test_malformed_grant_file_is_rejected_by_both_readers(tmp_path, raw):
+    from aegis.config import load_publishers
+
+    path = tmp_path / "malformed-trust.json"
+    path.write_text(json.dumps(raw))
+    for reader in (lambda: load_publishers(str(path)), lambda: load_observer_publishers(path)):
+        with pytest.raises((ValueError, TypeError, KeyError, AttributeError)):
+            reader()
 
 
 def test_oversized_grants_rejected_without_state(tmp_path, monkeypatch, capsys):
