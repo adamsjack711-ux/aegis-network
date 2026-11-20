@@ -1,0 +1,42 @@
+{
+  "baseline_source_commit": "d15a3a756b8066c5cb2d98665662220e52f4a7d6",
+  "candidate_source_commit": "9b69c486b1dd6dff1d7eaa0f7a3858c711385d41",
+  "classification": "owner-reported; pending independent VAL-R reproduction",
+  "files": {
+    "aegis-5b-r-9b69c48-256m-100k-closed.json": {
+      "bytes": 592,
+      "sha256": "00f333e55ada9c6b315af51e17a630a426e7b7d45312b4ca2a8a65a9dda63ec4"
+    },
+    "aegis-5b-r-9b69c48-256m-100k-slow.json": {
+      "bytes": 607,
+      "sha256": "962010d7b1ef211af3e64d9af4d431ef3cd5342590b9fdd6c6cba3b3f6349051"
+    },
+    "aegis-5b-r-9b69c48-256m-100k.json": {
+      "bytes": 1276,
+      "sha256": "e67487e5d966955edb2171221cbfa915348f413d7d1c03cca96d218270498216"
+    },
+    "aegis-5b-r-9b69c48-512m-100k.json": {
+      "bytes": 1281,
+      "sha256": "523a091fc8c142052ddd9b8530a6bbc0704ee04963ffbcc7b1e6451a8e3d7e7c"
+    },
+    "aegis-5b-r-9b69c48-focused-tests.log": {
+      "bytes": 99,
+      "sha256": "c506394a917da2d3142b11c41ef642e39196645939b77dfe28499cd55fdc84f0"
+    },
+    "aegis-5b-r-9b69c48-negatives.json": {
+      "bytes": 1010,
+      "sha256": "b069b658970c487566699282387d64d3272b0fc7899e9ba653ab34eb41e9f9ab"
+    },
+    "aegis-5b-r-d15a3a7-512m-100k-same-harness.json": {
+      "bytes": 1279,
+      "sha256": "d3418ad8e4e74304caed8eb41df31aec38cea470089f689076bf38ad831d25bb"
+    }
+  },
+  "frozen_acceptance_commit": "f419af45d0437e84702c400b1b2cc196376725a6",
+  "harness": {
+    "negatives_sha256": "40478c572ec667bab56cf0389ae3a82ce1816f021b3a2c2f1a109c01396cae48",
+    "resource_sha256": "e08886b7fe29c4c9c8a05707f8ba30aee13acf919b9b20fb8a4ff41aa64cef49"
+  },
+  "image": "aegis_phase4_baseline-coordinator:latest sha256:67898a5e53a2ebb1138a9e17b0dfb22e52aabca270854cf86d21372f179a003e",
+  "serializer_source_commit": "f86ca372eabfb806af71c814099dd75e9d38491a"
+}
