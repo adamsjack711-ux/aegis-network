@@ -1,0 +1,4 @@
+.......................................x.....                            [100%]
+=========================== short test summary info ============================
+XFAIL tests/cli_safety_phase5b2/test_grant_race.py::test_grant_replacement_cannot_bypass_one_megabyte_limit - trust stat/read race awaits shared grant parser compatibility review
+44 passed, 1 xfailed in 1.59s

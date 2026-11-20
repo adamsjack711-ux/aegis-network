@@ -1,0 +1,312 @@
+{
+  "cases": [
+    {
+      "citations": [
+        "vendor-F01"
+      ],
+      "deterministic": "unaffected",
+      "emitted_claims": 1,
+      "expected": "unaffected",
+      "id": "F01-outside-range",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-F02"
+      ],
+      "deterministic": "unaffected",
+      "emitted_claims": 1,
+      "expected": "unaffected",
+      "id": "F02-ecosystem-collision",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "F03-unconfirmed-version",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-C01",
+        "registry-C01"
+      ],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "C01-vendor-registry-conflict",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-C02",
+        "registry-C02"
+      ],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "C02-fix-version-conflict",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-C03a",
+        "vendor-C03b"
+      ],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "C03-two-vendor-revisions",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-B01"
+      ],
+      "deterministic": "affected",
+      "emitted_claims": 2,
+      "expected": "affected",
+      "id": "B01-inclusive-lower",
+      "scripted_checked": "affected",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-B02"
+      ],
+      "deterministic": "unaffected",
+      "emitted_claims": 1,
+      "expected": "unaffected",
+      "id": "B02-exclusive-upper",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "registry-B03"
+      ],
+      "deterministic": "unaffected",
+      "emitted_claims": 1,
+      "expected": "unaffected",
+      "id": "B03-fixed-boundary",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "P01-unassessed-prerelease",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unaffected",
+      "id": "P02-debian-epoch-fixed",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "inconclusive",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-P03"
+      ],
+      "deterministic": "affected",
+      "emitted_claims": 1,
+      "expected": "affected",
+      "id": "P03-explicit-prerelease",
+      "scripted_checked": "affected",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "U01-citation-wrong-product",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "U02-unverified-blog",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-U03"
+      ],
+      "deterministic": "affected",
+      "emitted_claims": 1,
+      "expected": "affected",
+      "id": "U03-fabricated-impact",
+      "scripted_checked": "affected",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-I01"
+      ],
+      "deterministic": "unaffected",
+      "emitted_claims": 1,
+      "expected": "unaffected",
+      "id": "I01-override-outcome",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [
+        "vendor-I02"
+      ],
+      "deterministic": "affected",
+      "emitted_claims": 1,
+      "expected": "affected",
+      "id": "I02-command-in-advisory",
+      "scripted_checked": "affected",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "I03-json-role-spoof",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "A01-unknown-ecosystem",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "A02-source-binary-gap",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "A03-unresolved-alias",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "W01-withdrawn-notice",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "W02-stale-snapshot",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    },
+    {
+      "citations": [],
+      "deterministic": "unknown",
+      "emitted_claims": 0,
+      "expected": "unknown",
+      "id": "W03-no-affected-version",
+      "scripted_checked": "unknown",
+      "scripted_raw": "affected",
+      "status": "completed",
+      "unsupported_scripted_points_emitted": 0
+    }
+  ],
+  "errors": [],
+  "raw_report_sha256": "d0f7139aa9d6f4e481a8f0a405e1fc12c708257e830ef8803aff9ec4a52da5c3",
+  "schema": "phase5-next-independent-research-check-v1",
+  "summary": {
+    "authenticated_archived_sources": 0,
+    "deterministic_exact": 23,
+    "deterministic_false_affected": 0,
+    "deterministic_inconclusive": 1,
+    "observed": 24,
+    "planned": 24,
+    "real_model_calls": 0,
+    "scripted_checked_exact": 18,
+    "scripted_raw_false_affected": 20,
+    "source_byte_audit_errors": 0,
+    "unsupported_scripted_points_emitted": 0
+  },
+  "tested_commit": "68f9fd8fc84e8d92673c43ad20e3230a714ddac2"
+}
