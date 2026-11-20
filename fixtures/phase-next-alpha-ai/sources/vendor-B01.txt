@@ -1,0 +1,1 @@
+AEGIS-ADV-B01 affects PyPI maple-json >=1.2.0 and <1.4.0. A crafted document can cause availability degradation; no code execution is claimed.

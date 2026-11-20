@@ -1,0 +1,1 @@
+AEGIS-ADV-C02: PyPI birch-parse 1.7.0 is the fixed release. Both source versions remain published.

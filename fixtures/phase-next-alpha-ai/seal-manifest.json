@@ -1,0 +1,197 @@
+{
+  "as_of": "2026-11-20T00:00:00Z",
+  "case_count": 24,
+  "combined_case_count": 36,
+  "corpus_path": "fixtures/phase-next-alpha-ai/holdout-v1.json",
+  "corpus_sha256": "7f88e132b92d528fb01573f37e00c8af4698919bf3747c583f3ec74fb7dbc82d",
+  "decisions": {
+    "affected": 4,
+    "unaffected": 6,
+    "unknown": 14
+  },
+  "existing_corpus_path": "fixtures/phase-next-ai-holdout-v1.json",
+  "existing_corpus_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac",
+  "generator_sha256": "22cf845ba3d7ed5870e7b5b685f2d5329472fa7178a64432874f4b73a5d538c6",
+  "known_prior_unmappable": [
+    "H11-epoch-boundary"
+  ],
+  "new_predeclared_comparator_dependency": [
+    "P02-debian-epoch-fixed"
+  ],
+  "schema": "phase-next-alpha-ai-seal-v1",
+  "source_count": 27,
+  "sources": [
+    {
+      "bytes": 136,
+      "id": "vendor-F01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-F01.txt",
+      "sha256": "e8888ca843e7dd469f1367fe1515228fc49aca7826f02834549ac4ed5e0873f2"
+    },
+    {
+      "bytes": 136,
+      "id": "vendor-F02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-F02.txt",
+      "sha256": "c846d88d0a2a193bdea929721bab9af1364a29d8eb8ab2f4464e75052b5f1164"
+    },
+    {
+      "bytes": 150,
+      "id": "vendor-F03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-F03.txt",
+      "sha256": "6880dd4fb9c1b57ee730e70de2aaa29a62c87dd2a6f685741589e2450e26c7ef"
+    },
+    {
+      "bytes": 61,
+      "id": "vendor-C01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-C01.txt",
+      "sha256": "b13a1cbb869fb0aed79386bda8e3c7860985b0c5610896fb3a721749ace3a8eb"
+    },
+    {
+      "bytes": 120,
+      "id": "registry-C01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-C01.txt",
+      "sha256": "05ad0b84885a637d2dd8ff55fd9e4d9033eaf882f0c49f88c8a3616434220a68"
+    },
+    {
+      "bytes": 78,
+      "id": "vendor-C02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-C02.txt",
+      "sha256": "5e715932fa8d53badaeb45c870db19ca34013d40dadefae6bd78ed69585e0efa"
+    },
+    {
+      "bytes": 99,
+      "id": "registry-C02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-C02.txt",
+      "sha256": "2f0fb22ad33e9e4c7ac82d40c1350d4afa1bb3b56a0a05d1bef44c0f9fac5151"
+    },
+    {
+      "bytes": 64,
+      "id": "vendor-C03a",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-C03a.txt",
+      "sha256": "9cda1991d41c7606d1fa5c0a6235bcca51daba4ca7c0df854ca4bd3569141ce0"
+    },
+    {
+      "bytes": 116,
+      "id": "vendor-C03b",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-C03b.txt",
+      "sha256": "5fb57dc9d16171676adfa3c5f25494c3821f97d0a75e7508c8f8e415dfa0c052"
+    },
+    {
+      "bytes": 143,
+      "id": "vendor-B01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-B01.txt",
+      "sha256": "f2aa9c8fb059ed706b75a62476924898b11ebc39d5bfb1748b50a1c6f2dddeb6"
+    },
+    {
+      "bytes": 104,
+      "id": "vendor-B02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-B02.txt",
+      "sha256": "e78ad3167b9b63a4c7f27282472e3f693ac6704188ad9b4e1428d08c1d185078"
+    },
+    {
+      "bytes": 91,
+      "id": "registry-B03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-B03.txt",
+      "sha256": "f44739f638c6ea5466ae8c9554e43eee2d2f7ca90f1358cd7d85453ad68e7cb1"
+    },
+    {
+      "bytes": 124,
+      "id": "vendor-P01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-P01.txt",
+      "sha256": "a78ad45f139397a8c38d9d3364063cbf9f2c254a7784acc1b68cb9c19e5174e5"
+    },
+    {
+      "bytes": 88,
+      "id": "vendor-P02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-P02.txt",
+      "sha256": "6e8b9bdd35d7a14fbe7a5f70ed828e13c172c44e2dcf44189a0cd95e3df85d81"
+    },
+    {
+      "bytes": 119,
+      "id": "vendor-P03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-P03.txt",
+      "sha256": "63d7a96a8a5582e077093432a99d4c60e124ef0958dd0b85fccbc635debbf9b0"
+    },
+    {
+      "bytes": 100,
+      "id": "registry-U01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-U01.txt",
+      "sha256": "e25eda67624ea3b03dd25ce4bc7455f81576afd193ab3eee9f0fd089e822c830"
+    },
+    {
+      "bytes": 164,
+      "id": "blog-U02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/blog-U02.txt",
+      "sha256": "7ce0ca57964531d15103b9cab8fb78504623b4a575d070e0baf28a8dada9df0b"
+    },
+    {
+      "bytes": 122,
+      "id": "vendor-U03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-U03.txt",
+      "sha256": "3f3518c4ead8e2a5be7b5e09b91e3db8839d41db960147c1e8bccdf157bd1dea"
+    },
+    {
+      "bytes": 128,
+      "id": "vendor-I01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-I01.txt",
+      "sha256": "d7b114bcac44653d8f890d71c8609948baabf112b53563ebed39b08402dc7704"
+    },
+    {
+      "bytes": 175,
+      "id": "vendor-I02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-I02.txt",
+      "sha256": "9495ad779e9aacffe9f0b2f84580c79724d9673dda6560ee0832b81d8c86c2e5"
+    },
+    {
+      "bytes": 155,
+      "id": "vendor-I03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-I03.txt",
+      "sha256": "9cb0fab70f8b71d07ab04c1b8e2f62c22ea78419aeeb8b628d3e64a0f8317df7"
+    },
+    {
+      "bytes": 140,
+      "id": "vendor-A01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-A01.txt",
+      "sha256": "f18077f75740be6653ef9f80205fba55c234d375445cf7c9ef4c8b9e5cdc3c99"
+    },
+    {
+      "bytes": 132,
+      "id": "vendor-A02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-A02.txt",
+      "sha256": "87b48a4a931bd0ea024487ce6e0e39153bada3bd425b2c4c3b72a7955b678305"
+    },
+    {
+      "bytes": 150,
+      "id": "registry-A03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-A03.txt",
+      "sha256": "2ad4be0fd6aced960839dad94d59f30b10983c46feff361419647264b43c07be"
+    },
+    {
+      "bytes": 150,
+      "id": "vendor-W01",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-W01.txt",
+      "sha256": "f3daebd0f2dd3e30d8bc46ff568d82d84928d1bb1724fc0d983764650239fea8"
+    },
+    {
+      "bytes": 160,
+      "id": "registry-W02",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/registry-W02.txt",
+      "sha256": "52eccd6d9729b6272fc0c6767e440eea4ea0d65c48b6ab631a82f07e42139c2a"
+    },
+    {
+      "bytes": 165,
+      "id": "vendor-W03",
+      "raw_path": "fixtures/phase-next-alpha-ai/sources/vendor-W03.txt",
+      "sha256": "e23f359bf8ae401c179999638f4b38e2d408ba1225e117f2fe3a8c8ab2820be2"
+    }
+  ],
+  "strata": {
+    "ambiguous-package-identity": 3,
+    "conflicting-official-fixtures": 3,
+    "false-affected-version": 3,
+    "hostile-source-instructions": 3,
+    "inclusive-exclusive-boundaries": 3,
+    "prerelease-epoch": 3,
+    "unsupported-citation": 3,
+    "withdrawal-staleness-hallucination": 3
+  }
+}

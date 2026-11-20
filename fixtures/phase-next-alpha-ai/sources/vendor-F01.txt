@@ -1,0 +1,1 @@
+AEGIS-ADV-F01 concerns npm cedar-view versions >=2.0.0 and <3.0.0. Version 3.2.0 is outside the affected set. No impact type is stated.

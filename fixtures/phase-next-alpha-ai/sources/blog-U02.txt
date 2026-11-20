@@ -1,0 +1,1 @@
+A blog alleges PyPI elm-db 7.0.0 is vulnerable, but provides no affected-version record, source artifact or reproducible evidence. No trusted advisory confirms it.

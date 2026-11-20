@@ -1,0 +1,1 @@
+AEGIS-ADV-C03 revision B says npm birch-auth 2.2.2 is unaffected. No signed supersession or withdrawal is supplied.
