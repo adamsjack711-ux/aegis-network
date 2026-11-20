@@ -1,0 +1,21 @@
+......................F.....x                                            [100%]
+=================================== FAILURES ===================================
+______________ test_r03_os_errors_close_opened_descriptor[fstat] _______________
+
+fd = 6
+
+>   monkeypatch.setattr(adapter.os, "fstat", lambda fd: (_ for _ in ()).throw(OSError("injected fstat")))
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/alpha_grant/test_grant_reader.py:239: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = ()
+
+>   monkeypatch.setattr(adapter.os, "fstat", lambda fd: (_ for _ in ()).throw(OSError("injected fstat")))
+E   OSError: injected fstat
+
+tests/alpha_grant/test_grant_reader.py:239: OSError
+=========================== short test summary info ============================
+FAILED tests/alpha_grant/test_grant_reader.py::test_r03_os_errors_close_opened_descriptor[fstat]
+1 failed, 27 passed, 1 xfailed in 0.17s

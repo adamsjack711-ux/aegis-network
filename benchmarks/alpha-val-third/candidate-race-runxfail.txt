@@ -1,0 +1,28 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_grant_replacement_cannot_bypass_one_megabyte_limit ____________
+
+tmp_path = PosixPath('/private/var/folders/5m/jydb32h527zdlbw92vq9g_jr0000gn/T/pytest-of-jackadams-lovell/pytest-500/test_grant_replacement_cannot_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109e8e2c0>
+
+    @pytest.mark.xfail(strict=True, reason="trust stat/read race awaits shared grant parser compatibility review")
+    def test_grant_replacement_cannot_bypass_one_megabyte_limit(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        feed = tmp_path / "mesh.json"
+        feed.write_text(json.dumps({"adapter_version": "mesh-events-v1", "events": []}))
+        trust = tmp_path / "trust.json"
+        trust.write_text('{"grants":[]}')
+        original = adapter.load_publishers
+    
+        def replace_after_stat(path: str):
+            trust.write_text(json.dumps({"grants": [], "padding": "x" * (1024 * 1024)}))
+            return original(path)
+    
+        monkeypatch.setattr(adapter, "load_publishers", replace_after_stat)
+>       with pytest.raises(ObservationError, match="limit"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ObservationError
+
+tests/cli_safety_phase5b2/test_grant_race.py:25: Failed
+=========================== short test summary info ============================
+FAILED tests/cli_safety_phase5b2/test_grant_race.py::test_grant_replacement_cannot_bypass_one_megabyte_limit
+1 failed in 0.13s
