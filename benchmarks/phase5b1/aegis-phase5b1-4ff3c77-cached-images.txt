@@ -1,0 +1,4 @@
+aegis_phase4_baseline-coordinator:latest 67898a5e53a2
+python:3.13-slim e48f59cdba69
+ubuntu:22.04 2edbbc5dc405
+mcr.microsoft.com/playwright/python:v1.50.0-noble 706130e55f22

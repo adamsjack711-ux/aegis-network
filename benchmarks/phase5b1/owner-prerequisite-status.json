@@ -1,0 +1,87 @@
+{
+  "archive_outputs": {
+    "reason": "No approved offline backend archive; source pyproject metadata is recorded separately.",
+    "sdist_sha256": null,
+    "wheel_metadata": null,
+    "wheel_sha256": null
+  },
+  "classification": "owner-reported prerequisite assessment; not independent VAL-1 acceptance",
+  "exact_source_commit": "47314c6f9bc478f334c494e1e7d31ac3a10e9e2f",
+  "focused_tests": {
+    "attempted": 35,
+    "failed": 0,
+    "interpreter": "host Python 3.14",
+    "passed": 35,
+    "planned": 35,
+    "skipped": 0
+  },
+  "frozen_oracle": "0960e6f43af83b221da47e873cc64a9fe899fca7",
+  "installed_platform_cells": {
+    "attempted": 0,
+    "failed": 0,
+    "passed": 0,
+    "planned": 4,
+    "reason": "No built wheel and no reviewed complete Linux runtime wheelhouse; Ubuntu 3.13 image also absent from inspected cache.",
+    "skipped": 4
+  },
+  "logical_cli_cases": {
+    "attempted": 0,
+    "failed": 0,
+    "passed": 0,
+    "planned": 84,
+    "reason": "Installed platform prerequisites unavailable.",
+    "skipped": 84
+  },
+  "offline_builds": {
+    "attempted": 0,
+    "failed": 0,
+    "passed": 0,
+    "planned": 2,
+    "reason": "No independently reviewed actual Hatchling 1.33.0 wheel archive and complete build wheelhouse. Fail-closed preflight attempted at both 4ff3c77 and 47314c6; exit 2 before creating output.",
+    "skipped": 2
+  },
+  "platform_rows": [
+    {
+      "attempted": 0,
+      "distribution": "debian",
+      "image": "cached aegis_phase4_baseline-coordinator",
+      "python": "3.12.16",
+      "reason": "No approved built wheel or complete reviewed runtime wheelhouse; preinstalled libraries cannot satisfy fresh install.",
+      "skipped": 1
+    },
+    {
+      "attempted": 0,
+      "distribution": "ubuntu",
+      "image": "cached mcr.microsoft.com/playwright/python:v1.50.0-noble",
+      "python": "3.12.3",
+      "reason": "No approved built wheel or reviewed runtime wheels; image lacks cryptography/pydantic; borrowed Debian libraries prohibited.",
+      "skipped": 1
+    },
+    {
+      "attempted": 0,
+      "distribution": "debian",
+      "image": "cached python:3.13-slim",
+      "python": "3.13.18",
+      "reason": "No approved built wheel or reviewed CPython 3.13 runtime wheels; image lacks cryptography/pydantic.",
+      "skipped": 1
+    },
+    {
+      "attempted": 0,
+      "distribution": "ubuntu",
+      "image": null,
+      "python": "3.13",
+      "reason": "No reviewed cached Ubuntu/Python 3.13 image, approved built wheel or reviewed runtime wheelhouse.",
+      "skipped": 1
+    }
+  ],
+  "proposal_review": "0cf8724b5e332c239bf9c0ca51053d67726eaa0e",
+  "release_decision": "NO-GO for installable alpha; source-level metadata/build-gate experiment only",
+  "syscall_tracing": {
+    "attempted": 0,
+    "failed": 0,
+    "passed": 0,
+    "planned": 1,
+    "reason": "No installed console and no reviewed cached syscall observer.",
+    "skipped": 1
+  }
+}
