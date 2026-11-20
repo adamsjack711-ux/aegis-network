@@ -1,0 +1,109 @@
+{
+  "at_utc": "2026-11-20T01:15:12.995558+00:00",
+  "baseline_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "contracts": [
+    {
+      "baseline_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "candidate_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "path": "src/aegis/artifact.py",
+      "unchanged": true
+    },
+    {
+      "baseline_sha256": "38771e3df535491b96fb136a63148943163165ae88604803e6fdcf35bd7ab3e0",
+      "candidate_sha256": "38771e3df535491b96fb136a63148943163165ae88604803e6fdcf35bd7ab3e0",
+      "path": "src/aegis/core.py",
+      "unchanged": true
+    }
+  ],
+  "interpretation": "static triage only; runtime side-effect and provenance tests remain required",
+  "source_pin": "e3da3876df413f080095dc7568a664f75ffba5b6",
+  "sources": [
+    {
+      "dynamic_execution_markers": [],
+      "forbidden_authority_references": [],
+      "imports": [
+        ".baseline",
+        ".feeds",
+        ".models"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/__init__.py",
+      "sha256": "ec9a238ba1a98a6ae697c5c7d8fe014ed4a1cf70de46f043c475eaf6bd869816"
+    },
+    {
+      "dynamic_execution_markers": [],
+      "forbidden_authority_references": [],
+      "imports": [
+        "json",
+        "re",
+        "datetime",
+        ".models"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/baseline.py",
+      "sha256": "cbfbea4d3712f47e6c2035b674bce5ce1d5f8df39d4d264c41f508c339b062d8"
+    },
+    {
+      "dynamic_execution_markers": [
+        "__import__("
+      ],
+      "forbidden_authority_references": [],
+      "imports": [
+        "json",
+        "hashlib",
+        "pathlib",
+        ".baseline",
+        ".feeds",
+        ".models",
+        ".research"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/evaluate.py",
+      "sha256": "4d26e7f739c9c491a20182df53270e548aac2c895d77d905888b93dc1b68521b"
+    },
+    {
+      "dynamic_execution_markers": [],
+      "forbidden_authority_references": [],
+      "imports": [
+        "hashlib",
+        "os",
+        "re",
+        "datetime",
+        "pathlib",
+        ".models"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/feeds.py",
+      "sha256": "6371f892b6a74280dc5cd00d954f846da597e94be82d771e6b39f4d5dee756f2"
+    },
+    {
+      "dynamic_execution_markers": [],
+      "forbidden_authority_references": [],
+      "imports": [
+        "hashlib",
+        "datetime",
+        "typing",
+        "pydantic"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/models.py",
+      "sha256": "9ee4f7163c862cdaeaa323e6891351bd81eda7b28d48472b282c9916cf9bf177"
+    },
+    {
+      "dynamic_execution_markers": [],
+      "forbidden_authority_references": [],
+      "imports": [
+        "json",
+        "re",
+        "time",
+        "typing",
+        "pydantic",
+        ".baseline",
+        ".models"
+      ],
+      "network_imports": [],
+      "path": "src/aegis/intelligence/research.py",
+      "sha256": "ef6d085145b9e81cf96b5b72b923d1699499bd8c0099407af6d11cf5d6c7932a"
+    }
+  ]
+}

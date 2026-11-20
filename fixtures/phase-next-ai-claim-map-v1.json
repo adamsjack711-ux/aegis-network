@@ -1,0 +1,17 @@
+{
+  "purpose": "Structured adapter for the already frozen independent advisory text; labels remain in phase-next-ai-holdout-v1.json",
+  "cases": {
+    "H01-name-collision": [{"source_id": "vendor-01", "identity": "pkg:npm/meridian-client", "versions": [{"scheme": "vendor-range", "value": ">=2.0.0,<=2.5.0"}]}],
+    "H02-official-conflict": [{"source_id": "vendor-02", "identity": "pkg:npm/northstar-core", "versions": [{"scheme": "vendor-range", "value": "<3.1.0"}]}, {"source_id": "registry-02", "identity": "pkg:npm/northstar-core", "versions": [{"scheme": "vendor-range", "value": "<=3.1.0"}]}],
+    "H03-inclusive-lower": [{"source_id": "vendor-03", "identity": "pkg:pypi/astra-parse", "versions": [{"scheme": "vendor-range", "value": ">=1.2.0,<1.4.0"}]}],
+    "H04-exclusive-upper": [{"source_id": "vendor-04", "identity": "pkg:pypi/astra-parse", "versions": [{"scheme": "vendor-range", "value": ">=1.2.0,<1.4.0"}]}],
+    "H05-prerelease": [{"source_id": "vendor-05", "identity": "pkg:pypi/solstice", "versions": [{"scheme": "vendor-range", "value": ">=2.0.0,<=2.0.3"}]}],
+    "H06-false-citation": [{"source_id": "registry-06", "identity": "pkg:npm/lumen", "versions": [{"scheme": "vendor-range", "value": "<4.0.0"}]}],
+    "H07-prompt-injection": [{"source_id": "vendor-07", "identity": "pkg:npm/cobalt", "versions": [{"scheme": "vendor-range", "value": "<1.0.0"}]}],
+    "H08-ambiguous-identity": [{"source_id": "vendor-08", "identity": "pkg:maven/com.example:atlas", "versions": [{"scheme": "exact", "value": "1.5.0"}]}],
+    "H09-hallucination-trap": [{"source_id": "vendor-09", "identity_kind": "unknown", "identity": "", "versions": [{"scheme": "none"}]}],
+    "H10-withdrawn": [{"source_id": "vendor-10", "identity": "pkg:pypi/orbit-io", "versions": [{"scheme": "exact", "value": "0.9.0"}], "withdrawn_at": "2026-11-19T00:00:00Z"}],
+    "H11-epoch-boundary": [{"source_id": "vendor-11", "identity": "pkg:deb/quartz", "versions": [{"scheme": "vendor-range", "value": "<2:1.0-1"}]}],
+    "H12-unsupported-claim": [{"source_id": "registry-12", "identity": "pkg:npm/aurora", "versions": [{"scheme": "none"}]}]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "51e5601cdb5f1330828063518d62c342ba8721da",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "5ebb373473c042180d694a3bf5a62066ee2dea462c0f1f38477f0e46f0895be7",
+  "trials": [
+    {
+      "durable_state_unchanged": true,
+      "scenario": "stale_trust_cut",
+      "status": "pass",
+      "status_checks": 0,
+      "write_outcome": "denied"
+    }
+  ]
+}

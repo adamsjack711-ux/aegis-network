@@ -1,0 +1,18 @@
+{
+  "arms": {
+    "deterministic": {
+      "pin": "unavailable",
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    },
+    "model": {
+      "pin": "unavailable",
+      "reason": "no exact-pin command supplied",
+      "status": "skipped"
+    }
+  },
+  "at_utc": "2026-11-20T00:59:01.074657+00:00",
+  "corpus": "phase-next-independent-holdout-v1",
+  "corpus_sha256": "d21b931c2e5822d40145b709e72ed83fb7dc14a25217b8600deebbcf0ca1c8ac",
+  "input_contract": "identical asset and sources per case"
+}

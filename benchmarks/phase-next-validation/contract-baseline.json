@@ -1,0 +1,21 @@
+{
+  "at_utc": "2026-11-20T01:07:00.895935+00:00",
+  "baseline_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "contracts": [
+    {
+      "baseline_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "candidate_sha256": "9983345ab3e046d8832faaae3f10d307e49f70e538e685e1b33b1ab33aeb5da6",
+      "path": "src/aegis/artifact.py",
+      "unchanged": true
+    },
+    {
+      "baseline_sha256": "38771e3df535491b96fb136a63148943163165ae88604803e6fdcf35bd7ab3e0",
+      "candidate_sha256": "38771e3df535491b96fb136a63148943163165ae88604803e6fdcf35bd7ab3e0",
+      "path": "src/aegis/core.py",
+      "unchanged": true
+    }
+  ],
+  "interpretation": "static triage only; runtime side-effect and provenance tests remain required",
+  "source_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "sources": []
+}

@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "case": "default-state-write",
+      "exit_code": 2,
+      "status": "fail",
+      "unexpected_files": [
+        "/tmp/state/aegis/identity.json"
+      ]
+    },
+    {
+      "case": "signed-current",
+      "claim_status": "current",
+      "exit_code": 0,
+      "result": "matched",
+      "status": "pass"
+    },
+    {
+      "case": "signed-expired",
+      "claim_status": "expired",
+      "exit_code": 2,
+      "result": "unknown",
+      "status": "pass"
+    },
+    {
+      "case": "signed-withdrawn",
+      "claim_status": "withdrawn",
+      "exit_code": 2,
+      "result": "unknown",
+      "status": "pass"
+    },
+    {
+      "case": "signed-unsupported-range",
+      "claim_status": "current",
+      "exit_code": 2,
+      "result": "unknown",
+      "status": "pass"
+    },
+    {
+      "case": "unsigned-observation",
+      "error": "unsupported local intelligence adapter version",
+      "exit_code": 2,
+      "status": "pass"
+    },
+    {
+      "case": "partial-inventory",
+      "exit_code": 2,
+      "reason": "INVENTORY_INCOMPLETE",
+      "result": "unknown",
+      "status": "pass"
+    },
+    {
+      "case": "malformed-feed",
+      "error": "cannot read local intelligence JSON",
+      "exit_code": 2,
+      "status": "pass"
+    },
+    {
+      "case": "duplicate-inventory",
+      "exit_code": 2,
+      "result": "unknown",
+      "status": "pass"
+    }
+  ],
+  "image_digest": "sha256:f4d96476e0c78b0a45c25acaed6cfc770e469058d23c888ae0e14047f89eebab",
+  "raw_sha256": {
+    "default-state": "26d39dc6136f4e1b5ca20290210d5f1ffe942573eb5fffb542c7d68cd3ca2b4d",
+    "duplicate": "b3399319263015e0877bf34ed663dfd00c0a49b8f4ae7fe7ee9cacba30681d3b",
+    "malformed": "4ba5589406171e78a798c5d10397753d2622ca392b656f049848abaac9dfbcfe",
+    "partial": "89672c0fd86a5d70b530ed65f1d2853ccdc9aff177413f7fcedd5b6554c58e1e",
+    "signed-cases": "d23dd9db40df70e757db9f0de41da473549f3cd03eff148f087b7af3f09cdcb1"
+  },
+  "source_pin": "cc2e918603beff4cd296b4f39a723b6c30beed06",
+  "summary": {
+    "fail": 1,
+    "inconclusive": 0,
+    "pass": 8
+  },
+  "topology": "one-host offline disposable Linux container, UID 65534, no capabilities"
+}

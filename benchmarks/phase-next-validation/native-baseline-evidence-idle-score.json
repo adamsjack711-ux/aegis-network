@@ -1,0 +1,15 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "dc14c18761cbac7a063930c8acc930cdf189c2fd82d4c1fd8988f843545a511c",
+  "trials": [
+    {
+      "deadline_ns": null,
+      "first_snapshot_ns": 556398639718916,
+      "reason": "pre-request snapshot did not cross the authoritative freshness deadline",
+      "scenario": "evidence_idle",
+      "status": "inconclusive"
+    }
+  ]
+}

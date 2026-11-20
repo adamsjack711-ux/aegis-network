@@ -1,0 +1,94 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "ee739cacfaa3f81a0994b4d7802fd2943c067d86",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "0884105f3e252a167aeccc74e9ad0989020dc40c35440e3efdd750bbd35c3b7f",
+  "trials": [
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 556204767100375,
+      "first_snapshot_ns": 556205269279250,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "confirmed",
+      "pre_request_targets": [
+        [
+          "canary",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-a",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-b",
+          1,
+          "restricted"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": null,
+      "route_sample_count": 9,
+      "scenario": "ownership_idle",
+      "status": "fail"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 556206183920666,
+      "first_snapshot_ns": 556206244839291,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "confirmed",
+      "pre_request_targets": [
+        [
+          "canary",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-a",
+          1,
+          "restricted"
+        ],
+        [
+          "replica-b",
+          1,
+          "restricted"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": null,
+      "route_sample_count": 9,
+      "scenario": "ownership_monitor",
+      "status": "fail"
+    },
+    {
+      "complete_route_inventory": true,
+      "cut_ns": 556206972344666,
+      "first_snapshot_ns": 556207032865666,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "evidence_monitor",
+      "status": "inconclusive"
+    }
+  ]
+}

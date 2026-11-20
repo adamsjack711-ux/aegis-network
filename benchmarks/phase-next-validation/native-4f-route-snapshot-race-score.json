@@ -1,0 +1,42 @@
+{
+  "oracle": "committed target state before any post-cut request",
+  "source_pin": "51e5601cdb5f1330828063518d62c342ba8721da",
+  "topology": "one-host fixture unless independently proven otherwise",
+  "trace_sha256": "60062ef9744aa10c2415e4b6c543cedbefb7693c63a9d440b4618d78d4bc0a13",
+  "trials": [
+    {
+      "complete_route_inventory": true,
+      "concurrent_sample_count": 1,
+      "cut_ns": 558107461708666,
+      "first_snapshot_ns": 558107965001166,
+      "inconsistent_sample_count": 1,
+      "observer_did_not_mutate_target": true,
+      "pre_request_phase": "recovery_required",
+      "pre_request_targets": [
+        [
+          "canary",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-a",
+          2,
+          "quarantined"
+        ],
+        [
+          "replica-b",
+          2,
+          "quarantined"
+        ]
+      ],
+      "protected_routes_denied": true,
+      "reopen_denied": true,
+      "restart_hold": true,
+      "restart_routes_denied": true,
+      "route_sample_count": 9,
+      "scenario": "ownership_snapshot_race",
+      "stale_route_response_permitted": false,
+      "status": "pass"
+    }
+  ]
+}
