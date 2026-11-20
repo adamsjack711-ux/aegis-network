@@ -22,6 +22,7 @@ The integration lead approved Phase 4D `ae59a97becfdbf9fb79c7cc89c0a27c662fb9a9f
 | Inherited Evidence contradiction and certified-view continuity on combined source | Both focused regressions passed. The inherited shared writer invalidated an exact plan after contradictory Evidence. The native T5 relying floor rejected older and conflicting certified status. These checks exercised the predecessor gates. |
 | C shadow remediation `f7053de6f059535e631cbca9544cd2ee57b2ed48` | The original assertion still failed with `checkpoint-v1`. The opt-in `withdrawal-v2` passed it and returned revoked after the same one-witness admission, before archive inclusion. A stopped admitting witness held status and restart preserved denial. A separate trial held when a fourth withdrawal view was unavailable despite three checkpoint signatures, excluded an unauthorized transport submission, preserved positive appraisal for an unrelated scope, denied a stale captured view, and rejected an older relying ledger against its intact anchor. |
 | C shadow import `86d2454bb9132642ce0b05fda0c7cd681c8f065f` | Both opt-in shadow probes and all 15 native T6 controls passed from one pinned integration export. Shadow appraisal uses its own writer boundary. |
+| C post-I/O timing fix `8042097bbcd2a0f30d146d5057a6c846ee3ac746` | Six focused regressions passed, including delayed final anchor reads and delayed signing. Fifteen independent synthetic-clock checks passed across refresh, approval entry, and publication. Each accepted a healthy control and denied at exclusive UTC expiry, at the earlier monotonic expiry after an allowed backward UTC correction, at the shorter reader deadline, and on monotonic rollback. |
 | A transport-to-proof contract `c1e5702202ad317396856ee4af89590e14a57a16` | The focused receipt contract test passed. It separated transport delivery from independent receipt and inclusion, and showed the existing reader holding the prior cut needs a separate discovery path for early receipt. That pin proposes a deny-only adapter, and its delta adds a contract test and documentation. No runtime adapter is exercised by that result. |
 
 The native writer constructs the T6 `EvidenceGate`, checks its journal and `NativeEvidenceStatus`, and signs local commands for the shared SQLite `OwnershipHome`. At the reviewed combined pin, Phase 4E-C `Gate` appraises an independently witnessed common cut in its own service lane, and Phase 4E-B owns a separate synthetic marker and receipt store. A common exact-plan binding across that cut, B owner and writer barrier, broker generation and ACK lane, and actual guarded mitigation transaction remains unimplemented. The tests preserve the distinct claims of each path.
@@ -46,7 +47,7 @@ Severity describes the observed defect or the consequence of an open deployment 
 | 4E-D05 · Single-witness withdrawal can leave positive Evidence | High | Reproduced at original C, the reviewed combined pin, and the `checkpoint-v1` profile on the remediation pin. One authenticated witness had durably accepted the withdrawal and returned its signed receipt while fresh positive appraisal remained available. The opt-in C `withdrawal-v2` profile passed the strict appraisal guard and lost-view and restore checks. Shared-writer closure remains open. No target write or marker reopening was attempted by the single-witness probe. |
 | 4E-D06 · Five-second all-agent withdrawal reporting gate | Medium | Open. The exact crashed pre-intake agents yielded no independent durable denial observation within five seconds. Both post-audit agents retained an early denial, with ACK observations around 30.4 s. Transport-only runs supply no independent actuator or quarantine evidence. |
 | 4E-D07 · Idle pre-observation quarantine | High | The original findings and four raw reports remain at `e64bd4d639d9dfd25646650c6a988c7ab0e57718` on `test/phase4e-observer-validation`, also incorporated at `c32532c4aa709a4a11d9c53cf87deefb392efca8`. The same independent idle assertion failed at the old B pin and passed at the two newer B pins for the disposable marker writers. The native idle ownership-loss failure remains open. |
-| 4E-D08 · Shadow freshness is checked before final anchor I/O | High | Source-confirmed at C `f7053de`. The publisher checks expiry before the final checkpoint and withdrawal anchor reads and can sign afterward without sampling time again. The relying refresh and authorization use the same ordering. C's separate local reviewer reported expiry crossed in both relying paths without a target effect. The passing matched shadow tests in this branch cover receipt behavior and do not close the delayed-read condition. |
+| 4E-D08 · Historical shadow freshness check occurred before final anchor I/O | High | Source-confirmed at C `f7053de`. C's separate local reviewer observed both relying paths crossing expiry without a target effect. At `8042097` the final clock checks follow the potentially blocking reads and, for publication, signing. Both focused lab and independent timing checks pass at that exact shadow pin. Native enforcement and cross-service commit timing remain open. |
 
 ## Scenario coverage
 
@@ -231,3 +232,25 @@ At `f7053de`, the publisher and the relying reader each refresh four direct view
 The shadow authorization lock and final status check cover local anchors and deadlines. A withdrawal arriving after the remote witness samples its view is a separate concurrency window. A local commit check has no fresh proof of subsequent remote intake unless that receipt has reached its relying anchor. The independent run exercised prior admission, lost view, stale replay, and restore. Concurrent remote admission and commit remain separate release evidence.
 
 The post-read deadline is also a separate condition. At this pin, `Publisher.publish`, `Gate._refresh`, and `Gate.require_current` sample time before final potentially blocking anchor reads. The returned status or entered authorization can therefore be past the already sampled deadline. This branch records the source finding without claiming an observed target effect.
+
+### Reproduce the C post-I/O fix checks
+
+```sh
+timing="$scratch/c-timing"
+mkdir "$timing"
+git archive 8042097bbcd2a0f30d146d5057a6c846ee3ac746 | tar -x -C "$timing"
+(
+  cd "$timing"
+  export PYTHONPATH="$PWD/src:$PWD" PYTHONDONTWRITEBYTECODE=1
+  "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+    tests/phase4e/test_status_expiry.py \
+    --junitxml="$scratch/c-timing-focused.xml" --tb=short
+  "$python" -m pytest -q -ra -o junit_family=legacy -p no:cacheprovider \
+    "$harness/tests/phase4e/status_timing_observer.py" \
+    --junitxml="$scratch/c-timing-independent.xml" --tb=short
+)
+```
+
+The six focused tests run the fixed shadow implementation in disposable private Unix-socket fixtures with throwaway signing material. The independent matrix uses an in-memory anchor callback and a synthetic clock. Its UTC error is 125 ms, and the signed expiry converts to an earlier monotonic deadline. A backward correction within the allowed clock bound leaves that deadline in force even when the final UTC sample by itself would allow more time. For approval entry, denied rows record that the context body never ran. The source publication path checks time after signing, withholds an expired result, and clamps to the earlier of the signed expiry and reader deadline. [Focused results](../benchmarks/phase4e-adversarial/c-timing-8042097-focused.xml) · [Independent timing matrix](../benchmarks/phase4e-adversarial/c-timing-8042097-independent.xml)
+
+The B Evidence-bound marker seam remains a separate local fixture review. At `cb6f294c53d13fcac73571b23139decabe8e1132` its supplemental deadline precedes the native status predicate inside the SQLite commit authorizer. Source at `fba23321b8f5732a513b650e1bc5ccd8a6b13fe9` repeats the supplemental deadline check after that predicate returns. The authorizer checks during SQL commit preparation. SQLite execution and flush time remain outside this source review. No B runtime result is attributed to these two pins here.

@@ -63,6 +63,45 @@
     "skipped": 0,
     "tests": 1
   },
+  "c-timing-8042097-focused.xml": {
+    "errors": 0,
+    "failures": 0,
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 6
+  },
+  "c-timing-8042097-independent.xml": {
+    "errors": 0,
+    "failures": 0,
+    "shadow_timing": {
+      "authorization": {
+        "earlier-monotonic-at-expiry": "status expired before approval use",
+        "earlier-reader-deadline": "status expired before approval use",
+        "monotonic-regression": "journal clock rolled back",
+        "utc-at-exclusive-expiry": "status expired before approval use",
+        "within-bounds": "allowed"
+      },
+      "publication": {
+        "earlier-monotonic-at-expiry": "status expired before publication",
+        "earlier-reader-deadline": "status expired before publication",
+        "monotonic-regression": "journal clock rolled back",
+        "utc-at-exclusive-expiry": "status expired before publication",
+        "within-bounds": "allowed"
+      },
+      "refresh": {
+        "earlier-monotonic-at-expiry": "status expired during appraisal",
+        "earlier-reader-deadline": "status expired during appraisal",
+        "monotonic-regression": "journal clock rolled back",
+        "utc-at-exclusive-expiry": "status expired during appraisal",
+        "within-bounds": "allowed"
+      }
+    },
+    "signed_ownership_requests": 0,
+    "signed_status_samples": 0,
+    "skipped": 0,
+    "tests": 15
+  },
   "combined-identity-restore-preread.xml": {
     "errors": 0,
     "failures": 0,

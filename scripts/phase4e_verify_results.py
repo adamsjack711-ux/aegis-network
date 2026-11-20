@@ -157,6 +157,19 @@ def inspect_file(path):
                 summary["shadow_v2"] = {key: observation[key] for key in (
                     "lost_fourth_view", "replayed_view", "stale_relying_restore",
                 )}
+            elif name == "shadow_timing_guard":
+                observation = json.loads(value)
+                before_utc, before_mono = observation["before_final_read"]
+                after_utc, after_mono = observation["after_final_read"]
+                expires = observation["signed_expiry_ms"] / 1000
+                error = observation["clock_error"]
+                deadline = min(observation["reader_deadline"], before_mono + (expires - (before_utc + error)))
+                allowed = before_mono <= after_mono < deadline and after_utc + error < expires
+                assert allowed == observation["expected_allow"] == (observation["decision"] == "allowed")
+                assert observation["authorization_entered"] == (allowed and observation["actor"] == "authorization")
+                summary.setdefault("shadow_timing", {}).setdefault(observation["actor"], {})[
+                    observation["fault"]
+                ] = observation["decision"]
             elif name in {"partition_held", "partition_reconnected"}:
                 dispatch[name] = value
         if {"queued_before_restart", "broker_publication", "durable_denial"} <= dispatch.keys():
