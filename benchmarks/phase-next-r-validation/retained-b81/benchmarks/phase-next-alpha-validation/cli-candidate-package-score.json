@@ -1,0 +1,47 @@
+{
+  "build_sha256": "f94e018fcc78eb1edd8716282ece0c16e202c97bac47eea161f332399f3c8c10",
+  "cli_alpha_release_status": "NO-GO",
+  "debian_default_denominator": 6,
+  "debian_default_zero_writes": "pass",
+  "debian_explicit_state": "pass",
+  "debian_nonroot_install_uninstall": "pass",
+  "debian_probe_sha256": "cd6ec5aa4f65c4e1ed256523f88e2467989b8d45b2956f4762263695e8d29581",
+  "debian_resource_rows": [
+    {
+      "max_cpu_ms": 107.092,
+      "max_peak_rss_kib_at_least": 36604,
+      "max_wall_ms": 108.609,
+      "rows": 100,
+      "runs": 3,
+      "status": "pass"
+    },
+    {
+      "max_cpu_ms": 147.604,
+      "max_peak_rss_kib_at_least": 42748,
+      "max_wall_ms": 147.862,
+      "rows": 10000,
+      "runs": 3,
+      "status": "pass"
+    },
+    {
+      "max_cpu_ms": 649.064,
+      "max_peak_rss_kib_at_least": 94756,
+      "max_wall_ms": 654.643,
+      "rows": 100000,
+      "runs": 3,
+      "status": "pass"
+    }
+  ],
+  "debian_resource_sha256": "c75c5af84acda3deabf3e436ea09def8d370ad475ed62f9a93aa15ddfcc46a80",
+  "debian_signed_independent_uncertainty": "pass",
+  "python_313": "skipped: no cached image",
+  "reproducible_offline_build": "pass",
+  "source_pin": "0df40c933ba7d49d0fb58c075be2abc6dab0cd08",
+  "syscall_trace": "skipped: no cached tracer",
+  "ubuntu_install": "skipped: cached image lacks ensurepip/python3.12-venv",
+  "ubuntu_prerequisite_sha256": "1c8cf65cc91abf8427bda48b86f2a7492ff05e8861eab6b6078bdf09c054be0c",
+  "wheel_sha256": [
+    "0e4a815ad95f5fab9d8bb997bec4ea8f67896460db86bb838441ca7318cbd0fa",
+    "0e4a815ad95f5fab9d8bb997bec4ea8f67896460db86bb838441ca7318cbd0fa"
+  ]
+}

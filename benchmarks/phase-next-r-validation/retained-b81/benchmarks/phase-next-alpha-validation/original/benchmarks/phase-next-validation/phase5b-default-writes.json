@@ -1,0 +1,80 @@
+{
+  "findings_missing_trust": {
+    "after": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "before": [],
+    "created": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "exit": 2,
+    "json_status": "unknown",
+    "stderr": ""
+  },
+  "findings_no_feed": {
+    "after": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "before": [],
+    "created": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "exit": 2,
+    "json_status": "unknown",
+    "stderr": ""
+  },
+  "inventory": {
+    "after": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "before": [],
+    "created": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "exit": 0,
+    "json_status": null,
+    "stderr": ""
+  },
+  "inventory_explicit_state": {
+    "after": [
+      "chosen",
+      "chosen/identity.json"
+    ],
+    "before": [],
+    "created": [
+      "chosen",
+      "chosen/identity.json"
+    ],
+    "exit": 0,
+    "json_status": null,
+    "stderr": ""
+  },
+  "status_no_feed": {
+    "after": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "before": [],
+    "created": [
+      "state",
+      "state/aegis",
+      "state/aegis/identity.json"
+    ],
+    "exit": 2,
+    "json_status": null,
+    "stderr": ""
+  }
+}

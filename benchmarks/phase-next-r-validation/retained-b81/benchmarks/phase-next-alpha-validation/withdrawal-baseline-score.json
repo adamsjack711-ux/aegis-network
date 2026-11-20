@@ -1,0 +1,76 @@
+{
+  "attempted_trials": 3,
+  "eligible_pairs": 6,
+  "five_second_limit_ms": 5000.0,
+  "observed_pairs": 6,
+  "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+  "status": "fail",
+  "trials": [
+    {
+      "admission_to_denial_exact_ms": "not recorded by this legacy driver",
+      "admission_to_denial_lower_bound_ms": {
+        "independent": 30547.997,
+        "mixed": 30551.738
+      },
+      "durable_denials": 2,
+      "enrolled_agents": 1,
+      "file": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-1.json",
+      "ordinary_enqueued": 4,
+      "physical_target_hold": "not observed; dry-run agent audit only",
+      "pre_restart_durable_admission_witness": true,
+      "sha256": "926cc40057be3403308a6f631a11208e3ba992d8fb39c5e8e880fd23d27e58de",
+      "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+      "status": "fail",
+      "submission_to_durable_denial_ms": {
+        "independent": 30614.198,
+        "mixed": 30599.854
+      },
+      "targeted_pairs": 2,
+      "timed_pairs": 2
+    },
+    {
+      "admission_to_denial_exact_ms": "not recorded by this legacy driver",
+      "admission_to_denial_lower_bound_ms": {
+        "independent": 30580.405,
+        "mixed": 30587.065
+      },
+      "durable_denials": 2,
+      "enrolled_agents": 1,
+      "file": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-2.json",
+      "ordinary_enqueued": 4,
+      "physical_target_hold": "not observed; dry-run agent audit only",
+      "pre_restart_durable_admission_witness": true,
+      "sha256": "e76d070f08db6bd8ab20053cf2fb62a511b04124bb16ea0a7a32845dfafb4682",
+      "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+      "status": "fail",
+      "submission_to_durable_denial_ms": {
+        "independent": 30643.737,
+        "mixed": 30632.728
+      },
+      "targeted_pairs": 2,
+      "timed_pairs": 2
+    },
+    {
+      "admission_to_denial_exact_ms": "not recorded by this legacy driver",
+      "admission_to_denial_lower_bound_ms": {
+        "independent": 30574.993,
+        "mixed": 30579.927
+      },
+      "durable_denials": 2,
+      "enrolled_agents": 1,
+      "file": "benchmarks/phase-next-alpha-validation/withdrawal-baseline-fresh-3.json",
+      "ordinary_enqueued": 4,
+      "physical_target_hold": "not observed; dry-run agent audit only",
+      "pre_restart_durable_admission_witness": true,
+      "sha256": "3a19394760d577c590ee7a46d40856c99659989fa6b2468ea4d4173b77258b45",
+      "source_pin": "3bfd2abea430bc8036105ce85adfdc78706d367d",
+      "status": "fail",
+      "submission_to_durable_denial_ms": {
+        "independent": 30637.752,
+        "mixed": 30626.916
+      },
+      "targeted_pairs": 2,
+      "timed_pairs": 2
+    }
+  ]
+}
