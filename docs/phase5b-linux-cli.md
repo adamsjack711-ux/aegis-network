@@ -6,11 +6,11 @@ The isolated source CLI is an on-demand, offline package observer. It has no dae
 
 The authoritative claim is unchanged: `SignedFinding` containing `Finding.schema_version="1.0"` from `aegis.artifact`. Its original Ed25519 signature, locally pinned publisher grant, role and signed scoped revocation are checked. Matching uses the exact `InventoryItem(purl, version)` pair from `aegis.core`. A valid signature establishes origin and integrity only. It does not prove vulnerability, current independent Evidence status, reachability or authorization to act. The `mesh-events-v1` wrapper is a local file adapter, not a new shared finding schema. Unsigned research candidates and advisory JSON are rejected.
 
-## Specialist-branch packaging recipe (not available in this integration candidate)
+## Alpha candidate packaging recipe
 
-The independent installable-alpha gate is open. This integrated candidate withholds the `aegis` console entry point; the wheel and `aegis` commands below describe the original specialist branch and are **expected to fail here** at the entry-point step. Both `scripts/smoke_phase5b_install.sh` and `scripts/smoke_phase5b_linux.sh` are retained specialist-branch packaging fixtures and are not passing tests for this integrated candidate. For source-only local testing here, use `PYTHONPATH=src python -m aegis.cli`. Do not treat a source invocation as wheel proof.
+This isolated alpha branch restores the `aegis` console entry point for offline package testing. The integrated baseline `3bfd2ab` still withholds it, and alpha remains NO-GO until the independent wheel, direct-entry-point, distro, purity and resource gates pass at one reviewed pin. Source-only `PYTHONPATH=src python -m aegis.cli` is useful for development but is not wheel proof.
 
-Python 3.12+ is required. On the original specialist branch only, build and install with dependencies already cached for offline operation:
+Python 3.12+ is declared. Build and install with dependencies already cached for offline operation:
 
 ```sh
 uv build --offline --wheel
@@ -20,9 +20,9 @@ uv pip install --offline --python .venv/bin/python dist/aegis_network-0.1.0-py3-
 .venv/bin/aegis inventory --json
 ```
 
-The original specialist-branch wheel adds the `aegis` console entry point; this integrated candidate's wheel does not. Installation adds no service or post-install action. The retained `scripts/smoke_phase5b_install.sh` fixture performs a disposable offline wheel install, invocation and uninstall on that branch. It requires the declared build and runtime dependencies in the local cache. A cached Debian container can exercise the same original wheel as an ordinary user with `--network none`, read-only mounts and no capabilities; record its exact image digest for each run.
+The candidate wheel adds the `aegis` console entry point. Installation adds no service or post-install action. `scripts/smoke_phase5b_install.sh` is a disposable offline wheel install, invocation and uninstall fixture. It requires declared build and runtime dependencies in the local cache. Cached Debian and Ubuntu containers must exercise the wheel as an ordinary user with `--network none`, read-only mounts and no capabilities; record each exact image digest. A missing cached image or build tool leaves that row skipped.
 
-For signed local claims, supply a JSON file containing the original signed Mesh envelopes and a separate local publisher grant file in the existing `aegis.config.load_publishers` format. The event file cannot supply its own trust grant.
+For signed local claims, supply a JSON file containing the original signed Mesh envelopes and a separate local publisher grant file in the existing `aegis.config.load_publishers` format. The private observer parser checks the same grant semantics without importing `aegis.core` at CLI runtime; golden comparison tests cover both readers. The event file cannot supply its own trust grant.
 
 ```json
 {"adapter_version":"mesh-events-v1","events":[{"kind":"finding","key_id":"default","finding":{"...":"original Finding 1.0 fields"},"signature":"original base64 Ed25519 signature"}]}
@@ -56,6 +56,6 @@ The `dpkg` file is capped at 64 MiB, each line at 16 KiB and installed rows at 1
 
 Run `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m pytest -q -p no:cacheprovider tests/test_phase5b_cli.py` for focused tests. The tests cover the original five default-state commands, default failure paths, explicit identity opt-in, signed exact match with structured unknown independent status, unsupported and partial inventory, malformed/untrusted/expired/withdrawn inputs, and an offline socket guard. `scripts/phase_next_probe_cli.py` preserves the independent five-command oracle; its retained original failure under `cc2e918` remains evidence, not a candidate result. A clean candidate requires an independent offline Linux rerun with filesystem tree hashes and, if cached, syscall tracing. Without a tracer the syscall gate stays inconclusive.
 
-`scripts/smoke_phase5b_linux.sh` uses the cached `aegis_phase4_baseline-coordinator:latest` image with `--pull never`, `--network none`, read-only root, no capabilities, ordinary UID 1000 and a disposable tmpfs. It installs the wheel in a temporary virtual environment, runs real Debian inventory, runs the frozen five-command default-state probe, and uninstalls. The image already contains an older `aegis-network` distribution, so the temporary environment force-installs the candidate wheel; `/tmp` is noexec, so Python interprets the generated console script. The test does not establish independent Ubuntu behavior or a syscall trace. Record the image digest in the run output.
+`scripts/smoke_phase5b_linux.sh` uses the cached `aegis_phase4_baseline-coordinator:latest` image with `--pull never`, `--network none`, read-only root, no capabilities, ordinary UID 1000 and a disposable executable tmpfs. It installs the wheel in a temporary virtual environment, invokes the generated `aegis` console script directly for real Debian inventory, runs the frozen five-command default-state probe, and uninstalls. The image already contains an older `aegis-network` distribution, so the temporary environment force-installs the candidate wheel. This Debian smoke does not establish independent Ubuntu behavior or a syscall trace. Record the image digest in the run output.
 
 `PYTHONPATH=src python scripts/benchmark_phase5b.py --output benchmarks/phase5b-observer-purity.json` measures synthetic package parsing and exact in-memory matching. The retained single local macOS/Python 3.15 run is exploratory, not a controlled performance comparison. It excludes signed-envelope verification, process startup and native RSS. Native Debian/Ubuntu matrices, broader ecosystem/version comparison, current independent T4/T5 proof, a signed Phase 5A-to-5B conversion and production integration remain outside this CLI alpha.

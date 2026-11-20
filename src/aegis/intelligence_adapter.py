@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Protocol
 
 from .artifact import SignedFinding, SignedRevocation, canonical_bytes, parse_event, verify
-from .config import load_publishers
+from .observer_grants import load_observer_publishers
 from .local_observer import (
     Advisory, MAX_ADVISORIES, MAX_FEED_BYTES, ObservationError, _read_bounded,
     utc_now,
@@ -114,7 +114,7 @@ def load_intelligence(path: Path, *, trust_path: Path | None = None,
             trust_meta = trust_path.stat()
             if not stat.S_ISREG(trust_meta.st_mode) or trust_meta.st_size > 1024 * 1024:
                 raise ObservationError("publisher grant file exceeds input limit")
-            trust = load_publishers(str(trust_path))
+            trust = load_observer_publishers(trust_path)
         except (OSError, ValueError, KeyError, TypeError) as exc:
             raise ObservationError("invalid local publisher grants") from exc
         return MeshV1Adapter().advisories(raw, now=now, trust=trust)
