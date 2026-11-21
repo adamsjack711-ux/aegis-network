@@ -1,0 +1,44 @@
+{
+  "case": "h53",
+  "variant": "original",
+  "seal": "46b55669f9534e6307260c98c245bf7f62734227",
+  "selector": "533508fbe6f915b098dcde33dc68f9996a54f440",
+  "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+  "target_sha256": "b0d348e1e1e2c5e97dfdffd6f2dbbeac9b45499eb22ff88f36f4d14a67537b54",
+  "labels_sha256": "2f134eeb764cc80a869956913793e5c143dccb30c7cd032328468c502ad4fa3d",
+  "case_gold_sha256": "3b90be67e54bfa1833a5e24a5ce8ad88e3099e28059bc51797b062b434ffd1c4",
+  "A": {
+    "expected_decision": "match",
+    "complete_pointers": [
+      "/affected/2"
+    ],
+    "expected_row_ids": [
+      "i-65106638e8cf10a53668bffd"
+    ],
+    "local_request_sha256": "344960984c0c613e9cbffbb8053e5dddca3b83a76485880b61fd0e93d9caca59"
+  },
+  "oracle_B": {
+    "admission": {
+      "matched_pointers": [
+        "/affected/2"
+      ]
+    },
+    "expected_decision": "unaffected",
+    "reference": [
+      {
+        "original_index": 2,
+        "pointer": "/affected/2",
+        "byte_start": 167,
+        "byte_end": 303,
+        "row_sha256": "7f1499f6f87a580ad33b294767274c6c687f050509974bdee67a7629c4f7e756"
+      }
+    ],
+    "expected_row_ids": [
+      "r-b06e2a878da63001f53b7844"
+    ],
+    "local_request_sha256": "d113b111c0720eb67284f2839a9bdb793f06f1bad41e8a2d58b2f28908d1e0cf",
+    "rationale": "npm bogfirth-plume target 2.7.0 equals the exclusive fixed endpoint of [2.1.0, 2.7.0)."
+  },
+  "scoring": "One independent denominator per arm. A must return the entire match set without omissions or extra IDs. B receives only the complete oracle-admitted row and target version regardless of A performance. Score determinate decision, pointer precision, support coverage and source digest/span separately. Abstention is a determinate miss. No emitted pointers gives undefined precision and zero coverage. Any later linked request comparison is offline only. No labels, decisive pointers or case names in provider-visible inputs.",
+  "status": "Preselected for a potential fixed-boundary comparison. No provider result examined and no API call made by reviewer."
+}
