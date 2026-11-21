@@ -1,6 +1,6 @@
 # Phase 6 two-stage applicability evaluation
 
-The live `s43` response at the standalone selector pin `076ca65` returned HTTP 200, abstained and released zero citations. The scripted `r02` selection passed on the same fixture. The combined live task supplied no stage-specific observation. Keep both results as historical controls. `git show ce6c4d9:benchmarks/phase6-multirow-independent/README.md`
+The live `s43` response at the standalone selector pin `076ca65` returned HTTP 200, abstained and released zero citations. The scripted `r02` selection passed on the same fixture. The combined live task supplied no stage-specific observation. Keep both results as historical controls. `git show c16be69:benchmarks/phase6-multirow-independent/live-s43.json`
 
 ## Freeze before evaluation
 
@@ -8,7 +8,7 @@ An independent curator seals 12 unseen synthetic OSV source–target pairs with 
 
 | Stage | Input and required output | What it measures |
 | --- | --- | --- |
-| A · Identity | Give every row the same fields: opaque ID, ecosystem, package and optional PURL. The target carries only ecosystem and package. Withhold versions. Require `match` with the complete ID set, `no_match` with an empty set, or `unknown` with an empty set. | Score exact match sets on all 12 cases, including extra and missed IDs, correct no-match, warranted abstentions and abstentions on determinate cases. Locally recheck identity before admitting rows to B. |
+| A · Identity | Give every row the same fields: opaque ID, ecosystem, package and optional PURL. The target carries only ecosystem and package. Withhold versions. Require `match` with the complete ID set, `no_match` with an empty set, or `unknown` with an empty set. | Score exact match sets on all 12 cases, including extra and missed IDs, correct no-match, warranted abstentions and abstentions on determinate cases. Locally recheck the full set, including any claimed no-match, before admitting rows to B. |
 | B · Version | Give the target version and the exact original bytes of all admitted rows. Run an oracle-input arm with the independently frozen identity sets, and a linked arm using A's locally accepted sets. Return `affected`, `unaffected` or `unknown` and supporting row IDs. Keep version labels and decisive pointers out of both arms. | Score oracle B on its ten admitted cases. Keep all 12 cases in the linked accounting and mark those blocked at A. Score decision and citation support separately, including wrong outcomes, warranted abstentions and missed determinations. Bind released IDs to the original digest, pointer and exact bytes. |
 
 Use a complete scripted round trip plus injected wrong IDs, empty determinate selections and unsupported version claims. Record A, oracle B and linked B per case. A failed identity check can block linked B even when oracle B resolves the version. A version failure with the correct rows supplied is observable in oracle B. Report resolved determinate cases and correct abstentions against their separate eligible denominators. Keep refusals, malformed replies and unrun stages visible. Offline acceptance requires every scripted control to match its expected result and zero unsupported released decisions or citations. The scripted results measure the verifier.
