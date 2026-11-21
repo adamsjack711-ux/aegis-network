@@ -1,0 +1,36 @@
+{
+  "case": "s43",
+  "model": "gpt-5.4-mini-2026-03-17",
+  "http_status": 200,
+  "saved_attempt_number": 1,
+  "raw_reply_sha256": "e0d02ceb9cb99f14f7b38c75e370c2cefd95e100b09311b30111fc4f573bbbb0",
+  "raw_draft_sha256": "81ff508b28b2b6f07b47f6a8310ebbe4cbc7bef3112aeb932fdf4b5f78b54152",
+  "recorded_create_sha256": "5ee6f09296a991ebde1347d27c72fb91d3921ac96eeb3366fec7f9854dd8a029",
+  "local_replay": {
+    "status": "abstained",
+    "reportable_outcome": "unknown",
+    "source_sha256": "940addc62e9459c63c09e89db47f142b5b43373870083ea42b63add25912a7bf",
+    "request_sha256": "d9b0be472583b04e4570769be65e414d479bbf407812603245b6eab555904350",
+    "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+    "references": []
+  },
+  "gold": "unaffected",
+  "determinate_misses": 1,
+  "correct_decisions": 0,
+  "denominator": 1,
+  "false_affected": 0,
+  "false_unaffected": 0,
+  "pointer_precision": null,
+  "gold_pointer_coverage": "0/1",
+  "scripted_r02": {
+    "reportable": "unaffected",
+    "pointers": [
+      "/affected/0"
+    ]
+  },
+  "provider_reported_tokens": [
+    474,
+    30
+  ],
+  "billing_verified": false
+}
