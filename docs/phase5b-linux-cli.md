@@ -6,23 +6,20 @@ The isolated source CLI is an on-demand, offline package observer. It has no dae
 
 The authoritative claim is unchanged: `SignedFinding` containing `Finding.schema_version="1.0"` from `aegis.artifact`. Its original Ed25519 signature, locally pinned publisher grant, role and signed scoped revocation are checked. Matching uses the exact `InventoryItem(purl, version)` pair from `aegis.core`. A valid signature establishes origin and integrity only. It does not prove vulnerability, current independent Evidence status, reachability or authorization to act. The `mesh-events-v1` wrapper is a local file adapter, not a new shared finding schema. Unsigned research candidates and advisory JSON are rejected.
 
-## Specialist-branch packaging recipe (not available in this integration candidate)
+## Run from source
 
-The independent installable-alpha gate is open. This integrated candidate withholds the `aegis` console entry point; the wheel and `aegis` commands below describe the original specialist branch and are **expected to fail here** at the entry-point step. Both `scripts/smoke_phase5b_install.sh` and `scripts/smoke_phase5b_linux.sh` are retained specialist-branch packaging fixtures and are not passing tests for this integrated candidate. For source-only local testing here, use `PYTHONPATH=src python -m aegis.cli`. Do not treat a source invocation as wheel proof.
-
-Python 3.12+ is required. On the original specialist branch only, build and install with dependencies already cached for offline operation:
+Aegis needs Python 3.12 or newer. After setting up the environment in the [README](../README.md), run these commands from the repo folder.
 
 ```sh
-uv build --offline --wheel
-uv venv .venv
-uv pip install --offline --python .venv/bin/python dist/aegis_network-0.1.0-py3-none-any.whl
-.venv/bin/aegis doctor --json
-.venv/bin/aegis inventory --json
+PYTHONPATH=src python -B -m aegis.cli doctor --json
+PYTHONPATH=src python -B -m aegis.cli inventory --json
 ```
 
-The original specialist-branch wheel adds the `aegis` console entry point; this integrated candidate's wheel does not. Installation adds no service or post-install action. The retained `scripts/smoke_phase5b_install.sh` fixture performs a disposable offline wheel install, invocation and uninstall on that branch. It requires the declared build and runtime dependencies in the local cache. A cached Debian container can exercise the same original wheel as an ordinary user with `--network none`, read-only mounts and no capabilities; record its exact image digest for each run.
+Use the source preview in a lab. The installable Linux alpha still needs independent validation.
 
-For signed local claims, supply a JSON file containing the original signed Mesh envelopes and a separate local publisher grant file in the existing `aegis.config.load_publishers` format. The event file cannot supply its own trust grant.
+## Check a signed alert file
+
+Supply a local JSON file with signed alerts and a separate file with the trusted publishers' public keys. The publisher file uses the `aegis.config.load_publishers` format. The alert file stays on your machine.
 
 ```json
 {"adapter_version":"mesh-events-v1","events":[{"kind":"finding","key_id":"default","finding":{"...":"original Finding 1.0 fields"},"signature":"original base64 Ed25519 signature"}]}
@@ -31,11 +28,8 @@ For signed local claims, supply a JSON file containing the original signed Mesh 
 The example is a shape only; replace the placeholder with a real signed envelope. No URI is fetched.
 
 ```sh
-aegis status --feed ./mesh-events.json --trust ./publishers.json --json
-aegis inventory --json
-aegis findings --feed ./mesh-events.json --trust ./publishers.json --json
-aegis explain FINDING_ID --feed ./mesh-events.json --trust ./publishers.json --json
-aegis doctor --json
+PYTHONPATH=src python -B -m aegis.cli findings --feed ./mesh-events.json --trust ./publishers.json --json
+PYTHONPATH=src python -B -m aegis.cli explain FINDING_ID --feed ./mesh-events.json --trust ./publishers.json --json
 ```
 
 Default invocations do not create identity or state. JSON `asset_id` is `null` and `identity_scope` is `none`. To opt in to a private persistent UUIDv4 asset ID, put the global `--state-dir PATH` option before the command. Its parent must already exist; the selected path is resolved to a canonical parent and only that directory receives `identity.json`. User-controlled ancestor symlinks and a symlink at the selected directory are rejected. The exact root-owned macOS `/var` and `/tmp` aliases to `/private` are accepted. Permissions are 0700 for the directory and 0600 for the file. The ID is neither Mesh enrollment nor an approval credential. Inventory, claims and observations are never stored. No hostname, machine ID, username, IP address or user files are collected.

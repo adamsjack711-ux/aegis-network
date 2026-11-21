@@ -4,3 +4,11 @@ __pycache__/
 *.pyc
 .env
 lab-config/
+
+# Local review and handoff files
+/START-HERE-Studio.md
+/aegis-network.bundle
+/aegis-tester-*.tar.gz
+/docs/roadmap-review-prompts.md
+/reviewed-source-*/
+/studio-tester-*.log
