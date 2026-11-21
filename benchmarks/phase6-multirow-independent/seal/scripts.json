@@ -1,0 +1,139 @@
+[
+  {
+    "run": "r01",
+    "case": "s17",
+    "proposal": "affected",
+    "select": [
+      "/affected/2"
+    ],
+    "expected_reportable": "affected"
+  },
+  {
+    "run": "r02",
+    "case": "s43",
+    "proposal": "unaffected",
+    "select": [
+      "/affected/0"
+    ],
+    "expected_reportable": "unaffected"
+  },
+  {
+    "run": "r03",
+    "case": "s26",
+    "proposal": "affected",
+    "select": [
+      "/affected/1"
+    ],
+    "expected_reportable": "affected"
+  },
+  {
+    "run": "r04",
+    "case": "s91",
+    "proposal": "unknown",
+    "select": [],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r05",
+    "case": "s68",
+    "proposal": "unknown",
+    "select": [],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r06",
+    "case": "s32",
+    "proposal": "unknown",
+    "select": [],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r07",
+    "case": "s54",
+    "proposal": "affected",
+    "select": [
+      "/affected/1"
+    ],
+    "expected_reportable": "affected"
+  },
+  {
+    "run": "r08",
+    "case": "s17",
+    "proposal": "affected",
+    "select": [
+      "/affected/0"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r09",
+    "case": "s43",
+    "proposal": "unaffected",
+    "select": [
+      "/affected/1"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r10",
+    "case": "s26",
+    "proposal": "affected",
+    "select": [
+      "/affected/2"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r11",
+    "case": "s68",
+    "proposal": "affected",
+    "select": [
+      "/affected/0"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r12",
+    "case": "s32",
+    "proposal": "unaffected",
+    "select": [
+      "/affected/1"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r13",
+    "case": "s43",
+    "proposal": "affected",
+    "select": [
+      "/affected/0"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r14",
+    "case": "s17",
+    "proposal": "unknown",
+    "select": [],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r15",
+    "case": "s17",
+    "proposal": "affected",
+    "select": [
+      "/affected/2",
+      "/affected/1"
+    ],
+    "expected_reportable": "unknown"
+  },
+  {
+    "run": "r16",
+    "case": "s54",
+    "proposal": "affected",
+    "select": [
+      "unissued"
+    ],
+    "expected_reportable": "unknown"
+  }
+]
