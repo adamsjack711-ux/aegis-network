@@ -1,0 +1,53 @@
+{
+  "case": "h84",
+  "variant": "original",
+  "seal": "46b55669f9534e6307260c98c245bf7f62734227",
+  "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+  "target_sha256": "df600d9dde6dfa01012d056b615e238b45e75d05a6f1b58dc5b925c0d26f7954",
+  "labels_sha256": "2f134eeb764cc80a869956913793e5c143dccb30c7cd032328468c502ad4fa3d",
+  "case_gold_sha256": "a7b92b32cd9e242bc6ea3e31a7d8ad78367ea206b990fe4193aa3a3f401dea8a",
+  "A": {
+    "expected": "match",
+    "complete_set": [
+      "/affected/0",
+      "/affected/2"
+    ],
+    "row_ids": [
+      "i-c111c339144b4677a94ab651",
+      "i-f3f0db23dc9eb1e78b8a3fdf"
+    ],
+    "prepared_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0"
+  },
+  "linked_B": {
+    "expected": "unaffected",
+    "expected_refs": [
+      {
+        "original_index": 0,
+        "pointer": "/affected/0",
+        "byte_start": 13,
+        "byte_end": 149,
+        "row_sha256": "ec212d94318ec9dce669bce10011d1beffff1b26de8d0ddc01a9644acebd3fba"
+      },
+      {
+        "original_index": 2,
+        "pointer": "/affected/2",
+        "byte_start": 228,
+        "byte_end": 312,
+        "row_sha256": "0707a10bdeb18f4d0b837ba7db729a4b0a8de01f32d712fedcd3187e7c1d16ff"
+      }
+    ],
+    "row_ids": [
+      "r-c389ad70f9928ece95480303",
+      "r-c93b0d465a620692b25dc36a"
+    ],
+    "prepared_sha256": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+    "rationale": "npm target 4.5.0 lies outside [4.1.0,4.3.0) and is absent from [4.6.0,4.7.0]. Both matching rows are required for exclusion. The same-name PyPI row is ineligible."
+  },
+  "scoring": [
+    "A has one determinate exact-set opportunity. Score full set equality, ignoring ID order. Partial, wrong or abstaining A is an identity miss for the primary trial.",
+    "Construct B solely from the observed A draft after local verification. Never substitute oracle admission. Verify target version only, both original source rows byte-for-byte, no decoy or gold. No B request may be produced on either singleton subset, decoy/incorrect set, or unknown with empty IDs.",
+    "If A blocks, record upstream miss and 0 downstream decision opportunities. Do not score a downstream error or abstention. Separately score each deliberately invalid A as a gate control by observing no B request.",
+    "When A admits, B has one determinate opportunity. Require unaffected plus exactly both source references; score decision, emitted pointer precision, and gold support coverage (two required) separately. Unknown with no IDs is a determinate miss, undefined precision, 0/2 coverage. Separate a wrong draft from any local refusal. End-to-end success requires both stages and complete support."
+  ],
+  "status": "Reviewer preselection before candidate observations. Synthetic offline preparation only."
+}
