@@ -71,3 +71,24 @@ values. Existing calls with a fixed evaluation or commit time keep their
 previous behavior. This demonstrates transaction ordering and expiry under
 real contention in scratch SQLite. It leaves production wall-clock trust and
 admission policy outside this benchmark.
+
+## Missing version evidence on h75
+
+The original h75 at `46b5566` matches one PyPI row with no version evidence.
+The same-name npm decoy lists the target version. The frozen oracle at
+`a6ce6fe:benchmarks/phase6-two-stage-independent/preselection-h75.json`
+admits the PyPI row at `/affected/1`. The scripted Stage A result verifies
+that complete singleton set. The decoy stays outside both B requests.
+
+```sh
+PYTHONPATH=src python3.12 -B -m pytest -q -s -p no:cacheprovider \
+  benchmarks/phase6-offline-fixture-freeze/test_scratch_history_admission.py \
+  -k h75_missing_version_evidence
+```
+
+Unknown with no IDs is a warranted abstention. The affected and unaffected
+proposals each cite the admitted row and are refused because it has no
+version basis. Both B arms release zero references for all three proposals.
+Scratch admission holds each one before a write transaction. Fresh read-only
+history stays empty and the subject report has no current result. This
+regression uses scripted inputs and makes no model calls.
