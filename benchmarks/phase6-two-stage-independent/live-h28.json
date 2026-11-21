@@ -1,0 +1,94 @@
+{
+  "case": "original/h28",
+  "review_pin": "703d32413bfd6da4877a4de3b4a892a339dec042",
+  "live_probes": {
+    "A": {
+      "stage": "A",
+      "gold": "match",
+      "draft": {
+        "identity_outcome": "match",
+        "selected_row_ids": [
+          "i-5f9587be0131c54184b37bf9"
+        ]
+      },
+      "observed": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+        "request_sha256": "db464822f7c91a4ca2dbfa11147f084ffceacdac6409db8e9869c34a05573250",
+        "draft_sha256": "5763a7d1b0455bf8a00abd2ba05a6a9180a9f9b0abd1c365d4f00636122c6292",
+        "matched_row_ids": [
+          "i-5f9587be0131c54184b37bf9"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "decision_or_complete_identity_correct": true,
+      "exact_gold_pointers": true,
+      "pointer_hits": 1,
+      "emitted": 1,
+      "gold_count": 1,
+      "raw_reply_sha256": "c66c2e0fd255b3f2cdc4a8924614336f3d66acf121a38365c9634a692c326368",
+      "raw_draft_sha256": "5763a7d1b0455bf8a00abd2ba05a6a9180a9f9b0abd1c365d4f00636122c6292",
+      "prepared_request_sha256": "db464822f7c91a4ca2dbfa11147f084ffceacdac6409db8e9869c34a05573250",
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 37
+      },
+      "http_status": 200,
+      "recorded_attempt": 1,
+      "retained_wire_sha256": "71291fec6d5e0215655b09af0e8f1b337da84560ebc8689e9e5f5b257bcd886e",
+      "model": "gpt-5.4-mini-2026-03-17"
+    },
+    "B": {
+      "stage": "B",
+      "gold": "affected",
+      "draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-6e7cc1d311be887540a77d50"
+        ]
+      },
+      "observed": {
+        "stage": "B",
+        "arm": "oracle",
+        "status": "verified",
+        "reportable_outcome": "affected",
+        "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+        "request_sha256": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+        "draft_sha256": "33ca96f1179162e07f2cf5ec3b34929e2df1cdb758ce00f46c568e56d23731d9",
+        "references": [
+          {
+            "row_id": "r-6e7cc1d311be887540a77d50",
+            "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+            "pointer": "/affected/1",
+            "byte_start": 90,
+            "byte_end": 230,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+          }
+        ]
+      },
+      "decision_or_complete_identity_correct": true,
+      "exact_gold_pointers": true,
+      "pointer_hits": 1,
+      "emitted": 1,
+      "gold_count": 1,
+      "raw_reply_sha256": "d06d20111a71ece31f80cf9226fe60a0c69423a27674e11c59a203dd6ef628bd",
+      "raw_draft_sha256": "33ca96f1179162e07f2cf5ec3b34929e2df1cdb758ce00f46c568e56d23731d9",
+      "prepared_request_sha256": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+      "usage": {
+        "input_tokens": 249,
+        "output_tokens": 44
+      },
+      "http_status": 200,
+      "recorded_attempt": 1,
+      "retained_wire_sha256": "eddb187063fe829896d45323bd8329e73f7a7a8bd01550ff099c5585d7ee8536",
+      "model": "gpt-5.4-mini-2026-03-17"
+    }
+  },
+  "linked_B_constructed_offline_equals_oracle_B_wire": true,
+  "linked_B_live_calls": 0,
+  "request_provenance": "reconciled local attempt, HTTP, response, transport and wire files; not provider-attested request digests"
+}
