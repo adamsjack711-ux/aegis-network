@@ -5,7 +5,10 @@ from hashlib import sha256
 from http.client import HTTPSConnection
 import json
 import multiprocessing
+import os
+from pathlib import Path
 import re
+import stat
 from tempfile import TemporaryFile
 from time import monotonic
 
@@ -39,7 +42,38 @@ def decode_json(content):
     return json.loads(content.decode("utf-8"), object_pairs_hook=unique_object)
 
 
-def request_once(body, credential, connection_factory, timeout):
+def private_error_path(value):
+    path = Path(value)
+    mode = path.parent.lstat()
+    if (not stat.S_ISDIR(mode.st_mode) or mode.st_uid != os.getuid() or mode.st_mode & 0o077
+            or path.exists() or path.is_symlink()):
+        raise Refused("HTTP diagnostic requires a new file in an owner-only directory")
+    return path
+
+
+def retain_http_error(response, credential, path):
+    encoding = response.getheader("Content-Encoding", "identity").strip().lower()
+    if encoding != "identity" or (response.length is not None and response.length > RAW_REPLY_LIMIT):
+        return False
+    raw = response.read(RAW_REPLY_LIMIT + 1)
+    if (not raw or len(raw) > RAW_REPLY_LIMIT or response.length not in (None, 0)
+            or credential.encode() in raw):
+        return False
+    directory_fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        info = os.fstat(directory_fd)
+        if info.st_uid != os.getuid() or info.st_mode & 0o077:
+            return False
+        fd = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                     0o600, dir_fd=directory_fd)
+        with os.fdopen(fd, "wb") as output:
+            output.write(raw)
+        return True
+    finally:
+        os.close(directory_fd)
+
+
+def request_once(body, credential, connection_factory, timeout, error_body_path):
     # Direct stdlib HTTPS has no redirect, proxy discovery, or retry handler.
     connection = connection_factory(HOST, port=443, timeout=timeout)
     try:
@@ -49,6 +83,13 @@ def request_once(body, credential, connection_factory, timeout):
         })
         response = connection.getresponse()
         if response.status != 200:
+            if error_body_path is not None and 400 <= response.status <= 599:
+                try:
+                    retained = retain_http_error(response, credential, error_body_path)
+                except OSError:
+                    retained = False
+                outcome = "retained" if retained else "unavailable"
+                raise Refused(f"HTTP {response.status} refused; raw diagnostic {outcome}; attempt consumed")
             raise Refused("HTTP response refused; attempt consumed")
         content_type = response.getheader("Content-Type", "").partition(";")[0].strip().lower()
         encoding = response.getheader("Content-Encoding", "identity").strip().lower()
@@ -155,7 +196,7 @@ def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_pars
 
 def complete_responses_once(body, *, body_sha256, model, input_token_limit, credential_reader,
                             deadline_seconds=DEADLINE_SECONDS, connection_factory=HTTPSConnection,
-                            draft_parser=Draft.model_validate_json):
+                            draft_parser=Draft.model_validate_json, error_body_path=None):
     """Send one approved text-only request; caller owns authorization and replay state.
 
     The credential supplier runs only inside the supervised child after local
@@ -182,6 +223,12 @@ def complete_responses_once(body, *, body_sha256, model, input_token_limit, cred
     except (KeyError, TypeError, ValueError, RecursionError):
         raise Refused("request bytes or limits outside the adapter contract") from None
 
+    if error_body_path is not None:
+        try:
+            error_body_path = private_error_path(error_body_path)
+        except OSError:
+            raise Refused("HTTP diagnostic directory is unavailable") from None
+
     def perform():
         try:
             credential = credential_reader()
@@ -189,7 +236,7 @@ def complete_responses_once(body, *, body_sha256, model, input_token_limit, cred
                 raise ValueError()
         except Exception:
             raise Refused("credential unavailable or invalid") from None
-        return request_once(body, credential, connection_factory, deadline_seconds)
+        return request_once(body, credential, connection_factory, deadline_seconds, error_body_path)
 
     raw = supervise(perform, seconds=deadline_seconds)
     return parse_reply(raw, model, input_token_limit, output_token_limit, draft_parser=draft_parser)

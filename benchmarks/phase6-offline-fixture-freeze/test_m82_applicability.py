@@ -21,16 +21,22 @@ def sealed():
     return trial.load_m82(Path(os.environ["AEGIS_TEST_M82_INPUTS"]))
 
 
-def wire(outcome, quote=None, source_id="S1"):
-    claims = [] if quote is None else [{"source_id": source_id, "quote": quote}]
-    return canonical({"proposed_outcome": outcome, "claims": claims})
+@pytest.fixture
+def accepted_request():
+    return Path(os.environ["AEGIS_TEST_REVIEW_BODY"]).read_bytes()
 
 
-def test_request_contains_only_exact_source_evidence_and_separate_asset_context(sealed):
-    body, count = trial.request_objects(sealed)
-    manifest = trial.request_manifest(sealed, body, count)
-    assert manifest["create_body_sha256"] == "753a0c923658f1a371c701e9719988a68596558bdbe04e2ab23c45adaca74c4b"
-    assert manifest["count_projection_sha256"] == "ae3f5e8bfef5f8979328d5c31779b8bce942a7c4856c224f906fb9e79d048e2c"
+def wire(outcome, quote=None, source_id="S1", kind="applicability"):
+    claims = [] if quote is None else [{"kind": kind, "source_id": source_id, "quote": quote}]
+    return canonical({"proposed_outcome": outcome, "claims": claims, "uncertainties": []})
+
+
+def test_request_contains_only_exact_source_evidence_and_separate_asset_context(sealed, accepted_request):
+    raw, count = trial.request_objects(sealed, accepted_request)
+    body = json.loads(raw)
+    manifest = trial.request_manifest(sealed, raw, count)
+    assert manifest["create_body_sha256"] == "e90bc1b7aab14d23f9c535e8f3faafb8eaea4bb724e389c3b7a447a0982eedfe"
+    assert manifest["count_projection_sha256"] == "1dcd3825c83000369b0f5eae7ac4935ca0dc74641649a90fb6dd49a7d115dce8"
     assert manifest["count_status"] == "no count for this projection"
     assert manifest["approval_status"] == "new approval required"
     logical = json.loads(body["input"])
@@ -44,13 +50,13 @@ def test_request_contains_only_exact_source_evidence_and_separate_asset_context(
     assert evidence["source_sha256"] == sha256(source.content).hexdigest()
     assert evidence["source_pointer"] == "/affected/0"
     assert b"dry-canvas" not in canonical(body) and b"baseline_outcome" not in canonical(body)
-    schema = body["text"]["format"]["schema"]
-    claim = schema["$defs"]["ApplicabilityClaim"]
-    assert claim["required"] == ["source_id", "quote"] and claim["additionalProperties"] is False
-    assert claim["properties"]["quote"]["enum"] == [quote.decode()]
-    assert schema["properties"]["claims"]["maxItems"] == 1
-    assert schema["properties"]["proposed_outcome"]["enum"] == ["affected", "unaffected", "unknown"]
-    assert schema["additionalProperties"] is False
+    marker = b'\n  "text": '
+    assert raw.split(marker, 1)[1] == accepted_request.split(marker, 1)[1]
+    assert json.loads(count)["text"] == json.loads(accepted_request)["text"]
+    original = json.loads(accepted_request)
+    assert {k: v for k, v in body.items() if k not in {"instructions", "input"}} == {
+        k: v for k, v in original.items() if k not in {"instructions", "input"}
+    }
 
 
 @pytest.mark.parametrize(("proposal", "expected", "excerpts"), [
@@ -98,12 +104,12 @@ def test_shape_recorded_in_original_live_draft_is_refused(sealed):
         {"kind": "applicability", "source_id": "S1", "quote": f'"affected":[{quote}]'},
         {"kind": "applicability", "source_id": "S1", "quote": CONTEXT_QUOTE},
         {"kind": "impact", "source_id": "S1", "quote": SUMMARY_QUOTE},
-    ], "uncertainties": ["uncertainty in historical draft"]})
-    with pytest.raises(Refused, match="applicability-only schema"):
+    ], "uncertainties": []})
+    with pytest.raises(Refused, match="exactly one source claim"):
         trial.checked_draft(original_shape, sealed)
 
 
-def test_raw_responses_envelope_uses_v2_validation_before_investigator(sealed):
+def test_raw_responses_envelope_checks_applicability_before_investigator(sealed):
     quote = trial.source_evidence(sealed)["affected_row_verbatim"]
     response = {
         "id": "resp_fixture", "object": "response", "status": "completed",
@@ -120,15 +126,10 @@ def test_raw_responses_envelope_uses_v2_validation_before_investigator(sealed):
         parse_reply(canonical(response), trial.MODEL, None, 512, draft_parser=parser)
 
 
-def count_receipt(count_digest):
-    return canonical({"request_sha256": count_digest, "endpoint": "/v1/responses/input_tokens",
-                      "model": trial.MODEL, "http_status": 200, "outcome": "counted",
-                      "attempts": 1, "input_tokens": 436})
-
-
 @pytest.mark.parametrize(("case", "reportable"), [("good", "unaffected"), ("abstain", "unknown"),
                                                   ("metadata", None)])
-def test_v2_through_shared_transport_and_local_verifier(sealed, tmp_path, case, reportable):
+def test_corrected_trial_through_shared_transport_and_local_verifier(sealed, accepted_request, tmp_path,
+                                                                  case, reportable):
     from test_openai_one_shot import DUMMY_SECRET, fake_endpoint, observed, response_body
 
     quote = trial.source_evidence(sealed)["affected_row_verbatim"]
@@ -142,7 +143,7 @@ def test_v2_through_shared_transport_and_local_verifier(sealed, tmp_path, case, 
 
     def run():
         return trial.complete_m82_applicability(
-            sealed, approved_body_sha256=trial.CREATE_SHA256, count_receipt=count_receipt(trial.COUNT_SHA256),
+            sealed, accepted_request=accepted_request, approved_body_sha256=trial.CREATE_SHA256, input_token_limit=10261,
             credential_reader=lambda: DUMMY_SECRET, deadline_seconds=0.5, connection_factory=connection,
         )
 
@@ -160,17 +161,21 @@ def test_v2_through_shared_transport_and_local_verifier(sealed, tmp_path, case, 
     assert len(posts) == 1 and posts[0]["digest"] == trial.CREATE_SHA256
 
 
-@pytest.mark.parametrize(("body_sha", "count_sha"), [
-    (trial.HISTORICAL_BODY_SHA256, trial.COUNT_SHA256),
-    (trial.CREATE_SHA256, trial.HISTORICAL_COUNT_SHA256),
+@pytest.mark.parametrize("body_sha, limit", [
+    (trial.HISTORICAL_BODY_SHA256, 10261),
+    (trial.REJECTED_CREATE_SHA256, 10261),
+    (trial.CREATE_SHA256, 0),
 ])
-def test_old_approval_or_count_refuses_before_credentials(sealed, body_sha, count_sha):
+def test_old_approval_or_invalid_local_screen_refuses_before_credentials(sealed, accepted_request, body_sha,
+                                                                         limit):
     def forbidden():
-        pytest.fail("credential asked for before checking fresh approval and count")
+        pytest.fail("credential asked for before checking approval and usage screen")
 
     with pytest.raises(Refused):
-        trial.complete_m82_applicability(sealed, approved_body_sha256=body_sha,
-                                       count_receipt=count_receipt(count_sha), credential_reader=forbidden)
+        trial.complete_m82_applicability(
+            sealed, accepted_request=accepted_request, approved_body_sha256=body_sha,
+            input_token_limit=limit, credential_reader=forbidden,
+        )
 
 
 def test_custom_parser_runs_after_envelope_checks():
@@ -183,3 +188,47 @@ def test_custom_parser_runs_after_envelope_checks():
                 response_body(usage={"input_tokens": 999, "output_tokens": 1, "total_tokens": 1000})):
         with pytest.raises(Refused, match="envelope"):
             parse_reply(raw, trial.MODEL, 436, 512, draft_parser=forbidden)
+
+
+
+def test_opt_in_private_raw_schema_error_capture(sealed, accepted_request, tmp_path):
+    from test_openai_one_shot import DUMMY_SECRET, fake_endpoint, observed
+
+    error = (b'{"error":{"code":"invalid_json_schema","param":"text.format.schema",'
+             b'"message":"Fixture-only provider error detail."}}')
+    connection, log = fake_endpoint(tmp_path, status=400, reply=error)
+    directory = tmp_path / "private"
+    directory.mkdir(mode=0o700)
+    destination = directory / "raw-error.json"
+    with pytest.raises(Refused, match="HTTP 400 refused; raw diagnostic retained") as refusal:
+        trial.complete_m82_applicability(
+            sealed, accepted_request=accepted_request, approved_body_sha256=trial.CREATE_SHA256,
+            input_token_limit=10261, credential_reader=lambda: DUMMY_SECRET,
+            deadline_seconds=0.5, connection_factory=connection, error_body_path=destination,
+        )
+    assert "Fixture-only" not in str(refusal.value)
+    assert destination.read_bytes() == error and destination.stat().st_mode & 0o777 == 0o600
+    assert sum(event.get("method") == "POST" for event in observed(log)) == 1
+
+
+@pytest.mark.parametrize("error", [
+    b"x" * (16_384 + 1),
+    b'{"error":{"message":"fake-test-token-never-sent"}}',
+])
+def test_raw_error_diagnostic_refuses_oversize_or_credential_echo(sealed, accepted_request, tmp_path, error):
+    from test_openai_one_shot import DUMMY_SECRET, fake_endpoint, observed
+
+    connection, log = fake_endpoint(tmp_path, status=400, reply=error)
+    directory = tmp_path / "private"
+    directory.mkdir(mode=0o700)
+    destination = directory / "raw-error.json"
+    with pytest.raises(Refused, match="HTTP 400 refused; raw diagnostic unavailable"):
+        trial.complete_m82_applicability(
+            sealed, accepted_request=accepted_request, approved_body_sha256=trial.CREATE_SHA256,
+            input_token_limit=10261, credential_reader=lambda: DUMMY_SECRET, deadline_seconds=0.5,
+            connection_factory=connection, error_body_path=destination,
+        )
+    assert not destination.exists()
+    calls = observed(log)
+    assert sum(event.get("method") == "POST" for event in calls) == 1
+    assert [event["read"] for event in calls if "read" in event] == [16_385]
