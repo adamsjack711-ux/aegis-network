@@ -82,3 +82,28 @@ def test_duplicate_source_text_cannot_substitute_for_exact_selected_spans():
         receipt = scratch.admit(event.sequence, advisory, source.sha256, asset, target, *drafts, now=now)
         assert (receipt.outcome, receipt.reason) == ("held", "selected-evidence-binding-mismatch")
         assert read_history(scratch.path, "osv", advisory) == []
+
+
+def test_freshness_is_sampled_after_the_contended_writer_lock():
+    observed = trial.run_lock_contention()
+    expired, fresh = observed["expired_while_waiting"], observed["fresh_after_same_wait"]
+    for report in (expired, fresh):
+        assert report["evaluated_outcome"] == "affected"
+        assert report["competing_writer"] == "SQLITE_BUSY"
+        assert report["rows_while_contended"] == 0
+        assert report["observed_wait_ms"] >= report["hold_window_ms"]
+        assert report["transaction"][:4] == ["SELECT", "BEGIN IMMEDIATE", "CLOCK", "SELECT"]
+        assert report["evaluation_clock"] == fresh["sampled_commit_clock"]
+        assert report["source_retrieved_at"] == fresh["source_retrieved_at"]
+        assert report["hold_window_ms"] == fresh["hold_window_ms"]
+
+    assert expired["clock_advanced_while_held"] is True
+    assert expired["sampled_commit_clock"] > expired["evaluation_clock"]
+    assert expired["receipt"]["reason"] == "stale-or-future-source"
+    assert expired["rows_after"] == 0 and expired["fresh_subject_report"]["current"] is None
+    assert expired["transaction"][4:] == ["ROLLBACK"]
+
+    assert fresh["clock_advanced_while_held"] is False
+    assert fresh["rows_after"] == 1 and fresh["receipt"]["outcome"] == "committed"
+    assert fresh["transaction"][4:] == ["INSERT", "COMMIT"]
+    assert fresh["retry"]["outcome"] == "duplicate"

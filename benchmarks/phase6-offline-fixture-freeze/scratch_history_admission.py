@@ -1,12 +1,16 @@
 """Explicit disposable SQLite benchmark for scripted two-stage history admission."""
 
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing, contextmanager
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
 from hashlib import sha256
 import json
 from pathlib import Path
+import sqlite3
 from tempfile import TemporaryDirectory
+from threading import Event
+from time import monotonic
 
 from aegis.intelligence.baseline import assess, normalize
 from aegis.intelligence.feeds import FeedClient, snapshot
@@ -67,10 +71,12 @@ class _ScratchTrial:
                               sha256=digest, content=content)
 
     def admit(self, sequence, advisory_id, digest, asset, target_bytes, identity_draft, version_draft,
-              *, now, commit_now=None, before_lock=None):
-        """Evaluate a scripted bundle, then bind and check it on the scratch writer."""
-        commit_now = now if commit_now is None else commit_now
+              *, now, commit_now=None, before_lock=None, commit_clock=None):
+        """Evaluate a bundle and check freshness with a clock sampled under the lock."""
         try:
+            if commit_now is not None and commit_clock is not None:
+                raise Held("ambiguous-commit-clock")
+            fixed_commit_time = now if commit_now is None else commit_now
             target = load_target(target_bytes)
             prefix = {"PyPI": "pypi", "npm": "npm"}[target.ecosystem]
             if (asset.identity_kind != "purl" or asset.identity != f"pkg:{prefix}/{target.package}"
@@ -91,17 +97,20 @@ class _ScratchTrial:
 
             with self.writer.db:
                 self.writer.db.execute("BEGIN IMMEDIATE")
+                locked_now = fixed_commit_time if commit_clock is None else commit_clock()
+                if not isinstance(locked_now, datetime) or locked_now.utcoffset() is None:
+                    raise Held("invalid-commit-clock")
                 current = self.snapshot_at(sequence, advisory_id, digest)
                 if current != evaluated:
                     raise Held("snapshot-binding-changed")
-                if (current.retrieved_at > commit_now
-                        or commit_now - current.retrieved_at > FRESHNESS_WINDOW):
+                if (current.retrieved_at > locked_now
+                        or locked_now - current.retrieved_at > FRESHNESS_WINDOW):
                     raise Held("stale-or-future-source")
-                conservative = assess(asset, normalize(current), advisory_id, now=commit_now)
+                conservative = assess(asset, normalize(current), advisory_id, now=locked_now)
                 if conservative.outcome != outcome:
                     raise Held("conservative-policy-disagreement")
                 current_input = data.model_copy(update={"sources": (current,)})
-                verify_investigation(current_input, result, now=commit_now)
+                verify_investigation(current_input, result, now=locked_now)
                 candidate = result.candidate
                 if result.check.status != "research-consistent" or candidate.reportable_outcome != outcome:
                     raise Held("investigator-check-not-determinate")
@@ -325,8 +334,122 @@ def run():
     }
 
 
+def contended_h28(pair, now, *, expire):
+    raw, target, advisory, uri, asset, drafts = case_setup(
+        "h28", pair, matches=[1], selected=[0], outcome="affected",
+    )
+    hold_window_seconds = 0.15
+    cutoff = now - FRESHNESS_WINDOW
+    with scratch() as trial:
+        source = snapshot("osv", uri, raw, retrieved_at=cutoff)
+        event, = trial.scout.ingest(source)
+        assert read_history(trial.path, "osv", advisory) == []
+        lock_held, writer_attempted, clock_sampled = Event(), Event(), Event()
+        operations, measured = [], {}
+        controlled_time = now
+
+        def trace(sql):
+            operation = sql.strip().split()[0].upper()
+            if sql.strip().upper() == "BEGIN IMMEDIATE":
+                operation = "BEGIN IMMEDIATE"
+                measured["begin_attempt"] = monotonic()
+                writer_attempted.set()
+            operations.append(operation)
+
+        def inspect_evaluation(evaluated):
+            assert evaluated.check.status == "research-consistent"
+            assert evaluated.candidate.reportable_outcome == "affected"
+            measured["evaluated_outcome"] = evaluated.candidate.reportable_outcome
+
+        def sample_clock():
+            assert trial.writer.db.in_transaction and writer_attempted.is_set()
+            assert not clock_sampled.is_set()
+            operations.append("CLOCK")
+            measured["sample"] = monotonic()
+            measured["sampled_clock"] = controlled_time.isoformat()
+            clock_sampled.set()
+            return controlled_time
+
+        def hold_writer():
+            nonlocal controlled_time
+            uri_rw = trial.path.resolve().as_uri() + "?mode=rw"
+            with closing(sqlite3.connect(uri_rw, uri=True)) as holder:
+                holder.execute("BEGIN IMMEDIATE")
+                try:
+                    lock_held.set()
+                    assert writer_attempted.wait(2), "admission never attempted its write lock"
+                    # Keep the true SQLite writer lock for the same interval in
+                    # both cases. No successful admission clock read can occur.
+                    assert not clock_sampled.wait(hold_window_seconds)
+                    with closing(sqlite3.connect(uri_rw, uri=True, timeout=0)) as other_writer:
+                        try:
+                            other_writer.execute("BEGIN IMMEDIATE")
+                        except sqlite3.OperationalError as exc:
+                            assert exc.sqlite_errorname == "SQLITE_BUSY"
+                            measured["competing_writer"] = exc.sqlite_errorname
+                        else:
+                            raise AssertionError("second SQLite writer did not hold the lock")
+                    assert holder.in_transaction
+                    assert read_history(trial.path, "osv", advisory) == []
+                    measured["rows_while_contended"] = 0
+                    if expire:
+                        controlled_time = now + timedelta(microseconds=1)
+                    measured["clock_advanced_while_held"] = expire
+                finally:
+                    holder.rollback()
+
+        trial.writer.db.set_trace_callback(trace)
+        try:
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                held = executor.submit(hold_writer)
+                assert lock_held.wait(2), "second connection never acquired the writer lock"
+                receipt = trial.admit(event.sequence, advisory, source.sha256, asset, target, *drafts,
+                                      now=now, before_lock=inspect_evaluation, commit_clock=sample_clock)
+                held.result(timeout=3)
+        finally:
+            trial.writer.db.set_trace_callback(None)
+        wait_ms = (measured["sample"] - measured["begin_attempt"]) * 1000
+        assert wait_ms >= hold_window_seconds * 1000
+        assert measured["sampled_clock"] == controlled_time.isoformat()
+        expected_ops = ["SELECT", "BEGIN IMMEDIATE", "CLOCK", "SELECT"]
+        if expire:
+            assert (receipt.outcome, receipt.reason) == ("held", "stale-or-future-source")
+            assert operations == expected_ops + ["ROLLBACK"]
+        else:
+            assert receipt.outcome == "committed"
+            assert operations == expected_ops + ["INSERT", "COMMIT"]
+        observed = append_observation(trial, advisory, asset, [], receipt, history_status="current",
+                                      count=0 if expire else 1)
+        if not expire:
+            assert observed["fresh_subject_report"]["current"]["reportable_outcome"] == "affected"
+            retry = trial.admit(event.sequence, advisory, source.sha256, asset, target, *drafts, now=now)
+            assert retry.outcome == "duplicate" and read_history(trial.path, "osv", advisory) == observed["history"]
+            observed["retry"] = asdict(retry)
+        return observed | {
+            "evaluation_clock": now.isoformat(), "source_retrieved_at": cutoff.isoformat(),
+            "sampled_commit_clock": measured["sampled_clock"], "evaluated_outcome": measured["evaluated_outcome"],
+            "clock_advanced_while_held": measured["clock_advanced_while_held"],
+            "competing_writer": measured["competing_writer"],
+            "rows_while_contended": measured["rows_while_contended"], "transaction": operations,
+            "hold_window_ms": int(hold_window_seconds * 1000), "observed_wait_ms": round(wait_ms, 3),
+        }
+
+
+def run_lock_contention():
+    freeze, pairs = sealed_inputs()
+    now = datetime.fromisoformat(freeze["clock"])
+    return {
+        "expired_while_waiting": contended_h28(pairs["h28"], now, expire=True),
+        "fresh_after_same_wait": contended_h28(pairs["h28"], now, expire=False),
+    }
+
+
 if __name__ == "__main__":
     import argparse
 
-    argparse.ArgumentParser(description=__doc__).parse_args()
-    print(json.dumps(run(), sort_keys=True, indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--lock-contention", action="store_true",
+                        help="run the paired post-lock freshness controls")
+    options = parser.parse_args()
+    result = run_lock_contention() if options.lock_contention else run()
+    print(json.dumps(result, sort_keys=True, indent=2))
