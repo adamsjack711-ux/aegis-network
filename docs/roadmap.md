@@ -26,4 +26,4 @@ A third synthetic case isolated the version question. The model saw version `3.1
 
 The offline `h84` handoff passed independent review on a synthetic advisory with two matching rows. The version request used the locally verified identity draft and carried both original rows in source order. The scripted unaffected decision required both exact source references. Incomplete, incorrect, and abstaining identity drafts produced no version request. [Independent h84 review and replay](../benchmarks/phase6-two-stage-independent/offline-h84.md)
 
-The next offline check is to replay the supported `h84` decision into disposable research history, verify both references on a fresh read, and check that a retry and incomplete drafts append no extra findings.
+The scripted `h84` replay saved one unaffected finding in disposable research history. Fresh readers recovered both exact source references, and an identical retry left the stored investigation byte-identical. A partial version exclusion and an incomplete identity draft each left a separate database empty. [Independent scratch history review](../benchmarks/phase6-two-stage-independent/offline-h84-scratch.md)
