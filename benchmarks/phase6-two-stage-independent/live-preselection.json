@@ -1,0 +1,35 @@
+{
+  "case": "h28",
+  "variant": "original",
+  "freeze_commit": "46b55669f9534e6307260c98c245bf7f62734227",
+  "candidate": "533508fbe6f915b098dcde33dc68f9996a54f440",
+  "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+  "target_sha256": "86a6f71341ed3d775bbe58115346b129dcea54f033167be59a3e43107a757cce",
+  "labels_file_sha256": "2f134eeb764cc80a869956913793e5c143dccb30c7cd032328468c502ad4fa3d",
+  "case_gold_sha256": "897307ee0f8059ffc45e0f77736674e3e64d17bdbb3f497187dd76aa7706e3d7",
+  "prior_exposure": "Offline scripted evaluation only in this project. No provider results inspected before preselection.",
+  "A": {
+    "expected": "match",
+    "exact_pointers": [
+      "/affected/1"
+    ],
+    "denominator": 1
+  },
+  "oracle_B": {
+    "admission_pointers": [
+      "/affected/1"
+    ],
+    "expected": "affected",
+    "exact_source_support": [
+      {
+        "original_index": 1,
+        "pointer": "/affected/1",
+        "byte_start": 90,
+        "byte_end": 230,
+        "row_sha256": "0e0d0dce9a258b983bf6d3b3b4186461c5938b4a060a4ee6a32d91eb8ed53b88"
+      }
+    ],
+    "denominator": 1
+  },
+  "scoring": "Score A exact decision and complete set; record omissions, extra IDs and abstention. Score B on the independent oracle admission regardless of A outcome. Score decision and exact digest/pointer/span separately. A determinate abstention is a miss; no emitted citations gives undefined precision and zero support coverage. Record any refusal or unrun arm. These probes are not a linked pipeline run."
+}
