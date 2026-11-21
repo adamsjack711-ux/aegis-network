@@ -1,0 +1,152 @@
+"""Exercise the frozen synthetic h84 gate with scripted drafts and no provider."""
+import argparse
+import json
+from pathlib import Path
+import sys
+
+from score import case_inputs, load, pack, raw_hash
+
+
+def replay(checkout):
+    sys.path[:0] = [
+        str(checkout / "src"),
+        str(checkout / "benchmarks/phase6-offline-fixture-freeze"),
+    ]
+    import osv_two_stage as checker
+    import two_stage_trial as trial
+
+    frozen = load("preselection-h84.json")
+    labels = Path("seal/oracle/labels.json").read_bytes()
+    assert raw_hash(labels) == frozen["labels_sha256"]
+    label, = (
+        item for item in json.loads(labels)
+        if (item["case"], item["variant"]) == (frozen["case"], frozen["variant"])
+    )
+    assert raw_hash(pack(label)) == frozen["case_gold_sha256"]
+    source, target = case_inputs(label)
+    assert raw_hash(source) == frozen["source_sha256"]
+    assert raw_hash(target) == frozen["target_sha256"]
+    asset = json.loads(target)
+    expected_a = frozen["A"]
+    expected_b = frozen["linked_B"]
+
+    stage_a = checker.prepare_a(source, target)
+    assert stage_a["status"] == "prepared"
+    assert stage_a["request_sha256"] == expected_a["prepared_sha256"]
+    a_wire = trial.build_request("A", stage_a)
+    a_payload = json.loads(json.loads(a_wire)["input"])
+    assert set(a_payload) == {"asset_context", "candidate_rows"}
+    assert a_payload["asset_context"] == {key: asset[key] for key in ("ecosystem", "package")}
+    a_rows = a_payload["candidate_rows"]
+    originals = json.loads(source)["affected"]
+    for row, original in zip(a_rows, originals, strict=True):
+        package = original["package"]
+        assert set(row) == {"row_id", "ecosystem", "package", "purl", "purl_present"}
+        assert row["ecosystem"] == package["ecosystem"]
+        assert row["package"] == package["name"]
+        assert row["purl"] == package.get("purl")
+        assert row["purl_present"] == ("purl" in package)
+    first, decoy, last = (row["row_id"] for row in a_rows)
+    assert [first, last] == expected_a["row_ids"]
+    assert len({first, decoy, last}) == 3
+
+    def identity(outcome, *ids):
+        return pack({"identity_outcome": outcome, "selected_row_ids": ids})
+
+    def version(outcome, *ids):
+        return pack({"proposed_outcome": outcome, "selected_row_ids": ids})
+
+    controls = {}
+    for name, raw_a, a_status in (
+        ("first-singleton", identity("match", first), "refused"),
+        ("last-singleton", identity("match", last), "refused"),
+        ("decoy-only", identity("match", decoy), "refused"),
+        ("decoy-substitution", identity("match", first, decoy), "refused"),
+        ("decoy-extra", identity("match", first, decoy, last), "refused"),
+        ("unknown", identity("unknown"), "abstained"),
+    ):
+        observed_a = checker.check_a(source, target, raw_a)
+        linked_b = checker.prepare_b(source, target, raw_a, arm="linked")
+        assert observed_a["status"] == a_status and observed_a["matched_pointers"] == []
+        assert linked_b["status"] == "blocked" and linked_b["upstream_status"] == a_status
+        assert "payload" not in linked_b and "request_sha256" not in linked_b
+        assert not linked_b["references"]
+        controls[name] = {
+            "A": a_status,
+            "B": linked_b["status"],
+            "reason": linked_b["reason"],
+            "B_decision_opportunities": 0,
+        }
+
+    # Reverse the draft IDs to check set equality and pass the actual draft bytes to B.
+    raw_a = identity("match", last, first)
+    observed_a = checker.check_a(source, target, raw_a)
+    assert observed_a["status"] == "verified"
+    assert observed_a["identity_outcome"] == expected_a["expected"]
+    assert sorted(observed_a["matched_pointers"]) == sorted(expected_a["complete_set"])
+    linked_b = checker.prepare_b(source, target, raw_a, arm="linked")
+    assert linked_b["status"] == "prepared" and linked_b["arm"] == "linked"
+    assert linked_b["request_sha256"] == expected_b["prepared_sha256"]
+    b_wire = trial.build_request("B", linked_b)
+    b_payload = json.loads(json.loads(b_wire)["input"])
+    assert set(b_payload) == {"asset_context", "candidate_rows"}
+    assert b_payload["asset_context"] == {"version": asset["version"]}
+    for row, row_id, reference in zip(
+        b_payload["candidate_rows"], expected_b["row_ids"], expected_b["expected_refs"], strict=True
+    ):
+        assert set(row) == {"row_id", "osv_row"} and row["row_id"] == row_id
+        span = source[reference["byte_start"]:reference["byte_end"]]
+        assert row["osv_row"].encode() == span
+        assert raw_hash(span) == reference["row_sha256"]
+
+    observed_b = checker.check_b(
+        source, target, raw_a, version("unaffected", *expected_b["row_ids"]), arm="linked"
+    )
+    assert observed_b["status"] == "verified"
+    assert observed_b["reportable_outcome"] == expected_b["expected"]
+    for actual, expected in zip(observed_b["references"], expected_b["expected_refs"], strict=True):
+        assert actual["source_sha256"] == frozen["source_sha256"]
+        for key in ("pointer", "byte_start", "byte_end"):
+            assert actual[key] == expected[key]
+        raw_row = actual["osv_row"].encode()
+        assert raw_row == source[expected["byte_start"]:expected["byte_end"]]
+        assert raw_hash(raw_row) == expected["row_sha256"]
+
+    b_controls = {}
+    for name, raw_b, status in (
+        ("unknown", version("unknown"), "abstained"),
+        ("one-support-reference", version("unaffected", expected_b["row_ids"][0]), "refused"),
+        ("incorrect-decision", version("affected", *expected_b["row_ids"]), "refused"),
+    ):
+        observed = checker.check_b(source, target, raw_a, raw_b, arm="linked")
+        assert observed["status"] == status
+        assert observed["reportable_outcome"] == "unknown" and observed["references"] == []
+        b_controls[name] = {"status": status, "precision": None, "support": [0, 2]}
+
+    return {
+        "case": "original/h84",
+        "draft_source": "independent scripted controls",
+        "A": {
+            "status": observed_a["status"],
+            "exact_set": observed_a["matched_pointers"],
+            "prepared_sha256": stage_a["request_sha256"],
+            "wire_sha256": raw_hash(a_wire),
+        },
+        "B": {
+            "arm": "linked",
+            "decision": observed_b["reportable_outcome"],
+            "prepared_sha256": linked_b["request_sha256"],
+            "wire_sha256": raw_hash(b_wire),
+            "reference_precision": [2, 2],
+            "support_coverage": [2, 2],
+        },
+        "blocked_A_controls": controls,
+        "B_controls_after_admission": b_controls,
+    }
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("checkout", type=Path)
+    args = parser.parse_args()
+    print(json.dumps(replay(args.checkout.resolve()), indent=2))

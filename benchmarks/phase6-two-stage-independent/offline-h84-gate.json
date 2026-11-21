@@ -1,0 +1,91 @@
+{
+  "case": "original/h84",
+  "draft_source": "independent scripted controls",
+  "A": {
+    "status": "verified",
+    "exact_set": [
+      "/affected/0",
+      "/affected/2"
+    ],
+    "prepared_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0",
+    "wire_sha256": "92b5e3a2318e5221b11749e2e536efc183b034a4b7dbabd07d58fb6cfd622e20"
+  },
+  "B": {
+    "arm": "linked",
+    "decision": "unaffected",
+    "prepared_sha256": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+    "wire_sha256": "0202d8052cb303a4fdad942907631c08c4ef20adbee4ff5b3f56c280bb46bdb1",
+    "reference_precision": [
+      2,
+      2
+    ],
+    "support_coverage": [
+      2,
+      2
+    ]
+  },
+  "blocked_A_controls": {
+    "first-singleton": {
+      "A": "refused",
+      "B": "blocked",
+      "reason": "identity-selection-is-incomplete-or-incorrect",
+      "B_decision_opportunities": 0
+    },
+    "last-singleton": {
+      "A": "refused",
+      "B": "blocked",
+      "reason": "identity-selection-is-incomplete-or-incorrect",
+      "B_decision_opportunities": 0
+    },
+    "decoy-only": {
+      "A": "refused",
+      "B": "blocked",
+      "reason": "identity-selection-is-incomplete-or-incorrect",
+      "B_decision_opportunities": 0
+    },
+    "decoy-substitution": {
+      "A": "refused",
+      "B": "blocked",
+      "reason": "identity-selection-is-incomplete-or-incorrect",
+      "B_decision_opportunities": 0
+    },
+    "decoy-extra": {
+      "A": "refused",
+      "B": "blocked",
+      "reason": "identity-selection-is-incomplete-or-incorrect",
+      "B_decision_opportunities": 0
+    },
+    "unknown": {
+      "A": "abstained",
+      "B": "blocked",
+      "reason": "identity-abstained",
+      "B_decision_opportunities": 0
+    }
+  },
+  "B_controls_after_admission": {
+    "unknown": {
+      "status": "abstained",
+      "precision": null,
+      "support": [
+        0,
+        2
+      ]
+    },
+    "one-support-reference": {
+      "status": "refused",
+      "precision": null,
+      "support": [
+        0,
+        2
+      ]
+    },
+    "incorrect-decision": {
+      "status": "refused",
+      "precision": null,
+      "support": [
+        0,
+        2
+      ]
+    }
+  }
+}
