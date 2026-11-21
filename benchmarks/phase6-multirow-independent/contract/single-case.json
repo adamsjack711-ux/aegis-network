@@ -1,0 +1,7 @@
+{
+  "case": "s43",
+  "source_sha256": "940addc62e9459c63c09e89db47f142b5b43373870083ea42b63add25912a7bf",
+  "labels_file_sha256": "bff3c00bfa9a715dd6f75672bc8bad89da6b2c560e7a4e0b62fcd276d9363652",
+  "case_label_sha256": "08122d5e00f1d4f5b318ca0cd2c848d7318b82672c1eeab066e9ad690617f954",
+  "selection_timing": "before candidate runs; private reviewer record"
+}
