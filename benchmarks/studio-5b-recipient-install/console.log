@@ -1,0 +1,113 @@
+recipient.tar.gz: OK
+README.md: OK
+docs/offline-research-handoff-freeze.md: OK
+empty-feed.json: OK
+fixtures/check-open-errors.py: OK
+fixtures/expected-history.txt: OK
+fixtures/history.sqlite: OK
+grants/trust.json: OK
+metadata/dependencies.json: OK
+metadata/packaged-checks.json: OK
+metadata/validation-summary.json: OK
+wheels/aegis_network-0.1.0-py3-none-any.whl: OK
+wheels/annotated_doc-0.0.7-py3-none-any.whl: OK
+wheels/annotated_types-0.8.0-py3-none-any.whl: OK
+wheels/anyio-4.16.0-py3-none-any.whl: OK
+wheels/certifi-2026.10.23-py3-none-any.whl: OK
+wheels/cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/cffi-2.1.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/click-8.5.1-py3-none-any.whl: OK
+wheels/cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl: OK
+wheels/fastapi-0.165.0-py3-none-any.whl: OK
+wheels/h11-0.16.0-py3-none-any.whl: OK
+wheels/httpcore-1.0.9-py3-none-any.whl: OK
+wheels/httpx-0.28.1-py3-none-any.whl: OK
+wheels/idna-3.20-py3-none-any.whl: OK
+wheels/nats_py-2.17.0-py3-none-any.whl: OK
+wheels/opentelemetry_api-1.45.2-py3-none-any.whl: OK
+wheels/psycopg-3.3.9-py3-none-any.whl: OK
+wheels/psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl: OK
+wheels/psycopg_binary-3.3.9-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl: OK
+wheels/pycparser-3.12-py3-none-any.whl: OK
+wheels/pydantic-2.14.4-py3-none-any.whl: OK
+wheels/pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/pydantic_core-2.50.5-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl: OK
+wheels/starlette-1.10.0-py3-none-any.whl: OK
+wheels/typing_extensions-4.16.0-py3-none-any.whl: OK
+wheels/typing_inspection-0.4.5-py3-none-any.whl: OK
+wheels/uvicorn-0.54.0-py3-none-any.whl: OK
+wheels/aegis_network-0.1.0-py3-none-any.whl: OK
+Verified recipient snapshot for 50ba781: archive=d4745deb7eb9524092f42a430eaa32682d3b18d4c93af6d0dae7f25076bd306c wheel=549a4048bdb2f3034f9c4d26a82f6806a9d52ee7d64a112d015e1294f535d68d
+Using the recorded local image sha256:6d620701a04f97b737f115f6e750d1fc3b8084d56acd801decfe781893c7443d
+Ubuntu 24.04.5 LTS | aarch64 | 6.8.0-117-generic | Python 3.12.13
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+Looking in links: /bundle/wheels
+Processing /bundle/wheels/aegis_network-0.1.0-py3-none-any.whl
+Processing /bundle/wheels/cryptography-46.0.7-cp311-abi3-manylinux_2_34_aarch64.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/fastapi-0.165.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/httpx-0.28.1-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/nats_py-2.17.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/psycopg-3.3.9-py3-none-any.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /bundle/wheels/pydantic-2.14.4-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/uvicorn-0.54.0-py3-none-any.whl (from aegis-network==0.1.0)
+Processing /bundle/wheels/cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from cryptography<47,>=44->aegis-network==0.1.0)
+Processing /bundle/wheels/starlette-1.10.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/anyio-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/typing_extensions-4.16.0-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/typing_inspection-0.4.5-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/annotated_doc-0.0.7-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/opentelemetry_api-1.45.2-py3-none-any.whl (from fastapi<1,>=0.115->aegis-network==0.1.0)
+Processing /bundle/wheels/certifi-2026.10.23-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/httpcore-1.0.9-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/idna-3.20-py3-none-any.whl (from httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/h11-0.16.0-py3-none-any.whl (from httpcore==1.*->httpx<1,>=0.27->aegis-network==0.1.0)
+Processing /bundle/wheels/psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (from psycopg[binary]<4,>=3.2->aegis-network==0.1.0)
+Processing /bundle/wheels/annotated_types-0.8.0-py3-none-any.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /bundle/wheels/pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (from pydantic<3,>=2.10->aegis-network==0.1.0)
+Processing /bundle/wheels/click-8.5.1-py3-none-any.whl (from uvicorn<1,>=0.30->aegis-network==0.1.0)
+Processing /bundle/wheels/pycparser-3.12-py3-none-any.whl (from cffi>=2.0.0->cryptography<47,>=44->aegis-network==0.1.0)
+Installing collected packages: typing-extensions, pycparser, psycopg-binary, nats-py, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, psycopg, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, httpx, cryptography, fastapi, aegis-network
+Successfully installed aegis-network-0.1.0 annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 cffi-2.1.1 click-8.5.1 cryptography-46.0.7 fastapi-0.165.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 nats-py-2.17.0 opentelemetry-api-1.45.2 psycopg-3.3.9 psycopg-binary-3.3.9 pycparser-3.12 pydantic-2.14.4 pydantic-core-2.50.5 starlette-1.10.0 typing-extensions-4.16.0 typing-inspection-0.4.5 uvicorn-0.54.0
+No broken requirements found.
+plain exit=2
+{
+  "asset_id": null,
+  "cli_version": "0.1.0",
+  "distribution": "ubuntu",
+  "identity_scope": "none",
+  "independent_status": "unknown",
+  "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+  "intelligence_scope": "supplied-signed-events-only",
+  "inventory_complete": true,
+  "inventory_reason": "complete",
+  "mode": "observation-only",
+  "network": "offline",
+  "overall_assessment": "unknown",
+  "package_count": 92,
+  "potential_findings": "unknown; no signed local finding file supplied",
+  "schema_version": "status-v2"
+}
+empty-feed exit=2
+{
+  "asset_id": null,
+  "claim_count": 0,
+  "cli_version": "0.1.0",
+  "distribution": "ubuntu",
+  "identity_scope": "none",
+  "independent_status": "unknown",
+  "independent_status_reason": "NO_VERIFIABLE_T4_T5_PROOF",
+  "intelligence_scope": "supplied-signed-events-only",
+  "inventory_complete": true,
+  "inventory_reason": "complete",
+  "mode": "observation-only",
+  "network": "offline",
+  "overall_assessment": "unknown",
+  "package_count": 92,
+  "potential_findings": 0,
+  "schema_version": "status-v2",
+  "unknown_claims": 0
+}
+Found existing installation: aegis-network 0.1.0
+Uninstalling aegis-network-0.1.0:
+  Successfully uninstalled aegis-network-0.1.0
+PASS 50ba781 recipient console smoke, Ubuntu arm64 CPython 3.12.13
