@@ -1,0 +1,16 @@
+# Phase 6 offline advisory triage fixture freeze
+
+Use source `50ba781` with the fixed clock 2026-11-20T00:00:00Z. The manifest references existing sealed inputs and labels by their full Git pins and SHA-256. Per-case hashes cover sorted compact JSON with no trailing newline. The five lifecycle inputs have seven revision steps. The sixth control is a malformed scripted response assessed directly by the Investigator.
+
+**Entry point.** In a disposable local database, ingest the supplied snapshot through `ThreatScout.ingest`. Pass the emitted sequence, fixture vulnerability ID, asset, and exact `ScriptedProvider` response to `OfflineHandoff.consume`. After each commit, call `read_history(path, "osv", advisory_id)` on a fresh connection. For the malformed control use the pinned test's `sample(0)` and `investigate` call. The provider is scripted throughout.
+
+| Score | Rule |
+| --- | --- |
+| Structured metadata | For each newly committed revision, compare the deterministic outcome to the independently frozen label. Count once per origin. An unknown label on ambiguous identity is a correct abstention. |
+| Reportable outcome | Compare the emitted candidate field against the expected reportable value separately. For m82 the metadata excludes the version, the provider says affected, and the reportable value must be unknown. Score that as a correct guard and a miss if measuring reportable agreement with the structured label. Malformed input must produce rejected/unknown and zero accepted excerpts. |
+| Semantic support | Resolve each expected pointer against the original bytes and verify digest, ecosystem/package and version relation. Require exact pointer sets, including the empty set for ambiguity. Excerpt byte alignment alone earns no support credit. The m82 quotation refers to a separate inventory. Report independent narrative entailment as unscored until a reviewer supplies separate labels. |
+| Lifecycle | Match each receipt and the complete ordered history, including status, originating revision digest and its saved payload. Revisions may supersede earlier rows. Withdrawal must hold the new result and preserve the original payload as withdrawn. A held or missing step stays in the denominator. |
+
+**Evidence boundary.** The existing raw output was captured on 39d580a. The Investigator, Scout, baseline and models are identical at 50ba781. The intervening handoff change extracted the history query and formatter and added the read-only entry point and open-error diagnostic. The pinned 50ba781 regression records the direct malformed-result control. This freeze reconciled gold, stored outputs, source digests, pointer sets and historical payloads. It did not run the seven-step wiring on 50ba781. [Exact inputs, expected outputs and evidence hashes](manifest.json)
+
+**Tomorrow.** The integration owner must replay all seven steps through the normal source-pin API and retain separate scores and fresh-reader observations. VAL must independently inspect pointer meaning, reconcile missing or extra rows, and adjudicate any narrative-support claim. Stop wiring at the first unsupported current affected finding, including a withdrawn row presented as current. These scripted cases measure metadata triage and failure handling. Live-provider accuracy remains unmeasured.

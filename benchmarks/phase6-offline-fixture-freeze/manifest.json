@@ -1,0 +1,201 @@
+{
+  "source_commit": "50ba7818b2a143a7ff4308e6b96c94dc322b9b03",
+  "capture_source_commit": "39d580a3d612dc2d3e341a7648e0effaea8c18f0",
+  "artifacts": {
+    "inputs": {
+      "commit": "aec2456397fed25c74a2b265053863cf45f229ab",
+      "path": "benchmarks/studio-offline-citation-support/unseen-holdout-39d580a/seal/inputs.json",
+      "sha256": "064648c544b190f5a8ef34f695bf5dc6ba7e24acebab03f3e3b3f0ff121c8ea0"
+    },
+    "labels": {
+      "commit": "aec2456397fed25c74a2b265053863cf45f229ab",
+      "path": "benchmarks/studio-offline-citation-support/unseen-holdout-39d580a/seal/labels.json",
+      "sha256": "39fe751657bee19551fcab5832bca151112450f5993bbc5e0417058b09412f82"
+    },
+    "output": {
+      "commit": "aec2456397fed25c74a2b265053863cf45f229ab",
+      "path": "benchmarks/studio-offline-citation-support/unseen-holdout-39d580a/capture/after-capture.json",
+      "sha256": "16c57eaee33fdd72ed1810d8d927477daacaac6dc152148c8e586a0c6e20ead8"
+    },
+    "scoring": {
+      "commit": "aec2456397fed25c74a2b265053863cf45f229ab",
+      "path": "benchmarks/studio-offline-citation-support/unseen-holdout-39d580a/seal/scoring.md",
+      "sha256": "1d1e7b3c47a5df9b5e34fc33fb2202e09b8e923e17d2d5d827706be4f4b0e196"
+    },
+    "malformed_input": {
+      "commit": "50ba7818b2a143a7ff4308e6b96c94dc322b9b03",
+      "path": "tests/fixtures/phase5a_cases.json",
+      "sha256": "cba6b33415f287b33dcf13d4aca9f99a21ae56c4375b4cd588c64b673cc5fb65"
+    },
+    "malformed_transform": {
+      "commit": "50ba7818b2a143a7ff4308e6b96c94dc322b9b03",
+      "path": "tests/test_phase5a_investigator.py",
+      "sha256": "7332250a7b29d4a29c2aa3b26ee5394fcf983e392de963a9b2497248fdff0e0b"
+    },
+    "exact_pin_regression": {
+      "commit": "79cd7090a20977b8e5d20b870f88566094ad3f4d",
+      "path": "benchmarks/history-open-50ba781/source-regression.xml.gz",
+      "sha256": "8c95d8d72174cdde15ef9f5604c9e17b74f0e9782dac769228c9c63fc9a992fd"
+    }
+  },
+  "cases": [
+    {
+      "id": "m17",
+      "case_sha256": "8036d9a8970eb8e4ddfd0a5a5f1db31959d216d235fd04c695b7a05d5cafa028",
+      "category": "alias-exact",
+      "steps": [
+        {
+          "body_sha256": "45d33eb241b4214f63f335876a5876e2ee8a5ff50c711e7d5445cfe0d9967ea2",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "current",
+              "structured": "affected",
+              "reportable": "affected",
+              "pointers": [
+                "/affected/0"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m31",
+      "case_sha256": "63f01698fcb2bdffd50e69b536c3f09948bbe0f5263b0f30eeb9a939d7172203",
+      "category": "ambiguous-identity",
+      "steps": [
+        {
+          "body_sha256": "93053714ba08100ff7a75110fce83227f7e1009df1a003d2a57341e341300fa6",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "current",
+              "structured": "unknown",
+              "reportable": "unknown",
+              "pointers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m82",
+      "case_sha256": "5e1db13fdf1c75fa289e7ad35496c4925518f39e789477f0225e4fd3e5c2e81a",
+      "category": "exclusive-upper-bound",
+      "steps": [
+        {
+          "body_sha256": "4b198b662553f839d626f6383ad983590f9134dfb871268dee4b3fee83705f3a",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "current",
+              "structured": "unaffected",
+              "reportable": "unknown",
+              "pointers": [
+                "/affected/0"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m72",
+      "case_sha256": "5c0a28b970f5f83079bdaca18b6a1f90038f24b3ae32b07b31263c8a020518f8",
+      "category": "supersession-negative-to-positive",
+      "steps": [
+        {
+          "body_sha256": "927d5b8055f0dfc22c53fd2513b45ccf5908ab2816bd92f2ed00049de718d4b1",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "current",
+              "structured": "unaffected",
+              "reportable": "unaffected",
+              "pointers": [
+                "/affected/0"
+              ]
+            }
+          ]
+        },
+        {
+          "body_sha256": "9302a6e4cb0c01c6d43bcfa16642227a193e4db2c6d15883eb8f1412ef31a11f",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "superseded",
+              "structured": "unaffected",
+              "reportable": "unaffected",
+              "pointers": [
+                "/affected/0"
+              ]
+            },
+            {
+              "origin": 2,
+              "status": "current",
+              "structured": "affected",
+              "reportable": "affected",
+              "pointers": [
+                "/affected/1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m90",
+      "case_sha256": "69ff2b8ff1879ce6442815e3aa25fbe3e658fd125ee2af5f8f74490afcbe2297",
+      "category": "after-publication-withdrawal",
+      "steps": [
+        {
+          "body_sha256": "071fa60e96aade9b69f62db60c89984ec383129b1333461554d8c58964dfd136",
+          "receipt": "committed",
+          "history": [
+            {
+              "origin": 1,
+              "status": "current",
+              "structured": "affected",
+              "reportable": "affected",
+              "pointers": [
+                "/affected/0"
+              ]
+            }
+          ]
+        },
+        {
+          "body_sha256": "82d33c2ddf8d7a21044b95ff4feedf4ac5d7c1326e34b55a07dce2eaca51e980",
+          "receipt": "held",
+          "history": [
+            {
+              "origin": 1,
+              "status": "withdrawn",
+              "structured": "affected",
+              "reportable": "affected",
+              "pointers": [
+                "/affected/0"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "malformed": {
+    "case": "osv-affected",
+    "case_sha256": "afcaba5cd526a36818dd50ce5f97da10343869f8b3b71e87fa63ea5836cb9d4c",
+    "transform": "sample(0), then add top-level extra='unauthorized' to the scripted reply",
+    "test": "test_invalid_model_claim_is_rejected[<lambda>2]",
+    "structured": "affected",
+    "reportable": "unknown",
+    "check": "rejected",
+    "excerpts": [],
+    "lifecycle": "not applicable (direct Investigator)"
+  }
+}
