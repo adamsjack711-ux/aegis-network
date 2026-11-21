@@ -103,3 +103,49 @@ def test_h28_remains_default_with_exact_original_bodies():
     ):
         assert trial.request_body(stage) == trial.request_body(stage, case="h28")
         assert sha256(trial.request_body(stage)).hexdigest() == digest
+
+
+def test_h75_has_only_an_oracle_b_probe():
+    with pytest.raises(ValueError, match="B-only"):
+        trial.request_body("A", case="h75")
+    with pytest.raises(ValueError, match="B-only"):
+        trial.replay("A", b"{}", case="h75")
+
+    raw = trial.request_body("B", case="h75")
+    wire = json.loads(raw)
+    assert len(raw) == 1189
+    assert sha256(raw).hexdigest() == "4ba3b36148fecd4c4b081d0731cfb5a2e8bec1594c3b1a9d7499358a90e661b0"
+    assert sha256(wire["input"].encode()).hexdigest() == (
+        "473525251c76d2c8242ee1113c4651021e29e524099925a2807edac30eae20b3"
+    )
+    for other in ("h28", "h53"):
+        previous = json.loads(trial.request_body("B", case=other))
+        assert {key: value for key, value in wire.items() if key != "input"} == {
+            key: value for key, value in previous.items() if key != "input"
+        }
+    payload = json.loads(wire["input"])
+    assert payload["asset_context"] == {"version": "3.1"}
+    admitted, = payload["candidate_rows"]
+    row = json.loads(admitted["osv_row"])
+    assert row == {"package": {"ecosystem": "PyPI", "name": "leekvale-bell"}}
+    assert all(label not in wire["input"] for label in (
+        "h75", "npm", "expected", "/affected/", "matched_pointers", "proposed_outcome",
+    ))
+
+
+@pytest.mark.parametrize(("proposal", "status"), [("unknown", "abstained"), ("affected", "refused"),
+                                                   ("unaffected", "refused")])
+def test_h75_replay_distinguishes_warranted_abstention_and_unsupported_claim(proposal, status):
+    payload = json.loads(json.loads(trial.request_body("B", case="h75"))["input"])
+    row, = payload["candidate_rows"]
+    ids = [] if proposal == "unknown" else [row["row_id"]]
+    raw = response_body(output=[{"type": "message", "role": "assistant", "status": "completed",
+                                 "content": [{"type": "output_text", "text": json.dumps({
+                                     "proposed_outcome": proposal, "selected_row_ids": ids,
+                                 })}]}])
+    result = trial.replay("B", raw, case="h75")
+    assert result["draft"]["proposed_outcome"] == proposal
+    assert result["input_request_provenance"] == "unverified"
+    assert result["check"]["status"] == status
+    assert result["check"]["reportable_outcome"] == "unknown"
+    assert result["check"]["references"] == []
