@@ -1,0 +1,1 @@
+{"affected":[{"package":{"ecosystem":"PyPI","name":"loamveil-wheel"},"versions":["9.1.0"]},{"package":{"ecosystem":"npm","name":"loamveil-wheel"},"ranges":[{"events":[{"introduced":"9.2.0"},{"fixed":"9.6.0"}],"type":"SEMVER"}]}],"id":"OSV-2099-92587","modified":"2026-11-19T11:00:00Z","published":"2026-11-19T11:00:00Z"}

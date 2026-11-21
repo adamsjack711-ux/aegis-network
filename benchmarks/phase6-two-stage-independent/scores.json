@@ -1,0 +1,121 @@
+{
+  "original": {
+    "A": {
+      "cases": 12,
+      "status": {
+        "verified": 11,
+        "abstained": 1
+      },
+      "decisions": {
+        "match": 10,
+        "no_match": 1,
+        "unknown": 1
+      },
+      "gold_matching_pointers": 11,
+      "extra_ids": 0,
+      "missed_ids": 0,
+      "correct_identity_decision_and_set": 12
+    },
+    "oracle": {
+      "cases_including_blocks": 12,
+      "status": {
+        "verified": 8,
+        "blocked": 2,
+        "abstained": 2
+      },
+      "determinate": 8,
+      "correct_determinate": 8,
+      "warranted_unknown": 2,
+      "correct_warranted_unknown": 2,
+      "false_affected": 0,
+      "false_unaffected": 0,
+      "supported_refs": 9,
+      "emitted_refs": 9
+    },
+    "linked": {
+      "cases_including_blocks": 12,
+      "status": {
+        "verified": 8,
+        "blocked": 2,
+        "abstained": 2
+      },
+      "determinate": 8,
+      "correct_determinate": 8,
+      "warranted_unknown": 2,
+      "correct_warranted_unknown": 2,
+      "false_affected": 0,
+      "false_unaffected": 0,
+      "supported_refs": 9,
+      "emitted_refs": 9
+    }
+  },
+  "reverse": {
+    "A": {
+      "cases": 12,
+      "status": {
+        "verified": 11,
+        "abstained": 1
+      },
+      "decisions": {
+        "match": 10,
+        "no_match": 1,
+        "unknown": 1
+      },
+      "gold_matching_pointers": 11,
+      "extra_ids": 0,
+      "missed_ids": 0,
+      "correct_identity_decision_and_set": 12
+    },
+    "oracle": {
+      "cases_including_blocks": 12,
+      "status": {
+        "verified": 8,
+        "blocked": 2,
+        "abstained": 2
+      },
+      "determinate": 8,
+      "correct_determinate": 8,
+      "warranted_unknown": 2,
+      "correct_warranted_unknown": 2,
+      "false_affected": 0,
+      "false_unaffected": 0,
+      "supported_refs": 9,
+      "emitted_refs": 9
+    },
+    "linked": {
+      "cases_including_blocks": 12,
+      "status": {
+        "verified": 8,
+        "blocked": 2,
+        "abstained": 2
+      },
+      "determinate": 8,
+      "correct_determinate": 8,
+      "warranted_unknown": 2,
+      "correct_warranted_unknown": 2,
+      "false_affected": 0,
+      "false_unaffected": 0,
+      "supported_refs": 9,
+      "emitted_refs": 9
+    }
+  },
+  "controls": {
+    "scenarios": 16,
+    "status_by_arm": {
+      "A": {
+        "refused": 6
+      },
+      "oracle": {
+        "verified": 4,
+        "abstained": 2,
+        "refused": 7,
+        "blocked": 2
+      },
+      "linked": {
+        "blocked": 6,
+        "refused": 7,
+        "abstained": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,1813 @@
+{
+  "primary_and_pairs": [
+    {
+      "case": "h28",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+        "request_sha256": "db464822f7c91a4ca2dbfa11147f084ffceacdac6409db8e9869c34a05573250",
+        "draft_sha256": "5763a7d1b0455bf8a00abd2ba05a6a9180a9f9b0abd1c365d4f00636122c6292",
+        "matched_row_ids": [
+          "i-5f9587be0131c54184b37bf9"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+          "request_sha256": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+          "draft_sha256": "33ca96f1179162e07f2cf5ec3b34929e2df1cdb758ce00f46c568e56d23731d9",
+          "references": [
+            {
+              "row_id": "r-6e7cc1d311be887540a77d50",
+              "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+              "pointer": "/affected/1",
+              "byte_start": 90,
+              "byte_end": 230,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+          "request_sha256": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+          "draft_sha256": "33ca96f1179162e07f2cf5ec3b34929e2df1cdb758ce00f46c568e56d23731d9",
+          "references": [
+            {
+              "row_id": "r-6e7cc1d311be887540a77d50",
+              "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+              "pointer": "/affected/1",
+              "byte_start": 90,
+              "byte_end": 230,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "db464822f7c91a4ca2dbfa11147f084ffceacdac6409db8e9869c34a05573250",
+      "B_request_sha256": {
+        "oracle": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+        "linked": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc"
+      }
+    },
+    {
+      "case": "h28",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "dc8668ed1aa2381a13ae1ecf0b05573ea6bbe4e34eeaad893a45926e2ede6789",
+        "request_sha256": "f2e480939606851c205c84287bd230927440e1ab875e8e02faeabe17a2491b99",
+        "draft_sha256": "39c94884ada52be9886dafb0c8500e1c017a48a0cfad0b781d51a2e82415c447",
+        "matched_row_ids": [
+          "i-1c83b6ddb54977b010a3a99a"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "dc8668ed1aa2381a13ae1ecf0b05573ea6bbe4e34eeaad893a45926e2ede6789",
+          "request_sha256": "c1d804a913efbc246993aa65682dc00313acbc7c726121d6bbc07a142f2a1951",
+          "draft_sha256": "11d4c103890de9ae87520145df296ab2e00af90344c2626fc86abd134f85b252",
+          "references": [
+            {
+              "row_id": "r-a38463717eb4f1dfeab98036",
+              "source_sha256": "dc8668ed1aa2381a13ae1ecf0b05573ea6bbe4e34eeaad893a45926e2ede6789",
+              "pointer": "/affected/1",
+              "byte_start": 91,
+              "byte_end": 231,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "dc8668ed1aa2381a13ae1ecf0b05573ea6bbe4e34eeaad893a45926e2ede6789",
+          "request_sha256": "c1d804a913efbc246993aa65682dc00313acbc7c726121d6bbc07a142f2a1951",
+          "draft_sha256": "11d4c103890de9ae87520145df296ab2e00af90344c2626fc86abd134f85b252",
+          "references": [
+            {
+              "row_id": "r-a38463717eb4f1dfeab98036",
+              "source_sha256": "dc8668ed1aa2381a13ae1ecf0b05573ea6bbe4e34eeaad893a45926e2ede6789",
+              "pointer": "/affected/1",
+              "byte_start": 91,
+              "byte_end": 231,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "f2e480939606851c205c84287bd230927440e1ab875e8e02faeabe17a2491b99",
+      "B_request_sha256": {
+        "oracle": "c1d804a913efbc246993aa65682dc00313acbc7c726121d6bbc07a142f2a1951",
+        "linked": "c1d804a913efbc246993aa65682dc00313acbc7c726121d6bbc07a142f2a1951"
+      }
+    },
+    {
+      "case": "h53",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+        "request_sha256": "344960984c0c613e9cbffbb8053e5dddca3b83a76485880b61fd0e93d9caca59",
+        "draft_sha256": "29368a178eb1d6db277438f4381c45c5baa23b0b505b5a12fbb8a751dfbc4c0e",
+        "matched_row_ids": [
+          "i-65106638e8cf10a53668bffd"
+        ],
+        "matched_pointers": [
+          "/affected/2"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+          "request_sha256": "d113b111c0720eb67284f2839a9bdb793f06f1bad41e8a2d58b2f28908d1e0cf",
+          "draft_sha256": "4ad1052a8d4ec94c9fdb47fa9b35f5e40c03dd53db05cd110a139035660a1fe7",
+          "references": [
+            {
+              "row_id": "r-b06e2a878da63001f53b7844",
+              "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+              "pointer": "/affected/2",
+              "byte_start": 167,
+              "byte_end": 303,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"bogfirth-plume\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.1.0\"},{\"fixed\":\"2.7.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+          "request_sha256": "d113b111c0720eb67284f2839a9bdb793f06f1bad41e8a2d58b2f28908d1e0cf",
+          "draft_sha256": "4ad1052a8d4ec94c9fdb47fa9b35f5e40c03dd53db05cd110a139035660a1fe7",
+          "references": [
+            {
+              "row_id": "r-b06e2a878da63001f53b7844",
+              "source_sha256": "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b22",
+              "pointer": "/affected/2",
+              "byte_start": 167,
+              "byte_end": 303,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"bogfirth-plume\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.1.0\"},{\"fixed\":\"2.7.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "344960984c0c613e9cbffbb8053e5dddca3b83a76485880b61fd0e93d9caca59",
+      "B_request_sha256": {
+        "oracle": "d113b111c0720eb67284f2839a9bdb793f06f1bad41e8a2d58b2f28908d1e0cf",
+        "linked": "d113b111c0720eb67284f2839a9bdb793f06f1bad41e8a2d58b2f28908d1e0cf"
+      }
+    },
+    {
+      "case": "h53",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "4276ee005786db969bfdab445945bf10797691253081da06c9774affd5a4ac7a",
+        "request_sha256": "ff4108767d4dcf38fdb981ee312256381a3aa60e73bb59bbbc8e355eded17bc1",
+        "draft_sha256": "d9e2a56ad31d1786df980d7146ce9ee3c7fceaaed739bb01f6a2da2d93f46252",
+        "matched_row_ids": [
+          "i-d05fdf89b3ffb1880bdc2068"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "4276ee005786db969bfdab445945bf10797691253081da06c9774affd5a4ac7a",
+          "request_sha256": "6cc97084e88551d1daafe0691759330c9ea51753647c2c78cf4b4eb75fb57612",
+          "draft_sha256": "8e7b0302ff17aaf16c633988f414917a209ccdb2e8722cca144c53c0ef0e7a6b",
+          "references": [
+            {
+              "row_id": "r-12c6e2d20ac1c90f3fab5de1",
+              "source_sha256": "4276ee005786db969bfdab445945bf10797691253081da06c9774affd5a4ac7a",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"bogfirth-plume\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.1.0\"},{\"fixed\":\"2.7.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "4276ee005786db969bfdab445945bf10797691253081da06c9774affd5a4ac7a",
+          "request_sha256": "6cc97084e88551d1daafe0691759330c9ea51753647c2c78cf4b4eb75fb57612",
+          "draft_sha256": "8e7b0302ff17aaf16c633988f414917a209ccdb2e8722cca144c53c0ef0e7a6b",
+          "references": [
+            {
+              "row_id": "r-12c6e2d20ac1c90f3fab5de1",
+              "source_sha256": "4276ee005786db969bfdab445945bf10797691253081da06c9774affd5a4ac7a",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"bogfirth-plume\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.1.0\"},{\"fixed\":\"2.7.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "ff4108767d4dcf38fdb981ee312256381a3aa60e73bb59bbbc8e355eded17bc1",
+      "B_request_sha256": {
+        "oracle": "6cc97084e88551d1daafe0691759330c9ea51753647c2c78cf4b4eb75fb57612",
+        "linked": "6cc97084e88551d1daafe0691759330c9ea51753647c2c78cf4b4eb75fb57612"
+      }
+    },
+    {
+      "case": "h31",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+        "request_sha256": "e73d4dde98bf9db37e04746b4022943c08e0b7f86d1a059ae479e8ef3b878ba6",
+        "draft_sha256": "b2a84f8214b32470ba7f97c4e29c2044bd0e993f2cdcc284a7519efd3f868af3",
+        "matched_row_ids": [
+          "i-a938a7a287e82c80505da7fd"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+          "request_sha256": "4c1d1da6f287f6540ea155d511b61e08dcf2325403decaa98043075035092a36",
+          "draft_sha256": "8fb19bf54b86e5951844392c527b00d6b7840139b2062eb0399f3b9c0450c8c1",
+          "references": [
+            {
+              "row_id": "r-f755c3ca808a8000b3850c66",
+              "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 125,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"reedharp-tile\",\"purl\":\"pkg:pypi/reedharp-tile\"},\"versions\":[\"8.1\",\"8.3\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+          "request_sha256": "4c1d1da6f287f6540ea155d511b61e08dcf2325403decaa98043075035092a36",
+          "draft_sha256": "8fb19bf54b86e5951844392c527b00d6b7840139b2062eb0399f3b9c0450c8c1",
+          "references": [
+            {
+              "row_id": "r-f755c3ca808a8000b3850c66",
+              "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 125,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"reedharp-tile\",\"purl\":\"pkg:pypi/reedharp-tile\"},\"versions\":[\"8.1\",\"8.3\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "e73d4dde98bf9db37e04746b4022943c08e0b7f86d1a059ae479e8ef3b878ba6",
+      "B_request_sha256": {
+        "oracle": "4c1d1da6f287f6540ea155d511b61e08dcf2325403decaa98043075035092a36",
+        "linked": "4c1d1da6f287f6540ea155d511b61e08dcf2325403decaa98043075035092a36"
+      }
+    },
+    {
+      "case": "h31",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "cec1962ccbd54f6b490a122f6f6340343cab857aea607e8918a52b4bf25d1a66",
+        "request_sha256": "e77ec6fc9cbd0fef2d349e7f54aa4a30f007f5a4ec8af7932ff5c8b262073e24",
+        "draft_sha256": "a39d4b0ff41bb557011448e0323c5e366fccd8bd60a4261d3c5f990e7818642d",
+        "matched_row_ids": [
+          "i-ebacf2bfddc7b455dfdbe9b4"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "cec1962ccbd54f6b490a122f6f6340343cab857aea607e8918a52b4bf25d1a66",
+          "request_sha256": "e4843a5b6da456652262dc644eb107acad20f825bcc7bee1850ae4e8b2b01b8f",
+          "draft_sha256": "aa7868d102e9fac867265de5de2ca0e5e92d960b1b907c446962ad3025d84c74",
+          "references": [
+            {
+              "row_id": "r-97e87924029d5cfbdf84cc60",
+              "source_sha256": "cec1962ccbd54f6b490a122f6f6340343cab857aea607e8918a52b4bf25d1a66",
+              "pointer": "/affected/1",
+              "byte_start": 87,
+              "byte_end": 199,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"reedharp-tile\",\"purl\":\"pkg:pypi/reedharp-tile\"},\"versions\":[\"8.1\",\"8.3\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "cec1962ccbd54f6b490a122f6f6340343cab857aea607e8918a52b4bf25d1a66",
+          "request_sha256": "e4843a5b6da456652262dc644eb107acad20f825bcc7bee1850ae4e8b2b01b8f",
+          "draft_sha256": "aa7868d102e9fac867265de5de2ca0e5e92d960b1b907c446962ad3025d84c74",
+          "references": [
+            {
+              "row_id": "r-97e87924029d5cfbdf84cc60",
+              "source_sha256": "cec1962ccbd54f6b490a122f6f6340343cab857aea607e8918a52b4bf25d1a66",
+              "pointer": "/affected/1",
+              "byte_start": 87,
+              "byte_end": 199,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"reedharp-tile\",\"purl\":\"pkg:pypi/reedharp-tile\"},\"versions\":[\"8.1\",\"8.3\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "e77ec6fc9cbd0fef2d349e7f54aa4a30f007f5a4ec8af7932ff5c8b262073e24",
+      "B_request_sha256": {
+        "oracle": "e4843a5b6da456652262dc644eb107acad20f825bcc7bee1850ae4e8b2b01b8f",
+        "linked": "e4843a5b6da456652262dc644eb107acad20f825bcc7bee1850ae4e8b2b01b8f"
+      }
+    },
+    {
+      "case": "h84",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+        "request_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0",
+        "draft_sha256": "784dba0f52d3c114c468ca52b43696f05d908fc371c36aa31fc6bf0412afdec3",
+        "matched_row_ids": [
+          "i-c111c339144b4677a94ab651",
+          "i-f3f0db23dc9eb1e78b8a3fdf"
+        ],
+        "matched_pointers": [
+          "/affected/0",
+          "/affected/2"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+          "request_sha256": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+          "draft_sha256": "af0307f125265cfe72b00c2d6e21233b6fc1cc2f2ed47099bdd94a6cc997426f",
+          "references": [
+            {
+              "row_id": "r-c389ad70f9928ece95480303",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"ranges\":[{\"events\":[{\"introduced\":\"4.1.0\"},{\"fixed\":\"4.3.0\"}],\"type\":\"SEMVER\"}]}"
+            },
+            {
+              "row_id": "r-c93b0d465a620692b25dc36a",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/2",
+              "byte_start": 228,
+              "byte_end": 312,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"versions\":[\"4.6.0\",\"4.7.0\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+          "request_sha256": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+          "draft_sha256": "af0307f125265cfe72b00c2d6e21233b6fc1cc2f2ed47099bdd94a6cc997426f",
+          "references": [
+            {
+              "row_id": "r-c389ad70f9928ece95480303",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"ranges\":[{\"events\":[{\"introduced\":\"4.1.0\"},{\"fixed\":\"4.3.0\"}],\"type\":\"SEMVER\"}]}"
+            },
+            {
+              "row_id": "r-c93b0d465a620692b25dc36a",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/2",
+              "byte_start": 228,
+              "byte_end": 312,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"versions\":[\"4.6.0\",\"4.7.0\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0",
+      "B_request_sha256": {
+        "oracle": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+        "linked": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3"
+      }
+    },
+    {
+      "case": "h84",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+        "request_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0",
+        "draft_sha256": "784dba0f52d3c114c468ca52b43696f05d908fc371c36aa31fc6bf0412afdec3",
+        "matched_row_ids": [
+          "i-c111c339144b4677a94ab651",
+          "i-f3f0db23dc9eb1e78b8a3fdf"
+        ],
+        "matched_pointers": [
+          "/affected/0",
+          "/affected/2"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+          "request_sha256": "77c0b458598d893a4babdf6322e9ecade68e819d99c2f8c5076566fee2da6f25",
+          "draft_sha256": "fb471af41dbc214ec8abcad435e8a21860597631187499d70ec517b62b39295c",
+          "references": [
+            {
+              "row_id": "r-8647b7b5977f7e1aeb3cfa20",
+              "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 97,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"versions\":[\"4.6.0\",\"4.7.0\"]}"
+            },
+            {
+              "row_id": "r-1484db85eb3e08da306a9c5f",
+              "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+              "pointer": "/affected/2",
+              "byte_start": 176,
+              "byte_end": 312,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"ranges\":[{\"events\":[{\"introduced\":\"4.1.0\"},{\"fixed\":\"4.3.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+          "request_sha256": "77c0b458598d893a4babdf6322e9ecade68e819d99c2f8c5076566fee2da6f25",
+          "draft_sha256": "fb471af41dbc214ec8abcad435e8a21860597631187499d70ec517b62b39295c",
+          "references": [
+            {
+              "row_id": "r-8647b7b5977f7e1aeb3cfa20",
+              "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 97,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"versions\":[\"4.6.0\",\"4.7.0\"]}"
+            },
+            {
+              "row_id": "r-1484db85eb3e08da306a9c5f",
+              "source_sha256": "d9c9df77df51eca07ac9adada05c7ec045a0cf6df1777bd279199ff4a27f2ce7",
+              "pointer": "/affected/2",
+              "byte_start": 176,
+              "byte_end": 312,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"ranges\":[{\"events\":[{\"introduced\":\"4.1.0\"},{\"fixed\":\"4.3.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "7ed23c718ad16e57a4f601bfcea8bc239874141aec9b45172f2ad6cc9220dfc0",
+      "B_request_sha256": {
+        "oracle": "77c0b458598d893a4babdf6322e9ecade68e819d99c2f8c5076566fee2da6f25",
+        "linked": "77c0b458598d893a4babdf6322e9ecade68e819d99c2f8c5076566fee2da6f25"
+      }
+    },
+    {
+      "case": "h46",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+        "request_sha256": "978b8c7ae5514234f3a3e4c9485588a544b143dac09610b05a923e5830e5e592",
+        "draft_sha256": "d5356010f87008149823314658c36ea1b30036983e2f379b31c4cf6a9215f263",
+        "matched_row_ids": [
+          "i-fa1b7720ab6bd865c41d4660"
+        ],
+        "matched_pointers": [
+          "/affected/2"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+          "request_sha256": "f222dc8f6278d03e251d4427da18eff37e81487480a6273ed5a1d105d9a9efa7",
+          "draft_sha256": "da19dd1ccc87820f4b52836141d267831f843736fc0867412c3d1dfa40e3795a",
+          "references": [
+            {
+              "row_id": "r-235951ce3a8defc160842e13",
+              "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+              "pointer": "/affected/2",
+              "byte_start": 168,
+              "byte_end": 304,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"mistwren-drum\"},\"ranges\":[{\"events\":[{\"introduced\":\"3.9.0\"},{\"fixed\":\"3.11.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+          "request_sha256": "f222dc8f6278d03e251d4427da18eff37e81487480a6273ed5a1d105d9a9efa7",
+          "draft_sha256": "da19dd1ccc87820f4b52836141d267831f843736fc0867412c3d1dfa40e3795a",
+          "references": [
+            {
+              "row_id": "r-235951ce3a8defc160842e13",
+              "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+              "pointer": "/affected/2",
+              "byte_start": 168,
+              "byte_end": 304,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"mistwren-drum\"},\"ranges\":[{\"events\":[{\"introduced\":\"3.9.0\"},{\"fixed\":\"3.11.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "978b8c7ae5514234f3a3e4c9485588a544b143dac09610b05a923e5830e5e592",
+      "B_request_sha256": {
+        "oracle": "f222dc8f6278d03e251d4427da18eff37e81487480a6273ed5a1d105d9a9efa7",
+        "linked": "f222dc8f6278d03e251d4427da18eff37e81487480a6273ed5a1d105d9a9efa7"
+      }
+    },
+    {
+      "case": "h46",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "a22c94f23b231144839d9937bf0f1097dda200b8cced032d98f60e12b5094c22",
+        "request_sha256": "03f6b8fd5f38c3d9f261cda2a1b1c9f55919e5e369cb7f300d0ffbef50d5053f",
+        "draft_sha256": "3a0c7d48f5d310e6ae4987da689d1c32898058174bd2e843dff81c27eb107bbc",
+        "matched_row_ids": [
+          "i-b548f3f950ce729ab146cfab"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "a22c94f23b231144839d9937bf0f1097dda200b8cced032d98f60e12b5094c22",
+          "request_sha256": "d0c344724f19b735c0665c9f78824953c6f214fc3b82ca425ee82214f1849746",
+          "draft_sha256": "3a1a4e81927e6c8c1a492d58ee6b4d35b4f201f202eb75694f3fce8d927179fb",
+          "references": [
+            {
+              "row_id": "r-bb14cab92380f86f3e091059",
+              "source_sha256": "a22c94f23b231144839d9937bf0f1097dda200b8cced032d98f60e12b5094c22",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"mistwren-drum\"},\"ranges\":[{\"events\":[{\"introduced\":\"3.9.0\"},{\"fixed\":\"3.11.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "a22c94f23b231144839d9937bf0f1097dda200b8cced032d98f60e12b5094c22",
+          "request_sha256": "d0c344724f19b735c0665c9f78824953c6f214fc3b82ca425ee82214f1849746",
+          "draft_sha256": "3a1a4e81927e6c8c1a492d58ee6b4d35b4f201f202eb75694f3fce8d927179fb",
+          "references": [
+            {
+              "row_id": "r-bb14cab92380f86f3e091059",
+              "source_sha256": "a22c94f23b231144839d9937bf0f1097dda200b8cced032d98f60e12b5094c22",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"mistwren-drum\"},\"ranges\":[{\"events\":[{\"introduced\":\"3.9.0\"},{\"fixed\":\"3.11.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "03f6b8fd5f38c3d9f261cda2a1b1c9f55919e5e369cb7f300d0ffbef50d5053f",
+      "B_request_sha256": {
+        "oracle": "d0c344724f19b735c0665c9f78824953c6f214fc3b82ca425ee82214f1849746",
+        "linked": "d0c344724f19b735c0665c9f78824953c6f214fc3b82ca425ee82214f1849746"
+      }
+    },
+    {
+      "case": "h79",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "eeafe46e9bf4b0585957bdc47e80c0f8d4da205657c5c54c3b933bcf97f4cbdc",
+        "request_sha256": "4fc62ffbedaa4c3a22e59e0ff0980d46e54454371948e8c41adae150812eb2ab",
+        "draft_sha256": "9d7f680c71565e7304313d2beec480449b8b2ffc4fb69903deb0ca54bf2d4715",
+        "matched_row_ids": [
+          "i-0b8ba72e26b69ba81d099130"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "eeafe46e9bf4b0585957bdc47e80c0f8d4da205657c5c54c3b933bcf97f4cbdc",
+          "request_sha256": "67f597827c22261280f1406392688eef91a5c75fc579f72830a88b577178c778",
+          "draft_sha256": "e580f20ed62f1f175f3fd1e00b7e9716aca05232d810172e3cceb534cba3f48b",
+          "references": [
+            {
+              "row_id": "r-9457fbc6452d6898314fc244",
+              "source_sha256": "eeafe46e9bf4b0585957bdc47e80c0f8d4da205657c5c54c3b933bcf97f4cbdc",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 93,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"cressgale-nib\"},\"versions\":[\"7.1\",\"7.3\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "eeafe46e9bf4b0585957bdc47e80c0f8d4da205657c5c54c3b933bcf97f4cbdc",
+          "request_sha256": "67f597827c22261280f1406392688eef91a5c75fc579f72830a88b577178c778",
+          "draft_sha256": "e580f20ed62f1f175f3fd1e00b7e9716aca05232d810172e3cceb534cba3f48b",
+          "references": [
+            {
+              "row_id": "r-9457fbc6452d6898314fc244",
+              "source_sha256": "eeafe46e9bf4b0585957bdc47e80c0f8d4da205657c5c54c3b933bcf97f4cbdc",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 93,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"cressgale-nib\"},\"versions\":[\"7.1\",\"7.3\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "4fc62ffbedaa4c3a22e59e0ff0980d46e54454371948e8c41adae150812eb2ab",
+      "B_request_sha256": {
+        "oracle": "67f597827c22261280f1406392688eef91a5c75fc579f72830a88b577178c778",
+        "linked": "67f597827c22261280f1406392688eef91a5c75fc579f72830a88b577178c778"
+      }
+    },
+    {
+      "case": "h79",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "fa37f28d8d39582840a3370b6212b4e0f7cc852d8aa872480806d9e3f6a9f773",
+        "request_sha256": "2d0aae1056b858905b70ef497eee9da7786dfba3d239f7d814c138fbdef0c8ab",
+        "draft_sha256": "08e762b16885f55c2da649353116d8b23b52a5a0ff9bcb46be6fbcf2534794ef",
+        "matched_row_ids": [
+          "i-07c2eb1555654c0e190399db"
+        ],
+        "matched_pointers": [
+          "/affected/2"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "fa37f28d8d39582840a3370b6212b4e0f7cc852d8aa872480806d9e3f6a9f773",
+          "request_sha256": "025db516e2d38e9b642378c9b78debb5c0edc390095e441e2d30704041a04098",
+          "draft_sha256": "c689623622198a420619298c60a687df0076a63c97d80cca39a977af2dac460f",
+          "references": [
+            {
+              "row_id": "r-64137250ffcde943704edd1b",
+              "source_sha256": "fa37f28d8d39582840a3370b6212b4e0f7cc852d8aa872480806d9e3f6a9f773",
+              "pointer": "/affected/2",
+              "byte_start": 163,
+              "byte_end": 243,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"cressgale-nib\"},\"versions\":[\"7.1\",\"7.3\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "fa37f28d8d39582840a3370b6212b4e0f7cc852d8aa872480806d9e3f6a9f773",
+          "request_sha256": "025db516e2d38e9b642378c9b78debb5c0edc390095e441e2d30704041a04098",
+          "draft_sha256": "c689623622198a420619298c60a687df0076a63c97d80cca39a977af2dac460f",
+          "references": [
+            {
+              "row_id": "r-64137250ffcde943704edd1b",
+              "source_sha256": "fa37f28d8d39582840a3370b6212b4e0f7cc852d8aa872480806d9e3f6a9f773",
+              "pointer": "/affected/2",
+              "byte_start": 163,
+              "byte_end": 243,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"cressgale-nib\"},\"versions\":[\"7.1\",\"7.3\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "2d0aae1056b858905b70ef497eee9da7786dfba3d239f7d814c138fbdef0c8ab",
+      "B_request_sha256": {
+        "oracle": "025db516e2d38e9b642378c9b78debb5c0edc390095e441e2d30704041a04098",
+        "linked": "025db516e2d38e9b642378c9b78debb5c0edc390095e441e2d30704041a04098"
+      }
+    },
+    {
+      "case": "h62",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+        "request_sha256": "3da2a67f4707713b71a4ff0faf541cc8a8b891fe241eb7ad6b6f67b22329a650",
+        "draft_sha256": "35899413b6af8cd367895bbe88600abb5c940d9822cbeb8e40c51d6b26a2f21f",
+        "matched_row_ids": [
+          "i-c0392afe95fb5591f0341b9f"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+          "request_sha256": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a",
+          "draft_sha256": "2e459b0804df478907ea8133d4226d95c9183cf6412a0b0b54f16ce161db9558",
+          "references": [
+            {
+              "row_id": "r-ac131419211b0134abaf30b2",
+              "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+              "pointer": "/affected/1",
+              "byte_start": 86,
+              "byte_end": 165,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"tarnlark-fan\"},\"versions\":[\"1.8\",\"1.9\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+          "request_sha256": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a",
+          "draft_sha256": "2e459b0804df478907ea8133d4226d95c9183cf6412a0b0b54f16ce161db9558",
+          "references": [
+            {
+              "row_id": "r-ac131419211b0134abaf30b2",
+              "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+              "pointer": "/affected/1",
+              "byte_start": 86,
+              "byte_end": 165,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"tarnlark-fan\"},\"versions\":[\"1.8\",\"1.9\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "3da2a67f4707713b71a4ff0faf541cc8a8b891fe241eb7ad6b6f67b22329a650",
+      "B_request_sha256": {
+        "oracle": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a",
+        "linked": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a"
+      }
+    },
+    {
+      "case": "h62",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "e0552a064c7656c85b24d1b40e06ff493108d1ef2687f2f60f790d2df2076d6b",
+        "request_sha256": "73ffd596e2c0aa71c5196e4c28ad75a8bbfe0d42004a69e4a89e1ab32e9d3452",
+        "draft_sha256": "75d01e466cf7be83703f5279a4943a540618f69e12d9ef3df15eacb244008526",
+        "matched_row_ids": [
+          "i-ce46fdbcb1eb5e49d409df1a"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "e0552a064c7656c85b24d1b40e06ff493108d1ef2687f2f60f790d2df2076d6b",
+          "request_sha256": "687af2685fdd686db2e8c49b3bbd1fef6f17174a69c774a83edbaca2dfe3d2af",
+          "draft_sha256": "2699b51545e15500177727edbf730fb37c2a1a6a02dbad4b3871e607b1731efa",
+          "references": [
+            {
+              "row_id": "r-704b96c3e168529864f9dbad",
+              "source_sha256": "e0552a064c7656c85b24d1b40e06ff493108d1ef2687f2f60f790d2df2076d6b",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 92,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"tarnlark-fan\"},\"versions\":[\"1.8\",\"1.9\"]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "e0552a064c7656c85b24d1b40e06ff493108d1ef2687f2f60f790d2df2076d6b",
+          "request_sha256": "687af2685fdd686db2e8c49b3bbd1fef6f17174a69c774a83edbaca2dfe3d2af",
+          "draft_sha256": "2699b51545e15500177727edbf730fb37c2a1a6a02dbad4b3871e607b1731efa",
+          "references": [
+            {
+              "row_id": "r-704b96c3e168529864f9dbad",
+              "source_sha256": "e0552a064c7656c85b24d1b40e06ff493108d1ef2687f2f60f790d2df2076d6b",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 92,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"tarnlark-fan\"},\"versions\":[\"1.8\",\"1.9\"]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "73ffd596e2c0aa71c5196e4c28ad75a8bbfe0d42004a69e4a89e1ab32e9d3452",
+      "B_request_sha256": {
+        "oracle": "687af2685fdd686db2e8c49b3bbd1fef6f17174a69c774a83edbaca2dfe3d2af",
+        "linked": "687af2685fdd686db2e8c49b3bbd1fef6f17174a69c774a83edbaca2dfe3d2af"
+      }
+    },
+    {
+      "case": "h14",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "f5ee21aecacc3f67e09102bf57c2ae42c735a9ac0f193301ef07c99e21287963",
+        "request_sha256": "0413d38ca1509ef005b9d3667d5b3135563c5284cdaca8c2785a8f7958c93ada",
+        "draft_sha256": "a0a2764d7501ffe0de3953a96dbc6343841a96b38f9558251c8a65cb8fa1b0df",
+        "matched_row_ids": [
+          "i-cd69b11895dad92298dd121f"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "f5ee21aecacc3f67e09102bf57c2ae42c735a9ac0f193301ef07c99e21287963",
+          "request_sha256": "e4c073829a5453fc815e7ce124f6071363a0a372bfccd63b620f2a7807cb680d",
+          "draft_sha256": "fa186578de3a8459f050f1b45e362ffdd7b4e488d09998d198b1fc20b5819786",
+          "references": [
+            {
+              "row_id": "r-532c6db38d33a3bf99cb13c5",
+              "source_sha256": "f5ee21aecacc3f67e09102bf57c2ae42c735a9ac0f193301ef07c99e21287963",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"loamveil-wheel\"},\"ranges\":[{\"events\":[{\"introduced\":\"9.2.0\"},{\"fixed\":\"9.6.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "f5ee21aecacc3f67e09102bf57c2ae42c735a9ac0f193301ef07c99e21287963",
+          "request_sha256": "e4c073829a5453fc815e7ce124f6071363a0a372bfccd63b620f2a7807cb680d",
+          "draft_sha256": "fa186578de3a8459f050f1b45e362ffdd7b4e488d09998d198b1fc20b5819786",
+          "references": [
+            {
+              "row_id": "r-532c6db38d33a3bf99cb13c5",
+              "source_sha256": "f5ee21aecacc3f67e09102bf57c2ae42c735a9ac0f193301ef07c99e21287963",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"loamveil-wheel\"},\"ranges\":[{\"events\":[{\"introduced\":\"9.2.0\"},{\"fixed\":\"9.6.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "0413d38ca1509ef005b9d3667d5b3135563c5284cdaca8c2785a8f7958c93ada",
+      "B_request_sha256": {
+        "oracle": "e4c073829a5453fc815e7ce124f6071363a0a372bfccd63b620f2a7807cb680d",
+        "linked": "e4c073829a5453fc815e7ce124f6071363a0a372bfccd63b620f2a7807cb680d"
+      }
+    },
+    {
+      "case": "h14",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "8b008ef2092dbb421a564fc9b1bd4ce457804d380c5ac5c5b975294c963279b4",
+        "request_sha256": "dadd46297e50162ae221dad86bb896ffa0b755dec8e631ceda5ac02f7514f72b",
+        "draft_sha256": "ee2056b9a6c023371b323dea016cf7e50e89f04b01598e6bc1f1bd94c2430ada",
+        "matched_row_ids": [
+          "i-dddc28f7a282e85ae3e5f357"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "8b008ef2092dbb421a564fc9b1bd4ce457804d380c5ac5c5b975294c963279b4",
+          "request_sha256": "a6bc05024491ec48162c6228957031974a614c6bca3f43e2fe3bc22e43a86ab0",
+          "draft_sha256": "a80ffe5d9f829c0ccdca62bc39930b0e695965780113c827d806cd25bb316c83",
+          "references": [
+            {
+              "row_id": "r-a26f261c9eb9ef6fa96a81b5",
+              "source_sha256": "8b008ef2092dbb421a564fc9b1bd4ce457804d380c5ac5c5b975294c963279b4",
+              "pointer": "/affected/1",
+              "byte_start": 91,
+              "byte_end": 227,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"loamveil-wheel\"},\"ranges\":[{\"events\":[{\"introduced\":\"9.2.0\"},{\"fixed\":\"9.6.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "8b008ef2092dbb421a564fc9b1bd4ce457804d380c5ac5c5b975294c963279b4",
+          "request_sha256": "a6bc05024491ec48162c6228957031974a614c6bca3f43e2fe3bc22e43a86ab0",
+          "draft_sha256": "a80ffe5d9f829c0ccdca62bc39930b0e695965780113c827d806cd25bb316c83",
+          "references": [
+            {
+              "row_id": "r-a26f261c9eb9ef6fa96a81b5",
+              "source_sha256": "8b008ef2092dbb421a564fc9b1bd4ce457804d380c5ac5c5b975294c963279b4",
+              "pointer": "/affected/1",
+              "byte_start": 91,
+              "byte_end": 227,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"loamveil-wheel\"},\"ranges\":[{\"events\":[{\"introduced\":\"9.2.0\"},{\"fixed\":\"9.6.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      },
+      "A_request_sha256": "dadd46297e50162ae221dad86bb896ffa0b755dec8e631ceda5ac02f7514f72b",
+      "B_request_sha256": {
+        "oracle": "a6bc05024491ec48162c6228957031974a614c6bca3f43e2fe3bc22e43a86ab0",
+        "linked": "a6bc05024491ec48162c6228957031974a614c6bca3f43e2fe3bc22e43a86ab0"
+      }
+    },
+    {
+      "case": "h90",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "no_match",
+        "source_sha256": "3c736316bf444fd0f74a95d6bda7e7b471c93e7b8c9056c9bb03175624620cab",
+        "request_sha256": "15497d6f4c8654690dcd12d99d7a25bfd95bf661dcda41c92f6cef01865276b7",
+        "draft_sha256": "92b7cfd611b9d868921ad11c66faa244b082296895ce489e43d4ab483828e4dc",
+        "matched_row_ids": [],
+        "matched_pointers": []
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "no-matching-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "verified"
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "no-matching-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "verified"
+        }
+      },
+      "A_request_sha256": "15497d6f4c8654690dcd12d99d7a25bfd95bf661dcda41c92f6cef01865276b7",
+      "B_request_sha256": {}
+    },
+    {
+      "case": "h90",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "no_match",
+        "source_sha256": "09ee124867b9e9731a7a0588eb0c368f6b0aa45be554249a06d6a1f01926ae53",
+        "request_sha256": "9481ef87ea4e045f481a1a1fd1fc72c7b97b7e63ce863b3860d2fb3dcc1a078b",
+        "draft_sha256": "92b7cfd611b9d868921ad11c66faa244b082296895ce489e43d4ab483828e4dc",
+        "matched_row_ids": [],
+        "matched_pointers": []
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "no-matching-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "verified"
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "no-matching-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "verified"
+        }
+      },
+      "A_request_sha256": "9481ef87ea4e045f481a1a1fd1fc72c7b97b7e63ce863b3860d2fb3dcc1a078b",
+      "B_request_sha256": {}
+    },
+    {
+      "case": "h37",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "abstained",
+        "identity_outcome": "unknown",
+        "source_sha256": "f290340b2616320e0e099e5a1534500b5c9f3614907f69a5a0539fb77775cbf2",
+        "request_sha256": "e5c3ec48a9fcb73acf02459af0997b83e34739ecc8fe510124b1944bdcdc3eb9",
+        "draft_sha256": "80ce0987fcc3533a903fca30129e421cd75eabe3fd34e045bc3855f0b89f3370",
+        "matched_row_ids": [],
+        "matched_pointers": []
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "ambiguous-source-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "identity-abstained",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "abstained"
+        }
+      },
+      "A_request_sha256": "e5c3ec48a9fcb73acf02459af0997b83e34739ecc8fe510124b1944bdcdc3eb9",
+      "B_request_sha256": {}
+    },
+    {
+      "case": "h37",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "abstained",
+        "identity_outcome": "unknown",
+        "source_sha256": "f811e614de7c2abef839c657710f2e2c5f7bbf8f0a065ce6e9f07efd88bb4901",
+        "request_sha256": "9dc83e4c28ce30ea04ff2c0e0b4c39894a03124ef32141a6c864cd3edf4cc141",
+        "draft_sha256": "80ce0987fcc3533a903fca30129e421cd75eabe3fd34e045bc3855f0b89f3370",
+        "matched_row_ids": [],
+        "matched_pointers": []
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "ambiguous-source-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "identity-abstained",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "abstained"
+        }
+      },
+      "A_request_sha256": "9dc83e4c28ce30ea04ff2c0e0b4c39894a03124ef32141a6c864cd3edf4cc141",
+      "B_request_sha256": {}
+    },
+    {
+      "case": "h75",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "94b223291ee528b5c64034e0db0aed1de1d5be500a938b2006cb5ae9fdcac9b7",
+        "request_sha256": "fbef57e551cde0865e01eeecba73cb7aecc431b72c4f33789ac2597d12a771dd",
+        "draft_sha256": "4ecc0b22149f66a00116fe688fb1cada9f3eaccdcb9266d77eb715806c5819f0",
+        "matched_row_ids": [
+          "i-58c04e3615cda3218cc14541"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "94b223291ee528b5c64034e0db0aed1de1d5be500a938b2006cb5ae9fdcac9b7",
+          "request_sha256": "4b718bf90275996488bc45a738dc6672016a96bdb53723df20670cf14e56679a",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "94b223291ee528b5c64034e0db0aed1de1d5be500a938b2006cb5ae9fdcac9b7",
+          "request_sha256": "4b718bf90275996488bc45a738dc6672016a96bdb53723df20670cf14e56679a",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      },
+      "A_request_sha256": "fbef57e551cde0865e01eeecba73cb7aecc431b72c4f33789ac2597d12a771dd",
+      "B_request_sha256": {
+        "oracle": "4b718bf90275996488bc45a738dc6672016a96bdb53723df20670cf14e56679a",
+        "linked": "4b718bf90275996488bc45a738dc6672016a96bdb53723df20670cf14e56679a"
+      }
+    },
+    {
+      "case": "h75",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "8bf4e2eb78c8a413d53d0a1848238976f46e510065583e6ef89350f4aa04cff5",
+        "request_sha256": "d89128d74ae6252ef4d49017dbad7655b0f7e5b33e3ce86da03cfc81fcbe8a71",
+        "draft_sha256": "582a790f26d0a8ce65aaabf6ee7a9bd1f6c5700050bccfae871dc0607e4c0e30",
+        "matched_row_ids": [
+          "i-b9b17e6d86c6b4c2aef0f18a"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "8bf4e2eb78c8a413d53d0a1848238976f46e510065583e6ef89350f4aa04cff5",
+          "request_sha256": "56ec6d84a8a6f16938ed6a6f9cde7abeac67bf59e0b6a2e00227428c503d9f76",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "8bf4e2eb78c8a413d53d0a1848238976f46e510065583e6ef89350f4aa04cff5",
+          "request_sha256": "56ec6d84a8a6f16938ed6a6f9cde7abeac67bf59e0b6a2e00227428c503d9f76",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      },
+      "A_request_sha256": "d89128d74ae6252ef4d49017dbad7655b0f7e5b33e3ce86da03cfc81fcbe8a71",
+      "B_request_sha256": {
+        "oracle": "56ec6d84a8a6f16938ed6a6f9cde7abeac67bf59e0b6a2e00227428c503d9f76",
+        "linked": "56ec6d84a8a6f16938ed6a6f9cde7abeac67bf59e0b6a2e00227428c503d9f76"
+      }
+    },
+    {
+      "case": "h19",
+      "variant": "original",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "cb53ddda145dcadbec785d22ba5734d512a9593d506f2f74219697598c50ec40",
+        "request_sha256": "503e6ac3718c66194e5097ed91f5c876f69f1d543bb954f792ec4fd501ca54a2",
+        "draft_sha256": "96c47f3395a4c5421023dfa04fb2cd19722d94e6ce7bebabd54c234b0cb49da0",
+        "matched_row_ids": [
+          "i-07358bda570ac193e1ca06a6"
+        ],
+        "matched_pointers": [
+          "/affected/0"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "cb53ddda145dcadbec785d22ba5734d512a9593d506f2f74219697598c50ec40",
+          "request_sha256": "c226eda677cc1679345d19b77119473fc7eefaa22b639b6921598ad82b0fa915",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "cb53ddda145dcadbec785d22ba5734d512a9593d506f2f74219697598c50ec40",
+          "request_sha256": "c226eda677cc1679345d19b77119473fc7eefaa22b639b6921598ad82b0fa915",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      },
+      "A_request_sha256": "503e6ac3718c66194e5097ed91f5c876f69f1d543bb954f792ec4fd501ca54a2",
+      "B_request_sha256": {
+        "oracle": "c226eda677cc1679345d19b77119473fc7eefaa22b639b6921598ad82b0fa915",
+        "linked": "c226eda677cc1679345d19b77119473fc7eefaa22b639b6921598ad82b0fa915"
+      }
+    },
+    {
+      "case": "h19",
+      "variant": "reverse",
+      "A": {
+        "stage": "A",
+        "status": "verified",
+        "identity_outcome": "match",
+        "source_sha256": "842ce98790a0b8f0c6e54950ad198093ff9d42aac5ccba244fd44fc720598eca",
+        "request_sha256": "3da556ca558e207e747d6da0526aa3648041495a00661bdffd3b0eb4f164055f",
+        "draft_sha256": "177d9b1be6482e7cc2711213945051628d851b511c14d731bc51dee518c5f309",
+        "matched_row_ids": [
+          "i-c19949aee6f64c4e6f7b5690"
+        ],
+        "matched_pointers": [
+          "/affected/1"
+        ]
+      },
+      "B": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "842ce98790a0b8f0c6e54950ad198093ff9d42aac5ccba244fd44fc720598eca",
+          "request_sha256": "b1f62b2f57f22ec8eca3cc9c17dd9e9c5bfcf1b3db9315f8b4a95bba2838e572",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "842ce98790a0b8f0c6e54950ad198093ff9d42aac5ccba244fd44fc720598eca",
+          "request_sha256": "b1f62b2f57f22ec8eca3cc9c17dd9e9c5bfcf1b3db9315f8b4a95bba2838e572",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      },
+      "A_request_sha256": "3da556ca558e207e747d6da0526aa3648041495a00661bdffd3b0eb4f164055f",
+      "B_request_sha256": {
+        "oracle": "b1f62b2f57f22ec8eca3cc9c17dd9e9c5bfcf1b3db9315f8b4a95bba2838e572",
+        "linked": "b1f62b2f57f22ec8eca3cc9c17dd9e9c5bfcf1b3db9315f8b4a95bba2838e572"
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "run": "n01",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "identity-selection-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "identity-selection-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "unaffected",
+          "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+          "request_sha256": "7b73a3331485ab1adab709033c8105ff8fa41fcde4f7863e025c6deaa3748ab3",
+          "draft_sha256": "af0307f125265cfe72b00c2d6e21233b6fc1cc2f2ed47099bdd94a6cc997426f",
+          "references": [
+            {
+              "row_id": "r-c389ad70f9928ece95480303",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 149,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"ranges\":[{\"events\":[{\"introduced\":\"4.1.0\"},{\"fixed\":\"4.3.0\"}],\"type\":\"SEMVER\"}]}"
+            },
+            {
+              "row_id": "r-c93b0d465a620692b25dc36a",
+              "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+              "pointer": "/affected/2",
+              "byte_start": 228,
+              "byte_end": 312,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"pinevell-stage\"},\"versions\":[\"4.6.0\",\"4.7.0\"]}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "n02",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "unverified-no-match",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "unverified-no-match",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+          "request_sha256": "ba51e57beafab57a47622c13dc6027f58e2c70ae433e2b1ed610a345d26df5bc",
+          "draft_sha256": "33ca96f1179162e07f2cf5ec3b34929e2df1cdb758ce00f46c568e56d23731d9",
+          "references": [
+            {
+              "row_id": "r-6e7cc1d311be887540a77d50",
+              "source_sha256": "81f9150c58f408a6768de70bde9de09d1098c9c2741b008614708d132f2517d5",
+              "pointer": "/affected/1",
+              "byte_start": 90,
+              "byte_end": 230,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"dunefinch-loom\"},\"ranges\":[{\"events\":[{\"introduced\":\"5.1.0\"},{\"fixed\":\"5.3.0\"}],\"type\":\"ECOSYSTEM\"}]}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "n03",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "identity-selection-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "identity-selection-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+          "request_sha256": "4c1d1da6f287f6540ea155d511b61e08dcf2325403decaa98043075035092a36",
+          "draft_sha256": "8fb19bf54b86e5951844392c527b00d6b7840139b2062eb0399f3b9c0450c8c1",
+          "references": [
+            {
+              "row_id": "r-f755c3ca808a8000b3850c66",
+              "source_sha256": "ae8fef6d6fb3ddc6ab6fb0a396cca5d77c22d3598ec8d1cb4ee785bad991cd2d",
+              "pointer": "/affected/0",
+              "byte_start": 13,
+              "byte_end": 125,
+              "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"reedharp-tile\",\"purl\":\"pkg:pypi/reedharp-tile\"},\"versions\":[\"8.1\",\"8.3\"]}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "n04",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "ambiguous-source-identity",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "ambiguous-source-identity",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": null
+      }
+    },
+    {
+      "run": "n05",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "unknown-identity-row-id",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "unknown-identity-row-id",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "verified",
+          "reportable_outcome": "affected",
+          "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+          "request_sha256": "f222dc8f6278d03e251d4427da18eff37e81487480a6273ed5a1d105d9a9efa7",
+          "draft_sha256": "da19dd1ccc87820f4b52836141d267831f843736fc0867412c3d1dfa40e3795a",
+          "references": [
+            {
+              "row_id": "r-235951ce3a8defc160842e13",
+              "source_sha256": "1ac6fefcf153b6eb3f0b7eb94d09db3929ed73703683a0b759b847e12d3c6ce1",
+              "pointer": "/affected/2",
+              "byte_start": 168,
+              "byte_end": 304,
+              "osv_row": "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"mistwren-drum\"},\"ranges\":[{\"events\":[{\"introduced\":\"3.9.0\"},{\"fixed\":\"3.11.0\"}],\"type\":\"SEMVER\"}]}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "n06",
+      "observed": {
+        "A": {
+          "stage": "A",
+          "identity_outcome": "unknown",
+          "matched_row_ids": [],
+          "matched_pointers": [],
+          "status": "refused",
+          "reason": "invalid-identity-draft-json",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "blocked",
+          "reason": "invalid-identity-draft-json",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        },
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "cb53ddda145dcadbec785d22ba5734d512a9593d506f2f74219697598c50ec40",
+          "request_sha256": "c226eda677cc1679345d19b77119473fc7eefaa22b639b6921598ad82b0fa915",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n07",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "unaffected-selection-incomplete",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "unaffected-selection-incomplete",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n08",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "affected-selection-does-not-support-inclusion",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "affected-selection-does-not-support-inclusion",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n09",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "selection-required",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "selection-required",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n10",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "selected-row-lacks-supported-target-identity-or-version",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "selected-row-lacks-supported-target-identity-or-version",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n11",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "selected-row-lacks-supported-target-identity-or-version",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "selected-row-lacks-supported-target-identity-or-version",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n12",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+          "request_sha256": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "abstained",
+          "reportable_outcome": "unknown",
+          "source_sha256": "3cc26173b1ec6725ace38946d561ab17fdf0222f34d1bae5d9ec61c084437cf2",
+          "request_sha256": "f0c49656ed585a456607c409cc4602722adec34f1252007322e39fb2d44e693a",
+          "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n13",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "unknown-row-id",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "unknown-row-id",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n14",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "refused",
+          "reason": "invalid-draft-json",
+          "reportable_outcome": "unknown",
+          "references": []
+        },
+        "linked": {
+          "stage": "B",
+          "arm": "linked",
+          "status": "refused",
+          "reason": "invalid-draft-json",
+          "reportable_outcome": "unknown",
+          "references": []
+        }
+      }
+    },
+    {
+      "run": "n15",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "oracle-identity-set-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        }
+      }
+    },
+    {
+      "run": "n16",
+      "observed": {
+        "oracle": {
+          "stage": "B",
+          "arm": "oracle",
+          "status": "blocked",
+          "reason": "oracle-identity-set-is-incomplete-or-incorrect",
+          "reportable_outcome": "unknown",
+          "references": [],
+          "upstream_status": "refused"
+        }
+      }
+    }
+  ]
+}

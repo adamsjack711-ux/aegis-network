@@ -1,0 +1,24 @@
+{
+  "case": "h62 augmented per lifecycle freeze",
+  "standalone": {
+    "stage": "B",
+    "arm": "linked",
+    "status": "verified",
+    "reportable_outcome": "affected",
+    "source_sha256": "fb155a412f4382f7bbd09b28b5d02dad9b3f030e9034352feaa2f01d7cb181e0",
+    "request_sha256": "3574822b109566a1d72dccd712fcd59af2824d28d357e650cebf9f777218315b",
+    "draft_sha256": "130e285be0322c4cc5c198dfa3344969916e93543b31c4a10b7c97f31f760d8a",
+    "references": [
+      {
+        "row_id": "r-245d50ce3e6d106fac2ba0df",
+        "source_sha256": "fb155a412f4382f7bbd09b28b5d02dad9b3f030e9034352feaa2f01d7cb181e0",
+        "pointer": "/affected/1",
+        "byte_start": 86,
+        "byte_end": 165,
+        "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"tarnlark-fan\"},\"versions\":[\"1.8\",\"1.9\"]}"
+      }
+    ]
+  },
+  "pinned_aegis_assess": "conflicting",
+  "history_writes": 0
+}

@@ -1,0 +1,18 @@
+[
+  {"run":"n01","case":"h84","arm":"A","draft":{"identity_outcome":"match","pointers":["/affected/0"]},"expect":"refused","linked":"blocked","oracle":"unaffected"},
+  {"run":"n02","case":"h28","arm":"A","draft":{"identity_outcome":"no_match","pointers":[]},"expect":"refused","linked":"blocked","oracle":"affected"},
+  {"run":"n03","case":"h31","arm":"A","draft":{"identity_outcome":"match","pointers":["/affected/1"]},"expect":"refused","linked":"blocked","oracle":"affected"},
+  {"run":"n04","case":"h37","arm":"A","draft":{"identity_outcome":"match","pointers":["/affected/1"]},"expect":"refused","linked":"blocked","oracle":null},
+  {"run":"n05","case":"h46","arm":"A","draft":{"identity_outcome":"match","pointers":["UNISSUED"]},"expect":"refused","linked":"blocked","oracle":"affected"},
+  {"run":"n06","case":"h19","arm":"A","draft":"malformed-json","expect":"refused","linked":"blocked","oracle":"unknown"},
+  {"run":"n07","case":"h84","arm":"B","draft":{"proposed_outcome":"unaffected","pointers":["/affected/0"]},"expect":"refused"},
+  {"run":"n08","case":"h53","arm":"B","draft":{"proposed_outcome":"affected","pointers":["/affected/2"]},"expect":"refused"},
+  {"run":"n09","case":"h79","arm":"B","draft":{"proposed_outcome":"unaffected","pointers":[]},"expect":"refused"},
+  {"run":"n10","case":"h75","arm":"B","draft":{"proposed_outcome":"unaffected","pointers":["/affected/1"]},"expect":"refused"},
+  {"run":"n11","case":"h19","arm":"B","draft":{"proposed_outcome":"affected","pointers":["/affected/0"]},"expect":"refused"},
+  {"run":"n12","case":"h62","arm":"B","draft":{"proposed_outcome":"unknown","pointers":[]},"expect":"abstained"},
+  {"run":"n13","case":"h14","arm":"B","draft":{"proposed_outcome":"unaffected","pointers":["UNISSUED"]},"expect":"refused"},
+  {"run":"n14","case":"h31","arm":"B","draft":"malformed-json","expect":"refused"},
+  {"run":"n15","case":"h84","arm":"oracle-admission","admit":["/affected/0"],"expect":"blocked"},
+  {"run":"n16","case":"h90","arm":"oracle-admission","admit":["/affected/1"],"expect":"blocked"}
+]
