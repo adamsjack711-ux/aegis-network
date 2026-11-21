@@ -1,0 +1,5 @@
+# Supplemental interface checks frozen before candidate output
+
+For each case resolve opaque row IDs from raw row text. No case or gold fields are passed. Examine the request for uniform row fields, complete row coverage, and absence of any supplied result or selection hint. Compare the s17/s26 permutations by semantic row content, not by ID reuse. For rejection results synthetic scripts are not retried with a new selection.
+
+Additional controls use s17 and synthetic rewrites independent of any candidate. Preserve a noncanonical whitespace layout inside its true interval row; require the exact original text in the candidate and resulting evidence. Duplicate a JSON member; require refusal. Exceed 16 rows, 24,000 source bytes, 12,000 rendered request bytes, and 4,096 draft bytes separately, without trimming. Score these as interface controls separately from the sealed 16 decision attempts. A local offline run is not provider accuracy, general OSV coverage or authorization for another workflow.

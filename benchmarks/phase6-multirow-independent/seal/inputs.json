@@ -1,0 +1,372 @@
+[
+  {
+    "id": "s17",
+    "asset": {
+      "asset_id": "fixture-s17",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81701",
+      "aliases": [
+        "CVE-2099-69701"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "2.0"
+                },
+                {
+                  "fixed": "2.5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s43",
+    "asset": {
+      "asset_id": "fixture-s43",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.5"
+    },
+    "body": {
+      "id": "OSV-2099-81702",
+      "aliases": [
+        "CVE-2099-69702"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "2.0"
+                },
+                {
+                  "fixed": "2.5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s26",
+    "asset": {
+      "asset_id": "fixture-s26",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81703",
+      "aliases": [
+        "CVE-2099-69703"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "2.0"
+                },
+                {
+                  "fixed": "2.5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s91",
+    "asset": {
+      "asset_id": "fixture-s91",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81704",
+      "aliases": [
+        "CVE-2099-69704"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s68",
+    "asset": {
+      "asset_id": "fixture-s68",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81705",
+      "aliases": [
+        "CVE-2099-69705"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "ranges": [
+            {
+              "type": "ECOSYSTEM",
+              "events": [
+                {
+                  "introduced": "2.0"
+                },
+                {
+                  "fixed": "2.5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "3.1"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s32",
+    "asset": {
+      "asset_id": "fixture-s32",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81706",
+      "aliases": [
+        "CVE-2099-69706"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "s54",
+    "asset": {
+      "asset_id": "fixture-s54",
+      "identity_kind": "purl",
+      "identity": "pkg:pypi/lilac-cairn",
+      "version": "2.2"
+    },
+    "body": {
+      "id": "OSV-2099-81707",
+      "aliases": [
+        "CVE-2099-69707"
+      ],
+      "summary": "Synthetic package metadata for local review.",
+      "published": "2026-11-19T00:00:00Z",
+      "modified": "2026-11-19T00:00:00Z",
+      "affected": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-cairn"
+          },
+          "versions": [
+            "2.2"
+          ]
+        },
+        {
+          "package": {
+            "ecosystem": "PyPI",
+            "name": "lilac-brace"
+          },
+          "versions": [
+            "2.2",
+            "2.5"
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,535 @@
+{
+  "attempts": [
+    {
+      "run": "r01",
+      "case": "s17",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/2"
+      ],
+      "reportable": "affected",
+      "accepted_pointers": [
+        "/affected/2"
+      ],
+      "prepared_request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-8319cc4ba4f509193a1fa2b0"
+        ]
+      },
+      "observed": {
+        "status": "verified",
+        "reportable_outcome": "affected",
+        "source_sha256": "b594edee9999207c6151342681d0b88db409b4090da394f430f70455350c891e",
+        "request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+        "draft_sha256": "2af0a6c3842d1e3b2d3fcf5470037527f60cd09ff47cc17e62ab280809c6904c",
+        "references": [
+          {
+            "row_id": "r-8319cc4ba4f509193a1fa2b0",
+            "source_sha256": "b594edee9999207c6151342681d0b88db409b4090da394f430f70455350c891e",
+            "pointer": "/affected/2",
+            "byte_start": 170,
+            "byte_end": 303,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"lilac-cairn\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.0\"},{\"fixed\":\"2.5\"}],\"type\":\"ECOSYSTEM\"}]}"
+          }
+        ]
+      }
+    },
+    {
+      "run": "r02",
+      "case": "s43",
+      "proposal": "unaffected",
+      "requested_pointers": [
+        "/affected/0"
+      ],
+      "reportable": "unaffected",
+      "accepted_pointers": [
+        "/affected/0"
+      ],
+      "prepared_request_sha256": "d9b0be472583b04e4570769be65e414d479bbf407812603245b6eab555904350",
+      "scripted_draft": {
+        "proposed_outcome": "unaffected",
+        "selected_row_ids": [
+          "r-0835c177cf275b2ded721315"
+        ]
+      },
+      "observed": {
+        "status": "verified",
+        "reportable_outcome": "unaffected",
+        "source_sha256": "940addc62e9459c63c09e89db47f142b5b43373870083ea42b63add25912a7bf",
+        "request_sha256": "d9b0be472583b04e4570769be65e414d479bbf407812603245b6eab555904350",
+        "draft_sha256": "ddcdcf20192e710c50d96baa614d2911779f7dfa7154145143c4fa899fa45867",
+        "references": [
+          {
+            "row_id": "r-0835c177cf275b2ded721315",
+            "source_sha256": "940addc62e9459c63c09e89db47f142b5b43373870083ea42b63add25912a7bf",
+            "pointer": "/affected/0",
+            "byte_start": 13,
+            "byte_end": 146,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"lilac-cairn\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.0\"},{\"fixed\":\"2.5\"}],\"type\":\"ECOSYSTEM\"}]}"
+          }
+        ]
+      }
+    },
+    {
+      "run": "r03",
+      "case": "s26",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/1"
+      ],
+      "reportable": "affected",
+      "accepted_pointers": [
+        "/affected/1"
+      ],
+      "prepared_request_sha256": "ef3d1e3af2a6612a70c01fd99066d447e507c6478c40b73e97c677566d36479b",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-8ccd0d87c2b379cbc752071e"
+        ]
+      },
+      "observed": {
+        "status": "verified",
+        "reportable_outcome": "affected",
+        "source_sha256": "a08abab426866e0f930f3927c0abb600c0ebe4279e96d7f36cf88a09f7dc1b31",
+        "request_sha256": "ef3d1e3af2a6612a70c01fd99066d447e507c6478c40b73e97c677566d36479b",
+        "draft_sha256": "ed7faefec21cdfb61ab42a96242a6a4c2576b7aedecdb2bc4c10bbde40413eca",
+        "references": [
+          {
+            "row_id": "r-8ccd0d87c2b379cbc752071e",
+            "source_sha256": "a08abab426866e0f930f3927c0abb600c0ebe4279e96d7f36cf88a09f7dc1b31",
+            "pointer": "/affected/1",
+            "byte_start": 92,
+            "byte_end": 225,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"lilac-cairn\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.0\"},{\"fixed\":\"2.5\"}],\"type\":\"ECOSYSTEM\"}]}"
+          }
+        ]
+      }
+    },
+    {
+      "run": "r04",
+      "case": "s91",
+      "proposal": "unknown",
+      "requested_pointers": [],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "f133f050694cfd570d68bd212a9da1275375f9a275a0c15bc272a9e5fbfcfada",
+      "scripted_draft": {
+        "proposed_outcome": "unknown",
+        "selected_row_ids": []
+      },
+      "observed": {
+        "status": "abstained",
+        "reportable_outcome": "unknown",
+        "source_sha256": "044184ea2b96089dcbcf9a75cca61da59991f4b81f28953eed959c3fd131a5a3",
+        "request_sha256": "f133f050694cfd570d68bd212a9da1275375f9a275a0c15bc272a9e5fbfcfada",
+        "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+        "references": []
+      }
+    },
+    {
+      "run": "r05",
+      "case": "s68",
+      "proposal": "unknown",
+      "requested_pointers": [],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "6137a6ebb08cd876a51492e74e6c37bedd720f8a477af5d5ae1233f7ad3926f4",
+      "scripted_draft": {
+        "proposed_outcome": "unknown",
+        "selected_row_ids": []
+      },
+      "observed": {
+        "status": "abstained",
+        "reportable_outcome": "unknown",
+        "source_sha256": "c23b70e06a269c21a4822606d02883a3f2405e8194eb108df00544ef0866a09a",
+        "request_sha256": "6137a6ebb08cd876a51492e74e6c37bedd720f8a477af5d5ae1233f7ad3926f4",
+        "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+        "references": []
+      }
+    },
+    {
+      "run": "r06",
+      "case": "s32",
+      "proposal": "unknown",
+      "requested_pointers": [],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "db5532a1617c9f317c6cd0e640a1310bebf0e1fd50c723f73a3348b50e25ffc5",
+      "scripted_draft": {
+        "proposed_outcome": "unknown",
+        "selected_row_ids": []
+      },
+      "observed": {
+        "status": "abstained",
+        "reportable_outcome": "unknown",
+        "source_sha256": "d034aacfccfbd6a7e7651c96eec32bf142a618db5dd902f5ecfa2d4ea121bc9c",
+        "request_sha256": "db5532a1617c9f317c6cd0e640a1310bebf0e1fd50c723f73a3348b50e25ffc5",
+        "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+        "references": []
+      }
+    },
+    {
+      "run": "r07",
+      "case": "s54",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/1"
+      ],
+      "reportable": "affected",
+      "accepted_pointers": [
+        "/affected/1"
+      ],
+      "prepared_request_sha256": "e94928301d71cc380b0529e736074ddcb11ba3ac5f1ac1fa17468f0b308a5af9",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-41d356c563e4f4955a10ce98"
+        ]
+      },
+      "observed": {
+        "status": "verified",
+        "reportable_outcome": "affected",
+        "source_sha256": "fca7e610b8714a47ad223c5fdb1ff5761756a7221184ee3f2b93b8087a4be50d",
+        "request_sha256": "e94928301d71cc380b0529e736074ddcb11ba3ac5f1ac1fa17468f0b308a5af9",
+        "draft_sha256": "20d4d53a4eabdd1bec034e6047e61bc665d6f5e05163c14f0e0640bdb0047d01",
+        "references": [
+          {
+            "row_id": "r-41d356c563e4f4955a10ce98",
+            "source_sha256": "fca7e610b8714a47ad223c5fdb1ff5761756a7221184ee3f2b93b8087a4be50d",
+            "pointer": "/affected/1",
+            "byte_start": 91,
+            "byte_end": 163,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"lilac-cairn\"},\"versions\":[\"2.2\"]}"
+          }
+        ]
+      }
+    },
+    {
+      "run": "r08",
+      "case": "s17",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/0"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-04a963f2b2e578b7ab672382"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "selected-row-lacks-supported-target-identity-or-version",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r09",
+      "case": "s43",
+      "proposal": "unaffected",
+      "requested_pointers": [
+        "/affected/1"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "d9b0be472583b04e4570769be65e414d479bbf407812603245b6eab555904350",
+      "scripted_draft": {
+        "proposed_outcome": "unaffected",
+        "selected_row_ids": [
+          "r-e32b89f50cc5712eff98e2e6"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "selected-row-lacks-supported-target-identity-or-version",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r10",
+      "case": "s26",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/2"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "ef3d1e3af2a6612a70c01fd99066d447e507c6478c40b73e97c677566d36479b",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-f4c27e8bc75c2cd238f35c3e"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "selected-row-lacks-supported-target-identity-or-version",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r11",
+      "case": "s68",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/0"
+      ],
+      "reportable": "affected",
+      "accepted_pointers": [
+        "/affected/0"
+      ],
+      "prepared_request_sha256": "6137a6ebb08cd876a51492e74e6c37bedd720f8a477af5d5ae1233f7ad3926f4",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-1707010ddcd1cbeb84855762"
+        ]
+      },
+      "observed": {
+        "status": "verified",
+        "reportable_outcome": "affected",
+        "source_sha256": "c23b70e06a269c21a4822606d02883a3f2405e8194eb108df00544ef0866a09a",
+        "request_sha256": "6137a6ebb08cd876a51492e74e6c37bedd720f8a477af5d5ae1233f7ad3926f4",
+        "draft_sha256": "b5afcfaa591d14852c9c3128116333b4fc38908de525556ebb03ecc78e0f67e1",
+        "references": [
+          {
+            "row_id": "r-1707010ddcd1cbeb84855762",
+            "source_sha256": "c23b70e06a269c21a4822606d02883a3f2405e8194eb108df00544ef0866a09a",
+            "pointer": "/affected/0",
+            "byte_start": 13,
+            "byte_end": 146,
+            "osv_row": "{\"package\":{\"ecosystem\":\"PyPI\",\"name\":\"lilac-cairn\"},\"ranges\":[{\"events\":[{\"introduced\":\"2.0\"},{\"fixed\":\"2.5\"}],\"type\":\"ECOSYSTEM\"}]}"
+          }
+        ]
+      }
+    },
+    {
+      "run": "r12",
+      "case": "s32",
+      "proposal": "unaffected",
+      "requested_pointers": [
+        "/affected/1"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "db5532a1617c9f317c6cd0e640a1310bebf0e1fd50c723f73a3348b50e25ffc5",
+      "scripted_draft": {
+        "proposed_outcome": "unaffected",
+        "selected_row_ids": [
+          "r-7282ca08e56a808160bfb470"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "selected-row-lacks-supported-target-identity-or-version",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r13",
+      "case": "s43",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/0"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "d9b0be472583b04e4570769be65e414d479bbf407812603245b6eab555904350",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-0835c177cf275b2ded721315"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "affected-selection-does-not-support-inclusion",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r14",
+      "case": "s17",
+      "proposal": "unknown",
+      "requested_pointers": [],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+      "scripted_draft": {
+        "proposed_outcome": "unknown",
+        "selected_row_ids": []
+      },
+      "observed": {
+        "status": "abstained",
+        "reportable_outcome": "unknown",
+        "source_sha256": "b594edee9999207c6151342681d0b88db409b4090da394f430f70455350c891e",
+        "request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+        "draft_sha256": "88d80df75ea130b57e56f600cd011854521b3336e467f50e9637503855b29f90",
+        "references": []
+      }
+    },
+    {
+      "run": "r15",
+      "case": "s17",
+      "proposal": "affected",
+      "requested_pointers": [
+        "/affected/2",
+        "/affected/1"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "d536a9f9daff0e6444d02ca68068c49716a559ba805127ec41940cd2b16bd6ea",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-8319cc4ba4f509193a1fa2b0",
+          "r-f03095d2fcb2fedc111b7f01"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "selected-row-lacks-supported-target-identity-or-version",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    },
+    {
+      "run": "r16",
+      "case": "s54",
+      "proposal": "affected",
+      "requested_pointers": [
+        "unissued"
+      ],
+      "reportable": "unknown",
+      "accepted_pointers": [],
+      "prepared_request_sha256": "e94928301d71cc380b0529e736074ddcb11ba3ac5f1ac1fa17468f0b308a5af9",
+      "scripted_draft": {
+        "proposed_outcome": "affected",
+        "selected_row_ids": [
+          "r-000000000000000000000000"
+        ]
+      },
+      "observed": {
+        "status": "refused",
+        "reason": "unknown-row-id",
+        "reportable_outcome": "unknown",
+        "references": []
+      }
+    }
+  ],
+  "scores": {
+    "conservative": {
+      "primary": {
+        "attempts": 7,
+        "guard_match": 7,
+        "decision_match": 7,
+        "false_affected": 0,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 3,
+        "misses_on_determinate": 0,
+        "determinate_targets": 4,
+        "covered_determinate": 4,
+        "submitted_pointers": 4,
+        "submitted_correct_pointer_identity": 4,
+        "emitted_pointers": 4,
+        "emitted_correct_pointer_identity": 4
+      },
+      "controls": {
+        "attempts": 9,
+        "guard_match": 8,
+        "decision_match": 1,
+        "false_affected": 1,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 8,
+        "misses_on_determinate": 7,
+        "determinate_targets": 7,
+        "covered_determinate": 0,
+        "submitted_pointers": 9,
+        "submitted_correct_pointer_identity": 2,
+        "emitted_pointers": 1,
+        "emitted_correct_pointer_identity": 0
+      },
+      "all": {
+        "attempts": 16,
+        "guard_match": 15,
+        "decision_match": 8,
+        "false_affected": 1,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 11,
+        "misses_on_determinate": 7,
+        "determinate_targets": 11,
+        "covered_determinate": 4,
+        "submitted_pointers": 13,
+        "submitted_correct_pointer_identity": 6,
+        "emitted_pointers": 5,
+        "emitted_correct_pointer_identity": 4
+      }
+    },
+    "union": {
+      "primary": {
+        "attempts": 7,
+        "guard_match": 7,
+        "decision_match": 6,
+        "false_affected": 0,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 3,
+        "misses_on_determinate": 1,
+        "determinate_targets": 5,
+        "covered_determinate": 4,
+        "submitted_pointers": 4,
+        "submitted_correct_pointer_identity": 4,
+        "emitted_pointers": 4,
+        "emitted_correct_pointer_identity": 4
+      },
+      "controls": {
+        "attempts": 9,
+        "guard_match": 9,
+        "decision_match": 2,
+        "false_affected": 0,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 8,
+        "misses_on_determinate": 7,
+        "determinate_targets": 8,
+        "covered_determinate": 1,
+        "submitted_pointers": 9,
+        "submitted_correct_pointer_identity": 3,
+        "emitted_pointers": 1,
+        "emitted_correct_pointer_identity": 1
+      },
+      "all": {
+        "attempts": 16,
+        "guard_match": 16,
+        "decision_match": 8,
+        "false_affected": 0,
+        "false_unaffected": 0,
+        "abstentions_including_refusals": 11,
+        "misses_on_determinate": 8,
+        "determinate_targets": 13,
+        "covered_determinate": 5,
+        "submitted_pointers": 13,
+        "submitted_correct_pointer_identity": 7,
+        "emitted_pointers": 5,
+        "emitted_correct_pointer_identity": 5
+      }
+    }
+  },
+  "interface_controls": {
+    "original_whitespace": "exact",
+    "duplicate-member": "duplicate-json-key",
+    "17-plus-rows": "row-count-limit",
+    "source-bytes": "source-byte-limit",
+    "rendered-request": "request-byte-limit",
+    "draft-bytes": "draft-byte-limit"
+  }
+}
