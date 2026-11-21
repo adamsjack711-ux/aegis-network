@@ -1,0 +1,41 @@
+{
+  "case": "h75",
+  "variant": "original",
+  "seal": "46b55669f9534e6307260c98c245bf7f62734227",
+  "source_sha256": "94b223291ee528b5c64034e0db0aed1de1d5be500a938b2006cb5ae9fdcac9b7",
+  "target_sha256": "30d491527322ff9b42bda3f80cd86f280b6d726910c90ccf9769863bdde8bb5c",
+  "labels_sha256": "2f134eeb764cc80a869956913793e5c143dccb30c7cd032328468c502ad4fa3d",
+  "case_gold_sha256": "ae9e1a56c6f50ab8beef8e99c48eb13f7c4d7bd058fddc61778fb5d10cc20deb",
+  "A": {
+    "decision": "match",
+    "pointers": [
+      "/affected/1"
+    ],
+    "expected_ids": [
+      "i-58c04e3615cda3218cc14541"
+    ],
+    "request_sha256": "fbef57e551cde0865e01eeecba73cb7aecc431b72c4f33789ac2597d12a771dd"
+  },
+  "oracle_B": {
+    "admission": {
+      "matched_pointers": [
+        "/affected/1"
+      ]
+    },
+    "decision": "unknown",
+    "selected_row_ids": [],
+    "references": [],
+    "status": "abstained",
+    "request_sha256": "4b718bf90275996488bc45a738dc6672016a96bdb53723df20670cf14e56679a"
+  },
+  "history": {
+    "expected_outcome": "held",
+    "new_rows": 0
+  },
+  "scoring": [
+    "A has one determinate identity opportunity. Require the complete singleton set. An A abstention is a determinate miss.",
+    "Oracle B has one required abstention and zero determinate version opportunities. Unknown with no IDs and no references earns 1/1 correct abstention. A false affected or unaffected proposal is an unsupported claim even if the checker refuses it. Score local refusal separately from provider abstention.",
+    "No emitted or expected references yields undefined pointer precision and recall. Count incorrect emitted pointers separately. For linked B, record a blocked upstream admission separately from a correct B abstention.",
+    "Scratch admission must leave the initial zero research rows at zero on a fresh read. Withholding an unsupported version claim is correct. No provider result or history observation is recorded by this preselection."
+  ]
+}
