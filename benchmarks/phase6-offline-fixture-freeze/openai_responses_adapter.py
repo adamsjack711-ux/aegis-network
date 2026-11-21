@@ -13,6 +13,7 @@ from tempfile import TemporaryFile
 from time import monotonic
 
 from aegis.intelligence.investigator import Draft, Limits
+from aegis.intelligence.models import Record
 
 HOST = "api.openai.com"
 PATH = "/v1/responses"
@@ -150,14 +151,14 @@ def supervise(perform, seconds=DEADLINE_SECONDS):
 class ResponsesReply:
     response_id: str
     model: str
-    draft: Draft
+    draft: Record
     draft_sha256: str
     reply_sha256: str
     input_tokens: int
     output_tokens: int
 
 
-def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_parser=Draft.model_validate_json):
+def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_parser=None, draft_type=Draft):
     """Check an envelope, leaving an unknown input-token upper bound explicit for offline reviews."""
     try:
         data = decode_json(raw)
@@ -184,8 +185,9 @@ def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_pars
         if re.fullmatch(r"resp_[A-Za-z0-9_-]{1,128}", response_id) is None:
             raise ValueError()
         decode_json(draft_bytes)  # Reject duplicate fields before the strict draft parser.
-        draft = draft_parser(draft_bytes)
-        if type(draft) is not Draft:
+        parser = draft_type.model_validate_json if draft_parser is None else draft_parser
+        draft = parser(draft_bytes)
+        if type(draft) is not draft_type:
             raise ValueError()
     except (KeyError, TypeError, ValueError, AttributeError, RecursionError):
         raise Refused("response envelope, draft or usage refused") from None
@@ -196,12 +198,12 @@ def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_pars
 
 def complete_responses_once(body, *, body_sha256, model, input_token_limit, credential_reader,
                             deadline_seconds=DEADLINE_SECONDS, connection_factory=HTTPSConnection,
-                            draft_parser=Draft.model_validate_json, error_body_path=None):
+                            draft_parser=None, draft_type=Draft, error_body_path=None):
     """Send one approved text-only request; caller owns authorization and replay state.
 
     The credential supplier runs only inside the supervised child after local
     request checks. The optional parser receives exact draft bytes only after
-    envelope validation and returns a normalized Draft. Refusals contain no raw
+    envelope validation and returns the exact requested record type. Refusals contain no raw
     provider payload or transport error.
     """
     try:
@@ -239,4 +241,4 @@ def complete_responses_once(body, *, body_sha256, model, input_token_limit, cred
         return request_once(body, credential, connection_factory, deadline_seconds, error_body_path)
 
     raw = supervise(perform, seconds=deadline_seconds)
-    return parse_reply(raw, model, input_token_limit, output_token_limit, draft_parser=draft_parser)
+    return parse_reply(raw, model, input_token_limit, output_token_limit, draft_parser=draft_parser, draft_type=draft_type)
