@@ -2,7 +2,9 @@
 import argparse
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
 from tempfile import TemporaryDirectory
 
@@ -27,7 +29,100 @@ def describe(body):
     return {"bytes": len(body), "sha256": raw_hash(body)}
 
 
-def rebuild(checkout):
+def review_handoff(checkout, create, count, ids, expected_b):
+    entrypoint = checkout / "benchmarks/phase6-offline-fixture-freeze/h84_identity_preflight.py"
+    env = {**os.environ, "PYTHONPATH": str(checkout / "src")}
+
+    def invoke(*args):
+        return subprocess.run(
+            [sys.executable, "-B", str(entrypoint), *args],
+            check=False, capture_output=True, timeout=5, env=env,
+        )
+
+    for mode, expected in (("create", create), ("count", count)):
+        result = invoke(mode)
+        assert result.returncode == 0 and result.stderr == b"" and result.stdout == expected
+    doc = (checkout / "docs/studio-phase6-h84-identity-preflight.md").read_text()
+    wire = json.loads(create)
+    text_format = pack(wire["text"]["format"])
+    for exported in (create, count, wire["input"].encode(), wire["instructions"].encode(), text_format):
+        assert raw_hash(exported) in doc
+
+    create_digest = raw_hash(create)
+
+    def receipts(outcome, chosen):
+        draft = json.dumps({"identity_outcome": outcome, "selected_row_ids": chosen}, indent=2)
+        response = pack({
+            "id": "resp_h84_independent_preflight", "object": "response", "status": "completed",
+            "model": MODEL, "service_tier": "default", "store": False,
+            "output": [{"type": "message", "status": "completed", "role": "assistant",
+                        "content": [{"type": "output_text", "text": draft}]}],
+            "usage": {"input_tokens": 100, "output_tokens": 20, "total_tokens": 120},
+        })
+        return {
+            "attempt": {"attempt": 1, "request_sha256": create_digest},
+            "http": {"http_status": 200},
+            "response": response,
+            "transport": {
+                "evaluated_contract_body_sha256": create_digest, "response_sha256": raw_hash(response),
+                "draft_sha256": raw_hash(draft.encode()), "model": MODEL, "input_tokens": 100,
+                "output_tokens": 20,
+            },
+        }
+
+    first, decoy, last = ids
+    complete = receipts("match", [last, first])
+    bad_hash = "0" * 64
+    rejected = (
+        ("first-singleton", receipts("match", [first]), "100"),
+        ("last-singleton", receipts("match", [last]), "100"),
+        ("decoy-substitution", receipts("match", [first, decoy]), "100"),
+        ("abstention", receipts("unknown", []), "100"),
+        ("false-no-match", receipts("no_match", []), "100"),
+        ("wrong-attempt-body", complete | {"attempt": {"attempt": 1, "request_sha256": bad_hash}}, "100"),
+        ("boolean-attempt", complete | {"attempt": complete["attempt"] | {"attempt": True}}, "100"),
+        ("duplicate-http-status", complete | {"http": b'{"http_status":500,"http_status":200}'}, "100"),
+        ("http-failure", complete | {"http": {"http_status": 503}}, "100"),
+        ("different-raw-response-digest",
+         complete | {"transport": complete["transport"] | {"response_sha256": bad_hash}}, "100"),
+        ("different-raw-draft-digest",
+         complete | {"transport": complete["transport"] | {"draft_sha256": bad_hash}}, "100"),
+        ("float-transport-usage", complete | {"transport": complete["transport"] | {"input_tokens": 100.0}}, "100"),
+        ("missing-http", complete | {"http": None}, "100"),
+        ("input-over-approved-bound", complete, "99"),
+        ("nonpositive-input-bound", complete, "0"),
+    )
+    observations = {}
+    with TemporaryDirectory(prefix="aegis-h84-retained-review-") as directory:
+        def prepare(artifacts, limit):
+            for kind, data in artifacts.items():
+                path = Path(directory) / f"h84-two-stage-A.{kind}.json"
+                if data is None:
+                    path.unlink(missing_ok=True)
+                else:
+                    path.write_bytes(data if isinstance(data, bytes) else pack(data))
+            return invoke("linked-b", directory, limit)
+
+        result = prepare(complete, "100")
+        assert result.returncode == 0 and result.stderr == b""
+        assert raw_hash(result.stdout) == expected_b
+        b_body = describe(result.stdout)
+        for name, artifacts, limit in rejected:
+            result = prepare(artifacts, limit)
+            assert result.returncode == 2 and result.stdout == b""
+            assert result.stderr.startswith(b"h84 preflight: ")
+            observations[name] = result.stderr.decode().strip()
+
+    return {
+        "candidate": subprocess.check_output(["git", "-C", str(checkout), "rev-parse", "HEAD"], text=True).strip(),
+        "create_and_count_cli_exact": True,
+        "documented_text_format": describe(text_format),
+        "linked_b_from_reconciled_scripted_records": b_body,
+        "rejected_with_zero_b_bytes": observations,
+    }
+
+
+def rebuild(checkout, check_handoff=False):
     sys.path[:0] = [
         str(checkout / "src"),
         str(checkout / "benchmarks/phase6-offline-fixture-freeze"),
@@ -113,7 +208,7 @@ def rebuild(checkout):
             raise AssertionError("m82 review accepted a different body")
     assert PLAN["trial"] == "phase6-m82-responses-1" and PLAN["body_sha256"] != raw_hash(create)
 
-    return {
+    report = {
         "case": "original/h84",
         "source_sha256": frozen["source_sha256"],
         "target_sha256": frozen["target_sha256"],
@@ -129,10 +224,16 @@ def rebuild(checkout):
         "existing_m82_body_check_refused_h84": True,
         "provider_requests": 0,
     }
+    if check_handoff:
+        report["handoff"] = review_handoff(
+            checkout, create, count, ids, recorded["candidate_CLI"]["linked_B_wire_sha256"]
+        )
+    return report
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("checkout", type=Path)
+    parser.add_argument("--check-handoff", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(rebuild(args.checkout.resolve()), indent=2))
+    print(json.dumps(rebuild(args.checkout.resolve(), args.check_handoff), indent=2))
