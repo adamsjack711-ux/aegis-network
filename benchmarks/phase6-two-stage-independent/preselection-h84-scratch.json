@@ -1,0 +1,65 @@
+{
+  "case": "original/h84",
+  "linked_preselection_commit": "9d733da7da6763e5692bd685676ae5bbb29956c2",
+  "linked_preselection_sha256": "ff6e87c796b4c1026542ca4de2855126c7be78f40cb68c9d0bdd0dd319b53ff3",
+  "scratch_interface_baseline": "275edaf1e7c8eecd5ec99eade64332c51f636861",
+  "advisory_id": "OSV-2099-92583",
+  "asset": {
+    "asset_id": "synthetic-h84",
+    "identity_kind": "purl",
+    "identity": "pkg:npm/pinevell-stage",
+    "version": "4.5.0"
+  },
+  "clocks": {
+    "retrieval": "2026-11-20T00:00:00Z",
+    "evaluation": "2026-11-20T00:00:00Z",
+    "commit": "2026-11-20T00:00:01Z"
+  },
+  "supported": {
+    "identity_outcome": "match",
+    "identity_pointers": ["/affected/2", "/affected/0"],
+    "version_outcome": "unaffected",
+    "version_pointers": ["/affected/0", "/affected/2"],
+    "admission": "committed",
+    "rows_before": 0,
+    "rows_after": 1,
+    "fresh_history": {
+      "status": "current",
+      "check": "research-consistent",
+      "reportable_outcome": "unaffected"
+    },
+    "reference_precision": [2, 2],
+    "support_coverage": [2, 2],
+    "retry": {
+      "outcome": "duplicate",
+      "rows_after": 1,
+      "stored_investigation_bytes_identical": true
+    }
+  },
+  "controls": {
+    "one_row_exclusion": {
+      "identity": "complete",
+      "version_outcome": "unaffected",
+      "version_pointers": ["/affected/0"],
+      "linked_status": "refused",
+      "linked_reason": "unaffected-selection-incomplete"
+    },
+    "blocked_identity": {
+      "identity_outcome": "match",
+      "identity_pointers": ["/affected/0"],
+      "supplied_version": "complete scripted draft from the supported control",
+      "linked_status": "blocked",
+      "linked_reason": "identity-selection-is-incomplete-or-incorrect"
+    },
+    "shared_expected": {
+      "admission": "held",
+      "reason": "unverified-two-stage-bundle",
+      "rows_before": 0,
+      "rows_after": 0,
+      "fresh_current": null,
+      "commit_clock_samples": 0
+    }
+  },
+  "isolation": "An individually owned disposable SQLite database per scenario. Read public history and the current asset report with fresh readers. Read the exact persisted investigation bytes from a separate read-only SQLite connection after each supported write attempt.",
+  "status": "Frozen before observing the h84 scratch-history candidate. Original synthetic fixture and scripted drafts only."
+}
