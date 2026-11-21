@@ -1,18 +1,20 @@
 # Aegis Network
 
-## The problem
+**A security alert just landed. Which machines need a closer look?**
 
-A security alert says a certain version of a software package has a flaw. If you manage several computers, it takes time to check which ones have that version and whether the alert came from a source you trust.
+![A signed alert next to three Linux terminals, with one highlighted](docs/assets/aegis-banner.webp)
 
-## What Aegis does
+Say an alert flags version `2.4.1` of a package. Checking who sent the alert and which machines run that version takes time. Aegis does both checks on Debian and Ubuntu.
 
-Aegis checks the alert's digital signature and compares the affected package versions with what's installed on a Debian or Ubuntu machine. It works offline and keeps the package list on the machine.
+1. **Check the alert.** Aegis checks that a trusted publisher signed it.
+2. **Look for a match.** It looks for the exact package and version on the machine.
 
-An exact match tells you where to look first. This early preview is for lab use. It reports what it finds and leaves any fixes to you.
+> [!NOTE]
+> Aegis runs offline and keeps your package list on the machine. This lab preview reports matches and leaves any fixes to you.
 
-## Try it
+## Try it in a lab
 
-In a lab running Debian or Ubuntu with Python 3.12 or newer, run these commands from the repo folder.
+On Debian or Ubuntu with Python 3.12 or newer, run this from the repo folder to list your installed packages.
 
 ```sh
 python3 -m venv .venv
@@ -21,4 +23,4 @@ python -m pip install -e .
 PYTHONPATH=src python -B -m aegis.cli inventory
 ```
 
-See the [CLI guide](docs/phase5b-linux-cli.md) to check your inventory against a signed alert file. For more about the project design, see the [architecture](architecture.md).
+The [CLI guide](docs/phase5b-linux-cli.md) shows how to check a signed alert file. The [architecture notes](architecture.md) explain how the larger project fits together.
