@@ -39,20 +39,21 @@ admission and billing were outside this replay.
 
 ## Reproduce offline
 
-Use the saved local replay harness and the exact worktrees. Set
-`BRIDGE_CHECKOUT` to `daf170c`, `SCRATCH_CHECKOUT` to `e878744`,
-`RECEIPTS_DIR` to the private retained receipts and `EVIDENCE_DIR` to
-the local replay directory.
+From the clean integration checkout, use the reviewed Python 3.12 environment.
+Set `RECEIPTS_DIR` to the operator's separate private receipt directory and
+choose an output path outside the checkout. The directory must contain
+`h28-two-stage-{A,B}.{attempt,http,response,transport}.json` and the equivalent
+files for `h53`. The harness reads those inputs and creates its own temporary
+database.
 
 ```sh
-bridge="$BRIDGE_CHECKOUT/benchmarks/phase6-offline-fixture-freeze"
-scratch="$SCRATCH_CHECKOUT/benchmarks/phase6-offline-fixture-freeze"
-PYTHONPATH="$BRIDGE_CHECKOUT/src:$bridge:$scratch" python3.12 -B \
-  "$EVIDENCE_DIR/replay_retained.py" "$RECEIPTS_DIR" "$bridge" "$scratch"
+PYTHONPATH=src python3.12 -B benchmarks/phase6-offline-fixture-freeze/replay_retained.py \
+  "$RECEIPTS_DIR" > "$OUTPUT_JSON"
+shasum -a 256 "$OUTPUT_JSON"
 ```
 
-The retained harness SHA-256 is
-`f071b2dfaf246685a0c3592af352cdfa6e79163f9e4253e1bcc3e8cd1c2ce822`.
-The aggregate result SHA-256 is
+Expected aggregate SHA-256
 `b79948b0645a600e8285d6a80488238e2ec29259d462338fc449b835c1e3cf90`.
-No raw provider response or service identifier is included in either file.
+The repository contains the harness and synthetic fixtures. Keep the
+original receipts, provider metadata and output in the operator's private
+workspace.
