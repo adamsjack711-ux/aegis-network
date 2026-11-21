@@ -1,0 +1,110 @@
+{
+  "candidate": "c4ac23cbaeff63e83a8bfc4c4ff3c9c1f903caf9",
+  "case": "original/h84",
+  "clocks": {
+    "retrieval": "2026-11-20T00:00:00Z",
+    "evaluation": "2026-11-20T00:00:00Z",
+    "commit": "2026-11-20T00:00:01Z"
+  },
+  "supported": {
+    "admission": {
+      "outcome": "committed",
+      "sequence": 1,
+      "reason": "verified-two-stage-current-at-commit"
+    },
+    "rows_before": 0,
+    "rows_after": 1,
+    "linked_status": "verified",
+    "fresh_current": {
+      "sequence": 1,
+      "revision": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+      "reportable_outcome": "unaffected",
+      "check_status": "research-consistent",
+      "reason_codes": [],
+      "applicability_references": [
+        {
+          "kind": "osv",
+          "acquisition": "fixture",
+          "uri": "https://api.osv.dev/v1/vulns/OSV-2099-92583",
+          "retrieved_at": "2026-11-20T00:00:00Z",
+          "sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+          "pointer": "/affected/0"
+        },
+        {
+          "kind": "osv",
+          "acquisition": "fixture",
+          "uri": "https://api.osv.dev/v1/vulns/OSV-2099-92583",
+          "retrieved_at": "2026-11-20T00:00:00Z",
+          "sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+          "pointer": "/affected/2"
+        }
+      ],
+      "independently_verified": false
+    },
+    "exact_references": [
+      {
+        "original_index": 0,
+        "pointer": "/affected/0",
+        "byte_start": 13,
+        "byte_end": 149,
+        "row_sha256": "ec212d94318ec9dce669bce10011d1beffff1b26de8d0ddc01a9644acebd3fba",
+        "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104"
+      },
+      {
+        "original_index": 2,
+        "pointer": "/affected/2",
+        "byte_start": 228,
+        "byte_end": 312,
+        "row_sha256": "0707a10bdeb18f4d0b837ba7db729a4b0a8de01f32d712fedcd3187e7c1d16ff",
+        "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104"
+      }
+    ],
+    "reference_precision": [
+      2,
+      2
+    ],
+    "support_coverage": [
+      2,
+      2
+    ],
+    "stored_investigation_sha256": "4fa02911daeca1a87c72962c19fe918da5adc9540e12488759cdd0076ea8abce",
+    "retry": {
+      "outcome": "duplicate",
+      "sequence": 1,
+      "reason": "already-recorded"
+    },
+    "retry_rows_after": 1,
+    "retry_bytes_identical": true,
+    "commit_clock_samples": [
+      "2026-11-20T00:00:01Z",
+      "2026-11-20T00:00:01Z"
+    ]
+  },
+  "one_row_exclusion": {
+    "admission": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "unverified-two-stage-bundle"
+    },
+    "rows_before": 0,
+    "rows_after": 0,
+    "linked_status": "refused",
+    "linked_reason": "unaffected-selection-incomplete",
+    "fresh_current": null,
+    "commit_clock_samples": []
+  },
+  "blocked_identity": {
+    "admission": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "unverified-two-stage-bundle"
+    },
+    "rows_before": 0,
+    "rows_after": 0,
+    "linked_status": "blocked",
+    "linked_reason": "identity-selection-is-incomplete-or-incorrect",
+    "fresh_current": null,
+    "commit_clock_samples": []
+  },
+  "independent_disposable_databases": 3
+}
