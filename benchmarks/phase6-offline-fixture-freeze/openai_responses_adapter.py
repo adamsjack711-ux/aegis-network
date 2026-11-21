@@ -116,7 +116,8 @@ class ResponsesReply:
     output_tokens: int
 
 
-def parse_reply(raw, model, input_token_limit, output_token_limit):
+def parse_reply(raw, model, input_token_limit, output_token_limit, *, draft_parser=Draft.model_validate_json):
+    """Check an envelope, leaving an unknown input-token upper bound explicit for offline reviews."""
     try:
         data = decode_json(raw)
         if (data["object"] != "response" or data["status"] != "completed" or data["model"] != model
@@ -132,15 +133,18 @@ def parse_reply(raw, model, input_token_limit, output_token_limit):
                 or len(part["text"].encode()) > DRAFT_LIMIT):
             raise ValueError()
         draft_bytes = part["text"].encode()
-        decode_json(draft_bytes)  # Reject duplicate fields before the strict Draft parser.
-        draft = Draft.model_validate_json(draft_bytes)
         usage = data["usage"]
         i, o, total = (usage[name] for name in ("input_tokens", "output_tokens", "total_tokens"))
-        if (any(type(n) is not int for n in (i, o, total)) or not 0 <= i <= input_token_limit
+        if (any(type(n) is not int for n in (i, o, total)) or i < 0
+                or (input_token_limit is not None and i > input_token_limit)
                 or not 0 <= o <= output_token_limit or total != i + o):
             raise ValueError()
         response_id = data["id"]
         if re.fullmatch(r"resp_[A-Za-z0-9_-]{1,128}", response_id) is None:
+            raise ValueError()
+        decode_json(draft_bytes)  # Reject duplicate fields before the strict draft parser.
+        draft = draft_parser(draft_bytes)
+        if type(draft) is not Draft:
             raise ValueError()
     except (KeyError, TypeError, ValueError, AttributeError, RecursionError):
         raise Refused("response envelope, draft or usage refused") from None
@@ -150,11 +154,14 @@ def parse_reply(raw, model, input_token_limit, output_token_limit):
 
 
 def complete_responses_once(body, *, body_sha256, model, input_token_limit, credential_reader,
-                            deadline_seconds=DEADLINE_SECONDS, connection_factory=HTTPSConnection):
+                            deadline_seconds=DEADLINE_SECONDS, connection_factory=HTTPSConnection,
+                            draft_parser=Draft.model_validate_json):
     """Send one approved text-only request; caller owns authorization and replay state.
 
     The credential supplier runs only inside the supervised child after local
-    request checks. Refusals contain no raw provider payload or transport error.
+    request checks. The optional parser receives exact draft bytes only after
+    envelope validation and returns a normalized Draft. Refusals contain no raw
+    provider payload or transport error.
     """
     try:
         if (not 0 < len(body) <= REQUEST_LIMIT or sha256(body).hexdigest() != body_sha256
@@ -185,4 +192,4 @@ def complete_responses_once(body, *, body_sha256, model, input_token_limit, cred
         return request_once(body, credential, connection_factory, deadline_seconds)
 
     raw = supervise(perform, seconds=deadline_seconds)
-    return parse_reply(raw, model, input_token_limit, output_token_limit)
+    return parse_reply(raw, model, input_token_limit, output_token_limit, draft_parser=draft_parser)
