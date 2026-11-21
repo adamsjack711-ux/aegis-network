@@ -26,7 +26,12 @@ def test_native_stage_transport(stage, expected_rows, tmp_path):
                                      input_token_limit=10261, credential_reader=lambda: DUMMY_SECRET,
                                      connection_factory=connection, draft_type=trial.DRAFT_TYPES[stage])
     assert result.draft.selected_row_ids == ()
-    assert trial.replay(stage, raw)["check"]["status"] == "abstained"
+    replay = trial.replay(stage, raw)
+    assert replay["check"]["status"] == "abstained"
+    assert replay["input_request_provenance"] == "unverified"
+    assert replay["evaluated_contract_body_sha256"] == sha256(body).hexdigest()
+    with pytest.raises(ValueError, match="exceeds"):
+        trial.replay(stage, raw + b" " * trial.RAW_REPLY_LIMIT)
     other = "B" if stage == "A" else "A"
     with pytest.raises(Refused):
         trial.replay(other, raw)

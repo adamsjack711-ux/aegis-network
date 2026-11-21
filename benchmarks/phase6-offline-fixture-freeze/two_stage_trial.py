@@ -5,7 +5,7 @@ from hashlib import sha256
 from pathlib import Path
 
 from openai_one_shot import MODEL
-from openai_responses_adapter import REQUEST_LIMIT, decode_json, parse_reply
+from openai_responses_adapter import RAW_REPLY_LIMIT, REQUEST_LIMIT, decode_json, parse_reply
 from osv_row_selection import Selection, canonical
 from osv_two_stage import IdentityDraft, check_a, check_b, prepare_a, prepare_b
 
@@ -57,6 +57,8 @@ def request_body(stage):
 
 
 def replay(stage, raw):
+    if len(raw) > RAW_REPLY_LIMIT:
+        raise ValueError("saved response exceeds the transport limit")
     reply = parse_reply(raw, MODEL, 10261, 512, draft_type=DRAFT_TYPES[stage])
     message, = (item for item in decode_json(raw)["output"] if item["type"] == "message")
     draft_bytes = message["content"][0]["text"].encode()
@@ -65,7 +67,8 @@ def replay(stage, raw):
               else check_b(source, target, ADMISSION, draft_bytes, arm="oracle"))
     return {"check": result, "draft": reply.draft.model_dump(mode="json"),
             "draft_sha256": reply.draft_sha256, "response_sha256": reply.reply_sha256,
-            "request_sha256": sha256(request_body(stage)).hexdigest(), "model": reply.model,
+            "evaluated_contract_body_sha256": sha256(request_body(stage)).hexdigest(),
+            "input_request_provenance": "unverified", "model": reply.model,
             "input_tokens": reply.input_tokens, "output_tokens": reply.output_tokens}
 
 
@@ -75,5 +78,9 @@ if __name__ == "__main__":
     parser.add_argument("--response", type=Path, help="saved raw Responses API JSON for offline scoring")
     args = parser.parse_args()
     import sys
-    sys.stdout.buffer.write(canonical(replay(args.stage, args.response.read_bytes())) + b"\n"
-                            if args.response else request_body(args.stage))
+    if args.response:
+        with args.response.open("rb") as saved:
+            result = replay(args.stage, saved.read(RAW_REPLY_LIMIT + 1))
+        sys.stdout.buffer.write(canonical(result) + b"\n")
+    else:
+        sys.stdout.buffer.write(request_body(args.stage))
