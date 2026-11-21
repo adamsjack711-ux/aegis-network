@@ -1,0 +1,5 @@
+# Independent scratch admission checks
+
+Use the frozen lifecycle clock (2026-11-20 00:00 UTC) and the source/target bytes at 46b5566. Reopen scratch SQLite from a different connection after the receipt. A successful probe must add one fresh supported research result bound to the exact source revision, subject and valid stage-selected references. Holds must add zero results across stale h28, equal-time conflict h53, advanced withdrawal h53, supersession h31 and mixed-policy h62. Compare old payloads in full, including evidence and any audit latency. Distinguish revision-derived lifecycle status from saved payload fields.
+
+Exercise the stale/revision change after preparation and before the transactional write; use a previously absent uniqueness key where possible. Observe the actual guarded insertion and whether a competing writer can interleave after the admission reader checks. Inspect the candidate's transaction ordering and rollback semantics. Identify separately what rests on the caller's clock, local source acquisition and scratch database custody. No live model, external I/O or production writes.
