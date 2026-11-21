@@ -1,0 +1,128 @@
+{
+  "fresh": {
+    "receipt": {
+      "outcome": "committed",
+      "sequence": 1,
+      "reason": "verified-two-stage-current-at-commit"
+    },
+    "row_count_before": 0,
+    "row_count_after": 1,
+    "status_after": [
+      "current"
+    ],
+    "transaction_events": [
+      "snapshot before lock",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "insert while locked",
+      "competitor busy",
+      "0 visible before insert",
+      "COMMIT"
+    ]
+  },
+  "stale": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "stale-or-future-source"
+    },
+    "row_count_before": 0,
+    "row_count_after": 0,
+    "status_after": [],
+    "transaction_events": [
+      "snapshot before lock",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  },
+  "boundary-age": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "stale-or-future-source"
+    },
+    "row_count_before": 0,
+    "row_count_after": 0,
+    "status_after": [],
+    "transaction_events": [
+      "snapshot before lock",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  },
+  "conflict": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "conflict"
+    },
+    "row_count_before": 1,
+    "row_count_after": 1,
+    "status_after": [
+      "conflict"
+    ],
+    "transaction_events": [
+      "snapshot before lock",
+      "separate Scout conflict committed",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  },
+  "withdrawal": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "withdrawn"
+    },
+    "row_count_before": 1,
+    "row_count_after": 1,
+    "status_after": [
+      "withdrawn"
+    ],
+    "transaction_events": [
+      "snapshot before lock",
+      "separate Scout changed committed",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  },
+  "superseded": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "superseded"
+    },
+    "row_count_before": 1,
+    "row_count_after": 1,
+    "status_after": [
+      "superseded"
+    ],
+    "transaction_events": [
+      "snapshot before lock",
+      "separate Scout changed committed",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  },
+  "mixed": {
+    "receipt": {
+      "outcome": "held",
+      "sequence": 1,
+      "reason": "conservative-policy-disagreement"
+    },
+    "row_count_before": 0,
+    "row_count_after": 0,
+    "status_after": [],
+    "transaction_events": [
+      "snapshot before lock",
+      "BEGIN IMMEDIATE",
+      "snapshot inside transaction",
+      "ROLLBACK"
+    ]
+  }
+}
