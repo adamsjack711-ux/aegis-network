@@ -19,9 +19,14 @@ H53_SOURCE_SHA = "d4e658704f4c8b1946a231f06157815a24c8a7a5bfe3d5e33f6beeb6e6a01b
 H53_TARGET_SHA = "b0d348e1e1e2c5e97dfdffd6f2dbbeac9b45499eb22ff88f36f4d14a67537b54"
 # Admission only, from f0c6330:benchmarks/phase6-two-stage-independent/preselection-h53.json.
 H53_ADMISSION = canonical({"matched_pointers": ["/affected/2"]})
+H75_SOURCE_SHA = "94b223291ee528b5c64034e0db0aed1de1d5be500a938b2006cb5ae9fdcac9b7"
+H75_TARGET_SHA = "30d491527322ff9b42bda3f80cd86f280b6d726910c90ccf9769863bdde8bb5c"
+# Only the admission from a6ce6fe, never its version answer or selected-row label.
+H75_ADMISSION = canonical({"matched_pointers": ["/affected/1"]})
 CASES = {
     "h28": (SOURCE_SHA, TARGET_SHA, ADMISSION),
     "h53": (H53_SOURCE_SHA, H53_TARGET_SHA, H53_ADMISSION),
+    "h75": (H75_SOURCE_SHA, H75_TARGET_SHA, H75_ADMISSION),
 }
 
 
@@ -60,7 +65,13 @@ def build_request(stage, prepared):
     return body
 
 
+def require_probe(stage, case):
+    if case == "h75" and stage != "B":
+        raise ValueError("h75 is an oracle B-only probe")
+
+
 def request_body(stage, *, case="h28"):
+    require_probe(stage, case)
     source, target = fixture(case)
     admission = CASES[case][2]
     prepared = prepare_a(source, target) if stage == "A" else prepare_b(source, target, admission, arm="oracle")
@@ -68,6 +79,7 @@ def request_body(stage, *, case="h28"):
 
 
 def replay(stage, raw, *, case="h28"):
+    require_probe(stage, case)
     if len(raw) > RAW_REPLY_LIMIT:
         raise ValueError("saved response exceeds the transport limit")
     reply = parse_reply(raw, MODEL, 10261, 512, draft_type=DRAFT_TYPES[stage])
@@ -90,6 +102,10 @@ if __name__ == "__main__":
     parser.add_argument("--case", choices=CASES, default="h28")
     parser.add_argument("--response", type=Path, help="saved raw Responses API JSON for offline scoring")
     args = parser.parse_args()
+    try:
+        require_probe(args.stage, args.case)
+    except ValueError as exc:
+        parser.error(str(exc))
     import sys
     if args.response:
         with args.response.open("rb") as saved:
