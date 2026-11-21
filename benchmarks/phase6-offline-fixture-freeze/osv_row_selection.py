@@ -129,7 +129,7 @@ def safe_name(ecosystem, value):
     return None
 
 
-def load_request(source_bytes, target_bytes):
+def load_source(source_bytes):
     text, advisory = bounded_json(source_bytes, SOURCE_LIMIT, "source")
     if not isinstance(advisory, dict) or not isinstance(advisory.get("id"), str) or not advisory["id"]:
         raise Refused("invalid-osv-object")
@@ -140,7 +140,10 @@ def load_request(source_bytes, target_bytes):
         raise Refused("invalid-affected-array")
     if len(values) > ROW_LIMIT:
         raise Refused("row-count-limit")
+    return sha256(source_bytes).hexdigest(), text, values
 
+
+def load_target(target_bytes):
     bounded_json(target_bytes, TARGET_LIMIT, "target")
     try:
         target = Target.model_validate_json(target_bytes)
@@ -149,8 +152,10 @@ def load_request(source_bytes, target_bytes):
     if safe_name(target.ecosystem, target.package) is None:
         raise Refused("invalid-target-package")
 
-    source_digest = sha256(source_bytes).hexdigest()
-    context = target.model_dump(mode="json")
+    return target
+
+
+def bind_rows(source_digest, text, values, context):
     seed = canonical({"source_sha256": source_digest, "asset_context": context})
     rows = []
     for index, ((start, end), value) in enumerate(zip(affected_spans(text, len(values)), values, strict=True)):
@@ -159,18 +164,29 @@ def load_request(source_bytes, target_bytes):
         byte_end = len(text[:end].encode("utf-8"))
         rows.append(Row(row_id, f"/affected/{index}", byte_start, byte_end, text[start:end], value))
 
+    return rows
+
+
+def render_request(source_digest, instructions, payload):
+    request = canonical({"instructions": instructions, "payload": payload})
+    if len(request) > REQUEST_LIMIT:
+        raise Refused("request-byte-limit")
+    return {
+        "status": "prepared", "source_sha256": source_digest, "request_sha256": sha256(request).hexdigest(),
+        "request_bytes": len(request), "instructions": instructions, "payload": payload,
+    }
+
+
+def load_request(source_bytes, target_bytes):
+    source_digest, text, values = load_source(source_bytes)
+    target = load_target(target_bytes)
+    context = target.model_dump(mode="json")
+    rows = bind_rows(source_digest, text, values, context)
     payload = {
         "asset_context": context,
         "candidate_rows": [{"row_id": row.row_id, "osv_row": row.text} for row in rows],
     }
-    request = canonical({"instructions": INSTRUCTIONS, "payload": payload})
-    if len(request) > REQUEST_LIMIT:
-        raise Refused("request-byte-limit")
-    report = {
-        "status": "prepared", "source_sha256": source_digest, "request_sha256": sha256(request).hexdigest(),
-        "request_bytes": len(request), "instructions": INSTRUCTIONS, "payload": payload,
-    }
-    return report, target, rows
+    return render_request(source_digest, INSTRUCTIONS, payload), target, rows
 
 
 def verified_identity(row, target):
@@ -295,20 +311,24 @@ def prepare(source_bytes, target_bytes):
         return refusal(str(exc))
 
 
+def checked_report(request, selection, selected, draft_bytes):
+    digest = request["source_sha256"]
+    return {
+        "status": "verified" if selected else "abstained",
+        "reportable_outcome": selection.proposed_outcome,
+        "source_sha256": digest, "request_sha256": request["request_sha256"],
+        "draft_sha256": sha256(draft_bytes).hexdigest(),
+        "references": [row.reference(digest) for row in selected],
+    }
+
+
 def check(source_bytes, target_bytes, draft_bytes):
     """Resolve scripted row IDs and validate support against the original bytes."""
     try:
         request, target, rows = load_request(source_bytes, target_bytes)
         selection = load_selection(draft_bytes)
         selected = verify_selection(rows, target, selection)
-        digest = request["source_sha256"]
-        return {
-            "status": "verified" if selected else "abstained",
-            "reportable_outcome": selection.proposed_outcome,
-            "source_sha256": digest, "request_sha256": request["request_sha256"],
-            "draft_sha256": sha256(draft_bytes).hexdigest(),
-            "references": [row.reference(digest) for row in selected],
-        }
+        return checked_report(request, selection, selected, draft_bytes)
     except Refused as exc:
         return refusal(str(exc))
 
