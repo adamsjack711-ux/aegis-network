@@ -12,3 +12,21 @@ The B citation is the original 140-byte interval [90, 230) in the frozen source,
 Using A's actual returned draft, the offline-linked B request was byte-identical to the live oracle B request, SHA-256 `eddb187063fe829896d45323bd8329e73f7a7a8bd01550ff099c5585d7ee8536`. There was no third live probe. The two observations establish success on this one introduced-boundary case. The earlier combined s43 abstention remains unattributed.
 
 **Next discriminating case:** original h53 tests exclusion exactly at a fixed boundary, again with a same-name ecosystem decoy and a different-package decoy. Running A and independent oracle B would distinguish identity selection from interpretation of that opposite boundary. This is a recommendation only. [Frozen scoring and observation details](live-h28.json)
+
+## Replay the retained results
+
+From the repository root, set `RECORDS` to the directory containing the original per-stage attempt, HTTP, response and transport files. Run the commands with the project's Python environment. They reconstruct both public request bodies, score the saved replies and compare the resulting report with the committed JSON.
+
+```sh
+set -e
+wire_dir=$(mktemp -d)
+export PYTHONPATH="$PWD/src:$PWD/scripts"
+for stage in A B; do
+    python -B benchmarks/phase6-offline-fixture-freeze/two_stage_trial.py "$stage" > "$wire_dir/$stage.json"
+done
+(
+    cd benchmarks/phase6-two-stage-independent
+    python -B replay_h28.py ../.. "$RECORDS" "$wire_dir" > "$wire_dir/replayed.json"
+    cmp live-h28.json "$wire_dir/replayed.json"
+)
+```
