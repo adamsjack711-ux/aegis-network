@@ -1,0 +1,51 @@
+{
+  "case": "original/h84",
+  "source_sha256": "0747257e6a8891f95ec563365fe262a608cd3c9e2d81860a45ee5a7b0498c104",
+  "target_sha256": "df600d9dde6dfa01012d056b615e238b45e75d05a6f1b58dc5b925c0d26f7954",
+  "create": {
+    "bytes": 1450,
+    "sha256": "92b5e3a2318e5221b11749e2e536efc183b034a4b7dbabd07d58fb6cfd622e20"
+  },
+  "count_projection": {
+    "bytes": 1387,
+    "sha256": "2decf8568cdda2ac4d1933cb642c49d82d780701bd9f72123df568f862f8cd25",
+    "fields": [
+      "input",
+      "instructions",
+      "model",
+      "text",
+      "tool_choice",
+      "tools"
+    ]
+  },
+  "input_string": {
+    "bytes": 438,
+    "sha256": "ee08d952541663db8b1ec7aebf6f10b10ae5df79ebb3f2f6c9e0de0ba20dd521"
+  },
+  "instructions": {
+    "bytes": 451,
+    "sha256": "9e8568e692d0051c42d9a73fd8a36a2f560383b7c359abcedb6ba62758f36d51"
+  },
+  "strict_text_format": {
+    "bytes": 334,
+    "sha256": "b1fde8def719bb8ed6b0f223846db65042ab924e32a99e364f7e23f067c0ad81"
+  },
+  "model": "gpt-5.4-mini-2026-03-17",
+  "version_only_mutation_preserved_wire": true,
+  "accepted_scripted_identity": [
+    "/affected/0",
+    "/affected/2"
+  ],
+  "no_B_body_controls": [
+    "first-singleton",
+    "last-singleton",
+    "decoy-only",
+    "decoy-substitution",
+    "decoy-extra",
+    "unknown",
+    "oracle-admission",
+    "full-envelope"
+  ],
+  "existing_m82_body_check_refused_h84": true,
+  "provider_requests": 0
+}
