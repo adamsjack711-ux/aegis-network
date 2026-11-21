@@ -1,0 +1,5 @@
+{
+  "case_overrides": {"s68": {"decision": "affected", "support": ["/affected/0"]}},
+  "run_overrides": {"r11": "affected"},
+  "note": "r05 remains a valid scripted abstention and a determinate miss under union. Same-advisory OSV affected rows denote alternatives. A second enumerated set omitting the target does not negate the first row's matching interval. Both the pre-frozen conservative Aegis labels and the pre-output union interpretation must be reported."
+}
