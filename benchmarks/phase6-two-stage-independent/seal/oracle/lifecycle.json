@@ -1,0 +1,10 @@
+{
+  "scope":"Frozen expectations for a future history adapter; no history writes in this evaluation.",
+  "clock":"2026-11-20T00:00:00Z",
+  "controls":[
+    {"case":"h28","mutation":"Freeze original retrieval at 2026-11-10T00:00:00Z. Evaluate on freeze clock with seven-day freshness.","expected":"hold; zero new research rows"},
+    {"case":"h53","mutation":"Mark original source withdrawn as of 2026-11-19T23:59:00Z.","expected":"hold; existing row becomes withdrawn, historical payload preserved"},
+    {"case":"h31","mutation":"After evaluation and before commit, replace current source with a new digest by advancing modified to 2026-11-20T00:00:00Z and changing the summary.","expected":"hold old revision; existing row becomes superseded, historical payload preserved"},
+    {"case":"h62","mutation":"Append another matching PyPI tarnlark-fan row with an exact versions list containing only 2.0; original matching row still includes 1.8.","standalone_union":"affected","conservative_history":"hold mixed applicability; zero promoted rows"}
+  ]
+}

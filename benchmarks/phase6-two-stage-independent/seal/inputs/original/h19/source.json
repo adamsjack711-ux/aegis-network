@@ -1,0 +1,1 @@
+{"affected":[{"package":{"ecosystem":"npm","name":"rosewain-disk"},"ranges":[{"events":[{"introduced":"0"},{"fixed":"abc123def"}],"repo":"https://example.invalid/synthetic-fixture","type":"GIT"}]},{"package":{"ecosystem":"PyPI","name":"rosewain-disk"},"versions":["2.6.0"]}],"id":"OSV-2099-92591","modified":"2026-11-19T11:00:00Z","published":"2026-11-19T11:00:00Z"}
