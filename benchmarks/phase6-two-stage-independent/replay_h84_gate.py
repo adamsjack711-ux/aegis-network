@@ -1,13 +1,81 @@
 """Exercise the frozen synthetic h84 gate with scripted drafts and no provider."""
 import argparse
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
+from tempfile import TemporaryDirectory
 
 from score import case_inputs, load, pack, raw_hash
 
 
-def replay(checkout):
+def review_entrypoint(checkout, trial, a_wire, b_wire, raw_a, invalid_a):
+    from openai_responses_adapter import parse_reply
+    from osv_row_selection import DRAFT_LIMIT
+
+    entrypoint = checkout / "benchmarks/phase6-offline-fixture-freeze/h84_linked_trial.py"
+
+    def invoke(*args):
+        return subprocess.run(
+            [sys.executable, "-B", str(entrypoint), *args],
+            check=False,
+            capture_output=True,
+            env={**os.environ, "PYTHONPATH": str(checkout / "src")},
+            timeout=5,
+        )
+
+    a_result = invoke("A")
+    assert a_result.returncode == 0 and a_result.stderr == b"" and a_result.stdout == a_wire
+    wire = json.loads(a_wire)
+    message = {
+        "type": "message", "role": "assistant", "status": "completed",
+        "content": [{"type": "output_text", "text": raw_a.decode()}],
+    }
+    retained_envelope = pack({
+        "id": "resp_h84_scripted_review", "object": "response", "status": "completed",
+        "model": wire["model"], "service_tier": wire["service_tier"], "store": wire["store"],
+        "output": [message], "usage": {"input_tokens": 100, "output_tokens": 20, "total_tokens": 120},
+    })
+    reply = parse_reply(retained_envelope, wire["model"], 10261, wire["max_output_tokens"],
+                        draft_type=trial.DRAFT_TYPES["A"])
+    extracted = json.loads(retained_envelope)["output"][0]["content"][0]["text"].encode()
+    assert extracted == raw_a and raw_hash(extracted) == reply.draft_sha256
+
+    with TemporaryDirectory(prefix="aegis-h84-cli-") as folder:
+        draft_path = Path(folder) / "stage-a-draft.json"
+        draft_path.write_bytes(extracted)
+        b_result = invoke("B", str(draft_path))
+        assert b_result.returncode == 0 and b_result.stderr == b"" and b_result.stdout == b_wire
+
+        refused = {}
+        for name, raw in {**invalid_a, "full-envelope": retained_envelope}.items():
+            draft_path.write_bytes(raw)
+            result = invoke("B", str(draft_path))
+            assert result.returncode == 2 and result.stdout == b"" and result.stderr.startswith(b"h84: ")
+            refused[name] = {"exit": result.returncode, "stdout_bytes": len(result.stdout),
+                             "diagnostic": result.stderr.decode().strip()}
+
+        missing = invoke("B", str(Path(folder) / "missing.json"))
+        assert missing.returncode == 2 and missing.stdout == b""
+        assert missing.stderr == b"h84: local input unavailable\n"
+        draft_path.write_bytes(raw_a + b" " * DRAFT_LIMIT)
+        oversized = invoke("B", str(draft_path))
+        assert oversized.returncode == 2 and oversized.stdout == b""
+        assert oversized.stderr == b"h84: identity-draft-byte-limit\n"
+
+    return {
+        "A_wire_sha256": raw_hash(a_result.stdout),
+        "scripted_A_envelope_sha256": reply.reply_sha256,
+        "extracted_A_draft_sha256": reply.draft_sha256,
+        "linked_B_wire_sha256": raw_hash(b_result.stdout),
+        "blocked_A_controls": refused,
+        "oversized_A_draft": "blocked with zero stdout bytes",
+        "missing_A_draft_file": "blocked with zero stdout bytes",
+    }
+
+
+def replay(checkout, check_entrypoint=False):
     sys.path[:0] = [
         str(checkout / "src"),
         str(checkout / "benchmarks/phase6-offline-fixture-freeze"),
@@ -57,6 +125,7 @@ def replay(checkout):
         return pack({"proposed_outcome": outcome, "selected_row_ids": ids})
 
     controls = {}
+    invalid_a = {}
     for name, raw_a, a_status in (
         ("first-singleton", identity("match", first), "refused"),
         ("last-singleton", identity("match", last), "refused"),
@@ -71,6 +140,7 @@ def replay(checkout):
         assert linked_b["status"] == "blocked" and linked_b["upstream_status"] == a_status
         assert "payload" not in linked_b and "request_sha256" not in linked_b
         assert not linked_b["references"]
+        invalid_a[name] = raw_a
         controls[name] = {
             "A": a_status,
             "B": linked_b["status"],
@@ -79,7 +149,7 @@ def replay(checkout):
         }
 
     # Reverse the draft IDs to check set equality and pass the actual draft bytes to B.
-    raw_a = identity("match", last, first)
+    raw_a = b" " + identity("match", last, first) + b"\n"
     observed_a = checker.check_a(source, target, raw_a)
     assert observed_a["status"] == "verified"
     assert observed_a["identity_outcome"] == expected_a["expected"]
@@ -123,7 +193,7 @@ def replay(checkout):
         assert observed["reportable_outcome"] == "unknown" and observed["references"] == []
         b_controls[name] = {"status": status, "precision": None, "support": [0, 2]}
 
-    return {
+    report = {
         "case": "original/h84",
         "draft_source": "independent scripted controls",
         "A": {
@@ -143,10 +213,17 @@ def replay(checkout):
         "blocked_A_controls": controls,
         "B_controls_after_admission": b_controls,
     }
+    if check_entrypoint:
+        invalid_a["oracle-admission"] = pack({"matched_pointers": expected_a["complete_set"]})
+        report["candidate_CLI"] = review_entrypoint(
+            checkout, trial, a_wire, b_wire, raw_a, invalid_a,
+        )
+    return report
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("checkout", type=Path)
+    parser.add_argument("--check-entrypoint", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(replay(args.checkout.resolve()), indent=2))
+    print(json.dumps(replay(args.checkout.resolve(), args.check_entrypoint), indent=2))
