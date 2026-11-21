@@ -85,3 +85,36 @@ The comparison checks exact excerpt bytes and structured reference bindings;
 independent adjudication of package and version meaning, narrative entailment,
 and observation of attempted effects are separate review steps. The guest is
 isolated from the network. Independent tracing is required to measure attempts.
+
+## Run the synthetic m82 fake-transport check
+
+Use the same staging and isolated Linux guest recipe above. Before running it,
+add `"$base/fake_transport_check.py"` to the `git archive` paths. Replace the
+guest's final `exec` line with:
+
+```sh
+exec /tmp/venv/bin/python -B /input/benchmarks/phase6-offline-fixture-freeze/fake_transport_check.py /input/artifacts/inputs
+```
+
+The check consumes the exact sealed inputs artifact, admits only m82 revision 1,
+and emits a JSON report on stdout. Require exit 0 and `matched=true`. The report
+records the exact 640-byte projection and the pinned instruction and payload
+hashes. The fixed local child acknowledges both content hashes on each dispatch.
+It uses anonymous pipes with no remote transport and no external configuration.
+
+| Control | Expected observation |
+| --- | --- |
+| Valid draft | One dispatch. Local verification accepts the grounded unaffected result. |
+| Disagreement | One dispatch. The fixture's affected proposal yields reportable unknown. |
+| Extra reply field | One dispatch. Strict draft parsing rejects the reply. |
+| Oversized draft or raw reply | One dispatch per case. Reject 4,097 draft bytes or 16,385 raw bytes before parsing. |
+| Refused cap | Zero dispatches. The fictional two-cent charge bound exceeds the one-cent cap. |
+| Non-fixture or altered fixture | Zero dispatches. Both attempts fail before the cap and transport checks. |
+| Partial reply and stall | One dispatch. The fake sends a partial response and pauses for five seconds. The parent discards the partial bytes, kills and reaps the child at a one-second monotonic deadline with a 250 ms measurement tolerance. No accepted reply or retry. |
+
+The fake bound and cap are test inputs with zero billed cost. The reply-size
+checks apply to the captured output of this fixed bounded child. Live streaming
+limits, the proposed ten-second external deadline, real request authorization,
+provider response identity and usage, and billing remain unverified. Jack's
+provider/model, export/retention and spend decisions remain separate.
+[Single-call preflight](../../docs/studio-phase6-live-trial-preflight.md)
