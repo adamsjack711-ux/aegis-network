@@ -41,3 +41,33 @@ selected spans. This proves the controlled SQLite and appraisal behavior
 for scripted fixtures. The schema does not persist a separate two-stage
 attestation, and wall-clock sampling, production admission and history
 authority remain separate decisions.
+
+## Freshness across a contended write lock
+
+Run the pair separately from the fixed lifecycle replay:
+
+```sh
+PYTHONPATH=src python3.12 -B benchmarks/phase6-offline-fixture-freeze/scratch_history_admission.py \
+  --lock-contention > contention-results.json
+```
+
+Both controls start with a determinate, eligible h28 evaluation at exactly the
+seven-day cutoff. A separate SQLite connection holds `BEGIN IMMEDIATE` for at
+least 150 ms after the admission writer enters its lock attempt. While the
+lock is held, another connection observes `SQLITE_BUSY` and a fresh reader
+sees zero rows. The injectable commit clock is sampled after the admission
+writer obtains its lock. The trace includes that sample before the locked
+snapshot recheck.
+
+- In the expiry control, the clock advances one microsecond beyond the cutoff
+  while the other connection still holds the lock. Admission rolls back
+  without an insert. A fresh reader sees zero rows.
+- In the fresh control, the timestamp stays at the cutoff through the same
+  hold schedule. Admission writes one row. A retry returns duplicate, and
+  the stored history stays intact.
+
+Measured waits vary by scheduler. The date and cutoff are controlled fixture
+values. Existing calls with a fixed evaluation or commit time keep their
+previous behavior. This demonstrates transaction ordering and expiry under
+real contention in scratch SQLite. It leaves production wall-clock trust and
+admission policy outside this benchmark.
