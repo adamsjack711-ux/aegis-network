@@ -27,20 +27,31 @@ from replay import NOW, canonical
 MODEL = "gpt-5.4-mini-2026-03-17"
 BODY_SHA256 = "ca82ce718189b2d7ba48137b0220391b09038fa6bbf2d794d825e6b72121085b"
 BODY_BYTES = 2914
-USD_CAP = Decimal("0.01")
+COUNTED_INPUT_TOKENS = 436
+COUNT_PROJECTION_SHA256 = "bc320ef005cafeae439d0eb80dc5411a9b4e50248a8a46fa5ce25afef0184d3b"
+COUNT_RECEIPT_SHA256 = "c0c512bb78db723a3beeccde629ee7edd844853c5e6f768ef4ab9d3f3f956984"
+USD_REVIEW_THRESHOLD = Decimal("0.01")
 INPUT_USD_PER_MILLION = Decimal("0.75")
 OUTPUT_USD_PER_MILLION = Decimal("4.50")
-MILLION = Decimal(1_000_000)
-MAX_BILLED_INPUT_TOKENS = int(
-    (USD_CAP * MILLION - OUTPUT_TOKENS * OUTPUT_USD_PER_MILLION) / INPUT_USD_PER_MILLION
-)
+ESTIMATED_CHARGE = (COUNTED_INPUT_TOKENS * INPUT_USD_PER_MILLION
+                    + OUTPUT_TOKENS * OUTPUT_USD_PER_MILLION) / Decimal(1_000_000)
+CHARGE_BASIS = {
+    "kind": "owner-accepted-count-estimate",
+    "count_projection_sha256": COUNT_PROJECTION_SHA256, "count_receipt_sha256": COUNT_RECEIPT_SHA256,
+    "counted_input_tokens": COUNTED_INPUT_TOKENS, "max_output_tokens": OUTPUT_TOKENS,
+    "uncached_input_usd_per_million": str(INPUT_USD_PER_MILLION),
+    "output_usd_per_million": str(OUTPUT_USD_PER_MILLION),
+    "estimated_charge_usd": str(ESTIMATED_CHARGE), "binding_charge_ceiling_verified": False,
+    "residual_risk": "Create usage, applicable rates or fees may differ; response checks occur after dispatch.",
+}
 COUNT_FIELDS = ("input", "instructions", "model", "text", "tool_choice", "tools")
 PLAN = {
     "trial": "phase6-m82-responses-1", "method": "POST", "endpoint": f"https://{HOST}{PATH}",
     "model": MODEL, "service_tier": "default", "store": False, "body_sha256": BODY_SHA256,
     "credential_ref": "studio-phase6-openai/project-key", "total_attempts": 1,
     "deadline_seconds": DEADLINE_SECONDS, "request_bytes": BODY_BYTES, "raw_reply_bytes": RAW_REPLY_LIMIT,
-    "draft_bytes": DRAFT_LIMIT, "max_output_tokens": OUTPUT_TOKENS, "usd_cap": str(USD_CAP),
+    "draft_bytes": DRAFT_LIMIT, "max_output_tokens": OUTPUT_TOKENS,
+    "usd_review_threshold": str(USD_REVIEW_THRESHOLD),
 }
 
 
@@ -59,7 +70,10 @@ def review_body(body_path, sealed):
     parsed = decode_json(body)
     if parsed["input"].encode() != project(sealed, sealed) or parsed["instructions"] != INSTRUCTIONS:
         raise Refused("logical request differs from the sealed projection")
-    return body, {field: parsed[field] for field in COUNT_FIELDS}
+    count = {field: parsed[field] for field in COUNT_FIELDS}
+    if sha256(canonical(count)).hexdigest() != COUNT_PROJECTION_SHA256:
+        raise Refused("count projection differs from the reviewed request")
+    return body, count
 
 
 def load_owner_key():
@@ -80,36 +94,24 @@ def load_owner_key():
 
 
 def authorize(envelope, owner_key, now, operator_uid):
-    # The signer vouches for the independently reviewed retention and binding
-    # charge evidence. A token estimate or unsigned operator flag grants nothing.
+    # The signer accepts the exact estimate and its residual billing risk.
     try:
         if set(envelope) != {"statement", "signature"}:
             raise ValueError()
         statement = envelope["statement"]
         owner_key.verify(bytes.fromhex(envelope["signature"]), canonical(statement))
         if set(statement) != {
-            "plan", "expires_at", "operator_uid", "max_billed_input_tokens", "max_charge_usd",
-            "retention_evidence_sha256",
-            "charge_evidence_sha256",
+            "plan", "expires_at", "operator_uid", "charge_basis", "retention_evidence_sha256",
         } or canonical(statement["plan"]) != canonical(PLAN):
             raise ValueError()
         if type(statement["operator_uid"]) is not int or statement["operator_uid"] != operator_uid:
             raise ValueError()
         expiration = datetime.fromisoformat(statement["expires_at"])
-        input_bound = statement["max_billed_input_tokens"]
-        cost = statement["max_charge_usd"]
-        if (expiration <= now or type(input_bound) is not int or not 1 <= input_bound <= MAX_BILLED_INPUT_TOKENS
-                or not isinstance(cost, str) or re.fullmatch(r"0\.\d{1,9}", cost) is None
-                or not 0 < Decimal(cost) <= USD_CAP):
+        if (expiration <= now or not 0 < ESTIMATED_CHARGE <= USD_REVIEW_THRESHOLD
+                or canonical(statement["charge_basis"]) != canonical(CHARGE_BASIS)
+                or re.fullmatch(r"[a-f0-9]{64}", statement["retention_evidence_sha256"]) is None):
             raise ValueError()
-        at_standard_rates = (input_bound * INPUT_USD_PER_MILLION
-                             + OUTPUT_TOKENS * OUTPUT_USD_PER_MILLION) / MILLION
-        if Decimal(cost) < at_standard_rates:
-            raise ValueError()
-        for name in ("retention_evidence_sha256", "charge_evidence_sha256"):
-            if re.fullmatch(r"[a-f0-9]{64}", statement[name]) is None:
-                raise ValueError()
-        return input_bound, expiration
+        return COUNTED_INPUT_TOKENS, expiration
     except (InvalidSignature, KeyError, TypeError, ValueError):
         raise Refused("approval absent, invalid, expired or outside the fixed caps") from None
 
@@ -175,7 +177,7 @@ def main():
         sealed = load_m82(args.inputs)
         body, count = review_body(args.body, sealed)
         if args.mode == "check":
-            print(json.dumps({"status": "offline-check", "plan": PLAN,
+            print(json.dumps({"status": "offline-check", "plan": PLAN, "charge_basis": CHARGE_BASIS,
                               "count_projection_sha256": sha256(canonical(count)).hexdigest(),
                               "count_projection_bytes": len(canonical(count))}, sort_keys=True))
             return 0

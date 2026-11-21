@@ -65,39 +65,22 @@ git show aec2456:benchmarks/studio-offline-citation-support/unseen-holdout-39d58
 body="$HOME/.aegis-phase6-request-review/m82-ca82ce718189.json"
 base=benchmarks/phase6-offline-fixture-freeze
 PYTHONPATH=src python3.12 -B "$base/openai_one_shot.py" check "$body" "$fixture"
-AEGIS_TEST_M82_INPUTS="$fixture" AEGIS_TEST_REVIEW_BODY="$body" \
+receipt="$HOME/.aegis-phase6-request-review/m82-count-bc320ef005ca.replacement.receipt.json"
+AEGIS_TEST_M82_INPUTS="$fixture" AEGIS_TEST_REVIEW_BODY="$body" AEGIS_TEST_COUNT_RECEIPT="$receipt" \
     PYTHONPATH=src python3.12 -B -m pytest -q -p no:cacheprovider \
     "$base/test_openai_one_shot.py" tests/test_phase5a_investigator.py tests/test_offline_research_handoff.py
 ```
 
 The `check` mode verifies and prints public fixture metadata with zero
-credential access or dispatch. Future `dispatch` requires a centrally
-supplied credential pipe, Jack's unexpired Ed25519-signed approval and an
-enrolled, independently administered verifier key. Its trust anchor is
-`/private/etc/aegis/phase6-openai-operator.pub` on macOS or
-`/etc/aegis/phase6-openai-operator.pub` on Linux. Enrollment must confirm the
-root-owned path and key are writable only by the administrator, including
-effective ACLs, and scope the enrollment to the designated Studio host.
-The key file contains the raw 32-byte public key. The envelope has
-`statement` and a hex `signature` over the sorted compact statement without
-a trailing newline. The statement binds the exact `plan` emitted by
-`check`, `operator_uid`, `expires_at`, `max_billed_input_tokens`,
-`max_charge_usd`, `retention_evidence_sha256` and
-`charge_evidence_sha256`. The evidence hashes identify reviewed material
-held by the approver. The code verifies the signature and cap arithmetic.
-The approver must verify the substance of the charge and retention evidence.
-
-The program creates and syncs a fixed, exclusive marker under the signed
-operator UID's OS account home before a credential is read or a dispatch is
-attempted. One marker covers concurrent calls and later invocations in that
-enrolled host and account. An ambiguous failure or timeout consumes the
-attempt. The marker's durability assumes continued custody of that home
-and marker. Copying enrollment to another host or restoring earlier local
-state falls outside the tested one-attempt scope. The program has no
-Keychain lookup. Activation still needs Jack's approval, independent
-approval-key enrollment, a verified charge ceiling including applicable
-fees, accepted outbound/retention scope and the centrally managed credential
-handoff. No trusted key or approval was provisioned for these tests.
+credential access or dispatch. The existing one-shot admission requires Jack's
+signed envelope and the independently installed public verifier. It binds the
+exact plan, operator UID, expiry, accepted estimate and retention record. The
+launcher marks the attempt before reading the centrally supplied credential
+pipe. Concurrent calls and later invocations share that marker in the enrolled
+host and account. An ambiguous failure or timeout consumes the attempt.
+The marker's durability assumes continued custody of the account home.
+See the separate operator handoff for the approved estimate and exact offline
+signing and verification commands. [Studio operator enrollment](studio-phase6-openai-owner-handoff.md)
 
 ## Token-count evidence for the one-cent cap
 
@@ -120,6 +103,6 @@ The documented output cap includes non-visible tokens. One separately
 authorized count can establish the provider-reported processed input for
 the supported projection. The docs do not bind that measurement to later
 billing for the create request. Treat it as cost evidence with pinned
-equivalence, rates and fee checks. A hard one-cent guarantee still needs
-an independently accepted binding upper bound. No count or inference
-request was made. [Snapshot pricing](https://developers.openai.com/api/docs/models/gpt-5.4-mini) · [Responses create reference](https://developers.openai.com/api/reference/resources/responses/methods/create)
+equivalence, rates and fee checks. Jack accepted the count-based estimate for
+the single m82 trial. The signed record expressly leaves the binding charge
+ceiling unverified. The adapter's fake tests make no count or inference request. [Snapshot pricing](https://developers.openai.com/api/docs/models/gpt-5.4-mini) · [Responses create reference](https://developers.openai.com/api/reference/resources/responses/methods/create)

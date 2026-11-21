@@ -35,7 +35,7 @@ def response_body(**updates):
         "model": trial.MODEL, "service_tier": "default", "store": False,
         "output": [{"type": "message", "role": "assistant", "status": "completed",
                     "content": [{"type": "output_text", "text": canonical(draft).decode()}]}],
-        "usage": {"input_tokens": 700, "output_tokens": 60, "total_tokens": 760},
+        "usage": {"input_tokens": 436, "output_tokens": 60, "total_tokens": 496},
     }
     return canonical({**reply, **updates})
 
@@ -91,7 +91,7 @@ def fake_call(tmp_path, body, *, digest=trial.BODY_SHA256, **options):
 
     def invoke():
         return complete_responses_once(
-            body, body_sha256=digest, model=trial.MODEL, input_token_limit=700,
+            body, body_sha256=digest, model=trial.MODEL, input_token_limit=436,
             credential_reader=credential, deadline_seconds=0.4, connection_factory=connection_factory,
         )
 
@@ -118,7 +118,7 @@ def test_success_through_reusable_adapter_and_local_checker(frozen, tmp_path):
     report = trial.check_response(run(), sealed)
     assert report["reportable_outcome"] == "unaffected"
     assert report["applicability_references"][0]["pointer"] == "/affected/0"
-    assert report["provider_reported_usage"] == {"input_tokens": 700, "output_tokens": 60, "total_tokens": 760}
+    assert report["provider_reported_usage"] == {"input_tokens": 436, "output_tokens": 60, "total_tokens": 496}
     assert report["independently_verified"] is False and report["billing_verified"] is False
     events = observed(log)
     assert events == [
@@ -158,8 +158,8 @@ def test_failed_http_status_never_reads_reply_or_retries(frozen, tmp_path, statu
     b" " * (RAW_REPLY_LIMIT + 1),
     b'{"malformed":',
     response_body(model="wrong-model"),
-    response_body(usage={"input_tokens": 701, "output_tokens": 60, "total_tokens": 761}),
-    response_body(usage={"input_tokens": 700, "output_tokens": 513, "total_tokens": 1213}),
+    response_body(usage={"input_tokens": 437, "output_tokens": 60, "total_tokens": 497}),
+    response_body(usage={"input_tokens": 436, "output_tokens": 513, "total_tokens": 949}),
     response_body(output=[{"type": "message", "role": "assistant", "status": "completed",
                            "content": [{"type": "output_text", "text": " " * 4097}]}]),
     response_body(output=[{"type": "message", "role": "assistant", "status": "completed",
@@ -204,8 +204,7 @@ def signed_approval(**update):
     expires = (now + timedelta(minutes=5)).isoformat()
     statement = {
         "plan": trial.PLAN, "operator_uid": os.getuid(), "expires_at": expires,
-        "max_billed_input_tokens": 1000, "max_charge_usd": "0.005",
-        "retention_evidence_sha256": "a" * 64, "charge_evidence_sha256": "b" * 64,
+        "charge_basis": trial.CHARGE_BASIS, "retention_evidence_sha256": "a" * 64,
         **update,
     }
     envelope = {"statement": statement, "signature": key.sign(canonical(statement)).hex()}
@@ -215,10 +214,10 @@ def signed_approval(**update):
 @pytest.mark.parametrize("update", [
     {"operator_uid": -1},
     {"expires_at": "2020-01-01T00:00:00Z"},
-    {"max_billed_input_tokens": 10262},
-    {"max_charge_usd": "0.011"},
-    {"max_charge_usd": "0.001"},
-    {"charge_evidence_sha256": ""},
+    {"charge_basis": {**trial.CHARGE_BASIS, "counted_input_tokens": 437}},
+    {"charge_basis": {**trial.CHARGE_BASIS, "binding_charge_ceiling_verified": True}},
+    {"charge_basis": {**trial.CHARGE_BASIS, "estimated_charge_usd": "0.011"}},
+    {"retention_evidence_sha256": ""},
     {"plan": {**trial.PLAN, "method": "GET"}},
 ])
 def test_signed_but_invalid_approval_is_refused(update):
@@ -230,8 +229,8 @@ def test_signed_but_invalid_approval_is_refused(update):
 def test_approval_signature_is_required_and_binds_caps():
     envelope, key, now = signed_approval()
     bound, _ = trial.authorize(envelope, key, now, os.getuid())
-    assert bound == 1000
-    envelope["statement"]["max_billed_input_tokens"] = 999
+    assert bound == 436
+    envelope["statement"]["charge_basis"] = {**trial.CHARGE_BASIS, "counted_input_tokens": 435}
     with pytest.raises(Refused, match="approval"):
         trial.authorize(envelope, key, now, os.getuid())
 
@@ -317,7 +316,61 @@ def test_invalid_credential_is_never_forwarded_or_echoed(frozen, tmp_path):
 
     with pytest.raises(Refused, match="^credential unavailable or invalid$"):
         complete_responses_once(
-            body, body_sha256=trial.BODY_SHA256, model=trial.MODEL, input_token_limit=700,
+            body, body_sha256=trial.BODY_SHA256, model=trial.MODEL, input_token_limit=436,
             credential_reader=invalid, deadline_seconds=0.4, connection_factory=connection_factory,
         )
     assert not log.exists()
+
+
+@pytest.mark.parametrize("installed_matches", [True, False])
+def test_owner_signer_waits_for_verifier_readback(frozen, tmp_path, monkeypatch, installed_matches):
+    from sign_openai_trial import CONFIRMATION, PLAN_SHA256, review_inputs, run_signing_session
+
+    receipt = Path(os.environ["AEGIS_TEST_COUNT_RECEIPT"])
+    review_inputs(Path(os.environ["AEGIS_TEST_REVIEW_BODY"]), Path(os.environ["AEGIS_TEST_M82_INPUTS"]), receipt)
+    output = tmp_path / "disposable-signer"
+    installed = tmp_path / "simulated-verifier"
+
+    def fake_owner(prompt):
+        if prompt.startswith("Verified effective"):
+            return "standard"
+        if prompt.startswith("Type SHARING OFF"):
+            return "SHARING OFF"
+        if prompt.startswith("Enter the SHA-256"):
+            assert not (output / "phase6-openai-approval.json").exists()
+            public = (output / "phase6-openai-operator.pub").read_bytes()
+            installed.write_bytes(public if installed_matches else b"different verifier")
+            return sha256(installed.read_bytes()).hexdigest()
+        assert prompt.startswith("Type APPROVE") and installed_matches
+        return CONFIRMATION
+
+    monkeypatch.setattr("builtins.input", fake_owner)
+    if not installed_matches:
+        with pytest.raises(Refused, match="installed verifier did not match"):
+            run_signing_session(output)
+        assert sorted(path.name for path in output.iterdir()) == ["phase6-openai-operator.pub"]
+        return
+
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+
+    run_signing_session(output)
+    assert sorted(path.name for path in output.iterdir()) == [
+        "phase6-openai-approval.json", "phase6-openai-operator.pub", "retention-review.json",
+    ]
+    envelope = json.loads((output / "phase6-openai-approval.json").read_bytes())
+    record = (output / "retention-review.json").read_bytes()
+    assert envelope["statement"]["charge_basis"]["binding_charge_ceiling_verified"] is False
+    assert envelope["statement"]["charge_basis"]["estimated_charge_usd"] == "0.002631"
+    assert envelope["statement"]["retention_evidence_sha256"] == sha256(record).hexdigest()
+    assert json.loads(record)["plan_sha256"] == PLAN_SHA256
+    assert trial.authorize(envelope, Ed25519PublicKey.from_public_bytes(installed.read_bytes()),
+                           datetime.now(timezone.utc), 501)[0] == 436
+
+
+def test_signer_refuses_modified_count_receipt(frozen, tmp_path):
+    from sign_openai_trial import review_inputs
+
+    receipt = tmp_path / "wrong-receipt.json"
+    receipt.write_bytes(Path(os.environ["AEGIS_TEST_COUNT_RECEIPT"]).read_bytes() + b"\n")
+    with pytest.raises(Refused, match="reviewed 436-token receipt"):
+        review_inputs(Path(os.environ["AEGIS_TEST_REVIEW_BODY"]), Path(os.environ["AEGIS_TEST_M82_INPUTS"]), receipt)
