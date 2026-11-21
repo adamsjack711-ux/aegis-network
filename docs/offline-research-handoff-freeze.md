@@ -35,3 +35,13 @@ Each call opens a read-only connection and returns one fresh snapshot of committ
 | `[]` | The database opened and contains no saved research for that source kind and advisory ID. |
 | `sqlite3.OperationalError: unable to open database file: ...` | The message includes the resolved path. Check that the file exists, the reporting account can read it, and that account can traverse each parent directory. The exception retains SQLite’s original error code. |
 | `sqlite3.OperationalError: Incomplete research history schema ...` | Use a database initialized by both `ThreatScout` and `OfflineHandoff`, or have the writer initialize it before reporting. |
+
+## Report one asset
+
+Set `ASSET_DIGEST` to the selected asset's SHA-256 from the research history. Run the reporter in the installed Python environment.
+
+```sh
+python -m aegis.intelligence.report private/scout.sqlite osv OSV-2099-1 CVE-2099-0001 "$ASSET_DIGEST"
+```
+
+Each invocation reads one committed snapshot. The JSON field `current` contains the selected asset's reportable research outcome and check status. A current result can have outcome `unknown`. A null `current` means this selection has no current research result. The `history` entries show the sequence, digest and status of each matching stored revision. Withdrawal and supersession therefore remain visible even when no current result is available. Current v1 records use null for `applicability_references` because that format predates structured references. Current v2 records include the stored references from the deterministic assessment. Database errors exit 1. A successful report exits 0, including an empty selection.

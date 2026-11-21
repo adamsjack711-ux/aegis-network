@@ -13,6 +13,7 @@ from aegis.intelligence.feeds import snapshot
 from aegis.intelligence.handoff import OfflineHandoff, read_history
 from aegis.intelligence.investigator import ScriptedProvider
 from aegis.intelligence.models import Asset
+from aegis.intelligence.report import main as report_main, read_asset_report
 from aegis.intelligence.scout import ThreatScout
 
 NOW = datetime(2026, 11, 20, tzinfo=timezone.utc)
@@ -169,6 +170,8 @@ def test_archive_preserves_uncertainty_and_conflict_blocks_even_if_pointer_stays
         assert conflict.kind == 'conflict'
         assert worker.consume(event.sequence, VID, different, PROVIDER, now=NOW).reason == 'conflict'
         assert worker.history('osv', AID)[0]['status'] == 'conflict'
+        report = read_asset_report(path, 'osv', AID, VID, row['asset_digest'])
+        assert report['current'] is None and report['history'][0]['status'] == 'conflict'
     finally:
         worker.close()
         scout.close()
@@ -276,3 +279,65 @@ def test_read_history_open_diagnostic(tmp_path, monkeypatch, unreadable):
     if unreadable:
         assert path.read_bytes() == original
         assert read_history(path, 'osv', AID) == []
+
+
+def test_report_tracks_selected_subject_across_revisions(tmp_path, capsys):
+    path = tmp_path / "history.sqlite"
+    scout = ThreatScout(path)
+    worker = OfflineHandoff(path)
+    try:
+        event, = scout.ingest(source())
+        assert worker.consume(event.sequence, VID, ASSET, PROVIDER, now=NOW).outcome == "committed"
+        row, = worker.history("osv", AID)
+        digest = row["asset_digest"]
+        args = [str(path), "osv", AID, VID, digest]
+
+        def report():
+            assert report_main(args) == 0
+            return json.loads(capsys.readouterr().out)
+
+        initial = report()
+        assert initial["current"]["reportable_outcome"] == "affected"
+        assert initial["current"]["applicability_references"][0]["sha256"] == row["revision"]
+        assert initial["current"]["independently_verified"] is False
+        other = ASSET.model_copy(update={"asset_id": "other", "identity": "pkg:pypi/unrelated"})
+        assert worker.consume(event.sequence, VID, other, PROVIDER, now=NOW).outcome == "committed"
+        assert report() == initial
+        for vid, asset in [(VID, "f" * 64), ("CVE-2099-absent", digest)]:
+            absent = read_asset_report(path, "osv", AID, vid, asset)
+            assert absent["current"] is None and absent["history"] == []
+
+        # Older v1 research has no structured reference field.
+        legacy = row["research"]
+        legacy["candidate"]["schema_version"] = "research-candidate-v1"
+        del legacy["candidate"]["applicability_references"]
+        with worker.db:
+            worker.db.execute("UPDATE research_results SET investigation=? WHERE asset_digest=?",
+                              (json.dumps(legacy), digest))
+        assert report()["current"]["applicability_references"] is None
+
+        later, = scout.ingest(source(modified="2026-11-20T00:00:00Z"))
+        pending = report()
+        assert pending["current"] is None
+        assert [r["status"] for r in pending["history"]] == ["superseded"]
+        disagree = ScriptedProvider(dict(proposed_outcome="unaffected", claims=[], uncertainties=[]))
+        assert worker.consume(later.sequence, VID, ASSET, disagree, now=NOW).outcome == "committed"
+        new = report()
+        assert new["current"]["reportable_outcome"] == "unknown"
+        assert new["current"]["sequence"] == later.sequence
+        assert [r["status"] for r in new["history"]] == ["superseded", "current"]
+        scout.ingest(source(modified="2026-11-21T00:00:00Z", withdrawn="2026-11-21T00:00:00Z"))
+        withdrawn = report()
+        assert withdrawn["current"] is None
+        assert [r["status"] for r in withdrawn["history"]] == ["withdrawn", "withdrawn"]
+    finally:
+        worker.close()
+        scout.close()
+
+
+def test_report_cli_missing_database(tmp_path, capsys):
+    path = tmp_path / "missing.sqlite"
+    assert report_main([str(path), "osv", AID, VID, "0" * 64]) == 1
+    result = capsys.readouterr()
+    assert result.out == "" and str(path) in result.err
+    assert not path.exists()
