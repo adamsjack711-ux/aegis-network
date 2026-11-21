@@ -1,18 +1,23 @@
 # Roadmap and milestone checklist
 
-| Phase | Milestone | State |
+| Phase | Verified state and open gate | Next work |
 | --- | --- | --- |
-| 0 | Investigate OSS-CRS, Buttercup, GUAC, OSV, CycloneDX/VEX, in-toto, TUF; decide reuse boundaries | Documented |
-| 1 | Architecture, threat model, ADRs, contracts, acceptance plan | Documented |
-| 2a | Signed finding → validation → durable event → local match → audited dry run | Implemented |
-| 2A mesh reliability | Independent durable fan-out, outbox recovery, role-pinned trust, signed revocation, fault injection | Implemented locally on `feat/mesh-reliability`; integration review pending |
-| 2b | Multi-publisher trust rotation, artifact schema evolution, audit replication | Planned |
-| 3 | Three intentionally vulnerable, isolated lab apps and reversible templates | Planned |
-| 4 | Independent verifier workers, container integration, failure injection, health checks, rollback | Planned |
-| 5 | 10/100/1,000 deployment benchmark with p50/p95/p99, coverage, false positives, safety failures, cost | Planned |
-| 6 | Optional provider-agnostic LLM investigator in isolated labs, no execution authority | One provider tested on two version boundaries and one missing-version case in the synthetic lab. [Phase 6 evidence](#phase-6-lab-evidence) |
+| 0 · Reuse | The reuse assessment records the boundaries for OSV, SBOM and VEX, attestations, and trust metadata. [Reuse assessment](phase0.md) | Lead revisits the applicable decision when proposing a new dependency. Backend checks how any new input is trusted before integration. |
+| 1 · Architecture and contracts | The architecture, threat model, signed finding contracts, and acceptance plan are documented. [Architecture](../architecture.md) · [Threat model](../threat-model.md) · [Contracts](contracts.md) · [Acceptance](acceptance.md) | Lead ties each change to its governing contract. Backend checks that observations and research outputs confer no execution authority. |
+| 2 · Signed dry run | The local lab verified signed ingest, durable fan-out, Rapid audit, scoped revocation, and journal recovery. Multi-publisher trust rotation and independently operated audit replication remain follow-ups. [Phase 2C integration](phase2c-integration.md) · [Hardening](phase2c-hardening.md) | Lead reruns the signed dry-run flow when shared contracts change. Backend checks replay, revocation, and acknowledgement ordering at the same pin. |
+| 3 · Disposable lab integration | The integrated local fixture passed 129 tests, including the independent validation suite. The evidence is scoped to the disposable synthetic lab. The three-app milestone still needs evidence across separately pinned apps. [Phase 3C integration](phase3c-integration.md) · [Independent validation](phase3d-validation.md) | Lead keeps the fixture and exact approval path reproducible. Backend reruns the independent health, denial, and rollback checks when the lab path changes. |
+| 4 · Trust and recovery | Trust, status, and fencing have disposable-lab evidence. A pre-intake crash took about 30.6 seconds to reach durable denial against the five-second all-agent gate. Distributed enforcement remains blocked. [Recovery decision](phase4f-recovery-decision.md) · [Frozen acceptance](phase4f-recovery-acceptance.md) | Backend pins the failure baseline, both clocks, and direct SQLite scoring for a minimal disposable rerun. Lead reviews the recovery contract and waits for an accepted design before changing authority behavior. |
+| 5 · Performance | Local labs measured rollout and reuse costs under specific workloads. The full 10/100/1,000-deployment comparison still needs latency, coverage, resource use, and fault results. [Distributed reliability](phase4a-distributed.md) · [Reuse benchmark](phase4b-evidence-portability.md) · [Acceptance](acceptance.md) | Lead identifies the next comparable disposable benchmark. Backend freezes workload, eligibility, metrics, and pass thresholds before measurement. |
+| 5A · Offline research | The private Scout–Investigator path and source-bound evidence have reviewed offline coverage. [Alpha integration review](phase5-alpha-validation-integrated-0045-review.md) · [Offline handoff contract](offline-research-handoff-freeze.md) | Lead preserves the supported offline workflow. Backend repeats source attribution, abstention, and withdrawal checks when shared research code changes. |
+| 5B · Observation-only Linux CLI | The private Studio tester passed its scoped arm64 Linux walkthrough. Broader installed Linux coverage and grant custody remain release gates. [Studio roadmap at `7737351`](https://github.com/adamsjack711-ux/aegis-network/blob/7737351/docs/roadmap.md) · [Installed acceptance](phase5b-release-acceptance-handoff.md) | Lead reconciles the tester pin and the installed matrix and prepares the smallest missing cell. Backend verifies the exact artifact, unprivileged installation, read-only grants, and observed effects. |
+| 5C · Diagnostic Runner | Consent and inert metadata have design and local evidence. The contained worker and 72 safety cases are pending. [Runner contracts](phase5c-integration-contracts.md) | Lead prepares the consent and containment design for review. Backend freezes the independent safety and cleanup cases before any worker acceptance work. |
+| 6 · Investigator | Limited synthetic live probes and independently verified offline `h84` handoff and scratch history are complete. [Phase 6 evidence](#phase-6-lab-evidence) | Lead prepares the exact `h84` Stage A owner review offline. Backend rebuilds and checks the wire body and count projection. Stage B needs verified Stage A output and its own review. |
 
-The next concrete milestone is independent verification design and three isolated lab apps. Execution stays disabled until all safety gates in `docs/acceptance.md` pass.
+## Current assignments
+
+1. Finish the Phase 6 Stage A preflight and independent review. Pin the exact candidate and evidence. The owner review covers any proposed outbound request.
+2. Lead continues with the Phase 5B installed acceptance gap. Backend continues with the Phase 4F failure baseline and scoring plan. Both tracks can progress while the Phase 6 preflight awaits owner review.
+3. After each assignment, the owner reports the candidate commit, the test command, the result and any blocker. The reviewer reports the exact candidate and evidence commits. Push reviewed work to the private repository on the corresponding work branch.
 
 ## Phase 6 lab evidence
 
